@@ -1,0 +1,89 @@
+{
+ "id": "s22-s22kmeans",
+ "file": "media/m2/s22-s22kmeans.mp4",
+ "poster": "media/m2/s22-s22kmeans.png",
+ "session": 22,
+ "method": "s22kmeans",
+ "title": "k-means clustering · assign, update, repeat",
+ "duration": 72,
+ "cases": {
+  "s22-medicines-kmeans": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7
+  ],
+  "s22-exercise-sbp-crp": [
+   8,
+   8,
+   9,
+   9,
+   10
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "Set up",
+   "start": 0,
+   "end": 6
+  },
+  {
+   "step": 2,
+   "title": "Iteration 1 distances",
+   "start": 6,
+   "end": 14
+  },
+  {
+   "step": 3,
+   "title": "Assign labels",
+   "start": 14,
+   "end": 21
+  },
+  {
+   "step": 4,
+   "title": "Move centroids",
+   "start": 21,
+   "end": 28
+  },
+  {
+   "step": 5,
+   "title": "Iteration 2",
+   "start": 28,
+   "end": 36
+  },
+  {
+   "step": 6,
+   "title": "New centroids",
+   "start": 36,
+   "end": 43
+  },
+  {
+   "step": 7,
+   "title": "Converged",
+   "start": 43,
+   "end": 49
+  },
+  {
+   "step": 8,
+   "title": "Exercise distances",
+   "start": 49,
+   "end": 57
+  },
+  {
+   "step": 9,
+   "title": "Exercise labels",
+   "start": 57,
+   "end": 65
+  },
+  {
+   "step": 10,
+   "title": "Exercise centroids",
+   "start": 65,
+   "end": 72
+  }
+ ]
+}

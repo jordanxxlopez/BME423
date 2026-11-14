@@ -1,0 +1,62 @@
+{
+ "id": "s22-s22distance",
+ "file": "media/m2/s22-s22distance.mp4",
+ "poster": "media/m2/s22-s22distance.png",
+ "session": 22,
+ "method": "s22distance",
+ "title": "Distance · Euclidean, Manhattan, Minkowski",
+ "duration": 49,
+ "cases": {
+  "s22-medicine-distance": [
+   2,
+   3,
+   4,
+   6,
+   7
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "Two medicines",
+   "start": 0,
+   "end": 6
+  },
+  {
+   "step": 2,
+   "title": "Differences",
+   "start": 6,
+   "end": 13
+  },
+  {
+   "step": 3,
+   "title": "Euclidean",
+   "start": 13,
+   "end": 20
+  },
+  {
+   "step": 4,
+   "title": "Manhattan",
+   "start": 20,
+   "end": 27
+  },
+  {
+   "step": 5,
+   "title": "Minkowski",
+   "start": 27,
+   "end": 34
+  },
+  {
+   "step": 6,
+   "title": "Minkowski p = 3",
+   "start": 34,
+   "end": 41
+  },
+  {
+   "step": 7,
+   "title": "Compare",
+   "start": 41,
+   "end": 49
+  }
+ ]
+}

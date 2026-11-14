@@ -1,0 +1,77 @@
+{
+ "id": "s18-s18compare",
+ "file": "media/m2/s18-s18compare.mp4",
+ "poster": "media/m2/s18-s18compare.png",
+ "session": 18,
+ "method": "s18compare",
+ "title": "Comparing two regression slopes",
+ "duration": 66,
+ "cases": {
+  "s18-plutonian-slopes": [
+   3,
+   4,
+   5,
+   6,
+   6,
+   7,
+   8,
+   9
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "Two groups",
+   "start": 0,
+   "end": 7
+  },
+  {
+   "step": 2,
+   "title": "Each slope first",
+   "start": 7,
+   "end": 14
+  },
+  {
+   "step": 3,
+   "title": "Hypotheses",
+   "start": 14,
+   "end": 21
+  },
+  {
+   "step": 4,
+   "title": "Slope difference",
+   "start": 21,
+   "end": 27
+  },
+  {
+   "step": 5,
+   "title": "SE of the difference",
+   "start": 27,
+   "end": 35
+  },
+  {
+   "step": 6,
+   "title": "t and ν",
+   "start": 35,
+   "end": 43
+  },
+  {
+   "step": 7,
+   "title": "Class t table",
+   "start": 43,
+   "end": 51
+  },
+  {
+   "step": 8,
+   "title": "Decision",
+   "start": 51,
+   "end": 59
+  },
+  {
+   "step": 9,
+   "title": "Intercepts",
+   "start": 59,
+   "end": 66
+  }
+ ]
+}

@@ -1,0 +1,70 @@
+{
+ "id": "s18-s18corr",
+ "file": "media/m2/s18-s18corr.mp4",
+ "poster": "media/m2/s18-s18corr.png",
+ "session": 18,
+ "method": "s18corr",
+ "title": "Pearson correlation r and its t test",
+ "duration": 60,
+ "cases": {
+  "s18-martians-r": [
+   4,
+   5,
+   6,
+   6,
+   7,
+   8,
+   5
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "Two variables",
+   "start": 0,
+   "end": 6
+  },
+  {
+   "step": 2,
+   "title": "Split at the means",
+   "start": 6,
+   "end": 13
+  },
+  {
+   "step": 3,
+   "title": "Deviation products",
+   "start": 13,
+   "end": 21
+  },
+  {
+   "step": 4,
+   "title": "Scale to r",
+   "start": 21,
+   "end": 29
+  },
+  {
+   "step": 5,
+   "title": "Sign and strength",
+   "start": 29,
+   "end": 37
+  },
+  {
+   "step": 6,
+   "title": "Test of no correlation",
+   "start": 37,
+   "end": 45
+  },
+  {
+   "step": 7,
+   "title": "Class t table",
+   "start": 45,
+   "end": 52
+  },
+  {
+   "step": 8,
+   "title": "Decision",
+   "start": 52,
+   "end": 60
+  }
+ ]
+}

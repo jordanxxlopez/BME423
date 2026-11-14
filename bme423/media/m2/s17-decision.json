@@ -1,0 +1,78 @@
+{
+ "id": "s17-decision",
+ "file": "media/m2/s17-decision.mp4",
+ "poster": "media/m2/s17-decision.png",
+ "session": 17,
+ "method": "decision",
+ "title": "Using a confidence interval to decide",
+ "duration": 71,
+ "cases": {
+  "ci-glucose": [
+   2,
+   3,
+   4,
+   4,
+   4,
+   5,
+   6,
+   6,
+   7
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The rule",
+   "start": 0,
+   "end": 8
+  },
+  {
+   "step": 2,
+   "title": "Glucose trial",
+   "start": 8,
+   "end": 16
+  },
+  {
+   "step": 3,
+   "title": "Observed difference",
+   "start": 16,
+   "end": 22
+  },
+  {
+   "step": 4,
+   "title": "Pooled SE",
+   "start": 22,
+   "end": 30
+  },
+  {
+   "step": 5,
+   "title": "No row 1698",
+   "start": 30,
+   "end": 39
+  },
+  {
+   "step": 6,
+   "title": "95% interval",
+   "start": 39,
+   "end": 47
+  },
+  {
+   "step": 7,
+   "title": "Is zero inside?",
+   "start": 47,
+   "end": 54
+  },
+  {
+   "step": 8,
+   "title": "99% interval",
+   "start": 54,
+   "end": 62
+  },
+  {
+   "step": 9,
+   "title": "Match the levels",
+   "start": 62,
+   "end": 71
+  }
+ ]
+}

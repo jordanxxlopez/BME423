@@ -1,0 +1,63 @@
+{
+ "id": "s18-s18syx",
+ "file": "media/m2/s18-s18syx.mp4",
+ "poster": "media/m2/s18-s18syx.png",
+ "session": 18,
+ "method": "s18syx",
+ "title": "Scatter about the line · s_y|x, s_b and s_a",
+ "duration": 53,
+ "cases": {
+  "s18-martians-spread": [
+   4,
+   4,
+   5,
+   6,
+   7,
+   3
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "Line and scatter",
+   "start": 0,
+   "end": 6
+  },
+  {
+   "step": 2,
+   "title": "Residuals",
+   "start": 6,
+   "end": 13
+  },
+  {
+   "step": 3,
+   "title": "Divide by n − 2",
+   "start": 13,
+   "end": 21
+  },
+  {
+   "step": 4,
+   "title": "Shortcut with SDs",
+   "start": 21,
+   "end": 29
+  },
+  {
+   "step": 5,
+   "title": "Standard error of b",
+   "start": 29,
+   "end": 37
+  },
+  {
+   "step": 6,
+   "title": "Far from x = 0",
+   "start": 37,
+   "end": 45
+  },
+  {
+   "step": 7,
+   "title": "Standard error of a",
+   "start": 45,
+   "end": 53
+  }
+ ]
+}

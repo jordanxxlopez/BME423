@@ -1,0 +1,112 @@
+{
+ "id": "s21-s21rmAnova",
+ "file": "media/m2/s21-s21rmAnova.mp4",
+ "poster": "media/m2/s21-s21rmAnova.png",
+ "session": 21,
+ "method": "s21rmAnova",
+ "title": "Repeated measures ANOVA · FEV1 example",
+ "duration": 70,
+ "cases": {
+  "s21-fev1-rmanova": [
+   1,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "s21-sbp-rmanova": [
+   1,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "s21-orig-hr-rmanova": [
+   1,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "Design and H0",
+   "start": 0,
+   "end": 8
+  },
+  {
+   "step": 2,
+   "title": "Subject means",
+   "start": 8,
+   "end": 14
+  },
+  {
+   "step": 3,
+   "title": "Treatment means",
+   "start": 14,
+   "end": 21
+  },
+  {
+   "step": 4,
+   "title": "SS within subjects",
+   "start": 21,
+   "end": 28
+  },
+  {
+   "step": 5,
+   "title": "SS treatment",
+   "start": 28,
+   "end": 35
+  },
+  {
+   "step": 6,
+   "title": "SS residual",
+   "start": 35,
+   "end": 41
+  },
+  {
+   "step": 7,
+   "title": "DF and mean squares",
+   "start": 41,
+   "end": 48
+  },
+  {
+   "step": 8,
+   "title": "F statistic",
+   "start": 48,
+   "end": 55
+  },
+  {
+   "step": 9,
+   "title": "Class F table",
+   "start": 55,
+   "end": 63
+  },
+  {
+   "step": 10,
+   "title": "Decision",
+   "start": 63,
+   "end": 70
+  }
+ ]
+}

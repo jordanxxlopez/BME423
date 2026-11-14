@@ -1,0 +1,96 @@
+{
+ "id": "s20-s20rmanova",
+ "file": "media/m2/s20-s20rmanova.mp4",
+ "poster": "media/m2/s20-s20rmanova.png",
+ "session": 20,
+ "method": "s20rmanova",
+ "title": "Repeated measures ANOVA · splitting the variation",
+ "duration": 71,
+ "cases": {
+  "s20-breathing-rmanova": [
+   1,
+   2,
+   3,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "s20-oc-rmanova": [
+   1,
+   2,
+   3,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   10
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "Same people, three treatments",
+   "start": 0,
+   "end": 7
+  },
+  {
+   "step": 2,
+   "title": "Subject means",
+   "start": 7,
+   "end": 13
+  },
+  {
+   "step": 3,
+   "title": "Treatment means",
+   "start": 13,
+   "end": 20
+  },
+  {
+   "step": 4,
+   "title": "Split the total",
+   "start": 20,
+   "end": 28
+  },
+  {
+   "step": 5,
+   "title": "Within subjects",
+   "start": 28,
+   "end": 35
+  },
+  {
+   "step": 6,
+   "title": "Treatment part",
+   "start": 35,
+   "end": 42
+  },
+  {
+   "step": 7,
+   "title": "Residual",
+   "start": 42,
+   "end": 48
+  },
+  {
+   "step": 8,
+   "title": "F ratio",
+   "start": 48,
+   "end": 56
+  },
+  {
+   "step": 9,
+   "title": "Class F table",
+   "start": 56,
+   "end": 64
+  },
+  {
+   "step": 10,
+   "title": "Decision",
+   "start": 64,
+   "end": 71
+  }
+ ]
+}

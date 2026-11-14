@@ -1,0 +1,121 @@
+{
+ "id": "s17-twoProportions",
+ "file": "media/m2/s17-twoProportions.mp4",
+ "poster": "media/m2/s17-twoProportions.png",
+ "session": 17,
+ "method": "twoProportions",
+ "title": "Confidence interval · difference of two proportions",
+ "duration": 59,
+ "cases": {
+  "ci-aspirin": [
+   2,
+   3,
+   4,
+   5,
+   5,
+   7,
+   7,
+   8
+  ],
+  "ci-aspirin-precision": [
+   2,
+   3,
+   4,
+   5,
+   5,
+   7,
+   7,
+   8
+  ],
+  "ci-event": [
+   2,
+   3,
+   4,
+   5,
+   5,
+   7,
+   7,
+   8
+  ],
+  "ci-adverse": [
+   2,
+   3,
+   4,
+   5,
+   5,
+   7,
+   7,
+   8
+  ],
+  "ci-improvement": [
+   2,
+   3,
+   4,
+   5,
+   5,
+   7,
+   7,
+   8
+  ],
+  "ci-completion": [
+   2,
+   3,
+   4,
+   5,
+   5,
+   7,
+   7,
+   8
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "Two groups",
+   "start": 0,
+   "end": 7
+  },
+  {
+   "step": 2,
+   "title": "Null hypothesis",
+   "start": 7,
+   "end": 14
+  },
+  {
+   "step": 3,
+   "title": "Group proportions",
+   "start": 14,
+   "end": 21
+  },
+  {
+   "step": 4,
+   "title": "Pooled proportion",
+   "start": 21,
+   "end": 28
+  },
+  {
+   "step": 5,
+   "title": "Standard error",
+   "start": 28,
+   "end": 36
+  },
+  {
+   "step": 6,
+   "title": "Class t table",
+   "start": 36,
+   "end": 43
+  },
+  {
+   "step": 7,
+   "title": "Margin and interval",
+   "start": 43,
+   "end": 51
+  },
+  {
+   "step": 8,
+   "title": "Is zero inside?",
+   "start": 51,
+   "end": 59
+  }
+ ]
+}

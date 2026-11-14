@@ -1,0 +1,90 @@
+{
+ "id": "s19-s19mlrtest",
+ "file": "media/m2/s19-s19mlrtest.mp4",
+ "poster": "media/m2/s19-s19mlrtest.png",
+ "session": 19,
+ "method": "s19mlrtest",
+ "title": "Multiple regression · reading summary()",
+ "duration": 72,
+ "cases": {
+  "s19-sbp-summary": [
+   3,
+   3,
+   4,
+   7,
+   7,
+   8,
+   10
+  ],
+  "s19-walk-refit": [
+   1,
+   5,
+   7,
+   9,
+   9,
+   10
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The R summary",
+   "start": 0,
+   "end": 7
+  },
+  {
+   "step": 2,
+   "title": "Whole-model null",
+   "start": 7,
+   "end": 13
+  },
+  {
+   "step": 3,
+   "title": "F from R squared",
+   "start": 13,
+   "end": 21
+  },
+  {
+   "step": 4,
+   "title": "Class F table",
+   "start": 21,
+   "end": 28
+  },
+  {
+   "step": 5,
+   "title": "F decision",
+   "start": 28,
+   "end": 35
+  },
+  {
+   "step": 6,
+   "title": "Class t table",
+   "start": 35,
+   "end": 42
+  },
+  {
+   "step": 7,
+   "title": "t per coefficient",
+   "start": 42,
+   "end": 50
+  },
+  {
+   "step": 8,
+   "title": "Intervals and zero",
+   "start": 50,
+   "end": 57
+  },
+  {
+   "step": 9,
+   "title": "When zero is inside",
+   "start": 57,
+   "end": 65
+  },
+  {
+   "step": 10,
+   "title": "Predict",
+   "start": 65,
+   "end": 72
+  }
+ ]
+}

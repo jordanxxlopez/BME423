@@ -1,0 +1,87 @@
+{
+ "id": "s21-s21holm",
+ "file": "media/m2/s21-s21holm.mp4",
+ "poster": "media/m2/s21-s21holm.png",
+ "session": 21,
+ "method": "s21holm",
+ "title": "Holm-corrected t tests · which treatments differ",
+ "duration": 64,
+ "cases": {
+  "s21-fev1-holm": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   7,
+   8,
+   9
+  ],
+  "s21-orig-hr-holm": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   7,
+   8,
+   9
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "After a significant F",
+   "start": 0,
+   "end": 7
+  },
+  {
+   "step": 2,
+   "title": "One H0 per pair",
+   "start": 7,
+   "end": 13
+  },
+  {
+   "step": 3,
+   "title": "Standard error",
+   "start": 13,
+   "end": 19
+  },
+  {
+   "step": 4,
+   "title": "Three t values",
+   "start": 19,
+   "end": 27
+  },
+  {
+   "step": 5,
+   "title": "Order and Holm levels",
+   "start": 27,
+   "end": 35
+  },
+  {
+   "step": 6,
+   "title": "Class t table",
+   "start": 35,
+   "end": 44
+  },
+  {
+   "step": 7,
+   "title": "Comparison 1",
+   "start": 44,
+   "end": 50
+  },
+  {
+   "step": 8,
+   "title": "Comparison 2",
+   "start": 50,
+   "end": 56
+  },
+  {
+   "step": 9,
+   "title": "Comparison 3",
+   "start": 56,
+   "end": 64
+  }
+ ]
+}

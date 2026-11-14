@@ -1,0 +1,80 @@
+{
+ "id": "s22-s22knn",
+ "file": "media/m2/s22-s22knn.mp4",
+ "poster": "media/m2/s22-s22knn.png",
+ "session": 22,
+ "method": "s22knn",
+ "title": "K-nearest neighbors · classify by the K closest",
+ "duration": 70,
+ "cases": {
+  "s22-mesh-knn": [
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "s22-tomato-knn": [
+   6,
+   6,
+   6,
+   6
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "Training set",
+   "start": 0,
+   "end": 7
+  },
+  {
+   "step": 2,
+   "title": "Distances",
+   "start": 7,
+   "end": 15
+  },
+  {
+   "step": 3,
+   "title": "Rank",
+   "start": 15,
+   "end": 22
+  },
+  {
+   "step": 4,
+   "title": "K = 3 nearest",
+   "start": 22,
+   "end": 29
+  },
+  {
+   "step": 5,
+   "title": "Vote",
+   "start": 29,
+   "end": 37
+  },
+  {
+   "step": 6,
+   "title": "Tomato, K = 3",
+   "start": 37,
+   "end": 46
+  },
+  {
+   "step": 7,
+   "title": "Choosing K",
+   "start": 46,
+   "end": 54
+  },
+  {
+   "step": 8,
+   "title": "Min-max scaling",
+   "start": 54,
+   "end": 62
+  },
+  {
+   "step": 9,
+   "title": "z-score scaling",
+   "start": 62,
+   "end": 70
+  }
+ ]
+}

@@ -1,0 +1,76 @@
+{
+ "id": "s19-s19margin",
+ "file": "media/m2/s19-s19margin.mp4",
+ "poster": "media/m2/s19-s19margin.png",
+ "session": 19,
+ "method": "s19margin",
+ "title": "Margin of error · cutoff × standard error",
+ "duration": 63,
+ "cases": {
+  "s19-survey-margin": [
+   2,
+   2,
+   3,
+   3,
+   4,
+   5,
+   7
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "Survey result",
+   "start": 0,
+   "end": 6
+  },
+  {
+   "step": 2,
+   "title": "Observed difference",
+   "start": 6,
+   "end": 12
+  },
+  {
+   "step": 3,
+   "title": "Standard error",
+   "start": 12,
+   "end": 19
+  },
+  {
+   "step": 4,
+   "title": "Normal cutoff",
+   "start": 19,
+   "end": 26
+  },
+  {
+   "step": 5,
+   "title": "Margin of error",
+   "start": 26,
+   "end": 33
+  },
+  {
+   "step": 6,
+   "title": "Survey style",
+   "start": 33,
+   "end": 40
+  },
+  {
+   "step": 7,
+   "title": "Is zero inside?",
+   "start": 40,
+   "end": 47
+  },
+  {
+   "step": 8,
+   "title": "Two means use t",
+   "start": 47,
+   "end": 55
+  },
+  {
+   "step": 9,
+   "title": "Bigger samples",
+   "start": 55,
+   "end": 63
+  }
+ ]
+}

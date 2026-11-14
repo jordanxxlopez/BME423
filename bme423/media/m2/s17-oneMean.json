@@ -1,0 +1,100 @@
+{
+ "id": "s17-oneMean",
+ "file": "media/m2/s17-oneMean.mp4",
+ "poster": "media/m2/s17-oneMean.png",
+ "session": 17,
+ "method": "oneMean",
+ "title": "Confidence interval · one population mean",
+ "duration": 49,
+ "cases": {
+  "ci-heart": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   6,
+   7
+  ],
+  "ci-heart-practice": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   6,
+   7
+  ],
+  "ci-reaction": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   6,
+   7
+  ],
+  "ci-pressure": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   6,
+   7
+  ],
+  "ci-respiration": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   6,
+   7
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "Ten students",
+   "start": 0,
+   "end": 6
+  },
+  {
+   "step": 2,
+   "title": "Mean and SD",
+   "start": 6,
+   "end": 13
+  },
+  {
+   "step": 3,
+   "title": "Standard error",
+   "start": 13,
+   "end": 20
+  },
+  {
+   "step": 4,
+   "title": "Class t table",
+   "start": 20,
+   "end": 27
+  },
+  {
+   "step": 5,
+   "title": "Margin",
+   "start": 27,
+   "end": 34
+  },
+  {
+   "step": 6,
+   "title": "Both endpoints",
+   "start": 34,
+   "end": 41
+  },
+  {
+   "step": 7,
+   "title": "Mean, not people",
+   "start": 41,
+   "end": 49
+  }
+ ]
+}

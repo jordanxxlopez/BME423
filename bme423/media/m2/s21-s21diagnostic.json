@@ -1,0 +1,79 @@
+{
+ "id": "s21-s21diagnostic",
+ "file": "media/m2/s21-s21diagnostic.mp4",
+ "poster": "media/m2/s21-s21diagnostic.png",
+ "session": 21,
+ "method": "s21diagnostic",
+ "title": "McNemar's test · two diagnostic procedures",
+ "duration": 55,
+ "cases": {
+  "s21-bp-machine": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8
+  ],
+  "s21-orig-strep-mcnemar": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "Twenty subjects",
+   "start": 0,
+   "end": 7
+  },
+  {
+   "step": 2,
+   "title": "Paired table",
+   "start": 7,
+   "end": 14
+  },
+  {
+   "step": 3,
+   "title": "Null hypothesis",
+   "start": 14,
+   "end": 21
+  },
+  {
+   "step": 4,
+   "title": "Disagreements",
+   "start": 21,
+   "end": 27
+  },
+  {
+   "step": 5,
+   "title": "Expected count",
+   "start": 27,
+   "end": 33
+  },
+  {
+   "step": 6,
+   "title": "McNemar chi-square",
+   "start": 33,
+   "end": 40
+  },
+  {
+   "step": 7,
+   "title": "Class chi-square table",
+   "start": 40,
+   "end": 47
+  },
+  {
+   "step": 8,
+   "title": "Decision",
+   "start": 47,
+   "end": 55
+  }
+ ]
+}

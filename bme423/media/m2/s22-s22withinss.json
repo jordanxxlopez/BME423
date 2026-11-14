@@ -1,0 +1,63 @@
+{
+ "id": "s22-s22withinss",
+ "file": "media/m2/s22-s22withinss.mp4",
+ "poster": "media/m2/s22-s22withinss.png",
+ "session": 22,
+ "method": "s22withinss",
+ "title": "kmeans() output · within-cluster sum of squares",
+ "duration": 54,
+ "cases": {
+  "s22-ages-withinss": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "R output",
+   "start": 0,
+   "end": 7
+  },
+  {
+   "step": 2,
+   "title": "Cluster 1 SS",
+   "start": 7,
+   "end": 15
+  },
+  {
+   "step": 3,
+   "title": "Cluster 2 SS",
+   "start": 15,
+   "end": 23
+  },
+  {
+   "step": 4,
+   "title": "tot.withinss",
+   "start": 23,
+   "end": 30
+  },
+  {
+   "step": 5,
+   "title": "betweenss",
+   "start": 30,
+   "end": 38
+  },
+  {
+   "step": 6,
+   "title": "Compare k = 1 to 4",
+   "start": 38,
+   "end": 47
+  },
+  {
+   "step": 7,
+   "title": "Choose k",
+   "start": 47,
+   "end": 54
+  }
+ ]
+}

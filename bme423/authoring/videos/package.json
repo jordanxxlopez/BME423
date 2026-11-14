@@ -1,0 +1,20 @@
+{
+  "name": "bme423-module2-videos",
+  "private": true,
+  "description": "Module II teaching animations rendered with Remotion (React + SVG + KaTeX).",
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "render": "node render.mjs"
+  },
+  "dependencies": {
+    "@remotion/bundler": "^4.0.300",
+    "@remotion/cli": "^4.0.300",
+    "@remotion/google-fonts": "^4.0.300",
+    "@remotion/renderer": "^4.0.300",
+    "katex": "^0.16.22",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "^4.0.300",
+    "typescript": "^5.6.3"
+  }
+}

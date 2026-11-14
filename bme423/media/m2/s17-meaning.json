@@ -1,0 +1,60 @@
+{
+ "id": "s17-meaning",
+ "file": "media/m2/s17-meaning.mp4",
+ "poster": "media/m2/s17-meaning.png",
+ "session": 17,
+ "method": "meaning",
+ "title": "What a 95% confidence interval means",
+ "duration": 61,
+ "cases": {},
+ "steps": [
+  {
+   "step": 1,
+   "title": "Middle 95%",
+   "start": 0,
+   "end": 7
+  },
+  {
+   "step": 2,
+   "title": "Column 0.05",
+   "start": 7,
+   "end": 14
+  },
+  {
+   "step": 3,
+   "title": "Confidence level",
+   "start": 14,
+   "end": 22
+  },
+  {
+   "step": 4,
+   "title": "One sample",
+   "start": 22,
+   "end": 29
+  },
+  {
+   "step": 5,
+   "title": "New samples",
+   "start": 29,
+   "end": 36
+  },
+  {
+   "step": 6,
+   "title": "About 95% catch it",
+   "start": 36,
+   "end": 44
+  },
+  {
+   "step": 7,
+   "title": "One interval",
+   "start": 44,
+   "end": 52
+  },
+  {
+   "step": 8,
+   "title": "Mean, not people",
+   "start": 52,
+   "end": 61
+  }
+ ]
+}

@@ -1,0 +1,70 @@
+{
+ "id": "s18-s18line",
+ "file": "media/m2/s18-s18line.mp4",
+ "poster": "media/m2/s18-s18line.png",
+ "session": 18,
+ "method": "s18line",
+ "title": "Least-squares regression line",
+ "duration": 61,
+ "cases": {
+  "s18-martians-line": [
+   5,
+   5,
+   6,
+   7,
+   7,
+   7,
+   8
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "Ten Martians",
+   "start": 0,
+   "end": 6
+  },
+  {
+   "step": 2,
+   "title": "Residuals",
+   "start": 6,
+   "end": 13
+  },
+  {
+   "step": 3,
+   "title": "Squares shrink",
+   "start": 13,
+   "end": 22
+  },
+  {
+   "step": 4,
+   "title": "Least squares",
+   "start": 22,
+   "end": 29
+  },
+  {
+   "step": 5,
+   "title": "Five sums",
+   "start": 29,
+   "end": 37
+  },
+  {
+   "step": 6,
+   "title": "Slope b",
+   "start": 37,
+   "end": 45
+  },
+  {
+   "step": 7,
+   "title": "Intercept a",
+   "start": 45,
+   "end": 53
+  },
+  {
+   "step": 8,
+   "title": "The fitted line",
+   "start": 53,
+   "end": 61
+  }
+ ]
+}

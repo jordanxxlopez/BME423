@@ -1,0 +1,79 @@
+{
+ "id": "s19-s19logistic",
+ "file": "media/m2/s19-s19logistic.mp4",
+ "poster": "media/m2/s19-s19logistic.png",
+ "session": 19,
+ "method": "s19logistic",
+ "title": "Logistic regression · probability, logit and odds",
+ "duration": 69,
+ "cases": {
+  "s19-chd-age": [
+   5,
+   6,
+   6,
+   7
+  ],
+  "s19-oring-temperature": [
+   9,
+   8,
+   8,
+   9
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "Yes or no outcome",
+   "start": 0,
+   "end": 7
+  },
+  {
+   "step": 2,
+   "title": "Straight line fails",
+   "start": 7,
+   "end": 14
+  },
+  {
+   "step": 3,
+   "title": "S-shaped curve",
+   "start": 14,
+   "end": 22
+  },
+  {
+   "step": 4,
+   "title": "Logit is a line",
+   "start": 22,
+   "end": 30
+  },
+  {
+   "step": 5,
+   "title": "Test the age slope",
+   "start": 30,
+   "end": 37
+  },
+  {
+   "step": 6,
+   "title": "Probability at 60",
+   "start": 37,
+   "end": 45
+  },
+  {
+   "step": 7,
+   "title": "Odds at 60",
+   "start": 45,
+   "end": 53
+  },
+  {
+   "step": 8,
+   "title": "O-ring failures",
+   "start": 53,
+   "end": 61
+  },
+  {
+   "step": 9,
+   "title": "Odds per degree",
+   "start": 61,
+   "end": 69
+  }
+ ]
+}

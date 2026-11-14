@@ -1,0 +1,97 @@
+{
+ "id": "s20-s20paired",
+ "file": "media/m2/s20-s20paired.mp4",
+ "poster": "media/m2/s20-s20paired.png",
+ "session": 20,
+ "method": "s20paired",
+ "title": "Paired t test · before and after",
+ "duration": 61,
+ "cases": {
+  "s20-platelet-paired": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ],
+  "s20-oc-paired": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ],
+  "s20-grip-paired": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "Same person twice",
+   "start": 0,
+   "end": 7
+  },
+  {
+   "step": 2,
+   "title": "Null hypothesis",
+   "start": 7,
+   "end": 13
+  },
+  {
+   "step": 3,
+   "title": "One column of d",
+   "start": 13,
+   "end": 20
+  },
+  {
+   "step": 4,
+   "title": "Mean difference",
+   "start": 20,
+   "end": 26
+  },
+  {
+   "step": 5,
+   "title": "SD of the differences",
+   "start": 26,
+   "end": 33
+  },
+  {
+   "step": 6,
+   "title": "Standard error",
+   "start": 33,
+   "end": 39
+  },
+  {
+   "step": 7,
+   "title": "t and degrees of freedom",
+   "start": 39,
+   "end": 46
+  },
+  {
+   "step": 8,
+   "title": "Class t table",
+   "start": 46,
+   "end": 53
+  },
+  {
+   "step": 9,
+   "title": "Decision",
+   "start": 53,
+   "end": 61
+  }
+ ]
+}

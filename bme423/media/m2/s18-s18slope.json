@@ -1,0 +1,71 @@
+{
+ "id": "s18-s18slope",
+ "file": "media/m2/s18-s18slope.mp4",
+ "poster": "media/m2/s18-s18slope.png",
+ "session": 18,
+ "method": "s18slope",
+ "title": "Slope t test · CIs for β and α",
+ "duration": 59,
+ "cases": {
+  "s18-martians-trend": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "Is there a trend?",
+   "start": 0,
+   "end": 7
+  },
+  {
+   "step": 2,
+   "title": "t statistic",
+   "start": 7,
+   "end": 15
+  },
+  {
+   "step": 3,
+   "title": "Degrees of freedom",
+   "start": 15,
+   "end": 21
+  },
+  {
+   "step": 4,
+   "title": "Class t table",
+   "start": 21,
+   "end": 28
+  },
+  {
+   "step": 5,
+   "title": "Decision",
+   "start": 28,
+   "end": 36
+  },
+  {
+   "step": 6,
+   "title": "P range",
+   "start": 36,
+   "end": 43
+  },
+  {
+   "step": 7,
+   "title": "CI for the slope β",
+   "start": 43,
+   "end": 51
+  },
+  {
+   "step": 8,
+   "title": "CI for the intercept α",
+   "start": 51,
+   "end": 59
+  }
+ ]
+}

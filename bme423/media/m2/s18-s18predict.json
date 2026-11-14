@@ -1,0 +1,96 @@
+{
+ "id": "s18-s18predict",
+ "file": "media/m2/s18-s18predict.mp4",
+ "poster": "media/m2/s18-s18predict.png",
+ "session": 18,
+ "method": "s18predict",
+ "title": "Prediction · CI for the mean vs one observation",
+ "duration": 59,
+ "cases": {
+  "s18-martians-at40": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8
+  ],
+  "s18-plutonian-males": [
+   null,
+   4,
+   null,
+   null,
+   null,
+   1,
+   2,
+   5,
+   7
+  ],
+  "s18-original-caffeine": [
+   null,
+   null,
+   null,
+   null,
+   null,
+   null,
+   null,
+   null,
+   null,
+   null,
+   5,
+   7
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "Predict at 40 cm",
+   "start": 0,
+   "end": 7
+  },
+  {
+   "step": 2,
+   "title": "Distance from the mean",
+   "start": 7,
+   "end": 14
+  },
+  {
+   "step": 3,
+   "title": "SE of the mean",
+   "start": 14,
+   "end": 21
+  },
+  {
+   "step": 4,
+   "title": "Class t table",
+   "start": 21,
+   "end": 28
+  },
+  {
+   "step": 5,
+   "title": "CI for the mean",
+   "start": 28,
+   "end": 36
+  },
+  {
+   "step": 6,
+   "title": "One new Martian",
+   "start": 36,
+   "end": 44
+  },
+  {
+   "step": 7,
+   "title": "CI for one Martian",
+   "start": 44,
+   "end": 52
+  },
+  {
+   "step": 8,
+   "title": "Compare the widths",
+   "start": 52,
+   "end": 59
+  }
+ ]
+}

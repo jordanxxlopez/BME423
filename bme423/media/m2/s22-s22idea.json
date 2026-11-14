@@ -1,0 +1,73 @@
+{
+ "id": "s22-s22idea",
+ "file": "media/m2/s22-s22idea.mp4",
+ "poster": "media/m2/s22-s22idea.png",
+ "session": 22,
+ "method": "s22idea",
+ "title": "Machine learning · clustering vs classification",
+ "duration": 64,
+ "cases": {
+  "s22-tomato-nearest": [
+   6,
+   7,
+   8,
+   9
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "Two learning types",
+   "start": 0,
+   "end": 7
+  },
+  {
+   "step": 2,
+   "title": "Feature space",
+   "start": 7,
+   "end": 14
+  },
+  {
+   "step": 3,
+   "title": "Find clusters",
+   "start": 14,
+   "end": 21
+  },
+  {
+   "step": 4,
+   "title": "Name the clusters",
+   "start": 21,
+   "end": 28
+  },
+  {
+   "step": 5,
+   "title": "Labeled foods",
+   "start": 28,
+   "end": 35
+  },
+  {
+   "step": 6,
+   "title": "A new object",
+   "start": 35,
+   "end": 42
+  },
+  {
+   "step": 7,
+   "title": "Grape, green bean",
+   "start": 42,
+   "end": 49
+  },
+  {
+   "step": 8,
+   "title": "Nuts, orange",
+   "start": 49,
+   "end": 56
+  },
+  {
+   "step": 9,
+   "title": "Nearest food",
+   "start": 56,
+   "end": 64
+  }
+ ]
+}

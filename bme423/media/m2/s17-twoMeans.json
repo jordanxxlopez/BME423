@@ -1,0 +1,72 @@
+{
+ "id": "s17-twoMeans",
+ "file": "media/m2/s17-twoMeans.mp4",
+ "poster": "media/m2/s17-twoMeans.png",
+ "session": 17,
+ "method": "twoMeans",
+ "title": "Confidence interval · difference of two means",
+ "duration": 54,
+ "cases": {
+  "ci-urine": [
+   1,
+   2,
+   3,
+   3,
+   4,
+   5,
+   6,
+   6,
+   7
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "Two groups",
+   "start": 0,
+   "end": 6
+  },
+  {
+   "step": 2,
+   "title": "Observed difference",
+   "start": 6,
+   "end": 12
+  },
+  {
+   "step": 3,
+   "title": "Pooled variance",
+   "start": 12,
+   "end": 19
+  },
+  {
+   "step": 4,
+   "title": "Standard error",
+   "start": 19,
+   "end": 25
+  },
+  {
+   "step": 5,
+   "title": "Class t table",
+   "start": 25,
+   "end": 32
+  },
+  {
+   "step": 6,
+   "title": "Margin and interval",
+   "start": 32,
+   "end": 39
+  },
+  {
+   "step": 7,
+   "title": "Is zero inside?",
+   "start": 39,
+   "end": 45
+  },
+  {
+   "step": 8,
+   "title": "What 95% means",
+   "start": 45,
+   "end": 54
+  }
+ ]
+}

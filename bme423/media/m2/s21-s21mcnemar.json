@@ -1,0 +1,71 @@
+{
+ "id": "s21-s21mcnemar",
+ "file": "media/m2/s21-s21mcnemar.mp4",
+ "poster": "media/m2/s21-s21mcnemar.png",
+ "session": 21,
+ "method": "s21mcnemar",
+ "title": "McNemar's test · p7 antigen before and after",
+ "duration": 57,
+ "cases": {
+  "s21-p7-mcnemar": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "Thirty women",
+   "start": 0,
+   "end": 7
+  },
+  {
+   "step": 2,
+   "title": "Null hypothesis",
+   "start": 7,
+   "end": 13
+  },
+  {
+   "step": 3,
+   "title": "The wrong test",
+   "start": 13,
+   "end": 21
+  },
+  {
+   "step": 4,
+   "title": "Who changed",
+   "start": 21,
+   "end": 28
+  },
+  {
+   "step": 5,
+   "title": "Expected count",
+   "start": 28,
+   "end": 34
+  },
+  {
+   "step": 6,
+   "title": "McNemar chi-square",
+   "start": 34,
+   "end": 42
+  },
+  {
+   "step": 7,
+   "title": "Class chi-square table",
+   "start": 42,
+   "end": 49
+  },
+  {
+   "step": 8,
+   "title": "Decision",
+   "start": 49,
+   "end": 57
+  }
+ ]
+}
