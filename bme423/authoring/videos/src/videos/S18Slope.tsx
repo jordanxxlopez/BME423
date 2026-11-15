@@ -25,7 +25,7 @@ export const meta = {
   cases: {'s18-martians-trend': [1, 2, 3, 4, 5, 6, 7, 8]},
   steps: [
     {title: 'Is there a trend?', seconds: 7, caption: 'This is the **t test for the slope**. The null hypothesis says the line of means is flat, so its slope β is zero.',
-      card: [{label: 'hypotheses', tex: 'H_0:\\beta=0\\qquad H_A:\\beta\\ne0', note: 'Martians  b = 0.44 g/cm · s_b = 0.064 g/cm'}]},
+      card: [{label: 'hypotheses', tex: 'H_0:\\beta=0\\qquad H_1:\\beta\\ne0', note: 'Martians  b = 0.44 g/cm · s_b = 0.064 g/cm'}]},
     {title: 't statistic', seconds: 8, caption: 'Divide the slope by its standard error. The slope b sits about **6.9 standard errors** away from zero.',
       card: [{label: 't statistic', tex: 't=\\frac{b-\\beta}{s_b}=\\frac{b}{s_b}', value: `0.44 / 0.064 = ${t.toFixed(3)}`, color: C.signal}]},
     {title: 'Degrees of freedom', seconds: 6, caption: 'Two numbers, a and b, were estimated from the ten points, so ν = 10 − 2 = **8**.',
@@ -37,9 +37,9 @@ export const meta = {
     {title: 'P range', seconds: 7, caption: 'Row 8, column 0.001 gives **5.041**. The statistic passes even that cutoff, so **P < 0.001**.',
       card: [{label: 'P range', value: '6.875 > 5.041 → P < 0.001', color: C.green, note: 'class t table, row 8, column 0.001'}]},
     {title: 'CI for the slope', seconds: 8, caption: 'The same cutoff builds the 95% interval for β. It **leaves out zero**, which agrees with the test.',
-      card: [{label: '95% CI for the slope', tex: 'b\\pm t_{0.05}(\\nu)\\,s_b', value: `0.44 ± ${Mb.toFixed(4)} → (0.2924, 0.5876)`, color: C.signal}]},
+      card: [{label: '95% CI for the slope', tex: 'b-t_\\alpha(\\nu)\\cdot s_b<\\beta<b+t_\\alpha(\\nu)\\cdot s_b', value: `0.44 ± ${Mb.toFixed(4)} → (0.2924, 0.5876)`, color: C.signal}]},
     {title: 'CI for the intercept', seconds: 8, caption: 'The intercept interval is **much wider** because x = 0 is far from the data. It holds the true −8 g.',
-      card: [{label: '95% CI for the intercept', tex: 'a\\pm t_{0.05}(\\nu)\\,s_a', value: `−6.0 ± ${Ma.toFixed(4)} → (−12.00, −0.004)`, color: C.signal}]},
+      card: [{label: '95% CI for the intercept', tex: '\\begin{aligned}a-t_\\alpha(\\nu)\\cdot s_a&<\\alpha_{LOM}\\\\&<a+t_\\alpha(\\nu)\\cdot s_a\\end{aligned}', value: `−6.0 ± ${Ma.toFixed(4)} → (−12.00, −0.004)`, color: C.signal}]},
   ] as Step[],
 };
 

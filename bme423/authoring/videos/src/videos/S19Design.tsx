@@ -37,7 +37,7 @@ export const meta = {
     {title: 'Randomized follow-up', seconds: 8, caption: 'The 2002 WHI trial was **randomized**. It found the overall risks of estrogen plus progestin exceeded the benefits.',
       card: [{label: 'WHI trial (JAMA 2002)', value: 'randomized → risks > benefits', note: 'estrogen + progestin · average 5.2-year follow-up\nhormone use fell 46% within six months', color: C.pink}]},
     {title: 'Timing of therapy', seconds: 8, caption: 'A 2026 FDA release ties the benefits to **when therapy starts**, within ten years of menopause or before age 60.',
-      card: [{label: 'FDA release (Feb 2026)', value: 'benefit tied to start timing', note: 'start within 10 years of menopause onset or before 60\nwho was studied shapes what a result means', color: C.green}]},
+      card: [{label: 'FDA · HHS fact sheet', value: 'benefit tied to start timing', note: 'start within 10 years of menopause onset or before 60\nwho was studied shapes what a result means', color: C.green}]},
   ] as Step[],
 };
 

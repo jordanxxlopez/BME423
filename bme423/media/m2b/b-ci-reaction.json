@@ -1,0 +1,78 @@
+{
+ "id": "b-ci-reaction",
+ "file": "media/m2b/b-ci-reaction.mp4",
+ "poster": "media/m2b/b-ci-reaction.png",
+ "session": 17,
+ "method": "oneMean",
+ "title": "Reaction time in a laboratory sample",
+ "duration": 115.333,
+ "cases": {
+  "ci-reaction": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 13.333
+  },
+  {
+   "step": 2,
+   "title": "Identify the population quantity",
+   "start": 13.333,
+   "end": 28.467
+  },
+  {
+   "step": 3,
+   "title": "Calculate the standard error",
+   "start": 28.467,
+   "end": 40.867
+  },
+  {
+   "step": 4,
+   "title": "Choose degrees of freedom and the cutoff",
+   "start": 40.867,
+   "end": 62.133
+  },
+  {
+   "step": 5,
+   "title": "Calculate the margin of error",
+   "start": 62.133,
+   "end": 71.2
+  },
+  {
+   "step": 6,
+   "title": "Calculate the lower endpoint",
+   "start": 71.2,
+   "end": 79.133
+  },
+  {
+   "step": 7,
+   "title": "Calculate the upper endpoint",
+   "start": 79.133,
+   "end": 86.933
+  },
+  {
+   "step": 8,
+   "title": "State the population interval",
+   "start": 86.933,
+   "end": 101.733
+  },
+  {
+   "step": 9,
+   "title": "Conclusion",
+   "start": 101.733,
+   "end": 115.333
+  }
+ ],
+ "case": "ci-reaction",
+ "kind": "board"
+}

@@ -1,0 +1,64 @@
+{
+ "id": "b-s22-exercise-sbp-crp",
+ "file": "media/m2b/b-s22-exercise-sbp-crp.mp4",
+ "poster": "media/m2b/b-s22-exercise-sbp-crp.png",
+ "session": 22,
+ "method": "s22kmeans",
+ "title": "Exercise · k-means on SBP and CRP",
+ "duration": 88.6,
+ "cases": {
+  "s22-exercise-sbp-crp": [
+   2,
+   3,
+   4,
+   5,
+   6
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 16
+  },
+  {
+   "step": 2,
+   "title": "Distances for patient 1",
+   "start": 16,
+   "end": 26.6
+  },
+  {
+   "step": 3,
+   "title": "Distances for patient 2",
+   "start": 26.6,
+   "end": 37.2
+  },
+  {
+   "step": 4,
+   "title": "Distances for patient 3",
+   "start": 37.2,
+   "end": 47.8
+  },
+  {
+   "step": 5,
+   "title": "Assign labels",
+   "start": 47.8,
+   "end": 59.8
+  },
+  {
+   "step": 6,
+   "title": "New centroids",
+   "start": 59.8,
+   "end": 72.6
+  },
+  {
+   "step": 7,
+   "title": "Conclusion",
+   "start": 72.6,
+   "end": 88.6
+  }
+ ],
+ "case": "s22-exercise-sbp-crp",
+ "kind": "board"
+}

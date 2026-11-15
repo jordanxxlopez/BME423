@@ -1,0 +1,85 @@
+{
+ "id": "b-ci-screen",
+ "file": "media/m2b/b-ci-screen.mp4",
+ "poster": "media/m2b/b-ci-screen.png",
+ "session": 17,
+ "method": "oneProportion",
+ "title": "Positive screening responses",
+ "duration": 115.467,
+ "cases": {
+  "ci-screen": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 10.667
+  },
+  {
+   "step": 2,
+   "title": "State the proportion and hypotheses",
+   "start": 10.667,
+   "end": 23.267
+  },
+  {
+   "step": 3,
+   "title": "Calculate the sample proportion",
+   "start": 23.267,
+   "end": 32
+  },
+  {
+   "step": 4,
+   "title": "Calculate the proportion SE",
+   "start": 32,
+   "end": 44.467
+  },
+  {
+   "step": 5,
+   "title": "Select the Normal cutoff",
+   "start": 44.467,
+   "end": 58.733
+  },
+  {
+   "step": 6,
+   "title": "Calculate the margin",
+   "start": 58.733,
+   "end": 71.2
+  },
+  {
+   "step": 7,
+   "title": "Calculate the lower bound",
+   "start": 71.2,
+   "end": 79.6
+  },
+  {
+   "step": 8,
+   "title": "Calculate the upper bound",
+   "start": 79.6,
+   "end": 87.867
+  },
+  {
+   "step": 9,
+   "title": "Compare with the null reference",
+   "start": 87.867,
+   "end": 101.867
+  },
+  {
+   "step": 10,
+   "title": "Conclusion",
+   "start": 101.867,
+   "end": 115.467
+  }
+ ],
+ "case": "ci-screen",
+ "kind": "board"
+}

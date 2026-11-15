@@ -1,0 +1,111 @@
+{
+ "concept-meaning": {
+  "end": "The population mean never moves, so the 95 percent is about the method. Repeating the study many times would give intervals that catch the population mean about 95 times out of 100."
+ },
+ "concept-decision": {
+  "end": "Because the interval from 31.18917 to 408.8108 mL/day never reaches zero, equal means are not plausible at the 0.05 level. The lower bound is above zero, so the diuretic raises urine production."
+ },
+ "ci-heart": {
+  "0": "The sample mean estimates the population mean. The SD describes how much single measurements vary, while the standard error describes the uncertainty in their mean.",
+  "2": "Use the class t table (two-tailed), row 9 and the combined two-tail 0.05 column. The printed cutoff is 2.262. The column already counts both tails, so do not halve it again.",
+  "end": "This interval is about the population mean, not about single people. One person varies by about the SD of 9 beats/min, which is √10 times the standard error of 2.84605."
+ },
+ "ci-urine": {
+  "0": "Keep the direction diuretic minus placebo throughout. The null says the two population means are equal, and the two-sided alternative says they differ.",
+  "5": "Use the class t table (two-tailed), row 18 and the combined two-tail 0.05 column. The printed cutoff is 2.101. The column already counts both tails, so do not halve it again.",
+  "8": "Zero is outside the interval, so the equal-means null is rejected at the matching two-sided 0.05 level. No separate t statistic is needed.",
+  "end": "Because zero is outside, a difference of zero is not plausible at the 0.05 level. Every value in the interval is positive, so diuretic is higher by between 31.18917 and 408.8108 mL/day."
+ },
+ "ci-aspirin": {
+  "2": "Add the event counts and the group sizes first, then divide. This pooled estimate is the one used for this interval.",
+  "end": "Because zero is outside, equal event probabilities are not plausible at the 0.05 level. Aspirin lowers the event probability by 10.60 to 69.40 percentage points, which is an absolute difference, not a relative reduction.",
+  "intro": "A trial compares thrombosis incidence with placebo and aspirin. This version keeps the rounded proportions 0.72 and 0.32 and the rounded SE of 0.15 all the way through.",
+  "4": "Keep the two group sizes separate inside the square root. The unrounded SE is 0.151547, and this version uses the rounded SE of 0.15 for the interval.",
+  "5": "Use the Normal cutoff 1.96 from the infinite-df row and the total two-tail 0.05 column. The difference 0.4 and the margin 0.294 come from the rounded values 0.72, 0.32 and 0.15."
+ },
+ "ci-aspirin-precision": {
+  "2": "Add the event counts and the group sizes first, then divide. This pooled estimate is the one used for this interval.",
+  "end": "Because zero is outside, equal event probabilities are not plausible at the 0.05 level. Aspirin lowers the event probability by 10.72 to 70.12 percentage points, which is an absolute difference, not a relative reduction."
+ },
+ "ci-survey": {
+  "end": "Because 0.5 is outside the interval, the population proportion differs from 0.5 at the 0.05 level. The whole interval lies below 0.5, so the proportion is lower."
+ },
+ "ci-glucose": {
+  "0": "Keep the direction placebo minus drug throughout. The null says the two population means are equal, and the two-sided alternative says they differ.",
+  "5": "The class t table (two-tailed) has no row for 1698 df, so the infinity row in the 0.05 column gives 1.9600. This is a large-df Normal approximation. The printed row 200, with 1.972, would be a slightly more cautious choice.",
+  "8": "Zero is outside the interval, so the equal-means null is rejected at the matching two-sided 0.05 level. No separate t statistic is needed.",
+  "end": "Because zero is outside, a difference of zero is not plausible at the 0.05 level. Every value in the interval is positive, so placebo is higher by between 2.889417 and 3.710583 mg/dL."
+ },
+ "ci-heart-practice": {
+  "0": "The sample mean estimates the population mean. The SD describes how much single measurements vary, while the standard error describes the uncertainty in their mean.",
+  "2": "Use the class t table (two-tailed), row 15 and the combined two-tail 0.05 column. The printed cutoff is 2.131. The column already counts both tails, so do not halve it again.",
+  "end": "This interval is about the population mean, not about single people. One person varies by about the SD of 8 beats/min, which is 4 times the standard error of 2."
+ },
+ "ci-reaction": {
+  "0": "The sample mean estimates the population mean. The SD describes how much single measurements vary, while the standard error describes the uncertainty in their mean.",
+  "2": "Use the class t table (two-tailed), row 24 and the combined two-tail 0.05 column. The printed cutoff is 2.064. The column already counts both tails, so do not halve it again.",
+  "end": "This interval is about the population mean, not about single people. One person varies by about the SD of 40 ms, which is 5 times the standard error of 8."
+ },
+ "ci-pressure": {
+  "0": "The sample mean estimates the population mean. The SD describes how much single measurements vary, while the standard error describes the uncertainty in their mean.",
+  "2": "Use the class t table (two-tailed), row 11 and the combined two-tail 0.05 column. The printed cutoff is 2.201. The column already counts both tails, so do not halve it again.",
+  "end": "This interval is about the population mean, not about single people. One person varies by about the SD of 12 mmHg, which is √12 times the standard error of 3.464102."
+ },
+ "ci-respiration": {
+  "0": "The sample mean estimates the population mean. The SD describes how much single measurements vary, while the standard error describes the uncertainty in their mean.",
+  "2": "Use the class t table (two-tailed), row 19 and the combined two-tail 0.01 column. The printed cutoff is 2.861. The column already counts both tails, so do not halve it again.",
+  "end": "This interval is about the population mean, not about single people. One person varies by about the SD of 3 breaths/min, which is √20 times the standard error of 0.6708204."
+ },
+ "ci-neural": {
+  "0": "Keep the direction group1 minus group2 throughout. The null says the two population means are equal, and the two-sided alternative says they differ.",
+  "5": "Use the class t table (two-tailed), row 26 and the combined two-tail 0.05 column. The printed cutoff is 2.056. The column already counts both tails, so do not halve it again.",
+  "8": "Zero is inside the interval, so the equal-means null is not rejected at the matching two-sided 0.05 level. No separate t statistic is needed.",
+  "end": "Because zero is inside, a difference of zero is still plausible. The interval runs from -0.6144368 to 6.614437 score units, so the data cannot tell whether group1 is higher or lower."
+ },
+ "ci-sleep": {
+  "0": "Keep the direction group1 minus group2 throughout. The null says the two population means are equal, and the two-sided alternative says they differ.",
+  "5": "Use the class t table (two-tailed), row 34 and the combined two-tail 0.05 column. The printed cutoff is 2.032. The column already counts both tails, so do not halve it again.",
+  "8": "Zero is inside the interval, so the equal-means null is not rejected at the matching two-sided 0.05 level. No separate t statistic is needed.",
+  "end": "Because zero is inside, a difference of zero is still plausible. The interval runs from -0.3796692 to 1.179669 hours, so the data cannot tell whether group1 is higher or lower."
+ },
+ "ci-pain": {
+  "0": "Keep the direction group1 minus group2 throughout. The null says the two population means are equal, and the two-sided alternative says they differ.",
+  "5": "Use the class t table (two-tailed), row 42 and the combined two-tail 0.05 column. The printed cutoff is 2.018. The column already counts both tails, so do not halve it again.",
+  "8": "Zero is outside the interval, so the equal-means null is rejected at the matching two-sided 0.05 level. No separate t statistic is needed.",
+  "end": "Because zero is outside, a difference of zero is not plausible at the 0.05 level. Every value in the interval is negative, so group1 is lower by between 0.2366644 and 1.963336 score units."
+ },
+ "ci-latency": {
+  "0": "Keep the direction group1 minus group2 throughout. The null says the two population means are equal, and the two-sided alternative says they differ.",
+  "5": "Use the class t table (two-tailed), row 30 and the combined two-tail 0.05 column. The printed cutoff is 2.042. The column already counts both tails, so do not halve it again.",
+  "8": "Zero is inside the interval, so the equal-means null is not rejected at the matching two-sided 0.05 level. No separate t statistic is needed.",
+  "end": "Because zero is inside, a difference of zero is still plausible. The interval runs from -11.62804 to 3.628041 ms, so the data cannot tell whether group1 is higher or lower."
+ },
+ "ci-screen": {
+  "end": "Because 0.25 is inside the interval, a population proportion of 0.25 is still plausible at the 0.01 level. So the data do not show a difference from 0.25."
+ },
+ "ci-recall": {
+  "end": "Because 0.5 is outside the interval, the population proportion differs from 0.5 at the 0.05 level. The whole interval lies above 0.5, so the proportion is higher."
+ },
+ "ci-symptom": {
+  "end": "Because 0.3 is inside the interval, a population proportion of 0.3 is still plausible at the 0.05 level. So the data do not show a difference from 0.3."
+ },
+ "ci-response": {
+  "end": "Because 0.4 is inside the interval, a population proportion of 0.4 is still plausible at the 0.05 level. So the data do not show a difference from 0.4."
+ },
+ "ci-event": {
+  "2": "Add the event counts and the group sizes first, then divide. This pooled estimate is the one used for this interval.",
+  "end": "Because zero is outside, equal event probabilities are not plausible at the 0.05 level. Group1 is higher by 2.62 to 27.38 percentage points, which is an absolute difference, not a relative reduction."
+ },
+ "ci-adverse": {
+  "2": "Add the event counts and the group sizes first, then divide. This pooled estimate is the one used for this interval.",
+  "end": "Because zero is inside, equal event probabilities remain plausible at the 0.05 level. The difference could be anywhere from -4.62 to 12.80 percentage points, so the direction is not settled."
+ },
+ "ci-improvement": {
+  "2": "Add the event counts and the group sizes first, then divide. This pooled estimate is the one used for this interval.",
+  "end": "Because zero is inside, equal event probabilities remain plausible at the 0.05 level. The difference could be anywhere from -1.21 to 25.21 percentage points, so the direction is not settled."
+ },
+ "ci-completion": {
+  "2": "Add the event counts and the group sizes first, then divide. This pooled estimate is the one used for this interval.",
+  "end": "Because zero is inside, equal event probabilities remain plausible at the 0.05 level. The difference could be anywhere from -14.34 to 7.67 percentage points, so the direction is not settled."
+ }
+}

@@ -57,13 +57,13 @@
   },
   {
    "step": 7,
-   "title": "CI for the slope β",
+   "title": "CI for the slope",
    "start": 43,
    "end": 51
   },
   {
    "step": 8,
-   "title": "CI for the intercept α",
+   "title": "CI for the intercept",
    "start": 51,
    "end": 59
   }

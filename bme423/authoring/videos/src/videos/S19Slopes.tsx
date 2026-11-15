@@ -21,17 +21,17 @@ export const meta = {
     {title: 'Two lines', seconds: 7, card: [{label: 'fitted lines (R) · weight on height', note: 'males    ŷ = −4.2329 + 3.2833x\nfemales  ŷ = 6.8349 + 2.0290x'}],
       caption: 'Each sex gets its own regression of weight on height. Males sit close to their line, and females **scatter more**.'},
     {title: 'Same slope?', seconds: 7, caption: 'The question is not which group is heavier. It is whether weight rises with height at the **same rate**.',
-      card: [{label: 'null hypothesis', tex: 'H_0:\\beta_M=\\beta_F', value: 'same lbs gained per inch', color: C.signal}]},
+      card: [{label: 'null hypothesis', tex: 'H_0:\\beta_1=\\beta_2', value: 'same lbs gained per inch', color: C.signal}]},
     {title: 'Slopes and SEs', seconds: 7, caption: 'Each slope has a **standard error** from R. The female slope is less certain because female weights scatter more.',
-      card: [{label: 'R output · Height.in row', note: 'males    b 3.2833 · SE 0.2041 · n 18\nfemales  b 2.0290 · SE 0.4708 · n 18'}]},
+      card: [{label: 'R output · Height.in row', note: 'males (1)    b 3.2833 · SE 0.2041 · n 18\nfemales (2)  b 2.0290 · SE 0.4708 · n 18'}]},
     {title: 'Slope difference', seconds: 6, caption: 'Males gain about **1.25 lbs more per inch** of height than females in these samples.',
-      card: [{label: 'difference', tex: 'b_M-b_F', value: `3.2833 − 2.029 = ${diff.toFixed(4)}`, color: C.signal}]},
+      card: [{label: 'difference', tex: 'b_1-b_2', value: `3.2833 − 2.029 = ${diff.toFixed(4)}`, color: C.signal}]},
     {title: 'SE of the difference', seconds: 7, caption: 'The two samples are independent, so the slope **variances add**. The root of their sum is 0.51314.',
-      card: [{label: 'standard error', tex: 's_{b_M-b_F}=\\sqrt{s_{b_M}^2+s_{b_F}^2}', value: `√(0.2041² + 0.4708²) = ${seD.toFixed(5)}`, color: C.noise}]},
+      card: [{label: 'standard error', tex: 's_{b_1-b_2}=\\sqrt{s_{b_1}^2+s_{b_2}^2}', value: `√(0.2041² + 0.4708²) = ${seD.toFixed(5)}`, color: C.noise}]},
     {title: 't statistic', seconds: 7, caption: 'The t statistic counts how many standard errors fit inside the difference. Here that is **2.444**.',
-      card: [{label: 't statistic', tex: 't=\\frac{b_M-b_F}{s_{b_M-b_F}}', value: `${diff.toFixed(4)} / ${seD.toFixed(5)} = ${t.toFixed(3)}`, color: C.signal}]},
+      card: [{label: 't statistic', tex: 't=\\frac{b_1-b_2}{s_{b_1-b_2}}', value: `${diff.toFixed(4)} / ${seD.toFixed(5)} = ${t.toFixed(3)}`, color: C.signal}]},
     {title: 'Class t table', seconds: 8, caption: 'Use the **class t table** (two-tailed). Each line uses 2 df, so ν = 18 + 18 − 4 = 32, and column 0.05 gives **2.037**.',
-      card: [{label: 'class t table', tex: '\\nu=n_M+n_F-4=32', value: 'row 32 · column 0.05 → 2.037', color: C.signal}]},
+      card: [{label: 'class t table', tex: '\\nu=n_1+n_2-4=32', value: 'row 32 · column 0.05 → 2.037', color: C.signal}]},
     {title: 'Decision', seconds: 7, caption: '2.444 passes 2.037 but not 2.449, so **0.02 < P < 0.05**. Weight rises faster with height in males.',
       card: [{label: 'decision', value: '2.037 < 2.444 < 2.449', note: 'reject H0 · 0.02 < P < 0.05', color: C.green}]},
   ] as Step[],
@@ -85,7 +85,7 @@ const S19Slopes: React.FC = () => (
           <line x1={xd(0)} x2={xd(2.6)} y1={392} y2={392} stroke={C.muted} strokeWidth={1.5} />
           {[0, 0.5, 1, 1.5, 2, 2.5].map(v => <g key={v}><line x1={xd(v)} x2={xd(v)} y1={392} y2={398} stroke={C.muted} /><text x={xd(v)} y={414} fill={C.muted} fontSize={14} fontFamily={mono} textAnchor="middle">{v.toFixed(1)}</text></g>)}
           <rect x={xd(0)} y={340} width={(xd(diff) - xd(0)) * prog(tl, f, 3, 1.4)} height={18} rx={4} fill={C.signal} opacity={0.85} />
-          <Label x={xd(0)} y={328} text={`b_M − b_F = ${diff.toFixed(4)}`} color={C.signal} size={14} weight={700} />
+          <Label x={xd(0)} y={328} text={`b₁ − b₂ = ${diff.toFixed(4)}`} color={C.signal} size={14} weight={700} />
           {i === 4 && (() => { const q = prog(tl, f, 4, 1.4); const s = 230; const ox = 470, oy = 360; const ax = ox + male.sb * s, ay = oy - fem.sb * s; return (<g opacity={q}>
             <line x1={ox} x2={ax} y1={oy} y2={oy} stroke={GROUP[0]} strokeWidth={4} />
             <line x1={ax} x2={ax} y1={oy} y2={ay} stroke={GROUP[1]} strokeWidth={4} />

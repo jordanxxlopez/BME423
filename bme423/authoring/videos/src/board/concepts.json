@@ -1,0 +1,26 @@
+[
+ {"id": "concept-meaning", "title": "What 95% confidence means", "topic": "meaning", "session": 17,
+  "context": "Ten resting heart rates give a sample mean of 67 beats/min, and the 95% confidence interval for the population mean is 60.56224 to 73.43776 beats/min. What does the 95% describe?",
+  "tasks": ["Say which quantity is fixed and which one changes from sample to sample.", "Say where the cutoff comes from and what the confidence level describes in the long run."],
+  "hypotheses": null, "values": {"xbar": 67, "s": 9, "n": 10, "se": 2.84605, "tc": 2.262, "L": 60.56224, "U": 73.43776},
+  "conclusion": "The 95% describes the procedure. About 95 out of 100 intervals built this way contain the fixed population mean, so this one interval from 60.56224 to 73.43776 beats/min either contains it or it does not.",
+  "steps": [
+   {"title": "Name the confidence level", "general": ["\\text{confidence}=100(1-\\alpha)\\%"], "work": ["\\alpha=0.05", "100(1-0.05)\\%=95\\%"], "words": "The confidence level comes from alpha. With alpha equal to 0.05 the level is 95 percent.", "lookup": null},
+   {"title": "The population mean is fixed", "general": ["\\text{estimate of }\\mu=\\bar x"], "work": ["\\bar x=67,\\quad s=9,\\quad n=10"], "words": "The population mean is one fixed number that we do not know. The sample mean changes from sample to sample, so it is the interval that moves, not the population mean.", "lookup": null},
+   {"title": "Where the cutoff comes from", "general": ["\\nu=n-1", "t_c=t_\\alpha(\\nu)"], "work": ["\\nu=10-1=9", "t_{0.05}(9)=2.262"], "words": "The middle 95 percent of the t distribution lies between the negative and the positive cutoff. The other 5 percent is split into 2.5 percent in each tail, so the combined two-tail 0.05 column is used.", "lookup": {"path": "sources/tables/t_table.pdf", "page": 1, "row": "9", "column": "0.05", "value": 2.262, "actualDf": 9, "approximation": false}},
+   {"title": "Build the interval", "general": ["M=t_c s_{\\bar x}", "L<\\mu<U"], "work": ["M=2.262(2.84605)=6.437765", "60.56224<\\mu<73.43776"], "words": "The interval reaches one margin below and one margin above the sample mean.", "lookup": null},
+   {"title": "Long-run coverage", "general": ["P(L<\\mu<U)=1-\\alpha\\ \\text{before sampling}"], "work": ["1-0.05=0.95"], "words": "Before the data are collected, the procedure has a 95 percent chance of producing an interval that contains the population mean. After the data are in, this one interval either contains it or it does not.", "lookup": null}
+  ]},
+ {"id": "concept-decision", "title": "Deciding with a confidence interval", "topic": "decision", "session": 17,
+  "context": "The 95% confidence interval for diuretic minus placebo urine production is 31.18917 to 408.8108 mL/day. Do the population means differ at the matching two-sided 0.05 level?",
+  "tasks": ["State both hypotheses for the difference.", "Use only the interval to decide, and give the direction."],
+  "hypotheses": {"null": "H_0:\\mu_1-\\mu_2=0", "alternative": "H_A:\\mu_1-\\mu_2\\ne0", "nullWords": "The diuretic and placebo populations have equal means.", "alternativeWords": "The diuretic and placebo population means differ."},
+  "values": {"L": 31.18917, "U": 408.8108, "theta0": 0},
+  "conclusion": "Zero is outside the interval from 31.18917 to 408.8108 mL/day, so the equal-means null is rejected at the 0.05 level. Both bounds are positive, so the diuretic mean is higher.",
+  "steps": [
+   {"title": "State the hypotheses", "general": ["H_0:\\mu_1-\\mu_2=0", "H_A:\\mu_1-\\mu_2\\ne0"], "work": [], "words": "For a difference of two means the null value is zero, because zero difference means equal population means.", "lookup": null},
+   {"title": "Match the levels", "general": ["\\text{confidence}=100(1-\\alpha)\\%"], "work": ["95\\%\\ \\text{interval}\\Leftrightarrow\\alpha=0.05\\ \\text{two-sided}"], "words": "A 95 percent interval matches a two-sided test at the 0.05 level. The levels have to match before the interval can be used for the decision.", "lookup": null},
+   {"title": "Check the null value", "general": ["\\theta_0\\in[L,U]\\Rightarrow\\text{do not reject }H_0", "\\theta_0\\notin[L,U]\\Rightarrow\\text{reject }H_0"], "work": ["0\\notin[31.18917,\\ 408.8108]"], "words": "Look for zero inside the interval. Here the whole interval sits above zero.", "lookup": null},
+   {"title": "Decide and give the direction", "general": ["L>0\\Rightarrow\\mu_1>\\mu_2"], "work": ["L=31.18917>0", "\\text{reject }H_0,\\ P<0.05"], "words": "Zero is outside, so the null is rejected. Both bounds are positive, so the first mean, the diuretic, is higher.", "lookup": null}
+  ]}
+]

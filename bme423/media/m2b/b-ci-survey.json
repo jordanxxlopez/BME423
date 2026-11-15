@@ -1,0 +1,85 @@
+{
+ "id": "b-ci-survey",
+ "file": "media/m2b/b-ci-survey.mp4",
+ "poster": "media/m2b/b-ci-survey.png",
+ "session": 17,
+ "method": "oneProportion",
+ "title": "Non-prescribed stimulant survey",
+ "duration": 119.333,
+ "cases": {
+  "ci-survey": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 14.733
+  },
+  {
+   "step": 2,
+   "title": "State the proportion and hypotheses",
+   "start": 14.733,
+   "end": 27.267
+  },
+  {
+   "step": 3,
+   "title": "Calculate the sample proportion",
+   "start": 27.267,
+   "end": 36
+  },
+  {
+   "step": 4,
+   "title": "Calculate the proportion SE",
+   "start": 36,
+   "end": 48.467
+  },
+  {
+   "step": 5,
+   "title": "Select the Normal cutoff",
+   "start": 48.467,
+   "end": 62.6
+  },
+  {
+   "step": 6,
+   "title": "Calculate the margin",
+   "start": 62.6,
+   "end": 75.067
+  },
+  {
+   "step": 7,
+   "title": "Calculate the lower bound",
+   "start": 75.067,
+   "end": 83.467
+  },
+  {
+   "step": 8,
+   "title": "Calculate the upper bound",
+   "start": 83.467,
+   "end": 91.733
+  },
+  {
+   "step": 9,
+   "title": "Compare with the null reference",
+   "start": 91.733,
+   "end": 105.267
+  },
+  {
+   "step": 10,
+   "title": "Conclusion",
+   "start": 105.267,
+   "end": 119.333
+  }
+ ],
+ "case": "ci-survey",
+ "kind": "board"
+}

@@ -17,17 +17,17 @@ export const meta = {
   steps: [
     {title: 'Two medicines', seconds: 6, card: [{label: 'features (arbitrary units)', note: 'medicine 1   MW 1 · pH 1\nmedicine 4   MW 5 · pH 4'}],
       caption: 'Medicine 1 is (1, 1) and medicine 4 is (5, 4) in MW and pH. A **distance** measures how different they are.'},
-    {title: 'Differences', seconds: 7, card: [{label: 'coordinate differences', tex: '\\Delta_i=|q_i-r_i|', value: `Δ1 = ${dx} · Δ2 = ${dy}`, color: C.noise, note: 'Δ1 = |1 − 5| = 4\nΔ2 = |1 − 4| = 3'}],
+    {title: 'Differences', seconds: 7, card: [{label: 'coordinate differences', tex: '|q_i-r_i|,\\ i=1,\\dots,m', value: `|q₁ − r₁| = ${dx} · |q₂ − r₂| = ${dy}`, color: C.noise, note: '|q₁ − r₁| = |1 − 5| = 4\n|q₂ − r₂| = |1 − 4| = 3'}],
       caption: 'Subtract matching coordinates first. The differences are **4** in MW and **3** in pH, and every distance reuses them.'},
-    {title: 'Euclidean', seconds: 7, card: [{label: 'Euclidean · ℓ2 norm', tex: 'd_2=\\sqrt{\\textstyle\\sum_i(q_i-r_i)^2}', value: `√(4² + 3²) = √25 = ${eu}`, color: C.signal}],
+    {title: 'Euclidean', seconds: 7, card: [{label: 'Euclidean · ℓ2 norm', tex: 'd(q,r)=\\sqrt{\\textstyle\\sum_{i=1}^{m}(q_i-r_i)^2}', value: `√(4² + 3²) = √25 = ${eu}`, color: C.signal}],
       caption: 'Euclidean distance is the **straight line** between the points. Square the differences, add them and take the root.'},
-    {title: 'Manhattan', seconds: 7, card: [{label: 'Manhattan · ℓ1 norm', tex: 'd_1=\\textstyle\\sum_i|q_i-r_i|', value: `4 + 3 = ${man}`, color: C.green}],
+    {title: 'Manhattan', seconds: 7, card: [{label: 'Manhattan · ℓ1 norm', tex: 'd(q,r)=\\textstyle\\sum_{i=1}^{m}|q_i-r_i|', value: `4 + 3 = ${man}`, color: C.green}],
       caption: 'Manhattan distance walks the **grid** like city blocks, so it adds the differences, 4\u00a0+\u00a03\u00a0=\u00a07.'},
-    {title: 'Minkowski', seconds: 7, card: [{label: 'Minkowski · ℓp norm', tex: 'd_p=\\left(\\textstyle\\sum_i|q_i-r_i|^p\\right)^{1/p}', note: 'p = 1 gives Manhattan · p = 2 gives Euclidean'}],
+    {title: 'Minkowski', seconds: 7, card: [{label: 'Minkowski · ℓp norm', tex: 'd(q,r)=\\left(\\textstyle\\sum_{i=1}^{m}|q_i-r_i|^p\\right)^{1/p}', note: 'p = 1 gives Manhattan · p = 2 gives Euclidean'}],
       caption: 'Minkowski uses a power p and a root 1/p. So **p = 1 is Manhattan** and **p = 2 is Euclidean**.'},
-    {title: 'Minkowski p = 3', seconds: 7, card: [{label: 'Minkowski, p = 3', tex: 'd_3=(4^3+3^3)^{1/3}', value: `91^(1/3) = ${mk3.toFixed(3)}`, color: C.purple}],
+    {title: 'Minkowski p = 3', seconds: 7, card: [{label: 'Minkowski, p = 3', tex: '\\lVert q-r\\rVert_3=(4^3+3^3)^{1/3}', value: `91^(1/3) = ${mk3.toFixed(3)}`, color: C.purple}],
       caption: 'With p = 3, cube the differences, add them and take the cube root. So 91 to the power 1/3 gives **4.498**.'},
-    {title: 'Compare', seconds: 8, card: [{label: 'compare', tex: 'd_1\\ge d_2\\ge d_3', value: `7 ≥ 5 ≥ ${mk3.toFixed(3)}`, color: C.signal}],
+    {title: 'Compare', seconds: 8, card: [{label: 'compare', tex: '\\lVert q-r\\rVert_1\\ge\\lVert q-r\\rVert_2\\ge\\lVert q-r\\rVert_3', value: `7 ≥ 5 ≥ ${mk3.toFixed(3)}`, color: C.signal}],
       caption: 'Larger p puts more weight on the largest difference, so the distance **shrinks toward 4**. Small d means similar.'},
   ] as Step[],
 };
@@ -70,18 +70,18 @@ const S22Distance: React.FC = () => (
         {after(tl, f, 1) && (() => { const p = prog(tl, f, 1, 1.4); return (<g>
           <line x1={qx} x2={lerp(qx, rx, Math.min(1, p * 2))} y1={qy} y2={qy} stroke={C.noise} strokeWidth={4} strokeLinecap="round" />
           {p > 0.5 && <line x1={rx} x2={rx} y1={qy} y2={lerp(qy, ry, (p - 0.5) * 2)} stroke={C.noise} strokeWidth={4} strokeLinecap="round" />}
-          <Label x={x(3.3)} y={qy + 28} text={`Δ1 = ${dx}`} color={C.noise} anchor="middle" opacity={Math.min(1, p * 2)} weight={700} />
-          <Label x={rx + 12} y={y(2.5) + 5} text={`Δ2 = ${dy}`} color={C.noise} opacity={Math.max(0, (p - 0.5) * 2)} weight={700} />
+          <Label x={x(3.3)} y={qy + 28} text={`|q₁ − r₁| = ${dx}`} color={C.noise} anchor="middle" opacity={Math.min(1, p * 2)} weight={700} />
+          <Label x={rx + 12} y={y(2.5) + 5} text={`|q₂ − r₂| = ${dy}`} color={C.noise} opacity={Math.max(0, (p - 0.5) * 2)} weight={700} />
         </g>); })()}
         {/* Euclidean: straight line */}
         {after(tl, f, 2) && (() => { const p = prog(tl, f, 2, 1.4); return (<g>
           <line x1={qx} y1={qy} x2={lerp(qx, rx, p)} y2={lerp(qy, ry, p)} stroke={C.signal} strokeWidth={5} strokeLinecap="round" />
-          <Label x={x(3.45)} y={y(2.15) + 6} text={`d₂ = ${eu}`} color={C.signal} opacity={p} weight={700} />
+          <Label x={x(3.2)} y={y(2.15) + 6} text={`‖q − r‖₂ = ${eu}`} color={C.signal} opacity={p} weight={700} />
         </g>); })()}
         {/* Manhattan: a grid path */}
         {after(tl, f, 3) && (() => { const p = prog(tl, f, 3, 2.2); return (<g>
           <path d={partial(stairs, p)} fill="none" stroke={C.green} strokeWidth={4} strokeLinejoin="round" strokeLinecap="round" />
-          <Label x={x(1.15)} y={y(3.55)} text={`d₁ = ${man}`} color={C.green} opacity={p} weight={700} />
+          <Label x={x(1.15)} y={y(3.55)} text={`‖q − r‖₁ = ${man}`} color={C.green} opacity={p} weight={700} />
         </g>); })()}
         {/* the two medicines */}
         {[{a: q, name: 'medicine 1', c: GROUP[0], dyl: 30}, {a: r, name: 'medicine 4', c: GROUP[1], dyl: -18}].map((m, k) => {
@@ -102,7 +102,7 @@ const S22Distance: React.FC = () => (
             </g>); })}
           {after(tl, f, 6) && <g opacity={prog(tl, f, 6)}>
             <line x1={528} x2={740} y1={yb(4)} y2={yb(4)} stroke={C.noise} strokeWidth={2} strokeDasharray="6 5" />
-            <Label x={522} y={yb(4) + 5} text="Δ = 4" color={C.noise} anchor="end" size={13} weight={700} />
+            <Label x={522} y={yb(4) + 24} text="|q₁ − r₁| = 4" color={C.noise} anchor="end" size={13} weight={700} />
           </g>}
         </g>}
       </g>);

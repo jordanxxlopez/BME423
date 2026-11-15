@@ -1,0 +1,78 @@
+{
+ "id": "b-s22-medicines-kmeans",
+ "file": "media/m2b/b-s22-medicines-kmeans.mp4",
+ "poster": "media/m2b/b-s22-medicines-kmeans.png",
+ "session": 22,
+ "method": "s22kmeans",
+ "title": "k-means on four medicines (MW, pH)",
+ "duration": 104.933,
+ "cases": {
+  "s22-medicines-kmeans": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 16
+  },
+  {
+   "step": 2,
+   "title": "Set up",
+   "start": 16,
+   "end": 24.067
+  },
+  {
+   "step": 3,
+   "title": "Iteration 1 distances",
+   "start": 24.067,
+   "end": 37.467
+  },
+  {
+   "step": 4,
+   "title": "Iteration 1 labels",
+   "start": 37.467,
+   "end": 44.867
+  },
+  {
+   "step": 5,
+   "title": "Iteration 1 centroids",
+   "start": 44.867,
+   "end": 55.067
+  },
+  {
+   "step": 6,
+   "title": "Iteration 2 distances and labels",
+   "start": 55.067,
+   "end": 69.667
+  },
+  {
+   "step": 7,
+   "title": "Iteration 2 centroids",
+   "start": 69.667,
+   "end": 79.6
+  },
+  {
+   "step": 8,
+   "title": "Check convergence",
+   "start": 79.6,
+   "end": 90.333
+  },
+  {
+   "step": 9,
+   "title": "Conclusion",
+   "start": 90.333,
+   "end": 104.933
+  }
+ ],
+ "case": "s22-medicines-kmeans",
+ "kind": "board"
+}

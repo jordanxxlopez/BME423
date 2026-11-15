@@ -1,0 +1,85 @@
+{
+ "id": "b-ci-aspirin-precision",
+ "file": "media/m2b/b-ci-aspirin-precision.mp4",
+ "poster": "media/m2b/b-ci-aspirin-precision.png",
+ "session": 17,
+ "method": "twoProportions",
+ "title": "Aspirin thrombosis interval · retain intermediate digits",
+ "duration": 122.733,
+ "cases": {
+  "ci-aspirin-precision": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 12.133
+  },
+  {
+   "step": 2,
+   "title": "Define the population difference",
+   "start": 12.133,
+   "end": 23.467
+  },
+  {
+   "step": 3,
+   "title": "Calculate both sample proportions",
+   "start": 23.467,
+   "end": 33.4
+  },
+  {
+   "step": 4,
+   "title": "Calculate the course pooled proportion",
+   "start": 33.4,
+   "end": 45.733
+  },
+  {
+   "step": 5,
+   "title": "Calculate the pooled binary variance",
+   "start": 45.733,
+   "end": 55.533
+  },
+  {
+   "step": 6,
+   "title": "Calculate the difference SE",
+   "start": 55.533,
+   "end": 64.4
+  },
+  {
+   "step": 7,
+   "title": "Calculate the difference and margin",
+   "start": 64.4,
+   "end": 79.6
+  },
+  {
+   "step": 8,
+   "title": "Calculate both endpoints",
+   "start": 79.6,
+   "end": 94.533
+  },
+  {
+   "step": 9,
+   "title": "Interpret direction and the zero comparison",
+   "start": 94.533,
+   "end": 106.733
+  },
+  {
+   "step": 10,
+   "title": "Conclusion",
+   "start": 106.733,
+   "end": 122.733
+  }
+ ],
+ "case": "ci-aspirin-precision",
+ "kind": "board"
+}

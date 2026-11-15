@@ -1,0 +1,99 @@
+{
+ "id": "b-s20-hr-posture-r",
+ "file": "media/m2b/b-s20-hr-posture-r.mp4",
+ "poster": "media/m2b/b-s20-hr-posture-r.png",
+ "session": 20,
+ "method": "s20pairedR",
+ "title": "Heart rate seated and standing, by hand and in R",
+ "duration": 193.733,
+ "cases": {
+  "s20-hr-posture-r": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 14.333
+  },
+  {
+   "step": 2,
+   "title": "State the procedure and hypotheses",
+   "start": 14.333,
+   "end": 33.067
+  },
+  {
+   "step": 3,
+   "title": "Form one difference per subject",
+   "start": 33.067,
+   "end": 47.933
+  },
+  {
+   "step": 4,
+   "title": "Calculate the mean difference",
+   "start": 47.933,
+   "end": 58.333
+  },
+  {
+   "step": 5,
+   "title": "Calculate the SD of the differences",
+   "start": 58.333,
+   "end": 76.2
+  },
+  {
+   "step": 6,
+   "title": "Calculate the standard error of the mean difference",
+   "start": 76.2,
+   "end": 86.8
+  },
+  {
+   "step": 7,
+   "title": "Calculate the t statistic",
+   "start": 86.8,
+   "end": 98.6
+  },
+  {
+   "step": 8,
+   "title": "Find the degrees of freedom and the critical value",
+   "start": 98.6,
+   "end": 114.467
+  },
+  {
+   "step": 9,
+   "title": "Make the decision and bracket P",
+   "start": 114.467,
+   "end": 132.2
+  },
+  {
+   "step": 10,
+   "title": "Run the same test in R",
+   "start": 132.2,
+   "end": 153.733
+  },
+  {
+   "step": 11,
+   "title": "Mark each R line against the hand calculation",
+   "start": 153.733,
+   "end": 177.733
+  },
+  {
+   "step": 12,
+   "title": "Conclusion",
+   "start": 177.733,
+   "end": 193.733
+  }
+ ],
+ "case": "s20-hr-posture-r",
+ "kind": "board"
+}

@@ -1,0 +1,92 @@
+{
+ "id": "b-ci-sleep",
+ "file": "media/m2b/b-ci-sleep.mp4",
+ "poster": "media/m2b/b-ci-sleep.png",
+ "session": 17,
+ "method": "twoMeans",
+ "title": "Sleep duration in two treatment groups",
+ "duration": 148.2,
+ "cases": {
+  "ci-sleep": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 13.067
+  },
+  {
+   "step": 2,
+   "title": "Define the contrast and hypotheses",
+   "start": 13.067,
+   "end": 27.267
+  },
+  {
+   "step": 3,
+   "title": "Calculate the observed difference",
+   "start": 27.267,
+   "end": 36.667
+  },
+  {
+   "step": 4,
+   "title": "Square both group SDs",
+   "start": 36.667,
+   "end": 48.4
+  },
+  {
+   "step": 5,
+   "title": "Pool both variance contributions",
+   "start": 48.4,
+   "end": 64.4
+  },
+  {
+   "step": 6,
+   "title": "Calculate the SE of the difference",
+   "start": 64.4,
+   "end": 77.067
+  },
+  {
+   "step": 7,
+   "title": "Find degrees of freedom and the t cutoff",
+   "start": 77.067,
+   "end": 98.333
+  },
+  {
+   "step": 8,
+   "title": "Calculate the margin",
+   "start": 98.333,
+   "end": 107.867
+  },
+  {
+   "step": 9,
+   "title": "Calculate both bounds",
+   "start": 107.867,
+   "end": 119.4
+  },
+  {
+   "step": 10,
+   "title": "Make the decision using the interval",
+   "start": 119.4,
+   "end": 133.2
+  },
+  {
+   "step": 11,
+   "title": "Conclusion",
+   "start": 133.2,
+   "end": 148.2
+  }
+ ],
+ "case": "ci-sleep",
+ "kind": "board"
+}

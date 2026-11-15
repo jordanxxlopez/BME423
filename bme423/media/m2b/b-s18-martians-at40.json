@@ -1,0 +1,85 @@
+{
+ "id": "b-s18-martians-at40",
+ "file": "media/m2b/b-s18-martians-at40.mp4",
+ "poster": "media/m2b/b-s18-martians-at40.png",
+ "session": 18,
+ "method": "s18predict",
+ "title": "Martians 40 cm tall: mean weight and one Martian's weight",
+ "duration": 125.267,
+ "cases": {
+  "s18-martians-at40": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 10.467
+  },
+  {
+   "step": 2,
+   "title": "Calculate the predicted weight",
+   "start": 10.467,
+   "end": 19.067
+  },
+  {
+   "step": 3,
+   "title": "Evaluate the distance term",
+   "start": 19.067,
+   "end": 28.933
+  },
+  {
+   "step": 4,
+   "title": "Calculate the standard error of the mean prediction",
+   "start": 28.933,
+   "end": 39
+  },
+  {
+   "step": 5,
+   "title": "Find the degrees of freedom and cutoff",
+   "start": 39,
+   "end": 54
+  },
+  {
+   "step": 6,
+   "title": "Construct the interval for the mean",
+   "start": 54,
+   "end": 68.267
+  },
+  {
+   "step": 7,
+   "title": "Calculate the standard error for one new Martian",
+   "start": 68.267,
+   "end": 81.267
+  },
+  {
+   "step": 8,
+   "title": "Construct the interval for one Martian",
+   "start": 81.267,
+   "end": 94.533
+  },
+  {
+   "step": 9,
+   "title": "Compare the two widths",
+   "start": 94.533,
+   "end": 109.267
+  },
+  {
+   "step": 10,
+   "title": "Conclusion",
+   "start": 109.267,
+   "end": 125.267
+  }
+ ],
+ "case": "s18-martians-at40",
+ "kind": "board"
+}

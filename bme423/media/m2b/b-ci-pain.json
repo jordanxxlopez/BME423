@@ -1,0 +1,92 @@
+{
+ "id": "b-ci-pain",
+ "file": "media/m2b/b-ci-pain.mp4",
+ "poster": "media/m2b/b-ci-pain.png",
+ "session": 17,
+ "method": "twoMeans",
+ "title": "Pain scores after intervention versus control",
+ "duration": 149.067,
+ "cases": {
+  "ci-pain": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 13.067
+  },
+  {
+   "step": 2,
+   "title": "Define the contrast and hypotheses",
+   "start": 13.067,
+   "end": 27.267
+  },
+  {
+   "step": 3,
+   "title": "Calculate the observed difference",
+   "start": 27.267,
+   "end": 37
+  },
+  {
+   "step": 4,
+   "title": "Square both group SDs",
+   "start": 37,
+   "end": 48.733
+  },
+  {
+   "step": 5,
+   "title": "Pool both variance contributions",
+   "start": 48.733,
+   "end": 64.733
+  },
+  {
+   "step": 6,
+   "title": "Calculate the SE of the difference",
+   "start": 64.733,
+   "end": 77.4
+  },
+  {
+   "step": 7,
+   "title": "Find degrees of freedom and the t cutoff",
+   "start": 77.4,
+   "end": 98.667
+  },
+  {
+   "step": 8,
+   "title": "Calculate the margin",
+   "start": 98.667,
+   "end": 108.2
+  },
+  {
+   "step": 9,
+   "title": "Calculate both bounds",
+   "start": 108.2,
+   "end": 119.733
+  },
+  {
+   "step": 10,
+   "title": "Make the decision using the interval",
+   "start": 119.733,
+   "end": 133.333
+  },
+  {
+   "step": 11,
+   "title": "Conclusion",
+   "start": 133.333,
+   "end": 149.067
+  }
+ ],
+ "case": "ci-pain",
+ "kind": "board"
+}

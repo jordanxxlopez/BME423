@@ -1,0 +1,85 @@
+{
+ "id": "b-s21-p7-mcnemar",
+ "file": "media/m2b/b-s21-p7-mcnemar.mp4",
+ "poster": "media/m2b/b-s21-p7-mcnemar.png",
+ "session": 21,
+ "method": "s21mcnemar",
+ "title": "p7 antigen before and after chemotherapy",
+ "duration": 163.467,
+ "cases": {
+  "s21-p7-mcnemar": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 16
+  },
+  {
+   "step": 2,
+   "title": "State the procedure",
+   "start": 16,
+   "end": 33
+  },
+  {
+   "step": 3,
+   "title": "State the hypotheses",
+   "start": 33,
+   "end": 54.733
+  },
+  {
+   "step": 4,
+   "title": "Show why the independent chi-square is wrong here",
+   "start": 54.733,
+   "end": 76.067
+  },
+  {
+   "step": 5,
+   "title": "Identify the subjects who change",
+   "start": 76.067,
+   "end": 95.333
+  },
+  {
+   "step": 6,
+   "title": "Calculate the expected number in each change cell",
+   "start": 95.333,
+   "end": 105.467
+  },
+  {
+   "step": 7,
+   "title": "Calculate the McNemar chi-square with Yates correction",
+   "start": 105.467,
+   "end": 117.467
+  },
+  {
+   "step": 8,
+   "title": "Find the critical value",
+   "start": 117.467,
+   "end": 135.267
+  },
+  {
+   "step": 9,
+   "title": "Make the decision",
+   "start": 135.267,
+   "end": 147.467
+  },
+  {
+   "step": 10,
+   "title": "Conclusion",
+   "start": 147.467,
+   "end": 163.467
+  }
+ ],
+ "case": "s21-p7-mcnemar",
+ "kind": "board"
+}

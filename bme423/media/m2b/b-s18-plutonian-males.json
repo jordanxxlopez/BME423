@@ -1,0 +1,92 @@
+{
+ "id": "b-s18-plutonian-males",
+ "file": "media/m2b/b-s18-plutonian-males.mp4",
+ "poster": "media/m2b/b-s18-plutonian-males.png",
+ "session": 18,
+ "method": "s18predict",
+ "title": "Male Plutonians: intervals, correlation and predictions at 68 inches",
+ "duration": 142.067,
+ "cases": {
+  "s18-plutonian-males": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 16
+  },
+  {
+   "step": 2,
+   "title": "Read the coefficients and standard errors",
+   "start": 16,
+   "end": 27.933
+  },
+  {
+   "step": 3,
+   "title": "Find the degrees of freedom and cutoff",
+   "start": 27.933,
+   "end": 42.933
+  },
+  {
+   "step": 4,
+   "title": "Construct the 95% interval for the slope",
+   "start": 42.933,
+   "end": 56.2
+  },
+  {
+   "step": 5,
+   "title": "Construct the 95% interval for the intercept",
+   "start": 56.2,
+   "end": 69.133
+  },
+  {
+   "step": 6,
+   "title": "Calculate the correlation coefficient",
+   "start": 69.133,
+   "end": 77
+  },
+  {
+   "step": 7,
+   "title": "Predict the mean weight at 68 inches",
+   "start": 77,
+   "end": 86.533
+  },
+  {
+   "step": 8,
+   "title": "Find the mean and SD of height",
+   "start": 86.533,
+   "end": 97.6
+  },
+  {
+   "step": 9,
+   "title": "Construct the 95% interval for the mean at 68 inches",
+   "start": 97.6,
+   "end": 111.467
+  },
+  {
+   "step": 10,
+   "title": "Construct the 95% interval for one male at 68 inches",
+   "start": 111.467,
+   "end": 126.067
+  },
+  {
+   "step": 11,
+   "title": "Conclusion",
+   "start": 126.067,
+   "end": 142.067
+  }
+ ],
+ "case": "s18-plutonian-males",
+ "kind": "board"
+}

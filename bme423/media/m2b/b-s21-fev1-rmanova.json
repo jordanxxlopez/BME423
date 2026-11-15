@@ -1,0 +1,106 @@
+{
+ "id": "b-s21-fev1-rmanova",
+ "file": "media/m2b/b-s21-fev1-rmanova.mp4",
+ "poster": "media/m2b/b-s21-fev1-rmanova.png",
+ "session": 21,
+ "method": "s21rmAnova",
+ "title": "FEV1 at baseline, after endotoxin, and after endotoxin plus salbutamol",
+ "duration": 198.667,
+ "cases": {
+  "s21-fev1-rmanova": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 16
+  },
+  {
+   "step": 2,
+   "title": "State the procedure and design",
+   "start": 16,
+   "end": 35.067
+  },
+  {
+   "step": 3,
+   "title": "State the hypotheses",
+   "start": 35.067,
+   "end": 48.4
+  },
+  {
+   "step": 4,
+   "title": "Calculate each subject mean",
+   "start": 48.4,
+   "end": 63.733
+  },
+  {
+   "step": 5,
+   "title": "Calculate the treatment means and the grand mean",
+   "start": 63.733,
+   "end": 82.8
+  },
+  {
+   "step": 6,
+   "title": "Calculate the within-subjects sum of squares",
+   "start": 82.8,
+   "end": 103.4
+  },
+  {
+   "step": 7,
+   "title": "Calculate the treatment sum of squares",
+   "start": 103.4,
+   "end": 112.533
+  },
+  {
+   "step": 8,
+   "title": "Calculate the residual sum of squares",
+   "start": 112.533,
+   "end": 123.067
+  },
+  {
+   "step": 9,
+   "title": "Find the degrees of freedom and mean squares",
+   "start": 123.067,
+   "end": 136.333
+  },
+  {
+   "step": 10,
+   "title": "Calculate the F statistic",
+   "start": 136.333,
+   "end": 148.733
+  },
+  {
+   "step": 11,
+   "title": "Find the critical value",
+   "start": 148.733,
+   "end": 171.533
+  },
+  {
+   "step": 12,
+   "title": "Make the decision",
+   "start": 171.533,
+   "end": 182.667
+  },
+  {
+   "step": 13,
+   "title": "Conclusion",
+   "start": 182.667,
+   "end": 198.667
+  }
+ ],
+ "case": "s21-fev1-rmanova",
+ "kind": "board"
+}

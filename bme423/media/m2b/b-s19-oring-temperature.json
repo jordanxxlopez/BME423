@@ -1,0 +1,57 @@
+{
+ "id": "b-s19-oring-temperature",
+ "file": "media/m2b/b-s19-oring-temperature.mp4",
+ "poster": "media/m2b/b-s19-oring-temperature.png",
+ "session": 19,
+ "method": "s19logistic",
+ "title": "O-ring failure and launch temperature",
+ "duration": 82.467,
+ "cases": {
+  "s19-oring-temperature": [
+   2,
+   3,
+   4,
+   5
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 15.4
+  },
+  {
+   "step": 2,
+   "title": "Test the temperature coefficient",
+   "start": 15.4,
+   "end": 34.667
+  },
+  {
+   "step": 3,
+   "title": "Probability at 53 °F",
+   "start": 34.667,
+   "end": 46.467
+  },
+  {
+   "step": 4,
+   "title": "Probability at 75 °F",
+   "start": 46.467,
+   "end": 57.733
+  },
+  {
+   "step": 5,
+   "title": "Odds multiplier per degree",
+   "start": 57.733,
+   "end": 68.733
+  },
+  {
+   "step": 6,
+   "title": "Conclusion",
+   "start": 68.733,
+   "end": 82.467
+  }
+ ],
+ "case": "s19-oring-temperature",
+ "kind": "board"
+}

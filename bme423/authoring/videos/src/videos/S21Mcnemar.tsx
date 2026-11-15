@@ -29,7 +29,7 @@ export const meta = {
     {title: 'Expected count', seconds: 6, caption: 'With no effect, the 12 changes would split **6 and 6** between the two directions.',
       card: [{label: 'expected per change cell', tex: 'E=\\frac{b+c}{2}', value: '(0 + 12) / 2 = 6', color: C.noise}]},
     {title: 'McNemar chi-square', seconds: 8, caption: 'Compare 0 and 12 with 6, subtracting **1/2** for the Yates correction. The statistic is **10.083** with 1 df.',
-      card: [{label: 'McNemar χ² (Yates, ν = 1)', tex: '\\chi^2=\\frac{(|b-E|-\\frac12)^2}{E}+\\frac{(|c-E|-\\frac12)^2}{E}', value: `5.5²/6 + 5.5²/6 = ${chi.toFixed(3)}`, color: C.signal}]},
+      card: [{label: 'McNemar χ² (Yates, ν = 1)', tex: '\\chi^2=\\frac{(|b-E|-1/2)^2}{E}+\\frac{(|c-E|-1/2)^2}{E}', value: `5.5²/6 + 5.5²/6 = ${chi.toFixed(3)}`, color: C.signal}]},
     {title: 'Class chi-square table', seconds: 7, caption: 'Use the **class chi-square table**, 1 df. Column 0.05 gives **3.841** and column 0.005 gives 7.879.',
       card: [{label: 'class chi-square table', value: '1 df · 0.05 → 3.841', color: C.signal, note: '0.005 → 7.879 (the last printed column)'}]},
     {title: 'Decision', seconds: 8, caption: 'McNemar passes **7.879**, so p7 changes after chemotherapy, P < 0.005. All 12 changes went negative to positive.',

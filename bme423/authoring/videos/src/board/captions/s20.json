@@ -1,0 +1,54 @@
+{
+ "s20-platelet-paired": {
+  "0": "The paired t test is used because each person is measured both before and after smoking. The null hypothesis says the true mean after-minus-before difference is zero, and the alternative says it is not zero.",
+  "1": "The differences are already given as after minus before, one per subject, so the analysis uses only these 11 numbers.",
+  "2": "The mean difference is 10.2727, and it estimates the true mean change δ in percentage points.",
+  "3": "The SD of the differences is 7.9761. Square each difference's distance from the mean difference, add them, divide by n − 1 and take the root.",
+  "6": "Use the class t table (two-tailed), row 10 and the 0.05 column. The printed cutoff is 2.228.",
+  "intro": "Eleven people have maximum percent platelet aggregation measured before and after smoking one cigarette. Each person's change is given as after minus before, in percentage points. Assume the differences are Normally distributed.",
+  "end": "Smoking one cigarette raises platelet aggregation by about 10.3 percentage points on average. This is because t = 4.27161 passes even the 0.002 column value 4.144, so a mean change this large would be very unlikely if smoking had no effect."
+ },
+ "s20-oc-paired": {
+  "0": "The paired t test is used because each woman is measured both without and with oral contraceptives. The null hypothesis says the true mean with-minus-without difference is zero, and the alternative says it is not zero.",
+  "2": "The mean difference is 4.8, and it estimates the true mean change δ in mmHg.",
+  "3": "The SD of the differences is 4.56557. Square each difference's distance from the mean difference, add them, divide by n − 1 and take the root.",
+  "6": "Use the class t table (two-tailed), row 9 and the 0.05 column. The printed cutoff is 2.262.",
+  "end": "Systolic blood pressure is about 4.8 mmHg higher with oral contraceptives. The test detects this because each woman serves as her own control, so the small but steady rise in almost every woman stands out against a standard error of only 1.44376."
+ },
+ "s20-oc-unpaired": {
+  "4": "Use the class t table (two-tailed), row 18 and the 0.05 column. The printed cutoff is 2.101.",
+  "intro": "The same ten women's systolic blood pressures are analyzed as if the two columns were two independent groups of ten different people. This shows what the unpaired t test concludes when it ignores the pairing.",
+  "end": "The unpaired test misses the effect because its standard error of 5.30283 comes from the large differences between women. The 4.8 mmHg difference is smaller than that, so t is only 0.905177, while the paired analysis of the same data gives t = 3.325."
+ },
+ "s20-hr-posture-r": {
+  "0": "The paired t test is used because each volunteer is measured both seated and standing. The null hypothesis says the true mean standing-minus-seated difference is zero, and the alternative says it is not zero.",
+  "2": "The mean difference is 5.375, and it estimates the true mean change δ in beats/min.",
+  "3": "The SD of the differences is 5.15302. Square each difference's distance from the mean difference, add them, divide by n − 1 and take the root.",
+  "6": "Use the class t table (two-tailed), row 7 and the 0.05 column. The printed cutoff is 2.365.",
+  "8": "List standing first so R subtracts standing minus seated, the same direction as by hand. R 4.6.1 reports t = 2.9503, df = 7, p-value = 0.0214, a 95 percent interval from 1.066971 to 9.683029 and a mean difference of 5.375.",
+  "9": "Each R line matches a hand result. R does not print the SD or standard error of the differences because they are folded into t. Its interval uses the exact quantile 2.364624 instead of 2.365, so it differs only in the fourth decimal.",
+  "intro": "Eight volunteers have resting heart rate recorded for 5 minutes while seated and again for 5 minutes while standing. Assume the differences are Normally distributed.",
+  "end": "Standing raises resting heart rate by about 5.4 beats/min. The hand test and R agree because they compute the same t = 2.95, and R's interval from 1.07 to 9.68 leaves out 0, which is the same as rejecting the null hypothesis at the 0.05 level."
+ },
+ "s20-grip-paired": {
+  "0": "The paired t test is used because each volunteer is measured both morning and evening. The null hypothesis says the true mean evening-minus-morning difference is zero, and the alternative says it is not zero.",
+  "2": "The mean difference is 0.571429, and it estimates the true mean change δ in kg.",
+  "3": "The SD of the differences is 1.27242. Square each difference's distance from the mean difference, add them, divide by n − 1 and take the root.",
+  "6": "Use the class t table (two-tailed), row 6 and the 0.05 column. The printed cutoff is 2.447.",
+  "intro": "Seven volunteers have dominant-hand grip strength measured in the morning and again in the evening of the same day. Assume the differences are Normally distributed.",
+  "end": "These data give no evidence that grip strength changes between morning and evening. This is because the mean change of 0.571 kg is only about 1.2 standard errors from zero, and the differences go both up and down."
+ },
+ "s20-breathing-rmanova": {
+  "0": "Every subject receives every treatment, so the procedure is repeated measures ANOVA. The null hypothesis says mean heart rate is the same under all three breathing protocols, and the alternative says at least one protocol has a different mean.",
+  "7": "Use the class F table, numerator column 2 (DF treat) and denominator row 6 (DF res). The lightface value for P < .05 is 5.14 and the boldface value for P < .01 is 10.92.",
+  "intro": "Four volunteers each have heart rate recorded during three breathing protocols, slow paced, normal and rapid paced breathing, so there are n = 4 subjects and m = 3 treatments. Assume Normally distributed responses.",
+  "end": "Heart rate rises from 69.5 with slow breathing to 78.5 with rapid breathing. The test is sensitive because the large differences between volunteers are removed before F is formed, so only the small residual counts as noise."
+ },
+ "s20-oc-rmanova": {
+  "0": "Every subject receives every treatment, so the procedure is repeated measures ANOVA. The null hypothesis says mean systolic blood pressure is the same without and with oral contraceptives, and the alternative says it differs.",
+  "7": "Use the class F table, numerator column 1 (DF treat) and denominator row 9 (DF res). The lightface value for P < .05 is 5.12 and the boldface value for P < .01 is 10.56.",
+  "9": "With only two treatments, repeated measures ANOVA and the paired t test are the same test, so F equals the square of the paired t. The F(1, 9) cutoff 5.12 is also the square of t0.05(9) = 2.262 to rounding.",
+  "intro": "The systolic blood pressures of the same ten women, without and with oral contraceptives, are analyzed with the repeated measures ANOVA steps, treating the two conditions as m = 2 treatments.",
+  "end": "Both methods give the same answer because with two treatments F is exactly t squared, 11.0533 = 3.32465². Both set aside the 2437 of between-subject variation, which is why each finds the rise that the unpaired test missed."
+ }
+}

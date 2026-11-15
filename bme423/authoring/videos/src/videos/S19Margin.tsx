@@ -24,22 +24,22 @@ export const meta = {
     {title: 'Survey result', seconds: 6, card: [{label: 'practice survey · weekly use', note: `first-year  ${m1} yes of ${n1}\nsenior      ${m2} yes of ${n2}`}],
       caption: 'A practice survey asks first-years and seniors about weekly gym use. The report gives the gap **plus or minus** a margin.'},
     {title: 'Observed difference', seconds: 6, caption: 'First-years say yes 60% of the time and seniors 50%, so the **observed difference** is 0.10, or 10 points.',
-      card: [{label: 'difference', tex: 'd=\\hat p_1-\\hat p_2', value: `0.6000 − 0.5000 = ${d.toFixed(4)}`, color: C.signal}]},
+      card: [{label: 'difference', tex: '\\hat p_1-\\hat p_2', value: `0.6000 − 0.5000 = ${d.toFixed(4)}`, color: C.signal}]},
     {title: 'Standard error', seconds: 7, caption: 'Pooling both groups gives one common proportion. The **standard error** is how much the gap wobbles between samples.',
       card: [{label: 'pooled proportion', value: `540 / 980 = ${pp.toFixed(5)}`, color: C.noise},
-        {label: 'standard error', tex: 's_{\\hat p_1-\\hat p_2}=\\sqrt{\\hat p(1-\\hat p)\\left(\\tfrac1{n_1}+\\tfrac1{n_2}\\right)}', value: `= ${se.toFixed(5)}`, color: C.noise}]},
+        {label: 'standard error', tex: 's_{(\\hat p_1-\\hat p_2)}=\\sqrt{\\hat p(1-\\hat p)\\left(\\tfrac1{n_1}+\\tfrac1{n_2}\\right)}', value: `= ${se.toFixed(5)}`, color: C.noise}]},
     {title: 'Normal cutoff', seconds: 7, caption: 'Proportions use the Normal cutoff. In the **class t table**, the infinity row and column 0.05 give **1.960**.',
       card: [{label: 'class t table (two-tailed)', value: 'row ∞ · column 0.05 → 1.960', color: C.signal}]},
     {title: 'Margin of error', seconds: 7, caption: 'The **margin of error** is the cutoff times the standard error. It is the number a report prints after plus or minus.',
-      card: [{label: 'margin of error', tex: 'M=z_{0.05}\\,s_{\\hat p_1-\\hat p_2}', value: `1.960 × ${se.toFixed(5)} = ${M.toFixed(4)}`, color: C.signal}]},
+      card: [{label: 'margin of error', tex: 'z_{0.05}\\cdot s_{(\\hat p_1-\\hat p_2)}', value: `1.960 × ${se.toFixed(5)} = ${M.toFixed(4)}`, color: C.signal}]},
     {title: 'Survey style', seconds: 7, caption: 'The report reads **10 points plus or minus 6.2**. The 95% interval runs from about 3.8 to 16.2 points.',
-      card: [{label: '95% interval', tex: 'd\\pm M', value: `${d.toFixed(4)} ± ${M.toFixed(4)}`, note: `(${lo.toFixed(4)}, ${hi.toFixed(4)}) · 10.0 ± 6.2 points`, color: C.signal}]},
+      card: [{label: '95% interval', tex: '(\\hat p_1-\\hat p_2)\\pm z_{0.05}\\cdot s_{(\\hat p_1-\\hat p_2)}', value: `${d.toFixed(4)} ± ${M.toFixed(4)}`, note: `(${lo.toFixed(4)}, ${hi.toFixed(4)}) · 10.0 ± 6.2 points`, color: C.signal}]},
     {title: 'Is zero inside?', seconds: 7, caption: 'The gap is **larger than its margin**, so zero falls outside the interval and two-sided P < 0.05.',
       card: [{label: 'decision', value: '0.1000 > 0.0623 → reject H0', note: 'first-years use the facility weekly more often', color: C.green}]},
     {title: 'Two means use t', seconds: 8, caption: 'For two means the cutoff comes from the t table instead. The diuretic example gives a margin of **188.81 mL/day**.',
-      card: [{label: 'margin · two means', tex: 'M=t_{0.05}(\\nu)\\,s_{\\bar x_1-\\bar x_2}', value: `2.101 × 89.867 = ${MU.toFixed(2)}`, note: 'urine example, ν = 18 → d = 220 ± 188.81 mL/day', color: C.signal}]},
+      card: [{label: 'margin · two means', tex: 't_{0.05}(\\nu)\\cdot s_{(\\bar x_1-\\bar x_2)}', value: `2.101 × 89.867 = ${MU.toFixed(2)}`, note: 'urine example, ν = 18 → difference 220 ± 188.81 mL/day', color: C.signal}]},
     {title: 'Bigger samples', seconds: 8, caption: 'As an illustration, four times as many students **halves the standard error**, so the margin falls to 3.1 points.',
-      card: [{label: 'illustration · 4× respondents', value: `SE ${se4.toFixed(5)} → M = ${M4.toFixed(4)}`, note: 'same proportions, n 2000 and 1920', color: C.noise}]},
+      card: [{label: 'illustration · 4× respondents', value: `SE ${se4.toFixed(5)} → margin ${M4.toFixed(4)}`, note: 'same proportions, n 2000 and 1920', color: C.noise}]},
   ] as Step[],
 };
 
@@ -80,13 +80,13 @@ const S19Margin: React.FC = () => (
             {i < 4 && <Label x={xd(d + se) + 8} y={359} text={`± SE ${se.toFixed(4)}`} color={C.noise} size={13} />}</g>}
           {after(tl, f, 4) && (() => { const q = prog(tl, f, 4, 1.6); return (<g>
             <line x1={xd(d - M * q)} x2={xd(d + M * q)} y1={330} y2={330} stroke={C.signal} strokeWidth={5} strokeLinecap="round" />
-            {q > 0.98 && i === 4 && <><Arrow x1={xd(d)} y1={312} x2={xd(hi)} y2={312} color={C.signal} w={2} /><Label x={(xd(d) + xd(hi)) / 2} y={304} text={`M = ${M.toFixed(4)}`} color={C.signal} anchor="middle" size={13} /></>}
+            {q > 0.98 && i === 4 && <><Arrow x1={xd(d)} y1={312} x2={xd(hi)} y2={312} color={C.signal} w={2} /><Label x={(xd(d) + xd(hi)) / 2} y={304} text={`margin ${M.toFixed(4)}`} color={C.signal} anchor="middle" size={13} /></>}
             {after(tl, f, 5) && <g opacity={prog(tl, f, 5)}>
               <Label x={xd(lo)} y={318} text={lo.toFixed(4)} color={C.signal} anchor="middle" size={13} />
               <Label x={xd(hi)} y={318} text={hi.toFixed(4)} color={C.signal} anchor="middle" size={13} /></g>}
           </g>); })()}
           <Glow cx={xd(d)} cy={330} r={8} color={C.signal} />
-          {i < 4 && <Label x={xd(d)} y={306} text={`d = ${d.toFixed(2)}`} color={C.signal} anchor="middle" weight={700} />}
+          {i < 4 && <Label x={xd(d)} y={306} text={`p̂₁ − p̂₂ = ${d.toFixed(2)}`} color={C.signal} anchor="middle" weight={700} />}
           {i === 5 && <Label x={xd(d)} y={290} text="10 ± 6.2 points" color={C.signal} anchor="middle" weight={700} size={17} opacity={prog(tl, f, 5)} />}
           {after(tl, f, 6) && <g opacity={prog(tl, f, 6)}>
             <line x1={xd(0)} x2={xd(0)} y1={250} y2={372} stroke={C.red} strokeWidth={2} strokeDasharray="5 5" />
@@ -103,9 +103,9 @@ const S19Margin: React.FC = () => (
           <line x1={xu(dU - seU)} x2={xu(dU + seU)} y1={256} y2={256} stroke={C.noise} strokeWidth={4} />
           <Label x={xu(dU + seU) + 8} y={261} text="± SE 89.867" color={C.noise} size={13} />
           <Glow cx={xu(dU)} cy={230} r={8} color={C.signal} />
-          <Label x={xu(dU)} y={206} text="d = 220" color={C.signal} anchor="middle" weight={700} />
+          <Label x={xu(dU)} y={206} text="difference 220" color={C.signal} anchor="middle" weight={700} />
           {q > 0.98 && <><Label x={xu(dU - MU)} y={206} text={(dU - MU).toFixed(2)} color={C.signal} anchor="middle" size={13} /><Label x={xu(dU + MU)} y={206} text={(dU + MU).toFixed(2)} color={C.signal} anchor="middle" size={13} />
-            <Label x={(xu(dU) + xu(dU + MU)) / 2} y={160} text="M = 2.101 × 89.867 = 188.81" color={C.signal} anchor="middle" size={14} /></>}
+            <Label x={(xu(dU) + xu(dU + MU)) / 2} y={160} text="2.101 × 89.867 = 188.81" color={C.signal} anchor="middle" size={14} /></>}
           <AxisX x={xu} y={330} ticks={[-200, 0, 200, 400, 600]} label="difference in urine production (mL/day)" />
         </g>); })()}
         {/* bigger samples (illustration) */}

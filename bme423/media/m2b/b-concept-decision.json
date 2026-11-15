@@ -1,0 +1,57 @@
+{
+ "id": "b-concept-decision",
+ "file": "media/m2b/b-concept-decision.mp4",
+ "poster": "media/m2b/b-concept-decision.png",
+ "session": 17,
+ "method": "decision",
+ "title": "Deciding with a confidence interval",
+ "duration": 80.2,
+ "cases": {
+  "concept-decision": [
+   2,
+   3,
+   4,
+   5
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 14.733
+  },
+  {
+   "step": 2,
+   "title": "State the hypotheses",
+   "start": 14.733,
+   "end": 26
+  },
+  {
+   "step": 3,
+   "title": "Match the levels",
+   "start": 26,
+   "end": 39.733
+  },
+  {
+   "step": 4,
+   "title": "Check the null value",
+   "start": 39.733,
+   "end": 50.667
+  },
+  {
+   "step": 5,
+   "title": "Decide and give the direction",
+   "start": 50.667,
+   "end": 64.2
+  },
+  {
+   "step": 6,
+   "title": "Conclusion",
+   "start": 64.2,
+   "end": 80.2
+  }
+ ],
+ "case": "concept-decision",
+ "kind": "board"
+}

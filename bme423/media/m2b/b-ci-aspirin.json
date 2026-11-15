@@ -1,0 +1,85 @@
+{
+ "id": "b-ci-aspirin",
+ "file": "media/m2b/b-ci-aspirin.mp4",
+ "poster": "media/m2b/b-ci-aspirin.png",
+ "session": 17,
+ "method": "twoProportions",
+ "title": "Aspirin thrombosis interval · slide rounding",
+ "duration": 136.333,
+ "cases": {
+  "ci-aspirin": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 14.533
+  },
+  {
+   "step": 2,
+   "title": "Define the population difference",
+   "start": 14.533,
+   "end": 25.867
+  },
+  {
+   "step": 3,
+   "title": "Calculate both sample proportions",
+   "start": 25.867,
+   "end": 35.8
+  },
+  {
+   "step": 4,
+   "title": "Calculate the course pooled proportion",
+   "start": 35.8,
+   "end": 48.133
+  },
+  {
+   "step": 5,
+   "title": "Calculate the pooled binary variance",
+   "start": 48.133,
+   "end": 57.933
+  },
+  {
+   "step": 6,
+   "title": "Calculate the difference SE",
+   "start": 57.933,
+   "end": 72.267
+  },
+  {
+   "step": 7,
+   "title": "Calculate the difference and margin",
+   "start": 72.267,
+   "end": 93.2
+  },
+  {
+   "step": 8,
+   "title": "Calculate both endpoints",
+   "start": 93.2,
+   "end": 108.133
+  },
+  {
+   "step": 9,
+   "title": "Interpret direction and the zero comparison",
+   "start": 108.133,
+   "end": 120.333
+  },
+  {
+   "step": 10,
+   "title": "Conclusion",
+   "start": 120.333,
+   "end": 136.333
+  }
+ ],
+ "case": "ci-aspirin",
+ "kind": "board"
+}

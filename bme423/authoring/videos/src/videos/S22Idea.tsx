@@ -45,7 +45,7 @@ export const meta = {
       caption: 'Clustering groups points that sit close together, so points are **similar within** a cluster and dissimilar between.'},
     {title: 'Name the clusters', seconds: 7, card: [{label: 'names from other information', note: 'accepted major · Humanities, BME, Math'}],
       caption: 'Outside information, the accepted major, gives each cluster a name. Now every point carries a **label**.'},
-    {title: 'Labeled foods', seconds: 7, card: [{label: 'classification is given', tex: 'x_i\\ \\text{and}\\ y_i\\in\\{1,\\dots,L\\}', note: 'x = (sweetness, crunchiness) · L = 3 classes'}],
+    {title: 'Labeled foods', seconds: 7, card: [{label: 'classification is given', tex: 'x_i\\ \\text{and}\\ y_i\\in(1,\\dots,L)', note: 'x = (sweetness, crunchiness) · L = 3 classes'}],
       caption: 'In classification every food already has a class. Foods of one class have **similar features**, so they sit together.'},
     {title: 'A new object', seconds: 7, card: [{label: 'tomato · no label', value: 'q = (6, 4) → classification', color: C.signal}],
       caption: 'The tomato is new and has no label. The foods have known classes, so this is **classification**, a supervised problem.'},

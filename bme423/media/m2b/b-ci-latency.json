@@ -1,0 +1,92 @@
+{
+ "id": "b-ci-latency",
+ "file": "media/m2b/b-ci-latency.mp4",
+ "poster": "media/m2b/b-ci-latency.png",
+ "session": 17,
+ "method": "twoMeans",
+ "title": "Evoked-response latency in two groups",
+ "duration": 147.733,
+ "cases": {
+  "ci-latency": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 13.067
+  },
+  {
+   "step": 2,
+   "title": "Define the contrast and hypotheses",
+   "start": 13.067,
+   "end": 27.267
+  },
+  {
+   "step": 3,
+   "title": "Calculate the observed difference",
+   "start": 27.267,
+   "end": 36.467
+  },
+  {
+   "step": 4,
+   "title": "Square both group SDs",
+   "start": 36.467,
+   "end": 48.2
+  },
+  {
+   "step": 5,
+   "title": "Pool both variance contributions",
+   "start": 48.2,
+   "end": 64.2
+  },
+  {
+   "step": 6,
+   "title": "Calculate the SE of the difference",
+   "start": 64.2,
+   "end": 76.867
+  },
+  {
+   "step": 7,
+   "title": "Find degrees of freedom and the t cutoff",
+   "start": 76.867,
+   "end": 98.133
+  },
+  {
+   "step": 8,
+   "title": "Calculate the margin",
+   "start": 98.133,
+   "end": 107.667
+  },
+  {
+   "step": 9,
+   "title": "Calculate both bounds",
+   "start": 107.667,
+   "end": 119.2
+  },
+  {
+   "step": 10,
+   "title": "Make the decision using the interval",
+   "start": 119.2,
+   "end": 133
+  },
+  {
+   "step": 11,
+   "title": "Conclusion",
+   "start": 133,
+   "end": 147.733
+  }
+ ],
+ "case": "ci-latency",
+ "kind": "board"
+}

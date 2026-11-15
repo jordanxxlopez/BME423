@@ -1,0 +1,19 @@
+{
+ "s21holm": {"replace": [
+   ["SE=\\sqrt{\\frac{2MS_{res}}{n}}", "\\sqrt{2MS_{res}/n}"],
+   ["SE=\\sqrt{\\frac{2(0.0047)}{4}}", "\\sqrt{2(0.0047)/4}"],
+   ["SE=\\sqrt{\\frac{2(2.288889)}{6}}", "\\sqrt{2(2.288889)/6}"],
+   ["t=\\frac{\\bar T_i-\\bar T_j}{SE}", "t=\\frac{\\bar T_i-\\bar T_j}{\\sqrt{2MS_{res}/n}}"]
+ ]},
+ "s21-fev1-holm": {"replace": [["{0.048477}", "{\\sqrt{2(0.0047)/4}}"]]},
+ "s21-orig-hr-holm": {"replace": [["{0.873478}", "{\\sqrt{2(2.288889)/6}}"]]},
+ "s21mcnemar": {"replace": [
+   ["\\text{O1}", "\\text{Outcome 1}"], ["\\text{O2}", "\\text{Outcome 2}"], ["-\\frac12)^2", "-1/2)^2"]
+ ]},
+ "s21diagnostic": {"replace": [
+   ["\\text{O1}", "\\text{Outcome 1}"], ["\\text{O2}", "\\text{Outcome 2}"], ["-\\frac12)^2", "-1/2)^2"]
+ ]},
+ "s21-p7-mcnemar": {"steps": {"2": {"general": [
+   "E_{ij}=\\frac{R_iC_j}{N},\\quad \\chi^2=\\sum_{i=1}^{n_r}\\sum_{j=1}^{n_c}\\frac{\\left(|O_{ij}-E_{ij}|-\\frac{1}{2}\\right)^2}{E_{ij}}"
+ ]}}}
+}

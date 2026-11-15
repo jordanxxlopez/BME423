@@ -1,0 +1,92 @@
+{
+ "id": "b-s20-breathing-rmanova",
+ "file": "media/m2b/b-s20-breathing-rmanova.mp4",
+ "poster": "media/m2b/b-s20-breathing-rmanova.png",
+ "session": 20,
+ "method": "s20rmanova",
+ "title": "Heart rate under three breathing protocols (repeated measures ANOVA)",
+ "duration": 164.733,
+ "cases": {
+  "s20-breathing-rmanova": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 16
+  },
+  {
+   "step": 2,
+   "title": "State the procedure and hypotheses",
+   "start": 16,
+   "end": 36.8
+  },
+  {
+   "step": 3,
+   "title": "Calculate the subject means",
+   "start": 36.8,
+   "end": 45.333
+  },
+  {
+   "step": 4,
+   "title": "Calculate the treatment means and the grand mean",
+   "start": 45.333,
+   "end": 58.667
+  },
+  {
+   "step": 5,
+   "title": "Calculate the sum of squares within subjects",
+   "start": 58.667,
+   "end": 76.2
+  },
+  {
+   "step": 6,
+   "title": "Calculate the treatment sum of squares",
+   "start": 76.2,
+   "end": 88.467
+  },
+  {
+   "step": 7,
+   "title": "Calculate the residual sum of squares",
+   "start": 88.467,
+   "end": 102.267
+  },
+  {
+   "step": 8,
+   "title": "Calculate the mean squares and F",
+   "start": 102.267,
+   "end": 116.733
+  },
+  {
+   "step": 9,
+   "title": "Find the critical F",
+   "start": 116.733,
+   "end": 134.667
+  },
+  {
+   "step": 10,
+   "title": "Make the decision and bracket P",
+   "start": 134.667,
+   "end": 148.733
+  },
+  {
+   "step": 11,
+   "title": "Conclusion",
+   "start": 148.733,
+   "end": 164.733
+  }
+ ],
+ "case": "s20-breathing-rmanova",
+ "kind": "board"
+}

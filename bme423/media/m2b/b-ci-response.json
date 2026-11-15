@@ -1,0 +1,85 @@
+{
+ "id": "b-ci-response",
+ "file": "media/m2b/b-ci-response.mp4",
+ "poster": "media/m2b/b-ci-response.png",
+ "session": 17,
+ "method": "oneProportion",
+ "title": "Clinical response proportion",
+ "duration": 115.067,
+ "cases": {
+  "ci-response": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 10.667
+  },
+  {
+   "step": 2,
+   "title": "State the proportion and hypotheses",
+   "start": 10.667,
+   "end": 23.2
+  },
+  {
+   "step": 3,
+   "title": "Calculate the sample proportion",
+   "start": 23.2,
+   "end": 31.933
+  },
+  {
+   "step": 4,
+   "title": "Calculate the proportion SE",
+   "start": 31.933,
+   "end": 44.4
+  },
+  {
+   "step": 5,
+   "title": "Select the Normal cutoff",
+   "start": 44.4,
+   "end": 58.533
+  },
+  {
+   "step": 6,
+   "title": "Calculate the margin",
+   "start": 58.533,
+   "end": 71
+  },
+  {
+   "step": 7,
+   "title": "Calculate the lower bound",
+   "start": 71,
+   "end": 79.4
+  },
+  {
+   "step": 8,
+   "title": "Calculate the upper bound",
+   "start": 79.4,
+   "end": 87.667
+  },
+  {
+   "step": 9,
+   "title": "Compare with the null reference",
+   "start": 87.667,
+   "end": 101.6
+  },
+  {
+   "step": 10,
+   "title": "Conclusion",
+   "start": 101.6,
+   "end": 115.067
+  }
+ ],
+ "case": "ci-response",
+ "kind": "board"
+}

@@ -33,19 +33,19 @@ export const meta = {
     {title: 'Each slope first', seconds: 7, caption: 'First check that each slope differs from zero. Both do, so comparing the two slopes **makes sense**.',
       card: [{label: 'each slope against 0', note: 'males    t = 16.088 · P = 2.66e−11\nfemales  t = 4.309 · P = 0.00054'}]},
     {title: 'Hypotheses', seconds: 7, caption: 'This is the **t test for two slopes**. The null hypothesis says weight rises with height at the same rate in each sex.',
-      card: [{label: 'hypotheses', tex: 'H_0:\\beta_M=\\beta_F\\qquad H_A:\\beta_M\\ne\\beta_F'}]},
+      card: [{label: 'hypotheses', tex: 'H_0:\\beta_M=\\beta_F\\qquad H_1:\\beta_M\\ne\\beta_F'}]},
     {title: 'Slope difference', seconds: 6, caption: 'With both lines started at one point, only the angles differ. Males gain about **1.25 lb more per inch**.',
-      card: [{label: 'difference (males − females)', tex: 'b_M-b_F', value: `3.2833 − 2.0290 = ${diff.toFixed(4)} lb/in`, color: C.signal}]},
+      card: [{label: 'difference (males − females)', tex: 'b_1-b_2', value: `3.2833 − 2.0290 = ${diff.toFixed(4)} lb/in`, color: C.signal}]},
     {title: 'SE of the difference', seconds: 8, caption: 'With equal group sizes, add the two slope **variances** and take the root. The female slope is much less certain.',
-      card: [{label: 'SE of the difference', tex: 's_{b_M-b_F}=\\sqrt{s_{b_M}^2+s_{b_F}^2}', value: `√(0.2041² + 0.4708²) = ${se.toFixed(4)}`, color: C.noise}]},
+      card: [{label: 'SE of the difference', tex: 's_{b_1-b_2}=\\sqrt{s_{b_1}^2+s_{b_2}^2}', value: `√(0.2041² + 0.4708²) = ${se.toFixed(4)}`, color: C.noise}]},
     {title: 't and df', seconds: 8, caption: 'The difference is about **2.44 standard errors**. Each line uses two degrees of freedom, so ν = 18 + 18 − 4 = 32.',
-      card: [{label: 't statistic', tex: 't=\\frac{b_M-b_F}{s_{b_M-b_F}},\\quad\\nu=n_1+n_2-4', value: `${diff.toFixed(4)} / ${se.toFixed(4)} = ${t.toFixed(3)} · ν = ${nu}`, color: C.signal}]},
+      card: [{label: 't statistic', tex: 't=\\frac{b_1-b_2}{s_{b_1-b_2}},\\quad\\nu=n_1+n_2-4', value: `${diff.toFixed(4)} / ${se.toFixed(4)} = ${t.toFixed(3)} · ν = ${nu}`, color: C.signal}]},
     {title: 'Class t table', seconds: 8, caption: 'Use the **class t table** (two-tailed). Row 32 gives **2.037** at 0.05 and **2.449** at 0.02.',
       card: [{label: 'class t table, row 32', value: '0.05 → 2.037 · 0.02 → 2.449', color: C.signal}]},
     {title: 'Decision', seconds: 8, caption: 'The statistic passes 2.037 but not 2.449, so **reject equal slopes** with 0.02 < P < 0.05. Males gain weight faster.',
       card: [{label: 'decision', value: '0.02 < P < 0.05 → slopes differ', color: C.green, note: `2.037 < ${t.toFixed(3)} < 2.449`}]},
     {title: 'Intercepts', seconds: 7, caption: 'The same formula with intercepts gives |t| = 0.337, below 2.037, so the **intercepts do not differ**.',
-      card: [{label: 'intercept test', tex: 't=\\frac{a_M-a_F}{\\sqrt{s_{a_M}^2+s_{a_F}^2}}', value: `−11.0678 / 32.854 = ${tA.toFixed(3)}`, color: C.green, note: '|t| < 2.037 → no difference in intercepts'}]},
+      card: [{label: 'intercept test', tex: 't=\\frac{a_1-a_2}{\\sqrt{s_{a_1}^2+s_{a_2}^2}}', value: `−11.0678 / 32.854 = ${tA.toFixed(3)}`, color: C.green, note: '|t| < 2.037 → no difference in intercepts'}]},
   ] as Step[],
 };
 
@@ -152,7 +152,8 @@ const S18Compare: React.FC = () => (
           <line x1={xt(t02)} x2={xt(t02)} y1={base} y2={60} stroke={C.pink} strokeWidth={2} strokeDasharray="2 4" />
           <Label x={xt(t02) + 6} y={50} text="2.449" color={C.pink} size={14} />
           <Glow cx={xt(tv)} cy={base} r={9} color={C.green} />
-          <Label x={xt(tv)} y={base - 34} text={`t = ${tv.toFixed(3)}`} color={C.green} size={15} anchor="middle" weight={700} />
+          {/* right of both cutoff lines when t sits between them, so neither line crosses the label */}
+          <Label x={tv > 0 ? xt(t02) + 10 : xt(tv)} y={tv > 0 ? base - 18 : base - 34} text={`t = ${tv.toFixed(3)}`} color={C.green} size={15} anchor={tv > 0 ? 'start' : 'middle'} weight={700} />
           {zoomA > 0 && <g opacity={zoomA}>
             <line x1={xt(2.40)} x2={xz(2.40)} y1={base + 4} y2={330} stroke={C.muted} strokeOpacity={0.5} />
             <line x1={xt(2.47)} x2={xz(2.47)} y1={base + 4} y2={330} stroke={C.muted} strokeOpacity={0.5} />

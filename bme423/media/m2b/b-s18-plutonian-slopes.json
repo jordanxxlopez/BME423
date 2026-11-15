@@ -1,0 +1,85 @@
+{
+ "id": "b-s18-plutonian-slopes",
+ "file": "media/m2b/b-s18-plutonian-slopes.mp4",
+ "poster": "media/m2b/b-s18-plutonian-slopes.png",
+ "session": 18,
+ "method": "s18compare",
+ "title": "Male versus female Plutonians: comparing slopes",
+ "duration": 127.667,
+ "cases": {
+  "s18-plutonian-slopes": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 16
+  },
+  {
+   "step": 2,
+   "title": "State the procedure and hypotheses",
+   "start": 16,
+   "end": 30.4
+  },
+  {
+   "step": 3,
+   "title": "Calculate the slope difference",
+   "start": 30.4,
+   "end": 38.6
+  },
+  {
+   "step": 4,
+   "title": "Calculate the standard error of the difference",
+   "start": 38.6,
+   "end": 47.8
+  },
+  {
+   "step": 5,
+   "title": "Calculate the t statistic",
+   "start": 47.8,
+   "end": 55.867
+  },
+  {
+   "step": 6,
+   "title": "Find the degrees of freedom",
+   "start": 55.867,
+   "end": 65.4
+  },
+  {
+   "step": 7,
+   "title": "Compare with the 0.05 cutoff",
+   "start": 65.4,
+   "end": 80.867
+  },
+  {
+   "step": 8,
+   "title": "Find the P range",
+   "start": 80.867,
+   "end": 94.067
+  },
+  {
+   "step": 9,
+   "title": "Apply the corresponding intercept test",
+   "start": 94.067,
+   "end": 111.667
+  },
+  {
+   "step": 10,
+   "title": "Conclusion",
+   "start": 111.667,
+   "end": 127.667
+  }
+ ],
+ "case": "s18-plutonian-slopes",
+ "kind": "board"
+}

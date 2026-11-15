@@ -1,0 +1,57 @@
+{
+ "id": "b-s22-tomato-knn",
+ "file": "media/m2b/b-s22-tomato-knn.mp4",
+ "poster": "media/m2b/b-s22-tomato-knn.png",
+ "session": 22,
+ "method": "s22knn",
+ "title": "Classifying the tomato with K = 3",
+ "duration": 69.667,
+ "cases": {
+  "s22-tomato-knn": [
+   2,
+   3,
+   4,
+   5
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 13.333
+  },
+  {
+   "step": 2,
+   "title": "Distances",
+   "start": 13.333,
+   "end": 26.6
+  },
+  {
+   "step": 3,
+   "title": "Rank and keep K = 3",
+   "start": 26.6,
+   "end": 35.333
+  },
+  {
+   "step": 4,
+   "title": "Count classes",
+   "start": 35.333,
+   "end": 45.067
+  },
+  {
+   "step": 5,
+   "title": "Classify",
+   "start": 45.067,
+   "end": 53.933
+  },
+  {
+   "step": 6,
+   "title": "Conclusion",
+   "start": 53.933,
+   "end": 69.667
+  }
+ ],
+ "case": "s22-tomato-knn",
+ "kind": "board"
+}

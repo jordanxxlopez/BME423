@@ -1,0 +1,78 @@
+{
+ "id": "b-s18-martians-line",
+ "file": "media/m2b/b-s18-martians-line.mp4",
+ "poster": "media/m2b/b-s18-martians-line.png",
+ "session": 18,
+ "method": "s18line",
+ "title": "Least-squares line for 10 Martians",
+ "duration": 113.067,
+ "cases": {
+  "s18-martians-line": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 15.933
+  },
+  {
+   "step": 2,
+   "title": "Collect the sums",
+   "start": 15.933,
+   "end": 27.333
+  },
+  {
+   "step": 3,
+   "title": "Calculate the shared denominator",
+   "start": 27.333,
+   "end": 37.2
+  },
+  {
+   "step": 4,
+   "title": "Calculate the slope",
+   "start": 37.2,
+   "end": 47.733
+  },
+  {
+   "step": 5,
+   "title": "Calculate both sample means",
+   "start": 47.733,
+   "end": 60.2
+  },
+  {
+   "step": 6,
+   "title": "Calculate the intercept from the means",
+   "start": 60.2,
+   "end": 71.867
+  },
+  {
+   "step": 7,
+   "title": "Check the intercept with the full formula",
+   "start": 71.867,
+   "end": 80.067
+  },
+  {
+   "step": 8,
+   "title": "Write the line and compare with the line of means",
+   "start": 80.067,
+   "end": 97.067
+  },
+  {
+   "step": 9,
+   "title": "Conclusion",
+   "start": 97.067,
+   "end": 113.067
+  }
+ ],
+ "case": "s18-martians-line",
+ "kind": "board"
+}

@@ -1,0 +1,71 @@
+{
+ "id": "b-s19-sbp-least-squares",
+ "file": "media/m2b/b-s19-sbp-least-squares.mp4",
+ "poster": "media/m2b/b-s19-sbp-least-squares.png",
+ "session": 19,
+ "method": "s19mlrfit",
+ "title": "Child SBP on mother and father SBP: least squares by matrix",
+ "duration": 104.733,
+ "cases": {
+  "s19-sbp-least-squares": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 16
+  },
+  {
+   "step": 2,
+   "title": "Build the cross-product matrix",
+   "start": 16,
+   "end": 27.4
+  },
+  {
+   "step": 3,
+   "title": "Build the cross-product vector",
+   "start": 27.4,
+   "end": 36.333
+  },
+  {
+   "step": 4,
+   "title": "Invert the cross-product matrix",
+   "start": 36.333,
+   "end": 48.533
+  },
+  {
+   "step": 5,
+   "title": "Solve for the coefficients",
+   "start": 48.533,
+   "end": 60
+  },
+  {
+   "step": 6,
+   "title": "Calculate the residual variance",
+   "start": 60,
+   "end": 76
+  },
+  {
+   "step": 7,
+   "title": "Calculate R squared",
+   "start": 76,
+   "end": 90.733
+  },
+  {
+   "step": 8,
+   "title": "Conclusion",
+   "start": 90.733,
+   "end": 104.733
+  }
+ ],
+ "case": "s19-sbp-least-squares",
+ "kind": "board"
+}

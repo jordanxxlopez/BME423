@@ -20,3 +20,10 @@
 .m2v-seek{flex:1;min-width:140px;accent-color:var(--accent)}
 .m2v-time{font-size:.85em;color:var(--muted);font-variant-numeric:tabular-nums;min-width:88px;text-align:right}
 .m2v-video{cursor:pointer}
+.m2v-tabs{margin:12px 0}
+.m2v-tabbar{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-bottom:4px}
+.m2v-tab{font-size:.9em;padding:5px 12px;border-radius:999px;border:1px solid var(--line);background:var(--paper)}
+.m2v-tab.active{background:var(--accent);color:var(--paper);border-color:var(--accent)}
+.m2v-tabhint{flex-basis:100%;margin-top:2px}
+.m2v-pane[hidden]{display:none}
+.m2v-tabs h3{margin:14px 0 4px}

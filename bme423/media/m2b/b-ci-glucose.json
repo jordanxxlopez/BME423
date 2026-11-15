@@ -1,0 +1,92 @@
+{
+ "id": "b-ci-glucose",
+ "file": "media/m2b/b-ci-glucose.mp4",
+ "poster": "media/m2b/b-ci-glucose.png",
+ "session": 17,
+ "method": "twoMeans",
+ "title": "Session 17 glucose lecture exercise",
+ "duration": 154,
+ "cases": {
+  "ci-glucose": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 16
+  },
+  {
+   "step": 2,
+   "title": "Define the contrast and hypotheses",
+   "start": 16,
+   "end": 30.133
+  },
+  {
+   "step": 3,
+   "title": "Calculate the observed difference",
+   "start": 30.133,
+   "end": 39.533
+  },
+  {
+   "step": 4,
+   "title": "Square both group SDs",
+   "start": 39.533,
+   "end": 51.267
+  },
+  {
+   "step": 5,
+   "title": "Pool both variance contributions",
+   "start": 51.267,
+   "end": 67.267
+  },
+  {
+   "step": 6,
+   "title": "Calculate the SE of the difference",
+   "start": 67.267,
+   "end": 79.933
+  },
+  {
+   "step": 7,
+   "title": "Find degrees of freedom and the t cutoff",
+   "start": 79.933,
+   "end": 103.933
+  },
+  {
+   "step": 8,
+   "title": "Calculate the margin",
+   "start": 103.933,
+   "end": 113.467
+  },
+  {
+   "step": 9,
+   "title": "Calculate both bounds",
+   "start": 113.467,
+   "end": 124.933
+  },
+  {
+   "step": 10,
+   "title": "Make the decision using the interval",
+   "start": 124.933,
+   "end": 138.533
+  },
+  {
+   "step": 11,
+   "title": "Conclusion",
+   "start": 138.533,
+   "end": 154
+  }
+ ],
+ "case": "ci-glucose",
+ "kind": "board"
+}

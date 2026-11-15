@@ -30,7 +30,7 @@ export const meta = {
       card: [{label: 'data (beats/min)', note: 'seated    64 72 58 80 69 75 61 70\nstanding  75 70 66 83 74 87 60 77'},
         {label: 'hypotheses', tex: 'H_0:\\delta=0\\qquad H_A:\\delta\\ne0', note: 'δ = true mean of standing − seated'}]},
     {title: 'Differences', seconds: 6, caption: 'Subtract seated from standing for each person. That gives **one difference per person**, n = 8.',
-      card: [{label: 'differences', tex: 'd_i=x_{\\mathrm{standing},i}-x_{\\mathrm{seated},i}', value: '11, −2, 8, 3, 5, 12, −1, 7', color: C.signal}]},
+      card: [{label: 'differences', tex: 'd_i=x1_i-x2_i', value: '11, −2, 8, 3, 5, 12, −1, 7', color: C.signal, note: 'x1 = standing, x2 = seated'}]},
     {title: 'Hand calculation', seconds: 8, caption: 'By hand, the **mean difference** is 5.375 and the standard error is 1.822 beats/min.',
       card: [{label: 'mean and spread', tex: '\\bar d=\\tfrac{43}{8},\\quad s_d=\\sqrt{\\tfrac{185.875}{7}},\\quad s_{\\bar d}=\\tfrac{s_d}{\\sqrt8}', value: `${dbar} · ${sd.toFixed(5)} · ${se.toFixed(5)}`, color: C.noise}]},
     {title: 't by hand', seconds: 8, caption: 'So t = **2.950** with 7 df. The **class t table** row 7 gives 2.365 at 0.05 and 2.998 at 0.02, so 0.02 < P < 0.05.',
@@ -46,7 +46,7 @@ export const meta = {
     {title: 'Interval and mean', seconds: 9, caption: 'The mean difference equals **d̄ = 5.375**. The interval differs slightly because R uses an exact t value, not 2.365.',
       card: [{label: 'interval by hand', tex: '\\bar d\\pm t_{0.05}(7)\\,s_{\\bar d}', value: `(${lo.toFixed(5)}, ${hi.toFixed(5)})`, color: C.noise, note: 'R prints 1.066971 to 9.683029'},
         {label: 'mean difference', value: '5.375 ↔ d̄ = 5.375', color: C.signal}]},
-    {title: 'Not printed', seconds: 6, caption: 'R never prints **s_d** or the standard error of d̄, so those numbers come only from the hand work.',
+    {title: 'Not printed', seconds: 6, caption: 'R never prints the **SD of the differences** or the standard error of d̄, so those numbers come only from the hand work.',
       card: [{label: 'hand only', value: 's_d = 5.15302 · SE = 1.82187', color: C.muted}]},
   ] as Step[],
 };

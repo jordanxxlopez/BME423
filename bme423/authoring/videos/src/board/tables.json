@@ -1,0 +1,802 @@
+{
+ "Chi_Squared_Table1.pdf|1|1|.05": {
+  "img": "tables/Chi_Squared_Table1.pdf_1_1_.05.png",
+  "w": 382,
+  "h": 129,
+  "table": "c1",
+  "cell": [
+   226,
+   70
+  ],
+  "label": [
+   27,
+   70
+  ],
+  "head": [
+   226,
+   26
+  ],
+  "rowH": 23,
+  "colW": 98
+ },
+ "Chi_Squared_Table2.pdf|1|1|0.050": {
+  "img": "tables/Chi_Squared_Table2.pdf_1_1_0.050.png",
+  "w": 470,
+  "h": 166,
+  "table": "c2",
+  "cell": [
+   270,
+   83
+  ],
+  "label": [
+   27,
+   83
+  ],
+  "head": [
+   270,
+   41
+  ],
+  "rowH": 32,
+  "colW": 125
+ },
+ "F_table.pdf|1|10|2 (0.05 lightface)": {
+  "img": "tables/F_table.pdf_1_10_20.05lightface.png",
+  "w": 242,
+  "h": 364,
+  "table": "F",
+  "cell": [
+   143,
+   216
+  ],
+  "label": [
+   27,
+   216
+  ],
+  "head": [
+   143,
+   26
+  ],
+  "rowH": 30,
+  "colW": 62
+ },
+ "F_table.pdf|1|10|2 (lightface, P<.05)": {
+  "img": "tables/F_table.pdf_1_10_2lightfacePlt.05.png",
+  "w": 242,
+  "h": 364,
+  "table": "F",
+  "cell": [
+   143,
+   216
+  ],
+  "label": [
+   27,
+   216
+  ],
+  "head": [
+   143,
+   26
+  ],
+  "rowH": 30,
+  "colW": 62
+ },
+ "F_table.pdf|1|6|2 (0.05 lightface)": {
+  "img": "tables/F_table.pdf_1_6_20.05lightface.png",
+  "w": 242,
+  "h": 364,
+  "table": "F",
+  "cell": [
+   143,
+   216
+  ],
+  "label": [
+   27,
+   216
+  ],
+  "head": [
+   143,
+   26
+  ],
+  "rowH": 30,
+  "colW": 62
+ },
+ "F_table.pdf|1|6|2 (lightface, P<.05)": {
+  "img": "tables/F_table.pdf_1_6_2lightfacePlt.05.png",
+  "w": 242,
+  "h": 364,
+  "table": "F",
+  "cell": [
+   143,
+   216
+  ],
+  "label": [
+   27,
+   216
+  ],
+  "head": [
+   143,
+   26
+  ],
+  "rowH": 30,
+  "colW": 62
+ },
+ "F_table.pdf|1|8|2 (0.05 lightface)": {
+  "img": "tables/F_table.pdf_1_8_20.05lightface.png",
+  "w": 242,
+  "h": 364,
+  "table": "F",
+  "cell": [
+   143,
+   216
+  ],
+  "label": [
+   27,
+   216
+  ],
+  "head": [
+   143,
+   26
+  ],
+  "rowH": 30,
+  "colW": 62
+ },
+ "F_table.pdf|1|8|2 (lightface, P<.05)": {
+  "img": "tables/F_table.pdf_1_8_2lightfacePlt.05.png",
+  "w": 242,
+  "h": 364,
+  "table": "F",
+  "cell": [
+   143,
+   216
+  ],
+  "label": [
+   27,
+   216
+  ],
+  "head": [
+   143,
+   26
+  ],
+  "rowH": 30,
+  "colW": 62
+ },
+ "F_table.pdf|1|9|1 (0.05 lightface)": {
+  "img": "tables/F_table.pdf_1_9_10.05lightface.png",
+  "w": 198,
+  "h": 364,
+  "table": "F",
+  "cell": [
+   99,
+   216
+  ],
+  "label": [
+   45,
+   216
+  ],
+  "head": [
+   99,
+   26
+  ],
+  "rowH": 30,
+  "colW": 62
+ },
+ "F_table.pdf|1|9|1 (lightface, P<.05)": {
+  "img": "tables/F_table.pdf_1_9_1lightfacePlt.05.png",
+  "w": 198,
+  "h": 364,
+  "table": "F",
+  "cell": [
+   99,
+   216
+  ],
+  "label": [
+   45,
+   216
+  ],
+  "head": [
+   99,
+   26
+  ],
+  "rowH": 30,
+  "colW": 62
+ },
+ "F_table.pdf|1|ν_d=17|ν_n=2 (lightface, P<.05)": {
+  "img": "tables/F_table.pdf_1_v_d17_v_n2lightfacePlt.05.png",
+  "w": 239,
+  "h": 364,
+  "table": "F",
+  "cell": [
+   140,
+   216
+  ],
+  "label": [
+   27,
+   216
+  ],
+  "head": [
+   140,
+   26
+  ],
+  "rowH": 30,
+  "colW": 62
+ },
+ "F_table.pdf|1|ν_d=28|ν_n=3 (lightface, P<.05)": {
+  "img": "tables/F_table.pdf_1_v_d28_v_n3lightfacePlt.05.png",
+  "w": 268,
+  "h": 364,
+  "table": "F",
+  "cell": [
+   169,
+   216
+  ],
+  "label": [
+   27,
+   216
+  ],
+  "head": [
+   169,
+   26
+  ],
+  "rowH": 30,
+  "colW": 62
+ },
+ "t_table.pdf|1|10|0.01": {
+  "img": "tables/t_table.pdf_1_10_0.01.png",
+  "w": 440,
+  "h": 244,
+  "table": "t1",
+  "cell": [
+   255,
+   156
+  ],
+  "label": [
+   27,
+   156
+  ],
+  "head": [
+   255,
+   26
+  ],
+  "rowH": 34,
+  "colW": 116
+ },
+ "t_table.pdf|1|10|0.02": {
+  "img": "tables/t_table.pdf_1_10_0.02.png",
+  "w": 440,
+  "h": 244,
+  "table": "t1",
+  "cell": [
+   255,
+   156
+  ],
+  "label": [
+   27,
+   156
+  ],
+  "head": [
+   255,
+   26
+  ],
+  "rowH": 34,
+  "colW": 116
+ },
+ "t_table.pdf|1|10|0.05": {
+  "img": "tables/t_table.pdf_1_10_0.05.png",
+  "w": 440,
+  "h": 244,
+  "table": "t1",
+  "cell": [
+   255,
+   156
+  ],
+  "label": [
+   27,
+   156
+  ],
+  "head": [
+   255,
+   26
+  ],
+  "rowH": 34,
+  "colW": 116
+ },
+ "t_table.pdf|1|11|0.05": {
+  "img": "tables/t_table.pdf_1_11_0.05.png",
+  "w": 440,
+  "h": 244,
+  "table": "t1",
+  "cell": [
+   255,
+   156
+  ],
+  "label": [
+   27,
+   156
+  ],
+  "head": [
+   255,
+   26
+  ],
+  "rowH": 34,
+  "colW": 116
+ },
+ "t_table.pdf|1|15|0.05": {
+  "img": "tables/t_table.pdf_1_15_0.05.png",
+  "w": 440,
+  "h": 244,
+  "table": "t1",
+  "cell": [
+   255,
+   156
+  ],
+  "label": [
+   27,
+   156
+  ],
+  "head": [
+   255,
+   26
+  ],
+  "rowH": 34,
+  "colW": 116
+ },
+ "t_table.pdf|1|16|0.05": {
+  "img": "tables/t_table.pdf_1_16_0.05.png",
+  "w": 440,
+  "h": 244,
+  "table": "t1",
+  "cell": [
+   255,
+   156
+  ],
+  "label": [
+   27,
+   156
+  ],
+  "head": [
+   255,
+   26
+  ],
+  "rowH": 34,
+  "colW": 116
+ },
+ "t_table.pdf|1|17|0.05": {
+  "img": "tables/t_table.pdf_1_17_0.05.png",
+  "w": 440,
+  "h": 244,
+  "table": "t1",
+  "cell": [
+   255,
+   156
+  ],
+  "label": [
+   27,
+   156
+  ],
+  "head": [
+   255,
+   26
+  ],
+  "rowH": 34,
+  "colW": 116
+ },
+ "t_table.pdf|1|18|0.05": {
+  "img": "tables/t_table.pdf_1_18_0.05.png",
+  "w": 440,
+  "h": 244,
+  "table": "t1",
+  "cell": [
+   255,
+   156
+  ],
+  "label": [
+   27,
+   156
+  ],
+  "head": [
+   255,
+   26
+  ],
+  "rowH": 34,
+  "colW": 116
+ },
+ "t_table.pdf|1|19|0.01": {
+  "img": "tables/t_table.pdf_1_19_0.01.png",
+  "w": 440,
+  "h": 244,
+  "table": "t1",
+  "cell": [
+   255,
+   156
+  ],
+  "label": [
+   27,
+   156
+  ],
+  "head": [
+   255,
+   26
+  ],
+  "rowH": 34,
+  "colW": 116
+ },
+ "t_table.pdf|1|24|0.05": {
+  "img": "tables/t_table.pdf_1_24_0.05.png",
+  "w": 440,
+  "h": 244,
+  "table": "t1",
+  "cell": [
+   255,
+   156
+  ],
+  "label": [
+   27,
+   156
+  ],
+  "head": [
+   255,
+   26
+  ],
+  "rowH": 34,
+  "colW": 116
+ },
+ "t_table.pdf|1|26|0.05": {
+  "img": "tables/t_table.pdf_1_26_0.05.png",
+  "w": 440,
+  "h": 244,
+  "table": "t1",
+  "cell": [
+   255,
+   156
+  ],
+  "label": [
+   27,
+   156
+  ],
+  "head": [
+   255,
+   26
+  ],
+  "rowH": 34,
+  "colW": 116
+ },
+ "t_table.pdf|1|28|0.05": {
+  "img": "tables/t_table.pdf_1_28_0.05.png",
+  "w": 440,
+  "h": 244,
+  "table": "t1",
+  "cell": [
+   255,
+   156
+  ],
+  "label": [
+   27,
+   156
+  ],
+  "head": [
+   255,
+   26
+  ],
+  "rowH": 34,
+  "colW": 116
+ },
+ "t_table.pdf|1|30|0.05": {
+  "img": "tables/t_table.pdf_1_30_0.05.png",
+  "w": 440,
+  "h": 244,
+  "table": "t1",
+  "cell": [
+   255,
+   156
+  ],
+  "label": [
+   27,
+   156
+  ],
+  "head": [
+   255,
+   26
+  ],
+  "rowH": 34,
+  "colW": 116
+ },
+ "t_table.pdf|1|32|0.02": {
+  "img": "tables/t_table.pdf_1_32_0.02.png",
+  "w": 440,
+  "h": 244,
+  "table": "t1",
+  "cell": [
+   255,
+   156
+  ],
+  "label": [
+   27,
+   156
+  ],
+  "head": [
+   255,
+   26
+  ],
+  "rowH": 34,
+  "colW": 116
+ },
+ "t_table.pdf|1|32|0.05": {
+  "img": "tables/t_table.pdf_1_32_0.05.png",
+  "w": 440,
+  "h": 244,
+  "table": "t1",
+  "cell": [
+   255,
+   156
+  ],
+  "label": [
+   27,
+   156
+  ],
+  "head": [
+   255,
+   26
+  ],
+  "rowH": 34,
+  "colW": 116
+ },
+ "t_table.pdf|1|34|0.05": {
+  "img": "tables/t_table.pdf_1_34_0.05.png",
+  "w": 440,
+  "h": 244,
+  "table": "t1",
+  "cell": [
+   255,
+   156
+  ],
+  "label": [
+   27,
+   156
+  ],
+  "head": [
+   255,
+   26
+  ],
+  "rowH": 34,
+  "colW": 116
+ },
+ "t_table.pdf|1|42|0.001": {
+  "img": "tables/t_table.pdf_1_42_0.001.png",
+  "w": 440,
+  "h": 244,
+  "table": "t1",
+  "cell": [
+   255,
+   156
+  ],
+  "label": [
+   27,
+   156
+  ],
+  "head": [
+   255,
+   26
+  ],
+  "rowH": 34,
+  "colW": 116
+ },
+ "t_table.pdf|1|42|0.05": {
+  "img": "tables/t_table.pdf_1_42_0.05.png",
+  "w": 440,
+  "h": 244,
+  "table": "t1",
+  "cell": [
+   255,
+   156
+  ],
+  "label": [
+   27,
+   156
+  ],
+  "head": [
+   255,
+   26
+  ],
+  "rowH": 34,
+  "colW": 116
+ },
+ "t_table.pdf|1|6|0.01": {
+  "img": "tables/t_table.pdf_1_6_0.01.png",
+  "w": 440,
+  "h": 244,
+  "table": "t1",
+  "cell": [
+   255,
+   156
+  ],
+  "label": [
+   27,
+   156
+  ],
+  "head": [
+   255,
+   26
+  ],
+  "rowH": 34,
+  "colW": 116
+ },
+ "t_table.pdf|1|6|0.02": {
+  "img": "tables/t_table.pdf_1_6_0.02.png",
+  "w": 440,
+  "h": 244,
+  "table": "t1",
+  "cell": [
+   255,
+   156
+  ],
+  "label": [
+   27,
+   156
+  ],
+  "head": [
+   255,
+   26
+  ],
+  "rowH": 34,
+  "colW": 116
+ },
+ "t_table.pdf|1|6|0.05": {
+  "img": "tables/t_table.pdf_1_6_0.05.png",
+  "w": 440,
+  "h": 244,
+  "table": "t1",
+  "cell": [
+   255,
+   156
+  ],
+  "label": [
+   27,
+   156
+  ],
+  "head": [
+   255,
+   26
+  ],
+  "rowH": 34,
+  "colW": 116
+ },
+ "t_table.pdf|1|7|0.05": {
+  "img": "tables/t_table.pdf_1_7_0.05.png",
+  "w": 440,
+  "h": 244,
+  "table": "t1",
+  "cell": [
+   255,
+   156
+  ],
+  "label": [
+   27,
+   156
+  ],
+  "head": [
+   255,
+   26
+  ],
+  "rowH": 34,
+  "colW": 116
+ },
+ "t_table.pdf|1|8|0.001": {
+  "img": "tables/t_table.pdf_1_8_0.001.png",
+  "w": 440,
+  "h": 244,
+  "table": "t1",
+  "cell": [
+   255,
+   156
+  ],
+  "label": [
+   27,
+   156
+  ],
+  "head": [
+   255,
+   26
+  ],
+  "rowH": 34,
+  "colW": 116
+ },
+ "t_table.pdf|1|8|0.05": {
+  "img": "tables/t_table.pdf_1_8_0.05.png",
+  "w": 440,
+  "h": 244,
+  "table": "t1",
+  "cell": [
+   255,
+   156
+  ],
+  "label": [
+   27,
+   156
+  ],
+  "head": [
+   255,
+   26
+  ],
+  "rowH": 34,
+  "colW": 116
+ },
+ "t_table.pdf|1|9|0.05": {
+  "img": "tables/t_table.pdf_1_9_0.05.png",
+  "w": 440,
+  "h": 244,
+  "table": "t1",
+  "cell": [
+   255,
+   156
+  ],
+  "label": [
+   27,
+   156
+  ],
+  "head": [
+   255,
+   26
+  ],
+  "rowH": 34,
+  "colW": 116
+ },
+ "t_table.pdf|2|infinity|0.01": {
+  "img": "tables/t_table.pdf_2_infinity_0.01.png",
+  "w": 478,
+  "h": 250,
+  "table": "t2",
+  "cell": [
+   274,
+   159
+  ],
+  "label": [
+   27,
+   159
+  ],
+  "head": [
+   274,
+   26
+  ],
+  "rowH": 35,
+  "colW": 128
+ },
+ "t_table.pdf|2|infinity|0.05": {
+  "img": "tables/t_table.pdf_2_infinity_0.05.png",
+  "w": 478,
+  "h": 250,
+  "table": "t2",
+  "cell": [
+   274,
+   159
+  ],
+  "label": [
+   27,
+   159
+  ],
+  "head": [
+   274,
+   26
+  ],
+  "rowH": 35,
+  "colW": 128
+ },
+ "t_table.pdf|2|∞|0.05": {
+  "img": "tables/t_table.pdf_2_infinity_0.05.png",
+  "w": 478,
+  "h": 250,
+  "table": "t2",
+  "cell": [
+   274,
+   159
+  ],
+  "label": [
+   27,
+   159
+  ],
+  "head": [
+   274,
+   26
+  ],
+  "rowH": 35,
+  "colW": 128
+ }
+}

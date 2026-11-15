@@ -1,0 +1,85 @@
+{
+ "id": "b-s20-grip-paired",
+ "file": "media/m2b/b-s20-grip-paired.mp4",
+ "poster": "media/m2b/b-s20-grip-paired.png",
+ "session": 20,
+ "method": "s20paired",
+ "title": "Grip strength in the morning and evening",
+ "duration": 148.333,
+ "cases": {
+  "s20-grip-paired": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 14.267
+  },
+  {
+   "step": 2,
+   "title": "State the procedure and hypotheses",
+   "start": 14.267,
+   "end": 33
+  },
+  {
+   "step": 3,
+   "title": "Form one difference per subject",
+   "start": 33,
+   "end": 47.867
+  },
+  {
+   "step": 4,
+   "title": "Calculate the mean difference",
+   "start": 47.867,
+   "end": 58
+  },
+  {
+   "step": 5,
+   "title": "Calculate the SD of the differences",
+   "start": 58,
+   "end": 75.867
+  },
+  {
+   "step": 6,
+   "title": "Calculate the standard error of the mean difference",
+   "start": 75.867,
+   "end": 86.467
+  },
+  {
+   "step": 7,
+   "title": "Calculate the t statistic",
+   "start": 86.467,
+   "end": 98.267
+  },
+  {
+   "step": 8,
+   "title": "Find the degrees of freedom and the critical value",
+   "start": 98.267,
+   "end": 114.133
+  },
+  {
+   "step": 9,
+   "title": "Make the decision and bracket P",
+   "start": 114.133,
+   "end": 132.333
+  },
+  {
+   "step": 10,
+   "title": "Conclusion",
+   "start": 132.333,
+   "end": 148.333
+  }
+ ],
+ "case": "s20-grip-paired",
+ "kind": "board"
+}

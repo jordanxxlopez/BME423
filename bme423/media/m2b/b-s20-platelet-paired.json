@@ -1,0 +1,85 @@
+{
+ "id": "b-s20-platelet-paired",
+ "file": "media/m2b/b-s20-platelet-paired.mp4",
+ "poster": "media/m2b/b-s20-platelet-paired.png",
+ "session": 20,
+ "method": "s20paired",
+ "title": "Platelet aggregation before and after smoking a cigarette",
+ "duration": 149.533,
+ "cases": {
+  "s20-platelet-paired": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 16
+  },
+  {
+   "step": 2,
+   "title": "State the procedure and hypotheses",
+   "start": 16,
+   "end": 34.667
+  },
+  {
+   "step": 3,
+   "title": "List the differences",
+   "start": 34.667,
+   "end": 48.067
+  },
+  {
+   "step": 4,
+   "title": "Calculate the mean difference",
+   "start": 48.067,
+   "end": 59.067
+  },
+  {
+   "step": 5,
+   "title": "Calculate the SD of the differences",
+   "start": 59.067,
+   "end": 76.867
+  },
+  {
+   "step": 6,
+   "title": "Calculate the standard error of the mean difference",
+   "start": 76.867,
+   "end": 87.467
+  },
+  {
+   "step": 7,
+   "title": "Calculate the t statistic",
+   "start": 87.467,
+   "end": 99.267
+  },
+  {
+   "step": 8,
+   "title": "Find the degrees of freedom and the critical value",
+   "start": 99.267,
+   "end": 115.2
+  },
+  {
+   "step": 9,
+   "title": "Make the decision and bracket P",
+   "start": 115.2,
+   "end": 133.533
+  },
+  {
+   "step": 10,
+   "title": "Conclusion",
+   "start": 133.533,
+   "end": 149.533
+  }
+ ],
+ "case": "s20-platelet-paired",
+ "kind": "board"
+}

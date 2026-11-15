@@ -1,0 +1,57 @@
+{
+ "id": "b-s19-chd-age",
+ "file": "media/m2b/b-s19-chd-age.mp4",
+ "poster": "media/m2b/b-s19-chd-age.png",
+ "session": 19,
+ "method": "s19logistic",
+ "title": "Probability and odds of CHD at age 60",
+ "duration": 81.6,
+ "cases": {
+  "s19-chd-age": [
+   2,
+   3,
+   4,
+   5
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 13.867
+  },
+  {
+   "step": 2,
+   "title": "Test the age coefficient",
+   "start": 13.867,
+   "end": 31.933
+  },
+  {
+   "step": 3,
+   "title": "Find the logit",
+   "start": 31.933,
+   "end": 43.6
+  },
+  {
+   "step": 4,
+   "title": "Convert to a probability",
+   "start": 43.6,
+   "end": 54.267
+  },
+  {
+   "step": 5,
+   "title": "Calculate the odds",
+   "start": 54.267,
+   "end": 70.067
+  },
+  {
+   "step": 6,
+   "title": "Conclusion",
+   "start": 70.067,
+   "end": 81.6
+  }
+ ],
+ "case": "s19-chd-age",
+ "kind": "board"
+}

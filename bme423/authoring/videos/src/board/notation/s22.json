@@ -1,0 +1,57 @@
+{
+ "s22-medicine-distance": {
+  "steps": {
+   "0": {"general": ["|q_i-r_i|,\\quad i=1,\\dots,m"],
+         "work": ["|q_1-r_1|=|1-5|=4", "|q_2-r_2|=|1-4|=3"]},
+   "1": {"general": ["d(q,r)=\\sqrt{\\sum_{i=1}^{m}(q_i-r_i)^2}=\\lVert q-r\\rVert_2"],
+         "work": ["\\lVert q-r\\rVert_2=\\sqrt{4^2+3^2}=\\sqrt{25}=5"]},
+   "2": {"general": ["d(q,r)=\\sum_{i=1}^{m}|q_i-r_i|=\\lVert q-r\\rVert_1"],
+         "work": ["\\lVert q-r\\rVert_1=4+3=7"]},
+   "3": {"general": ["d(q,r)=\\left(\\sum_{i=1}^{m}|q_i-r_i|^p\\right)^{1/p}=\\lVert q-r\\rVert_p"],
+         "work": ["\\lVert q-r\\rVert_3=(4^3+3^3)^{1/3}=91^{1/3}=4.49794"]},
+   "4": {"general": ["\\lVert q-r\\rVert_1\\ge\\lVert q-r\\rVert_2\\ge\\lVert q-r\\rVert_3"],
+         "work": ["7\\ge 5\\ge 4.49794"]}
+  }
+ },
+ "s22-ages-kmeans": {
+  "replace": [["c_1^{(0)}", "c_1"], ["c_2^{(0)}", "c_2"],
+              ["d_{ij}=|x_i-c_j|", "d_{ij}=\\lVert x_i-c_j\\rVert_2=|x_i-c_j|"]],
+  "steps": {
+   "1": {"work": ["d_{41}=|x_4-c_1|=|28-21|=7", "d_{42}=|x_4-c_2|=|28-30|=2", "d_{51}=14,\\ d_{52}=5"]},
+   "4": {"work": ["d_{41}=7,\\ d_{42}=11\\Rightarrow y_4=1", "y=(1,1,1,1,2,2,2,2,2,2)"]},
+   "6": {"work": ["d_{41}=5.25,\\ d_{42}=12.83333", "d_{51}=12.25,\\ d_{52}=5.83333", "y=(1,1,1,1,2,2,2,2,2,2)"]},
+   "7": {"general": ["\\text{repeat until no changes in cluster assignments}"]}
+  }
+ },
+ "s22-medicines-kmeans": {
+  "replace": [["i=1,\\dots,n,\\ j=1,\\dots,k", "i=1,\\dots,4,\\ j=1,\\dots,2"]],
+  "steps": {
+   "1": {"general": ["d_{ij}=\\lVert x_i-c_j\\rVert_2,\\quad i=1,\\dots,4,\\ j=1,\\dots,2"]},
+   "4": {"general": ["d_{ij}=\\lVert x_i-c_j\\rVert_2,\\quad i=1,\\dots,4,\\ j=1,\\dots,2"]},
+   "6": {"general": ["\\text{no changes in cluster assignments}\\Rightarrow\\text{stop}"]}
+  }
+ },
+ "s22-exercise-sbp-crp": {
+  "steps": {
+   "0": {"general": ["d_{ij}=\\lVert x_i-c_j\\rVert_2,\\quad i=1,\\dots,n,\\ j=1,\\dots,k"]},
+   "1": {"general": ["d_{ij}=\\lVert x_i-c_j\\rVert_2,\\quad i=1,\\dots,n,\\ j=1,\\dots,k"]},
+   "2": {"general": ["d_{ij}=\\lVert x_i-c_j\\rVert_2,\\quad i=1,\\dots,n,\\ j=1,\\dots,k"]}
+  }
+ },
+ "s22-ages-withinss": {
+  "steps": {
+   "3": {"general": ["\\text{betweenss}=\\sum_{i=1}^{n}(x_i-\\bar x)^2-SS_{\\text{within total}}"],
+         "work": ["\\bar x=336/10=33.6,\\ \\sum_{i=1}^{n}(x_i-\\bar x)^2=874.4", "\\text{betweenss}=874.4-89.58333=784.81667"]}
+  }
+ },
+ "s22-tomato-knn": {
+  "replace": [["P(\\text{fruit})", "\\text{Prob}(T=\\text{fruit})"], ["P(\\text{protein})", "\\text{Prob}(T=\\text{protein})"],
+              ["P(\\text{class})", "\\text{Prob}(T=\\text{class})"]],
+  "steps": {
+   "3": {"general": ["T=\\text{plurality class of the }K\\text{ nearest neighbors}"], "work": ["T=\\text{fruit}"]}
+  }
+ },
+ "s22-mesh-knn": {
+  "replace": [["P(\\text{Fail})", "\\text{Prob}(\\text{Fail})"]]
+ }
+}

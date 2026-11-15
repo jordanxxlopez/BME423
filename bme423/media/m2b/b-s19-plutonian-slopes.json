@@ -1,0 +1,71 @@
+{
+ "id": "b-s19-plutonian-slopes",
+ "file": "media/m2b/b-s19-plutonian-slopes.mp4",
+ "poster": "media/m2b/b-s19-plutonian-slopes.png",
+ "session": 19,
+ "method": "s19slopes",
+ "title": "Plutonian weight on height: males versus females",
+ "duration": 104,
+ "cases": {
+  "s19-plutonian-slopes": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 16
+  },
+  {
+   "step": 2,
+   "title": "Read both slopes and standard errors",
+   "start": 16,
+   "end": 29.267
+  },
+  {
+   "step": 3,
+   "title": "Calculate the slope difference",
+   "start": 29.267,
+   "end": 39.467
+  },
+  {
+   "step": 4,
+   "title": "Calculate the SE of the difference",
+   "start": 39.467,
+   "end": 49.2
+  },
+  {
+   "step": 5,
+   "title": "Calculate the t statistic",
+   "start": 49.2,
+   "end": 57.667
+  },
+  {
+   "step": 6,
+   "title": "Find df and the critical value",
+   "start": 57.667,
+   "end": 77.667
+  },
+  {
+   "step": 7,
+   "title": "Decide and bracket P",
+   "start": 77.667,
+   "end": 90
+  },
+  {
+   "step": 8,
+   "title": "Conclusion",
+   "start": 90,
+   "end": 104
+  }
+ ],
+ "case": "s19-plutonian-slopes",
+ "kind": "board"
+}

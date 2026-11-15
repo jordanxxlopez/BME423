@@ -20,15 +20,15 @@ export const meta = {
   steps: [
     {title: 'Two groups', seconds: 6, card: [{label: 'data (mL/day)', note: 'diuretic  n 10 · mean 1400 · SD 245\nplacebo   n 10 · mean 1180 · SD 144'}], caption: 'Ten people took a diuretic and ten took a placebo. The goal is the **population difference** in mean urine production.'},
     {title: 'Observed difference', seconds: 6, caption: 'The sample difference sits in the **middle** of the interval.',
-      card: [{label: 'difference', tex: 'd=\\bar x_1-\\bar x_2', value: `1400 − 1180 = ${d} mL/day`, color: C.signal}]},
+      card: [{label: 'difference', tex: '(\\bar x_1-\\bar x_2)', value: `1400 − 1180 = ${d} mL/day`, color: C.signal}]},
     {title: 'Pooled variance', seconds: 7, caption: 'Each group has its own spread. **Pooling** combines them into one variance, weighted by each group\'s degrees of freedom.',
       card: [{label: 'pooled variance', tex: 's^2=\\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}', value: `= ${sp2.toFixed(1)}`, color: C.noise}]},
     {title: 'Standard error', seconds: 6, caption: 'The standard error is how much the **difference** would wobble from sample to sample.',
-      card: [{label: 'standard error', tex: 's_{\\bar x_1-\\bar x_2}=\\sqrt{s^2\\left(\\tfrac1{n_1}+\\tfrac1{n_2}\\right)}', value: `= ${se.toFixed(3)} mL/day`, color: C.noise}]},
+      card: [{label: 'standard error', tex: 's_{(\\bar x_1-\\bar x_2)}=\\sqrt{\\frac{s^2}{n_1}+\\frac{s^2}{n_2}}', value: `= ${se.toFixed(3)} mL/day`, color: C.noise}]},
     {title: 'Class t table', seconds: 7, caption: 'Use the **class t table** (two-tailed). Row 18 is the degrees of freedom and column 0.05 gives **2.101**.',
       card: [{label: 'class t table', tex: '\\nu=n_1+n_2-2=18', value: 'row 18 · column 0.05 → 2.101', color: C.signal}]},
     {title: 'Margin and interval', seconds: 7, caption: 'The margin is the cutoff times the standard error. Add and subtract it from the difference.',
-      card: [{label: 'margin and interval', tex: 'd\\pm t_c\\,s_{\\bar x_1-\\bar x_2}', value: `${d} ± ${M.toFixed(2)} → (${lo.toFixed(2)}, ${hi.toFixed(2)})`, color: C.signal}]},
+      card: [{label: 'margin and interval', tex: '(\\bar x_1-\\bar x_2)\\pm t_\\alpha(\\nu)\\cdot s_{(\\bar x_1-\\bar x_2)}', value: `${d} ± ${M.toFixed(2)} → (${lo.toFixed(2)}, ${hi.toFixed(2)})`, color: C.signal}]},
     {title: 'Is zero inside?', seconds: 6, caption: 'Zero means no difference. The interval **leaves zero out**, so the means differ with P < 0.05.',
       card: [{label: 'decision', value: '0 is outside → reject H0, P < 0.05', color: C.green}]},
     {title: 'What 95% means', seconds: 9, caption: 'Repeat the study many times. About **95 out of 100** intervals built this way catch the true difference. A few miss.'},
@@ -68,7 +68,7 @@ const S17TwoMeans: React.FC = () => (
         {after(tl, f, 1) && i !== 4 && i !== 7 && <g opacity={prog(tl, f, 1)}>
           <AxisX x={xd} y={392} ticks={[-200, 0, 200, 400, 600]} />
           <Glow cx={xd(d)} cy={360} r={8} color={C.signal} />
-          <Label x={xd(d)} y={336} text={`d = ${d}`} color={C.signal} anchor="middle" weight={700} />
+          <Label x={xd(d)} y={336} text={`difference = ${d}`} color={C.signal} anchor="middle" weight={700} />
           {after(tl, f, 3) && <g opacity={prog(tl, f, 3)}>
             <line x1={xd(d - se)} x2={xd(d + se)} y1={378} y2={378} stroke={C.noise} strokeWidth={4} />
             <Label x={xd(d + se) + 8} y={383} text={`± SE ${se.toFixed(1)}`} color={C.noise} size={13} /></g>}

@@ -1,0 +1,64 @@
+{
+ "id": "b-s22-mesh-knn",
+ "file": "media/m2b/b-s22-mesh-knn.mp4",
+ "poster": "media/m2b/b-s22-mesh-knn.png",
+ "session": 22,
+ "method": "s22knn",
+ "title": "Quality control of surgical mesh with K = 3",
+ "duration": 80.267,
+ "cases": {
+  "s22-mesh-knn": [
+   2,
+   3,
+   4,
+   5,
+   6
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 16
+  },
+  {
+   "step": 2,
+   "title": "Set up",
+   "start": 16,
+   "end": 24
+  },
+  {
+   "step": 3,
+   "title": "Distances",
+   "start": 24,
+   "end": 36.2
+  },
+  {
+   "step": 4,
+   "title": "Rank the distances",
+   "start": 36.2,
+   "end": 46.2
+  },
+  {
+   "step": 5,
+   "title": "Read the neighbor classes",
+   "start": 46.2,
+   "end": 54.8
+  },
+  {
+   "step": 6,
+   "title": "Classify and give the probability",
+   "start": 54.8,
+   "end": 64.267
+  },
+  {
+   "step": 7,
+   "title": "Conclusion",
+   "start": 64.267,
+   "end": 80.267
+  }
+ ],
+ "case": "s22-mesh-knn",
+ "kind": "board"
+}

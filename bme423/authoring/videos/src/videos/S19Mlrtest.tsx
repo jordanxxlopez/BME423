@@ -25,7 +25,7 @@ export const meta = {
     {title: 'Whole-model null', seconds: 6, caption: 'The F test asks whether **both slopes are zero together**, which would mean neither parent predicts the child.',
       card: [{label: 'null hypothesis', tex: 'H_0:\\beta_1=\\beta_2=0', note: 'alternative: β1 ≠ 0 and/or β2 ≠ 0', color: C.signal}]},
     {title: 'F from R squared', seconds: 8, caption: 'F compares explained variation per model df with leftover variation per residual df. Here **F = 12.61 on 2 and 17 df**.',
-      card: [{label: 'F statistic', tex: 'F=\\frac{R^2/k}{(1-R^2)/(n-k-1)}', value: `0.29865 / 0.023688 = ${F.toFixed(2)}`, note: 'df: k = 2 and n − k − 1 = 20 − 2 − 1 = 17', color: C.signal}]},
+      card: [{label: 'F statistic', tex: 'F=\\frac{MS_{mod}}{MS_{res}}=\\frac{R^2/k}{(1-R^2)/(n-k-1)}', value: `0.29865 / 0.023688 = ${F.toFixed(2)}`, note: 'df: k = 2 and n − k − 1 = 20 − 2 − 1 = 17', color: C.signal}]},
     {title: 'Class F table', seconds: 7, caption: 'In the **class F table**, column 2 and row 17 give **3.59** in lightface for 0.05 and 6.11 in boldface for 0.01.',
       card: [{label: 'class F table', value: 'num 2 · den 17 → 3.59 (0.05)', note: 'boldface 6.11 (0.01)', color: C.signal}]},
     {title: 'F decision', seconds: 7, caption: 'F = 12.61 passes both cutoffs, so **reject H0**. The table supports P < 0.01, and R\'s exact P is 0.0004388.',
@@ -65,7 +65,7 @@ const Summary: React.FC<{boxCol?: number; boxF?: boolean; boxR?: boolean; pb: nu
     <text x={20} y={y0 + rh * 7.6} fill={C.ink}>F-statistic: 12.61 on 2 and 17 DF, p-value: 0.0004388</text>
     {boxCol !== undefined && <rect x={COLX[boxCol] - (boxCol === 3 ? 66 : 92)} y={y0 + rh + 6} width={boxCol === 3 ? 74 : 100} height={rh * 3 + 4} rx={6} fill="none" stroke={C.signal} strokeWidth={2.5} opacity={pb} />}
     {boxF && <rect x={12} y={y0 + rh * 6.85} width={545} height={rh} rx={6} fill="none" stroke={C.signal} strokeWidth={2.5} opacity={pb} />}
-    {boxR && <rect x={12} y={y0 + rh * 5.85} width={260} height={rh} rx={6} fill="none" stroke={C.noise} strokeWidth={2.5} opacity={pb} />}
+    {boxR && <rect x={12} y={y0 + rh * 5.85} width={256} height={rh} rx={6} fill="none" stroke={C.noise} strokeWidth={2.5} opacity={pb} />}
   </g>);
 };
 
@@ -131,7 +131,7 @@ const S19Mlrtest: React.FC = () => (
           {[3.222, 3.646].map(v => <line key={v} x1={x(v)} x2={x(v)} y1={262} y2={360} stroke={C.muted} strokeWidth={1.5} strokeDasharray="3 5" />)}
           {coef.map((c, j) => { const q = prog(tl, f, 6, 1.4 + j * 0.5); const yy = 290 + j * 40; return (<g key={j}>
             <Glow cx={x(tv[j] * q)} cy={yy} r={8} color={c.c} />
-            {q > 0.98 && <Label x={x(tv[j]) - 14} y={yy + 5} text={`${c.name.replace('SBP', '')} ${tv[j].toFixed(3)}`} color={c.c} size={13} anchor="end" />}</g>); })}
+            {q > 0.98 && <Label x={Math.min(x(tv[j]) - 14, x(3.222) - 8)} y={yy + 5} text={`${c.name.replace('SBP', '')} ${tv[j].toFixed(3)}`} color={c.c} size={13} anchor="end" />}</g>); })}
           <AxisX x={x} y={360} ticks={[0, 1, 2, 3, 4]} label="t with 17 df" />
         </g>); })()}
         {/* confidence intervals vs zero */}

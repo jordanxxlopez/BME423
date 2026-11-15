@@ -1,0 +1,85 @@
+{
+ "id": "b-ci-event",
+ "file": "media/m2b/b-ci-event.mp4",
+ "poster": "media/m2b/b-ci-event.png",
+ "session": 17,
+ "method": "twoProportions",
+ "title": "Event proportions in two treatment groups",
+ "duration": 120.133,
+ "cases": {
+  "ci-event": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 9.8
+  },
+  {
+   "step": 2,
+   "title": "Define the population difference",
+   "start": 9.8,
+   "end": 21
+  },
+  {
+   "step": 3,
+   "title": "Calculate both sample proportions",
+   "start": 21,
+   "end": 30.933
+  },
+  {
+   "step": 4,
+   "title": "Calculate the course pooled proportion",
+   "start": 30.933,
+   "end": 43.267
+  },
+  {
+   "step": 5,
+   "title": "Calculate the pooled binary variance",
+   "start": 43.267,
+   "end": 53.067
+  },
+  {
+   "step": 6,
+   "title": "Calculate the difference SE",
+   "start": 53.067,
+   "end": 61.933
+  },
+  {
+   "step": 7,
+   "title": "Calculate the difference and margin",
+   "start": 61.933,
+   "end": 77.133
+  },
+  {
+   "step": 8,
+   "title": "Calculate both endpoints",
+   "start": 77.133,
+   "end": 92.067
+  },
+  {
+   "step": 9,
+   "title": "Interpret direction and the zero comparison",
+   "start": 92.067,
+   "end": 104.133
+  },
+  {
+   "step": 10,
+   "title": "Conclusion",
+   "start": 104.133,
+   "end": 120.133
+  }
+ ],
+ "case": "ci-event",
+ "kind": "board"
+}

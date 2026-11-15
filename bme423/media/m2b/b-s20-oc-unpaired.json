@@ -1,0 +1,71 @@
+{
+ "id": "b-s20-oc-unpaired",
+ "file": "media/m2b/b-s20-oc-unpaired.mp4",
+ "poster": "media/m2b/b-s20-oc-unpaired.png",
+ "session": 20,
+ "method": "s20unpaired",
+ "title": "Oral contraceptive data run through the unpaired t test",
+ "duration": 121.2,
+ "cases": {
+  "s20-oc-unpaired": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 16
+  },
+  {
+   "step": 2,
+   "title": "State the procedure and hypotheses",
+   "start": 16,
+   "end": 31
+  },
+  {
+   "step": 3,
+   "title": "Calculate the group means and SDs",
+   "start": 31,
+   "end": 44.467
+  },
+  {
+   "step": 4,
+   "title": "Pool the variances",
+   "start": 44.467,
+   "end": 53.6
+  },
+  {
+   "step": 5,
+   "title": "Calculate the standard error and t",
+   "start": 53.6,
+   "end": 67.533
+  },
+  {
+   "step": 6,
+   "title": "Find the degrees of freedom and the critical value",
+   "start": 67.533,
+   "end": 83.467
+  },
+  {
+   "step": 7,
+   "title": "Make the decision",
+   "start": 83.467,
+   "end": 105.2
+  },
+  {
+   "step": 8,
+   "title": "Conclusion",
+   "start": 105.2,
+   "end": 121.2
+  }
+ ],
+ "case": "s20-oc-unpaired",
+ "kind": "board"
+}

@@ -1,0 +1,78 @@
+{
+ "id": "b-s19-survey-margin",
+ "file": "media/m2b/b-s19-survey-margin.mp4",
+ "poster": "media/m2b/b-s19-survey-margin.png",
+ "session": 19,
+ "method": "s19margin",
+ "title": "Margin of error for a two-group survey difference",
+ "duration": 116.867,
+ "cases": {
+  "s19-survey-margin": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 16
+  },
+  {
+   "step": 2,
+   "title": "Find both sample proportions",
+   "start": 16,
+   "end": 28.667
+  },
+  {
+   "step": 3,
+   "title": "Find the observed difference",
+   "start": 28.667,
+   "end": 37.333
+  },
+  {
+   "step": 4,
+   "title": "Pool the two groups",
+   "start": 37.333,
+   "end": 49.333
+  },
+  {
+   "step": 5,
+   "title": "Calculate the standard error of the difference",
+   "start": 49.333,
+   "end": 60.4
+  },
+  {
+   "step": 6,
+   "title": "Read the Normal cutoff",
+   "start": 60.4,
+   "end": 75.267
+  },
+  {
+   "step": 7,
+   "title": "Calculate the margin of error",
+   "start": 75.267,
+   "end": 85
+  },
+  {
+   "step": 8,
+   "title": "Form the interval and decide",
+   "start": 85,
+   "end": 102.133
+  },
+  {
+   "step": 9,
+   "title": "Conclusion",
+   "start": 102.133,
+   "end": 116.867
+  }
+ ],
+ "case": "s19-survey-margin",
+ "kind": "board"
+}

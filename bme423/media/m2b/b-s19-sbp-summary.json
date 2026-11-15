@@ -1,0 +1,78 @@
+{
+ "id": "b-s19-sbp-summary",
+ "file": "media/m2b/b-s19-sbp-summary.mp4",
+ "poster": "media/m2b/b-s19-sbp-summary.png",
+ "session": 19,
+ "method": "s19mlrtest",
+ "title": "Reading the R summary for child SBP",
+ "duration": 138.333,
+ "cases": {
+  "s19-sbp-summary": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 15.8
+  },
+  {
+   "step": 2,
+   "title": "Find the F degrees of freedom",
+   "start": 15.8,
+   "end": 29.533
+  },
+  {
+   "step": 3,
+   "title": "Recompute F from R squared",
+   "start": 29.533,
+   "end": 42.333
+  },
+  {
+   "step": 4,
+   "title": "Compare with the F cutoff",
+   "start": 42.333,
+   "end": 65.733
+  },
+  {
+   "step": 5,
+   "title": "Test the mother coefficient",
+   "start": 65.733,
+   "end": 85.733
+  },
+  {
+   "step": 6,
+   "title": "Test the father coefficient",
+   "start": 85.733,
+   "end": 100.467
+  },
+  {
+   "step": 7,
+   "title": "Build 95% intervals for both slopes",
+   "start": 100.467,
+   "end": 111.2
+  },
+  {
+   "step": 8,
+   "title": "Predict by hand",
+   "start": 111.2,
+   "end": 122.333
+  },
+  {
+   "step": 9,
+   "title": "Conclusion",
+   "start": 122.333,
+   "end": 138.333
+  }
+ ],
+ "case": "s19-sbp-summary",
+ "kind": "board"
+}

@@ -38,19 +38,19 @@ export const meta = {
   steps: [
     {title: 'Two groups', seconds: 7, card: [{label: 'data (thrombosis)', note: 'placebo  18 of 25 patients\naspirin   6 of 19 patients'}],
       caption: 'Thrombosis hit 18 of 25 patients on placebo and 6 of 19 on aspirin. The goal is the **difference in event probability**.'},
-    {title: 'Null hypothesis', seconds: 7, card: [{label: 'null hypothesis', tex: 'H_0:\\ p_1-p_2=0', note: 'equal event probabilities\ndifference = placebo − aspirin'}],
+    {title: 'Null hypothesis', seconds: 7, card: [{label: 'null hypothesis', tex: 'H_0:\\ p_1=p_2', note: 'equal event probabilities\ndifference = placebo − aspirin'}],
       caption: 'The null says both groups share **one event probability**, so placebo minus aspirin would be zero.'},
-    {title: 'Group proportions', seconds: 7, card: [{label: 'group proportions', tex: '\\hat p_i=m_i/n_i', value: '18/25 = 0.72 · 6/19 ≈ 0.32', color: C.signal, note: 'd = 0.72 − 0.32 = 0.40'}],
-      caption: 'Each count is divided by its own group size. Placebo gives **0.72** and aspirin gives **0.32**, so d is 0.40.'},
+    {title: 'Group proportions', seconds: 7, card: [{label: 'group proportions', tex: '\\hat p_i=m_i/n_i', value: '18/25 = 0.72 · 6/19 ≈ 0.32', color: C.signal, note: 'difference = 0.72 − 0.32 = 0.40'}],
+      caption: 'Each count is divided by its own group size. Placebo gives **0.72** and aspirin gives **0.32**, so the difference is 0.40.'},
     {title: 'Pooled proportion', seconds: 7, card: [{label: 'pooled proportion', tex: '\\hat p=\\frac{m_1+m_2}{n_1+n_2}', value: `24 / 44 = ${pool.toFixed(4)}`, color: C.noise}],
       caption: 'The standard error **pools** both groups, 24 events in 44 patients, because the null says they share one probability.'},
     {title: 'Standard error', seconds: 8, card: [
       {label: 'pooled variance', tex: 's^2=\\hat p(1-\\hat p)', value: `= ${v.toFixed(4)}`, color: C.noise},
-      {label: 'standard error', tex: 's_d=\\sqrt{\\frac{s^2}{n_1}+\\frac{s^2}{n_2}}', value: `= ${seRaw.toFixed(4)} ≈ 0.15`, color: C.noise}],
+      {label: 'standard error', tex: 's_{(\\hat p_1-\\hat p_2)}=\\sqrt{\\frac{s^2}{n_1}+\\frac{s^2}{n_2}}', value: `= ${seRaw.toFixed(4)} ≈ 0.15`, color: C.noise}],
       caption: 'The pooled variance goes over each group size. The square root of the sum is the **standard error**, rounded to 0.15.'},
     {title: 'Class t table', seconds: 7, card: [{label: 'class t table', tex: 'z_{0.05}=t_{0.05}(\\infty)', value: 'row ∞ · column 0.05 → 1.96', color: C.signal}],
       caption: 'Proportions use the Normal cutoff. In the **class t table**, the infinity row and column 0.05 give **1.96**.'},
-    {title: 'Margin and interval', seconds: 8, card: [{label: 'margin and interval', tex: 'd\\pm z_{0.05}\\,s_d', value: `0.40 ± ${M.toFixed(3)} → (${lo.toFixed(3)}, ${hi.toFixed(3)})`, color: C.signal,
+    {title: 'Margin and interval', seconds: 8, card: [{label: 'margin and interval', tex: '(\\hat p_1-\\hat p_2)\\pm z_{0.05}\\cdot s_{(\\hat p_1-\\hat p_2)}', value: `0.40 ± ${M.toFixed(3)} → (${lo.toFixed(3)}, ${hi.toFixed(3)})`, color: C.signal,
       note: `unrounded digits give (${(dRaw - Mraw).toFixed(3)}, ${(dRaw + Mraw).toFixed(3)})`}],
       caption: 'The margin is 1.96 times 0.15, which is 0.294. Add and subtract it from 0.40 to get **0.106 to 0.694**.'},
     {title: 'Is zero inside?', seconds: 8, card: [{label: 'decision', value: '0 is outside → reject H0', color: C.green, note: '10.6 to 69.4 percentage points, placebo\nhigher. This is not a relative risk.'}],
@@ -73,7 +73,7 @@ const S17TwoProportions: React.FC = () => (
         <g opacity={topA}>
           {groups.map((g, gi) => (<g key={gi}>
             <Label x={40} y={g.y0 - 16} text={`${g.name}  ${g.m}/${g.n}`} color={g.c} />
-            {Array.from({length: g.n}, (_, k) => { const cx = 52 + (k % 5) * 24, cy = g.y0 + Math.floor(k / 5) * 22; const ev = k < g.m;
+            {Array.from({length: g.n}, (_, k) => { const cx = 52 + (k % 5) * 24, cy = g.y0 + Math.floor(k / 5) * 20; const ev = k < g.m;
               const p = prog(tl, f, 0, 0.5 + k * 0.04 + gi * 0.4);
               return ev ? <Glow key={k} cx={cx} cy={lerp(cy - 30, cy, p)} r={6} color={g.c} opacity={p} />
                 : <circle key={k} cx={cx} cy={lerp(cy - 30, cy, p)} r={5.5} fill="none" stroke={C.muted} strokeWidth={1.5} opacity={p} />; })}
@@ -98,7 +98,7 @@ const S17TwoProportions: React.FC = () => (
           <Label x={xd(0)} y={312} text="0 = equal" color={i >= 7 ? C.red : C.muted} anchor="middle" size={13} />
           {after(tl, f, 2) && <g opacity={prog(tl, f, 2)}>
             <Glow cx={xd(d)} cy={360} r={8} color={C.signal} />
-            <Label x={xd(d)} y={336} text="d = 0.40" color={C.signal} anchor="middle" weight={700} /></g>}
+            <Label x={xd(d)} y={336} text="difference = 0.40" color={C.signal} anchor="middle" weight={700} /></g>}
           {after(tl, f, 4) && <g opacity={prog(tl, f, 4)}>
             <line x1={xd(d - se)} x2={xd(d + se)} y1={378} y2={378} stroke={C.noise} strokeWidth={4} />
             <Label x={xd(d + se) + 8} y={383} text="± SE 0.15" color={C.noise} size={13} /></g>}

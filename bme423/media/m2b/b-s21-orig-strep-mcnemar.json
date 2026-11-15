@@ -1,0 +1,78 @@
+{
+ "id": "b-s21-orig-strep-mcnemar",
+ "file": "media/m2b/b-s21-orig-strep-mcnemar.mp4",
+ "poster": "media/m2b/b-s21-orig-strep-mcnemar.png",
+ "session": 21,
+ "method": "s21diagnostic",
+ "title": "Original practice: two rapid strep tests on the same throat swabs",
+ "duration": 134.333,
+ "cases": {
+  "s21-orig-strep-mcnemar": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 16
+  },
+  {
+   "step": 2,
+   "title": "State the procedure",
+   "start": 16,
+   "end": 28.533
+  },
+  {
+   "step": 3,
+   "title": "State the hypotheses",
+   "start": 28.533,
+   "end": 49.667
+  },
+  {
+   "step": 4,
+   "title": "Identify the subjects who change",
+   "start": 49.667,
+   "end": 67.133
+  },
+  {
+   "step": 5,
+   "title": "Calculate the expected number in each change cell",
+   "start": 67.133,
+   "end": 77.267
+  },
+  {
+   "step": 6,
+   "title": "Calculate the McNemar chi-square with Yates correction",
+   "start": 77.267,
+   "end": 89.267
+  },
+  {
+   "step": 7,
+   "title": "Find the critical value",
+   "start": 89.267,
+   "end": 107.067
+  },
+  {
+   "step": 8,
+   "title": "Make the decision",
+   "start": 107.067,
+   "end": 119.267
+  },
+  {
+   "step": 9,
+   "title": "Conclusion",
+   "start": 119.267,
+   "end": 134.333
+  }
+ ],
+ "case": "s21-orig-strep-mcnemar",
+ "kind": "board"
+}

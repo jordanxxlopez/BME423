@@ -1,0 +1,5 @@
+{
+ "s21-bp-machine": {"text": {"conclusion": "McNemar chi-square = 3.125 with 1 df is below chi-square_0.05(1) = 3.841. Do not reject H0 (P > 0.05). None of the 20 subjects has hypertension, so every positive is a false positive. The machine gives 10 false positives and the person gives 4, and the 8 disagreements split 7 against 1, but that split is not enough to show a difference in specificity."}},
+ "s22-exercise-sbp-crp": {"text": {"title": "Exercise · k-means on SBP and CRP"}},
+ "s22-ages-kmeans": {"text": {"conclusion": "Iteration 1 moves the centroids from 21 and 30 to 21 and 39. Iteration 2 moves age 28 into cluster 1 and gives 22.75 and 40.83333. Iteration 3 changes nothing, so the final clusters are ages 20 to 28 and ages 35 to 44."}}
+}

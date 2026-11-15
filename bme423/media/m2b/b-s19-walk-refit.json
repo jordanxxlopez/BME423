@@ -1,0 +1,71 @@
+{
+ "id": "b-s19-walk-refit",
+ "file": "media/m2b/b-s19-walk-refit.mp4",
+ "poster": "media/m2b/b-s19-walk-refit.png",
+ "session": 19,
+ "method": "s19mlrtest",
+ "title": "Six-minute walk distance: summary, confint, refit and prediction",
+ "duration": 126.733,
+ "cases": {
+  "s19-walk-refit": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 16
+  },
+  {
+   "step": 2,
+   "title": "Write the full equation",
+   "start": 16,
+   "end": 24.133
+  },
+  {
+   "step": 3,
+   "title": "Test the model as a whole",
+   "start": 24.133,
+   "end": 46.733
+  },
+  {
+   "step": 4,
+   "title": "Test each coefficient",
+   "start": 46.733,
+   "end": 68
+  },
+  {
+   "step": 5,
+   "title": "Confirm with the 95% intervals",
+   "start": 68,
+   "end": 83.733
+  },
+  {
+   "step": 6,
+   "title": "Refit without BMI",
+   "start": 83.733,
+   "end": 99.933
+  },
+  {
+   "step": 7,
+   "title": "Predict by hand",
+   "start": 99.933,
+   "end": 110.933
+  },
+  {
+   "step": 8,
+   "title": "Conclusion",
+   "start": 110.933,
+   "end": 126.733
+  }
+ ],
+ "case": "s19-walk-refit",
+ "kind": "board"
+}

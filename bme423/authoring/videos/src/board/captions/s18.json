@@ -1,0 +1,56 @@
+{
+  "s18-martians-line": {
+    "0": "The least-squares formulas need only these five numbers, read from the totals row of the data table.",
+    "4": "Carry the unrounded slope into this step, because rounding b to 0.44 first would move a to about −5.86 g.",
+    "intro": "A random sample of 10 Martians is drawn from a population of 200. Height x (cm) and weight y (g) are recorded for each Martian, and the totals of x, y, x² and xy are formed in the data table.",
+    "end": "The fitted line passes through the point of means (36.9 cm, 10.38 g) and makes the squared vertical distances to the 10 points as small as possible. Its slope 0.44 g/cm sits close to the population slope 0.5 g/cm."
+  },
+  "s18-martians-spread": {
+    "0": "The first term is the total variance of weight, and the second is the part of it explained by the line.",
+    "2": "Using the rounded 1.02 g instead gives 0.068 g/cm. The unrounded data give 0.064 g/cm, as the last step shows.",
+    "4": "With the rounded 1.02 g the result is 2.53 g, a little below the 2.6 g used in the trend test. The intercept is far less precise than the slope because it is an extrapolation to zero height.",
+    "5": "From the ten observations and the unrounded line, the residual sum of squares is 7.438 g². The shortcut with rounded inputs overstates s_y|x because it subtracts two nearly equal numbers. R output reproduces the raw-data values.",
+    "intro": "For the same sample of 10 Martians, the summary values are rounded. The SD of height is 5.0 cm, the SD of weight is 2.4 g, the slope is 0.44 g/cm, and the mean height is 36.9 cm.",
+    "end": "The rounded shortcut gives slightly larger values than the raw data because it subtracts two nearly equal numbers, 5.76 and 4.84. The intercept SE is large because zero height lies far from the mean height of 36.9 cm."
+  },
+  "s18-martians-trend": {
+    "3": "Use the class t table (two-tailed), row 8, column 0.05. The printed cutoff is 2.306.",
+    "5": "Row 8, column 0.001 of the class t table prints 5.041. The statistic exceeds the largest printed cutoff, so P < 0.001.",
+    "intro": "The Martian sample of n = 10 gives the slope b = 0.44 g/cm with standard error s_b = 0.064 g/cm, and the intercept a = −6.0 g with standard error s_a = 2.6 g.",
+    "end": "Because 6.875 lies beyond even the 0.001 cutoff, the evidence that mean Martian weight rises with height is strong. The slope interval excludes 0, matching the test, and the intercept interval is wide because zero height lies far outside the data."
+  },
+  "s18-martians-at40": {
+    "3": "Use the class t table (two-tailed), row 8, column 0.05. The cutoff is 2.306.",
+    "4": "With 95% confidence, the mean weight of all 40 cm Martians lies between about 10.71 and 12.49 g, and the true mean is 12 g.",
+    "intro": "Use the Martian regression ŷ = −6.0 + 0.44x with s_y|x = 1.02 g, n = 10, x̄ = 36.9 cm and s_x = 5.0 cm.",
+    "end": "Both intervals are centered on the predicted 11.6 g. The interval for one Martian is wider because it adds the scatter of single Martians about the line, s_y|x = 1.02 g, to the uncertainty in the line itself."
+  },
+  "s18-martians-r": {
+    "0": "The units g·cm cancel, so r has no units. Cut off at three decimals, r is 0.925.",
+    "4": "Use the class t table (two-tailed), row 8, column 0.05. The cutoff is 2.306.",
+    "6": "A value this close to +1 indicates a strong positive linear relationship, so taller Martians tend to be heavier.",
+    "intro": "The data table gives, for the 10 sampled Martians, the totals of the deviation products and squared deviations from the means.",
+    "end": "Because r = 0.9256 is close to +1, taller Martians tend to be heavier, and r² = 0.857 means about 86% of the variation in weight goes with height. The t for r matches the slope t from the same data, so both tests reach the same decision."
+  },
+  "s18-plutonian-males": {
+    "0": "The Std. Error column gives both standard errors directly.",
+    "1": "Use the class t table (two-tailed), row 16, column 0.05. The cutoff is 2.120.",
+    "2": "Each additional inch adds between about 2.85 and 3.72 lb to mean male weight, and the interval excludes 0.",
+    "5": "This is the estimated mean weight of males 68 inches tall, in pounds.",
+    "intro": "For 18 male Plutonians, lm(Weight.lbs ~ Height.in) gives the coefficients in the table, a residual standard error of 2.711 lb on 16 degrees of freedom, and multiple R-squared 0.9418. The heights in the data table total 1215 in, with Σx² = 82,189 in².",
+    "end": "The interval for one male is more than four times as wide as the interval for the mean, because one male also varies about the line by about s_y|x = 2.711 lb. The intercept interval contains 0 because zero height lies far outside the data."
+  },
+  "s18-plutonian-slopes": {
+    "5": "Use the class t table (two-tailed), row 32, column 0.05. The cutoff is 2.037, so reject equal slopes.",
+    "end": "Because 2.444 falls between the 0.05 and 0.02 cutoffs for 32 degrees of freedom, the slopes differ with 0.02 < P < 0.05. The intercept t of −0.337 lies far inside the cutoffs, so the intercepts do not differ significantly."
+  },
+  "s18-original-caffeine": {
+    "1": "These shortcut forms give the three deviation sums straight from the raw totals.",
+    "2": "Dividing the two deviation sums gives the same slope, 15336.4/338720. Tapping rate rises by about 0.045 taps per 10 s per mg.",
+    "5": "This is the requested estimate of the variance about the line of means, in (taps/10 s)².",
+    "6": "The term (n−1)s_x² equals Σ(x−x̄)² = 338720, so either form gives the same standard errors.",
+    "7": "Row 43 is not printed in the class t table (two-tailed), so bracket it with rows 42 and 44 and use the conservative row-42 cutoff 2.018. The two rows differ by only 0.003.",
+    "intro": "This practice example uses invented numbers. Forty-five volunteers each receive a caffeine dose x (mg, 0 to 300) and then perform a finger-tapping test, and y is taps per 10 s. Only the sums are given, and R is not to be used.",
+    "end": "Each extra 100 mg of caffeine raises the mean tapping rate by about 4.5 taps per 10 s. The slope and correlation tests share the same t of 6.247, but r = 0.6898 shows that volunteers still scatter widely about the line."
+  }
+}

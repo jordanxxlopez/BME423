@@ -28,7 +28,7 @@ export const meta = {
   cases: {},
   title: 'What a 95% confidence interval means',
   steps: [
-    {title: 'Middle 95%', seconds: 7, card: [{label: 't curve, 9 df', tex: 'P\\!\\left(-t_{0.05}<T_\\nu<t_{0.05}\\right)=0.95'}],
+    {title: 'Middle 95%', seconds: 7, card: [{label: 't curve, 9 df', tex: 'P\\!\\left(-t_{0.05}(\\nu)<t<t_{0.05}(\\nu)\\right)=0.95'}],
       caption: 'The middle **95%** of the t curve lies between the two cutoffs. The other 5% splits into 2.5% in each tail.'},
     {title: 'Column 0.05', seconds: 7, card: [{label: 'class t table', tex: 't_{0.05}(9)=2.262', value: 'row 9 · column 0.05 → 2.262', color: C.signal, note: 'both tails combined · cumulative 0.975'}],
       caption: 'Column 0.05 of the class t table already counts **both tails**, so do not halve it. Row 9 gives **2.262**.'},

@@ -1,0 +1,55 @@
+{
+ "s19-survey-margin": {
+  "intro": "A campus survey asks first-year and senior students whether they use a campus fitness facility at least weekly. A news summary reports the difference in percentage points plus or minus a margin of error, so we use the pooled-proportion standard error and the Normal cutoff.",
+  "2": "Both groups are pooled to estimate one common proportion for the standard error, as in the two-proportion test.",
+  "4": "Use the class t table (two-tailed), infinity row, 0.05 column. The infinity row is the standard Normal cutoff, 1.960.",
+  "end": "The margin of 6.23 points is smaller than the 10-point gap, so the interval 0.0377 to 0.1623 stays above zero and the difference is significant at the two-sided 0.05 level."
+ },
+ "s19-hrt-relative-risk": {
+  "2": "Subtract one half from each absolute discrepancy before squaring, because this is the Yates correction for a 2×2 table.",
+  "3": "Use class chi-square table 1, row 1. The 0.05 column gives 3.841 and the 0.001 column gives 10.828. The statistic exceeds both, so reject with P < 0.001.",
+  "6": "Women were grouped by whether they used hormones, not assigned at random, so the result is an association. The later randomized Women's Health Initiative trial reached a less favorable overall conclusion.",
+  "end": "The women chose whether to use hormones, so other differences between users and never-users could explain part of the lower risk. That is why the relative risk of 0.6047 shows an association and not a cause."
+ },
+ "s19-plutonian-slopes": {
+  "intro": "Separate R regressions of weight (lbs) on height (inches) are run for 18 male and 18 female Plutonians. Test whether the slopes of the two lines of means differ. The slope standard errors come from the R output.",
+  "0": "Take the Height.in row of each R coefficient table and read the Estimate column and the Std. Error column.",
+  "4": "Use the class t table (two-tailed), row 32, 0.05 column, which gives 2.037. Four degrees of freedom are lost because each line estimates an intercept and a slope.",
+  "end": "The slope gap of 1.2543 lbs per inch is 2.444 standard errors of the difference, which is past the 2.037 cutoff, so equal slopes are rejected at the 0.05 level."
+ },
+ "s19-sbp-least-squares": {
+  "intro": "Twenty families from Rosner's hypertension data give the systolic blood pressure (mm Hg) of the first-born child (y), the mother (x1) and the father (x2). Fit the multiple regression by the matrix least-squares formula and confirm the R estimates.",
+  "0": "Each entry is a sum over the 20 families, and the first row and column come from the column of ones.",
+  "2": "The inverse is found with software, and its diagonal entries are reused later for the coefficient standard errors.",
+  "3": "These match the R Estimate column, which prints -15.6892, 0.4225 and 0.4150.",
+  "5": "About 60% of the variation in child SBP is accounted for by the two parental SBPs together, and R prints Multiple R-squared 0.5973.",
+  "end": "The plane misses a typical child by about 10.67 mm Hg, and because R² is 0.5973 the two parents' SBPs together account for about 60% of the spread in child SBP."
+ },
+ "s19-sbp-summary": {
+  "intro": "The R call lm(SBPchild ~ SBPmother + SBPfather) on the 20 families prints the summary in the table. Use it to test the model as a whole, test each parental coefficient, and predict by hand.",
+  "0": "Two independent variables are tested together, so 17 degrees of freedom remain for the residuals.",
+  "1": "Dividing SS mod and SS res by SS tot turns them into R² and 1 − R², so F can be checked from the printed R². R prints 12.61.",
+  "2": "Use the class F table with numerator df 2 across the top and denominator df 17 down the side. The lightface value is 3.59 and the boldface value is 6.11. F exceeds both, so P < 0.01 from the table, and R gives P = 0.0004388 (P < 0.001).",
+  "3": "Use the class t table (two-tailed), row 17, which gives 2.110 at 0.05. The statistic also lies between 3.222 (0.005) and 3.646 (0.002), so 0.002 < P < 0.005, matching R's 0.00238.",
+  "4": "The father coefficient is also significant. Its t of 3.325 lies between 3.222 and 3.646, so 0.002 < P < 0.005, matching R's 0.00401.",
+  "6": "Substitute the parental SBPs into the fitted plane, and the result is a mean child SBP in mm Hg.",
+  "end": "Each t test is done with the other parent's SBP already in the model, so each parent adds information on its own. The fitted plane predicts a mean child SBP of 101.5 mm Hg for parents at 130 and 150 mm Hg."
+ },
+ "s19-walk-refit": {
+  "intro": "For 32 adults in a rehabilitation program, six-minute walk distance (m) is regressed on Age (years), BMI (kg/m²) and Exercise (hours per week). R prints the summary(), the confint() output, and a refit with only the significant variables.",
+  "1": "Use the class F table with numerator df 3 across the top and denominator df 28 down the side, which gives 2.95 (lightface) and 4.57 (boldface). Reject the null that all three coefficients are zero, and R gives P = 9.43e-07.",
+  "2": "Compare each magnitude with 2.048, the class t table (two-tailed) value in row 28 at 0.05. Age and Exercise exceed it but BMI does not (P = 0.554), so BMI is not significant.",
+  "end": "Dropping BMI barely changes R², from 0.6611 to 0.6568, because BMI added almost nothing once age and exercise were known. So the simpler two-variable equation gives the 448.71 m prediction."
+ },
+ "s19-chd-age": {
+  "0": "Use the infinity row of the class t table for the Normal cutoffs, 1.960 at 0.05 and 3.2905 at 0.001. Reject with P < 0.001, and R prints 4.02e-06.",
+  "1": "The logit is the natural log of the odds, and it is a straight line in age, so plug age 60 into b0 + b1x.",
+  "2": "The logistic function keeps the result between 0 and 1. Rounded to two places, p = 0.79.",
+  "3": "Dividing the rounded probability 0.79 by 0.21 gives 3.76. Carrying p unrounded gives 3.84, so the difference comes only from rounding p to two places.",
+  "end": "Odds of about 3.76 to 1 mean a 60-year-old is estimated to be nearly four times as likely to have CHD as not to have it."
+ },
+ "s19-oring-temperature": {
+  "0": "The magnitude just exceeds the 0.05 Normal cutoff of 1.960 in the infinity row of the class t table, but not the 0.02 cutoff, so 0.02 < P < 0.05, and R prints 0.0493.",
+  "end": "Each degree colder multiplies the odds of failure by 1/0.856, about 1.17, so the estimated failure probability climbs from 0.143 at 75 °F to 0.834 at 53 °F."
+ }
+}

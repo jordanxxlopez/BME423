@@ -1,0 +1,85 @@
+{
+ "id": "b-s22-ages-kmeans",
+ "file": "media/m2b/b-s22-ages-kmeans.mp4",
+ "poster": "media/m2b/b-s22-ages-kmeans.png",
+ "session": 22,
+ "method": "s22kmeans",
+ "title": "k-means on ten ages",
+ "duration": 116.067,
+ "cases": {
+  "s22-ages-kmeans": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 12.533
+  },
+  {
+   "step": 2,
+   "title": "Set up",
+   "start": 12.533,
+   "end": 22
+  },
+  {
+   "step": 3,
+   "title": "Iteration 1 distances",
+   "start": 22,
+   "end": 35.4
+  },
+  {
+   "step": 4,
+   "title": "Iteration 1 labels",
+   "start": 35.4,
+   "end": 45.067
+  },
+  {
+   "step": 5,
+   "title": "Iteration 1 centroids",
+   "start": 45.067,
+   "end": 54.467
+  },
+  {
+   "step": 6,
+   "title": "Iteration 2 distances and labels",
+   "start": 54.467,
+   "end": 67.333
+  },
+  {
+   "step": 7,
+   "title": "Iteration 2 centroids",
+   "start": 67.333,
+   "end": 77.067
+  },
+  {
+   "step": 8,
+   "title": "Iteration 3 check",
+   "start": 77.067,
+   "end": 90.867
+  },
+  {
+   "step": 9,
+   "title": "Name the clusters",
+   "start": 90.867,
+   "end": 100.067
+  },
+  {
+   "step": 10,
+   "title": "Conclusion",
+   "start": 100.067,
+   "end": 116.067
+  }
+ ],
+ "case": "s22-ages-kmeans",
+ "kind": "board"
+}

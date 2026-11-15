@@ -1,0 +1,78 @@
+{
+ "id": "b-s18-martians-r",
+ "file": "media/m2b/b-s18-martians-r.mp4",
+ "poster": "media/m2b/b-s18-martians-r.png",
+ "session": 18,
+ "method": "s18corr",
+ "title": "Martian correlation coefficient and its t test",
+ "duration": 112.867,
+ "cases": {
+  "s18-martians-r": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 11.867
+  },
+  {
+   "step": 2,
+   "title": "Calculate r from the deviation totals",
+   "start": 11.867,
+   "end": 22.067
+  },
+  {
+   "step": 3,
+   "title": "Check with the slope relation",
+   "start": 22.067,
+   "end": 35.2
+  },
+  {
+   "step": 4,
+   "title": "Square r",
+   "start": 35.2,
+   "end": 46.2
+  },
+  {
+   "step": 5,
+   "title": "Calculate the t statistic",
+   "start": 46.2,
+   "end": 57.533
+  },
+  {
+   "step": 6,
+   "title": "Find the degrees of freedom and the 0.05 cutoff",
+   "start": 57.533,
+   "end": 72.533
+  },
+  {
+   "step": 7,
+   "title": "Decide and give the P range",
+   "start": 72.533,
+   "end": 84.8
+  },
+  {
+   "step": 8,
+   "title": "Interpret r",
+   "start": 84.8,
+   "end": 96.867
+  },
+  {
+   "step": 9,
+   "title": "Conclusion",
+   "start": 96.867,
+   "end": 112.867
+  }
+ ],
+ "case": "s18-martians-r",
+ "kind": "board"
+}

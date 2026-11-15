@@ -1,0 +1,85 @@
+{
+ "id": "b-s18-martians-trend",
+ "file": "media/m2b/b-s18-martians-trend.mp4",
+ "poster": "media/m2b/b-s18-martians-trend.png",
+ "session": 18,
+ "method": "s18slope",
+ "title": "Is Martian weight related to height?",
+ "duration": 128.333,
+ "cases": {
+  "s18-martians-trend": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 13.867
+  },
+  {
+   "step": 2,
+   "title": "State the procedure and hypotheses",
+   "start": 13.867,
+   "end": 27.4
+  },
+  {
+   "step": 3,
+   "title": "Calculate the t statistic",
+   "start": 27.4,
+   "end": 37.8
+  },
+  {
+   "step": 4,
+   "title": "Find the degrees of freedom",
+   "start": 37.8,
+   "end": 46
+  },
+  {
+   "step": 5,
+   "title": "Find the 0.05 critical value",
+   "start": 46,
+   "end": 58.933
+  },
+  {
+   "step": 6,
+   "title": "Make the decision",
+   "start": 58.933,
+   "end": 69.6
+  },
+  {
+   "step": 7,
+   "title": "Find the P range",
+   "start": 69.6,
+   "end": 86.067
+  },
+  {
+   "step": 8,
+   "title": "Construct the 95% interval for the slope",
+   "start": 86.067,
+   "end": 100.067
+  },
+  {
+   "step": 9,
+   "title": "Construct the 95% interval for the intercept",
+   "start": 100.067,
+   "end": 112.333
+  },
+  {
+   "step": 10,
+   "title": "Conclusion",
+   "start": 112.333,
+   "end": 128.333
+  }
+ ],
+ "case": "s18-martians-trend",
+ "kind": "board"
+}

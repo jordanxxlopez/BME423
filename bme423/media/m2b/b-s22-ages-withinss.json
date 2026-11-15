@@ -1,0 +1,71 @@
+{
+ "id": "b-s22-ages-withinss",
+ "file": "media/m2b/b-s22-ages-withinss.mp4",
+ "poster": "media/m2b/b-s22-ages-withinss.png",
+ "session": 22,
+ "method": "s22withinss",
+ "title": "Within-cluster sums of squares for the ages",
+ "duration": 91.4,
+ "cases": {
+  "s22-ages-withinss": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 16
+  },
+  {
+   "step": 2,
+   "title": "Cluster 1 sum of squares",
+   "start": 16,
+   "end": 26.4
+  },
+  {
+   "step": 3,
+   "title": "Cluster 2 sum of squares",
+   "start": 26.4,
+   "end": 36.733
+  },
+  {
+   "step": 4,
+   "title": "Total within-cluster sum of squares",
+   "start": 36.733,
+   "end": 44.4
+  },
+  {
+   "step": 5,
+   "title": "Between-cluster sum of squares",
+   "start": 44.4,
+   "end": 56.2
+  },
+  {
+   "step": 6,
+   "title": "Compare k = 1 to 4",
+   "start": 56.2,
+   "end": 67
+  },
+  {
+   "step": 7,
+   "title": "Choose k",
+   "start": 67,
+   "end": 76.867
+  },
+  {
+   "step": 8,
+   "title": "Conclusion",
+   "start": 76.867,
+   "end": 91.4
+  }
+ ],
+ "case": "s22-ages-withinss",
+ "kind": "board"
+}

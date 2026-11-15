@@ -44,7 +44,7 @@ export const meta = {
     {title: 'Residual', seconds: 6, caption: 'What is left over is the **residual**, random wobble that the treatments do not explain.',
       card: [{label: 'residual', tex: 'SS_{res}=SS_{wit\\,subjs}-SS_{treat}', value: `${ssWit.toFixed(3)} − ${ssTreat.toFixed(3)} = ${ssRes.toFixed(3)}`, color: C.pink, note: 'DF = (n − 1)(m − 1) = 6'}]},
     {title: 'F ratio', seconds: 8, caption: 'F compares treatment with residual. The **between-subjects** part never enters F, so differences between people drop out.',
-      card: [{label: 'F statistic', tex: 'F=\\frac{SS_{treat}/(m-1)}{SS_{res}/[(n-1)(m-1)]}', value: `${msT.toFixed(3)} / ${msR.toFixed(3)} = ${F.toFixed(4)}`, color: C.signal}]},
+      card: [{label: 'F statistic', tex: 'F=\\frac{SS_{treat}/DF_{treat}}{SS_{res}/DF_{res}}=\\frac{MS_{treat}}{MS_{res}}', value: `${msT.toFixed(3)} / ${msR.toFixed(3)} = ${F.toFixed(4)}`, color: C.signal}]},
     {title: 'Class F table', seconds: 8, caption: 'Use the **class F table**, numerator 2 across the top, denominator 6 down the side. Lightface 0.05 gives **5.14**.',
       card: [{label: 'class F table', value: '(2, 6) lightface 0.05 → 5.14', color: C.signal, note: 'boldface 0.01 → 10.92'}]},
     {title: 'Decision', seconds: 7, caption: 'F passes 5.14 and also the boldface **10.92**, so heart rate differs among the kinds of breathing, P < 0.01.',

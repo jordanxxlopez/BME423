@@ -1,0 +1,85 @@
+{
+ "id": "b-s21-orig-hr-holm",
+ "file": "media/m2b/b-s21-orig-hr-holm.mp4",
+ "poster": "media/m2b/b-s21-orig-hr-holm.png",
+ "session": 21,
+ "method": "s21holm",
+ "title": "Original practice: Holm-corrected comparisons of heart rate times",
+ "duration": 168.733,
+ "cases": {
+  "s21-orig-hr-holm": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 16
+  },
+  {
+   "step": 2,
+   "title": "State the procedure",
+   "start": 16,
+   "end": 29.733
+  },
+  {
+   "step": 3,
+   "title": "State the hypotheses for each pair",
+   "start": 29.733,
+   "end": 44.2
+  },
+  {
+   "step": 4,
+   "title": "Calculate the standard error of a difference",
+   "start": 44.2,
+   "end": 55.733
+  },
+  {
+   "step": 5,
+   "title": "Calculate every pairwise t statistic",
+   "start": 55.733,
+   "end": 69.4
+  },
+  {
+   "step": 6,
+   "title": "Order by |t| and set the Holm levels",
+   "start": 69.4,
+   "end": 83
+  },
+  {
+   "step": 7,
+   "title": "Comparison 1: Before dose vs 1 hour after",
+   "start": 83,
+   "end": 106.933
+  },
+  {
+   "step": 8,
+   "title": "Comparison 2: Before dose vs 3 hours after",
+   "start": 106.933,
+   "end": 130.867
+  },
+  {
+   "step": 9,
+   "title": "Comparison 3: 1 hour after vs 3 hours after",
+   "start": 130.867,
+   "end": 152.733
+  },
+  {
+   "step": 10,
+   "title": "Conclusion",
+   "start": 152.733,
+   "end": 168.733
+  }
+ ],
+ "case": "s21-orig-hr-holm",
+ "kind": "board"
+}

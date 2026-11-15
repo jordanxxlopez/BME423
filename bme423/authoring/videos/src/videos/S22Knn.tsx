@@ -46,15 +46,15 @@ export const meta = {
       caption: 'Rank the distances from smallest. C is 1, D is 2, A is 3 and B is **4**.'},
     {title: 'K = 3 nearest', seconds: 7, card: [{label: 'K = 3 nearest neighbors', value: M.order.slice(0, K).map(k => `${mesh[k].name} ${mesh[k].cls}`).join(' · '), note: 'B is 4th, so its class is not used'}],
       caption: 'Keep the **K = 3** nearest vendors, C, D and A. B falls outside the circle, so its class is not used.'},
-    {title: 'Vote', seconds: 8, card: [{label: 'plurality vote', tex: `P(\\text{Fail})=\\tfrac{2}{3}=${pFail.toFixed(3)}`, value: 'new mesh → Fail', color: FAIL}],
+    {title: 'Vote', seconds: 8, card: [{label: 'plurality vote', tex: `\\text{Prob}(\\text{Fail})=\\tfrac{2}{3}=${pFail.toFixed(3)}`, value: 'new mesh → Fail', color: FAIL}],
       caption: 'Two of the three neighbors failed, so the new mesh is classified **Fail**, with probability 2/3 of failing.'},
-    {title: 'Tomato, K = 3', seconds: 9, card: [{label: 'tomato (6, 4) · K = 3', note: T.order.map(k => `${food[k].name} ${f3(T.ds[k])}`).join(' · ').replace(' · green', '\ngreen') + ' (4th)', value: `P(fruit) = 2/3 → fruit`, color: C.pink}],
+    {title: 'Tomato, K = 3', seconds: 9, card: [{label: 'tomato (6, 4) · K = 3', note: T.order.map(k => `${food[k].name} ${f3(T.ds[k])}`).join(' · ').replace(' · green', '\ngreen') + ' (4th)', value: `Prob(T = fruit) = 2/3 → fruit`, color: C.pink}],
       caption: 'The tomato works the same way. Orange, grape and nuts are nearest, so it is a **fruit** with probability 2/3.'},
     {title: 'Choosing K', seconds: 8, card: [{label: 'choosing K (a priori)', note: 'K = 1 follows one point, so noise matters\nK = n gives the most common class\nguideline K = √n'}],
       caption: 'K is chosen in advance. **K = 1** follows a single point, so noise matters, and K = n gives the most common class.'},
-    {title: 'Min-max scaling', seconds: 8, card: [{label: 'min-max scaling', tex: 'w_{\\text{scaled}}=\\frac{w-\\min(w)}{\\max(w)-\\min(w)}', value: `(${w.join(', ')}) → (${mm.map(f3).join(', ')})`, color: C.noise}],
+    {title: 'Min-max scaling', seconds: 8, card: [{label: 'min-max scaling', tex: 'w_{scaled}=\\frac{w-\\min(w)}{\\max(w)-\\min(w)}', value: `(${w.join(', ')}) → (${mm.map(f3).join(', ')})`, color: C.noise}],
       caption: 'Scaling keeps one feature from dominating. **Min-max** maps a feature onto 0 to 1, here the flexibility values.'},
-    {title: 'z-score scaling', seconds: 8, card: [{label: 'z-score scaling', tex: 'w_{\\text{scaled}}=\\frac{w-\\bar w}{s_w}', value: `→ (${zs.map(fz).join(', ')})`, color: C.purple, note: `mean ${wbar} · SD ${f3(sw)}`}],
+    {title: 'z-score scaling', seconds: 8, card: [{label: 'z-score scaling', tex: 'w_{scaled}=\\frac{w-\\bar w}{s_w}', value: `→ (${zs.map(fz).join(', ')})`, color: C.purple, note: `mean ${wbar} · SD ${f3(sw)}`}],
       caption: `The **z-score** subtracts the mean and divides by the SD. Flexibility has mean ${wbar} and SD ${f3(sw)}, so 7 becomes ${f3(zs[0])}.`},
   ] as Step[],
 };
@@ -137,7 +137,7 @@ const S22Knn: React.FC = () => (
           </g>); })()}
           {i >= 1 && <RankPanel items={mesh} R={M} title="distance to (7, 3)" sortP={i === 1 ? 0 : i === 2 ? prog(tl, f, 2, 1.6) : 1} keep={keepK} keepP={keepP} opacity={i === 1 ? prog(tl, f, 1, 1.6) : 1} />}
           {(i === 4 || i === 6) && <Vote counts={i === 6 ? [{name: 'Fail', n: 1, color: FAIL}] : [{name: 'Fail', n: 2, color: FAIL}, {name: 'Pass', n: 1, color: PASS}]}
-            result={i === 6 ? 'K = 1 → C → Fail' : `P(Fail) = 2/3 → Fail`} opacity={1} grow={i === 6 ? prog(tl, f, 6, 2.4) : vote} />}
+            result={i === 6 ? 'K = 1 → C → Fail' : `Prob(Fail) = 2/3 → Fail`} opacity={1} grow={i === 6 ? prog(tl, f, 6, 2.4) : vote} />}
         </g>);
       }
       /* tomato, step 6 */
@@ -159,9 +159,9 @@ const S22Knn: React.FC = () => (
               <Label x={fd.side === 'r' ? fx + 15 : fx - 15} y={fy + 5} text={fd.name} color={fd.color} anchor={fd.side === 'r' ? 'start' : 'end'} weight={700} size={14} />
             </g>); })}
           <Glow cx={tx} cy={ty} r={9} color={vote > 0.9 ? C.pink : C.white} />
-          <Label x={tx - 14} y={ty + 26} text={vote > 0.9 ? 'tomato → fruit' : 'tomato ?'} color={vote > 0.9 ? C.pink : C.white} anchor="end" weight={700} size={14} />
+          <Label x={tx - 14} y={ty + 48} text={vote > 0.9 ? 'tomato → fruit' : 'tomato ?'} color={vote > 0.9 ? C.pink : C.white} anchor="end" weight={700} size={14} />
           <RankPanel items={food} R={T} title="distance to (6, 4)" sortP={1} keep={K} keepP={kp} opacity={lp} />
-          <Vote counts={[{name: 'fruit', n: 2, color: C.pink}, {name: 'protein', n: 1, color: C.blue}]} result="P(fruit) = 2/3 → fruit" opacity={1} grow={Math.min(1, vote)} />
+          <Vote counts={[{name: 'fruit', n: 2, color: C.pink}, {name: 'protein', n: 1, color: C.blue}]} result="Prob(T=fruit) = 2/3 → fruit" opacity={1} grow={Math.min(1, vote)} />
         </g>);
       }
       /* scaling, steps 8–9 */

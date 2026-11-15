@@ -1,0 +1,53 @@
+{
+ "s21-sbp-rmanova": {
+  "9": "Use the class F table with numerator column ν_n = 2 and denominator row ν_d = 8. The lightface entry 4.46 is the 0.05 cutoff and the boldface entry 8.65 is the 0.01 cutoff. Swapping the two df selects a different, wrong cell.",
+  "end": "The times do not differ because F = 0.01934 is far below the cutoff 4.46. Almost all of the within-subject variation is residual scatter, 248.1 of 249.3, so the treatment means of 125, 125 and 125.6 mmHg barely move."
+ },
+ "s21-fev1-rmanova": {
+  "9": "Use the class F table with numerator column ν_n = 2 and denominator row ν_d = 6. The lightface entry 5.14 is the 0.05 cutoff and the boldface entry 10.92 is the 0.01 cutoff. Swapping the two df selects a different, wrong cell.",
+  "end": "P is below 0.01 because F = 64.059 is above even the 0.01 cutoff 10.92. The treatments explain 0.605 of the 0.6333 within-subject sum of squares, so the conditions differ, and Holm-corrected t tests come next to find which pairs differ."
+ },
+ "s21-orig-hr-rmanova": {
+  "9": "Use the class F table with numerator column ν_n = 2 and denominator row ν_d = 10. The lightface entry 4.10 is the 0.05 cutoff and the boldface entry 7.56 is the 0.01 cutoff. Swapping the two df selects a different, wrong cell.",
+  "intro": "This is an original practice example. Resting heart rate is measured in the same 6 volunteers before a beta-blocker dose, 1 hour after it, and 3 hours after it. Assume Normal responses and the usual repeated-measures ANOVA conditions.",
+  "end": "P is below 0.01 because F = 36.214 is above the 0.01 cutoff 7.56. The treatment part, 165.78 of the 188.67 within-subject sum of squares, is most of the change inside each volunteer, so heart rate shifts after the dose."
+ },
+ "s21-fev1-holm": {
+  "3": "Keep the subtraction order. The sign only gives the direction, and the ranking uses |t|.",
+  "5": "The 0.0167 column is not printed, so row 6 of the class t table uses the stricter 0.01 column, 3.707, not the 0.02 column, 3.143. Because |t| = 11.346 > 3.707, the Endotoxin and Salbutamol & Endotoxin means differ (P < 0.001 before adjustment).",
+  "6": "The 0.025 column is not printed, so in row 6 of the class t table use the stricter 0.02 column, 3.143, instead of the 0.05 column, 2.447. Because |t| = 5.776 > 3.143, the Baseline and Endotoxin means differ (0.001 < P < 0.002 before adjustment).",
+  "7": "Use row 6 of the class t table, two-tailed 0.05 column, which gives 2.447. Because |t| = 5.570 > 2.447, the Baseline and Salbutamol & Endotoxin means differ (0.001 < P < 0.002 before adjustment).",
+  "intro": "The repeated-measures ANOVA for FEV1 in 4 people rejects equal means with P < 0.01. F is printed as 64.053, while the unrounded sums give 64.059. Use the rounded means 3.48 L (baseline), 3.20 L (after endotoxin) and 3.75 L (after endotoxin and salbutamol), MS_res = 0.0047 and DF_res = 6.",
+  "end": "Every |t| clears its Holm cutoff, so the testing never stops early and all three pairs differ. FEV1 drops 1 hour after endotoxin and rises above baseline once salbutamol is added."
+ },
+ "s21-orig-hr-holm": {
+  "3": "Keep the subtraction order. The sign only gives the direction, and the ranking uses |t|.",
+  "5": "The 0.0167 column is not printed, so in row 10 of the class t table use the stricter 0.01 column, 3.169, instead of the 0.02 column, 2.764. Because |t| = 8.014 > 3.169, the Before dose and 1 hour after means differ (P < 0.001 before adjustment).",
+  "6": "The 0.025 column is not printed, so in row 10 of the class t table use the stricter 0.02 column, 2.764, instead of the 0.05 column, 2.228. Because |t| = 6.487 > 2.764, the Before dose and 3 hours after means differ (P < 0.001 before adjustment).",
+  "7": "Use row 10 of the class t table, two-tailed 0.05 column, which gives 2.228. Because |t| = 1.526 < 2.228, the 1 hour after and 3 hours after means are not shown to differ (P > 0.05), and Holm testing stops here.",
+  "intro": "This is an original practice example that continues the heart-rate repeated-measures ANOVA. The treatment means are 80, 73 and 74.3333 beats/min (before, 1 hour after, 3 hours after), MS_res = 2.288889 with DF_res = 10, and n = 6 volunteers.",
+  "end": "Heart rate is lower at 1 hour and stays lower at 3 hours, because both after-dose means differ from the before-dose mean but not from each other. The 1.33 beats/min rise from 1 to 3 hours is too small to show a difference."
+ },
+ "s21-p7-mcnemar": {
+  "1": "The null hypothesis says chemotherapy has no effect, so a woman whose status changes is as likely to go from positive to negative as from negative to positive. The alternative says the two directions are not equally likely, so p7 expression differs before and after treatment.",
+  "6": "Use the class chi-square table 2, row df = 1, column χ².050, which gives 3.841. The same row gives 6.635 in the .010 column and 7.879 in the .005 column for a P range.",
+  "7": "Reject the null hypothesis with P < 0.005, because 10.0833 is above 3.841 and also above 7.879 in the .005 column.",
+  "intro": "Breast cancer tumor cells from 30 women are tested for the p7 antigen before and after chemotherapy. Of the women positive before, 4 stay positive and 0 become negative. Of the women negative before, 12 become positive and 14 stay negative.",
+  "end": "All 12 women who changed went from negative to positive and none went the other way, so p7 expression rises after chemotherapy. The independent chi-square of 2.165 misses this because it ignores that the same women are counted twice."
+ },
+ "s21-bp-machine": {
+  "1": "The null hypothesis says the BP machine and the experienced person have the same specificity, so disagreements are equally likely in either direction. The alternative says the specificity of the two methods differs.",
+  "2": "Only discordant subjects carry information about a difference. Here b counts subjects the machine calls hypertensive and the person does not, and c counts the reverse. The concordant cells a = 3 and d = 9 do not enter the statistic.",
+  "5": "Use the class chi-square table 2, row df = 1, column χ².050, which gives 3.841. The same row gives 6.635 in the .010 column and 7.879 in the .005 column for a P range.",
+  "6": "Do not reject the null hypothesis, because 3.125 is below 3.841. So 0.05 < P < 0.10.",
+  "intro": "Twenty subjects, none hypertensive by the gold standard, are judged by an automated BP machine and by an experienced person. Of the 10 machine positives, the person calls 3 positive and 7 negative. Of the 10 machine negatives, the person calls 1 positive and 9 negative.",
+  "end": "Every positive call is false, so the machine gives 10 false positives and the person 4. Only the 8 disagreements enter the test, 7 against 1, and that split is not enough evidence of a difference in specificity at the 0.05 level."
+ },
+ "s21-orig-strep-mcnemar": {
+  "1": "The null hypothesis says the two rapid tests have the same probability of a positive result, so swabs on which they disagree are equally likely to be positive on A only as on B only. The alternative says the two tests differ in how often they give a positive result.",
+  "5": "Use the class chi-square table 2, row df = 1, column χ².050, which gives 3.841. The same row gives 6.635 in the .010 column and 7.879 in the .005 column for a P range.",
+  "6": "Reject the null hypothesis, because 7.5625 is above 3.841. It is above 6.635 but below 7.879, so 0.005 < P < 0.01.",
+  "intro": "This is an original practice example. Two rapid strep tests, A and B, are run on the same 40 throat swabs. Of the 12 swabs positive on A, 10 are positive on B and 2 negative. Of the 28 swabs negative on A, 14 are positive on B and 14 negative.",
+  "end": "Test B is positive on 24 swabs and test A on only 12, because 14 swabs are positive on B alone against 2 on A alone. So on the same swabs test B calls strep positive more often."
+ }
+}

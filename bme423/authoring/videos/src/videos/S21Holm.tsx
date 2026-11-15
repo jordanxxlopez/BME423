@@ -24,11 +24,11 @@ export const meta = {
   title: 'Holm-corrected t tests · which treatments differ',
   steps: [
     {title: 'After a significant F', seconds: 7, caption: 'The F test said **some FEV1 means differ** but not which ones. Pairwise t tests find the pairs that differ.',
-      card: [{label: 'from the ANOVA', value: 'F = 64.053, P < 0.01', color: C.green, note: 'MS_res = 0.0047 · n = 4 · DF_res = 6\nmeans 3.48, 3.20, 3.75 L'}]},
+      card: [{label: 'printed ANOVA result', value: 'F = 64.053, P < 0.01', color: C.green, note: 'MS_res = 0.0047 · n = 4 · DF_res = 6\nmeans 3.48, 3.20, 3.75 L'}]},
     {title: 'One H0 per pair', seconds: 6, caption: 'Each pair gets its own null hypothesis, that the two treatments have the **same population mean**.',
       card: [{label: 'pairwise null hypothesis', tex: 'H_0:\\mu_i=\\mu_j', note: 'k = 3 pairs from m = 3 treatments'}]},
     {title: 'Standard error', seconds: 6, caption: 'Every comparison uses the same **standard error**, built from the residual mean square of the ANOVA.',
-      card: [{label: 'standard error of a difference', tex: 'SE=\\sqrt{2MS_{res}/n}', value: `√(2(0.0047)/4) = ${se.toFixed(6)}`, color: C.noise}]},
+      card: [{label: 'standard error of a difference', tex: '\\sqrt{2MS_{res}/n}', value: `√(2(0.0047)/4) = ${se.toFixed(6)}`, color: C.noise}]},
     {title: 'Three t values', seconds: 8, caption: 'Each t is a difference of two means divided by that standard error. Endotoxin vs salbutamol is the **largest**.',
       card: [{label: 'pairwise t', tex: 't=\\frac{\\bar T_i-\\bar T_j}{\\sqrt{2MS_{res}/n}}', value: `${tES.toFixed(3)}, ${tBE.toFixed(3)}, ${tBS.toFixed(3)}`, color: C.signal, note: 'from the rounded means and MS_res\nunrounded data give −11.319, 5.659, −5.659'}]},
     {title: 'Order and Holm levels', seconds: 8, caption: 'Sort by |t|, largest first. The first test uses the **strictest level** 0.05/3, and the last uses the full 0.05.',

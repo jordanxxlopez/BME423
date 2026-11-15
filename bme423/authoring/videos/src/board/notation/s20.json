@@ -1,0 +1,13 @@
+{
+ "s20paired": {"replace": [["t_c=t_{0.05}(\\nu)", "t_\\alpha(\\nu)=t_{0.05}(\\nu)"]]},
+ "s20pairedR": {"replace": [["t_c=t_{0.05}(\\nu)", "t_\\alpha(\\nu)=t_{0.05}(\\nu)"]]},
+ "s20unpaired": {"replace": [["t_c=t_{0.05}(\\nu)", "t_\\alpha(\\nu)=t_{0.05}(\\nu)"]]},
+ "s20-platelet-paired": {"steps": {"1": {"general": ["d_i=x1_i-x2_i,\\quad i=1,\\dots,n", "x1_i=\\text{after},\\quad x2_i=\\text{before}"]}}},
+ "s20-oc-paired": {"steps": {"1": {"general": ["d_i=x1_i-x2_i,\\quad i=1,\\dots,n", "x1_i=\\text{with OC},\\quad x2_i=\\text{without OC}"]}}},
+ "s20-hr-posture-r": {"steps": {"1": {"general": ["d_i=x1_i-x2_i,\\quad i=1,\\dots,n", "x1_i=\\text{standing},\\quad x2_i=\\text{seated}"]}}},
+ "s20-grip-paired": {"steps": {"1": {"general": ["d_i=x1_i-x2_i,\\quad i=1,\\dots,n", "x1_i=\\text{evening},\\quad x2_i=\\text{morning}"]}}},
+ "s20rmanova": {
+  "hypotheses": {"null": "H_0:\\mu_1=\\mu_2=\\dots=\\mu_m", "alternative": "H_A:\\text{at least one treatment mean differs}"},
+  "steps": {"0": {"general": ["H_0:\\mu_1=\\mu_2=\\dots=\\mu_m", "H_A:\\text{at least one treatment mean differs}"]}}
+ }
+}

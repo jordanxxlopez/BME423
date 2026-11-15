@@ -1,0 +1,71 @@
+{
+ "id": "b-s18-martians-spread",
+ "file": "media/m2b/b-s18-martians-spread.mp4",
+ "poster": "media/m2b/b-s18-martians-spread.png",
+ "session": 18,
+ "method": "s18syx",
+ "title": "Martian scatter about the line and coefficient standard errors",
+ "duration": 122.067,
+ "cases": {
+  "s18-martians-spread": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 15.133
+  },
+  {
+   "step": 2,
+   "title": "Square the pieces inside the shortcut",
+   "start": 15.133,
+   "end": 29.2
+  },
+  {
+   "step": 3,
+   "title": "Calculate the standard error of the estimate",
+   "start": 29.2,
+   "end": 45.533
+  },
+  {
+   "step": 4,
+   "title": "Calculate the standard error of the slope",
+   "start": 45.533,
+   "end": 57.533
+  },
+  {
+   "step": 5,
+   "title": "Evaluate the bracket for the intercept",
+   "start": 57.533,
+   "end": 69
+  },
+  {
+   "step": 6,
+   "title": "Calculate the standard error of the intercept",
+   "start": 69,
+   "end": 85.667
+  },
+  {
+   "step": 7,
+   "title": "Compare with the unrounded raw data",
+   "start": 85.667,
+   "end": 106.067
+  },
+  {
+   "step": 8,
+   "title": "Conclusion",
+   "start": 106.067,
+   "end": 122.067
+  }
+ ],
+ "case": "s18-martians-spread",
+ "kind": "board"
+}

@@ -1,0 +1,64 @@
+{
+ "id": "b-s22-medicine-distance",
+ "file": "media/m2b/b-s22-medicine-distance.mp4",
+ "poster": "media/m2b/b-s22-medicine-distance.png",
+ "session": 22,
+ "method": "s22distance",
+ "title": "Three distances between medicines 1 and 4",
+ "duration": 77.4,
+ "cases": {
+  "s22-medicine-distance": [
+   2,
+   3,
+   4,
+   5,
+   6
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 15
+  },
+  {
+   "step": 2,
+   "title": "Coordinate differences",
+   "start": 15,
+   "end": 27.067
+  },
+  {
+   "step": 3,
+   "title": "Euclidean distance",
+   "start": 27.067,
+   "end": 34.733
+  },
+  {
+   "step": 4,
+   "title": "Manhattan distance",
+   "start": 34.733,
+   "end": 41.933
+  },
+  {
+   "step": 5,
+   "title": "Minkowski distance, p = 3",
+   "start": 41.933,
+   "end": 49.4
+  },
+  {
+   "step": 6,
+   "title": "Compare",
+   "start": 49.4,
+   "end": 61.8
+  },
+  {
+   "step": 7,
+   "title": "Conclusion",
+   "start": 61.8,
+   "end": 77.4
+  }
+ ],
+ "case": "s22-medicine-distance",
+ "kind": "board"
+}

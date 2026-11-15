@@ -1,0 +1,64 @@
+{
+  "s18line": {
+    "replace": [
+      ["D=n\\sum x_i^2-\\Big(\\sum x_i\\Big)^2", "n\\sum x_i^2-\\Big(\\sum x_i\\Big)^2"],
+      ["D=10(13841)-369^2", "10(13841)-369^2"],
+      ["}{D}", "}{n\\sum x_i^2-\\Big(\\sum x_i\\Big)^2}"]
+    ]
+  },
+  "s18slope": {
+    "replace": [
+      ["H_A:", "H_1:"],
+      ["t_c=t_{0.05}(\\nu)", "t_{crit}=t_\\alpha(\\nu)"],
+      ["|t|>t_{0.05}(\\nu)", "|t|>t_\\alpha(\\nu)"],
+      ["t_{0.05}(\\nu)s_", "t_\\alpha(\\nu)\\cdot s_"],
+      ["M=2.306(0.064)", "t_{0.05}(8)\\cdot s_b=2.306(0.064)"],
+      ["M=2.306(2.6)", "t_{0.05}(8)\\cdot s_a=2.306(2.6)"]
+    ]
+  },
+  "s18predict": {
+    "replace": [
+      ["t_c=t_{0.05}(\\nu)", "t_{crit}=t_\\alpha(\\nu)"],
+      ["\\hat y\\pm t_{0.05}(\\nu)s_{\\hat y}", "\\hat y-t_\\alpha(\\nu)\\cdot s_{\\hat y}<\\mu_{y|x}<\\hat y+t_\\alpha(\\nu)\\cdot s_{\\hat y}"],
+      ["\\hat y\\pm t_{0.05}(\\nu)s_{Y_{new}}", "\\hat y-t_\\alpha(\\nu)\\cdot s_{Y_{new}}<y<\\hat y+t_\\alpha(\\nu)\\cdot s_{Y_{new}}"],
+      ["b_1\\pm t_{0.05}(\\nu)s_{b_1}", "b_1-t_\\alpha(\\nu)\\cdot s_{b_1}<\\beta<b_1+t_\\alpha(\\nu)\\cdot s_{b_1}"],
+      ["b_0\\pm t_{0.05}(\\nu)s_{b_0}", "b_0-t_\\alpha(\\nu)\\cdot s_{b_0}<\\alpha_{LOM}<b_0+t_\\alpha(\\nu)\\cdot s_{b_0}"],
+      ["M=2.306(0.3853267)", "t_{0.05}(8)\\cdot s_{\\hat y}=2.306(0.3853267)"],
+      ["M=2.306(1.090356)", "t_{0.05}(8)\\cdot s_{Y_{new}}=2.306(1.090356)"],
+      ["M=2.120(0.2041)", "t_{0.05}(16)\\cdot s_{b_1}=2.120(0.2041)"],
+      ["M=2.120(13.7901)", "t_{0.05}(16)\\cdot s_{b_0}=2.120(13.7901)"],
+      ["M=2.120(0.6470833)", "t_{0.05}(16)\\cdot s_{\\hat y}=2.120(0.6470833)"],
+      ["M=2.120(2.787156)", "t_{0.05}(16)\\cdot s_{Y_{new}}=2.120(2.787156)"],
+      ["M=2.018(0.7563603)", "t_{0.05}(42)\\cdot s_{\\hat y}=2.018(0.7563603)"],
+      ["M=2.018(4.28534)", "t_{0.05}(42)\\cdot s_{Y_{new}}=2.018(4.28534)"]
+    ]
+  },
+  "s18compare": {
+    "steps": {
+      "5": {"general": ["|t|>t_\\alpha(\\nu)\\Rightarrow\\text{reject }H_0"]}
+    }
+  },
+  "s18corr": {
+    "replace": [
+      ["t_c=t_{0.05}(\\nu)", "t_{crit}=t_\\alpha(\\nu)"]
+    ]
+  },
+  "s18-martians-trend": {
+    "hypotheses": {"null": "H_0:\\beta=0", "alternative": "H_1:\\beta\\ne0"}
+  },
+  "s18-plutonian-slopes": {
+    "hypotheses": {"null": "H_0:\\beta_M=\\beta_F", "alternative": "H_1:\\beta_M\\ne\\beta_F"}
+  },
+  "s18-martians-r": {
+    "hypotheses": {"null": "H_0:r=0", "alternative": "H_1:r\\ne0"}
+  },
+  "s18-original-caffeine": {
+    "hypotheses": {"null": "H_0:\\beta=0", "alternative": "H_1:\\beta\\ne0"},
+    "replace": [
+      ["S_{xx}S_{yy}", "\\sum(x-\\bar x)^2\\sum(y-\\bar y)^2"],
+      ["S_{xx}", "\\sum(x-\\bar x)^2"],
+      ["S_{xy}", "\\sum(x-\\bar x)(y-\\bar y)"],
+      ["S_{yy}", "\\sum(y-\\bar y)^2"]
+    ]
+  }
+}

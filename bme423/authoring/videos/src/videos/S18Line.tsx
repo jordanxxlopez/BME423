@@ -36,16 +36,16 @@ export const meta = {
       card: [{label: 'sum of squared residuals', tex: 'SS=\\sum(y_i-\\hat y_i)^2', value: `flat line SS = ${Syy.toFixed(2)} g²`, color: C.noise}]},
     {title: 'Least squares', seconds: 7, caption: 'The **least-squares line** is the one line with the smallest sum of squares. Any other slope gives a bigger SS.',
       card: [{label: 'best line', value: `smallest SS = ${SSmin.toFixed(2)} g²`, color: C.signal, note: 'at the bottom of the SS curve'}]},
-    {title: 'Five sums', seconds: 8, caption: 'The formulas need only **five numbers** from the table. Both a and b divide by the same denominator D.',
+    {title: 'Five sums', seconds: 8, caption: 'The formulas need only **five numbers** from the table. Both a and b divide by the same denominator.',
       card: [{label: 'sums', note: `n = 10 · Σx = 369 · Σy = 103.8\nΣx² = 13841 · Σxy = 3930.1`},
-        {label: 'shared denominator', tex: 'D=n\\sum x_i^2-\\Big(\\sum x_i\\Big)^2', value: `10(13841) − 369² = ${D}`}]},
+        {label: 'shared denominator', tex: 'n\\sum x_i^2-\\Big(\\sum x_i\\Big)^2', value: `10(13841) − 369² = ${D}`}]},
     {title: 'Slope b', seconds: 8, caption: 'The slope is the rise in mean weight for each extra centimeter of height, about **0.44 g per cm**.',
-      card: [{label: 'slope', tex: 'b=\\frac{n\\sum x_iy_i-\\sum x_i\\sum y_i}{D}', value: `998.8 / 2249 = ${b.toFixed(4)} g/cm`, color: C.signal}]},
+      card: [{label: 'slope', tex: 'b=\\frac{n\\sum x_iy_i-\\sum x_i\\sum y_i}{n\\sum x_i^2-\\Big(\\sum x_i\\Big)^2}', value: `998.8 / 2249 = ${b.toFixed(4)} g/cm`, color: C.signal}]},
     {title: 'Intercept a', seconds: 8, caption: 'The line passes through the **point of means** (36.9, 10.38), so a = 10.38 − b(36.9) with b kept unrounded.',
       card: [{label: 'intercept', tex: 'a=\\bar y-b\\bar x', value: `10.38 − ${b.toFixed(4)}(36.9) = ${a.toFixed(2)} g`, color: C.signal,
-        note: 'same as (Σy·Σx² − Σx·Σxy) / D = −13511.1 / 2249'}]},
+        note: 'same as (Σy·Σx² − Σx·Σxy) / 2249 = −13511.1 / 2249'}]},
     {title: 'The fitted line', seconds: 8, caption: 'The sample line **ŷ = −6.0 + 0.44x** estimates the line of means −8 + 0.5x. Another sample would give another line.',
-      card: [{label: 'regression line', value: 'ŷ = −6.0 + 0.44x', color: C.signal, note: 'line of means  μ = −8 + 0.5x'}]},
+      card: [{label: 'regression line', value: 'ŷ = −6.0 + 0.44x', color: C.signal, note: 'line of means  μ_y|x = −8 + 0.5x'}]},
   ] as Step[],
 };
 
@@ -84,7 +84,7 @@ const S18Line: React.FC = () => (
         {/* true line of means (last step) */}
         {after(tl, f, 7) && <g opacity={prog(tl, f, 7)}>
           <line x1={x(30)} x2={x(48)} y1={y(-8 + 0.5 * 30)} y2={y(-8 + 0.5 * 48)} stroke={C.ink} strokeWidth={2} strokeDasharray="7 6" />
-          <Label x={600} y={40} text="μ = −8 + 0.5x" color={C.ink} size={14} anchor="end" />
+          <Label x={600} y={40} text="μ_y|x = −8 + 0.5x" color={C.ink} size={14} anchor="end" />
           <Label x={560} y={165} text="ŷ = −6.0 + 0.44x" color={C.signal} size={14} />
         </g>}
         {/* the line */}

@@ -1,0 +1,85 @@
+{
+ "id": "b-s20-oc-paired",
+ "file": "media/m2b/b-s20-oc-paired.mp4",
+ "poster": "media/m2b/b-s20-oc-paired.png",
+ "session": 20,
+ "method": "s20paired",
+ "title": "Systolic blood pressure without and with oral contraceptives",
+ "duration": 148.8,
+ "cases": {
+  "s20-oc-paired": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 14.333
+  },
+  {
+   "step": 2,
+   "title": "State the procedure and hypotheses",
+   "start": 14.333,
+   "end": 33.667
+  },
+  {
+   "step": 3,
+   "title": "Form one difference per subject",
+   "start": 33.667,
+   "end": 48.8
+  },
+  {
+   "step": 4,
+   "title": "Calculate the mean difference",
+   "start": 48.8,
+   "end": 58.8
+  },
+  {
+   "step": 5,
+   "title": "Calculate the SD of the differences",
+   "start": 58.8,
+   "end": 76.667
+  },
+  {
+   "step": 6,
+   "title": "Calculate the standard error of the mean difference",
+   "start": 76.667,
+   "end": 87.267
+  },
+  {
+   "step": 7,
+   "title": "Calculate the t statistic",
+   "start": 87.267,
+   "end": 99.067
+  },
+  {
+   "step": 8,
+   "title": "Find the degrees of freedom and the critical value",
+   "start": 99.067,
+   "end": 114.933
+  },
+  {
+   "step": 9,
+   "title": "Make the decision and bracket P",
+   "start": 114.933,
+   "end": 132.8
+  },
+  {
+   "step": 10,
+   "title": "Conclusion",
+   "start": 132.8,
+   "end": 148.8
+  }
+ ],
+ "case": "s20-oc-paired",
+ "kind": "board"
+}

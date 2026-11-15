@@ -1,0 +1,78 @@
+{
+ "id": "b-ci-heart-practice",
+ "file": "media/m2b/b-ci-heart-practice.mp4",
+ "poster": "media/m2b/b-ci-heart-practice.png",
+ "session": 17,
+ "method": "oneMean",
+ "title": "Resting heart rate in a student sample",
+ "duration": 115.867,
+ "cases": {
+  "ci-heart-practice": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 13.467
+  },
+  {
+   "step": 2,
+   "title": "Identify the population quantity",
+   "start": 13.467,
+   "end": 28.6
+  },
+  {
+   "step": 3,
+   "title": "Calculate the standard error",
+   "start": 28.6,
+   "end": 41
+  },
+  {
+   "step": 4,
+   "title": "Choose degrees of freedom and the cutoff",
+   "start": 41,
+   "end": 62.267
+  },
+  {
+   "step": 5,
+   "title": "Calculate the margin of error",
+   "start": 62.267,
+   "end": 71.333
+  },
+  {
+   "step": 6,
+   "title": "Calculate the lower endpoint",
+   "start": 71.333,
+   "end": 79.267
+  },
+  {
+   "step": 7,
+   "title": "Calculate the upper endpoint",
+   "start": 79.267,
+   "end": 87.067
+  },
+  {
+   "step": 8,
+   "title": "State the population interval",
+   "start": 87.067,
+   "end": 101.867
+  },
+  {
+   "step": 9,
+   "title": "Conclusion",
+   "start": 101.867,
+   "end": 115.867
+  }
+ ],
+ "case": "ci-heart-practice",
+ "kind": "board"
+}

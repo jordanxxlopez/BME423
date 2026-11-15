@@ -1,0 +1,85 @@
+{
+ "id": "b-s21-fev1-holm",
+ "file": "media/m2b/b-s21-fev1-holm.mp4",
+ "poster": "media/m2b/b-s21-fev1-holm.png",
+ "session": 21,
+ "method": "s21holm",
+ "title": "Holm-corrected comparisons of FEV1 conditions",
+ "duration": 167.467,
+ "cases": {
+  "s21-fev1-holm": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 16
+  },
+  {
+   "step": 2,
+   "title": "State the procedure",
+   "start": 16,
+   "end": 31.133
+  },
+  {
+   "step": 3,
+   "title": "State the hypotheses for each pair",
+   "start": 31.133,
+   "end": 44.667
+  },
+  {
+   "step": 4,
+   "title": "Calculate the standard error of a difference",
+   "start": 44.667,
+   "end": 56.2
+  },
+  {
+   "step": 5,
+   "title": "Calculate every pairwise t statistic",
+   "start": 56.2,
+   "end": 69.867
+  },
+  {
+   "step": 6,
+   "title": "Order by |t| and set the Holm levels",
+   "start": 69.867,
+   "end": 83.467
+  },
+  {
+   "step": 7,
+   "title": "Comparison 1: Endotoxin vs Salbutamol & Endotoxin",
+   "start": 83.467,
+   "end": 107.333
+  },
+  {
+   "step": 8,
+   "title": "Comparison 2: Baseline vs Endotoxin",
+   "start": 107.333,
+   "end": 131.267
+  },
+  {
+   "step": 9,
+   "title": "Comparison 3: Baseline vs Salbutamol & Endotoxin",
+   "start": 131.267,
+   "end": 152.267
+  },
+  {
+   "step": 10,
+   "title": "Conclusion",
+   "start": 152.267,
+   "end": 167.467
+  }
+ ],
+ "case": "s21-fev1-holm",
+ "kind": "board"
+}

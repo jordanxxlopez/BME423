@@ -1,0 +1,99 @@
+{
+ "id": "b-s20-oc-rmanova",
+ "file": "media/m2b/b-s20-oc-rmanova.mp4",
+ "poster": "media/m2b/b-s20-oc-rmanova.png",
+ "session": 20,
+ "method": "s20rmanova",
+ "title": "Oral contraceptive data as a two-treatment repeated measures ANOVA",
+ "duration": 183.333,
+ "cases": {
+  "s20-oc-rmanova": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 15.933
+  },
+  {
+   "step": 2,
+   "title": "State the procedure and hypotheses",
+   "start": 15.933,
+   "end": 35.667
+  },
+  {
+   "step": 3,
+   "title": "Calculate the subject means",
+   "start": 35.667,
+   "end": 44.2
+  },
+  {
+   "step": 4,
+   "title": "Calculate the treatment means and the grand mean",
+   "start": 44.2,
+   "end": 57.6
+  },
+  {
+   "step": 5,
+   "title": "Calculate the sum of squares within subjects",
+   "start": 57.6,
+   "end": 74.933
+  },
+  {
+   "step": 6,
+   "title": "Calculate the treatment sum of squares",
+   "start": 74.933,
+   "end": 87.2
+  },
+  {
+   "step": 7,
+   "title": "Calculate the residual sum of squares",
+   "start": 87.2,
+   "end": 101
+  },
+  {
+   "step": 8,
+   "title": "Calculate the mean squares and F",
+   "start": 101,
+   "end": 115.467
+  },
+  {
+   "step": 9,
+   "title": "Find the critical F",
+   "start": 115.467,
+   "end": 133.4
+  },
+  {
+   "step": 10,
+   "title": "Make the decision and bracket P",
+   "start": 133.4,
+   "end": 149.733
+  },
+  {
+   "step": 11,
+   "title": "Connect F to the paired t",
+   "start": 149.733,
+   "end": 167.333
+  },
+  {
+   "step": 12,
+   "title": "Conclusion",
+   "start": 167.333,
+   "end": 183.333
+  }
+ ],
+ "case": "s20-oc-rmanova",
+ "kind": "board"
+}

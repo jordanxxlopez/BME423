@@ -1,0 +1,113 @@
+{
+ "id": "b-s18-original-caffeine",
+ "file": "media/m2b/b-s18-original-caffeine.mp4",
+ "poster": "media/m2b/b-s18-original-caffeine.png",
+ "session": 18,
+ "method": "s18predict",
+ "title": "Caffeine dose and finger-tapping rate (by hand from sums)",
+ "duration": 196.467,
+ "cases": {
+  "s18-original-caffeine": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 16
+  },
+  {
+   "step": 2,
+   "title": "Calculate both means",
+   "start": 16,
+   "end": 28.333
+  },
+  {
+   "step": 3,
+   "title": "Calculate the deviation sums",
+   "start": 28.333,
+   "end": 43.533
+  },
+  {
+   "step": 4,
+   "title": "Calculate the slope",
+   "start": 43.533,
+   "end": 56.4
+  },
+  {
+   "step": 5,
+   "title": "Calculate the intercept",
+   "start": 56.4,
+   "end": 63.867
+  },
+  {
+   "step": 6,
+   "title": "Calculate the sample variances",
+   "start": 63.867,
+   "end": 74.333
+  },
+  {
+   "step": 7,
+   "title": "Estimate the variance about the line of means",
+   "start": 74.333,
+   "end": 86.533
+  },
+  {
+   "step": 8,
+   "title": "Calculate the coefficient standard errors",
+   "start": 86.533,
+   "end": 99.867
+  },
+  {
+   "step": 9,
+   "title": "Calculate t and bracket the missing table row",
+   "start": 99.867,
+   "end": 120.933
+  },
+  {
+   "step": 10,
+   "title": "Decide and give the P range",
+   "start": 120.933,
+   "end": 135.4
+  },
+  {
+   "step": 11,
+   "title": "Construct the 95% CI for the mean at 200 mg",
+   "start": 135.4,
+   "end": 151.667
+  },
+  {
+   "step": 12,
+   "title": "Construct the 95% CI for one volunteer at 200 mg",
+   "start": 151.667,
+   "end": 166.733
+  },
+  {
+   "step": 13,
+   "title": "Calculate the correlation coefficient",
+   "start": 166.733,
+   "end": 180.467
+  },
+  {
+   "step": 14,
+   "title": "Conclusion",
+   "start": 180.467,
+   "end": 196.467
+  }
+ ],
+ "case": "s18-original-caffeine",
+ "kind": "board"
+}

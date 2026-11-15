@@ -1,0 +1,78 @@
+{
+ "id": "b-s21-bp-machine",
+ "file": "media/m2b/b-s21-bp-machine.mp4",
+ "poster": "media/m2b/b-s21-bp-machine.png",
+ "session": 21,
+ "method": "s21diagnostic",
+ "title": "Hypertension status by an automated BP machine and an experienced person",
+ "duration": 134.467,
+ "cases": {
+  "s21-bp-machine": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 16
+  },
+  {
+   "step": 2,
+   "title": "State the procedure",
+   "start": 16,
+   "end": 30.8
+  },
+  {
+   "step": 3,
+   "title": "State the hypotheses",
+   "start": 30.8,
+   "end": 48.933
+  },
+  {
+   "step": 4,
+   "title": "Identify the subjects who change",
+   "start": 48.933,
+   "end": 68.067
+  },
+  {
+   "step": 5,
+   "title": "Calculate the expected number in each change cell",
+   "start": 68.067,
+   "end": 78.2
+  },
+  {
+   "step": 6,
+   "title": "Calculate the McNemar chi-square with Yates correction",
+   "start": 78.2,
+   "end": 90.2
+  },
+  {
+   "step": 7,
+   "title": "Find the critical value",
+   "start": 90.2,
+   "end": 108
+  },
+  {
+   "step": 8,
+   "title": "Make the decision",
+   "start": 108,
+   "end": 118.467
+  },
+  {
+   "step": 9,
+   "title": "Conclusion",
+   "start": 118.467,
+   "end": 134.467
+  }
+ ],
+ "case": "s21-bp-machine",
+ "kind": "board"
+}

@@ -1,0 +1,78 @@
+{
+ "id": "b-ci-respiration",
+ "file": "media/m2b/b-ci-respiration.mp4",
+ "poster": "media/m2b/b-ci-respiration.png",
+ "session": 17,
+ "method": "oneMean",
+ "title": "Respiration rate after quiet rest",
+ "duration": 116.267,
+ "cases": {
+  "ci-respiration": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 13.133
+  },
+  {
+   "step": 2,
+   "title": "Identify the population quantity",
+   "start": 13.133,
+   "end": 28.267
+  },
+  {
+   "step": 3,
+   "title": "Calculate the standard error",
+   "start": 28.267,
+   "end": 40.667
+  },
+  {
+   "step": 4,
+   "title": "Choose degrees of freedom and the cutoff",
+   "start": 40.667,
+   "end": 61.933
+  },
+  {
+   "step": 5,
+   "title": "Calculate the margin of error",
+   "start": 61.933,
+   "end": 71
+  },
+  {
+   "step": 6,
+   "title": "Calculate the lower endpoint",
+   "start": 71,
+   "end": 78.933
+  },
+  {
+   "step": 7,
+   "title": "Calculate the upper endpoint",
+   "start": 78.933,
+   "end": 86.733
+  },
+  {
+   "step": 8,
+   "title": "State the population interval",
+   "start": 86.733,
+   "end": 101.533
+  },
+  {
+   "step": 9,
+   "title": "Conclusion",
+   "start": 101.533,
+   "end": 116.267
+  }
+ ],
+ "case": "ci-respiration",
+ "kind": "board"
+}

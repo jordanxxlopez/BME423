@@ -1,0 +1,78 @@
+{
+ "id": "b-s19-hrt-relative-risk",
+ "file": "media/m2b/b-s19-hrt-relative-risk.mp4",
+ "poster": "media/m2b/b-s19-hrt-relative-risk.png",
+ "session": 19,
+ "method": "s19design",
+ "title": "Hormone replacement therapy and mortality",
+ "duration": 127.733,
+ "cases": {
+  "s19-hrt-relative-risk": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 16
+  },
+  {
+   "step": 2,
+   "title": "Find the group totals",
+   "start": 16,
+   "end": 27.733
+  },
+  {
+   "step": 3,
+   "title": "Calculate expected counts",
+   "start": 27.733,
+   "end": 40.2
+  },
+  {
+   "step": 4,
+   "title": "Calculate the Yates-corrected chi-square",
+   "start": 40.2,
+   "end": 52.733
+  },
+  {
+   "step": 5,
+   "title": "Compare with the chi-square cutoff",
+   "start": 52.733,
+   "end": 72.267
+  },
+  {
+   "step": 6,
+   "title": "Calculate both death proportions",
+   "start": 72.267,
+   "end": 83.533
+  },
+  {
+   "step": 7,
+   "title": "Calculate the relative risk",
+   "start": 83.533,
+   "end": 94.2
+  },
+  {
+   "step": 8,
+   "title": "State what the design allows",
+   "start": 94.2,
+   "end": 111.733
+  },
+  {
+   "step": 9,
+   "title": "Conclusion",
+   "start": 111.733,
+   "end": 127.733
+  }
+ ],
+ "case": "s19-hrt-relative-risk",
+ "kind": "board"
+}

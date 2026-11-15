@@ -37,7 +37,7 @@ export const meta = {
       caption: 'Four medicines have MW and pH but no labels. Choose **k = 2** and start the centroids at medicines 1 and 2.'},
     {title: 'Iteration 1 distances', seconds: 8, card: [{label: 'distance to each centroid', tex: 'd_{ij}=\\lVert x_i-c_j\\rVert_2', note: `d31 = √(3² + 2²) = ${f3(dist(X[2], C0[0]))}\nd32 = √(2² + 2²) = ${f3(dist(X[2], C0[1]))}\nd41 = √(4² + 3²) = ${f3(dist(X[3], C0[0]))}\nd42 = √(3² + 3²) = ${f3(dist(X[3], C0[1]))}`}],
       caption: 'Measure the Euclidean distance from **every medicine** to **both centroids**. The table keeps all eight.'},
-    {title: 'Assign labels', seconds: 7, card: [{label: 'nearest centroid', tex: 'y_i=\\arg\\min_j d_{ij}', value: `y = (${L1.map(v => v + 1).join(', ')})`, color: C.signal}],
+    {title: 'Assign labels', seconds: 7, card: [{label: 'nearest centroid', tex: 'y_i=\\arg\\min_j\\lVert x_i-c_j\\rVert_2', value: `y = (${L1.map(v => v + 1).join(', ')})`, color: C.signal}],
       caption: 'Each medicine joins its **nearest centroid**. Only medicine 1 is closer to c1, so the labels are 1, 2, 2, 2.'},
     {title: 'Move centroids', seconds: 7, card: [{label: 'centroid = mean of members', tex: 'c_j=\\frac{1}{n_j}\\sum_{i:y_i=j}x_i', value: `c2 = ${pt(C1[1])}`, color: GROUP[1], note: 'c2 = ((2+4+5)/3, (1+3+4)/3)\nc1 = (1, 1), only medicine 1'}],
       caption: 'Each centroid moves to the **mean** of its members. Two of c2\'s three members are high, so c2 slides up.'},

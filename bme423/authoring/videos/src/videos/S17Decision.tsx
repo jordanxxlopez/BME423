@@ -41,22 +41,22 @@ export const meta = {
       caption: 'For a difference the null value is **zero**. If the interval holds zero, do not reject. If it leaves zero out, reject.'},
     {title: 'Glucose trial', seconds: 8, card: [
       {label: 'data (mg/dL)', note: 'placebo  n 850 · mean 112.4 · SD 4.7\ndrug     n 850 · mean 109.1 · SD 3.9'},
-      {label: 'null hypothesis', tex: 'H_0:\\ \\mu_1-\\mu_2=0', note: 'equal mean glucose · order placebo − drug'}],
+      {label: 'null hypothesis', tex: 'H_0:\\ \\mu_1=\\mu_2', note: 'equal mean glucose · order placebo − drug'}],
       caption: '850 patients took placebo and 850 took the drug. The null says both populations have **equal mean glucose**.'},
-    {title: 'Observed difference', seconds: 6, card: [{label: 'difference', tex: 'd=\\bar x_1-\\bar x_2', value: '112.4 − 109.1 = 3.3 mg/dL', color: C.signal}],
+    {title: 'Observed difference', seconds: 6, card: [{label: 'difference', tex: '(\\bar x_1-\\bar x_2)', value: '112.4 − 109.1 = 3.3 mg/dL', color: C.signal}],
       caption: 'Placebo minus drug is **3.3 mg/dL**. This sample difference sits in the middle of the interval.'},
     {title: 'Pooled SE', seconds: 8, card: [
       {label: 'pooled variance', tex: 's^2=\\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}', value: '31667.7 / 1698 = 18.65', color: C.noise},
-      {label: 'standard error', tex: 's_d=\\sqrt{\\tfrac{s^2}{n_1}+\\tfrac{s^2}{n_2}}', value: `= ${se.toFixed(7)} mg/dL`, color: C.noise}],
+      {label: 'standard error', tex: 's_{(\\bar x_1-\\bar x_2)}=\\sqrt{\\tfrac{s^2}{n_1}+\\tfrac{s^2}{n_2}}', value: `= ${se.toFixed(7)} mg/dL`, color: C.noise}],
       caption: 'Pooling the two variances gives 18.65. With 850 patients per group the **standard error** is only 0.209 mg/dL.'},
     {title: 'No row 1698', seconds: 9, card: [{label: 'class t table', tex: '\\nu=850+850-2=1698', value: 'row ∞ · column 0.05 → 1.9600', color: C.signal, note: 'row 1698 is not printed (large-df\napproximation) · row 200 → 1.972'}],
       caption: 'Row 1698 is **not printed**. The infinity row gives **1.9600** for large df, and row 200 gives a slightly wider 1.972.'},
-    {title: '95% interval', seconds: 8, card: [{label: 'margin and interval', tex: 'd\\pm t_c\\,s_d', value: `3.3 ± ${M.toFixed(4)} → (${lo.toFixed(3)}, ${hi.toFixed(3)})`, color: C.signal,
+    {title: '95% interval', seconds: 8, card: [{label: 'margin and interval', tex: '(\\bar x_1-\\bar x_2)\\pm t_{0.05}(\\infty)\\cdot s_{(\\bar x_1-\\bar x_2)}', value: `3.3 ± ${M.toFixed(4)} → (${lo.toFixed(3)}, ${hi.toFixed(3)})`, color: C.signal,
       note: `with row 200: (${(d - M2).toFixed(3)}, ${(d + M2).toFixed(3)})`}],
       caption: 'The margin is 1.96 times the standard error, 0.411 mg/dL. The 95% interval runs from **2.889 to 3.711** mg/dL.'},
     {title: 'Is zero inside?', seconds: 7, card: [{label: 'decision', value: '0 outside → reject H0', color: C.green, note: 'P < 0.05 · placebo is higher,\nso the drug lowers mean glucose'}],
       caption: 'Zero is far **outside** the interval, so reject equal means at 0.05. Placebo glucose is higher, so the drug lowers it.'},
-    {title: '99% interval', seconds: 8, card: [{label: '99% interval', tex: 'd\\pm t_{0.01}(\\infty)\\,s_d', value: `3.3 ± ${M99.toFixed(4)} → (${lo99.toFixed(3)}, ${hi99.toFixed(3)})`, color: C.purple, note: 'row ∞ · column 0.01 → 2.5758'}],
+    {title: '99% interval', seconds: 8, card: [{label: '99% interval', tex: '(\\bar x_1-\\bar x_2)\\pm t_{0.01}(\\infty)\\cdot s_{(\\bar x_1-\\bar x_2)}', value: `3.3 ± ${M99.toFixed(4)} → (${lo99.toFixed(3)}, ${hi99.toFixed(3)})`, color: C.purple, note: 'row ∞ · column 0.01 → 2.5758'}],
       caption: 'A **99%** interval uses column 0.01, so it is wider. It still leaves zero out, so reject at the 0.01 level too.'},
     {title: 'Match the levels', seconds: 9, card: [{label: 'match the levels', tex: '95\\%\\leftrightarrow\\alpha=0.05', note: '99% ↔ α = 0.01\nillustration, not study data'}],
       caption: 'In this illustration the 95% interval leaves out zero but the 99% one holds it, so **0.01 < P < 0.05**.'},
@@ -106,7 +106,7 @@ const S17Decision: React.FC = () => (
           <AxisX x={xd} y={392} ticks={[0, 1, 2, 3, 4]} />
           <Label x={SW - 30} y={300} text="placebo − drug (mg/dL)" color={C.muted} size={13} anchor="end" />
           <Glow cx={xd(d)} cy={360} r={8} color={C.signal} />
-          {i < 5 && <Label x={xd(d)} y={336} text="d = 3.3" color={C.signal} anchor="middle" weight={700} />}
+          {i < 5 && <Label x={xd(d)} y={336} text="difference = 3.3" color={C.signal} anchor="middle" weight={700} />}
           {after(tl, f, 3) && i < 7 && <g opacity={prog(tl, f, 3)}>
             <line x1={xd(d - se)} x2={xd(d + se)} y1={378} y2={378} stroke={C.noise} strokeWidth={4} />
             <Label x={xd(d + se) + 8} y={383} text={`± SE ${se.toFixed(3)}`} color={C.noise} size={13} /></g>}

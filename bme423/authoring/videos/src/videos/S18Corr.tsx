@@ -44,7 +44,7 @@ export const meta = {
       card: [{label: 'same sign as the slope', tex: 'r=\\frac{\\sqrt{\\sum(x-\\bar x)^2}}{\\sqrt{\\sum(y-\\bar y)^2}}\\,b', value: `${ratio.toFixed(4)} × ${bDev.toFixed(4)} = ${r.toFixed(4)}`, color: C.signal,
         note: 'Martians r = 0.926 → strong and positive'}]},
     {title: 'Test of no correlation', seconds: 8, caption: 'The null hypothesis says the **population correlation is zero**. Turn r into t with ν = n − 2 = 8.',
-      card: [{label: 'hypotheses', tex: 'H_0:\\rho=0\\qquad H_A:\\rho\\ne0'},
+      card: [{label: 'hypotheses', tex: 'H_0:r=0\\qquad H_1:r\\ne0'},
         {label: 't statistic', tex: 't=r\\sqrt{\\frac{n-2}{1-r^2}}', value: `${r.toFixed(4)} · √(8 / ${(1 - r2).toFixed(4)}) = ${t.toFixed(3)}`, color: C.signal}]},
     {title: 'Class t table', seconds: 7, caption: 'Use the **class t table** (two-tailed). Row 8 gives **2.306** at 0.05 and **5.041** at 0.001.',
       card: [{label: 'class t table, row 8', value: '0.05 → 2.306 · 0.001 → 5.041', color: C.signal}]},
@@ -145,7 +145,7 @@ const S18Corr: React.FC = () => (
         out.push(<g key="curve" opacity={p}>
           {i === 7 && <><path d={tail(-4, -tc)} fill={C.signal} fillOpacity={0.3} /><path d={tail(tc, 8)} fill={C.signal} fillOpacity={0.3} /></>}
           <path d={path} fill="none" stroke={C.ink} strokeWidth={2.5} />
-          <AxisX x={xt} y={base} ticks={[-4, -2, 0, 2, 4, 6, 8]} label={`t with ν = ${nu}  (if ρ = 0)`} />
+          <AxisX x={xt} y={base} ticks={[-4, -2, 0, 2, 4, 6, 8]} label={`t with ν = ${nu}  (if r = 0)`} />
           {i === 7 && <g>
             {[-tc, tc].map(c => <line key={c} x1={xt(c)} x2={xt(c)} y1={base} y2={110} stroke={C.signal} strokeWidth={2} strokeDasharray="5 4" />)}
             <Label x={xt(-tc)} y={100} text="−2.306" color={C.signal} size={14} anchor="middle" />
