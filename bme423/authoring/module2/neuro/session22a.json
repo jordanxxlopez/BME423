@@ -1,0 +1,1734 @@
+{
+ "cases": [
+  {
+   "id": "n22-sleep-epoch-nearest",
+   "title": "Sleep recording epoch and its single most similar scored epoch",
+   "topic": "s22idea",
+   "context": "In a sleep study, an overnight recording was cut into 30-second segments (epochs). Four epochs were scored by a sleep technician as Wake, Light sleep, Deep sleep or REM sleep (rapid eye movement sleep, the stage with vivid dreaming). For each epoch, delta power (strength of the slow 0.5 to 4 Hz waves in the electroencephalogram (EEG)) and muscle tone (activity of the chin muscle in the electromyogram (EMG)) were each rated on a scale from 0 to 10. A new epoch that was not scored by the technician had a delta power of 7 and a muscle tone of 2.",
+   "unit": "feature units",
+   "table": {
+    "headers": [
+     "Epoch",
+     "Delta power",
+     "Muscle tone",
+     "Sleep stage"
+    ],
+    "rows": [
+     [
+      "A",
+      2,
+      8,
+      "Wake"
+     ],
+     [
+      "B",
+      5,
+      4,
+      "Light sleep"
+     ],
+     [
+      "C",
+      9,
+      3,
+      "Deep sleep"
+     ],
+     [
+      "D",
+      3,
+      1,
+      "REM sleep"
+     ]
+    ]
+   },
+   "tasks": [
+    "Calculate the Euclidean distance from the new epoch (7, 2) to each of the four scored epochs.",
+    "Identify the most similar scored epoch and assign the new epoch to its sleep stage. State whether this is a clustering or a classification problem. Please state how you reached your conclusions."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(q\\) (new epoch features), \\(r\\) (a scored epoch), \\(d(q,r)\\) (Euclidean distance).",
+   "steps": [
+    {
+     "title": "Identify the problem type",
+     "general": [
+      "\\text{given }(x_i,y_i)\\Rightarrow\\text{classification}"
+     ],
+     "work": [
+      "y_i\\in\\{\\text{Wake},\\text{Light sleep},\\text{Deep sleep},\\text{REM sleep}\\}"
+     ],
+     "words": "The four epochs have known sleep stages, so assigning the new epoch is a classification problem (supervised)."
+    },
+    {
+     "title": "Distance to epochs A and B",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d_A=\\sqrt{(7-2)^2+(2-8)^2}=\\sqrt{61}=7.81025",
+      "d_B=\\sqrt{(7-5)^2+(2-4)^2}=\\sqrt{8}=2.82843"
+     ],
+     "words": "Subtract matching features, square, add and take the root."
+    },
+    {
+     "title": "Distance to epochs C and D",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d_C=\\sqrt{(7-9)^2+(2-3)^2}=\\sqrt{5}=2.23607",
+      "d_D=\\sqrt{(7-3)^2+(2-1)^2}=\\sqrt{17}=4.12311"
+     ],
+     "words": "The same formula is applied to every scored epoch."
+    },
+    {
+     "title": "Pick the most similar epoch",
+     "general": [
+      "\\min_r d(q,r)"
+     ],
+     "work": [
+      "\\min(7.81025,2.82843,2.23607,4.12311)=2.23607"
+     ],
+     "words": "Epoch C has the smallest distance, so it is the most similar epoch. Its stage is Deep sleep, so the new epoch is assigned to Deep sleep."
+    }
+   ],
+   "conclusion": "The nearest scored epoch is epoch C at distance 2.23607, so the new epoch is classified as Deep sleep. This is a classification problem because the stages of the scored epochs are known, and it uses only one neighbor (K = 1).",
+   "source": "Original neuroscience practice example",
+   "lookup": null,
+   "values": {
+    "newEpoch": [
+     7,
+     2
+    ],
+    "A": 7.810249675906654,
+    "B": 2.8284271247461903,
+    "C": 2.23606797749979,
+    "D": 4.123105625617661,
+    "nearest": "C",
+    "assigned": "Deep sleep"
+   },
+   "module": 22,
+   "tolerance": 0.011180339887498949,
+   "answerName": "Distance",
+   "answer": 2.23606797749979
+  },
+  {
+   "id": "n22-fricative-distance",
+   "title": "Three distances between two fricative sounds",
+   "topic": "s22distance",
+   "context": "In a study of speech sounds, fricatives (consonants made by forcing air through a narrow gap, such as the first sounds of \"sip\" and \"ship\") were recorded from one talker. Two features were measured for each sound. The first was the spectral centre of gravity (the average frequency of the hissing noise). The second was the frication duration (how long the hissing noise lasted). Both features were then rescaled to unitless scores. The table below shows the scores for the \"s\" of \"sip\" and the \"sh\" of \"ship\".",
+   "unit": "unitless (scaled)",
+   "table": {
+    "headers": [
+     "Sound",
+     "Centre of gravity",
+     "Duration"
+    ],
+    "rows": [
+     [
+      "\"s\" (sip)",
+      9,
+      2
+     ],
+     [
+      "\"sh\" (ship)",
+      4,
+      5
+     ]
+    ]
+   },
+   "tasks": [
+    "Calculate the Euclidean distance and the Manhattan distance between the two sounds. Make sure to show your intermediate calculations.",
+    "Calculate the Minkowski distance with p = 3 and compare all three values."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(q,r\\) (two points or feature vectors), \\(q_i,r_i\\) (their \\(i\\)th coordinates), \\(m\\) (number of dimensions), \\(p\\) (Minkowski order), \\(d(q,r)\\) (distance).",
+   "steps": [
+    {
+     "title": "Coordinate differences",
+     "general": [
+      "\\Delta_i=|q_i-r_i|"
+     ],
+     "work": [
+      "\\Delta_1=|9-4|=5",
+      "\\Delta_2=|2-5|=3"
+     ],
+     "words": "Find the absolute difference for each feature first, then reuse them in every formula."
+    },
+    {
+     "title": "Euclidean distance",
+     "general": [
+      "d_2=\\sqrt{\\sum_i(q_i-r_i)^2}"
+     ],
+     "work": [
+      "d_2=\\sqrt{5^2+3^2}=\\sqrt{34}=5.83095"
+     ],
+     "words": "Square, add and take the square root."
+    },
+    {
+     "title": "Manhattan distance",
+     "general": [
+      "d_1=\\sum_i|q_i-r_i|"
+     ],
+     "work": [
+      "d_1=5+3=8"
+     ],
+     "words": "Add the absolute differences."
+    },
+    {
+     "title": "Minkowski distance, p = 3",
+     "general": [
+      "d_p=\\left(\\sum_i|q_i-r_i|^p\\right)^{1/p}"
+     ],
+     "work": [
+      "d_3=(5^3+3^3)^{1/3}=152^{1/3}=5.3368"
+     ],
+     "words": "Cube, add and take the cube root."
+    },
+    {
+     "title": "Compare",
+     "general": [
+      "d_1\\ge d_2\\ge d_3"
+     ],
+     "work": [
+      "8\\ge 5.83095\\ge 5.3368"
+     ],
+     "words": "Larger p puts more weight on the largest single difference, so the distance shrinks toward the largest difference, 5."
+    }
+   ],
+   "conclusion": "Between the \"s\" and the \"sh\", the Euclidean distance is 5.83095, the Manhattan distance is 8, and the Minkowski distance with p = 3 is 5.3368.",
+   "source": "Original neuroscience practice example",
+   "lookup": null,
+   "values": {
+    "q": [
+     9,
+     2
+    ],
+    "r": [
+     4,
+     5
+    ],
+    "euclidean": 5.830951894845301,
+    "manhattan": 8,
+    "minkowski3": 5.336803297443889
+   },
+   "module": 22,
+   "tolerance": 0.026684016487219443,
+   "answerName": "Distance (Minkowski, p = 3)",
+   "answer": 5.336803297443889
+  },
+  {
+   "id": "n22-odor-glomeruli-distance",
+   "title": "Three distances between two odor response patterns",
+   "topic": "s22distance",
+   "context": "In a study looking at how odors are coded in the olfactory bulb (the first brain station for smell), calcium imaging was used to record the responses of three glomeruli (small clusters of nerve endings that each receive input from one type of odor receptor) in an anesthetized mouse. The response of each glomerulus was the percent change in fluorescence (ΔF/F, in %). The table below shows the responses to two odors. A small distance between the two response patterns means that the bulb codes the two odors in a similar way.",
+   "unit": "% ΔF/F",
+   "table": {
+    "headers": [
+     "Odor",
+     "Glomerulus 1 (%)",
+     "Glomerulus 2 (%)",
+     "Glomerulus 3 (%)"
+    ],
+    "rows": [
+     [
+      "Odor A",
+      12,
+      5,
+      9
+     ],
+     [
+      "Odor B",
+      4,
+      11,
+      7
+     ]
+    ]
+   },
+   "tasks": [
+    "Calculate the Euclidean distance and the Manhattan distance between the response patterns of odor A and odor B. Make sure to show your intermediate calculations.",
+    "Calculate the Minkowski distance with p = 3 and compare all three values."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(q,r\\) (two points or feature vectors), \\(q_i,r_i\\) (their \\(i\\)th coordinates), \\(m\\) (number of dimensions), \\(p\\) (Minkowski order), \\(d(q,r)\\) (distance).",
+   "steps": [
+    {
+     "title": "Coordinate differences",
+     "general": [
+      "\\Delta_i=|q_i-r_i|"
+     ],
+     "work": [
+      "\\Delta_1=|12-4|=8",
+      "\\Delta_2=|5-11|=6",
+      "\\Delta_3=|9-7|=2"
+     ],
+     "words": "Find the absolute difference for each feature first, then reuse them in every formula."
+    },
+    {
+     "title": "Euclidean distance",
+     "general": [
+      "d_2=\\sqrt{\\sum_i(q_i-r_i)^2}"
+     ],
+     "work": [
+      "d_2=\\sqrt{8^2+6^2+2^2}=\\sqrt{104}=10.19804"
+     ],
+     "words": "Square, add and take the square root."
+    },
+    {
+     "title": "Manhattan distance",
+     "general": [
+      "d_1=\\sum_i|q_i-r_i|"
+     ],
+     "work": [
+      "d_1=8+6+2=16"
+     ],
+     "words": "Add the absolute differences."
+    },
+    {
+     "title": "Minkowski distance, p = 3",
+     "general": [
+      "d_p=\\left(\\sum_i|q_i-r_i|^p\\right)^{1/p}"
+     ],
+     "work": [
+      "d_3=(8^3+6^3+2^3)^{1/3}=736^{1/3}=9.02871"
+     ],
+     "words": "Cube, add and take the cube root."
+    },
+    {
+     "title": "Compare",
+     "general": [
+      "d_1\\ge d_2\\ge d_3"
+     ],
+     "work": [
+      "16\\ge 10.19804\\ge 9.02871"
+     ],
+     "words": "There are three features here, so each sum has three terms. Larger p puts more weight on the largest single difference, so the distance shrinks toward the largest difference, 8."
+    }
+   ],
+   "conclusion": "Between the response patterns of odor A and odor B, the Euclidean distance is 10.19804, the Manhattan distance is 16, and the Minkowski distance with p = 3 is 9.02871.",
+   "source": "Original neuroscience practice example",
+   "lookup": null,
+   "values": {
+    "q": [
+     12,
+     5,
+     9
+    ],
+    "r": [
+     4,
+     11,
+     7
+    ],
+    "euclidean": 10.198039027185569,
+    "manhattan": 16,
+    "minkowski3": 9.028714870948003
+   },
+   "module": 22,
+   "tolerance": 0.05099019513592785,
+   "answerName": "Distance (Euclidean)",
+   "answer": 10.198039027185569
+  },
+  {
+   "id": "n22-vot-kmeans",
+   "title": "k-means on ten voice onset times",
+   "topic": "s22kmeans",
+   "context": "In a study of stop consonants (speech sounds such as /b/ and /p/ that are made by briefly closing the lips or tongue), voice onset time (VOT, the time between the release of the closure and the start of vocal fold vibration) was measured in milliseconds (ms) for 10 words spoken by one talker. Stops with a short VOT are usually heard as voiced (like /b/) and stops with a long VOT are usually heard as voiceless (like /p/). The words were not labeled as voiced or voiceless. The 10 recorded VOTs were 6, 11, 14, 19, 32, 54, 61, 66, 72 and 78 ms. The k-Means algorithm with k = 2 and initial centroids c1 = 10 ms and c2 = 40 ms was applied to these VOTs.",
+   "unit": "ms",
+   "table": {
+    "headers": [
+     "VOT x_i (ms)",
+     "c1",
+     "c2",
+     "Distance to c1",
+     "Distance to c2",
+     "Nearest cluster"
+    ],
+    "rows": [
+     [
+      6,
+      "10",
+      "40",
+      "4",
+      "34",
+      1
+     ],
+     [
+      11,
+      "10",
+      "40",
+      "1",
+      "29",
+      1
+     ],
+     [
+      14,
+      "10",
+      "40",
+      "4",
+      "26",
+      1
+     ],
+     [
+      19,
+      "10",
+      "40",
+      "9",
+      "21",
+      1
+     ],
+     [
+      32,
+      "10",
+      "40",
+      "22",
+      "8",
+      2
+     ],
+     [
+      54,
+      "10",
+      "40",
+      "44",
+      "14",
+      2
+     ],
+     [
+      61,
+      "10",
+      "40",
+      "51",
+      "21",
+      2
+     ],
+     [
+      66,
+      "10",
+      "40",
+      "56",
+      "26",
+      2
+     ],
+     [
+      72,
+      "10",
+      "40",
+      "62",
+      "32",
+      2
+     ],
+     [
+      78,
+      "10",
+      "40",
+      "68",
+      "38",
+      2
+     ]
+    ]
+   },
+   "tasks": [
+    "Perform the first iteration of the k-Means algorithm with k = 2. Calculate both distances for every VOT, assign the cluster labels and calculate the new centroids. Make sure to show your intermediate calculations.",
+    "Continue iterating until no cluster label changes. Provide the final clusters and the final centroids."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(x_i\\) (feature vector of entry \\(i\\)), \\(c_j\\) (centroid of cluster \\(j\\)), \\(d_{ij}\\) (distance from entry \\(i\\) to centroid \\(j\\)), \\(y_i\\) (cluster label of entry \\(i\\)), \\(n_j\\) (number of entries in cluster \\(j\\)), \\(k\\) (number of clusters).",
+   "steps": [
+    {
+     "title": "Set up",
+     "general": [
+      "k=2,\\ c_1^{(0)}=10,\\ c_2^{(0)}=40"
+     ],
+     "work": [
+      "x=(6,11,14,19,32,54,61,66,72,78)"
+     ],
+     "words": "In one dimension the Euclidean distance is the absolute difference."
+    },
+    {
+     "title": "Iteration 1 distances",
+     "general": [
+      "d_{ij}=|x_i-c_j|"
+     ],
+     "work": [
+      "d(19,10)=|19-10|=9",
+      "d(19,40)=|19-40|=21",
+      "d(32,10)=22,\\ d(32,40)=8"
+     ],
+     "words": "Every VOT gets a distance to both centroids. The table lists all ten rows."
+    },
+    {
+     "title": "Iteration 1 labels",
+     "general": [
+      "y_i=\\arg\\min_{j}\\lVert x_i-c_j\\rVert_2,\\quad i=1,\\dots,n,\\ j=1,\\dots,k"
+     ],
+     "work": [
+      "y=(1,1,1,1,2,2,2,2,2,2)"
+     ],
+     "words": "The VOTs 6, 11, 14 and 19 ms are closer to 10. The VOTs of 32 ms and above are closer to 40."
+    },
+    {
+     "title": "Iteration 1 centroids",
+     "general": [
+      "c_j=\\frac{1}{n_j}\\sum_{i:y_i=j}x_i,\\quad j=1,\\dots,k"
+     ],
+     "work": [
+      "c_1=\\frac{6+11+14+19}{4}=\\frac{50}{4}=12.5",
+      "c_2=\\frac{32+54+61+66+72+78}{6}=\\frac{363}{6}=60.5"
+     ],
+     "words": "Each centroid is the mean of its members."
+    },
+    {
+     "title": "Iteration 2 distances and labels",
+     "general": [
+      "d_{ij}=|x_i-c_j|",
+      "y_i=\\arg\\min_{j}\\lVert x_i-c_j\\rVert_2,\\quad i=1,\\dots,n,\\ j=1,\\dots,k"
+     ],
+     "work": [
+      "d(32,12.5)=19.5,\\ d(32,60.5)=28.5\\Rightarrow y=1",
+      "y=(1,1,1,1,1,2,2,2,2,2)"
+     ],
+     "words": "The VOT of 32 ms is now closer to 12.5, so it moves to cluster 1. A label changed, so the algorithm continues."
+    },
+    {
+     "title": "Iteration 2 centroids",
+     "general": [
+      "c_j=\\frac{1}{n_j}\\sum_{i:y_i=j}x_i,\\quad j=1,\\dots,k"
+     ],
+     "work": [
+      "c_1=\\frac{6+11+14+19+32}{5}=\\frac{82}{5}=16.4",
+      "c_2=\\frac{54+61+66+72+78}{5}=\\frac{331}{5}=66.2"
+     ],
+     "words": "Recompute both means with the new memberships."
+    },
+    {
+     "title": "Iteration 3 check",
+     "general": [
+      "d_{ij}=|x_i-c_j|",
+      "y_i=\\arg\\min_{j}\\lVert x_i-c_j\\rVert_2,\\quad i=1,\\dots,n,\\ j=1,\\dots,k"
+     ],
+     "work": [
+      "d(32,16.4)=15.6,\\ d(32,66.2)=34.2",
+      "d(54,16.4)=37.6,\\ d(54,66.2)=12.2",
+      "y=(1,1,1,1,1,2,2,2,2,2)"
+     ],
+     "words": "No label changes, so the centroids stay the same and the algorithm stops."
+    },
+    {
+     "title": "Name the clusters",
+     "general": [
+      "\\text{stop when }y^{(t)}=y^{(t-1)}"
+     ],
+     "work": [
+      "c_1=16.4\\ (\\text{short VOT}),\\ c_2=66.2\\ (\\text{long VOT})"
+     ],
+     "words": "The labels 1 and 2 can be named voiced and voiceless after clustering. The algorithm itself never uses these names."
+    }
+   ],
+   "conclusion": "Iteration 1 moves the centroids from 10 and 40 ms to 12.5 and 60.5 ms. Iteration 2 moves the VOT of 32 ms into cluster 1 and gives 16.4 and 66.2 ms. Iteration 3 changes nothing, so the final clusters are the VOTs from 6 to 32 ms (short, voiced) and from 54 to 78 ms (long, voiceless).",
+   "source": "Original neuroscience practice example",
+   "lookup": null,
+   "values": {
+    "vot": [
+     6,
+     11,
+     14,
+     19,
+     32,
+     54,
+     61,
+     66,
+     72,
+     78
+    ],
+    "k": 2,
+    "initial": [
+     10,
+     40
+    ],
+    "iter1Labels": [
+     1,
+     1,
+     1,
+     1,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2
+    ],
+    "iter1Centroids": [
+     12.5,
+     60.5
+    ],
+    "iter2Labels": [
+     1,
+     1,
+     1,
+     1,
+     1,
+     2,
+     2,
+     2,
+     2,
+     2
+    ],
+    "iter2Centroids": [
+     16.4,
+     66.2
+    ],
+    "iterations": 3
+   },
+   "module": 22,
+   "tolerance": 0.3025,
+   "answerName": "New centroid c2 after iteration 1",
+   "answer": 60.5
+  },
+  {
+   "id": "n22-talker-pitch-kmeans",
+   "title": "Single k-means iteration on four talkers (F0 and pitch range)",
+   "topic": "s22kmeans",
+   "context": "In a study of differences between talkers, 4 adults read the same short passage aloud. Mean fundamental frequency (F0, the rate of vocal fold vibration that is heard as the pitch of the voice) was measured in hertz (Hz) and pitch range (the distance between the lowest and the highest pitch in the passage) was measured in semitones (st) for each talker. The data were standardized to avoid any issues associated with differences in scale; the scaled data are unitless.",
+   "unit": "unitless (scaled)",
+   "table": {
+    "headers": [
+     "Talker",
+     "F0",
+     "Range"
+    ],
+    "rows": [
+     [
+      1,
+      1,
+      4
+     ],
+     [
+      2,
+      4,
+      2
+     ],
+     [
+      3,
+      6,
+      7
+     ],
+     [
+      4,
+      9,
+      5
+     ]
+    ]
+   },
+   "tasks": [
+    "Based on the resulting data listed in the table below, perform a single iteration of the k-Means algorithm with k = 2. Use the Euclidian distance formula for your calculations. Use the following two initial centroids: C1 (F0 = 2, Range = 2) and C2 (F0 = 6, Range = 5).",
+    "As part of your final answer, provide the cluster labels for each of the 4 data points AND the new centroids of the two updated clusters after this single iteration. Make sure to show your intermediate calculations."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(x_i\\) (feature vector of entry \\(i\\)), \\(c_j\\) (centroid of cluster \\(j\\)), \\(d_{ij}\\) (distance from entry \\(i\\) to centroid \\(j\\)), \\(y_i\\) (cluster label of entry \\(i\\)), \\(n_j\\) (number of entries in cluster \\(j\\)), \\(k\\) (number of clusters).",
+   "steps": [
+    {
+     "title": "Distances for talker 1",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d_{11}=\\sqrt{(1-2)^2+(4-2)^2}=\\sqrt{5}=2.23607",
+      "d_{12}=\\sqrt{(1-6)^2+(4-5)^2}=\\sqrt{26}=5.09902"
+     ],
+     "words": "Talker 1 is (1, 4)."
+    },
+    {
+     "title": "Distances for talker 2",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d_{21}=\\sqrt{(4-2)^2+(2-2)^2}=\\sqrt{4}=2",
+      "d_{22}=\\sqrt{(4-6)^2+(2-5)^2}=\\sqrt{13}=3.60555"
+     ],
+     "words": "Talker 2 is (4, 2)."
+    },
+    {
+     "title": "Distances for talker 3",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d_{31}=\\sqrt{(6-2)^2+(7-2)^2}=\\sqrt{41}=6.40312",
+      "d_{32}=\\sqrt{(6-6)^2+(7-5)^2}=\\sqrt{4}=2"
+     ],
+     "words": "Talker 3 is (6, 7)."
+    },
+    {
+     "title": "Distances for talker 4",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d_{41}=\\sqrt{(9-2)^2+(5-2)^2}=\\sqrt{58}=7.61577",
+      "d_{42}=\\sqrt{(9-6)^2+(5-5)^2}=\\sqrt{9}=3"
+     ],
+     "words": "Talker 4 is (9, 5)."
+    },
+    {
+     "title": "Assign labels",
+     "general": [
+      "y_i=\\arg\\min_{j}\\lVert x_i-c_j\\rVert_2,\\quad i=1,\\dots,n,\\ j=1,\\dots,k"
+     ],
+     "work": [
+      "y_1=1\\ (2.23607<5.09902)",
+      "y_2=1\\ (2<3.60555)",
+      "y_3=2\\ (2<6.40312)",
+      "y_4=2\\ (3<7.61577)"
+     ],
+     "words": "Each talker goes to the centroid with the smaller distance."
+    },
+    {
+     "title": "New centroids",
+     "general": [
+      "c_j=\\frac{1}{n_j}\\sum_{i:y_i=j}x_i,\\quad j=1,\\dots,k"
+     ],
+     "work": [
+      "C_1=\\left(\\frac{1+4}{2},\\frac{4+2}{2}\\right)=(2.5,3)",
+      "C_2=\\left(\\frac{6+9}{2},\\frac{7+5}{2}\\right)=(7.5,6)"
+     ],
+     "words": "Cluster 1 averages talkers 1 and 2. Cluster 2 averages talkers 3 and 4. Each feature is averaged separately."
+    }
+   ],
+   "conclusion": "The labels are talkers 1 and 2 in cluster 1 and talkers 3 and 4 in cluster 2. After one iteration the new centroids are C1 = (2.5, 3) and C2 = (7.5, 6).",
+   "source": "Original neuroscience practice example",
+   "lookup": null,
+   "values": {
+    "points": [
+     [
+      1,
+      4
+     ],
+     [
+      4,
+      2
+     ],
+     [
+      6,
+      7
+     ],
+     [
+      9,
+      5
+     ]
+    ],
+    "initial": [
+     [
+      2,
+      2
+     ],
+     [
+      6,
+      5
+     ]
+    ],
+    "distC1": [
+     2.23606797749979,
+     2.0,
+     6.4031242374328485,
+     7.615773105863909
+    ],
+    "distC2": [
+     5.0990195135927845,
+     3.605551275463989,
+     2.0,
+     3.0
+    ],
+    "labels": [
+     1,
+     1,
+     2,
+     2
+    ],
+    "newC1": [
+     2.5,
+     3.0
+    ],
+    "newC2": [
+     7.5,
+     6.0
+    ]
+   },
+   "module": 22,
+   "tolerance": 0.0375,
+   "answerName": "New centroid C2 F0 coordinate",
+   "answer": 7.5
+  },
+  {
+   "id": "n22-hippocampus-recall-kmeans",
+   "title": "Single k-means iteration on five older adults (hippocampal volume and recall)",
+   "topic": "s22kmeans",
+   "context": "In a study of memory in aging, hippocampal volume (HV, the size of a brain structure needed to form new memories) was measured in cubic centimeters (cm³) from a magnetic resonance imaging (MRI) scan in 5 older adults. Delayed recall (DR, the number of words from a 15-word list remembered after 20 minutes) was measured in the same 5 adults. The data were standardized to avoid any issues associated with differences in scale; the scaled data are unitless.",
+   "unit": "unitless (scaled)",
+   "table": {
+    "headers": [
+     "Person",
+     "HV",
+     "DR"
+    ],
+    "rows": [
+     [
+      1,
+      2,
+      1
+     ],
+     [
+      2,
+      3,
+      4
+     ],
+     [
+      3,
+      5,
+      3
+     ],
+     [
+      4,
+      7,
+      8
+     ],
+     [
+      5,
+      8,
+      6
+     ]
+    ]
+   },
+   "tasks": [
+    "Based on the resulting data listed in the table below, perform a single iteration of the k-Means algorithm with k = 2. Use the Euclidian distance formula for your calculations. Use the following two initial centroids: C1 (HV = 3, DR = 2) and C2 (HV = 6, DR = 6).",
+    "As part of your final answer, provide the cluster labels for each of the 5 data points AND the new centroids of the two updated clusters after this single iteration. Make sure to show your intermediate calculations."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(x_i\\) (feature vector of entry \\(i\\)), \\(c_j\\) (centroid of cluster \\(j\\)), \\(d_{ij}\\) (distance from entry \\(i\\) to centroid \\(j\\)), \\(y_i\\) (cluster label of entry \\(i\\)), \\(n_j\\) (number of entries in cluster \\(j\\)), \\(k\\) (number of clusters).",
+   "steps": [
+    {
+     "title": "Distances for person 1",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d_{11}=\\sqrt{(2-3)^2+(1-2)^2}=\\sqrt{2}=1.41421",
+      "d_{12}=\\sqrt{(2-6)^2+(1-6)^2}=\\sqrt{41}=6.40312"
+     ],
+     "words": "Person 1 is (2, 1)."
+    },
+    {
+     "title": "Distances for person 2",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d_{21}=\\sqrt{(3-3)^2+(4-2)^2}=\\sqrt{4}=2",
+      "d_{22}=\\sqrt{(3-6)^2+(4-6)^2}=\\sqrt{13}=3.60555"
+     ],
+     "words": "Person 2 is (3, 4)."
+    },
+    {
+     "title": "Distances for person 3",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d_{31}=\\sqrt{(5-3)^2+(3-2)^2}=\\sqrt{5}=2.23607",
+      "d_{32}=\\sqrt{(5-6)^2+(3-6)^2}=\\sqrt{10}=3.16228"
+     ],
+     "words": "Person 3 is (5, 3)."
+    },
+    {
+     "title": "Distances for person 4",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d_{41}=\\sqrt{(7-3)^2+(8-2)^2}=\\sqrt{52}=7.2111",
+      "d_{42}=\\sqrt{(7-6)^2+(8-6)^2}=\\sqrt{5}=2.23607"
+     ],
+     "words": "Person 4 is (7, 8)."
+    },
+    {
+     "title": "Distances for person 5",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d_{51}=\\sqrt{(8-3)^2+(6-2)^2}=\\sqrt{41}=6.40312",
+      "d_{52}=\\sqrt{(8-6)^2+(6-6)^2}=\\sqrt{4}=2"
+     ],
+     "words": "Person 5 is (8, 6)."
+    },
+    {
+     "title": "Assign labels",
+     "general": [
+      "y_i=\\arg\\min_{j}\\lVert x_i-c_j\\rVert_2,\\quad i=1,\\dots,n,\\ j=1,\\dots,k"
+     ],
+     "work": [
+      "y_1=1\\ (1.41421<6.40312)",
+      "y_2=1\\ (2<3.60555)",
+      "y_3=1\\ (2.23607<3.16228)",
+      "y_4=2\\ (2.23607<7.2111)",
+      "y_5=2\\ (2<6.40312)"
+     ],
+     "words": "Each person goes to the centroid with the smaller distance."
+    },
+    {
+     "title": "New centroids",
+     "general": [
+      "c_j=\\frac{1}{n_j}\\sum_{i:y_i=j}x_i,\\quad j=1,\\dots,k"
+     ],
+     "work": [
+      "C_1=\\left(\\frac{2+3+5}{3},\\frac{1+4+3}{3}\\right)=(3.33333,2.66667)",
+      "C_2=\\left(\\frac{7+8}{2},\\frac{8+6}{2}\\right)=(7.5,7)"
+     ],
+     "words": "Cluster 1 averages persons 1, 2 and 3. Cluster 2 averages persons 4 and 5. Each feature is averaged separately. The centroid of cluster 1 is not one of the data points."
+    }
+   ],
+   "conclusion": "The labels are persons 1, 2 and 3 in cluster 1 and persons 4 and 5 in cluster 2. After one iteration the new centroids are C1 = (3.33333, 2.66667) and C2 = (7.5, 7).",
+   "source": "Original neuroscience practice example",
+   "lookup": null,
+   "values": {
+    "points": [
+     [
+      2,
+      1
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      5,
+      3
+     ],
+     [
+      7,
+      8
+     ],
+     [
+      8,
+      6
+     ]
+    ],
+    "initial": [
+     [
+      3,
+      2
+     ],
+     [
+      6,
+      6
+     ]
+    ],
+    "distC1": [
+     1.4142135623730951,
+     2.0,
+     2.23606797749979,
+     7.211102550927978,
+     6.4031242374328485
+    ],
+    "distC2": [
+     6.4031242374328485,
+     3.605551275463989,
+     3.1622776601683795,
+     2.23606797749979,
+     2.0
+    ],
+    "labels": [
+     1,
+     1,
+     1,
+     2,
+     2
+    ],
+    "newC1": [
+     3.3333333333333335,
+     2.6666666666666665
+    ],
+    "newC2": [
+     7.5,
+     7.0
+    ]
+   },
+   "module": 22,
+   "tolerance": 0.016666666666666666,
+   "answerName": "New centroid C1 HV coordinate",
+   "answer": 3.3333333333333335
+  },
+  {
+   "id": "n22-saccade-latency-withinss",
+   "title": "Within-cluster sums of squares for saccade latencies",
+   "topic": "s22withinss",
+   "context": "In a study of eye movements, saccade latency (time elapsed between the appearance of a visual target and the start of the fast eye movement toward it) was measured in milliseconds (ms) on 10 trials in one subject. The fixation point was switched off shortly before the target appeared. The 10 recorded latencies were 95, 102, 108, 118, 176, 184, 190, 197, 205 and 212 ms. The latencies were clustered in R with kmeans(latency, c(100, 200)). The final clusters were 95, 102, 108, 118 (centroid 105.75) and 176, 184, 190, 197, 205, 212 (centroid 194). The clustering was then repeated with k = 3 and k = 4. The table below shows the size (number of points in each cluster), withinss (within-cluster sum of squares) and tot.withinss (total within-cluster sum of squares) fields of the R output for each k.",
+   "unit": "ms²",
+   "table": {
+    "headers": [
+     "k",
+     "size",
+     "withinss",
+     "tot.withinss"
+    ],
+    "rows": [
+     [
+      1,
+      "10",
+      "19870.1",
+      19870.1
+     ],
+     [
+      2,
+      "4 6",
+      "284.75 894.00",
+      1178.75
+     ],
+     [
+      3,
+      "4 3 3",
+      "284.75000  98.66667 112.66667",
+      496.0833
+     ],
+     [
+      4,
+      "2 2 3 3",
+      "24.50000  50.00000  98.66667 112.66667",
+      285.8333
+     ]
+    ]
+   },
+   "tasks": [
+    "Calculate the within-cluster sum of squares for each of the two clusters and tot.withinss for k = 2. Calculate betweenss (between-cluster sum of squares) from the total sum of squares. Make sure to show your intermediate calculations.",
+    "Using tot.withinss for k = 1 to 4, how many clusters should be used for these latencies? Please state how you reached your conclusions."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(SS_j\\) (within-cluster sum of squares of cluster \\(j\\)), \\(x_i\\) (entry value), \\(c_j\\) (centroid of cluster \\(j\\)), \\(y_i\\) (cluster label), \\(k\\) (number of clusters).",
+   "steps": [
+    {
+     "title": "Cluster 1 sum of squares",
+     "general": [
+      "SS_1=\\sum_{i:y_i=1}(x_i-c_1)^2"
+     ],
+     "work": [
+      "c_1=423/4=105.75",
+      "SS_1=(95-105.75)^2+(102-105.75)^2+(108-105.75)^2+(118-105.75)^2",
+      "SS_1=115.5625+14.0625+5.0625+150.0625=284.75"
+     ],
+     "words": "Square each deviation from the cluster 1 centroid and add."
+    },
+    {
+     "title": "Cluster 2 sum of squares",
+     "general": [
+      "SS_2=\\sum_{i:y_i=2}(x_i-c_2)^2"
+     ],
+     "work": [
+      "c_2=1164/6=194",
+      "SS_2=(176-194)^2+(184-194)^2+(190-194)^2+(197-194)^2+(205-194)^2+(212-194)^2",
+      "SS_2=324+100+16+9+121+324=894"
+     ],
+     "words": "Square each deviation from the cluster 2 centroid and add. Cluster 2 is more spread out, so its sum of squares is larger."
+    },
+    {
+     "title": "Total within-cluster sum of squares",
+     "general": [
+      "SS_{\\text{within total}}=\\sum_{j=1}^{k}SS_j"
+     ],
+     "work": [
+      "SS_{\\text{within total}}=284.75+894=1178.75"
+     ],
+     "words": "This is tot.withinss in the R output."
+    },
+    {
+     "title": "Between-cluster sum of squares",
+     "general": [
+      "SS_{\\text{total}}=\\sum_i(x_i-\\bar x)^2",
+      "SS_{\\text{between}}=SS_{\\text{total}}-SS_{\\text{within total}}"
+     ],
+     "work": [
+      "\\bar x=1587/10=158.7,\\ SS_{\\text{total}}=19870.1",
+      "SS_{\\text{between}}=19870.1-1178.75=18691.35"
+     ],
+     "words": "R reports this as betweenss, 18691.35. At k = 1 the whole total is within-cluster."
+    },
+    {
+     "title": "Compare k = 1 to 4",
+     "general": [
+      "SS_{\\text{within total}}(k)"
+     ],
+     "work": [
+      "19870.1\\to1178.75\\to496.08333\\to285.83333"
+     ],
+     "words": "The drop from k = 1 to k = 2 is about 18691. The later drops are only about 683 and 210."
+    },
+    {
+     "title": "Choose k",
+     "general": [
+      "\\text{choose }k\\text{ where further gains are modest}"
+     ],
+     "work": [
+      "k=2"
+     ],
+     "words": "Beyond k = 2 there is only modest improvement, so two clusters are chosen."
+    }
+   ],
+   "conclusion": "withinss is 284.75 and 894, tot.withinss is 1178.75, and betweenss is 18691.35. tot.withinss improves only modestly for k > 2, so k = 2 is chosen. The two clusters match a group of fast saccades near 106 ms and a group of slower saccades near 194 ms.",
+   "source": "Original neuroscience practice example",
+   "lookup": null,
+   "values": {
+    "latencies": [
+     95,
+     102,
+     108,
+     118,
+     176,
+     184,
+     190,
+     197,
+     205,
+     212
+    ],
+    "ss1": 284.75,
+    "ss2": 894.0,
+    "totWithin": 1178.75,
+    "totalSS": 19870.1,
+    "between": 18691.35,
+    "totWithinK3": 496.0833333333333,
+    "totWithinK4": 285.8333333333333,
+    "chosenK": 2
+   },
+   "module": 22,
+   "tolerance": 5.89375,
+   "answerName": "tot.withinss",
+   "answer": 1178.75
+  },
+  {
+   "id": "n22-vowel-formant-knn",
+   "title": "Classifying a vowel from its first two formants with K = 3",
+   "topic": "s22knn",
+   "context": "In a study of vowel perception, five vowel recordings (tokens) from one talker were labeled by trained listeners as the vowel of \"heed\" or the vowel of \"hid\". For each token, the first formant (F1, the lowest resonance frequency of the vocal tract) and the second formant (F2, the next resonance frequency) were measured in hundreds of hertz (×100 Hz). A new token from the same talker has F1 = 3 and F2 = 22. The five labeled tokens were measured with the following results (training set):",
+   "unit": "probability",
+   "table": {
+    "headers": [
+     "Token",
+     "F1 (×100 Hz)",
+     "F2 (×100 Hz)",
+     "Vowel"
+    ],
+    "rows": [
+     [
+      "A",
+      3,
+      25,
+      "heed"
+     ],
+     [
+      "B",
+      2,
+      23,
+      "heed"
+     ],
+     [
+      "C",
+      4,
+      20,
+      "hid"
+     ],
+     [
+      "D",
+      5,
+      19,
+      "hid"
+     ],
+     [
+      "E",
+      4,
+      17,
+      "hid"
+     ]
+    ]
+   },
+   "tasks": [
+    "Based on the data listed in the table below, classify the new vowel as \"heed\" or \"hid\". Use a K-NN classification with K = 3. Use the Euclidian distance formula for your calculations.",
+    "Make sure to show your intermediate calculations. As part of your final answer, provide the probability for the class that you chose."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(x_i\\) (feature vector of training entry \\(i\\)), \\(y_i\\) (its class label), \\(L\\) (number of classes), \\(K\\) (number of nearest neighbors), \\(d\\) (Euclidean distance).",
+   "steps": [
+    {
+     "title": "Set up",
+     "general": [
+      "q=(3,22),\\ K=3"
+     ],
+     "work": [
+      "A=(3,25),\\ B=(2,23),\\ C=(4,20),\\ D=(5,19),\\ E=(4,17)"
+     ],
+     "words": "The training set has five labeled tokens."
+    },
+    {
+     "title": "Distances",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d_A=\\sqrt{(3-3)^2+(25-22)^2}=\\sqrt{9}=3",
+      "d_B=\\sqrt{(2-3)^2+(23-22)^2}=\\sqrt{2}=1.41421",
+      "d_C=\\sqrt{(4-3)^2+(20-22)^2}=\\sqrt{5}=2.23607",
+      "d_D=\\sqrt{(5-3)^2+(19-22)^2}=\\sqrt{13}=3.60555",
+      "d_E=\\sqrt{(4-3)^2+(17-22)^2}=\\sqrt{26}=5.09902"
+     ],
+     "words": "Compute the distance from the new vowel to every labeled token."
+    },
+    {
+     "title": "Rank the distances",
+     "general": [
+      "\\text{rank }d\\text{ from smallest}"
+     ],
+     "work": [
+      "B\\ (1.41421)<C\\ (2.23607)<A\\ (3)<D\\ (3.60555)<E\\ (5.09902)"
+     ],
+     "words": "Ranks are B 1, C 2, A 3, D 4, E 5, so the K = 3 nearest neighbors are B, C and A."
+    },
+    {
+     "title": "Read the neighbor classes",
+     "general": [
+      "y_B,\\ y_C,\\ y_A"
+     ],
+     "work": [
+      "\\text{heed},\\ \\text{hid},\\ \\text{heed}"
+     ],
+     "words": "The other tokens are not neighbors, so their classes are not used."
+    },
+    {
+     "title": "Classify and give the probability",
+     "general": [
+      "P(\\text{heed})=\\frac{\\#\\text{heed among neighbors}}{K}"
+     ],
+     "work": [
+      "P(\\text{heed})=\\frac{2}{3}=0.66667"
+     ],
+     "words": "The plurality class is heed, so the new vowel is classified as heed."
+    }
+   ],
+   "conclusion": "The three nearest neighbors are B (heed), C (hid) and A (heed). The new vowel is classified as heed. Probability of 2/3 that the new vowel is the vowel of \"heed\".",
+   "source": "Original neuroscience practice example",
+   "lookup": null,
+   "values": {
+    "newVowel": [
+     3,
+     22
+    ],
+    "distances": {
+     "A": 3.0,
+     "B": 1.4142135623730951,
+     "C": 2.23606797749979,
+     "D": 3.605551275463989,
+     "E": 5.0990195135927845
+    },
+    "ranks": {
+     "B": 1,
+     "C": 2,
+     "A": 3,
+     "D": 4,
+     "E": 5
+    },
+    "neighbors": [
+     "B",
+     "C",
+     "A"
+    ],
+    "K": 3,
+    "pHeed": 0.6666666666666666
+   },
+   "module": 22,
+   "tolerance": 0.003333333333333333,
+   "answerName": "Probability",
+   "answer": 0.6666666666666666
+  },
+  {
+   "id": "n22-neuron-type-knn",
+   "title": "Classifying a neuron as interneuron or pyramidal with K = 3",
+   "topic": "s22knn",
+   "context": "In a study of cell types in the cortex, six neurons were recorded with an electrode and then identified under a microscope as interneurons (cells that inhibit their neighbors) or pyramidal cells (the main excitatory cells). For each neuron, the firing rate (FR, in spikes per second (spikes/s)) and the spike width (SW, the duration of one action potential, in milliseconds (ms)) were measured. The data were standardized to avoid any issues associated with differences in scale; the scaled data are unitless. A new neuron that was not seen under the microscope has scaled values FR = 5 and SW = 4. The six identified neurons were measured with the following results (training set):",
+   "unit": "probability",
+   "table": {
+    "headers": [
+     "Neuron",
+     "FR",
+     "SW",
+     "Cell type"
+    ],
+    "rows": [
+     [
+      "A",
+      9,
+      1,
+      "Interneuron"
+     ],
+     [
+      "B",
+      7,
+      3,
+      "Interneuron"
+     ],
+     [
+      "C",
+      6,
+      5,
+      "Interneuron"
+     ],
+     [
+      "D",
+      3,
+      8,
+      "Pyramidal"
+     ],
+     [
+      "E",
+      2,
+      6,
+      "Pyramidal"
+     ],
+     [
+      "F",
+      4,
+      4,
+      "Pyramidal"
+     ]
+    ]
+   },
+   "tasks": [
+    "Based on the resulting data listed in the table below, classify the new neuron as Interneuron or Pyramidal. Use a K-NN classification with K = 3. Use the Euclidian distance formula for your calculations.",
+    "Make sure to show your intermediate calculations. As part of your final answer, provide the probability for the class that you chose."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(x_i\\) (feature vector of training entry \\(i\\)), \\(y_i\\) (its class label), \\(L\\) (number of classes), \\(K\\) (number of nearest neighbors), \\(d\\) (Euclidean distance).",
+   "steps": [
+    {
+     "title": "Set up",
+     "general": [
+      "q=(5,4),\\ K=3"
+     ],
+     "work": [
+      "A=(9,1),\\ B=(7,3),\\ C=(6,5),\\ D=(3,8),\\ E=(2,6),\\ F=(4,4)"
+     ],
+     "words": "The training set has six labeled neurons."
+    },
+    {
+     "title": "Distances",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d_A=\\sqrt{(9-5)^2+(1-4)^2}=\\sqrt{25}=5",
+      "d_B=\\sqrt{(7-5)^2+(3-4)^2}=\\sqrt{5}=2.23607",
+      "d_C=\\sqrt{(6-5)^2+(5-4)^2}=\\sqrt{2}=1.41421",
+      "d_D=\\sqrt{(3-5)^2+(8-4)^2}=\\sqrt{20}=4.47214",
+      "d_E=\\sqrt{(2-5)^2+(6-4)^2}=\\sqrt{13}=3.60555",
+      "d_F=\\sqrt{(4-5)^2+(4-4)^2}=\\sqrt{1}=1"
+     ],
+     "words": "Compute the distance from the new neuron to every labeled neuron."
+    },
+    {
+     "title": "Rank the distances",
+     "general": [
+      "\\text{rank }d\\text{ from smallest}"
+     ],
+     "work": [
+      "F\\ (1)<C\\ (1.41421)<B\\ (2.23607)<E\\ (3.60555)<D\\ (4.47214)<A\\ (5)"
+     ],
+     "words": "Ranks are F 1, C 2, B 3, E 4, D 5, A 6, so the K = 3 nearest neighbors are F, C and B."
+    },
+    {
+     "title": "Read the neighbor classes",
+     "general": [
+      "y_F,\\ y_C,\\ y_B"
+     ],
+     "work": [
+      "\\text{Pyramidal},\\ \\text{Interneuron},\\ \\text{Interneuron}"
+     ],
+     "words": "The other neurons are not neighbors, so their classes are not used."
+    },
+    {
+     "title": "Classify and give the probability",
+     "general": [
+      "P(\\text{Interneuron})=\\frac{\\#\\text{Interneuron among neighbors}}{K}"
+     ],
+     "work": [
+      "P(\\text{Interneuron})=\\frac{2}{3}=0.66667"
+     ],
+     "words": "The plurality class is Interneuron, so the new neuron is classified as Interneuron."
+    }
+   ],
+   "conclusion": "The three nearest neighbors are F (Pyramidal), C (Interneuron) and B (Interneuron). The new neuron is classified as Interneuron. Probability of 2/3 that the new neuron is an interneuron.",
+   "source": "Original neuroscience practice example",
+   "lookup": null,
+   "values": {
+    "newNeuron": [
+     5,
+     4
+    ],
+    "distances": {
+     "A": 5.0,
+     "B": 2.23606797749979,
+     "C": 1.4142135623730951,
+     "D": 4.47213595499958,
+     "E": 3.605551275463989,
+     "F": 1.0
+    },
+    "ranks": {
+     "F": 1,
+     "C": 2,
+     "B": 3,
+     "E": 4,
+     "D": 5,
+     "A": 6
+    },
+    "neighbors": [
+     "F",
+     "C",
+     "B"
+    ],
+    "K": 3,
+    "pInterneuron": 0.6666666666666666
+   },
+   "module": 22,
+   "tolerance": 0.003333333333333333,
+   "answerName": "Probability",
+   "answer": 0.6666666666666666
+  },
+  {
+   "id": "n22-tremor-diagnosis-knn",
+   "title": "Classifying a tremor as parkinsonian or essential with K = 3",
+   "topic": "s22knn",
+   "context": "In a movement disorders clinic, a wrist sensor (accelerometer) was used to record hand tremor in five patients whose diagnosis was already known. Three patients had Parkinson disease (PD) and two had essential tremor (ET, a common tremor that is seen mainly when the hands are in use). For each patient, the tremor frequency (in hertz (Hz)) and the tremor amplitude with the hand at rest (in millimeters (mm)) were measured. A new patient without a diagnosis has a tremor frequency of 5 Hz and a rest amplitude of 6 mm. The five patients with a known diagnosis were measured with the following results (training set):",
+   "unit": "probability",
+   "table": {
+    "headers": [
+     "Patient",
+     "Frequency (Hz)",
+     "Rest amplitude (mm)",
+     "Diagnosis"
+    ],
+    "rows": [
+     [
+      "A",
+      5,
+      8,
+      "PD"
+     ],
+     [
+      "B",
+      4,
+      6,
+      "PD"
+     ],
+     [
+      "C",
+      6,
+      5,
+      "PD"
+     ],
+     [
+      "D",
+      9,
+      2,
+      "ET"
+     ],
+     [
+      "E",
+      8,
+      3,
+      "ET"
+     ]
+    ]
+   },
+   "tasks": [
+    "Based on the data listed in the table below, classify the new patient as PD or ET. Use a K-NN classification with K = 3. Use the Euclidian distance formula for your calculations.",
+    "Make sure to show your intermediate calculations. As part of your final answer, provide the probability for the class that you chose."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(x_i\\) (feature vector of training entry \\(i\\)), \\(y_i\\) (its class label), \\(L\\) (number of classes), \\(K\\) (number of nearest neighbors), \\(d\\) (Euclidean distance).",
+   "steps": [
+    {
+     "title": "Set up",
+     "general": [
+      "q=(5,6),\\ K=3"
+     ],
+     "work": [
+      "A=(5,8),\\ B=(4,6),\\ C=(6,5),\\ D=(9,2),\\ E=(8,3)"
+     ],
+     "words": "The training set has five patients with a known diagnosis."
+    },
+    {
+     "title": "Distances",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d_A=\\sqrt{(5-5)^2+(8-6)^2}=\\sqrt{4}=2",
+      "d_B=\\sqrt{(4-5)^2+(6-6)^2}=\\sqrt{1}=1",
+      "d_C=\\sqrt{(6-5)^2+(5-6)^2}=\\sqrt{2}=1.41421",
+      "d_D=\\sqrt{(9-5)^2+(2-6)^2}=\\sqrt{32}=5.65685",
+      "d_E=\\sqrt{(8-5)^2+(3-6)^2}=\\sqrt{18}=4.24264"
+     ],
+     "words": "Compute the distance from the new patient to every labeled patient."
+    },
+    {
+     "title": "Rank the distances",
+     "general": [
+      "\\text{rank }d\\text{ from smallest}"
+     ],
+     "work": [
+      "B\\ (1)<C\\ (1.41421)<A\\ (2)<E\\ (4.24264)<D\\ (5.65685)"
+     ],
+     "words": "Ranks are B 1, C 2, A 3, E 4, D 5, so the K = 3 nearest neighbors are B, C and A."
+    },
+    {
+     "title": "Read the neighbor classes",
+     "general": [
+      "y_B,\\ y_C,\\ y_A"
+     ],
+     "work": [
+      "\\text{PD},\\ \\text{PD},\\ \\text{PD}"
+     ],
+     "words": "The other patients are not neighbors, so their classes are not used."
+    },
+    {
+     "title": "Classify and give the probability",
+     "general": [
+      "P(\\text{PD})=\\frac{\\#\\text{PD among neighbors}}{K}"
+     ],
+     "work": [
+      "P(\\text{PD})=\\frac{3}{3}=1"
+     ],
+     "words": "All three neighbors are PD, so the new patient is classified as PD."
+    }
+   ],
+   "conclusion": "The three nearest neighbors are B (PD), C (PD) and A (PD). The new patient is classified as PD. Probability of 3/3 that the new patient has Parkinson disease.",
+   "source": "Original neuroscience practice example",
+   "lookup": null,
+   "values": {
+    "newPatient": [
+     5,
+     6
+    ],
+    "distances": {
+     "A": 2.0,
+     "B": 1.0,
+     "C": 1.4142135623730951,
+     "D": 5.656854249492381,
+     "E": 4.242640687119285
+    },
+    "ranks": {
+     "B": 1,
+     "C": 2,
+     "A": 3,
+     "E": 4,
+     "D": 5
+    },
+    "neighbors": [
+     "B",
+     "C",
+     "A"
+    ],
+    "K": 3,
+    "pPD": 1.0
+   },
+   "module": 22,
+   "tolerance": 0.005,
+   "answerName": "Probability",
+   "answer": 1.0
+  }
+ ],
+ "questions": [
+  {
+   "id": "m2-n22-qa01",
+   "module": 22,
+   "topic": "s22idea",
+   "stem": "Researchers recorded 200 neurons in the auditory cortex and measured the best frequency and the response latency of each one. No cell types were known in advance, and the researchers asked whether the neurons fall into natural groups. Which task is this?",
+   "options": [
+    "Classification, because each neuron ends up in a group",
+    "Clustering, because only the features \\(x_i\\) are given and no labels \\(y_i\\)",
+    "Regression, because both features are numbers",
+    "Classification, because K nearest neighbors could be used"
+   ],
+   "correct": 1,
+   "why": "No class labels are given, so the groups must be found from the features alone. That is clustering (unsupervised). Classification needs known labels for a training set.",
+   "case": null,
+   "equations": [
+    "\\text{clustering: given }x_i\\text{ only}",
+    "\\text{classification: given }x_i\\text{ and }y_i\\in\\{1,\\dots,L\\}"
+   ]
+  },
+  {
+   "id": "m2-n22-qa02",
+   "module": 22,
+   "topic": "s22distance",
+   "stem": "For the two fricatives with scaled features \"s\" = (9, 2) and \"sh\" = (4, 5), what is the Euclidean distance between them?",
+   "options": [
+    "\\(8\\)",
+    "\\(34\\)",
+    "\\(5.83095\\)",
+    "\\(5.3368\\)"
+   ],
+   "correct": 2,
+   "why": "The differences are 5 and 3, so \\(\\sqrt{25+9}=\\sqrt{34}\\approx 5.83095\\). 34 forgets the square root, 8 is the Manhattan distance and 5.3368 is the Minkowski distance with \\(p=3\\).",
+   "case": "n22-fricative-distance",
+   "equations": [
+    "d_2=\\sqrt{5^2+3^2}=\\sqrt{34}"
+   ]
+  },
+  {
+   "id": "m2-n22-qa03",
+   "module": 22,
+   "topic": "s22distance",
+   "stem": "For the odor response patterns A = (12, 5, 9) and B = (4, 11, 7), what is the Manhattan distance between them?",
+   "options": [
+    "\\(16\\)",
+    "\\(10.19804\\)",
+    "\\(104\\)",
+    "\\(4\\)"
+   ],
+   "correct": 0,
+   "why": "Manhattan adds the absolute differences, \\(8+6+2=16\\). 10.19804 is the Euclidean distance, 104 is the sum of squares, and 4 comes from adding the signed differences \\(8-6+2\\) without absolute values.",
+   "case": "n22-odor-glomeruli-distance",
+   "equations": [
+    "d_1=|12-4|+|5-11|+|9-7|=16"
+   ]
+  },
+  {
+   "id": "m2-n22-qa04",
+   "module": 22,
+   "topic": "s22kmeans",
+   "stem": "Ten voice onset times (6, 11, 14, 19, 32, 54, 61, 66, 72 and 78 ms) are clustered with the k-Means algorithm with \\(k=2\\), \\(c_1=10\\) and \\(c_2=40\\). After iteration 1, what is the new centroid of cluster 2?",
+   "options": [
+    "\\(40\\)",
+    "\\(66.2\\)",
+    "\\(72.6\\)",
+    "\\(60.5\\)"
+   ],
+   "correct": 3,
+   "why": "Cluster 2 holds 32, 54, 61, 66, 72 and 78, so \\(363/6=60.5\\). 66.2 is the centroid after iteration 2, 72.6 divides by 5 instead of 6, and 40 is the starting centroid.",
+   "case": "n22-vot-kmeans",
+   "equations": [
+    "c_2=\\frac{363}{6}=60.5"
+   ]
+  },
+  {
+   "id": "m2-n22-qa05",
+   "module": 22,
+   "topic": "s22kmeans",
+   "stem": "Four talkers have scaled (F0, Range) values of (1, 4), (4, 2), (6, 7) and (9, 5). After a single k-Means iteration with initial centroids C1 = (2, 2) and C2 = (6, 5), what is the new centroid of cluster 2?",
+   "options": [
+    "\\((6,5)\\)",
+    "\\((7.5,6)\\)",
+    "\\((2.5,3)\\)",
+    "\\((15,12)\\)"
+   ],
+   "correct": 1,
+   "why": "Talkers 3 and 4 are assigned to cluster 2, so the centroid is \\(((6+9)/2,(7+5)/2)=(7.5,6)\\). (15, 12) forgets to divide by 2, (2.5, 3) is the cluster 1 centroid and (6, 5) is the old centroid.",
+   "case": "n22-talker-pitch-kmeans",
+   "equations": [
+    "C_2=\\left(\\frac{6+9}{2},\\frac{7+5}{2}\\right)=(7.5,6)"
+   ]
+  },
+  {
+   "id": "m2-n22-qa06",
+   "module": 22,
+   "topic": "s22kmeans",
+   "stem": "Hippocampal volume in cm³ (values near 3 to 4) and a delayed recall score (values from 0 to 15) are to be clustered with k-means. Why are the data standardized first?",
+   "options": [
+    "Standardizing makes the data Normally distributed",
+    "Standardizing tells the algorithm how many clusters to use",
+    "Without it the feature with the larger numeric range dominates the Euclidean distance",
+    "Standardizing is needed to label the clusters"
+   ],
+   "correct": 2,
+   "why": "The Euclidean distance adds squared differences, so a feature with large numbers swamps a feature with small numbers. Standardizing puts both features on the same unitless scale.",
+   "case": null,
+   "equations": [
+    "d(q,r)=\\sqrt{\\sum_{i=1}^{m}(q_i-r_i)^2}",
+    "w_{\\text{scaled}}=\\frac{w-\\bar w}{s_w}"
+   ]
+  },
+  {
+   "id": "m2-n22-qa07",
+   "module": 22,
+   "topic": "s22withinss",
+   "stem": "In the saccade latency example, withinss for k = 2 is 284.75 and 894.00 and the total sum of squares is 19870.1. What is betweenss?",
+   "options": [
+    "\\(18691.35\\)",
+    "\\(1178.75\\)",
+    "\\(21048.85\\)",
+    "\\(18976.1\\)"
+   ],
+   "correct": 0,
+   "why": "tot.withinss is \\(284.75+894=1178.75\\), so betweenss is \\(19870.1-1178.75=18691.35\\). 21048.85 adds instead of subtracting, and 18976.1 subtracts only one cluster.",
+   "case": "n22-saccade-latency-withinss",
+   "equations": [
+    "SS_{\\text{between}}=SS_{\\text{total}}-SS_{\\text{within total}}=19870.1-1178.75"
+   ]
+  },
+  {
+   "id": "m2-n22-qa08",
+   "module": 22,
+   "topic": "s22withinss",
+   "stem": "Pupil sizes from 40 trials are clustered with kmeans in R for k = 1 to 6, and tot.withinss gets smaller every time k goes up. What does this say about the choice of k?",
+   "options": [
+    "The largest k is always best because tot.withinss is smallest",
+    "The clustering failed because tot.withinss should rise with k",
+    "k should equal the number of trials so that tot.withinss is 0",
+    "Nothing by itself, so choose the k after which further drops are only modest"
+   ],
+   "correct": 3,
+   "why": "tot.withinss always falls as k grows and reaches 0 when every point is its own cluster. The useful k is where the large drops stop and later gains are modest.",
+   "case": null,
+   "equations": [
+    "SS_{\\text{within total}}=\\sum_{j=1}^{k}SS_j"
+   ]
+  },
+  {
+   "id": "m2-n22-qa09",
+   "module": 22,
+   "topic": "s22knn",
+   "stem": "In the neuron example, the new neuron (5, 4) has distances 1 to F (Pyramidal), 1.41421 to C (Interneuron), 2.23607 to B (Interneuron) and 3.60555 to E (Pyramidal). With K = 3, what is the probability that the new neuron is an interneuron?",
+   "options": [
+    "\\(1/3\\)",
+    "\\(1/2\\)",
+    "\\(2/3\\)",
+    "\\(0\\)"
+   ],
+   "correct": 2,
+   "why": "The three nearest neighbors are F, C and B, and two of them are interneurons, so the probability is 2/3. 0 uses only the single nearest neighbor F, and 1/2 counts all six training neurons.",
+   "case": "n22-neuron-type-knn",
+   "equations": [
+    "P(\\text{Interneuron})=\\frac{2}{3}"
+   ]
+  },
+  {
+   "id": "m2-n22-qa10",
+   "module": 22,
+   "topic": "s22knn",
+   "stem": "A K-NN classifier labels a new EEG segment as seizure or no seizure from two features. Why is K = 3 a more convenient choice than K = 4 when there are two classes?",
+   "options": [
+    "With two classes an odd K cannot give a tied vote",
+    "K = 3 always gives a higher probability than K = 4",
+    "K must be smaller than the number of features",
+    "K = 4 would need the Manhattan distance"
+   ],
+   "correct": 0,
+   "why": "With two classes and K = 3 the vote is 3 to 0 or 2 to 1, so one class always wins. With K = 4 the vote can be 2 to 2.",
+   "case": null,
+   "equations": [
+    "P(\\text{class})=\\frac{\\#\\text{neighbors in class}}{K}"
+   ]
+  }
+ ],
+ "notes": [
+  "All data are invented for practice. No real study is cited.",
+  "The exercise wording for the single-iteration k-Means cases and the K-NN cases is kept with its own punctuation in context and tasks (the semicolon in 'differences in scale; the scaled data are unitless', the colon after 'initial centroids' and after '(training set)'). The check script allows colons and semicolons in context and tasks only.",
+  "Two-dimensional k-Means and the neuron K-NN case follow the lecture exercise in showing standardized data as small positive integers. Real z-scores would include negative decimals.",
+  "n22-saccade-latency-withinss: size, withinss and tot.withinss were produced by R 'kmeans' with given starting centers, kmeans(x, c(100,200)), kmeans(x, c(100,180,205)) and kmeans(x, c(98,113,180,205)), and agree with kmeans(x, k, nstart = 100). The table strings are as R prints them. betweenss from R is 18691.35, 19374.02 and 19584.27.",
+  "values key names follow the reference cases (q, r, euclidean, manhattan, minkowski3, k, initial, iter1Labels, iter1Centroids, iter2Labels, iter2Centroids, iterations, points, distC1, distC2, labels, newC1, newC2, ss1, ss2, totWithin, totalSS, between, totWithinK3, totWithinK4, chosenK, distances, ranks, neighbors, K). Keys that name the data in the reference (ages, tomato, newMesh, pFail) are renamed for the new data (vot, latencies, newEpoch, newVowel, newNeuron, newPatient, pHeed, pInterneuron, pPD).",
+  "No K-NN case has tied distances at any rank. In n22-neuron-type-knn the single nearest neighbor (F, Pyramidal) is outvoted by the next two (Interneuron). n22-tremor-diagnosis-knn gives 3/3.",
+  "The vowel K-NN case uses raw formants in hundreds of Hz (not standardized), like the reference mesh case that uses raw units."
+ ]
+}

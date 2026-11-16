@@ -1,0 +1,1698 @@
+{
+ "session": 18,
+ "methods": [
+  {
+   "id": "s18line",
+   "title": "Least-squares regression line → slope b and intercept a",
+   "trigger": "Paired measurements of two variables (or their sums Σx, Σy, Σx², Σxy) are given and the question asks for the regression line of the dependent variable on the independent variable.",
+   "formula": [
+    "b=\\frac{n\\sum x_iy_i-\\sum x_i\\sum y_i}{n\\sum x_i^2-(\\sum x_i)^2}",
+    "a=\\bar y-b\\bar x",
+    "\\hat y=a+bx"
+   ]
+  },
+  {
+   "id": "s18syx",
+   "title": "Scatter about the line → s_y|x, s_a and s_b",
+   "trigger": "The question asks for the residual (standard error of the estimate) SD about the regression line, or for the standard errors of the intercept and slope.",
+   "formula": [
+    "s_{y|x}=\\sqrt{\\frac{1}{n-2}\\sum(y_i-\\hat y_i)^2}=\\sqrt{\\frac{n-1}{n-2}(s_y^2-b^2s_x^2)}",
+    "s_b=\\frac{1}{\\sqrt{n-1}}\\frac{s_{y|x}}{s_x}",
+    "s_a=s_{y|x}\\sqrt{\\frac1n+\\frac{\\bar x^2}{(n-1)s_x^2}}"
+   ]
+  },
+  {
+   "id": "s18slope",
+   "title": "Slope t test and CIs for β and α → significance of the trend",
+   "trigger": "The question asks whether there is a significant relationship (trend) between two variables, or asks for a confidence interval for the slope or intercept, by hand or from lm() output.",
+   "formula": [
+    "t=\\frac{b-\\beta}{s_b}=\\frac{b}{s_b},\\quad\\nu=n-2",
+    "b\\pm t_\\alpha(\\nu)s_b",
+    "a\\pm t_\\alpha(\\nu)s_a"
+   ]
+  },
+  {
+   "id": "s18predict",
+   "title": "Prediction at x → CI for the line of means vs CI for one observation",
+   "trigger": "The question asks for the mean of y at a given x with its confidence interval, or for the range expected for a single new individual at that x.",
+   "formula": [
+    "\\hat y=a+bx",
+    "s_{\\hat y}=s_{y|x}\\sqrt{\\frac1n+\\frac{(x-\\bar x)^2}{(n-1)s_x^2}}",
+    "s_{Y_{new}}=\\sqrt{s_{y|x}^2+s_{\\hat y}^2}=s_{y|x}\\sqrt{1+\\frac1n+\\frac{(x-\\bar x)^2}{(n-1)s_x^2}}",
+    "\\hat y\\pm t_\\alpha(\\nu)s_{\\hat y}\\quad\\text{or}\\quad\\hat y\\pm t_\\alpha(\\nu)s_{Y_{new}},\\ \\nu=n-2"
+   ]
+  },
+  {
+   "id": "s18compare",
+   "title": "Two regression lines → t test for a difference in slopes",
+   "trigger": "Two groups each have their own regression of y on x, and the question asks whether the slopes (or intercepts) differ.",
+   "formula": [
+    "t=\\frac{b_1-b_2}{s_{b_1-b_2}},\\quad\\nu=n_1+n_2-4",
+    "s_{b_1-b_2}=\\sqrt{s_{b_1}^2+s_{b_2}^2}\\quad(n_1=n_2)",
+    "s_{y|x_p}^2=\\frac{(n_1-2)s_{y|x_1}^2+(n_2-2)s_{y|x_2}^2}{n_1+n_2-4}",
+    "s_{b_1-b_2}=\\sqrt{\\frac{s_{y|x_p}^2}{(n_1-1)s_{x_1}^2}+\\frac{s_{y|x_p}^2}{(n_2-1)s_{x_2}^2}}\\quad(n_1\\ne n_2)"
+   ]
+  },
+  {
+   "id": "s18corr",
+   "title": "Pearson correlation r → strength of association and its t test",
+   "trigger": "The question asks how strongly two variables are associated, for the Pearson correlation coefficient, or whether the correlation differs from zero.",
+   "formula": [
+    "r=\\frac{\\sum(x_i-\\bar x)(y_i-\\bar y)}{\\sqrt{\\sum(x_i-\\bar x)^2\\sum(y_i-\\bar y)^2}}",
+    "r=\\frac{\\sqrt{\\sum(x_i-\\bar x)^2}}{\\sqrt{\\sum(y_i-\\bar y)^2}}\\,b",
+    "t=r\\sqrt{\\frac{n-2}{1-r^2}},\\quad\\nu=n-2"
+   ]
+  }
+ ],
+ "cases": [
+  {
+   "id": "s18-martians-line",
+   "title": "Least-squares line for 10 Martians",
+   "topic": "s18line",
+   "context": "A random sample of 10 Martians is drawn from a population of 200. Height x (cm) and weight y (g) are recorded for each Martian, and the totals of x, y, x² and xy are formed as in Table 8-1.",
+   "unit": "g/cm",
+   "table": {
+    "headers": [
+     "Height x (cm)",
+     "Weight y (g)",
+     "x² (cm²)",
+     "xy (g·cm)"
+    ],
+    "rows": [
+     [
+      31,
+      7.8,
+      961,
+      241.8
+     ],
+     [
+      32,
+      8.3,
+      1024,
+      265.6
+     ],
+     [
+      33,
+      7.6,
+      1089,
+      250.8
+     ],
+     [
+      34,
+      9.1,
+      1156,
+      309.4
+     ],
+     [
+      35,
+      9.6,
+      1225,
+      336
+     ],
+     [
+      35,
+      9.8,
+      1225,
+      343
+     ],
+     [
+      40,
+      11.8,
+      1600,
+      472
+     ],
+     [
+      41,
+      12.1,
+      1681,
+      496.1
+     ],
+     [
+      42,
+      14.7,
+      1764,
+      617.4
+     ],
+     [
+      46,
+      13,
+      2116,
+      598
+     ],
+     [
+      "Total 369",
+      "Total 103.8",
+      "Total 13,841",
+      "Total 3,930.1"
+     ]
+    ]
+   },
+   "tasks": [
+    "Using the column totals, calculate the least-squares slope b and intercept a. Show the shared denominator, both numerators, and the check \\(a=\\bar y-b\\bar x\\).",
+    "Write the regression line and compare it with the population line of means \\(\\mu_{y|x}=-8+0.5x\\)."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(n\\) (number of Martians), \\(x\\) (height, cm), \\(y\\) (weight, g), \\(b\\) (least-squares slope, g/cm), \\(a\\) (least-squares intercept, g), \\(\\bar x,\\bar y\\) (sample means), \\(D\\) (shared denominator).",
+   "steps": [
+    {
+     "title": "Collect the sums",
+     "general": [
+      "n,\\ \\sum x_i,\\ \\sum y_i,\\ \\sum x_i^2,\\ \\sum x_iy_i"
+     ],
+     "work": [
+      "n=10,\\ \\sum x_i=369,\\ \\sum y_i=103.8,\\ \\sum x_i^2=13841,\\ \\sum x_iy_i=3930.1"
+     ],
+     "words": "The least-squares formulas need only these five numbers, read from the bottom row of Table 8-1."
+    },
+    {
+     "title": "Calculate the shared denominator",
+     "general": [
+      "D=n\\sum x_i^2-\\Big(\\sum x_i\\Big)^2"
+     ],
+     "work": [
+      "D=10(13841)-369^2=138410-136161=2249"
+     ],
+     "words": "Both the slope and the intercept formulas divide by this quantity, in cm²."
+    },
+    {
+     "title": "Calculate the slope",
+     "general": [
+      "b=\\frac{n\\sum x_iy_i-\\sum x_i\\sum y_i}{D}"
+     ],
+     "work": [
+      "b=\\frac{10(3930.1)-369(103.8)}{2249}=\\frac{39301-38302.2}{2249}=\\frac{998.8}{2249}=0.4441085"
+     ],
+     "words": "The slope is the estimated increase in mean weight per centimeter of height, in g/cm."
+    },
+    {
+     "title": "Calculate both sample means",
+     "general": [
+      "\\bar x=\\frac{\\sum x_i}{n}",
+      "\\bar y=\\frac{\\sum y_i}{n}"
+     ],
+     "work": [
+      "\\bar x=\\frac{369}{10}=36.9",
+      "\\bar y=\\frac{103.8}{10}=10.38"
+     ],
+     "words": "The least-squares line passes through the point of means (36.9 cm, 10.38 g)."
+    },
+    {
+     "title": "Calculate the intercept from the means",
+     "general": [
+      "a=\\bar y-b\\bar x"
+     ],
+     "work": [
+      "a=10.38-0.4441085(36.9)=10.38-16.3876=-6.007603"
+     ],
+     "words": "Carry the unrounded slope into this step; rounding b to 0.44 first would move a to about −5.86 g."
+    },
+    {
+     "title": "Check the intercept with the full formula",
+     "general": [
+      "a=\\frac{\\sum y_i\\sum x_i^2-\\sum x_i\\sum x_iy_i}{D}"
+     ],
+     "work": [
+      "a=\\frac{103.8(13841)-369(3930.1)}{2249}=\\frac{1436695.8-1450206.9}{2249}=\\frac{-13511.1}{2249}=-6.007603"
+     ],
+     "words": "Both routes give the same intercept, in grams."
+    },
+    {
+     "title": "Write the line and compare with the line of means",
+     "general": [
+      "\\hat y=a+bx",
+      "\\mu_{y|x}=\\alpha+\\beta x"
+     ],
+     "work": [
+      "\\hat y=-6.01+0.444x\\approx-6.0+0.44x",
+      "\\mu_{y|x}=-8+0.5x"
+     ],
+     "words": "The sample line estimates the population line. Its slope 0.44 g/cm is near the true 0.5 g/cm, and the difference reflects which 10 Martians were sampled."
+    }
+   ],
+   "conclusion": "The least-squares line is \\(\\hat y=-6.008+0.4441x\\) (slide: \\(\\hat y=-6.0+0.44x\\)). Mean Martian weight is estimated to rise by about 0.44 g for each additional centimeter of height.",
+   "source": "Session 18 page 15",
+   "lookup": null,
+   "values": {
+    "n": 10,
+    "sumX": 369,
+    "sumY": 103.8,
+    "sumX2": 13841,
+    "sumXY": 3930.1,
+    "denominator": 2249,
+    "xbar": 36.9,
+    "ybar": 10.379999999999999,
+    "slope": 0.44410849266340724,
+    "intercept": -6.007603379279729
+   },
+   "module": 18,
+   "tolerance": 0.002220542463317036,
+   "answerName": "Slope b",
+   "answer": 0.44410849266340724
+  },
+  {
+   "id": "s18-martians-spread",
+   "title": "Martian scatter about the line and coefficient standard errors",
+   "topic": "s18syx",
+   "context": "For the same sample of 10 Martians, the slide summarizes the data with rounded values: the SD of height is 5.0 cm, the SD of weight is 2.4 g, the slope is 0.44 g/cm, and the mean height is 36.9 cm.",
+   "unit": "g",
+   "table": {
+    "headers": [
+     "Quantity",
+     "Symbol",
+     "Value"
+    ],
+    "rows": [
+     [
+      "Number of Martians",
+      "n",
+      10
+     ],
+     [
+      "SD of height (cm)",
+      "s_x",
+      5
+     ],
+     [
+      "SD of weight (g)",
+      "s_y",
+      2.4
+     ],
+     [
+      "Slope (g/cm)",
+      "b",
+      0.44
+     ],
+     [
+      "Mean height (cm)",
+      "x̄",
+      36.9
+     ]
+    ]
+   },
+   "tasks": [
+    "Estimate \\(\\sigma_{y|x}\\) with the shortcut \\(s_{y|x}=\\sqrt{\\frac{n-1}{n-2}(s_y^2-b^2s_x^2)}\\).",
+    "Calculate the standard errors \\(s_b\\) and \\(s_a\\) from the formulas, and compare with the values from the unrounded raw data."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(s_{y|x}\\) (standard error of the estimate, g), \\(s_x,s_y\\) (sample SDs), \\(b\\) (slope), \\(s_b\\) (SE of the slope, g/cm), \\(s_a\\) (SE of the intercept, g), \\(\\bar x\\) (mean height), \\(n\\) (sample size).",
+   "steps": [
+    {
+     "title": "Square the pieces inside the shortcut",
+     "general": [
+      "s_y^2",
+      "b^2s_x^2"
+     ],
+     "work": [
+      "s_y^2=2.4^2=5.76",
+      "b^2s_x^2=0.44^2(5.0^2)=0.1936(25)=4.84"
+     ],
+     "words": "The first term is the total variance of weight; the second is the part of it explained by the line."
+    },
+    {
+     "title": "Calculate the standard error of the estimate",
+     "general": [
+      "s_{y|x}=\\sqrt{\\frac{n-1}{n-2}\\left(s_y^2-b^2s_x^2\\right)}"
+     ],
+     "work": [
+      "s_{y|x}=\\sqrt{\\frac{9}{8}(5.76-4.84)}=\\sqrt{\\frac{9}{8}(0.92)}=\\sqrt{1.035}=1.017349"
+     ],
+     "words": "The factor (n−1)/(n−2) converts the n−1 denominators of the sample variances into the n−2 denominator required for regression. The result, about 1.02 g, estimates the true σ_y|x = 1 g."
+    },
+    {
+     "title": "Calculate the standard error of the slope",
+     "general": [
+      "s_b=\\frac{1}{\\sqrt{n-1}}\\frac{s_{y|x}}{s_x}"
+     ],
+     "work": [
+      "s_b=\\frac{1}{\\sqrt{9}}\\cdot\\frac{1.017349}{5.0}=0.0678233"
+     ],
+     "words": "Using the rounded 1.02 g instead gives 0.068 g/cm. The slide prints 0.064 g/cm, which matches the unrounded data (step 6)."
+    },
+    {
+     "title": "Evaluate the bracket for the intercept",
+     "general": [
+      "\\frac{1}{n}+\\frac{\\bar x^2}{(n-1)s_x^2}"
+     ],
+     "work": [
+      "\\frac{1}{10}+\\frac{36.9^2}{9(5.0^2)}=0.1+\\frac{1361.61}{225}=0.1+6.0516=6.1516"
+     ],
+     "words": "The second term is large because the mean height lies far from x = 0, where the intercept is defined."
+    },
+    {
+     "title": "Calculate the standard error of the intercept",
+     "general": [
+      "s_a=s_{y|x}\\sqrt{\\frac{1}{n}+\\frac{\\bar x^2}{(n-1)s_x^2}}"
+     ],
+     "work": [
+      "s_a=1.017349\\sqrt{6.1516}=1.017349(2.480242)=2.523273"
+     ],
+     "words": "With 1.02 g the result is 2.53 g; the slide prints 2.6 g. The intercept is far less precise than the slope because it is an extrapolation to zero height."
+    },
+    {
+     "title": "Compare with the unrounded raw data",
+     "general": [
+      "s_{y|x}^2=\\frac{1}{n-2}\\sum(y_i-\\hat y_i)^2"
+     ],
+     "work": [
+      "s_{y|x}=\\sqrt{\\frac{7.43844}{8}}=0.96426",
+      "s_b=0.0643,\\quad s_a=2.392"
+     ],
+     "words": "From the ten observations and the unrounded line, the residual sum of squares is 7.438 g². The shortcut with rounded inputs overstates s_y|x because it subtracts two nearly equal numbers; R output reproduces the raw-data values."
+    }
+   ],
+   "conclusion": "From the slide's rounded inputs, \\(s_{y|x}=1.017\\) g (slide: 1.02 g), \\(s_b=0.0678\\) g/cm and \\(s_a=2.52\\) g. The unrounded data give 0.964 g, 0.0643 g/cm and 2.39 g.",
+   "source": "Session 18 pages 19–20",
+   "lookup": null,
+   "values": {
+    "n": 10,
+    "sx": 5,
+    "sy": 2.4,
+    "b": 0.44,
+    "xbar": 36.9,
+    "syx": 1.0173494974687902,
+    "sb": 0.06782329983125268,
+    "sa": 2.5232728746610023,
+    "syxRaw": 0.964264211249892,
+    "sbRaw": 0.06429857090927792,
+    "saRaw": 2.392131526578776
+   },
+   "module": 18,
+   "tolerance": 0.005086747487343952,
+   "answerName": "Standard error of the estimate s_y|x",
+   "answer": 1.0173494974687902
+  },
+  {
+   "id": "s18-martians-trend",
+   "title": "Is Martian weight related to height?",
+   "topic": "s18slope",
+   "context": "The Martian sample of n = 10 gives the slope b = 0.44 g/cm with standard error s_b = 0.064 g/cm, and the intercept a = −6.0 g with standard error s_a = 2.6 g, as printed on the slides.",
+   "unit": "",
+   "table": {
+    "headers": [
+     "Coefficient",
+     "Estimate",
+     "Standard error"
+    ],
+    "rows": [
+     [
+      "Intercept a (g)",
+      -6,
+      2.6
+     ],
+     [
+      "Slope b (g/cm)",
+      0.44,
+      0.064
+     ]
+    ]
+   },
+   "tasks": [
+    "Test whether there is a relationship between height and weight at the 0.05 level. State the hypotheses, the statistic, the degrees of freedom and the printed critical value, and give the P range.",
+    "Construct the 95% confidence intervals for the slope β and for the intercept of the line of means."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\beta=0",
+    "alternative": "H_A:\\beta\\ne0",
+    "nullWords": "There is no linear relationship between height and weight in the Martian population: the slope of the line of means is zero.",
+    "alternativeWords": "Mean Martian weight changes linearly with height: the slope of the line of means is not zero."
+   },
+   "symbols": "\\(b\\) (sample slope), \\(s_b\\) (SE of the slope), \\(a\\) (sample intercept), \\(s_a\\) (SE of the intercept), \\(\\beta\\) (population slope), \\(\\alpha_{LOM}\\) (population intercept), \\(\\nu\\) (degrees of freedom), \\(t_\\alpha(\\nu)\\) (two-tailed critical value).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\beta=0",
+      "H_A:\\beta\\ne0"
+     ],
+     "work": [
+      "H_0:\\beta_{\\text{Martians}}=0"
+     ],
+     "words": "Use the t test for the slope of a regression line. The null states that mean Martian weight does not change with height."
+    },
+    {
+     "title": "Calculate the t statistic",
+     "general": [
+      "t=\\frac{b-\\beta}{s_b}=\\frac{b}{s_b}"
+     ],
+     "work": [
+      "t=\\frac{0.44}{0.064}=6.875"
+     ],
+     "words": "Under the null, β = 0, so the statistic is the slope divided by its standard error."
+    },
+    {
+     "title": "Find the degrees of freedom",
+     "general": [
+      "\\nu=n-2"
+     ],
+     "work": [
+      "\\nu=10-2=8"
+     ],
+     "words": "Two coefficients were estimated from the data."
+    },
+    {
+     "title": "Find the 0.05 critical value",
+     "general": [
+      "t_c=t_{0.05}(\\nu)"
+     ],
+     "work": [
+      "t_{0.05}(8)=2.306"
+     ],
+     "words": "Open t_table.pdf, PDF page 1, row 8, two-tailed column 0.05. The printed cutoff is 2.306.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "8",
+      "column": "0.05",
+      "value": 2.306,
+      "actualDf": 8,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision",
+     "general": [
+      "|t|>t_{0.05}(\\nu)\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "6.875>2.306"
+     ],
+     "words": "The statistic exceeds the cutoff, so the null hypothesis of no relationship is rejected."
+    },
+    {
+     "title": "Find the P range",
+     "general": [
+      "|t|>t_{0.001}(\\nu)\\Rightarrow P<0.001"
+     ],
+     "work": [
+      "t_{0.001}(8)=5.041",
+      "6.875>5.041\\Rightarrow P<0.001"
+     ],
+     "words": "Row 8, column 0.001 prints 5.041 (the slide writes 5.401). The statistic exceeds the largest printed cutoff, so P < 0.001.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "8",
+      "column": "0.001",
+      "value": 5.041,
+      "actualDf": 8,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Construct the 95% interval for the slope",
+     "general": [
+      "b-t_{0.05}(\\nu)s_b<\\beta<b+t_{0.05}(\\nu)s_b"
+     ],
+     "work": [
+      "M=2.306(0.064)=0.147584",
+      "0.44-0.147584<\\beta<0.44+0.147584",
+      "0.292416<\\beta<0.587584"
+     ],
+     "words": "The interval excludes 0, which agrees with the test, and it contains the true slope 0.5 g/cm."
+    },
+    {
+     "title": "Construct the 95% interval for the intercept",
+     "general": [
+      "a-t_{0.05}(\\nu)s_a<\\alpha_{LOM}<a+t_{0.05}(\\nu)s_a"
+     ],
+     "work": [
+      "M=2.306(2.6)=5.9956",
+      "-6.0-5.9956<\\alpha_{LOM}<-6.0+5.9956",
+      "-11.9956<\\alpha_{LOM}<-0.0044"
+     ],
+     "words": "The intercept interval is wide and contains the true value −8 g."
+    }
+   ],
+   "conclusion": "t = 6.875 with ν = 8 exceeds t_0.05(8) = 2.306 and t_0.001(8) = 5.041, so the null is rejected (P < 0.001): Martian weight increases with height. The 95% CI for β is 0.2924 to 0.5876 g/cm, and for α_LOM it is −11.9956 to −0.0044 g.",
+   "source": "Session 18 pages 21–23",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "8",
+    "column": "0.05",
+    "value": 2.306,
+    "actualDf": 8,
+    "approximation": false
+   },
+   "values": {
+    "n": 10,
+    "b": 0.44,
+    "sb": 0.064,
+    "a": -6,
+    "sa": 2.6,
+    "df": 8,
+    "t": 6.875,
+    "critical": 2.306,
+    "critical001": 5.041,
+    "slopeLower": 0.292416,
+    "slopeUpper": 0.587584,
+    "interceptLower": -11.9956,
+    "interceptUpper": -0.004399999999999515,
+    "reject": true,
+    "tRaw": 6.906972991515175
+   },
+   "module": 18,
+   "tolerance": 0.034375,
+   "answerName": "t statistic",
+   "answer": 6.875
+  },
+  {
+   "id": "s18-martians-at40",
+   "title": "Martians 40 cm tall: mean weight and one Martian's weight",
+   "topic": "s18predict",
+   "context": "Use the Martian regression \\(\\hat y=-6.0+0.44x\\) with \\(s_{y|x}=1.02\\) g, n = 10, \\(\\bar x=36.9\\) cm and \\(s_x=5.0\\) cm.",
+   "unit": "g",
+   "table": {
+    "headers": [
+     "Quantity",
+     "Value"
+    ],
+    "rows": [
+     [
+      "Intercept a (g)",
+      -6
+     ],
+     [
+      "Slope b (g/cm)",
+      0.44
+     ],
+     [
+      "s_y|x (g)",
+      1.02
+     ],
+     [
+      "n",
+      10
+     ],
+     [
+      "Mean height x̄ (cm)",
+      36.9
+     ],
+     [
+      "SD of height s_x (cm)",
+      5
+     ],
+     [
+      "Chosen height x (cm)",
+      40
+     ]
+    ]
+   },
+   "tasks": [
+    "Construct the 95% confidence interval for the mean weight of Martians 40 cm tall (the line of means at x = 40).",
+    "Construct the 95% confidence interval for the weight of a single Martian 40 cm tall, and explain why it is wider."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(\\hat y\\) (predicted mean weight), \\(s_{\\hat y}\\) (SE of the predicted mean), \\(s_{Y_{new}}\\) (SE for one new Martian), \\(s_{y|x}\\) (scatter about the line), \\(\\bar x\\) (mean height), \\(s_x\\) (SD of height), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "Calculate the predicted weight",
+     "general": [
+      "\\hat y=a+bx"
+     ],
+     "work": [
+      "\\hat y=-6.0+0.44(40)=-6.0+17.6=11.6"
+     ],
+     "words": "This is the estimated mean weight at 40 cm, in grams."
+    },
+    {
+     "title": "Evaluate the distance term",
+     "general": [
+      "\\frac{1}{n}+\\frac{(x-\\bar x)^2}{(n-1)s_x^2}"
+     ],
+     "work": [
+      "\\frac{1}{10}+\\frac{(40-36.9)^2}{9(5.0^2)}=0.1+\\frac{9.61}{225}=0.1427111"
+     ],
+     "words": "The second term grows with the distance between 40 cm and the mean height."
+    },
+    {
+     "title": "Calculate the standard error of the mean prediction",
+     "general": [
+      "s_{\\hat y}=s_{y|x}\\sqrt{\\frac{1}{n}+\\frac{(x-\\bar x)^2}{(n-1)s_x^2}}"
+     ],
+     "work": [
+      "s_{\\hat y}=1.02\\sqrt{0.1427111}=1.02(0.3777712)=0.3853267"
+     ],
+     "words": "This standard error describes uncertainty in the height of the line at x = 40."
+    },
+    {
+     "title": "Find the degrees of freedom and cutoff",
+     "general": [
+      "\\nu=n-2",
+      "t_c=t_{0.05}(\\nu)"
+     ],
+     "work": [
+      "\\nu=8",
+      "t_{0.05}(8)=2.306"
+     ],
+     "words": "Open t_table.pdf, PDF page 1, row 8, column 0.05.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "8",
+      "column": "0.05",
+      "value": 2.306,
+      "actualDf": 8,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Construct the interval for the mean",
+     "general": [
+      "\\hat y\\pm t_{0.05}(\\nu)s_{\\hat y}"
+     ],
+     "work": [
+      "M=2.306(0.3853267)=0.8885633",
+      "11.6\\pm0.8885633\\Rightarrow 10.71144<\\mu_{y|40}<12.48856"
+     ],
+     "words": "With 95% confidence, the mean weight of all 40 cm Martians lies between about 10.71 and 12.49 g; the true mean is 12 g."
+    },
+    {
+     "title": "Calculate the standard error for one new Martian",
+     "general": [
+      "s_{Y_{new}}=\\sqrt{s_{y|x}^2+s_{\\hat y}^2}"
+     ],
+     "work": [
+      "s_{Y_{new}}=\\sqrt{1.0404+0.1484766}=\\sqrt{1.188877}=1.090356"
+     ],
+     "words": "Add the individual scatter about the line to the uncertainty in the line itself. The same value follows from 1.02√(1+0.1427111)."
+    },
+    {
+     "title": "Construct the interval for one Martian",
+     "general": [
+      "\\hat y\\pm t_{0.05}(\\nu)s_{Y_{new}}"
+     ],
+     "work": [
+      "M=2.306(1.090356)=2.514361",
+      "11.6\\pm2.514361\\Rightarrow 9.085639<y<14.11436"
+     ],
+     "words": "This interval should contain the weight of a single randomly chosen Martian 40 cm tall with 95% confidence."
+    },
+    {
+     "title": "Compare the two widths",
+     "general": [
+      "s_{Y_{new}}>s_{\\hat y}"
+     ],
+     "work": [
+      "1.090356>0.3853267"
+     ],
+     "words": "The observation interval is about 2.8 times as wide, because individual Martians scatter about the mean with SD near 1 g even if the line were known exactly."
+    }
+   ],
+   "conclusion": "95% CI for the mean weight at 40 cm: 10.71144 to 12.48856 g. 95% CI for one Martian's weight at 40 cm: 9.085639 to 14.11436 g.",
+   "source": "Session 18 pages 24–25 and 43",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "8",
+    "column": "0.05",
+    "value": 2.306,
+    "actualDf": 8,
+    "approximation": false
+   },
+   "values": {
+    "a": -6,
+    "b": 0.44,
+    "syx": 1.02,
+    "n": 10,
+    "xbar": 36.9,
+    "sx": 5,
+    "x": 40,
+    "yhat": 11.600000000000001,
+    "seMean": 0.3853266666089956,
+    "seNew": 1.090356198680046,
+    "critical": 2.306,
+    "meanLower": 10.711436706799658,
+    "meanUpper": 12.488563293200345,
+    "obsLower": 9.085638605843815,
+    "obsUpper": 14.114361394156187,
+    "confidence": 0.95
+   },
+   "module": 18,
+   "tolerance": 0.05355718353399829,
+   "answerName": "Lower endpoint of the mean-weight CI",
+   "answer": 10.711436706799658
+  },
+  {
+   "id": "s18-martians-r",
+   "title": "Martian correlation coefficient and its t test",
+   "topic": "s18corr",
+   "context": "Table 8-3 gives, for the 10 sampled Martians, the totals of the deviation products and squared deviations from the means.",
+   "unit": "",
+   "table": {
+    "headers": [
+     "Total",
+     "Value"
+    ],
+    "rows": [
+     [
+      "Σ(x − x̄)(y − ȳ) (g·cm)",
+      99.9
+     ],
+     [
+      "Σ(x − x̄)² (cm²)",
+      224.9
+     ],
+     [
+      "Σ(y − ȳ)² (g²)",
+      51.8
+     ],
+     [
+      "n",
+      10
+     ]
+    ]
+   },
+   "tasks": [
+    "Calculate the Pearson correlation coefficient r and check it with the slope relation.",
+    "Test whether the correlation differs from zero at the 0.05 level, and give the P range."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\rho=0",
+    "alternative": "H_A:\\rho\\ne0",
+    "nullWords": "There is no linear relationship between height and weight in the Martian population (the population correlation is zero).",
+    "alternativeWords": "Height and weight are linearly related in the Martian population (the population correlation is not zero)."
+   },
+   "symbols": "\\(r\\) (sample correlation coefficient), \\(\\rho\\) (population correlation), \\(b\\) (slope), \\(n\\) (number of pairs), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "Calculate r from the deviation totals",
+     "general": [
+      "r=\\frac{\\sum(x-\\bar x)(y-\\bar y)}{\\sqrt{\\sum(x-\\bar x)^2\\sum(y-\\bar y)^2}}"
+     ],
+     "work": [
+      "r=\\frac{99.9}{\\sqrt{(224.9)(51.8)}}=\\frac{99.9}{\\sqrt{11649.82}}=\\frac{99.9}{107.9343}=0.9255628"
+     ],
+     "words": "The units g·cm cancel, so r has no units. The slide rounds to 0.925."
+    },
+    {
+     "title": "Check with the slope relation",
+     "general": [
+      "b=\\frac{\\sum(x-\\bar x)(y-\\bar y)}{\\sum(x-\\bar x)^2}",
+      "r=\\frac{\\sqrt{\\sum(x-\\bar x)^2}}{\\sqrt{\\sum(y-\\bar y)^2}}\\cdot b"
+     ],
+     "work": [
+      "b=\\frac{99.9}{224.9}=0.4441974",
+      "r=\\sqrt{\\frac{224.9}{51.8}}(0.4441974)=2.083674(0.4441974)=0.9255628"
+     ],
+     "words": "The deviation form of the slope equals the n·Σxy formula, and r has the same sign as b."
+    },
+    {
+     "title": "Square r",
+     "general": [
+      "r^2"
+     ],
+     "work": [
+      "r^2=0.9255628^2=0.8566665"
+     ],
+     "words": "About 86% of the variation in weight is accounted for by the linear relationship with height."
+    },
+    {
+     "title": "Calculate the t statistic",
+     "general": [
+      "t=r\\sqrt{\\frac{n-2}{1-r^2}}"
+     ],
+     "work": [
+      "t=0.9255628\\sqrt{\\frac{8}{0.1433335}}=0.9255628\\sqrt{55.81387}=6.914757"
+     ],
+     "words": "This matches the slope statistic b/s_b computed from the same data (6.907 from the unrounded data)."
+    },
+    {
+     "title": "Find the degrees of freedom and the 0.05 cutoff",
+     "general": [
+      "\\nu=n-2",
+      "t_c=t_{0.05}(\\nu)"
+     ],
+     "work": [
+      "\\nu=8",
+      "t_{0.05}(8)=2.306"
+     ],
+     "words": "Open t_table.pdf, PDF page 1, row 8, two-tailed column 0.05.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "8",
+      "column": "0.05",
+      "value": 2.306,
+      "actualDf": 8,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Decide and give the P range",
+     "general": [
+      "|t|>t_{0.001}(\\nu)\\Rightarrow P<0.001"
+     ],
+     "work": [
+      "6.914757>2.306",
+      "6.914757>t_{0.001}(8)=5.041\\Rightarrow P<0.001"
+     ],
+     "words": "Reject the null hypothesis of zero correlation.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "8",
+      "column": "0.001",
+      "value": 5.041,
+      "actualDf": 8,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Interpret r",
+     "general": [
+      "r\\to+1"
+     ],
+     "work": [
+      "r=0.926"
+     ],
+     "words": "A value this close to +1 indicates a strong positive linear relationship: taller Martians tend to be heavier."
+    }
+   ],
+   "conclusion": "r = 0.9256 (slide: 0.925). t = 6.915 with ν = 8 exceeds 5.041, so the correlation differs from zero (P < 0.001).",
+   "source": "Session 18 pages 39–41",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "8",
+    "column": "0.05",
+    "value": 2.306,
+    "actualDf": 8,
+    "approximation": false
+   },
+   "values": {
+    "n": 10,
+    "sxy": 99.9,
+    "sxx": 224.9,
+    "syy": 51.8,
+    "r": 0.9255627774129375,
+    "r2": 0.8566664549323508,
+    "t": 6.914757482314185,
+    "df": 8,
+    "critical": 2.306,
+    "reject": true
+   },
+   "module": 18,
+   "tolerance": 0.004627813887064687,
+   "answerName": "Correlation coefficient r",
+   "answer": 0.9255627774129375
+  },
+  {
+   "id": "s18-plutonian-males",
+   "title": "Male Plutonians: intervals, correlation and predictions at 68 inches",
+   "topic": "s18predict",
+   "context": "For 18 male Plutonians, lm(Weight.lbs ~ Height.in) gives the coefficients below, a residual standard error of 2.711 lb on 16 degrees of freedom, and multiple R-squared 0.9418. The heights in the data table total 1215 in, with Σx² = 82,189 in².",
+   "unit": "lb",
+   "table": {
+    "headers": [
+     "lm() row",
+     "Estimate",
+     "Std. Error",
+     "t value",
+     "Pr(>|t|)"
+    ],
+    "rows": [
+     [
+      "(Intercept)",
+      -4.2329,
+      13.7901,
+      -0.307,
+      0.763
+     ],
+     [
+      "Height.in",
+      3.2833,
+      0.2041,
+      16.088,
+      "2.66e-11"
+     ]
+    ]
+   },
+   "tasks": [
+    "Give the standard errors of \\(b_0\\) and \\(b_1\\) and their 95% confidence intervals.",
+    "Give the correlation coefficient.",
+    "Give the mean weight of a male 68 inches tall, the 95% CI for that mean, and the 95% CI for the weight of one male 68 inches tall."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(b_0=a\\) (intercept, lb), \\(b_1=b\\) (slope, lb/in), \\(s_a,s_b\\) (standard errors), \\(s_{y|x}\\) (residual standard error), \\(R^2\\) (multiple R-squared), \\(\\bar x,s_x\\) (mean and SD of height), \\(s_{\\hat y},s_{Y_{new}}\\) (SEs for the mean and for one male).",
+   "steps": [
+    {
+     "title": "Read the coefficients and standard errors",
+     "general": [
+      "\\hat y=b_0+b_1x"
+     ],
+     "work": [
+      "b_0=-4.2329,\\ s_{b_0}=13.7901",
+      "b_1=3.2833,\\ s_{b_1}=0.2041",
+      "s_{y|x}=2.711"
+     ],
+     "words": "The Std. Error column answers part (a) directly."
+    },
+    {
+     "title": "Find the degrees of freedom and cutoff",
+     "general": [
+      "\\nu=n-2",
+      "t_c=t_{0.05}(\\nu)"
+     ],
+     "work": [
+      "\\nu=18-2=16",
+      "t_{0.05}(16)=2.120"
+     ],
+     "words": "Open t_table.pdf, PDF page 1, row 16, two-tailed column 0.05.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "16",
+      "column": "0.05",
+      "value": 2.12,
+      "actualDf": 16,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Construct the 95% interval for the slope",
+     "general": [
+      "b_1\\pm t_{0.05}(\\nu)s_{b_1}"
+     ],
+     "work": [
+      "M=2.120(0.2041)=0.432692",
+      "3.2833\\pm0.432692\\Rightarrow 2.850608<\\beta<3.715992"
+     ],
+     "words": "Each additional inch adds between about 2.85 and 3.72 lb to mean male weight; the interval excludes 0."
+    },
+    {
+     "title": "Construct the 95% interval for the intercept",
+     "general": [
+      "b_0\\pm t_{0.05}(\\nu)s_{b_0}"
+     ],
+     "work": [
+      "M=2.120(13.7901)=29.23501",
+      "-4.2329\\pm29.23501\\Rightarrow -33.46791<\\alpha_{LOM}<25.00211"
+     ],
+     "words": "The interval contains 0, matching Pr(>|t|) = 0.763. The intercept is an extrapolation to zero height."
+    },
+    {
+     "title": "Calculate the correlation coefficient",
+     "general": [
+      "r=\\pm\\sqrt{R^2}\\ \\text{(sign of }b)"
+     ],
+     "work": [
+      "r=\\sqrt{0.9418}=0.9704638"
+     ],
+     "words": "The slope is positive, so r is positive."
+    },
+    {
+     "title": "Predict the mean weight at 68 inches",
+     "general": [
+      "\\hat y=b_0+b_1x"
+     ],
+     "work": [
+      "\\hat y=-4.2329+3.2833(68)=-4.2329+223.2644=219.0315"
+     ],
+     "words": "This answers part (d), in pounds."
+    },
+    {
+     "title": "Find the mean and SD of height",
+     "general": [
+      "\\bar x=\\frac{\\sum x}{n}",
+      "s_x^2=\\frac{\\sum x^2-(\\sum x)^2/n}{n-1}"
+     ],
+     "work": [
+      "\\bar x=\\frac{1215}{18}=67.5",
+      "s_x^2=\\frac{82189-1215^2/18}{17}=\\frac{176.5}{17}=10.38235,\\ s_x=3.222166"
+     ],
+     "words": "These come from the height column of the data table."
+    },
+    {
+     "title": "Construct the 95% interval for the mean at 68 inches",
+     "general": [
+      "s_{\\hat y}=s_{y|x}\\sqrt{\\frac{1}{n}+\\frac{(x-\\bar x)^2}{(n-1)s_x^2}}",
+      "\\hat y\\pm t_{0.05}(\\nu)s_{\\hat y}"
+     ],
+     "work": [
+      "s_{\\hat y}=2.711\\sqrt{\\frac{1}{18}+\\frac{0.5^2}{17(10.38235)}}=2.711\\sqrt{0.05697199}=0.6470833",
+      "M=2.120(0.6470833)=1.371817",
+      "217.6597<\\mu_{y|68}<220.4033"
+     ],
+     "words": "68 inches is close to the mean height, so the mean is estimated precisely."
+    },
+    {
+     "title": "Construct the 95% interval for one male at 68 inches",
+     "general": [
+      "s_{Y_{new}}=\\sqrt{s_{y|x}^2+s_{\\hat y}^2}",
+      "\\hat y\\pm t_{0.05}(\\nu)s_{Y_{new}}"
+     ],
+     "work": [
+      "s_{Y_{new}}=\\sqrt{7.349521+0.4187168}=2.787156",
+      "M=2.120(2.787156)=5.90877",
+      "213.1227<y<224.9403"
+     ],
+     "words": "The interval for one male is more than four times as wide as the interval for the mean."
+    }
+   ],
+   "conclusion": "s_b0 = 13.7901 and s_b1 = 0.2041; 95% CIs: b1 2.850608 to 3.715992 lb/in, b0 -33.46791 to 25.00211 lb. r = 0.9705. Mean weight at 68 in = 219.0315 lb with 95% CI 217.6597 to 220.4033 lb; one male at 68 in: 213.1227 to 224.9403 lb.",
+   "source": "Session 18 pages 30–32",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "16",
+    "column": "0.05",
+    "value": 2.12,
+    "actualDf": 16,
+    "approximation": false
+   },
+   "values": {
+    "n": 18,
+    "a": -4.2329,
+    "sa": 13.7901,
+    "b": 3.2833,
+    "sb": 0.2041,
+    "syx": 2.711,
+    "R2": 0.9418,
+    "xbar": 67.5,
+    "sx": 3.2221658773527584,
+    "x": 68,
+    "critical": 2.12,
+    "slopeLower": 2.8506080000000003,
+    "slopeUpper": 3.715992,
+    "interceptLower": -33.467912000000005,
+    "interceptUpper": 25.002112000000004,
+    "r": 0.9704638066409277,
+    "yhat": 219.0315,
+    "seMean": 0.6470833088748994,
+    "meanLower": 217.65968338518522,
+    "meanUpper": 220.40331661481477,
+    "seNew": 2.787155863712054,
+    "obsLower": 213.12272956893045,
+    "obsUpper": 224.94027043106954,
+    "confidence": 0.95
+   },
+   "module": 18,
+   "tolerance": 1.0882984169259262,
+   "answerName": "Lower endpoint of the mean-weight CI at 68 in",
+   "answer": 217.65968338518522
+  },
+  {
+   "id": "s18-plutonian-slopes",
+   "title": "Male versus female Plutonians: comparing slopes",
+   "topic": "s18compare",
+   "context": "Separate regressions of weight (lb) on height (in) were fitted to 18 male and 18 female Plutonians with lm(). Female heights total 1138 in with Σx² = 72,200 in², giving a mean of 63.22 in and an SD of 3.859 in.",
+   "unit": "",
+   "table": {
+    "headers": [
+     "Group",
+     "n",
+     "Intercept a",
+     "s_a",
+     "Slope b",
+     "s_b",
+     "s_y|x",
+     "R²"
+    ],
+    "rows": [
+     [
+      "Males",
+      18,
+      -4.2329,
+      13.7901,
+      3.2833,
+      0.2041,
+      2.711,
+      0.9418
+     ],
+     [
+      "Females",
+      18,
+      6.8349,
+      29.8197,
+      2.029,
+      0.4708,
+      7.491,
+      0.5372
+     ]
+    ]
+   },
+   "tasks": [
+    "Test whether the slopes of the male and female lines of means differ at the 0.05 level. State the hypotheses in words, the statistic, ν, the printed critical value and the P range.",
+    "Apply the corresponding test to the intercepts."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\beta_M=\\beta_F",
+    "alternative": "H_A:\\beta_M\\ne\\beta_F",
+    "nullWords": "Weight increases with height at the same rate in male and female Plutonians (equal slopes of the two lines of means).",
+    "alternativeWords": "The rate at which weight increases with height differs between male and female Plutonians."
+   },
+   "symbols": "\\(b_M,b_F\\) (male and female slopes), \\(s_{b_M},s_{b_F}\\) (their SEs), \\(s_{b_M-b_F}\\) (SE of the slope difference), \\(a_M,a_F\\) (intercepts), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\beta_1=\\beta_2",
+      "t=\\frac{b_1-b_2}{s_{b_1-b_2}}"
+     ],
+     "work": [
+      "H_0:\\beta_M=\\beta_F"
+     ],
+     "words": "Use the two-regression-line t test. Both slopes were significant on their own (t = 16.088 and 4.309), so the comparison is meaningful."
+    },
+    {
+     "title": "Calculate the slope difference",
+     "general": [
+      "b_1-b_2"
+     ],
+     "work": [
+      "3.2833-2.0290=1.2543"
+     ],
+     "words": "Keep the order males minus females throughout."
+    },
+    {
+     "title": "Calculate the standard error of the difference",
+     "general": [
+      "s_{b_1-b_2}=\\sqrt{s_{b_1}^2+s_{b_2}^2}"
+     ],
+     "work": [
+      "s_{b_M-b_F}=\\sqrt{0.2041^2+0.4708^2}=\\sqrt{0.04165681+0.2216526}=\\sqrt{0.2633095}=0.5131369"
+     ],
+     "words": "The equal-n formula applies because both groups have 18 points."
+    },
+    {
+     "title": "Calculate the t statistic",
+     "general": [
+      "t=\\frac{b_1-b_2}{s_{b_1-b_2}}"
+     ],
+     "work": [
+      "t=\\frac{1.2543}{0.5131369}=2.444377"
+     ],
+     "words": "The difference is about 2.4 standard errors."
+    },
+    {
+     "title": "Find the degrees of freedom",
+     "general": [
+      "\\nu=n_1+n_2-4"
+     ],
+     "work": [
+      "\\nu=18+18-4=32"
+     ],
+     "words": "Each line uses up two degrees of freedom for its intercept and slope."
+    },
+    {
+     "title": "Compare with the 0.05 cutoff",
+     "general": [
+      "|t|>t_{0.05}(\\nu)\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "t_{0.05}(32)=2.037",
+      "2.444377>2.037"
+     ],
+     "words": "Open t_table.pdf, PDF page 1, row 32, two-tailed column 0.05. Reject equal slopes.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "32",
+      "column": "0.05",
+      "value": 2.037,
+      "actualDf": 32,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Find the P range",
+     "general": [
+      "t_{0.05}(\\nu)<|t|<t_{0.02}(\\nu)\\Rightarrow0.02<P<0.05"
+     ],
+     "work": [
+      "t_{0.02}(32)=2.449",
+      "2.037<2.444377<2.449"
+     ],
+     "words": "The statistic lies between the 0.05 and 0.02 columns of row 32.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "32",
+      "column": "0.02",
+      "value": 2.449,
+      "actualDf": 32,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Apply the corresponding intercept test",
+     "general": [
+      "t=\\frac{a_1-a_2}{\\sqrt{s_{a_1}^2+s_{a_2}^2}}"
+     ],
+     "work": [
+      "t=\\frac{-4.2329-6.8349}{\\sqrt{13.7901^2+29.8197^2}}=\\frac{-11.0678}{32.85394}=-0.3368789"
+     ],
+     "words": "Replacing slopes by intercepts in the same formula gives |t| = 0.337 < 2.037, so the intercepts do not differ significantly. The intercepts are extrapolations to zero height with very large standard errors."
+    }
+   ],
+   "conclusion": "t = 2.444 with ν = 32 exceeds t_0.05(32) = 2.037 but not t_0.02(32) = 2.449, so the slopes differ (0.02 < P < 0.05): male weight rises faster with height (3.28 lb/in) than female weight (2.03 lb/in).",
+   "source": "Session 18 pages 26, 29 and 36",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "32",
+    "column": "0.05",
+    "value": 2.037,
+    "actualDf": 32,
+    "approximation": false
+   },
+   "values": {
+    "nM": 18,
+    "nF": 18,
+    "bM": 3.2833,
+    "sbM": 0.2041,
+    "bF": 2.029,
+    "sbF": 0.4708,
+    "difference": 1.2543000000000002,
+    "se": 0.5131368725788471,
+    "t": 2.4443770600548067,
+    "df": 32,
+    "critical": 2.037,
+    "critical002": 2.449,
+    "reject": true,
+    "interceptT": -0.3368789264867529,
+    "femaleXbar": 63.22222222222222,
+    "femaleSx": 3.8586123009300626,
+    "pooledVariance": 31.732301,
+    "pooledSE": 0.5524087831331709,
+    "pooledT": 2.2706011169587472
+   },
+   "module": 18,
+   "tolerance": 0.012221885300274033,
+   "answerName": "t statistic",
+   "answer": 2.4443770600548067
+  },
+  {
+   "id": "s18-original-caffeine",
+   "title": "Caffeine dose and finger-tapping rate (by hand from sums)",
+   "topic": "s18predict",
+   "context": "Original practice example (invented numbers, not from the lecture or homework). Forty-five volunteers each receive a caffeine dose x (mg, 0 to 300) and then perform a finger-tapping test; y is taps per 10 s. Only the sums are given, and R is not to be used.",
+   "unit": "taps/10 s",
+   "table": {
+    "headers": [
+     "Sum",
+     "Value"
+    ],
+    "rows": [
+     [
+      "n",
+      45
+     ],
+     [
+      "Σx (mg)",
+      6390
+     ],
+     [
+      "Σy (taps/10 s)",
+      2575.3
+     ],
+     [
+      "Σx²",
+      1246100
+     ],
+     [
+      "Σy²",
+      148841.01
+     ],
+     [
+      "Σxy",
+      381029
+     ]
+    ]
+   },
+   "tasks": [
+    "Find the regression line of tapping rate on dose.",
+    "Calculate \\(s_a\\), \\(s_b\\) and the estimate of the variance about the line of means, \\(s_{y|x}^2\\).",
+    "Using b, test whether the trend is significant at the 0.05 level.",
+    "Construct the 95% CI for the mean tapping rate at 200 mg, and the 95% CI for one volunteer's tapping rate at 200 mg.",
+    "Calculate the Pearson correlation coefficient."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\beta=0",
+    "alternative": "H_A:\\beta\\ne0",
+    "nullWords": "Mean tapping rate does not change linearly with caffeine dose (the slope of the line of means is zero).",
+    "alternativeWords": "Mean tapping rate changes linearly with caffeine dose (the slope of the line of means is not zero)."
+   },
+   "symbols": "\\(x\\) (dose, mg), \\(y\\) (taps per 10 s), \\(S_{xx},S_{yy},S_{xy}\\) (sums of squared and cross deviations), \\(s_x,s_y\\) (sample SDs), \\(s_{y|x}\\) (scatter about the line), \\(s_a,s_b\\) (SEs of the coefficients), \\(s_{\\hat y},s_{Y_{new}}\\) (SEs for the mean and for one volunteer), \\(r\\) (correlation).",
+   "steps": [
+    {
+     "title": "Calculate both means",
+     "general": [
+      "\\bar x=\\frac{\\sum x}{n}",
+      "\\bar y=\\frac{\\sum y}{n}"
+     ],
+     "work": [
+      "\\bar x=\\frac{6390}{45}=142",
+      "\\bar y=\\frac{2575.3}{45}=57.22889"
+     ],
+     "words": "These are the coordinates of the point the regression line passes through."
+    },
+    {
+     "title": "Calculate the deviation sums",
+     "general": [
+      "S_{xx}=\\sum x^2-\\frac{(\\sum x)^2}{n}",
+      "S_{xy}=\\sum xy-\\frac{\\sum x\\sum y}{n}",
+      "S_{yy}=\\sum y^2-\\frac{(\\sum y)^2}{n}"
+     ],
+     "work": [
+      "S_{xx}=1246100-907380=338720",
+      "S_{xy}=381029-365692.6=15336.4",
+      "S_{yy}=148841.01-147381.5576=1459.452"
+     ],
+     "words": "These equal Σ(x−x̄)², Σ(x−x̄)(y−ȳ) and Σ(y−ȳ)²."
+    },
+    {
+     "title": "Calculate the slope",
+     "general": [
+      "b=\\frac{n\\sum xy-\\sum x\\sum y}{n\\sum x^2-(\\sum x)^2}"
+     ],
+     "work": [
+      "b=\\frac{45(381029)-6390(2575.3)}{45(1246100)-6390^2}=\\frac{690138}{15242400}=0.04527752"
+     ],
+     "words": "Equivalently b = S_xy/S_xx = 15336.4/338720. Tapping rate rises by about 0.045 taps per 10 s per mg."
+    },
+    {
+     "title": "Calculate the intercept",
+     "general": [
+      "a=\\bar y-b\\bar x"
+     ],
+     "work": [
+      "a=57.22889-0.04527752(142)=57.22889-6.429407=50.79948"
+     ],
+     "words": "The line is ŷ = 50.80 + 0.04528x."
+    },
+    {
+     "title": "Calculate the sample variances",
+     "general": [
+      "s_x^2=\\frac{S_{xx}}{n-1}",
+      "s_y^2=\\frac{S_{yy}}{n-1}"
+     ],
+     "work": [
+      "s_x^2=\\frac{338720}{44}=7698.182,\\ s_x=87.73928",
+      "s_y^2=\\frac{1459.452}{44}=33.16937"
+     ],
+     "words": "These feed the shortcut formula for s_y|x."
+    },
+    {
+     "title": "Estimate the variance about the line of means",
+     "general": [
+      "s_{y|x}^2=\\frac{n-1}{n-2}\\left(s_y^2-b^2s_x^2\\right)"
+     ],
+     "work": [
+      "s_{y|x}^2=\\frac{44}{43}\\left(33.16937-15.78168\\right)=17.79205",
+      "s_{y|x}=4.218063"
+     ],
+     "words": "This is the requested estimate of the variance of the line of means, in (taps/10 s)²."
+    },
+    {
+     "title": "Calculate the coefficient standard errors",
+     "general": [
+      "s_b=\\frac{1}{\\sqrt{n-1}}\\frac{s_{y|x}}{s_x}",
+      "s_a=s_{y|x}\\sqrt{\\frac{1}{n}+\\frac{\\bar x^2}{(n-1)s_x^2}}"
+     ],
+     "work": [
+      "s_b=\\frac{1}{\\sqrt{44}}\\cdot\\frac{4.218063}{87.73928}=0.007247574",
+      "s_a=4.218063\\sqrt{\\frac{1}{45}+\\frac{142^2}{338720}}=4.218063\\sqrt{0.08175222}=1.206043"
+     ],
+     "words": "Note (n−1)s_x² = S_xx = 338720."
+    },
+    {
+     "title": "Calculate t and bracket the missing table row",
+     "general": [
+      "t=\\frac{b}{s_b},\\quad\\nu=n-2"
+     ],
+     "work": [
+      "t=\\frac{0.04527752}{0.007247574}=6.247265",
+      "\\nu=43",
+      "t_{0.05}(42)=2.018,\\ t_{0.05}(44)=2.015"
+     ],
+     "words": "Row 43 is not printed. Bracket it with rows 42 and 44 on PDF page 1 and use the conservative row-42 cutoff 2.018 (the two rows differ by only 0.003).",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "42",
+      "column": "0.05",
+      "value": 2.018,
+      "actualDf": 43,
+      "approximation": true
+     }
+    },
+    {
+     "title": "Decide and give the P range",
+     "general": [
+      "|t|>t_{0.001}(\\nu)\\Rightarrow P<0.001"
+     ],
+     "work": [
+      "6.247265>2.018",
+      "t_{0.001}(42)=3.538,\\ t_{0.001}(44)=3.526\\Rightarrow P<0.001"
+     ],
+     "words": "t exceeds both bracketing 0.001 cutoffs, so the trend is significant with P < 0.001.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "42",
+      "column": "0.001",
+      "value": 3.538,
+      "actualDf": 43,
+      "approximation": true
+     }
+    },
+    {
+     "title": "Construct the 95% CI for the mean at 200 mg",
+     "general": [
+      "\\hat y=a+bx",
+      "s_{\\hat y}=s_{y|x}\\sqrt{\\frac{1}{n}+\\frac{(x-\\bar x)^2}{(n-1)s_x^2}}",
+      "\\hat y\\pm t_{0.05}(\\nu)s_{\\hat y}"
+     ],
+     "work": [
+      "\\hat y=50.79948+0.04527752(200)=59.85498",
+      "s_{\\hat y}=4.218063\\sqrt{\\frac{1}{45}+\\frac{58^2}{338720}}=4.218063\\sqrt{0.03215373}=0.7563603",
+      "M=2.018(0.7563603)=1.526335",
+      "58.32865<\\mu_{y|200}<61.38132"
+     ],
+     "words": "Using the row-44 value 2.015 would move the lower bound only to 58.3309."
+    },
+    {
+     "title": "Construct the 95% CI for one volunteer at 200 mg",
+     "general": [
+      "s_{Y_{new}}=\\sqrt{s_{y|x}^2+s_{\\hat y}^2}",
+      "\\hat y\\pm t_{0.05}(\\nu)s_{Y_{new}}"
+     ],
+     "work": [
+      "s_{Y_{new}}=\\sqrt{17.79205+0.5720809}=4.28534",
+      "M=2.018(4.28534)=8.647815",
+      "51.20717<y<68.5028"
+     ],
+     "words": "The single-observation interval is much wider because it includes the person-to-person scatter."
+    },
+    {
+     "title": "Calculate the correlation coefficient",
+     "general": [
+      "r=\\frac{S_{xy}}{\\sqrt{S_{xx}S_{yy}}}"
+     ],
+     "work": [
+      "r=\\frac{15336.4}{\\sqrt{338720(1459.452)}}=\\frac{15336.4}{22233.89}=0.6897759",
+      "t=r\\sqrt{\\frac{43}{1-r^2}}=6.247265"
+     ],
+     "words": "A moderate positive correlation. Its t statistic equals b/s_b, so the correlation test agrees with the slope test."
+    }
+   ],
+   "conclusion": "ŷ = 50.799 + 0.04528x; s²_y|x = 17.792, s_b = 0.007248, s_a = 1.206. t = 6.247 (ν = 43) gives P < 0.001. 95% CI for the mean at 200 mg: 58.3286 to 61.3813; for one volunteer: 51.2072 to 68.5028 taps/10 s. r = 0.6898.",
+   "source": "Original practice example",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "42",
+    "column": "0.05",
+    "value": 2.018,
+    "actualDf": 43,
+    "approximation": true
+   },
+   "values": {
+    "n": 45,
+    "sumX": 6390,
+    "sumY": 2575.3,
+    "sumX2": 1246100,
+    "sumY2": 148841.01,
+    "sumXY": 381029,
+    "b": 0.04527751535191296,
+    "a": 50.799481708917256,
+    "varianceAboutLine": 17.792054837241015,
+    "syx": 4.218062924760726,
+    "sb": 0.007247573592071187,
+    "sa": 1.20604309077262,
+    "t": 6.247265347046128,
+    "df": 43,
+    "critical": 2.018,
+    "x": 200,
+    "yhat": 59.85498477929985,
+    "seMean": 0.7563603049225825,
+    "meanLower": 58.32864968396608,
+    "meanUpper": 61.38131987463362,
+    "seNew": 4.285339630426461,
+    "obsLower": 51.20716940509925,
+    "obsUpper": 68.50280015350044,
+    "r": 0.6897759256742368,
+    "confidence": 0.95
+   },
+   "module": 18,
+   "tolerance": 0.2916432484198304,
+   "answerName": "Lower endpoint of the mean CI at 200 mg",
+   "answer": 58.32864968396608
+  }
+ ],
+ "sampleQuestions": [
+  {
+   "id": "m2-s18-q001",
+   "module": 18,
+   "topic": "s18line",
+   "stem": "Using the column totals for the 10 Martians, what is the least-squares slope b?",
+   "options": [
+    "\\(0.5\\) g/cm",
+    "\\(2.252\\) g/cm",
+    "\\(0.4441\\) g/cm",
+    "\\(0.04441\\) g/cm"
+   ],
+   "correct": 2,
+   "why": "The slope is (10·3930.1 − 369·103.8)/(10·13841 − 369²) = 998.8/2249 = 0.4441 g/cm. The value 0.5 g/cm is the population slope, which the sample only estimates.",
+   "case": "s18-martians-line",
+   "equations": [
+    "b=\\frac{n\\sum xy-\\sum x\\sum y}{n\\sum x^2-(\\sum x)^2}",
+    "b=\\frac{998.8}{2249}=0.4441085"
+   ]
+  },
+  {
+   "id": "m2-s18-q002",
+   "module": 18,
+   "topic": "s18line",
+   "stem": "What is the least-squares intercept a for the Martian sample?",
+   "options": [
+    "\\(-6.008\\) g",
+    "\\(-8\\) g",
+    "\\(-5.856\\) g",
+    "\\(26.77\\) g"
+   ],
+   "correct": 0,
+   "why": "With the unrounded slope, a = ȳ − b x̄ = 10.38 − 0.4441(36.9) = −6.008 g. Rounding b to 0.44 first gives −5.856 g, and adding instead of subtracting gives 26.77 g.",
+   "case": "s18-martians-line",
+   "equations": [
+    "a=\\bar y-b\\bar x",
+    "a=10.38-0.4441085(36.9)=-6.007603"
+   ]
+  },
+  {
+   "id": "m2-s18-q003",
+   "module": 18,
+   "topic": "s18syx",
+   "stem": "Using the slide's rounded values, what is the standard error of the estimate \\(s_{y|x}\\)?",
+   "options": [
+    "\\(1.035\\) g",
+    "\\(0.9592\\) g",
+    "\\(0.9043\\) g",
+    "\\(1.017\\) g"
+   ],
+   "correct": 3,
+   "why": "s_y|x = √[(9/8)(5.76 − 4.84)] = √1.035 = 1.017 g. Forgetting the root gives 1.035, dropping the 9/8 factor gives 0.959, and inverting it gives 0.904.",
+   "case": "s18-martians-spread",
+   "equations": [
+    "s_{y|x}=\\sqrt{\\frac{n-1}{n-2}(s_y^2-b^2s_x^2)}",
+    "s_{y|x}=\\sqrt{\\tfrac98(0.92)}=1.017349"
+   ]
+  },
+  {
+   "id": "m2-s18-q004",
+   "module": 18,
+   "topic": "s18syx",
+   "stem": "With \\(s_{y|x}=1.017\\) g and \\(s_x=5.0\\) cm, what is the standard error of the slope \\(s_b\\)?",
+   "options": [
+    "\\(0.2035\\) g/cm",
+    "\\(0.06782\\) g/cm",
+    "\\(0.02261\\) g/cm",
+    "\\(0.01356\\) g/cm"
+   ],
+   "correct": 1,
+   "why": "s_b = (1/√9)(1.017/5.0) = 0.0678 g/cm. Omitting 1/√(n−1) gives 0.2035, dividing by 9 instead of 3 gives 0.0226, and using s_x² gives 0.0136.",
+   "case": "s18-martians-spread",
+   "equations": [
+    "s_b=\\frac{1}{\\sqrt{n-1}}\\frac{s_{y|x}}{s_x}",
+    "s_b=\\frac{1}{3}\\cdot\\frac{1.017349}{5.0}=0.0678233"
+   ]
+  },
+  {
+   "id": "m2-s18-q005",
+   "module": 18,
+   "topic": "s18syx",
+   "stem": "With \\(s_{y|x}=1.017\\) g, what is the standard error of the intercept \\(s_a\\) for the Martians?",
+   "options": [
+    "\\(2.523\\) g",
+    "\\(0.3217\\) g",
+    "\\(6.258\\) g",
+    "\\(2.503\\) g"
+   ],
+   "correct": 0,
+   "why": "s_a = 1.017√(0.1 + 36.9²/(9·25)) = 1.017√6.1516 = 2.523 g. Dropping the x̄² term gives 0.322, skipping the root gives 6.258, and dropping 1/n gives 2.503.",
+   "case": "s18-martians-spread",
+   "equations": [
+    "s_a=s_{y|x}\\sqrt{\\frac1n+\\frac{\\bar x^2}{(n-1)s_x^2}}",
+    "s_a=1.017349\\sqrt{6.1516}=2.523273"
+   ]
+  },
+  {
+   "id": "m2-s18-q006",
+   "module": 18,
+   "topic": "s18slope",
+   "stem": "What is the t statistic for testing \\(H_0:\\beta=0\\) with b = 0.44 g/cm and \\(s_b=0.064\\) g/cm?",
+   "options": [
+    "\\(0.1455\\)",
+    "\\(2.174\\)",
+    "\\(6.875\\)",
+    "\\(7.813\\)"
+   ],
+   "correct": 2,
+   "why": "t = b/s_b = 0.44/0.064 = 6.875. Using the population slope 0.5 in the numerator would give 7.813, which is not the null value.",
+   "case": "s18-martians-trend",
+   "equations": [
+    "t=\\frac{b}{s_b}",
+    "t=\\frac{0.44}{0.064}=6.875"
+   ]
+  },
+  {
+   "id": "m2-s18-q007",
+   "module": 18,
+   "topic": "s18slope",
+   "stem": "Which printed two-tailed value is \\(t_{0.001}(8)\\) in the course t table?",
+   "options": [
+    "\\(5.401\\)",
+    "\\(5.041\\)",
+    "\\(4.781\\)",
+    "\\(3.355\\)"
+   ],
+   "correct": 1,
+   "why": "Row 8, column 0.001 prints 5.041. The slide writes 5.401, a transposition; 4.781 is row 9 and 3.355 is the 0.01 column.",
+   "case": "s18-martians-trend",
+   "equations": [
+    "t_{0.001}(8)=5.041"
+   ]
+  },
+  {
+   "id": "m2-s18-q008",
+   "module": 18,
+   "topic": "s18slope",
+   "stem": "What is the lower endpoint of the 95% confidence interval for the Martian slope β?",
+   "options": [
+    "\\(0.2974\\) g/cm",
+    "\\(0.3146\\) g/cm",
+    "\\(0.1174\\) g/cm",
+    "\\(0.2924\\) g/cm"
+   ],
+   "correct": 3,
+   "why": "0.44 − 2.306(0.064) = 0.2924 g/cm with ν = 8. Using ν = 10 (2.228) gives 0.2974, using 1.96 gives 0.3146, and using the 0.001 cutoff gives 0.1174.",
+   "case": "s18-martians-trend",
+   "equations": [
+    "b-t_{0.05}(8)s_b",
+    "0.44-2.306(0.064)=0.292416"
+   ]
+  }
+ ]
+}

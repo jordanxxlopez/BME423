@@ -1,0 +1,2913 @@
+{
+ "cases": [
+  {
+   "id": "n18-b-dopamine-reward",
+   "title": "Dopamine neuron firing rate and reward size",
+   "topic": "s18line",
+   "context": "A study was reported concerning how midbrain dopamine neurons (cells in the ventral tegmental area that respond to rewards) code the size of a reward. Ten neurons were recorded in a monkey, and each neuron was tested with a different volume of juice in milliliters (mL). The firing rate in spikes per second (spikes/s) was measured in the 200 milliseconds (ms) after the juice was delivered. The data are listed in the table below. Note: some useful summations have already been calculated for you below, which you can use. In answering the questions below, DO NOT use R.",
+   "unit": "spikes/s per mL",
+   "table": {
+    "headers": [
+     "Neuron",
+     "Reward volume x (mL)",
+     "Firing rate y (spikes/s)",
+     "x²",
+     "xy"
+    ],
+    "rows": [
+     [
+      1,
+      0.1,
+      4.8,
+      0.01,
+      0.48
+     ],
+     [
+      2,
+      0.2,
+      6.4,
+      0.04,
+      1.28
+     ],
+     [
+      3,
+      0.3,
+      5.6,
+      0.09,
+      1.68
+     ],
+     [
+      4,
+      0.4,
+      7.9,
+      0.16,
+      3.16
+     ],
+     [
+      5,
+      0.5,
+      8.5,
+      0.25,
+      4.25
+     ],
+     [
+      6,
+      0.6,
+      7.7,
+      0.36,
+      4.62
+     ],
+     [
+      7,
+      0.8,
+      11.3,
+      0.64,
+      9.04
+     ],
+     [
+      8,
+      0.9,
+      10.6,
+      0.81,
+      9.54
+     ],
+     [
+      9,
+      1.0,
+      13.4,
+      1,
+      13.4
+     ],
+     [
+      10,
+      1.2,
+      13.1,
+      1.44,
+      15.72
+     ],
+     [
+      "Total",
+      6,
+      89.3,
+      4.8,
+      63.17
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) Find the linear regression relationship between reward volume (independent variable) and firing rate (dependent variable). Make sure to show your intermediate calculations.",
+    "(ii) Using only your calculations for Part (i), what firing rate does the line give for a reward of 0.7 mL?"
+   ],
+   "hypotheses": null,
+   "symbols": "\\(n\\) (number of neurons), \\(x\\) (reward volume, mL), \\(y\\) (firing rate, spikes/s), \\(b\\) (least-squares slope, spikes/s per mL), \\(a\\) (least-squares intercept, spikes/s), \\(\\bar x,\\bar y\\) (sample means), \\(D\\) (shared denominator).",
+   "steps": [
+    {
+     "title": "Collect the sums",
+     "general": [
+      "n,\\ \\sum x_i,\\ \\sum y_i,\\ \\sum x_i^2,\\ \\sum x_iy_i"
+     ],
+     "work": [
+      "n=10,\\ \\sum x_i=6,\\ \\sum y_i=89.3,\\ \\sum x_i^2=4.8,\\ \\sum x_iy_i=63.17"
+     ],
+     "words": "The least-squares formulas need only these five numbers, read from the bottom row of the table."
+    },
+    {
+     "title": "Calculate the shared denominator",
+     "general": [
+      "D=n\\sum x_i^2-\\Big(\\sum x_i\\Big)^2"
+     ],
+     "work": [
+      "D=10(4.8)-6^2=48-36=12"
+     ],
+     "words": "Both the slope and the intercept formulas divide by this quantity, in mL²."
+    },
+    {
+     "title": "Calculate the slope",
+     "general": [
+      "b=\\frac{n\\sum x_iy_i-\\sum x_i\\sum y_i}{D}"
+     ],
+     "work": [
+      "b=\\frac{10(63.17)-6(89.3)}{12}=\\frac{631.7-535.8}{12}=\\frac{95.9}{12}=7.991667"
+     ],
+     "words": "The slope is the estimated increase in mean firing rate per milliliter of juice, in spikes/s per mL."
+    },
+    {
+     "title": "Calculate both sample means",
+     "general": [
+      "\\bar x=\\frac{\\sum x_i}{n}",
+      "\\bar y=\\frac{\\sum y_i}{n}"
+     ],
+     "work": [
+      "\\bar x=\\frac{6}{10}=0.6",
+      "\\bar y=\\frac{89.3}{10}=8.93"
+     ],
+     "words": "The least-squares line passes through the point of means (0.6 mL, 8.93 spikes/s)."
+    },
+    {
+     "title": "Calculate the intercept from the means",
+     "general": [
+      "a=\\bar y-b\\bar x"
+     ],
+     "work": [
+      "a=8.93-7.991667(0.6)=8.93-4.795=4.135"
+     ],
+     "words": "Carry the unrounded slope into this step, because rounding b first would shift the intercept."
+    },
+    {
+     "title": "Check the intercept with the full formula",
+     "general": [
+      "a=\\frac{\\sum y_i\\sum x_i^2-\\sum x_i\\sum x_iy_i}{D}"
+     ],
+     "work": [
+      "a=\\frac{89.3(4.8)-6(63.17)}{12}=\\frac{428.64-379.02}{12}=\\frac{49.62}{12}=4.135"
+     ],
+     "words": "Both routes give the same intercept, in spikes/s."
+    },
+    {
+     "title": "Write the line and use it at 0.7 mL",
+     "general": [
+      "\\hat y=a+bx"
+     ],
+     "work": [
+      "\\hat y=4.135+7.992x",
+      "\\hat y=4.135+7.991667(0.7)=4.135+5.594167=9.729167"
+     ],
+     "words": "The line gives a mean firing rate of about 9.729 spikes/s for a 0.7 mL reward. This volume lies inside the range of the data, so the line can be used there."
+    }
+   ],
+   "conclusion": "The least-squares line is \\(\\hat y=4.135+7.992x\\). Mean firing rate is estimated to rise by about 7.99 spikes/s for each additional milliliter of juice, and the line gives about 9.729 spikes/s at 0.7 mL.",
+   "source": "Original neuroscience practice example",
+   "lookup": null,
+   "values": {
+    "n": 10,
+    "sumX": 6.0,
+    "sumY": 89.3,
+    "sumX2": 4.8,
+    "sumXY": 63.17,
+    "denominator": 12.0,
+    "xbar": 0.6,
+    "ybar": 8.93,
+    "slope": 7.991666666666674,
+    "intercept": 4.134999999999995
+   },
+   "module": 18,
+   "tolerance": 0.03995833333333337,
+   "answerName": "Slope b",
+   "answer": 7.991666666666674
+  },
+  {
+   "id": "n18-b-cortisol-sleep",
+   "title": "Morning cortisol and hours of sleep",
+   "topic": "s18syx",
+   "context": "Researchers interested in stress did a study to evaluate whether the stress hormone cortisol is related to sleep. Ten healthy adults wore a wrist actigraph (a motion sensor that estimates sleep) for one night, and the hours of sleep were recorded. The next morning the salivary cortisol concentration in nanomoles per liter (nmol/L) was measured 30 minutes after waking. The data are listed in the table below. Note: some useful summations have already been calculated for you below, which you can use. In answering the questions below, DO NOT use R.",
+   "unit": "nmol/L",
+   "table": {
+    "headers": [
+     "Subject",
+     "Sleep x (hours)",
+     "Cortisol y (nmol/L)",
+     "x²",
+     "y²",
+     "xy"
+    ],
+    "rows": [
+     [
+      1,
+      4.5,
+      21.4,
+      20.25,
+      457.96,
+      96.3
+     ],
+     [
+      2,
+      5.0,
+      19.8,
+      25,
+      392.04,
+      99
+     ],
+     [
+      3,
+      5.5,
+      20.5,
+      30.25,
+      420.25,
+      112.75
+     ],
+     [
+      4,
+      6.0,
+      17.2,
+      36,
+      295.84,
+      103.2
+     ],
+     [
+      5,
+      6.5,
+      16.9,
+      42.25,
+      285.61,
+      109.85
+     ],
+     [
+      6,
+      7.0,
+      15.1,
+      49,
+      228.01,
+      105.7
+     ],
+     [
+      7,
+      7.0,
+      17.8,
+      49,
+      316.84,
+      124.6
+     ],
+     [
+      8,
+      7.5,
+      13.6,
+      56.25,
+      184.96,
+      102
+     ],
+     [
+      9,
+      8.0,
+      14.2,
+      64,
+      201.64,
+      113.6
+     ],
+     [
+      10,
+      8.5,
+      11.9,
+      72.25,
+      141.61,
+      101.15
+     ],
+     [
+      "Total",
+      65.5,
+      168.4,
+      444.25,
+      2924.76,
+      1068.15
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) Calculate the slope b of the regression line of cortisol on hours of sleep.",
+    "(ii) Calculate the standard error of the estimate \\(s_{y|x}\\) (the SD of the points about the regression line).",
+    "(iii) Using only your calculations for Parts (i) and (ii), calculate the standard errors \\(s_b\\) and \\(s_a\\). Make sure to show your intermediate calculations."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(s_{y|x}\\) (standard error of the estimate, nmol/L), \\(s_x,s_y\\) (sample SDs), \\(b\\) (slope, nmol/L per hour), \\(s_b\\) (SE of the slope, nmol/L per hour), \\(s_a\\) (SE of the intercept, nmol/L), \\(\\bar x\\) (mean hours of sleep), \\(n\\) (sample size).",
+   "steps": [
+    {
+     "title": "Calculate the mean of x and both sample variances",
+     "general": [
+      "\\bar x=\\frac{\\sum x}{n}",
+      "s_x^2=\\frac{\\sum x^2-(\\sum x)^2/n}{n-1}",
+      "s_y^2=\\frac{\\sum y^2-(\\sum y)^2/n}{n-1}"
+     ],
+     "work": [
+      "\\bar x=\\frac{65.5}{10}=6.55",
+      "s_x^2=\\frac{444.25-65.5^2/10}{9}=\\frac{15.225}{9}=1.691667,\\ s_x=1.300641",
+      "s_y^2=\\frac{2924.76-168.4^2/10}{9}=\\frac{88.904}{9}=9.878222,\\ s_y=3.142964"
+     ],
+     "words": "These come from the totals in the bottom row of the table."
+    },
+    {
+     "title": "Calculate the slope",
+     "general": [
+      "b=\\frac{n\\sum xy-\\sum x\\sum y}{n\\sum x^2-(\\sum x)^2}"
+     ],
+     "work": [
+      "b=\\frac{10(1068.15)-65.5(168.4)}{10(444.25)-65.5^2}=\\frac{-348.7}{152.25}=-2.290312"
+     ],
+     "words": "The slope is negative, so morning cortisol is lower in the adults who slept longer."
+    },
+    {
+     "title": "Square the pieces inside the shortcut",
+     "general": [
+      "s_y^2",
+      "b^2s_x^2"
+     ],
+     "work": [
+      "s_y^2=9.878222",
+      "b^2s_x^2=(-2.290312)^2(1.691667)=5.245529(1.691667)=8.873687"
+     ],
+     "words": "The first term is the total variance of y. The second term is the part of that variance explained by the line."
+    },
+    {
+     "title": "Calculate the standard error of the estimate",
+     "general": [
+      "s_{y|x}=\\sqrt{\\frac{n-1}{n-2}\\left(s_y^2-b^2s_x^2\\right)}"
+     ],
+     "work": [
+      "s_{y|x}=\\sqrt{\\frac{9}{8}(9.878222-8.873687)}=\\sqrt{\\frac{9}{8}(1.004536)}=\\sqrt{1.130103}=1.063063"
+     ],
+     "words": "The factor (n−1)/(n−2) turns the n−1 denominators of the sample variances into the n−2 denominator that regression needs. The points scatter about the line with an SD of about 1.063 nmol/L."
+    },
+    {
+     "title": "Calculate the standard error of the slope",
+     "general": [
+      "s_b=\\frac{1}{\\sqrt{n-1}}\\frac{s_{y|x}}{s_x}"
+     ],
+     "work": [
+      "s_b=\\frac{1}{\\sqrt{9}}\\cdot\\frac{1.063063}{1.300641}=0.2724459"
+     ],
+     "words": "The slope is uncertain by about 0.2724 nmol/L per hour."
+    },
+    {
+     "title": "Evaluate the bracket for the intercept",
+     "general": [
+      "\\frac{1}{n}+\\frac{\\bar x^2}{(n-1)s_x^2}"
+     ],
+     "work": [
+      "\\frac{1}{10}+\\frac{6.55^2}{9(1.691667)}=0.1+\\frac{42.9025}{15.225}=2.917898"
+     ],
+     "words": "The second term grows with the distance between the mean of x and x = 0, where the intercept is defined."
+    },
+    {
+     "title": "Calculate the standard error of the intercept",
+     "general": [
+      "s_a=s_{y|x}\\sqrt{\\frac{1}{n}+\\frac{\\bar x^2}{(n-1)s_x^2}}"
+     ],
+     "work": [
+      "s_a=1.063063\\sqrt{2.917898}=1.063063(1.708186)=1.815909"
+     ],
+     "words": "The intercept is uncertain by about 1.816 nmol/L."
+    },
+    {
+     "title": "Check with the residual sum of squares",
+     "general": [
+      "s_{y|x}^2=\\frac{1}{n-2}\\sum(y_i-\\hat y_i)^2"
+     ],
+     "work": [
+      "s_{y|x}=\\sqrt{\\frac{9.040821}{8}}=1.063063"
+     ],
+     "words": "Subtracting the fitted value from each observed value and squaring gives a residual sum of squares of 9.0408. This direct route gives the same scatter as the shortcut, so the standard errors are confirmed."
+    }
+   ],
+   "conclusion": "The slope is \\(b=-2.29\\) nmol/L per hour. The scatter about the line is \\(s_{y|x}=1.063\\) nmol/L, with \\(s_b=0.2724\\) nmol/L per hour and \\(s_a=1.816\\) nmol/L.",
+   "source": "Original neuroscience practice example",
+   "lookup": null,
+   "values": {
+    "n": 10,
+    "sx": 1.3006408676751124,
+    "sy": 3.1429639231499653,
+    "b": -2.2903119868637156,
+    "xbar": 6.55,
+    "syx": 1.0630628519790093,
+    "sb": 0.27244590939727215,
+    "sa": 1.8159087022312264,
+    "syxRaw": 1.0630628519790346,
+    "sbRaw": 0.27244590939727864,
+    "saRaw": 1.8159087022312694
+   },
+   "module": 18,
+   "tolerance": 0.005315314259895046,
+   "answerName": "Standard error of the estimate s_y|x",
+   "answer": 1.0630628519790093
+  },
+  {
+   "id": "n18-b-fitts-reaching",
+   "title": "Reaching time and target difficulty",
+   "topic": "s18syx",
+   "context": "In a study looking at motor control, eleven subjects each made rapid reaching movements with a stylus to a target on a tablet. Each subject was assigned a different index of difficulty in bits (a number that grows when the target is smaller or farther away). The movement time in milliseconds (ms) was averaged over 50 reaches for each subject. The data are listed in the table below. Note: some useful summations have already been calculated for you below, which you can use. In answering the questions below, DO NOT use R.",
+   "unit": "ms per bit",
+   "table": {
+    "headers": [
+     "Subject",
+     "Index of difficulty x (bits)",
+     "Movement time y (ms)",
+     "x²",
+     "y²",
+     "xy"
+    ],
+    "rows": [
+     [
+      1,
+      1.5,
+      334,
+      2.25,
+      111556,
+      501
+     ],
+     [
+      2,
+      2.0,
+      341,
+      4,
+      116281,
+      682
+     ],
+     [
+      3,
+      2.5,
+      412,
+      6.25,
+      169744,
+      1030
+     ],
+     [
+      4,
+      3.0,
+      385,
+      9,
+      148225,
+      1155
+     ],
+     [
+      5,
+      3.5,
+      490,
+      12.25,
+      240100,
+      1715
+     ],
+     [
+      6,
+      4.0,
+      468,
+      16,
+      219024,
+      1872
+     ],
+     [
+      7,
+      4.5,
+      561,
+      20.25,
+      314721,
+      2524.5
+     ],
+     [
+      8,
+      5.0,
+      523,
+      25,
+      273529,
+      2615
+     ],
+     [
+      9,
+      5.5,
+      598,
+      30.25,
+      357604,
+      3289
+     ],
+     [
+      10,
+      6.0,
+      671,
+      36,
+      450241,
+      4026
+     ],
+     [
+      11,
+      6.5,
+      649,
+      42.25,
+      421201,
+      4218.5
+     ],
+     [
+      "Total",
+      44,
+      5432,
+      203.5,
+      2822226,
+      23628
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) Calculate the slope b of the regression line of movement time on index of difficulty.",
+    "(ii) Calculate the standard error of the estimate \\(s_{y|x}\\) (the SD of the points about the regression line).",
+    "(iii) Using only your calculations for Parts (i) and (ii), calculate the standard error of the slope \\(s_b\\) and the standard error of the intercept \\(s_a\\)."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(s_{y|x}\\) (standard error of the estimate, ms), \\(s_x,s_y\\) (sample SDs), \\(b\\) (slope, ms per bit), \\(s_b\\) (SE of the slope, ms per bit), \\(s_a\\) (SE of the intercept, ms), \\(\\bar x\\) (mean index of difficulty), \\(n\\) (sample size).",
+   "steps": [
+    {
+     "title": "Calculate the mean of x and both sample variances",
+     "general": [
+      "\\bar x=\\frac{\\sum x}{n}",
+      "s_x^2=\\frac{\\sum x^2-(\\sum x)^2/n}{n-1}",
+      "s_y^2=\\frac{\\sum y^2-(\\sum y)^2/n}{n-1}"
+     ],
+     "work": [
+      "\\bar x=\\frac{44}{11}=4",
+      "s_x^2=\\frac{203.5-44^2/11}{10}=\\frac{27.5}{10}=2.75,\\ s_x=1.658312",
+      "s_y^2=\\frac{2822226-5432^2/11}{10}=\\frac{139805.64}{10}=13980.56,\\ s_y=118.2394"
+     ],
+     "words": "These come from the totals in the bottom row of the table."
+    },
+    {
+     "title": "Calculate the slope",
+     "general": [
+      "b=\\frac{n\\sum xy-\\sum x\\sum y}{n\\sum x^2-(\\sum x)^2}"
+     ],
+     "work": [
+      "b=\\frac{11(23628)-44(5432)}{11(203.5)-44^2}=\\frac{20900}{302.5}=69.09091"
+     ],
+     "words": "The slope is the estimated extra movement time for each additional bit of difficulty."
+    },
+    {
+     "title": "Square the pieces inside the shortcut",
+     "general": [
+      "s_y^2",
+      "b^2s_x^2"
+     ],
+     "work": [
+      "s_y^2=13980.56",
+      "b^2s_x^2=69.09091^2(2.75)=4773.554(2.75)=13127.27"
+     ],
+     "words": "The first term is the total variance of y. The second term is the part of that variance explained by the line."
+    },
+    {
+     "title": "Calculate the standard error of the estimate",
+     "general": [
+      "s_{y|x}=\\sqrt{\\frac{n-1}{n-2}\\left(s_y^2-b^2s_x^2\\right)}"
+     ],
+     "work": [
+      "s_{y|x}=\\sqrt{\\frac{10}{9}(13980.56-13127.27)}=\\sqrt{\\frac{10}{9}(853.2909)}=\\sqrt{948.101}=30.79125"
+     ],
+     "words": "The factor (n−1)/(n−2) turns the n−1 denominators of the sample variances into the n−2 denominator that regression needs. The points scatter about the line with an SD of about 30.79 ms."
+    },
+    {
+     "title": "Calculate the standard error of the slope",
+     "general": [
+      "s_b=\\frac{1}{\\sqrt{n-1}}\\frac{s_{y|x}}{s_x}"
+     ],
+     "work": [
+      "s_b=\\frac{1}{\\sqrt{10}}\\cdot\\frac{30.79125}{1.658312}=5.871661"
+     ],
+     "words": "The slope is uncertain by about 5.872 ms per bit."
+    },
+    {
+     "title": "Evaluate the bracket for the intercept",
+     "general": [
+      "\\frac{1}{n}+\\frac{\\bar x^2}{(n-1)s_x^2}"
+     ],
+     "work": [
+      "\\frac{1}{11}+\\frac{4^2}{10(2.75)}=0.09090909+\\frac{16}{27.5}=0.6727273"
+     ],
+     "words": "The second term grows with the distance between the mean of x and x = 0, where the intercept is defined."
+    },
+    {
+     "title": "Calculate the standard error of the intercept",
+     "general": [
+      "s_a=s_{y|x}\\sqrt{\\frac{1}{n}+\\frac{\\bar x^2}{(n-1)s_x^2}}"
+     ],
+     "work": [
+      "s_a=30.79125\\sqrt{0.6727273}=30.79125(0.8201995)=25.25497"
+     ],
+     "words": "The intercept is uncertain by about 25.25 ms."
+    },
+    {
+     "title": "Check with the residual sum of squares",
+     "general": [
+      "s_{y|x}^2=\\frac{1}{n-2}\\sum(y_i-\\hat y_i)^2"
+     ],
+     "work": [
+      "s_{y|x}=\\sqrt{\\frac{8532.909}{9}}=30.79125"
+     ],
+     "words": "Subtracting the fitted value from each observed value and squaring gives a residual sum of squares of 8532.91. This direct route gives the same scatter as the shortcut, so the standard errors are confirmed."
+    }
+   ],
+   "conclusion": "The slope is \\(b=69.09\\) ms per bit. The scatter about the line is \\(s_{y|x}=30.79\\) ms, with \\(s_b=5.872\\) ms per bit and \\(s_a=25.25\\) ms.",
+   "source": "Original neuroscience practice example",
+   "lookup": null,
+   "values": {
+    "n": 11,
+    "sx": 1.6583123951777,
+    "sy": 118.2394335082997,
+    "b": 69.0909090909091,
+    "xbar": 4.0,
+    "syx": 30.79124892077286,
+    "sb": 5.871660784421128,
+    "sa": 25.254967962664598,
+    "syxRaw": 30.791248920773103,
+    "sbRaw": 5.871660784421175,
+    "saRaw": 25.2549679626648
+   },
+   "module": 18,
+   "tolerance": 0.029358303922105644,
+   "answerName": "Standard error of the slope s_b",
+   "answer": 5.871660784421128
+  },
+  {
+   "id": "n18-b-noise-hearing",
+   "title": "Hearing threshold and years of noise exposure",
+   "topic": "s18slope",
+   "context": "A study was reported concerning hearing loss in workers at a metal stamping plant. For each of 10 workers, the number of years of work on the factory floor was recorded. The hearing threshold (the quietest tone that the worker could detect) was then measured at 4 kilohertz (kHz) with pure-tone audiometry, in decibels hearing level (dB HL). Audiometers step in 5 dB, so every threshold is a multiple of 5. The data are listed in the table below. Note: some useful summations have already been calculated for you below, which you can use. In answering the questions below, DO NOT use R. Assume that any quantities of interest are Normally distributed.",
+   "unit": "",
+   "table": {
+    "headers": [
+     "Worker",
+     "Noise exposure x (years)",
+     "Threshold y (dB HL)",
+     "x²",
+     "y²",
+     "xy"
+    ],
+    "rows": [
+     [
+      1,
+      2,
+      10,
+      4,
+      100,
+      20
+     ],
+     [
+      2,
+      5,
+      15,
+      25,
+      225,
+      75
+     ],
+     [
+      3,
+      8,
+      10,
+      64,
+      100,
+      80
+     ],
+     [
+      4,
+      10,
+      20,
+      100,
+      400,
+      200
+     ],
+     [
+      5,
+      13,
+      25,
+      169,
+      625,
+      325
+     ],
+     [
+      6,
+      15,
+      20,
+      225,
+      400,
+      300
+     ],
+     [
+      7,
+      18,
+      35,
+      324,
+      1225,
+      630
+     ],
+     [
+      8,
+      22,
+      30,
+      484,
+      900,
+      660
+     ],
+     [
+      9,
+      25,
+      45,
+      625,
+      2025,
+      1125
+     ],
+     [
+      10,
+      30,
+      40,
+      900,
+      1600,
+      1200
+     ],
+     [
+      "Total",
+      148,
+      250,
+      2920,
+      7600,
+      4615
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) Find the linear regression relationship between years of noise exposure (independent variable) and hearing threshold (dependent variable).",
+    "(ii) Calculate the standard errors \\(s_b\\) and \\(s_a\\). Make sure to show your intermediate calculations.",
+    "(iii) Based on your calculations for b, is the trend between hearing threshold and years of noise exposure statistically significant?",
+    "(iv) What are the 95% confidence intervals for the slope and for the intercept of the line of means?",
+    "(v) Provide your result in a single complete sentence that would convey your conclusion in a way that could be understood by a non-expert in statistics or medicine (e.g., a typical reader of a local newspaper)."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\beta=0",
+    "alternative": "H_A:\\beta\\ne0",
+    "nullWords": "Mean hearing threshold does not change linearly with years of noise exposure in this population of workers, so the slope of the line of means is zero.",
+    "alternativeWords": "Mean hearing threshold changes linearly with years of noise exposure, so the slope of the line of means is not zero."
+   },
+   "symbols": "\\(x\\) (noise exposure, years), \\(y\\) (hearing threshold, dB HL), \\(S_{xx},S_{yy},S_{xy}\\) (sums of squared and cross deviations), \\(b\\) (sample slope, dB HL per year), \\(s_b\\) (SE of the slope), \\(a\\) (sample intercept), \\(s_a\\) (SE of the intercept), \\(s_{y|x}\\) (scatter about the line), \\(\\beta\\) (population slope), \\(\\alpha_{LOM}\\) (population intercept), \\(\\nu\\) (degrees of freedom), \\(t_\\alpha(\\nu)\\) (two-tailed critical value).",
+   "steps": [
+    {
+     "title": "Calculate both means",
+     "general": [
+      "\\bar x=\\frac{\\sum x}{n}",
+      "\\bar y=\\frac{\\sum y}{n}"
+     ],
+     "work": [
+      "\\bar x=\\frac{148}{10}=14.8",
+      "\\bar y=\\frac{250}{10}=25"
+     ],
+     "words": "The regression line passes through the point of means (14.8 years, 25 dB HL)."
+    },
+    {
+     "title": "Calculate the deviation sums",
+     "general": [
+      "S_{xx}=\\sum x^2-\\frac{(\\sum x)^2}{n}",
+      "S_{xy}=\\sum xy-\\frac{\\sum x\\sum y}{n}",
+      "S_{yy}=\\sum y^2-\\frac{(\\sum y)^2}{n}"
+     ],
+     "work": [
+      "S_{xx}=2920-2190.4=729.6",
+      "S_{xy}=4615-3700=915",
+      "S_{yy}=7600-6250=1350"
+     ],
+     "words": "These equal Σ(x−x̄)², Σ(x−x̄)(y−ȳ) and Σ(y−ȳ)². They come from the totals in the bottom row of the table."
+    },
+    {
+     "title": "Calculate the slope",
+     "general": [
+      "b=\\frac{n\\sum xy-\\sum x\\sum y}{n\\sum x^2-(\\sum x)^2}"
+     ],
+     "work": [
+      "b=\\frac{10(4615)-148(250)}{10(2920)-148^2}=\\frac{9150}{7296}=1.254112"
+     ],
+     "words": "The slope is the estimated rise in mean threshold for each additional year on the factory floor, in dB HL per year."
+    },
+    {
+     "title": "Calculate the intercept",
+     "general": [
+      "a=\\bar y-b\\bar x"
+     ],
+     "work": [
+      "a=25-1.254112(14.8)=25-18.56086=6.439145"
+     ],
+     "words": "Carry the unrounded slope into this step. The line is ŷ = 6.439 + 1.254x."
+    },
+    {
+     "title": "Calculate the sample variances",
+     "general": [
+      "s_x^2=\\frac{S_{xx}}{n-1}",
+      "s_y^2=\\frac{S_{yy}}{n-1}"
+     ],
+     "work": [
+      "s_x^2=\\frac{729.6}{9}=81.06667,\\ s_x=9.003703",
+      "s_y^2=\\frac{1350}{9}=150"
+     ],
+     "words": "These two variances feed the shortcut formula for the scatter about the line."
+    },
+    {
+     "title": "Calculate the standard error of the estimate",
+     "general": [
+      "s_{y|x}=\\sqrt{\\frac{n-1}{n-2}\\left(s_y^2-b^2s_x^2\\right)}"
+     ],
+     "work": [
+      "b^2s_x^2=1.254112^2(81.06667)=127.5014",
+      "s_{y|x}=\\sqrt{\\frac{9}{8}(150-127.5014)}=\\sqrt{25.31096}=5.031"
+     ],
+     "words": "The factor (n−1)/(n−2) turns the n−1 denominators of the sample variances into the n−2 denominator that regression needs. The points scatter about the line with an SD of about 5.031 dB HL."
+    },
+    {
+     "title": "Calculate the standard error of the slope",
+     "general": [
+      "s_b=\\frac{1}{\\sqrt{n-1}}\\frac{s_{y|x}}{s_x}"
+     ],
+     "work": [
+      "s_b=\\frac{1}{\\sqrt{9}}\\cdot\\frac{5.031}{9.003703}=0.1862567"
+     ],
+     "words": "The slope is uncertain by about 0.1863 dB HL per year."
+    },
+    {
+     "title": "Evaluate the bracket for the intercept",
+     "general": [
+      "\\frac{1}{n}+\\frac{\\bar x^2}{(n-1)s_x^2}"
+     ],
+     "work": [
+      "\\frac{1}{10}+\\frac{14.8^2}{9(81.06667)}=0.1+\\frac{219.04}{729.6}=0.4002193"
+     ],
+     "words": "The second term grows with the distance between the mean of x and x = 0, where the intercept is defined."
+    },
+    {
+     "title": "Calculate the standard error of the intercept",
+     "general": [
+      "s_a=s_{y|x}\\sqrt{\\frac{1}{n}+\\frac{\\bar x^2}{(n-1)s_x^2}}"
+     ],
+     "work": [
+      "s_a=5.031\\sqrt{0.4002193}=5.031(0.6326289)=3.182756"
+     ],
+     "words": "The intercept is uncertain by about 3.183 dB HL."
+    },
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\beta=0",
+      "H_A:\\beta\\ne0"
+     ],
+     "work": [
+      "H_0:\\beta=0"
+     ],
+     "words": "Use the t test for the slope of a regression line. The null hypothesis states that mean hearing threshold does not change with years of noise exposure."
+    },
+    {
+     "title": "Calculate the t statistic",
+     "general": [
+      "t=\\frac{b-\\beta}{s_b}=\\frac{b}{s_b}"
+     ],
+     "work": [
+      "t=\\frac{1.254112}{0.1862567}=6.733245"
+     ],
+     "words": "Under the null hypothesis β = 0, so the statistic is the slope divided by its standard error."
+    },
+    {
+     "title": "Find the degrees of freedom",
+     "general": [
+      "\\nu=n-2"
+     ],
+     "work": [
+      "\\nu=10-2=8"
+     ],
+     "words": "Two coefficients, the intercept and the slope, are estimated from the data."
+    },
+    {
+     "title": "Find the 0.05 critical value",
+     "general": [
+      "t_c=t_{0.05}(\\nu)"
+     ],
+     "work": [
+      "t_{0.05}(8)=2.306"
+     ],
+     "words": "Start with α = 0.05. Open t_table.pdf, PDF page 1, row 8, two-tailed column 0.05. The printed cutoff is 2.306.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "8",
+      "column": "0.05",
+      "value": 2.306,
+      "actualDf": 8,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision",
+     "general": [
+      "|t|>t_{0.05}(\\nu)\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "6.733245>2.306"
+     ],
+     "words": "The size of the statistic exceeds the cutoff, so the null hypothesis of no trend is rejected."
+    },
+    {
+     "title": "Find the P range",
+     "general": [
+      "|t|>t_{0.001}(\\nu)\\Rightarrow P<0.001"
+     ],
+     "work": [
+      "t_{0.001}(8)=5.041",
+      "6.733245>5.041\\Rightarrow P<0.001"
+     ],
+     "words": "Row 8, column 0.001 prints 5.041. The statistic exceeds the largest printed cutoff, so P < 0.001.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "8",
+      "column": "0.001",
+      "value": 5.041,
+      "actualDf": 8,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Construct the 95% interval for the slope",
+     "general": [
+      "b-t_{0.05}(\\nu)s_b<\\beta<b+t_{0.05}(\\nu)s_b"
+     ],
+     "work": [
+      "M=2.306(0.1862567)=0.4295079",
+      "1.254112-0.4295079<\\beta<1.254112+0.4295079",
+      "0.8246039<\\beta<1.68362"
+     ],
+     "words": "The interval does not contain 0, which agrees with the test."
+    },
+    {
+     "title": "Construct the 95% interval for the intercept",
+     "general": [
+      "a-t_{0.05}(\\nu)s_a<\\alpha_{LOM}<a+t_{0.05}(\\nu)s_a"
+     ],
+     "work": [
+      "M=2.306(3.182756)=7.339435",
+      "6.439145-7.339435<\\alpha_{LOM}<6.439145+7.339435",
+      "-0.9002899<\\alpha_{LOM}<13.77858"
+     ],
+     "words": "This interval covers the plausible values of mean hearing threshold at x = 0, in dB HL."
+    }
+   ],
+   "conclusion": "The line is \\(\\hat y=6.439+1.254x\\). The statistic t = 6.733 with ν = 8 exceeds \\(t_{0.05}(8)=2.306\\) and \\(t_{0.001}(8)=5.041\\), so the trend between hearing threshold and years of noise exposure is statistically significant (P < 0.001). The 95% confidence interval for the slope is 0.8246 to 1.684 dB HL per year and does not contain 0. For the intercept it is −0.9003 to 13.78 dB HL. Workers who had spent more years in the noise needed louder tones before they could hear them, by about 1.25 dB for each extra year.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "8",
+    "column": "0.05",
+    "value": 2.306,
+    "actualDf": 8,
+    "approximation": false
+   },
+   "values": {
+    "n": 10,
+    "b": 1.254111842105263,
+    "sb": 0.1862566894301265,
+    "a": 6.439144736842106,
+    "sa": 3.1827557041628904,
+    "df": 8,
+    "t": 6.733244566637369,
+    "critical": 2.306,
+    "critical001": 5.041,
+    "slopeLower": 0.8246039162793913,
+    "slopeUpper": 1.6836197679311349,
+    "interceptLower": -0.9002899169575196,
+    "interceptUpper": 13.778579390641731,
+    "reject": true,
+    "tRaw": 6.733244566637371
+   },
+   "module": 18,
+   "tolerance": 0.03366622283318685,
+   "answerName": "t statistic",
+   "answer": 6.733244566637369
+  },
+  {
+   "id": "n18-b-coldpressor-catastrophizing",
+   "title": "Cold-water pain tolerance and catastrophizing score",
+   "topic": "s18slope",
+   "context": "In a study looking at pain, 12 volunteers completed a pain catastrophizing questionnaire (a score from 0 to 52 that measures how much a person magnifies and dwells on pain). Each volunteer then performed a cold pressor test (the hand is held in circulating water at 4 °C), and the tolerance time in seconds (s) until the hand was withdrawn was recorded. The data are listed in the table below. Note: some useful summations have already been calculated for you below, which you can use. In answering the questions below, DO NOT use R. Assume that any quantities of interest are Normally distributed.",
+   "unit": "",
+   "table": {
+    "headers": [
+     "Volunteer",
+     "Catastrophizing score x",
+     "Tolerance time y (s)",
+     "x²",
+     "y²",
+     "xy"
+    ],
+    "rows": [
+     [
+      1,
+      8,
+      95,
+      64,
+      9025,
+      760
+     ],
+     [
+      2,
+      11,
+      120,
+      121,
+      14400,
+      1320
+     ],
+     [
+      3,
+      14,
+      70,
+      196,
+      4900,
+      980
+     ],
+     [
+      4,
+      17,
+      104,
+      289,
+      10816,
+      1768
+     ],
+     [
+      5,
+      19,
+      88,
+      361,
+      7744,
+      1672
+     ],
+     [
+      6,
+      22,
+      61,
+      484,
+      3721,
+      1342
+     ],
+     [
+      7,
+      25,
+      97,
+      625,
+      9409,
+      2425
+     ],
+     [
+      8,
+      27,
+      52,
+      729,
+      2704,
+      1404
+     ],
+     [
+      9,
+      30,
+      80,
+      900,
+      6400,
+      2400
+     ],
+     [
+      10,
+      33,
+      45,
+      1089,
+      2025,
+      1485
+     ],
+     [
+      11,
+      36,
+      74,
+      1296,
+      5476,
+      2664
+     ],
+     [
+      12,
+      40,
+      58,
+      1600,
+      3364,
+      2320
+     ],
+     [
+      "Total",
+      282,
+      944,
+      7754,
+      79984,
+      20540
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) Find the linear regression relationship between catastrophizing score (independent variable) and tolerance time (dependent variable).",
+    "(ii) Calculate the standard error of the slope \\(s_b\\).",
+    "(iii) Based on your calculations for b, is the trend between tolerance time and catastrophizing score statistically significant? Please state how you reached your conclusions.",
+    "(iv) What is the 95% confidence interval for the slope? Also give the interval for the intercept of the line of means."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\beta=0",
+    "alternative": "H_A:\\beta\\ne0",
+    "nullWords": "Mean cold-water tolerance time does not change linearly with catastrophizing score, so the slope of the line of means is zero.",
+    "alternativeWords": "Mean cold-water tolerance time changes linearly with catastrophizing score, so the slope of the line of means is not zero."
+   },
+   "symbols": "\\(x\\) (catastrophizing score, points), \\(y\\) (tolerance time, s), \\(S_{xx},S_{yy},S_{xy}\\) (sums of squared and cross deviations), \\(b\\) (sample slope, s per point), \\(s_b\\) (SE of the slope), \\(a\\) (sample intercept), \\(s_a\\) (SE of the intercept), \\(s_{y|x}\\) (scatter about the line), \\(\\beta\\) (population slope), \\(\\alpha_{LOM}\\) (population intercept), \\(\\nu\\) (degrees of freedom), \\(t_\\alpha(\\nu)\\) (two-tailed critical value).",
+   "steps": [
+    {
+     "title": "Calculate both means",
+     "general": [
+      "\\bar x=\\frac{\\sum x}{n}",
+      "\\bar y=\\frac{\\sum y}{n}"
+     ],
+     "work": [
+      "\\bar x=\\frac{282}{12}=23.5",
+      "\\bar y=\\frac{944}{12}=78.66667"
+     ],
+     "words": "The regression line passes through the point of means (23.5 points, 78.667 s)."
+    },
+    {
+     "title": "Calculate the deviation sums",
+     "general": [
+      "S_{xx}=\\sum x^2-\\frac{(\\sum x)^2}{n}",
+      "S_{xy}=\\sum xy-\\frac{\\sum x\\sum y}{n}",
+      "S_{yy}=\\sum y^2-\\frac{(\\sum y)^2}{n}"
+     ],
+     "work": [
+      "S_{xx}=7754-6627=1127",
+      "S_{xy}=20540-22184=-1644",
+      "S_{yy}=79984-74261.33=5722.667"
+     ],
+     "words": "These equal Σ(x−x̄)², Σ(x−x̄)(y−ȳ) and Σ(y−ȳ)². They come from the totals in the bottom row of the table."
+    },
+    {
+     "title": "Calculate the slope",
+     "general": [
+      "b=\\frac{n\\sum xy-\\sum x\\sum y}{n\\sum x^2-(\\sum x)^2}"
+     ],
+     "work": [
+      "b=\\frac{12(20540)-282(944)}{12(7754)-282^2}=\\frac{-19728}{13524}=-1.45874"
+     ],
+     "words": "The slope is negative, so tolerance time is shorter in the volunteers with higher catastrophizing scores."
+    },
+    {
+     "title": "Calculate the intercept",
+     "general": [
+      "a=\\bar y-b\\bar x"
+     ],
+     "work": [
+      "a=78.66667-(-1.45874)(23.5)=78.66667-(-34.28039)=112.9471"
+     ],
+     "words": "Carry the unrounded slope into this step. The line is ŷ = 112.95 − 1.459x."
+    },
+    {
+     "title": "Calculate the sample variances",
+     "general": [
+      "s_x^2=\\frac{S_{xx}}{n-1}",
+      "s_y^2=\\frac{S_{yy}}{n-1}"
+     ],
+     "work": [
+      "s_x^2=\\frac{1127}{11}=102.4545,\\ s_x=10.12198",
+      "s_y^2=\\frac{5722.667}{11}=520.2424"
+     ],
+     "words": "These two variances feed the shortcut formula for the scatter about the line."
+    },
+    {
+     "title": "Calculate the standard error of the estimate",
+     "general": [
+      "s_{y|x}=\\sqrt{\\frac{n-1}{n-2}\\left(s_y^2-b^2s_x^2\\right)}"
+     ],
+     "work": [
+      "b^2s_x^2=(-1.45874)^2(102.4545)=218.0153",
+      "s_{y|x}=\\sqrt{\\frac{11}{10}(520.2424-218.0153)}=\\sqrt{332.4498}=18.23321"
+     ],
+     "words": "The factor (n−1)/(n−2) turns the n−1 denominators of the sample variances into the n−2 denominator that regression needs. The points scatter about the line with an SD of about 18.23 s."
+    },
+    {
+     "title": "Calculate the standard error of the slope",
+     "general": [
+      "s_b=\\frac{1}{\\sqrt{n-1}}\\frac{s_{y|x}}{s_x}"
+     ],
+     "work": [
+      "s_b=\\frac{1}{\\sqrt{11}}\\cdot\\frac{18.23321}{10.12198}=0.5431266"
+     ],
+     "words": "The slope is uncertain by about 0.5431 s per point."
+    },
+    {
+     "title": "Evaluate the bracket for the intercept",
+     "general": [
+      "\\frac{1}{n}+\\frac{\\bar x^2}{(n-1)s_x^2}"
+     ],
+     "work": [
+      "\\frac{1}{12}+\\frac{23.5^2}{11(102.4545)}=0.08333333+\\frac{552.25}{1127}=0.5733511"
+     ],
+     "words": "The second term grows with the distance between the mean of x and x = 0, where the intercept is defined."
+    },
+    {
+     "title": "Calculate the standard error of the intercept",
+     "general": [
+      "s_a=s_{y|x}\\sqrt{\\frac{1}{n}+\\frac{\\bar x^2}{(n-1)s_x^2}}"
+     ],
+     "work": [
+      "s_a=18.23321\\sqrt{0.5733511}=18.23321(0.7571995)=13.80617"
+     ],
+     "words": "The intercept is uncertain by about 13.81 s."
+    },
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\beta=0",
+      "H_A:\\beta\\ne0"
+     ],
+     "work": [
+      "H_0:\\beta=0"
+     ],
+     "words": "Use the t test for the slope of a regression line. The null hypothesis states that mean tolerance time does not change with catastrophizing score."
+    },
+    {
+     "title": "Calculate the t statistic",
+     "general": [
+      "t=\\frac{b-\\beta}{s_b}=\\frac{b}{s_b}"
+     ],
+     "work": [
+      "t=\\frac{-1.45874}{0.5431266}=-2.685819"
+     ],
+     "words": "Under the null hypothesis β = 0, so the statistic is the slope divided by its standard error."
+    },
+    {
+     "title": "Find the degrees of freedom",
+     "general": [
+      "\\nu=n-2"
+     ],
+     "work": [
+      "\\nu=12-2=10"
+     ],
+     "words": "Two coefficients, the intercept and the slope, are estimated from the data."
+    },
+    {
+     "title": "Find the 0.05 critical value",
+     "general": [
+      "t_c=t_{0.05}(\\nu)"
+     ],
+     "work": [
+      "t_{0.05}(10)=2.228"
+     ],
+     "words": "Start with α = 0.05. Open t_table.pdf, PDF page 1, row 10, two-tailed column 0.05. The printed cutoff is 2.228.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "10",
+      "column": "0.05",
+      "value": 2.228,
+      "actualDf": 10,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision",
+     "general": [
+      "|t|>t_{0.05}(\\nu)\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "|t|=2.685819>2.228"
+     ],
+     "words": "The size of the statistic exceeds the cutoff, so the null hypothesis of no trend is rejected."
+    },
+    {
+     "title": "Find the P range",
+     "general": [
+      "t_{0.05}(\\nu)<|t|<t_{0.02}(\\nu)\\Rightarrow 0.02<P<0.05"
+     ],
+     "work": [
+      "t_{0.02}(10)=2.764",
+      "2.228<2.685819<2.764"
+     ],
+     "words": "Move to the stricter columns of row 10. The statistic lies between the 0.05 and 0.02 columns, so 0.02 < P < 0.05.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "10",
+      "column": "0.02",
+      "value": 2.764,
+      "actualDf": 10,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Construct the 95% interval for the slope",
+     "general": [
+      "b-t_{0.05}(\\nu)s_b<\\beta<b+t_{0.05}(\\nu)s_b"
+     ],
+     "work": [
+      "M=2.228(0.5431266)=1.210086",
+      "-1.45874-1.210086<\\beta<-1.45874+1.210086",
+      "-2.668826<\\beta<-0.2486539"
+     ],
+     "words": "The interval does not contain 0, which agrees with the test."
+    },
+    {
+     "title": "Construct the 95% interval for the intercept",
+     "general": [
+      "a-t_{0.05}(\\nu)s_a<\\alpha_{LOM}<a+t_{0.05}(\\nu)s_a"
+     ],
+     "work": [
+      "M=2.228(13.80617)=30.76016",
+      "112.9471-30.76016<\\alpha_{LOM}<112.9471+30.76016",
+      "82.1869<\\alpha_{LOM}<143.7072"
+     ],
+     "words": "This interval covers the plausible values of mean tolerance time at x = 0, in s."
+    }
+   ],
+   "conclusion": "The line is \\(\\hat y=112.95-1.459x\\). The statistic is t = −2.686 with ν = 10. Its size exceeds \\(t_{0.05}(10)=2.228\\) but not \\(t_{0.02}(10)=2.764\\), so the trend between tolerance time and catastrophizing score is statistically significant (0.02 < P < 0.05). The 95% confidence interval for the slope is −2.669 to −0.2487 s per point and does not contain 0. For the intercept it is 82.19 to 143.7 s. The statistic does not reach the 0.02 cutoff, so the evidence is modest.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "10",
+    "column": "0.05",
+    "value": 2.228,
+    "actualDf": 10,
+    "approximation": false
+   },
+   "values": {
+    "n": 12,
+    "b": -1.4587400177462289,
+    "sb": 0.5431266148348454,
+    "a": 112.94705708370304,
+    "sa": 13.806174566955981,
+    "df": 10,
+    "t": -2.685819434920906,
+    "critical": 2.228,
+    "critical001": 4.587,
+    "critical002": 2.764,
+    "slopeLower": -2.6688261155982644,
+    "slopeUpper": -0.24865391989419328,
+    "interceptLower": 82.18690014852511,
+    "interceptUpper": 143.70721401888096,
+    "reject": true,
+    "tRaw": -2.6858194349209095
+   },
+   "module": 18,
+   "tolerance": 0.01342909717460453,
+   "answerName": "t statistic",
+   "answer": -2.685819434920906
+  },
+  {
+   "id": "n18-b-delay-discounting",
+   "title": "Delay discounting of a $100 reward",
+   "topic": "s18predict",
+   "context": "Researchers interested in impulsive choice did a study to evaluate delay discounting (the loss of value of a reward when it must be waited for). Ten adults were each assigned a different delay in weeks. Each adult made a series of choices between a smaller amount of money now and $100 after the delay, and the indifference point in dollars ($) was recorded (the immediate amount judged to be worth the same as the delayed $100). The data are listed in the table below. Note: some useful summations have already been calculated for you below, which you can use. In answering the questions below, DO NOT use R. Assume that any quantities of interest are Normally distributed.",
+   "unit": "$",
+   "table": {
+    "headers": [
+     "Subject",
+     "Delay x (weeks)",
+     "Indifference point y ($)",
+     "x²",
+     "y²",
+     "xy"
+    ],
+    "rows": [
+     [
+      1,
+      1,
+      93,
+      1,
+      8649,
+      93
+     ],
+     [
+      2,
+      2,
+      91,
+      4,
+      8281,
+      182
+     ],
+     [
+      3,
+      4,
+      81,
+      16,
+      6561,
+      324
+     ],
+     [
+      4,
+      6,
+      84,
+      36,
+      7056,
+      504
+     ],
+     [
+      5,
+      8,
+      70,
+      64,
+      4900,
+      560
+     ],
+     [
+      6,
+      10,
+      72,
+      100,
+      5184,
+      720
+     ],
+     [
+      7,
+      12,
+      58,
+      144,
+      3364,
+      696
+     ],
+     [
+      8,
+      16,
+      55,
+      256,
+      3025,
+      880
+     ],
+     [
+      9,
+      20,
+      41,
+      400,
+      1681,
+      820
+     ],
+     [
+      10,
+      24,
+      38,
+      576,
+      1444,
+      912
+     ],
+     [
+      "Total",
+      103,
+      683,
+      1597,
+      50145,
+      5691
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) Find the linear regression relationship between delay (independent variable) and indifference point (dependent variable).",
+    "(ii) Calculate the standard error of the estimate \\(s_{y|x}\\).",
+    "(iii) What is the 95% Confidence Interval for the mean indifference point at a delay of 14 weeks?",
+    "(iv) What is the 95% Confidence Interval for an observation of indifference point at a delay of 14 weeks? State which interval is wider."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(\\hat y\\) (predicted mean, $), \\(s_{\\hat y}\\) (SE of the predicted mean), \\(s_{Y_{new}}\\) (SE for one new adult), \\(s_{y|x}\\) (scatter about the line), \\(S_{xx},S_{yy},S_{xy}\\) (sums of squared and cross deviations), \\(\\bar x\\) (mean of x), \\(s_x\\) (SD of x), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "Calculate both means",
+     "general": [
+      "\\bar x=\\frac{\\sum x}{n}",
+      "\\bar y=\\frac{\\sum y}{n}"
+     ],
+     "work": [
+      "\\bar x=\\frac{103}{10}=10.3",
+      "\\bar y=\\frac{683}{10}=68.3"
+     ],
+     "words": "The regression line passes through the point of means (10.3 weeks, 68.3 dollars)."
+    },
+    {
+     "title": "Calculate the deviation sums",
+     "general": [
+      "S_{xx}=\\sum x^2-\\frac{(\\sum x)^2}{n}",
+      "S_{xy}=\\sum xy-\\frac{\\sum x\\sum y}{n}",
+      "S_{yy}=\\sum y^2-\\frac{(\\sum y)^2}{n}"
+     ],
+     "work": [
+      "S_{xx}=1597-1060.9=536.1",
+      "S_{xy}=5691-7034.9=-1343.9",
+      "S_{yy}=50145-46648.9=3496.1"
+     ],
+     "words": "These equal Σ(x−x̄)², Σ(x−x̄)(y−ȳ) and Σ(y−ȳ)². They come from the totals in the bottom row of the table."
+    },
+    {
+     "title": "Calculate the slope",
+     "general": [
+      "b=\\frac{n\\sum xy-\\sum x\\sum y}{n\\sum x^2-(\\sum x)^2}"
+     ],
+     "work": [
+      "b=\\frac{10(5691)-103(683)}{10(1597)-103^2}=\\frac{-13439}{5361}=-2.506808"
+     ],
+     "words": "The slope is negative, so the delayed $100 is worth about $2.5 less for each additional week of waiting."
+    },
+    {
+     "title": "Calculate the intercept",
+     "general": [
+      "a=\\bar y-b\\bar x"
+     ],
+     "work": [
+      "a=68.3-(-2.506808)(10.3)=68.3-(-25.82013)=94.12013"
+     ],
+     "words": "Carry the unrounded slope into this step. The line is ŷ = 94.12 − 2.507x."
+    },
+    {
+     "title": "Calculate the sample variances",
+     "general": [
+      "s_x^2=\\frac{S_{xx}}{n-1}",
+      "s_y^2=\\frac{S_{yy}}{n-1}"
+     ],
+     "work": [
+      "s_x^2=\\frac{536.1}{9}=59.56667,\\ s_x=7.717944",
+      "s_y^2=\\frac{3496.1}{9}=388.4556"
+     ],
+     "words": "These two variances feed the shortcut formula for the scatter about the line."
+    },
+    {
+     "title": "Calculate the standard error of the estimate",
+     "general": [
+      "s_{y|x}=\\sqrt{\\frac{n-1}{n-2}\\left(s_y^2-b^2s_x^2\\right)}"
+     ],
+     "work": [
+      "b^2s_x^2=(-2.506808)^2(59.56667)=374.3222",
+      "s_{y|x}=\\sqrt{\\frac{9}{8}(388.4556-374.3222)}=\\sqrt{15.90002}=3.987483"
+     ],
+     "words": "The factor (n−1)/(n−2) turns the n−1 denominators of the sample variances into the n−2 denominator that regression needs. The points scatter about the line with an SD of about 3.987 dollars."
+    },
+    {
+     "title": "Calculate the predicted value at x = 14",
+     "general": [
+      "\\hat y=a+bx"
+     ],
+     "work": [
+      "\\hat y=94.12013+(-2.506808)(14)=94.12013+(-35.09532)=59.02481"
+     ],
+     "words": "This is the estimated mean at 14 weeks, in dollars. The value 14 is not one of the measured x values, but it lies inside their range."
+    },
+    {
+     "title": "Evaluate the distance term",
+     "general": [
+      "\\frac{1}{n}+\\frac{(x-\\bar x)^2}{(n-1)s_x^2}"
+     ],
+     "work": [
+      "\\frac{1}{10}+\\frac{(14-10.3)^2}{9(59.56667)}=0.1+\\frac{13.69}{536.1}=0.1255363"
+     ],
+     "words": "The second term grows with the distance between 14 weeks and the mean of x."
+    },
+    {
+     "title": "Calculate the standard error of the mean prediction",
+     "general": [
+      "s_{\\hat y}=s_{y|x}\\sqrt{\\frac{1}{n}+\\frac{(x-\\bar x)^2}{(n-1)s_x^2}}"
+     ],
+     "work": [
+      "s_{\\hat y}=3.987483\\sqrt{0.1255363}=3.987483(0.354311)=1.412809"
+     ],
+     "words": "This standard error describes the uncertainty in the height of the line at x = 14."
+    },
+    {
+     "title": "Find the degrees of freedom and cutoff",
+     "general": [
+      "\\nu=n-2",
+      "t_c=t_{0.05}(\\nu)"
+     ],
+     "work": [
+      "\\nu=10-2=8",
+      "t_{0.05}(8)=2.306"
+     ],
+     "words": "Open t_table.pdf, PDF page 1, row 8, two-tailed column 0.05. The printed cutoff is 2.306.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "8",
+      "column": "0.05",
+      "value": 2.306,
+      "actualDf": 8,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Construct the interval for the mean",
+     "general": [
+      "\\hat y\\pm t_{0.05}(\\nu)s_{\\hat y}"
+     ],
+     "work": [
+      "M=2.306(1.412809)=3.257937",
+      "59.02481\\pm3.257937\\Rightarrow 55.76687<\\mu_{y|14}<62.28275"
+     ],
+     "words": "With 95% confidence, the mean indifference point of all adults at 14 weeks lies between about 55.77 and 62.28 dollars."
+    },
+    {
+     "title": "Calculate the standard error for one new adult",
+     "general": [
+      "s_{Y_{new}}=\\sqrt{s_{y|x}^2+s_{\\hat y}^2}"
+     ],
+     "work": [
+      "s_{Y_{new}}=\\sqrt{15.90002+1.996029}=\\sqrt{17.89605}=4.230372"
+     ],
+     "words": "Add the individual scatter about the line to the uncertainty in the line itself. The same value follows from 3.987√(1+0.1255363)."
+    },
+    {
+     "title": "Construct the interval for one adult",
+     "general": [
+      "\\hat y\\pm t_{0.05}(\\nu)s_{Y_{new}}"
+     ],
+     "work": [
+      "M=2.306(4.230372)=9.755238",
+      "59.02481\\pm9.755238\\Rightarrow 49.26957<y<68.78005"
+     ],
+     "words": "This interval should contain the indifference point of a single randomly chosen adult at 14 weeks with 95% confidence."
+    },
+    {
+     "title": "Compare the two widths",
+     "general": [
+      "s_{Y_{new}}>s_{\\hat y}"
+     ],
+     "work": [
+      "4.230372>1.412809"
+     ],
+     "words": "The observation interval is about 2.99 times as wide, because individual values scatter about the mean with an SD near 3.99 dollars even if the line were known exactly."
+    }
+   ],
+   "conclusion": "The line is \\(\\hat y=94.12-2.507x\\), with \\(s_{y|x}=3.987\\) dollars. The 95% confidence interval for the mean indifference point at a delay of 14 weeks is 55.77 to 62.28 dollars. The 95% confidence interval for one adult at 14 weeks is 49.27 to 68.78 dollars, which is wider.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "8",
+    "column": "0.05",
+    "value": 2.306,
+    "actualDf": 8,
+    "approximation": false
+   },
+   "values": {
+    "a": 94.12012684200708,
+    "b": -2.506808431262824,
+    "syx": 3.987482746449978,
+    "n": 10,
+    "xbar": 10.3,
+    "sx": 7.717944458640957,
+    "x": 14,
+    "yhat": 59.02480880432755,
+    "seMean": 1.412808975876861,
+    "seNew": 4.23037207058132,
+    "critical": 2.306,
+    "meanLower": 55.766871305955505,
+    "meanUpper": 62.28274630269959,
+    "obsLower": 49.26957080956702,
+    "obsUpper": 68.78004679908807,
+    "confidence": 0.95
+   },
+   "module": 18,
+   "tolerance": 0.2788343565297775,
+   "answerName": "Lower endpoint of the mean CI at 14 weeks",
+   "answer": 55.766871305955505
+  },
+  {
+   "id": "n18-b-hrv-stress",
+   "title": "Heart-rate variability and perceived stress",
+   "topic": "s18predict",
+   "context": "A study was reported concerning stress and the vagal control of the heart. Ten office workers completed a perceived stress questionnaire (a score from 0 to 40, where higher means more stress). A 5-minute resting electrocardiogram (ECG) was then recorded, and heart-rate variability was summarized as the root mean square of successive differences between heartbeats (RMSSD) in milliseconds (ms). The data are listed in the table below. Note: some useful summations have already been calculated for you below, which you can use. In answering the questions below, DO NOT use R. Assume that any quantities of interest are Normally distributed.",
+   "unit": "ms",
+   "table": {
+    "headers": [
+     "Worker",
+     "Stress score x",
+     "RMSSD y (ms)",
+     "x²",
+     "y²",
+     "xy"
+    ],
+    "rows": [
+     [
+      1,
+      6,
+      61,
+      36,
+      3721,
+      366
+     ],
+     [
+      2,
+      9,
+      66,
+      81,
+      4356,
+      594
+     ],
+     [
+      3,
+      11,
+      49,
+      121,
+      2401,
+      539
+     ],
+     [
+      4,
+      14,
+      55,
+      196,
+      3025,
+      770
+     ],
+     [
+      5,
+      16,
+      42,
+      256,
+      1764,
+      672
+     ],
+     [
+      6,
+      19,
+      50,
+      361,
+      2500,
+      950
+     ],
+     [
+      7,
+      21,
+      36,
+      441,
+      1296,
+      756
+     ],
+     [
+      8,
+      24,
+      41,
+      576,
+      1681,
+      984
+     ],
+     [
+      9,
+      27,
+      33,
+      729,
+      1089,
+      891
+     ],
+     [
+      10,
+      31,
+      24,
+      961,
+      576,
+      744
+     ],
+     [
+      "Total",
+      178,
+      457,
+      3758,
+      22409,
+      7266
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) Find the linear regression relationship between stress score (independent variable) and RMSSD (dependent variable).",
+    "(ii) Calculate the standard error of the estimate \\(s_{y|x}\\).",
+    "(iii) What is the 95% Confidence Interval for an observation of RMSSD at a stress score of 20? Make sure to show your intermediate calculations, including the standard error of the mean RMSSD at that score."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(\\hat y\\) (predicted mean, ms), \\(s_{\\hat y}\\) (SE of the predicted mean), \\(s_{Y_{new}}\\) (SE for one new worker), \\(s_{y|x}\\) (scatter about the line), \\(S_{xx},S_{yy},S_{xy}\\) (sums of squared and cross deviations), \\(\\bar x\\) (mean of x), \\(s_x\\) (SD of x), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "Calculate both means",
+     "general": [
+      "\\bar x=\\frac{\\sum x}{n}",
+      "\\bar y=\\frac{\\sum y}{n}"
+     ],
+     "work": [
+      "\\bar x=\\frac{178}{10}=17.8",
+      "\\bar y=\\frac{457}{10}=45.7"
+     ],
+     "words": "The regression line passes through the point of means (17.8 points, 45.7 ms)."
+    },
+    {
+     "title": "Calculate the deviation sums",
+     "general": [
+      "S_{xx}=\\sum x^2-\\frac{(\\sum x)^2}{n}",
+      "S_{xy}=\\sum xy-\\frac{\\sum x\\sum y}{n}",
+      "S_{yy}=\\sum y^2-\\frac{(\\sum y)^2}{n}"
+     ],
+     "work": [
+      "S_{xx}=3758-3168.4=589.6",
+      "S_{xy}=7266-8134.6=-868.6",
+      "S_{yy}=22409-20884.9=1524.1"
+     ],
+     "words": "These equal Σ(x−x̄)², Σ(x−x̄)(y−ȳ) and Σ(y−ȳ)². They come from the totals in the bottom row of the table."
+    },
+    {
+     "title": "Calculate the slope",
+     "general": [
+      "b=\\frac{n\\sum xy-\\sum x\\sum y}{n\\sum x^2-(\\sum x)^2}"
+     ],
+     "work": [
+      "b=\\frac{10(7266)-178(457)}{10(3758)-178^2}=\\frac{-8686}{5896}=-1.473202"
+     ],
+     "words": "The slope is negative, so RMSSD is lower in the workers who report more stress."
+    },
+    {
+     "title": "Calculate the intercept",
+     "general": [
+      "a=\\bar y-b\\bar x"
+     ],
+     "work": [
+      "a=45.7-(-1.473202)(17.8)=45.7-(-26.223)=71.923"
+     ],
+     "words": "Carry the unrounded slope into this step. The line is ŷ = 71.92 − 1.473x."
+    },
+    {
+     "title": "Calculate the sample variances",
+     "general": [
+      "s_x^2=\\frac{S_{xx}}{n-1}",
+      "s_y^2=\\frac{S_{yy}}{n-1}"
+     ],
+     "work": [
+      "s_x^2=\\frac{589.6}{9}=65.51111,\\ s_x=8.093893",
+      "s_y^2=\\frac{1524.1}{9}=169.3444"
+     ],
+     "words": "These two variances feed the shortcut formula for the scatter about the line."
+    },
+    {
+     "title": "Calculate the standard error of the estimate",
+     "general": [
+      "s_{y|x}=\\sqrt{\\frac{n-1}{n-2}\\left(s_y^2-b^2s_x^2\\right)}"
+     ],
+     "work": [
+      "b^2s_x^2=(-1.473202)^2(65.51111)=142.1804",
+      "s_{y|x}=\\sqrt{\\frac{9}{8}(169.3444-142.1804)}=\\sqrt{30.55957}=5.528071"
+     ],
+     "words": "The factor (n−1)/(n−2) turns the n−1 denominators of the sample variances into the n−2 denominator that regression needs. The points scatter about the line with an SD of about 5.528 ms."
+    },
+    {
+     "title": "Calculate the predicted value at x = 20",
+     "general": [
+      "\\hat y=a+bx"
+     ],
+     "work": [
+      "\\hat y=71.923+(-1.473202)(20)=71.923+(-29.46404)=42.45896"
+     ],
+     "words": "This is the estimated mean at 20 points, in ms. The value 20 is not one of the measured x values, but it lies inside their range."
+    },
+    {
+     "title": "Evaluate the distance term",
+     "general": [
+      "\\frac{1}{n}+\\frac{(x-\\bar x)^2}{(n-1)s_x^2}"
+     ],
+     "work": [
+      "\\frac{1}{10}+\\frac{(20-17.8)^2}{9(65.51111)}=0.1+\\frac{4.84}{589.6}=0.108209"
+     ],
+     "words": "The second term grows with the distance between 20 points and the mean of x."
+    },
+    {
+     "title": "Calculate the standard error of the mean prediction",
+     "general": [
+      "s_{\\hat y}=s_{y|x}\\sqrt{\\frac{1}{n}+\\frac{(x-\\bar x)^2}{(n-1)s_x^2}}"
+     ],
+     "work": [
+      "s_{\\hat y}=5.528071\\sqrt{0.108209}=5.528071(0.3289513)=1.818466"
+     ],
+     "words": "This standard error describes the uncertainty in the height of the line at x = 20."
+    },
+    {
+     "title": "Find the degrees of freedom and cutoff",
+     "general": [
+      "\\nu=n-2",
+      "t_c=t_{0.05}(\\nu)"
+     ],
+     "work": [
+      "\\nu=10-2=8",
+      "t_{0.05}(8)=2.306"
+     ],
+     "words": "Open t_table.pdf, PDF page 1, row 8, two-tailed column 0.05. The printed cutoff is 2.306.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "8",
+      "column": "0.05",
+      "value": 2.306,
+      "actualDf": 8,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Construct the interval for the mean",
+     "general": [
+      "\\hat y\\pm t_{0.05}(\\nu)s_{\\hat y}"
+     ],
+     "work": [
+      "M=2.306(1.818466)=4.193383",
+      "42.45896\\pm4.193383\\Rightarrow 38.26557<\\mu_{y|20}<46.65234"
+     ],
+     "words": "With 95% confidence, the mean RMSSD of all workers at 20 points lies between about 38.27 and 46.65 ms."
+    },
+    {
+     "title": "Calculate the standard error for one new worker",
+     "general": [
+      "s_{Y_{new}}=\\sqrt{s_{y|x}^2+s_{\\hat y}^2}"
+     ],
+     "work": [
+      "s_{Y_{new}}=\\sqrt{30.55957+3.30682}=\\sqrt{33.86639}=5.819484"
+     ],
+     "words": "Add the individual scatter about the line to the uncertainty in the line itself. The same value follows from 5.528√(1+0.108209)."
+    },
+    {
+     "title": "Construct the interval for one worker",
+     "general": [
+      "\\hat y\\pm t_{0.05}(\\nu)s_{Y_{new}}"
+     ],
+     "work": [
+      "M=2.306(5.819484)=13.41973",
+      "42.45896\\pm13.41973\\Rightarrow 29.03923<y<55.87869"
+     ],
+     "words": "This interval should contain the RMSSD of a single randomly chosen worker at 20 points with 95% confidence."
+    },
+    {
+     "title": "Compare the two widths",
+     "general": [
+      "s_{Y_{new}}>s_{\\hat y}"
+     ],
+     "work": [
+      "5.819484>1.818466"
+     ],
+     "words": "The observation interval is about 3.2 times as wide, because individual values scatter about the mean with an SD near 5.53 ms even if the line were known exactly."
+    }
+   ],
+   "conclusion": "The line is \\(\\hat y=71.92-1.473x\\), with \\(s_{y|x}=5.528\\) ms. The 95% confidence interval for an observation of RMSSD at a stress score of 20 is 29.04 to 55.88 ms. The 95% confidence interval for the mean RMSSD at that score is narrower, 38.27 to 46.65 ms.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "8",
+    "column": "0.05",
+    "value": 2.306,
+    "actualDf": 8,
+    "approximation": false
+   },
+   "values": {
+    "a": 71.9229986431479,
+    "b": -1.473202170963365,
+    "syx": 5.528071479969529,
+    "n": 10,
+    "xbar": 17.8,
+    "sx": 8.0938934457473,
+    "x": 20,
+    "yhat": 42.45895522388061,
+    "seMean": 1.8184662784207581,
+    "seNew": 5.819483988585752,
+    "critical": 2.306,
+    "meanLower": 38.26557198584234,
+    "meanUpper": 46.65233846191887,
+    "obsLower": 29.039225146201865,
+    "obsUpper": 55.87868530155935,
+    "confidence": 0.95
+   },
+   "module": 18,
+   "tolerance": 0.14519612573100932,
+   "answerName": "Lower endpoint of the observation CI at a score of 20",
+   "answer": 29.039225146201865
+  },
+  {
+   "id": "n18-b-mental-rotation-age",
+   "title": "Mental rotation speed in younger and older adults",
+   "topic": "s18compare",
+   "context": "In a study looking at mental rotation (deciding whether two drawn objects are the same when one has been turned through an angle), 12 younger adults and 12 older adults were each tested at one rotation angle in degrees (deg). The mean response time in milliseconds (ms) for correct answers was recorded for each subject. A separate regression of response time on angle was fitted to each group in R with summary(lm(RT.ms ~ Angle.deg)), and the coefficient tables are shown below. The residual standard error was 41.29 ms on 10 degrees of freedom for the older group (multiple R-squared 0.9727) and 44.29 ms on 10 degrees of freedom for the younger group (multiple R-squared 0.9513). The same 12 angles were used in both groups.",
+   "unit": "",
+   "table": {
+    "headers": [
+     "lm() row",
+     "Estimate",
+     "Std. Error",
+     "t value",
+     "Pr(>|t|)"
+    ],
+    "rows": [
+     [
+      "Older (Intercept)",
+      663.776,
+      23.217,
+      28.59,
+      "6.38e-11"
+     ],
+     [
+      "Older Angle.deg",
+      4.1747,
+      0.2214,
+      18.86,
+      "3.81e-09"
+     ],
+     [
+      "Younger (Intercept)",
+      477.167,
+      24.899,
+      19.16,
+      "3.26e-09"
+     ],
+     [
+      "Younger Angle.deg",
+      3.3167,
+      0.2374,
+      13.97,
+      "6.91e-08"
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) Is there a difference between the two groups in the slope of response time against angle (the extra time needed for each additional degree of rotation)? Please state how you reached your conclusions.",
+    "(ii) Apply the corresponding test to the intercepts."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\beta_O=\\beta_Y",
+    "alternative": "H_A:\\beta_O\\ne\\beta_Y",
+    "nullWords": "Response time rises with rotation angle at the same rate in older and younger adults, so the two lines of means have equal slopes.",
+    "alternativeWords": "The rate at which response time rises with rotation angle is different in older and younger adults."
+   },
+   "symbols": "\\(b_O,b_Y\\) (older and younger slopes, ms per deg), \\(s_{b_O},s_{b_Y}\\) (their SEs), \\(s_{b_O-b_Y}\\) (SE of the slope difference), \\(a_O,a_Y\\) (intercepts, ms), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\beta_1=\\beta_2",
+      "t=\\frac{b_1-b_2}{s_{b_1-b_2}}"
+     ],
+     "work": [
+      "H_0:\\beta_O=\\beta_Y"
+     ],
+     "words": "Use the two-regression-line t test. Both slopes are significant on their own (t = 18.86 and 13.97), so the comparison is meaningful."
+    },
+    {
+     "title": "Calculate the slope difference",
+     "general": [
+      "b_1-b_2"
+     ],
+     "work": [
+      "4.1747-3.3167=0.858"
+     ],
+     "words": "Keep the order older minus younger throughout."
+    },
+    {
+     "title": "Calculate the standard error of the difference",
+     "general": [
+      "s_{b_1-b_2}=\\sqrt{s_{b_1}^2+s_{b_2}^2}"
+     ],
+     "work": [
+      "s_{b_O-b_Y}=\\sqrt{0.2214^2+0.2374^2}=\\sqrt{0.04901796+0.05635876}=\\sqrt{0.1053767}=0.3246178"
+     ],
+     "words": "The equal-n formula applies because both groups have 12 subjects."
+    },
+    {
+     "title": "Calculate the t statistic",
+     "general": [
+      "t=\\frac{b_1-b_2}{s_{b_1-b_2}}"
+     ],
+     "work": [
+      "t=\\frac{0.858}{0.3246178}=2.643108"
+     ],
+     "words": "The difference is about 2.64 standard errors."
+    },
+    {
+     "title": "Find the degrees of freedom",
+     "general": [
+      "\\nu=n_1+n_2-4"
+     ],
+     "work": [
+      "\\nu=12+12-4=20"
+     ],
+     "words": "Each line uses up two degrees of freedom for its intercept and slope."
+    },
+    {
+     "title": "Compare with the 0.05 cutoff",
+     "general": [
+      "|t|>t_{0.05}(\\nu)\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "t_{0.05}(20)=2.086",
+      "2.643108>2.086"
+     ],
+     "words": "Start with α = 0.05. Open t_table.pdf, PDF page 1, row 20, two-tailed column 0.05. The printed cutoff is 2.086, so equal slopes are rejected.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "20",
+      "column": "0.05",
+      "value": 2.086,
+      "actualDf": 20,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Find the P range",
+     "general": [
+      "t_{0.02}(\\nu)<|t|<t_{0.01}(\\nu)\\Rightarrow 0.01<P<0.02"
+     ],
+     "work": [
+      "t_{0.02}(20)=2.528,\\ t_{0.01}(20)=2.845",
+      "2.528<2.643108<2.845"
+     ],
+     "words": "Move to the stricter columns of row 20. The statistic lies between the 0.02 and 0.01 columns, so 0.01 < P < 0.02.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "20",
+      "column": "0.01",
+      "value": 2.845,
+      "actualDf": 20,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Apply the corresponding intercept test",
+     "general": [
+      "t=\\frac{a_1-a_2}{\\sqrt{s_{a_1}^2+s_{a_2}^2}}"
+     ],
+     "work": [
+      "t=\\frac{663.776-477.167}{\\sqrt{23.217^2+24.899^2}}=\\frac{186.609}{34.04393}=5.481417"
+     ],
+     "words": "Replacing slopes by intercepts in the same formula gives t = 5.481, which exceeds 3.850, the 0.001 cutoff of row 20. The intercepts also differ, so older adults are slower even when the two objects are not rotated at all."
+    }
+   ],
+   "conclusion": "The statistic t = 2.643 with ν = 20 exceeds \\(t_{0.05}(20)=2.086\\) and \\(t_{0.02}(20)=2.528\\) but not \\(t_{0.01}(20)=2.845\\), so there is a difference between the slopes (0.01 < P < 0.02). Response time rises faster with angle in older adults (4.1747 ms per deg) than in younger adults (3.3167 ms per deg).",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "20",
+    "column": "0.05",
+    "value": 2.086,
+    "actualDf": 20,
+    "approximation": false
+   },
+   "values": {
+    "nM": 12,
+    "nF": 12,
+    "bM": 4.1747,
+    "sbM": 0.2214,
+    "bF": 3.3167,
+    "sbF": 0.2374,
+    "difference": 0.8579999999999997,
+    "se": 0.324617806042737,
+    "t": 2.643108246154067,
+    "df": 20,
+    "critical": 2.086,
+    "critical002": 2.528,
+    "critical01": 2.845,
+    "reject": true,
+    "interceptT": 5.481417401777834,
+    "femaleXbar": 90.0,
+    "femaleSx": 56.246211993665526,
+    "pooledVariance": 1833.2341000000001,
+    "pooledSE": 0.32458940464715635,
+    "pooledT": 2.6433395166816527
+   },
+   "module": 18,
+   "tolerance": 0.013215541230770336,
+   "answerName": "t statistic",
+   "answer": 2.643108246154067
+  },
+  {
+   "id": "n18-b-amygdala-anxiety",
+   "title": "Amygdala response to fearful faces and trait anxiety",
+   "topic": "s18corr",
+   "context": "In a study looking at mood and threat processing, 10 adults completed a trait anxiety questionnaire (a score from 20 to 80, where higher means more anxious). Each adult then viewed fearful and neutral faces during functional magnetic resonance imaging (fMRI), and the amygdala response was recorded as the percent signal change (%) for fearful faces compared with neutral faces. The data are listed in the table below. Note: some useful summations have already been calculated for you below, which you can use. In answering the questions below, DO NOT use R. Assume that any quantities of interest are Normally distributed.",
+   "unit": "",
+   "table": {
+    "headers": [
+     "Subject",
+     "Trait anxiety score x",
+     "Amygdala response y (%)",
+     "x²",
+     "y²",
+     "xy"
+    ],
+    "rows": [
+     [
+      1,
+      28,
+      0.21,
+      784,
+      0.0441,
+      5.88
+     ],
+     [
+      2,
+      31,
+      0.35,
+      961,
+      0.1225,
+      10.85
+     ],
+     [
+      3,
+      35,
+      0.18,
+      1225,
+      0.0324,
+      6.3
+     ],
+     [
+      4,
+      38,
+      0.42,
+      1444,
+      0.1764,
+      15.96
+     ],
+     [
+      5,
+      41,
+      0.39,
+      1681,
+      0.1521,
+      15.99
+     ],
+     [
+      6,
+      44,
+      0.55,
+      1936,
+      0.3025,
+      24.2
+     ],
+     [
+      7,
+      47,
+      0.48,
+      2209,
+      0.2304,
+      22.56
+     ],
+     [
+      8,
+      52,
+      0.71,
+      2704,
+      0.5041,
+      36.92
+     ],
+     [
+      9,
+      55,
+      0.52,
+      3025,
+      0.2704,
+      28.6
+     ],
+     [
+      10,
+      60,
+      0.8,
+      3600,
+      0.64,
+      48
+     ],
+     [
+      "Total",
+      431,
+      4.61,
+      19569,
+      2.4749,
+      215.26
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) Calculate the correlation (Pearson coefficient) between amygdala response and trait anxiety score.",
+    "(ii) Is the correlation different from zero? Use a significance level of α = 0.05 for your inference, then give the P range."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\rho=0",
+    "alternative": "H_A:\\rho\\ne0",
+    "nullWords": "There is no linear relationship between amygdala response and trait anxiety score in the population, so the population correlation is zero.",
+    "alternativeWords": "Amygdala response and trait anxiety score are linearly related in the population, so the population correlation is not zero."
+   },
+   "symbols": "\\(r\\) (sample correlation coefficient), \\(\\rho\\) (population correlation), \\(b\\) (slope), \\(n\\) (number of pairs), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "Calculate the deviation totals from the sums",
+     "general": [
+      "\\sum(x-\\bar x)^2=\\sum x^2-\\frac{(\\sum x)^2}{n}",
+      "\\sum(y-\\bar y)^2=\\sum y^2-\\frac{(\\sum y)^2}{n}",
+      "\\sum(x-\\bar x)(y-\\bar y)=\\sum xy-\\frac{\\sum x\\sum y}{n}"
+     ],
+     "work": [
+      "\\sum(x-\\bar x)^2=19569-\\frac{431^2}{10}=19569-18576.1=992.9",
+      "\\sum(y-\\bar y)^2=2.4749-\\frac{4.61^2}{10}=2.4749-2.12521=0.34969",
+      "\\sum(x-\\bar x)(y-\\bar y)=215.26-\\frac{431(4.61)}{10}=215.26-198.691=16.569"
+     ],
+     "words": "The totals in the bottom row of the table give the three deviation totals that the correlation needs."
+    },
+    {
+     "title": "Calculate r from the deviation totals",
+     "general": [
+      "r=\\frac{\\sum(x-\\bar x)(y-\\bar y)}{\\sqrt{\\sum(x-\\bar x)^2\\sum(y-\\bar y)^2}}"
+     ],
+     "work": [
+      "r=\\frac{16.569}{\\sqrt{(992.9)(0.34969)}}=\\frac{16.569}{\\sqrt{347.2072}}=\\frac{16.569}{18.6335}=0.8892051"
+     ],
+     "words": "The units cancel, so r has no units."
+    },
+    {
+     "title": "Check with the slope relation",
+     "general": [
+      "b=\\frac{\\sum(x-\\bar x)(y-\\bar y)}{\\sum(x-\\bar x)^2}",
+      "r=\\frac{\\sqrt{\\sum(x-\\bar x)^2}}{\\sqrt{\\sum(y-\\bar y)^2}}\\cdot b"
+     ],
+     "work": [
+      "b=\\frac{16.569}{992.9}=0.01668748",
+      "r=\\sqrt{\\frac{992.9}{0.34969}}(0.01668748)=53.28576(0.01668748)=0.8892051"
+     ],
+     "words": "The slope relation gives the same value, and r has the same sign as b."
+    },
+    {
+     "title": "Square r",
+     "general": [
+      "r^2"
+     ],
+     "work": [
+      "r^2=0.8892051^2=0.7906857"
+     ],
+     "words": "About 79.07% of the variation in amygdala response is accounted for by the linear relationship with trait anxiety score."
+    },
+    {
+     "title": "Calculate the t statistic",
+     "general": [
+      "t=r\\sqrt{\\frac{n-2}{1-r^2}}"
+     ],
+     "work": [
+      "t=0.8892051\\sqrt{\\frac{8}{0.2093143}}=0.8892051\\sqrt{38.22003}=5.497275"
+     ],
+     "words": "The null hypothesis states that the population correlation is zero. This statistic equals the slope statistic b divided by its standard error for the same data."
+    },
+    {
+     "title": "Find the degrees of freedom and the 0.05 cutoff",
+     "general": [
+      "\\nu=n-2",
+      "t_c=t_{0.05}(\\nu)"
+     ],
+     "work": [
+      "\\nu=10-2=8",
+      "t_{0.05}(8)=2.306"
+     ],
+     "words": "Start with α = 0.05. Open t_table.pdf, PDF page 1, row 8, two-tailed column 0.05. The printed cutoff is 2.306.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "8",
+      "column": "0.05",
+      "value": 2.306,
+      "actualDf": 8,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Decide and give the P range",
+     "general": [
+      "|t|>t_{0.001}(\\nu)\\Rightarrow P<0.001"
+     ],
+     "work": [
+      "5.497275>2.306",
+      "t_{0.001}(8)=5.041",
+      "5.497275>5.041\\Rightarrow P<0.001"
+     ],
+     "words": "Reject the null hypothesis of zero correlation. Row 8, column 0.001 prints 5.041. The statistic exceeds the largest printed cutoff, so P < 0.001.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "8",
+      "column": "0.001",
+      "value": 5.041,
+      "actualDf": 8,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Interpret r",
+     "general": [
+      "r\\to+1"
+     ],
+     "work": [
+      "r=0.889"
+     ],
+     "words": "A value this close to +1 indicates a strong positive linear relationship, so adults with higher trait anxiety tend to show a larger amygdala response to fearful faces. A correlation does not show that one causes the other."
+    }
+   ],
+   "conclusion": "The correlation is r = 0.8892. The statistic t = 5.497 with ν = 8 exceeds \\(t_{0.05}(8)=2.306\\) and \\(t_{0.001}(8)=5.041\\), so the correlation is different from zero (P < 0.001).",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "8",
+    "column": "0.05",
+    "value": 2.306,
+    "actualDf": 8,
+    "approximation": false
+   },
+   "values": {
+    "n": 10,
+    "sxy": 16.56899999999999,
+    "sxx": 992.9000000000015,
+    "syy": 0.34968999999999983,
+    "r": 0.8892050818725568,
+    "r2": 0.7906856776279804,
+    "t": 5.497274918217989,
+    "df": 8,
+    "critical": 2.306,
+    "reject": true
+   },
+   "module": 18,
+   "tolerance": 0.004446025409362784,
+   "answerName": "Correlation coefficient r",
+   "answer": 0.8892050818725568
+  },
+  {
+   "id": "n18-b-alpha-vigilance",
+   "title": "Resting alpha power and vigilance reaction time",
+   "topic": "s18corr",
+   "context": "Researchers interested in attention did a study to evaluate whether resting brain rhythms are related to vigilance. For each of 10 students, 5 minutes of eyes-closed electroencephalography (EEG) was recorded, and the alpha power (the strength of the 8 to 12 Hz rhythm over the back of the head) was calculated in microvolts squared (μV²). Each student then completed a 10-minute vigilance task, and the mean reaction time in milliseconds (ms) was recorded. The data are listed in the table below. Note: some useful summations have already been calculated for you below, which you can use. In answering the questions below, DO NOT use R. Assume that any quantities of interest are Normally distributed.",
+   "unit": "",
+   "table": {
+    "headers": [
+     "Student",
+     "Alpha power x (μV²)",
+     "Reaction time y (ms)",
+     "x²",
+     "y²",
+     "xy"
+    ],
+    "rows": [
+     [
+      1,
+      12.4,
+      452,
+      153.76,
+      204304,
+      5604.8
+     ],
+     [
+      2,
+      15.1,
+      455,
+      228.01,
+      207025,
+      6870.5
+     ],
+     [
+      3,
+      9.8,
+      468,
+      96.04,
+      219024,
+      4586.4
+     ],
+     [
+      4,
+      21.6,
+      398,
+      466.56,
+      158404,
+      8596.8
+     ],
+     [
+      5,
+      18.3,
+      431,
+      334.89,
+      185761,
+      7887.3
+     ],
+     [
+      6,
+      25.0,
+      440,
+      625,
+      193600,
+      11000
+     ],
+     [
+      7,
+      14.2,
+      419,
+      201.64,
+      175561,
+      5949.8
+     ],
+     [
+      8,
+      30.5,
+      421,
+      930.25,
+      177241,
+      12840.5
+     ],
+     [
+      9,
+      22.7,
+      442,
+      515.29,
+      195364,
+      10033.4
+     ],
+     [
+      10,
+      17.9,
+      463,
+      320.41,
+      214369,
+      8287.7
+     ],
+     [
+      "Total",
+      187.5,
+      4389,
+      3871.85,
+      1930653,
+      81657.2
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) Calculate the correlation (Pearson coefficient) between reaction time and alpha power.",
+    "(ii) Is the correlation different from zero? Please state how you reached your conclusions.",
+    "(iii) Provide your result in a single complete sentence that would convey your conclusion in a way that could be understood by a non-expert in statistics or medicine (e.g., a typical reader of a local newspaper)."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\rho=0",
+    "alternative": "H_A:\\rho\\ne0",
+    "nullWords": "There is no linear relationship between reaction time and resting alpha power in the population, so the population correlation is zero.",
+    "alternativeWords": "Reaction time and resting alpha power are linearly related in the population, so the population correlation is not zero."
+   },
+   "symbols": "\\(r\\) (sample correlation coefficient), \\(\\rho\\) (population correlation), \\(b\\) (slope), \\(n\\) (number of pairs), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "Calculate the deviation totals from the sums",
+     "general": [
+      "\\sum(x-\\bar x)^2=\\sum x^2-\\frac{(\\sum x)^2}{n}",
+      "\\sum(y-\\bar y)^2=\\sum y^2-\\frac{(\\sum y)^2}{n}",
+      "\\sum(x-\\bar x)(y-\\bar y)=\\sum xy-\\frac{\\sum x\\sum y}{n}"
+     ],
+     "work": [
+      "\\sum(x-\\bar x)^2=3871.85-\\frac{187.5^2}{10}=3871.85-3515.625=356.225",
+      "\\sum(y-\\bar y)^2=1930653-\\frac{4389^2}{10}=1930653-1926332.1=4320.9",
+      "\\sum(x-\\bar x)(y-\\bar y)=81657.2-\\frac{187.5(4389)}{10}=81657.2-82293.75=-636.55"
+     ],
+     "words": "The totals in the bottom row of the table give the three deviation totals that the correlation needs."
+    },
+    {
+     "title": "Calculate r from the deviation totals",
+     "general": [
+      "r=\\frac{\\sum(x-\\bar x)(y-\\bar y)}{\\sqrt{\\sum(x-\\bar x)^2\\sum(y-\\bar y)^2}}"
+     ],
+     "work": [
+      "r=\\frac{-636.55}{\\sqrt{(356.225)(4320.9)}}=\\frac{-636.55}{\\sqrt{1539212.6}}=\\frac{-636.55}{1240.65}=-0.5130778"
+     ],
+     "words": "The units cancel, so r has no units."
+    },
+    {
+     "title": "Check with the slope relation",
+     "general": [
+      "b=\\frac{\\sum(x-\\bar x)(y-\\bar y)}{\\sum(x-\\bar x)^2}",
+      "r=\\frac{\\sqrt{\\sum(x-\\bar x)^2}}{\\sqrt{\\sum(y-\\bar y)^2}}\\cdot b"
+     ],
+     "work": [
+      "b=\\frac{-636.55}{356.225}=-1.786932",
+      "r=\\sqrt{\\frac{356.225}{4320.9}}(-1.786932)=0.2871277(-1.786932)=-0.5130778"
+     ],
+     "words": "The slope relation gives the same value, and r has the same sign as b."
+    },
+    {
+     "title": "Square r",
+     "general": [
+      "r^2"
+     ],
+     "work": [
+      "r^2=(-0.5130778)^2=0.2632488"
+     ],
+     "words": "About 26.32% of the variation in reaction time is accounted for by the linear relationship with alpha power."
+    },
+    {
+     "title": "Calculate the t statistic",
+     "general": [
+      "t=r\\sqrt{\\frac{n-2}{1-r^2}}"
+     ],
+     "work": [
+      "t=-0.5130778\\sqrt{\\frac{8}{0.7367512}}=-0.5130778\\sqrt{10.85848}=-1.690705"
+     ],
+     "words": "The null hypothesis states that the population correlation is zero. This statistic equals the slope statistic b divided by its standard error for the same data."
+    },
+    {
+     "title": "Find the degrees of freedom and the 0.05 cutoff",
+     "general": [
+      "\\nu=n-2",
+      "t_c=t_{0.05}(\\nu)"
+     ],
+     "work": [
+      "\\nu=10-2=8",
+      "t_{0.05}(8)=2.306"
+     ],
+     "words": "Start with α = 0.05. Open t_table.pdf, PDF page 1, row 8, two-tailed column 0.05. The printed cutoff is 2.306.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "8",
+      "column": "0.05",
+      "value": 2.306,
+      "actualDf": 8,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Decide and give the P range",
+     "general": [
+      "|t|<t_{0.05}(\\nu)\\Rightarrow P>0.05"
+     ],
+     "work": [
+      "|t|=1.690705<t_{0.05}(8)=2.306\\Rightarrow P>0.05"
+     ],
+     "words": "Do not reject the null hypothesis of zero correlation. The statistic is below the 0.05 cutoff in row 8, so P is greater than 0.05 and no stricter column needs to be checked.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "8",
+      "column": "0.05",
+      "value": 2.306,
+      "actualDf": 8,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Interpret r",
+     "general": [
+      "\\rho=0\\ \\text{is not rejected}"
+     ],
+     "work": [
+      "r=-0.513"
+     ],
+     "words": "The sample correlation is negative and moderate in size. With only 10 students a value of this size can easily arise by chance when the population correlation is zero, so the sign of r is not interpreted."
+    }
+   ],
+   "conclusion": "The correlation is r = −0.5131. The size of the statistic t = −1.691 with ν = 8 is below \\(t_{0.05}(8)=2.306\\), so the correlation is not shown to be different from zero (P > 0.05). This small study found no convincing evidence that students with stronger resting alpha rhythms respond faster or slower in the vigilance task.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "8",
+    "column": "0.05",
+    "value": 2.306,
+    "actualDf": 8,
+    "approximation": false
+   },
+   "values": {
+    "n": 10,
+    "sxy": -636.5500000000029,
+    "sxx": 356.2249999999999,
+    "syy": 4320.899999999907,
+    "r": -0.5130777921089786,
+    "r2": 0.2632488207554243,
+    "t": -1.6907048203454342,
+    "df": 8,
+    "critical": 2.306,
+    "reject": false
+   },
+   "module": 18,
+   "tolerance": 0.0025653889605448932,
+   "answerName": "Correlation coefficient r",
+   "answer": -0.5130777921089786
+  }
+ ],
+ "questions": [
+  {
+   "id": "m2-n18-qb01",
+   "module": 18,
+   "topic": "s18line",
+   "stem": "Ten dopamine neurons were each tested with a different juice volume x (mL), and the firing rate y (spikes/s) was recorded. The totals are \\(\\sum x=6\\), \\(\\sum y=89.3\\), \\(\\sum x^2=4.8\\) and \\(\\sum xy=63.17\\). What is the least-squares slope b?",
+   "options": [
+    "\\(1.998\\) spikes/s per mL",
+    "\\(13.16\\) spikes/s per mL",
+    "\\(7.992\\) spikes/s per mL",
+    "\\(14.88\\) spikes/s per mL"
+   ],
+   "correct": 2,
+   "why": "The slope is (10·63.17 − 6·89.3)/(10·4.8 − 6²) = 95.9/12 = 7.992. Leaving (Σx)² out of the denominator gives 1.998, and dividing Σxy by Σx² gives 13.16, which forces the line through the origin.",
+   "case": "n18-b-dopamine-reward",
+   "equations": [
+    "b=\\frac{n\\sum xy-\\sum x\\sum y}{n\\sum x^2-(\\sum x)^2}",
+    "b=\\frac{95.9}{12}=7.991667"
+   ]
+  },
+  {
+   "id": "m2-n18-qb02",
+   "module": 18,
+   "topic": "s18syx",
+   "stem": "In the study of morning cortisol against hours of sleep (n = 10), \\(s_y^2=9.8782\\), \\(s_x^2=1.6917\\) and \\(b=-2.2903\\) nmol/L per hour. What is the standard error of the estimate \\(s_{y|x}\\)?",
+   "options": [
+    "\\(1.063\\) nmol/L",
+    "\\(1.13\\) nmol/L",
+    "\\(1.002\\) nmol/L",
+    "\\(0.9449\\) nmol/L"
+   ],
+   "correct": 0,
+   "why": "s_y|x = √[(9/8)(9.8782 − 8.8737)] = √1.13 = 1.063 nmol/L. Forgetting the root gives 1.13, dropping the 9/8 factor gives 1.002, and inverting it gives 0.9449.",
+   "case": "n18-b-cortisol-sleep",
+   "equations": [
+    "s_{y|x}=\\sqrt{\\frac{n-1}{n-2}(s_y^2-b^2s_x^2)}",
+    "s_{y|x}=\\sqrt{\\tfrac98(1.004536)}=1.063063"
+   ]
+  },
+  {
+   "id": "m2-n18-qb03",
+   "module": 18,
+   "topic": "s18syx",
+   "stem": "Movement time (ms) was regressed on index of difficulty (bits) for 11 subjects in a reaching task. Which quantity describes how far a typical subject's movement time lies from the regression line?",
+   "options": [
+    "The standard error of the slope \\(s_b\\)",
+    "The standard error of the intercept \\(s_a\\)",
+    "The SD of movement time \\(s_y\\)",
+    "The standard error of the estimate \\(s_{y|x}\\)"
+   ],
+   "correct": 3,
+   "why": "The standard error of the estimate is the SD of the points about the line, in ms. The values s_b and s_a describe the uncertainty of the two coefficients, and s_y measures spread about the mean, which ignores the line.",
+   "case": null,
+   "equations": [
+    "s_{y|x}=\\sqrt{\\frac{1}{n-2}\\sum(y_i-\\hat y_i)^2}"
+   ]
+  },
+  {
+   "id": "m2-n18-qb04",
+   "module": 18,
+   "topic": "s18slope",
+   "stem": "For 10 factory workers, the regression of hearing threshold (dB HL) on years of noise exposure gives \\(b=1.254\\) dB HL per year with \\(s_b=0.1863\\), and \\(a=6.439\\) dB HL with \\(s_a=3.183\\). The scatter about the line is \\(s_{y|x}=5.031\\) dB HL. What is the t statistic for the trend?",
+   "options": [
+    "\\(0.2493\\)",
+    "\\(6.733\\)",
+    "\\(2.023\\)",
+    "\\(0.394\\)"
+   ],
+   "correct": 1,
+   "why": "t = b/s_b = 1.254/0.1863 = 6.733. Dividing b by s_y|x gives 0.2493, and a/s_a = 2.023 tests the intercept, not the trend.",
+   "case": "n18-b-noise-hearing",
+   "equations": [
+    "t=\\frac{b}{s_b}",
+    "t=\\frac{1.254112}{0.1862567}=6.733245"
+   ]
+  },
+  {
+   "id": "m2-n18-qb05",
+   "module": 18,
+   "topic": "s18slope",
+   "stem": "Cold-water tolerance time was regressed on catastrophizing score for 12 volunteers, and the slope gave |t| = 2.686. Which printed two-tailed cutoff at α = 0.05 is the correct one for this test?",
+   "options": [
+    "\\(t_{0.05}(12)=2.179\\)",
+    "\\(t_{0.05}(11)=2.201\\)",
+    "\\(t_{0.05}(10)=2.228\\)",
+    "\\(z=1.960\\)"
+   ],
+   "correct": 2,
+   "why": "A regression line estimates two coefficients, so ν = n − 2 = 10 and the cutoff is 2.228. Because 2.686 exceeds 2.228, the trend is significant at the 0.05 level.",
+   "case": "n18-b-coldpressor-catastrophizing",
+   "equations": [
+    "\\nu=n-2=10",
+    "t_{0.05}(10)=2.228"
+   ]
+  },
+  {
+   "id": "m2-n18-qb06",
+   "module": 18,
+   "topic": "s18predict",
+   "stem": "For 10 adults, the regression of indifference point ($) on delay (weeks) predicts \\(\\hat y=59.025\\) dollars at a delay of 14 weeks, with \\(s_{\\hat y}=1.413\\) and \\(s_{Y_{new}}=4.23\\) dollars. What is the lower endpoint of the 95% Confidence Interval for the mean indifference point at 14 weeks?",
+   "options": [
+    "\\(49.27\\) dollars",
+    "\\(55.77\\) dollars",
+    "\\(56.26\\) dollars",
+    "\\(55.88\\) dollars"
+   ],
+   "correct": 1,
+   "why": "59.025 − 2.306(1.413) = 55.77 dollars with ν = 8. Using s_Ynew gives 49.27, which is the interval for one adult. Using 1.96 gives 56.26 and using ν = 10 gives 55.88.",
+   "case": "n18-b-delay-discounting",
+   "equations": [
+    "\\hat y-t_{0.05}(8)s_{\\hat y}",
+    "59.02481-2.306(1.412809)=55.76687"
+   ]
+  },
+  {
+   "id": "m2-n18-qb07",
+   "module": 18,
+   "topic": "s18predict",
+   "stem": "Heart-rate variability (RMSSD, ms) was regressed on perceived stress score for 10 office workers. A clinician wants a range that should contain the RMSSD of one new worker with a stress score of 20. Which statement is correct?",
+   "options": [
+    "Use \\(\\hat y\\pm t_{0.05}(\\nu)s_{Y_{new}}\\), which is wider than the interval for the mean because it adds the scatter of individuals about the line.",
+    "Use \\(\\hat y\\pm t_{0.05}(\\nu)s_{\\hat y}\\), because one worker is a sample of size 1 from the line of means.",
+    "Use \\(b\\pm t_{0.05}(\\nu)s_b\\), because the slope carries all the uncertainty at a score of 20.",
+    "Use \\(\\hat y\\pm t_{0.05}(\\nu)s_{y|x}\\), because the uncertainty in the line does not matter for one worker."
+   ],
+   "correct": 0,
+   "why": "A single observation varies about the line of means with variance s²_y|x, and the line itself is uncertain with variance s²_ŷ. The two variances add, so the interval for one worker is wider than the interval for the mean.",
+   "case": null,
+   "equations": [
+    "s_{Y_{new}}=\\sqrt{s_{y|x}^2+s_{\\hat y}^2}"
+   ]
+  },
+  {
+   "id": "m2-n18-qb08",
+   "module": 18,
+   "topic": "s18compare",
+   "stem": "Response time (ms) was regressed on rotation angle (deg) separately for 12 older and 12 younger adults. R gave a slope of 4.1747 (Std. Error 0.2214) for the older group and 3.3167 (Std. Error 0.2374) for the younger group. What is the t statistic for the difference between the slopes?",
+   "options": [
+    "\\(1.87\\)",
+    "\\(3.875\\)",
+    "\\(8.142\\)",
+    "\\(2.643\\)"
+   ],
+   "correct": 3,
+   "why": "The difference is 0.858 and its standard error is √(0.2214² + 0.2374²) = 0.3246, so t = 2.643 with ν = 20. Adding the two standard errors without squaring gives 1.87, and using only one standard error gives 3.875.",
+   "case": "n18-b-mental-rotation-age",
+   "equations": [
+    "t=\\frac{b_1-b_2}{\\sqrt{s_{b_1}^2+s_{b_2}^2}}",
+    "t=\\frac{0.858}{0.3246178}=2.643108"
+   ]
+  },
+  {
+   "id": "m2-n18-qb09",
+   "module": 18,
+   "topic": "s18corr",
+   "stem": "For 10 adults, amygdala response y (%) and trait anxiety score x give \\(\\sum(x-\\bar x)(y-\\bar y)=16.569\\), \\(\\sum(x-\\bar x)^2=992.9\\) and \\(\\sum(y-\\bar y)^2=0.34969\\). Calculate the correlation (Pearson coefficient).",
+   "options": [
+    "\\(0.7907\\)",
+    "\\(0.8892\\)",
+    "\\(0.01669\\)",
+    "\\(47.38\\)"
+   ],
+   "correct": 1,
+   "why": "r = 16.569/√(992.9·0.34969) = 0.8892. The value 0.7907 is r², and 0.01669 is the slope b, which divides by Σ(x − x̄)² only.",
+   "case": "n18-b-amygdala-anxiety",
+   "equations": [
+    "r=\\frac{\\sum(x-\\bar x)(y-\\bar y)}{\\sqrt{\\sum(x-\\bar x)^2\\sum(y-\\bar y)^2}}",
+    "r=\\frac{16.569}{18.6335}=0.8892051"
+   ]
+  },
+  {
+   "id": "m2-n18-qb10",
+   "module": 18,
+   "topic": "s18corr",
+   "stem": "Resting alpha power and vigilance reaction time in 10 students give r = −0.5131, so t = −1.691 with ν = 8, and \\(t_{0.05}(8)=2.306\\). Which conclusion is correct?",
+   "options": [
+    "The correlation is negative, so stronger alpha power causes faster reactions.",
+    "The correlation is different from zero, because r is farther from 0 than 0.5.",
+    "The correlation is not shown to be different from zero (P > 0.05), so the data do not establish a linear relationship.",
+    "The data prove that alpha power and reaction time are unrelated."
+   ],
+   "correct": 2,
+   "why": "The size of t, 1.691, is below 2.306, so the null hypothesis of zero correlation is not rejected. Failing to reject does not prove that there is no relationship, and a correlation never shows causation.",
+   "case": "n18-b-alpha-vigilance",
+   "equations": [
+    "t=r\\sqrt{\\frac{n-2}{1-r^2}}",
+    "t=-0.5130778\\sqrt{\\frac{8}{0.7367512}}=-1.690705"
+   ]
+  }
+ ],
+ "notes": [
+  "All data are invented for practice. Every hand case carries full precision between steps and prints 7 significant figures, so a last printed digit can differ by one unit from arithmetic done with the printed values.",
+  "Critical values were read from the printed t table (sources/tables/t_table.pdf, page 1), rows 8, 10 and 20. No row had to be bracketed.",
+  "n18-b-mental-rotation-age stores the two summary(lm()) coefficient tables in `table` (lm() row, Estimate, Std. Error, t value, Pr(>|t|)), the way the ref case s18-plutonian-males stores R output. The residual standard errors and R-squared values are in the context. The hand calculation uses the printed (rounded) estimates. The invented raw data are in check_session18b.py.",
+  "n18-b-mental-rotation-age reuses the ref value key names nM, bM, sbM (group 1, here the older adults) and nF, bF, sbF, femaleXbar, femaleSx (group 2, here the younger adults). Its t lies between the 0.02 and 0.01 columns, so it carries critical002 and an added key critical01.",
+  "n18-b-coldpressor-catastrophizing lands between the 0.05 and 0.02 columns (0.02 < P < 0.05) and carries the added key critical002 next to the ref keys. n18-b-alpha-vigilance does not reject (P > 0.05).",
+  "Raw-data tables have a first label column (Neuron, Subject, Worker, ...) and a Total row whose cells are numbers. The ref line case has no label column and writes the totals as strings such as 'Total 369'.",
+  "The s18syx, s18slope, s18predict and s18corr cases start from raw pairs and sums, so they have extra opening steps before the steps of the matching ref case. In the s18syx cases syxRaw, sbRaw and saRaw come from the residual sum of squares and equal syx, sb and sa.",
+  "The step-level table lookup uses the key `classTable`, as in the ref cases.",
+  "Wording review. Each hand-case context now carries the homework sentences \"The data are listed in the table below. Note: some useful summations have already been calculated for you below, which you can use. In answering the questions below, DO NOT use R.\" The summations are still the Total row of the table. Negative numbers in running text use the minus sign − as the reference cases do. check_session18b.py allows that one colon in the context."
+ ]
+}

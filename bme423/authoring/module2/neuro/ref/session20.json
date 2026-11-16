@@ -1,0 +1,1696 @@
+{
+ "session": 20,
+ "methods": [
+  {
+   "id": "s20unpaired",
+   "title": "Unpaired t test on paired data (why it misses the effect)",
+   "trigger": "Two columns of measurements are compared as if they came from different individuals; check whether the same subjects appear in both columns.",
+   "formula": [
+    "t=\\frac{\\bar x_1-\\bar x_2}{\\sqrt{s^2/n_1+s^2/n_2}}",
+    "s^2=\\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2},\\quad\\nu=n_1+n_2-2"
+   ]
+  },
+  {
+   "id": "s20paired",
+   "title": "Paired t test (before and after in the same subjects)",
+   "trigger": "Each subject is measured under two conditions (before/after, treatment/placebo, awake/asleep) on an interval scale; test whether the mean change is zero.",
+   "formula": [
+    "d_i=x1_i-x2_i",
+    "\\bar d=\\frac{1}{n}\\sum d_i,\\quad s_d=\\sqrt{\\frac{\\sum(d_i-\\bar d)^2}{n-1}}",
+    "s_{\\bar d}=\\frac{s_d}{\\sqrt n},\\quad t=\\frac{\\bar d}{s_{\\bar d}},\\quad\\nu=n-1"
+   ]
+  },
+  {
+   "id": "s20pairedR",
+   "title": "Paired t test in R and matching the output to the hand calculation",
+   "trigger": "A question asks for a paired test by hand and then with R's t.test(..., paired = TRUE), marking which output lines match the hand work.",
+   "formula": [
+    "\\texttt{t.test(x1, x2, paired = TRUE)}",
+    "t=\\frac{\\bar d}{s_{\\bar d}},\\quad\\nu=n-1,\\quad\\bar d\\pm t_{0.05}(\\nu)s_{\\bar d}"
+   ]
+  },
+  {
+   "id": "s20rmanova",
+   "title": "Repeated measures ANOVA (multiple treatments in the same subjects)",
+   "trigger": "Each subject receives three or more treatments (or two, as an alternative to the paired t) on an interval scale; test whether the treatment means differ.",
+   "formula": [
+    "SS_{wit\\,subjs}=\\sum_s\\sum_t(x_{ts}-\\bar S_s)^2",
+    "SS_{treat}=n\\sum_t(\\bar T_t-\\bar X)^2,\\quad SS_{res}=SS_{wit\\,subjs}-SS_{treat}",
+    "F=\\frac{SS_{treat}/(m-1)}{SS_{res}/[(n-1)(m-1)]}"
+   ]
+  }
+ ],
+ "cases": [
+  {
+   "id": "s20-platelet-paired",
+   "title": "Platelet aggregation before and after smoking a cigarette",
+   "topic": "s20paired",
+   "context": "Eleven people have maximum percent platelet aggregation measured before and after smoking one cigarette. The slide gives each person's change (after minus before) in percentage points. Assume the differences are Normally distributed.",
+   "unit": "percentage points",
+   "table": {
+    "headers": [
+     "Subject",
+     "Change d (after − before, %)"
+    ],
+    "rows": [
+     [
+      1,
+      2
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      3,
+      10
+     ],
+     [
+      4,
+      12
+     ],
+     [
+      5,
+      16
+     ],
+     [
+      6,
+      15
+     ],
+     [
+      7,
+      4
+     ],
+     [
+      8,
+      27
+     ],
+     [
+      9,
+      9
+     ],
+     [
+      10,
+      -1
+     ],
+     [
+      11,
+      15
+     ]
+    ]
+   },
+   "tasks": [
+    "Using the eleven differences, calculate the mean difference, the SD of the differences, and the standard error of the mean difference.",
+    "Test whether smoking changes platelet aggregation at the two-sided 0.05 level. State both hypotheses in symbols and words, give the t statistic, degrees of freedom, printed critical value, decision, and P range."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\delta=0",
+    "alternative": "H_A:\\delta\\ne0",
+    "nullWords": "Smoking one cigarette produces no change in mean maximum platelet aggregation (the true mean after-minus-before difference is zero).",
+    "alternativeWords": "Smoking one cigarette changes mean maximum platelet aggregation (the true mean after-minus-before difference is not zero)."
+   },
+   "symbols": "\\(d_i\\) (difference in subject \\(i\\)), \\(\\bar d\\) (mean difference), \\(s_d\\) (SD of the differences), \\(s_{\\bar d}\\) (standard error of the mean difference), \\(\\delta\\) (true mean difference), \\(n\\) (number of subjects), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\delta=0",
+      "H_A:\\delta\\ne0"
+     ],
+     "work": [
+      "\\delta=\\mu_{\\mathrm{after}}-\\mu_{\\mathrm{before}}"
+     ],
+     "words": "Each subject is measured under both conditions, so the procedure is the paired t test on the within-subject differences. Smoking one cigarette produces no change in mean maximum platelet aggregation (the true mean after-minus-before difference is zero). Smoking one cigarette changes mean maximum platelet aggregation (the true mean after-minus-before difference is not zero)."
+    },
+    {
+     "title": "List the differences",
+     "general": [
+      "d_i=x1_i-x2_i,\\quad i=1,\\dots,n"
+     ],
+     "work": [
+      "d_i=(2,4,10,12,16,15,4,27,9,-1,15),\\quad n=11"
+     ],
+     "words": "The differences are already given on the slide, after minus before, one per subject."
+    },
+    {
+     "title": "Calculate the mean difference",
+     "general": [
+      "\\bar d=\\frac{1}{n}\\sum_{i=1}^{n}d_i"
+     ],
+     "work": [
+      "\\bar d=\\frac{113}{11}=10.2727"
+     ],
+     "words": "The mean difference estimates the true mean change \\(\\delta\\) in percentage points."
+    },
+    {
+     "title": "Calculate the SD of the differences",
+     "general": [
+      "s_d^2=\\frac{1}{n-1}\\sum_{i=1}^{n}(d_i-\\bar d)^2",
+      "s_d=\\sqrt{s_d^2}"
+     ],
+     "work": [
+      "\\sum(d_i-\\bar d)^2=636.182",
+      "s_d^2=\\frac{636.182}{10}=63.6182",
+      "s_d=7.9761"
+     ],
+     "words": "Square each deviation of a difference from the mean difference, add them, divide by \\(n-1\\), and take the root."
+    },
+    {
+     "title": "Calculate the standard error of the mean difference",
+     "general": [
+      "s_{\\bar d}=\\frac{s_d}{\\sqrt n}"
+     ],
+     "work": [
+      "s_{\\bar d}=\\frac{7.9761}{\\sqrt{11}}=2.40488"
+     ],
+     "words": "The standard error describes how much the mean difference varies from sample to sample."
+    },
+    {
+     "title": "Calculate the t statistic",
+     "general": [
+      "t=\\frac{\\bar d-\\delta}{s_{\\bar d}}=\\frac{\\bar d}{s_{\\bar d}}\\quad(\\delta=0\\text{ under }H_0)"
+     ],
+     "work": [
+      "t=\\frac{10.2727}{2.40488}=4.27161"
+     ],
+     "words": "Under the null hypothesis the true mean difference is zero, so the numerator is the mean difference itself."
+    },
+    {
+     "title": "Find the degrees of freedom and the critical value",
+     "general": [
+      "\\nu=n-1",
+      "t_c=t_{0.05}(\\nu)"
+     ],
+     "work": [
+      "\\nu=11-1=10",
+      "t_{0.05}(10)=2.228"
+     ],
+     "words": "Open t_table.pdf, PDF page 1. Use row 10 and the two-tailed 0.05 column. The printed cutoff is 2.228.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "10",
+      "column": "0.05",
+      "value": 2.228,
+      "actualDf": 10,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "|t|>t_\\alpha(\\nu)\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "|t|=4.27161>t_{0.05}(10)=2.228",
+      "t_{0.002}(10)=4.144<4.27161<t_{0.001}(10)=4.587",
+      "0.001<P<0.002"
+     ],
+     "words": "The statistic exceeds the 0.05 cutoff, so reject the null hypothesis. In row 10 it also passes the 0.002 column (4.144) but not the 0.001 column (4.587), so P < 0.002."
+    }
+   ],
+   "conclusion": "The mean increase is 10.2727 percentage points, t = 4.27161 with 10 degrees of freedom. Reject the null hypothesis: smoking one cigarette increases maximum platelet aggregation (P < 0.002).",
+   "source": "Session 20 page 10",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "10",
+    "column": "0.05",
+    "value": 2.228,
+    "actualDf": 10,
+    "approximation": false
+   },
+   "values": {
+    "n": 11,
+    "differences": [
+     2,
+     4,
+     10,
+     12,
+     16,
+     15,
+     4,
+     27,
+     9,
+     -1,
+     15
+    ],
+    "dbar": 10.272727272727273,
+    "sumSqDev": 636.1818181818182,
+    "varianceD": 63.618181818181824,
+    "sd": 7.976100664998018,
+    "se": 2.404884835991147,
+    "t": 4.271608818429545,
+    "df": 10,
+    "critical": 2.228,
+    "exactP": 0.0016328499219996728,
+    "reject": true
+   },
+   "module": 20,
+   "tolerance": 0.021358044092147727,
+   "answerName": "t statistic",
+   "answer": 4.271608818429545
+  },
+  {
+   "id": "s20-oc-paired",
+   "title": "Systolic blood pressure without and with oral contraceptives",
+   "topic": "s20paired",
+   "context": "Ten women have systolic blood pressure measured while not using oral contraceptives (OC) and again while using them. Assume the differences are Normally distributed.",
+   "unit": "mmHg",
+   "table": {
+    "headers": [
+     "Subject",
+     "SBP without OC (mmHg)",
+     "SBP with OC (mmHg)"
+    ],
+    "rows": [
+     [
+      1,
+      115,
+      128
+     ],
+     [
+      2,
+      112,
+      115
+     ],
+     [
+      3,
+      107,
+      106
+     ],
+     [
+      4,
+      119,
+      128
+     ],
+     [
+      5,
+      115,
+      122
+     ],
+     [
+      6,
+      138,
+      145
+     ],
+     [
+      7,
+      126,
+      132
+     ],
+     [
+      8,
+      105,
+      109
+     ],
+     [
+      9,
+      104,
+      102
+     ],
+     [
+      10,
+      115,
+      117
+     ]
+    ]
+   },
+   "tasks": [
+    "Form the ten with-minus-without differences and calculate the mean difference, \\(s_d\\), and \\(s_{\\bar d}\\).",
+    "Test whether systolic blood pressure differs with oral contraceptive use at the two-sided 0.05 level. State both hypotheses in symbols and words, and give t, df, the printed critical value, the decision, and the P range."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\delta=0",
+    "alternative": "H_A:\\delta\\ne0",
+    "nullWords": "Oral contraceptive use produces no change in mean systolic blood pressure (the true mean with-minus-without difference is zero).",
+    "alternativeWords": "Oral contraceptive use changes mean systolic blood pressure (the true mean with-minus-without difference is not zero)."
+   },
+   "symbols": "\\(d_i\\) (difference in subject \\(i\\)), \\(\\bar d\\) (mean difference), \\(s_d\\) (SD of the differences), \\(s_{\\bar d}\\) (standard error of the mean difference), \\(\\delta\\) (true mean difference), \\(n\\) (number of subjects), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\delta=0",
+      "H_A:\\delta\\ne0"
+     ],
+     "work": [
+      "\\delta=\\mu_{\\mathrm{with\\ OC}}-\\mu_{\\mathrm{without\\ OC}}"
+     ],
+     "words": "Each subject is measured under both conditions, so the procedure is the paired t test on the within-subject differences. Oral contraceptive use produces no change in mean systolic blood pressure (the true mean with-minus-without difference is zero). Oral contraceptive use changes mean systolic blood pressure (the true mean with-minus-without difference is not zero)."
+    },
+    {
+     "title": "Form one difference per subject",
+     "general": [
+      "d_i=x1_i-x2_i,\\quad i=1,\\dots,n"
+     ],
+     "work": [
+      "d_i=(128-115,115-112,106-107,128-119,122-115,145-138,132-126,109-105,102-104,117-115)",
+      "d_i=(13,3,-1,9,7,7,6,4,-2,2),\\quad n=10"
+     ],
+     "words": "Subtract in the same direction for every subject (with OC minus without OC). The analysis now uses only these 10 numbers."
+    },
+    {
+     "title": "Calculate the mean difference",
+     "general": [
+      "\\bar d=\\frac{1}{n}\\sum_{i=1}^{n}d_i"
+     ],
+     "work": [
+      "\\bar d=\\frac{48}{10}=4.8"
+     ],
+     "words": "The mean difference estimates the true mean change \\(\\delta\\) in mmHg."
+    },
+    {
+     "title": "Calculate the SD of the differences",
+     "general": [
+      "s_d^2=\\frac{1}{n-1}\\sum_{i=1}^{n}(d_i-\\bar d)^2",
+      "s_d=\\sqrt{s_d^2}"
+     ],
+     "work": [
+      "\\sum(d_i-\\bar d)^2=187.6",
+      "s_d^2=\\frac{187.6}{9}=20.8444",
+      "s_d=4.56557"
+     ],
+     "words": "Square each deviation of a difference from the mean difference, add them, divide by \\(n-1\\), and take the root."
+    },
+    {
+     "title": "Calculate the standard error of the mean difference",
+     "general": [
+      "s_{\\bar d}=\\frac{s_d}{\\sqrt n}"
+     ],
+     "work": [
+      "s_{\\bar d}=\\frac{4.56557}{\\sqrt{10}}=1.44376"
+     ],
+     "words": "The standard error describes how much the mean difference varies from sample to sample."
+    },
+    {
+     "title": "Calculate the t statistic",
+     "general": [
+      "t=\\frac{\\bar d-\\delta}{s_{\\bar d}}=\\frac{\\bar d}{s_{\\bar d}}\\quad(\\delta=0\\text{ under }H_0)"
+     ],
+     "work": [
+      "t=\\frac{4.8}{1.44376}=3.32465"
+     ],
+     "words": "Under the null hypothesis the true mean difference is zero, so the numerator is the mean difference itself."
+    },
+    {
+     "title": "Find the degrees of freedom and the critical value",
+     "general": [
+      "\\nu=n-1",
+      "t_c=t_{0.05}(\\nu)"
+     ],
+     "work": [
+      "\\nu=10-1=9",
+      "t_{0.05}(9)=2.262"
+     ],
+     "words": "Open t_table.pdf, PDF page 1. Use row 9 and the two-tailed 0.05 column. The printed cutoff is 2.262.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "9",
+      "column": "0.05",
+      "value": 2.262,
+      "actualDf": 9,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "|t|>t_\\alpha(\\nu)\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "|t|=3.32465>t_{0.05}(9)=2.262",
+      "t_{0.01}(9)=3.250<3.32465<t_{0.005}(9)=3.690",
+      "0.005<P<0.01"
+     ],
+     "words": "The statistic exceeds the 0.05 cutoff, so reject the null hypothesis. In row 9 it passes the 0.01 column (3.250) but not the 0.005 column (3.690), so P < 0.01."
+    }
+   ],
+   "conclusion": "The mean increase with oral contraceptives is 4.8 mmHg, t = 3.32465 with 9 degrees of freedom. Reject the null hypothesis: systolic blood pressure is higher with oral contraceptive use (P < 0.01).",
+   "source": "Session 20 pages 11-12",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "9",
+    "column": "0.05",
+    "value": 2.262,
+    "actualDf": 9,
+    "approximation": false
+   },
+   "values": {
+    "n": 10,
+    "differences": [
+     13,
+     3,
+     -1,
+     9,
+     7,
+     7,
+     6,
+     4,
+     -2,
+     2
+    ],
+    "dbar": 4.8,
+    "sumSqDev": 187.6,
+    "varianceD": 20.844444444444445,
+    "sd": 4.565571644870382,
+    "se": 1.443760521847181,
+    "t": 3.324651095085193,
+    "df": 9,
+    "critical": 2.262,
+    "exactP": 0.008874336881492043,
+    "reject": true
+   },
+   "module": 20,
+   "tolerance": 0.016623255475425966,
+   "answerName": "t statistic",
+   "answer": 3.324651095085193
+  },
+  {
+   "id": "s20-oc-unpaired",
+   "title": "Oral contraceptive data run through the unpaired t test",
+   "topic": "s20unpaired",
+   "context": "The same ten women's systolic blood pressures (slide 11) are analyzed as if the two columns were two independent groups of ten different people. This shows what the unpaired t test concludes when it ignores the pairing.",
+   "unit": "mmHg",
+   "table": {
+    "headers": [
+     "Group",
+     "Sample size",
+     "Mean (mmHg)",
+     "SD (mmHg)"
+    ],
+    "rows": [
+     [
+      "with OC",
+      10,
+      120.4,
+      13.2262
+     ],
+     [
+      "without OC",
+      10,
+      115.6,
+      10.3086
+     ]
+    ]
+   },
+   "tasks": [
+    "Treat the two columns as independent groups and carry out the pooled (unpaired) t test at the two-sided 0.05 level: pooled variance, standard error, t, df, printed critical value, and decision.",
+    "Compare the result with the paired t test on the same data (t = 3.325) and explain why the conclusions differ."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\mu_{\\mathrm{with}}=\\mu_{\\mathrm{without}}",
+    "alternative": "H_A:\\mu_{\\mathrm{with}}\\ne\\mu_{\\mathrm{without}}",
+    "nullWords": "Mean systolic blood pressure is the same with and without oral contraceptives.",
+    "alternativeWords": "Mean systolic blood pressure differs with and without oral contraceptives."
+   },
+   "symbols": "\\(\\bar x_i\\) (group sample mean), \\(s_i\\) (group sample SD), \\(n_i\\) (group size), \\(s^2\\) (pooled variance), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\mu_1=\\mu_2",
+      "H_A:\\mu_1\\ne\\mu_2"
+     ],
+     "work": [
+      "\\mu_1=\\mu_{\\mathrm{with}},\\ \\mu_2=\\mu_{\\mathrm{without}}"
+     ],
+     "words": "The unpaired t test compares two group means as if every number came from a different person. The null hypothesis states equal population means."
+    },
+    {
+     "title": "Calculate the group means and SDs",
+     "general": [
+      "\\bar x=\\frac{1}{n}\\sum x_i",
+      "s=\\sqrt{\\frac{\\sum(x_i-\\bar x)^2}{n-1}}"
+     ],
+     "work": [
+      "\\bar x_1=120.4,\\ s_1=13.2262",
+      "\\bar x_2=115.6,\\ s_2=10.3086"
+     ],
+     "words": "The SDs are large because the women differ a lot from one another in baseline blood pressure."
+    },
+    {
+     "title": "Pool the variances",
+     "general": [
+      "s^2=\\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}"
+     ],
+     "work": [
+      "s^2=\\frac{9(174.933)+9(106.267)}{18}=140.6"
+     ],
+     "words": "Each group variance is weighted by its own degrees of freedom."
+    },
+    {
+     "title": "Calculate the standard error and t",
+     "general": [
+      "t=\\frac{\\bar x_1-\\bar x_2}{\\sqrt{s^2/n_1+s^2/n_2}}"
+     ],
+     "work": [
+      "\\sqrt{\\frac{140.6}{10}+\\frac{140.6}{10}}=5.30283",
+      "t=\\frac{120.4-115.6}{5.30283}=0.905177"
+     ],
+     "words": "The numerator is the same 4.8 mmHg as the paired analysis, but the denominator now carries the between-subject spread."
+    },
+    {
+     "title": "Find the degrees of freedom and the critical value",
+     "general": [
+      "\\nu=n_1+n_2-2",
+      "t_c=t_{0.05}(\\nu)"
+     ],
+     "work": [
+      "\\nu=10+10-2=18",
+      "t_{0.05}(18)=2.101"
+     ],
+     "words": "Open t_table.pdf, PDF page 1. Use row 18 and the two-tailed 0.05 column. The printed cutoff is 2.101.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "18",
+      "column": "0.05",
+      "value": 2.101,
+      "actualDf": 18,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision",
+     "general": [
+      "|t|<t_\\alpha(\\nu)\\Rightarrow\\text{do not reject }H_0"
+     ],
+     "work": [
+      "|t|=0.905177<2.101",
+      "t_{0.50}(18)=0.688<0.905177<t_{0.20}(18)=1.330",
+      "0.20<P<0.50"
+     ],
+     "words": "The unpaired test does not reject the null hypothesis (P > 0.05). The paired test on the same numbers rejects it (P < 0.01), because pairing removes the large differences between women and leaves only each woman's own change."
+    }
+   ],
+   "conclusion": "Analyzed as two independent groups, t = 0.905177 with 18 df is below 2.101, so the unpaired test finds no difference (P > 0.05). The paired test on the same data finds an increase (P < 0.01); ignoring the pairing hides the treatment effect.",
+   "source": "Session 20 pages 4-5 and 11 (slide data; unpaired analysis added for comparison)",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "18",
+    "column": "0.05",
+    "value": 2.101,
+    "actualDf": 18,
+    "approximation": false
+   },
+   "values": {
+    "n1": 10,
+    "n2": 10,
+    "x1": 120.4,
+    "x2": 115.6,
+    "s1": 13.226236552146393,
+    "s2": 10.30857248442609,
+    "pooledVariance": 140.60000000000002,
+    "se": 5.302829433425141,
+    "t": 0.9051771436856592,
+    "df": 18,
+    "critical": 2.101,
+    "exactP": 0.3773283966238642,
+    "reject": false
+   },
+   "module": 20,
+   "tolerance": 0.0045258857184282955,
+   "answerName": "t statistic",
+   "answer": 0.9051771436856592
+  },
+  {
+   "id": "s20-hr-posture-r",
+   "title": "Heart rate seated and standing, by hand and in R",
+   "topic": "s20pairedR",
+   "context": "Original practice example. Eight volunteers have resting heart rate recorded for 5 minutes while seated (measurement 1) and again for 5 minutes while standing (measurement 2). Assume the differences are Normally distributed.",
+   "unit": "beats/min",
+   "table": {
+    "headers": [
+     "Subject",
+     "Seated HR (beats/min)",
+     "Standing HR (beats/min)"
+    ],
+    "rows": [
+     [
+      1,
+      64,
+      75
+     ],
+     [
+      2,
+      72,
+      70
+     ],
+     [
+      3,
+      58,
+      66
+     ],
+     [
+      4,
+      80,
+      83
+     ],
+     [
+      5,
+      69,
+      74
+     ],
+     [
+      6,
+      75,
+      87
+     ],
+     [
+      7,
+      61,
+      60
+     ],
+     [
+      8,
+      70,
+      77
+     ]
+    ]
+   },
+   "tasks": [
+    "Without R: test whether resting heart rate differs between the two postures. Assume Normality. State the procedure, both hypotheses in words, the general equations, d̄, s_d, s_d̄, t, df, the printed critical value, the decision, and the P range.",
+    "Run the same test with R's t.test(..., paired = TRUE). Show the code and output, and mark each output line that corresponds to a part of the hand calculation."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\delta=0",
+    "alternative": "H_A:\\delta\\ne0",
+    "nullWords": "Posture produces no change in mean resting heart rate (the true mean standing-minus-seated difference is zero).",
+    "alternativeWords": "Posture changes mean resting heart rate (the true mean standing-minus-seated difference is not zero)."
+   },
+   "symbols": "\\(d_i\\) (difference in subject \\(i\\)), \\(\\bar d\\) (mean difference), \\(s_d\\) (SD of the differences), \\(s_{\\bar d}\\) (standard error of the mean difference), \\(\\delta\\) (true mean difference), \\(n\\) (number of subjects), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\delta=0",
+      "H_A:\\delta\\ne0"
+     ],
+     "work": [
+      "\\delta=\\mu_{\\mathrm{standing}}-\\mu_{\\mathrm{seated}}"
+     ],
+     "words": "Each subject is measured under both conditions, so the procedure is the paired t test on the within-subject differences. Posture produces no change in mean resting heart rate (the true mean standing-minus-seated difference is zero). Posture changes mean resting heart rate (the true mean standing-minus-seated difference is not zero)."
+    },
+    {
+     "title": "Form one difference per subject",
+     "general": [
+      "d_i=x1_i-x2_i,\\quad i=1,\\dots,n"
+     ],
+     "work": [
+      "d_i=(75-64,70-72,66-58,83-80,74-69,87-75,60-61,77-70)",
+      "d_i=(11,-2,8,3,5,12,-1,7),\\quad n=8"
+     ],
+     "words": "Subtract in the same direction for every subject (standing minus seated). The analysis now uses only these 8 numbers."
+    },
+    {
+     "title": "Calculate the mean difference",
+     "general": [
+      "\\bar d=\\frac{1}{n}\\sum_{i=1}^{n}d_i"
+     ],
+     "work": [
+      "\\bar d=\\frac{43}{8}=5.375"
+     ],
+     "words": "The mean difference estimates the true mean change \\(\\delta\\) in beats/min."
+    },
+    {
+     "title": "Calculate the SD of the differences",
+     "general": [
+      "s_d^2=\\frac{1}{n-1}\\sum_{i=1}^{n}(d_i-\\bar d)^2",
+      "s_d=\\sqrt{s_d^2}"
+     ],
+     "work": [
+      "\\sum(d_i-\\bar d)^2=185.875",
+      "s_d^2=\\frac{185.875}{7}=26.5536",
+      "s_d=5.15302"
+     ],
+     "words": "Square each deviation of a difference from the mean difference, add them, divide by \\(n-1\\), and take the root."
+    },
+    {
+     "title": "Calculate the standard error of the mean difference",
+     "general": [
+      "s_{\\bar d}=\\frac{s_d}{\\sqrt n}"
+     ],
+     "work": [
+      "s_{\\bar d}=\\frac{5.15302}{\\sqrt{8}}=1.82187"
+     ],
+     "words": "The standard error describes how much the mean difference varies from sample to sample."
+    },
+    {
+     "title": "Calculate the t statistic",
+     "general": [
+      "t=\\frac{\\bar d-\\delta}{s_{\\bar d}}=\\frac{\\bar d}{s_{\\bar d}}\\quad(\\delta=0\\text{ under }H_0)"
+     ],
+     "work": [
+      "t=\\frac{5.375}{1.82187}=2.95027"
+     ],
+     "words": "Under the null hypothesis the true mean difference is zero, so the numerator is the mean difference itself."
+    },
+    {
+     "title": "Find the degrees of freedom and the critical value",
+     "general": [
+      "\\nu=n-1",
+      "t_c=t_{0.05}(\\nu)"
+     ],
+     "work": [
+      "\\nu=8-1=7",
+      "t_{0.05}(7)=2.365"
+     ],
+     "words": "Open t_table.pdf, PDF page 1. Use row 7 and the two-tailed 0.05 column. The printed cutoff is 2.365.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "7",
+      "column": "0.05",
+      "value": 2.365,
+      "actualDf": 7,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "|t|>t_\\alpha(\\nu)\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "|t|=2.95027>t_{0.05}(7)=2.365",
+      "t_{0.05}(7)=2.365<2.95027<t_{0.02}(7)=2.998",
+      "0.02<P<0.05"
+     ],
+     "words": "The statistic exceeds the 0.05 cutoff, so reject the null hypothesis. In row 7 it passes the 0.05 column but not the 0.02 column (2.998), so 0.02 < P < 0.05."
+    },
+    {
+     "title": "Run the same test in R",
+     "general": [
+      "\\texttt{t.test(x1, x2, paired = TRUE)}"
+     ],
+     "work": [
+      "\\texttt{seated <- c(64,72,58,80,69,75,61,70)}",
+      "\\texttt{standing <- c(75,70,66,83,74,87,60,77)}",
+      "\\texttt{t.test(standing, seated, paired = TRUE)}"
+     ],
+     "words": "List standing first and seated second so R subtracts standing minus seated, the same direction as the hand calculation. The output (R 4.6.1) is: Paired t-test / data: standing and seated / t = 2.9503, df = 7, p-value = 0.0214 / alternative hypothesis: true mean difference is not equal to 0 / 95 percent confidence interval: 1.066971 9.683029 / sample estimates: mean difference 5.375."
+    },
+    {
+     "title": "Mark each R line against the hand calculation",
+     "general": [
+      "t=\\bar d/s_{\\bar d},\\ \\nu=n-1",
+      "\\bar d\\pm t_{0.05}(\\nu)\\,s_{\\bar d}"
+     ],
+     "work": [
+      "\\text{Paired t-test}\\leftrightarrow\\text{procedure (paired t test)}",
+      "\\text{alternative: true mean difference}\\ne0\\leftrightarrow H_A:\\delta\\ne0",
+      "\\text{t = 2.9503}\\leftrightarrow t=2.95027",
+      "\\text{df = 7}\\leftrightarrow \\nu=n-1=7",
+      "\\text{p-value = 0.0214}\\leftrightarrow 0.02<P<0.05",
+      "\\text{mean difference 5.375}\\leftrightarrow\\bar d=5.375",
+      "\\text{95\\% CI 1.066971 to 9.683029}\\leftrightarrow 5.375\\pm2.365(1.82187)=[1.06629,9.68371]"
+     ],
+     "words": "R does not print \\(s_d\\) or \\(s_{\\bar d}\\); they are inside t. R reports an exact P value instead of a table bracket, and its interval uses the exact quantile 2.364624 rather than the printed 2.365, so the hand interval differs only in the fourth decimal. The interval excludes 0, which matches rejecting the null hypothesis."
+    }
+   ],
+   "conclusion": "Standing raises resting heart rate by a mean of 5.375 beats/min, t = 2.95027 with 7 df (0.02 < P < 0.05; R gives P = 0.0214). Reject the null hypothesis: heart rate differs between seated and standing.",
+   "source": "Original practice example",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "7",
+    "column": "0.05",
+    "value": 2.365,
+    "actualDf": 7,
+    "approximation": false
+   },
+   "values": {
+    "n": 8,
+    "differences": [
+     11,
+     -2,
+     8,
+     3,
+     5,
+     12,
+     -1,
+     7
+    ],
+    "dbar": 5.375,
+    "sumSqDev": 185.875,
+    "varianceD": 26.553571428571427,
+    "sd": 5.1530157605591915,
+    "se": 1.8218661939262795,
+    "t": 2.9502715500837136,
+    "df": 7,
+    "critical": 2.365,
+    "exactP": 0.021398616373381533,
+    "reject": true,
+    "ciLowerPrinted": 1.0662864513643484,
+    "ciUpperPrinted": 9.683713548635652,
+    "ciLowerR": 1.0669710146848779,
+    "ciUpperR": 9.683028985315122,
+    "rOutput": [
+     "Paired t-test",
+     "data:  standing and seated",
+     "t = 2.9503, df = 7, p-value = 0.0214",
+     "alternative hypothesis: true mean difference is not equal to 0",
+     "95 percent confidence interval:",
+     " 1.066971 9.683029",
+     "sample estimates:",
+     "mean difference ",
+     "          5.375 "
+    ],
+    "rCode": "t.test(standing, seated, paired = TRUE)"
+   },
+   "module": 20,
+   "tolerance": 0.014751357750418567,
+   "answerName": "t statistic",
+   "answer": 2.9502715500837136
+  },
+  {
+   "id": "s20-grip-paired",
+   "title": "Grip strength in the morning and evening",
+   "topic": "s20paired",
+   "context": "Original practice example. Seven volunteers have dominant-hand grip strength measured in the morning and again in the evening of the same day. Assume the differences are Normally distributed.",
+   "unit": "kg",
+   "table": {
+    "headers": [
+     "Subject",
+     "Morning (kg)",
+     "Evening (kg)"
+    ],
+    "rows": [
+     [
+      1,
+      38,
+      39
+     ],
+     [
+      2,
+      42,
+      41
+     ],
+     [
+      3,
+      30,
+      32
+     ],
+     [
+      4,
+      45,
+      44
+     ],
+     [
+      5,
+      36,
+      38
+     ],
+     [
+      6,
+      40,
+      41
+     ],
+     [
+      7,
+      33,
+      33
+     ]
+    ]
+   },
+   "tasks": [
+    "Calculate the differences (evening minus morning), d̄, s_d, and s_d̄.",
+    "Test at the two-sided 0.05 level whether grip strength differs between morning and evening. State both hypotheses in words and give the decision."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\delta=0",
+    "alternative": "H_A:\\delta\\ne0",
+    "nullWords": "Time of day produces no change in mean grip strength (the true mean evening-minus-morning difference is zero).",
+    "alternativeWords": "Time of day changes mean grip strength (the true mean evening-minus-morning difference is not zero)."
+   },
+   "symbols": "\\(d_i\\) (difference in subject \\(i\\)), \\(\\bar d\\) (mean difference), \\(s_d\\) (SD of the differences), \\(s_{\\bar d}\\) (standard error of the mean difference), \\(\\delta\\) (true mean difference), \\(n\\) (number of subjects), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\delta=0",
+      "H_A:\\delta\\ne0"
+     ],
+     "work": [
+      "\\delta=\\mu_{\\mathrm{evening}}-\\mu_{\\mathrm{morning}}"
+     ],
+     "words": "Each subject is measured under both conditions, so the procedure is the paired t test on the within-subject differences. Time of day produces no change in mean grip strength (the true mean evening-minus-morning difference is zero). Time of day changes mean grip strength (the true mean evening-minus-morning difference is not zero)."
+    },
+    {
+     "title": "Form one difference per subject",
+     "general": [
+      "d_i=x1_i-x2_i,\\quad i=1,\\dots,n"
+     ],
+     "work": [
+      "d_i=(39-38,41-42,32-30,44-45,38-36,41-40,33-33)",
+      "d_i=(1,-1,2,-1,2,1,0),\\quad n=7"
+     ],
+     "words": "Subtract in the same direction for every subject (evening minus morning). The analysis now uses only these 7 numbers."
+    },
+    {
+     "title": "Calculate the mean difference",
+     "general": [
+      "\\bar d=\\frac{1}{n}\\sum_{i=1}^{n}d_i"
+     ],
+     "work": [
+      "\\bar d=\\frac{4}{7}=0.571429"
+     ],
+     "words": "The mean difference estimates the true mean change \\(\\delta\\) in kg."
+    },
+    {
+     "title": "Calculate the SD of the differences",
+     "general": [
+      "s_d^2=\\frac{1}{n-1}\\sum_{i=1}^{n}(d_i-\\bar d)^2",
+      "s_d=\\sqrt{s_d^2}"
+     ],
+     "work": [
+      "\\sum(d_i-\\bar d)^2=9.71429",
+      "s_d^2=\\frac{9.71429}{6}=1.61905",
+      "s_d=1.27242"
+     ],
+     "words": "Square each deviation of a difference from the mean difference, add them, divide by \\(n-1\\), and take the root."
+    },
+    {
+     "title": "Calculate the standard error of the mean difference",
+     "general": [
+      "s_{\\bar d}=\\frac{s_d}{\\sqrt n}"
+     ],
+     "work": [
+      "s_{\\bar d}=\\frac{1.27242}{\\sqrt{7}}=0.480929"
+     ],
+     "words": "The standard error describes how much the mean difference varies from sample to sample."
+    },
+    {
+     "title": "Calculate the t statistic",
+     "general": [
+      "t=\\frac{\\bar d-\\delta}{s_{\\bar d}}=\\frac{\\bar d}{s_{\\bar d}}\\quad(\\delta=0\\text{ under }H_0)"
+     ],
+     "work": [
+      "t=\\frac{0.571429}{0.480929}=1.18818"
+     ],
+     "words": "Under the null hypothesis the true mean difference is zero, so the numerator is the mean difference itself."
+    },
+    {
+     "title": "Find the degrees of freedom and the critical value",
+     "general": [
+      "\\nu=n-1",
+      "t_c=t_{0.05}(\\nu)"
+     ],
+     "work": [
+      "\\nu=7-1=6",
+      "t_{0.05}(6)=2.447"
+     ],
+     "words": "Open t_table.pdf, PDF page 1. Use row 6 and the two-tailed 0.05 column. The printed cutoff is 2.447.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "6",
+      "column": "0.05",
+      "value": 2.447,
+      "actualDf": 6,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "|t|<t_\\alpha(\\nu)\\Rightarrow\\text{do not reject }H_0"
+     ],
+     "work": [
+      "|t|=1.18818<t_{0.05}(6)=2.447",
+      "t_{0.50}(6)=0.718<1.18818<t_{0.20}(6)=1.440",
+      "0.20<P<0.50"
+     ],
+     "words": "The statistic is below the 0.05 cutoff, so the null hypothesis is not rejected. No P range is required for a non-rejection, but row 6 places P between 0.20 and 0.50."
+    }
+   ],
+   "conclusion": "The mean evening-minus-morning difference is 0.571 kg, t = 1.18818 with 6 df, below 2.447. Do not reject the null hypothesis: these data give no evidence that grip strength differs between morning and evening (P > 0.05).",
+   "source": "Original practice example",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "6",
+    "column": "0.05",
+    "value": 2.447,
+    "actualDf": 6,
+    "approximation": false
+   },
+   "values": {
+    "n": 7,
+    "differences": [
+     1,
+     -1,
+     2,
+     -1,
+     2,
+     1,
+     0
+    ],
+    "dbar": 0.5714285714285714,
+    "sumSqDev": 9.714285714285715,
+    "varianceD": 1.6190476190476193,
+    "sd": 1.2724180205607036,
+    "se": 0.4809288065886704,
+    "t": 1.1881770515720091,
+    "df": 6,
+    "critical": 2.447,
+    "exactP": 0.2796582909046579,
+    "reject": false
+   },
+   "module": 20,
+   "tolerance": 0.005940885257860046,
+   "answerName": "t statistic",
+   "answer": 1.1881770515720091
+  },
+  {
+   "id": "s20-breathing-rmanova",
+   "title": "Heart rate under three breathing protocols (repeated measures ANOVA)",
+   "topic": "s20rmanova",
+   "context": "Original practice example, laid out like the n = 4, m = 3 notation table. Four volunteers each have heart rate recorded during three breathing protocols: slow paced breathing, normal breathing, and rapid paced breathing. Assume Normally distributed responses.",
+   "unit": "beats/min",
+   "table": {
+    "headers": [
+     "Subject",
+     "Slow paced",
+     "Normal",
+     "Rapid paced"
+    ],
+    "rows": [
+     [
+      1,
+      70,
+      74,
+      81
+     ],
+     [
+      2,
+      62,
+      67,
+      70
+     ],
+     [
+      3,
+      80,
+      79,
+      90
+     ],
+     [
+      4,
+      66,
+      72,
+      73
+     ]
+    ]
+   },
+   "tasks": [
+    "Calculate the subject means, the treatment means, and the grand mean.",
+    "Partition the within-subject sum of squares into treatment and residual parts, and give each degrees of freedom.",
+    "Calculate F and test at the 0.05 level whether heart rate differs among the protocols. State both hypotheses in words and give the P range."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\mu_1=\\dots=\\mu_m",
+    "alternative": "H_A:\\text{at least one treatment mean differs}",
+    "nullWords": "Mean heart rate is the same under all three breathing protocols.",
+    "alternativeWords": "At least one breathing protocol has a different mean heart rate."
+   },
+   "symbols": "\\(x_{ts}\\) (response to treatment \\(t\\) in subject \\(s\\)), \\(\\bar S_s\\) (subject mean), \\(\\bar T_t\\) (treatment mean), \\(\\bar X\\) (grand mean), \\(m\\) (number of treatments), \\(n\\) (number of subjects), \\(SS\\) (sum of squares), \\(MS\\) (mean square), \\(F\\) (F statistic).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\mu_1=\\mu_2=\\dots=\\mu_m",
+      "H_A:\\text{not all treatment means are equal}"
+     ],
+     "work": [
+      "\\mu_{\\mathrm{slow}}=\\mu_{\\mathrm{normal}}=\\mu_{\\mathrm{rapid}}"
+     ],
+     "words": "Every subject receives every treatment, so the procedure is repeated measures ANOVA. Mean heart rate is the same under all three breathing protocols."
+    },
+    {
+     "title": "Calculate the subject means",
+     "general": [
+      "\\bar S_s=\\frac{1}{m}\\sum_{t=1}^{m}x_{ts}"
+     ],
+     "work": [
+      "\\bar S=(75,\\ 66.3333,\\ 83,\\ 70.3333)"
+     ],
+     "words": "Average across the 3 treatments within each subject."
+    },
+    {
+     "title": "Calculate the treatment means and the grand mean",
+     "general": [
+      "\\bar T_t=\\frac{1}{n}\\sum_{s=1}^{n}x_{ts}",
+      "\\bar X=\\frac{1}{mn}\\sum_t\\sum_s x_{ts}"
+     ],
+     "work": [
+      "\\bar T=(69.5,\\ 73,\\ 78.5)",
+      "\\bar X=\\frac{884}{12}=73.6667"
+     ],
+     "words": "Average down each treatment column across the 4 subjects, then average all 12 observations."
+    },
+    {
+     "title": "Calculate the sum of squares within subjects",
+     "general": [
+      "SS_{wit\\,subjs}=\\sum_{s=1}^{n}\\sum_{t=1}^{m}(x_{ts}-\\bar S_s)^2=\\sum_s SS_s",
+      "DF_{wit\\,subjs}=n(m-1)"
+     ],
+     "work": [
+      "SS_s=(62,\\ 32.6667,\\ 74,\\ 28.6667)",
+      "SS_{wit\\,subjs}=197.333",
+      "DF_{wit\\,subjs}=4(3-1)=8"
+     ],
+     "words": "Each subject's own spread around their own mean is added up. Differences between subjects (SS between subjects = 461.333) are set aside."
+    },
+    {
+     "title": "Calculate the treatment sum of squares",
+     "general": [
+      "SS_{treat}=n\\sum_{t=1}^{m}(\\bar T_t-\\bar X)^2",
+      "DF_{treat}=m-1"
+     ],
+     "work": [
+      "SS_{treat}=4[(69.5-73.6667)^2+(73-73.6667)^2+(78.5-73.6667)^2]=164.667",
+      "DF_{treat}=3-1=2"
+     ],
+     "words": "The factor n appears because each treatment mean is based on n subjects."
+    },
+    {
+     "title": "Calculate the residual sum of squares",
+     "general": [
+      "SS_{res}=SS_{wit\\,subjs}-SS_{treat}",
+      "DF_{res}=(n-1)(m-1)"
+     ],
+     "work": [
+      "SS_{res}=197.333-164.667=32.6667",
+      "DF_{res}=(4-1)(3-1)=6"
+     ],
+     "words": "What remains of the within-subject variation after the treatment effect is removed is the residual."
+    },
+    {
+     "title": "Calculate the mean squares and F",
+     "general": [
+      "F=\\frac{SS_{treat}/DF_{treat}}{SS_{res}/DF_{res}}=\\frac{MS_{treat}}{MS_{res}}"
+     ],
+     "work": [
+      "MS_{treat}=\\frac{164.667}{2}=82.3333",
+      "MS_{res}=\\frac{32.6667}{6}=5.44444",
+      "F=\\frac{82.3333}{5.44444}=15.1224"
+     ],
+     "words": "A large F means the treatment means differ more than the leftover within-subject noise would explain."
+    },
+    {
+     "title": "Find the critical F",
+     "general": [
+      "F_{crit}=F_\\alpha(DF_{treat},DF_{res})=F_\\alpha(\\nu_n,\\nu_d)"
+     ],
+     "work": [
+      "F_{0.05}(2,6)=5.14"
+     ],
+     "words": "Open F_table.pdf, PDF page 1. Use numerator column \\(\\nu_n=2\\) and denominator row \\(\\nu_d=6\\). The lightface (P < .05) value is 5.14; the boldface (P < .01) value is 10.92.",
+     "classTable": {
+      "path": "sources/tables/F_table.pdf",
+      "page": 1,
+      "row": "6",
+      "column": "2 (lightface, P<.05)",
+      "value": 5.14,
+      "actualDf": [
+       2,
+       6
+      ],
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "F>F_{crit}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "F=15.1224>5.14",
+      "F=15.1224>10.92\\ (P<0.01)"
+     ],
+     "words": "F exceeds the lightface 0.05 value, so reject the null hypothesis. It also exceeds the boldface 0.01 value, so P < 0.01."
+    }
+   ],
+   "conclusion": "F = 15.1224 with 2 and 6 df exceeds 5.14 and also the boldface 10.92. Reject the null hypothesis: mean heart rate differs among the breathing protocols (P < 0.01).",
+   "source": "Original practice example",
+   "lookup": {
+    "path": "sources/tables/F_table.pdf",
+    "page": 1,
+    "row": "6",
+    "column": "2 (lightface, P<.05)",
+    "value": 5.14,
+    "actualDf": [
+     2,
+     6
+    ],
+    "approximation": false
+   },
+   "values": {
+    "n": 4,
+    "m": 3,
+    "subjectMeans": [
+     75,
+     66.33333333333333,
+     83,
+     70.33333333333333
+    ],
+    "treatmentMeans": [
+     69.5,
+     73,
+     78.5
+    ],
+    "grandMean": 73.66666666666667,
+    "SStotal": 658.6666666666666,
+    "SSbetweenSubjects": 461.33333333333366,
+    "SSwithinSubjects": 197.33333333333331,
+    "SStreat": 164.66666666666666,
+    "SSres": 32.66666666666666,
+    "DFtreat": 2,
+    "DFres": 6,
+    "MStreat": 82.33333333333333,
+    "MSres": 5.444444444444443,
+    "F": 15.12244897959184,
+    "critical05": 5.14,
+    "critical01": 10.92,
+    "exactP": 0.004536418437703589,
+    "reject": true
+   },
+   "module": 20,
+   "tolerance": 0.0756122448979592,
+   "answerName": "F statistic",
+   "answer": 15.12244897959184
+  },
+  {
+   "id": "s20-oc-rmanova",
+   "title": "Oral contraceptive data as a two-treatment repeated measures ANOVA",
+   "topic": "s20rmanova",
+   "context": "The slide 11 systolic blood pressures (ten women, without and with oral contraceptives) are analyzed with the repeated measures ANOVA steps of slides 16-18, treating the two conditions as m = 2 treatments.",
+   "unit": "mmHg",
+   "table": {
+    "headers": [
+     "Subject",
+     "Without OC",
+     "With OC"
+    ],
+    "rows": [
+     [
+      1,
+      115,
+      128
+     ],
+     [
+      2,
+      112,
+      115
+     ],
+     [
+      3,
+      107,
+      106
+     ],
+     [
+      4,
+      119,
+      128
+     ],
+     [
+      5,
+      115,
+      122
+     ],
+     [
+      6,
+      138,
+      145
+     ],
+     [
+      7,
+      126,
+      132
+     ],
+     [
+      8,
+      105,
+      109
+     ],
+     [
+      9,
+      104,
+      102
+     ],
+     [
+      10,
+      115,
+      117
+     ]
+    ]
+   },
+   "tasks": [
+    "Using the repeated measures ANOVA steps, calculate SS within subjects, SS treatment, SS residual, and F.",
+    "Test at the 0.05 level and compare F with the square of the paired t statistic from the lecture exercise."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\mu_1=\\dots=\\mu_m",
+    "alternative": "H_A:\\text{at least one treatment mean differs}",
+    "nullWords": "Mean systolic blood pressure is the same without and with oral contraceptives.",
+    "alternativeWords": "Mean systolic blood pressure differs without and with oral contraceptives."
+   },
+   "symbols": "\\(x_{ts}\\) (response to treatment \\(t\\) in subject \\(s\\)), \\(\\bar S_s\\) (subject mean), \\(\\bar T_t\\) (treatment mean), \\(\\bar X\\) (grand mean), \\(m\\) (number of treatments), \\(n\\) (number of subjects), \\(SS\\) (sum of squares), \\(MS\\) (mean square), \\(F\\) (F statistic).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\mu_1=\\mu_2=\\dots=\\mu_m",
+      "H_A:\\text{not all treatment means are equal}"
+     ],
+     "work": [
+      "\\mu_{\\mathrm{without}}=\\mu_{\\mathrm{with}}"
+     ],
+     "words": "Every subject receives every treatment, so the procedure is repeated measures ANOVA. Mean systolic blood pressure is the same without and with oral contraceptives."
+    },
+    {
+     "title": "Calculate the subject means",
+     "general": [
+      "\\bar S_s=\\frac{1}{m}\\sum_{t=1}^{m}x_{ts}"
+     ],
+     "work": [
+      "\\bar S=(121.5,\\ 113.5,\\ 106.5,\\ 123.5,\\ 118.5,\\ 141.5,\\ 129,\\ 107,\\ 103,\\ 116)"
+     ],
+     "words": "Average across the 2 treatments within each subject."
+    },
+    {
+     "title": "Calculate the treatment means and the grand mean",
+     "general": [
+      "\\bar T_t=\\frac{1}{n}\\sum_{s=1}^{n}x_{ts}",
+      "\\bar X=\\frac{1}{mn}\\sum_t\\sum_s x_{ts}"
+     ],
+     "work": [
+      "\\bar T=(115.6,\\ 120.4)",
+      "\\bar X=\\frac{2360}{20}=118"
+     ],
+     "words": "Average down each treatment column across the 10 subjects, then average all 20 observations."
+    },
+    {
+     "title": "Calculate the sum of squares within subjects",
+     "general": [
+      "SS_{wit\\,subjs}=\\sum_{s=1}^{n}\\sum_{t=1}^{m}(x_{ts}-\\bar S_s)^2=\\sum_s SS_s",
+      "DF_{wit\\,subjs}=n(m-1)"
+     ],
+     "work": [
+      "SS_s=(84.5,\\ 4.5,\\ 0.5,\\ 40.5,\\ 24.5,\\ 24.5,\\ 18,\\ 8,\\ 2,\\ 2)",
+      "SS_{wit\\,subjs}=209",
+      "DF_{wit\\,subjs}=10(2-1)=10"
+     ],
+     "words": "Each subject's own spread around their own mean is added up. Differences between subjects (SS between subjects = 2437) are set aside."
+    },
+    {
+     "title": "Calculate the treatment sum of squares",
+     "general": [
+      "SS_{treat}=n\\sum_{t=1}^{m}(\\bar T_t-\\bar X)^2",
+      "DF_{treat}=m-1"
+     ],
+     "work": [
+      "SS_{treat}=10[(115.6-118)^2+(120.4-118)^2]=115.2",
+      "DF_{treat}=2-1=1"
+     ],
+     "words": "The factor n appears because each treatment mean is based on n subjects."
+    },
+    {
+     "title": "Calculate the residual sum of squares",
+     "general": [
+      "SS_{res}=SS_{wit\\,subjs}-SS_{treat}",
+      "DF_{res}=(n-1)(m-1)"
+     ],
+     "work": [
+      "SS_{res}=209-115.2=93.8",
+      "DF_{res}=(10-1)(2-1)=9"
+     ],
+     "words": "What remains of the within-subject variation after the treatment effect is removed is the residual."
+    },
+    {
+     "title": "Calculate the mean squares and F",
+     "general": [
+      "F=\\frac{SS_{treat}/DF_{treat}}{SS_{res}/DF_{res}}=\\frac{MS_{treat}}{MS_{res}}"
+     ],
+     "work": [
+      "MS_{treat}=\\frac{115.2}{1}=115.2",
+      "MS_{res}=\\frac{93.8}{9}=10.4222",
+      "F=\\frac{115.2}{10.4222}=11.0533"
+     ],
+     "words": "A large F means the treatment means differ more than the leftover within-subject noise would explain."
+    },
+    {
+     "title": "Find the critical F",
+     "general": [
+      "F_{crit}=F_\\alpha(DF_{treat},DF_{res})=F_\\alpha(\\nu_n,\\nu_d)"
+     ],
+     "work": [
+      "F_{0.05}(1,9)=5.12"
+     ],
+     "words": "Open F_table.pdf, PDF page 1. Use numerator column \\(\\nu_n=1\\) and denominator row \\(\\nu_d=9\\). The lightface (P < .05) value is 5.12; the boldface (P < .01) value is 10.56.",
+     "classTable": {
+      "path": "sources/tables/F_table.pdf",
+      "page": 1,
+      "row": "9",
+      "column": "1 (lightface, P<.05)",
+      "value": 5.12,
+      "actualDf": [
+       1,
+       9
+      ],
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "F>F_{crit}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "F=11.0533>5.12",
+      "F=11.0533>10.56\\ (P<0.01)"
+     ],
+     "words": "F exceeds the lightface 0.05 value, so reject the null hypothesis. It also exceeds the boldface 0.01 value, so P < 0.01, the same P range as the paired t test."
+    },
+    {
+     "title": "Connect F to the paired t",
+     "general": [
+      "F=t^2\\quad(m=2)"
+     ],
+     "work": [
+      "t^2=3.32465^2=11.0533"
+     ],
+     "words": "With only two treatments, repeated measures ANOVA and the paired t test are the same test: F equals the square of the paired t, and the F(1, 9) cutoff 5.12 is the square of t0.05(9) = 2.262 to rounding."
+    }
+   ],
+   "conclusion": "F = 11.0533 with 1 and 9 df exceeds 5.12 and the boldface 10.56. Reject the null hypothesis (P < 0.01). F equals the paired t squared, so both methods reach the same conclusion.",
+   "source": "Session 20 page 11 data; method of pages 16-18",
+   "lookup": {
+    "path": "sources/tables/F_table.pdf",
+    "page": 1,
+    "row": "9",
+    "column": "1 (lightface, P<.05)",
+    "value": 5.12,
+    "actualDf": [
+     1,
+     9
+    ],
+    "approximation": false
+   },
+   "values": {
+    "n": 10,
+    "m": 2,
+    "subjectMeans": [
+     121.5,
+     113.5,
+     106.5,
+     123.5,
+     118.5,
+     141.5,
+     129,
+     107,
+     103,
+     116
+    ],
+    "treatmentMeans": [
+     115.6,
+     120.4
+    ],
+    "grandMean": 118,
+    "SStotal": 2646,
+    "SSbetweenSubjects": 2437,
+    "SSwithinSubjects": 209,
+    "SStreat": 115.20000000000054,
+    "SSres": 93.79999999999946,
+    "DFtreat": 1,
+    "DFres": 9,
+    "MStreat": 115.20000000000054,
+    "MSres": 10.422222222222162,
+    "F": 11.053304904051288,
+    "critical05": 5.12,
+    "critical01": 10.56,
+    "exactP": 0.008874336881491803,
+    "reject": true
+   },
+   "module": 20,
+   "tolerance": 0.05526652452025644,
+   "answerName": "F statistic",
+   "answer": 11.053304904051288
+  }
+ ],
+ "sampleQuestions": [
+  {
+   "id": "m2-s20-q001",
+   "module": 20,
+   "topic": "s20paired",
+   "stem": "For the platelet aggregation example (eleven after-minus-before changes), what is the mean difference \\(\\bar d\\)?",
+   "options": [
+    "\\(11.3\\) percentage points",
+    "\\(9.41667\\) percentage points",
+    "\\(113\\) percentage points",
+    "\\(10.2727\\) percentage points"
+   ],
+   "correct": 3,
+   "why": "The eleven changes sum to 113 percentage points; dividing by n = 11 gives 10.2727, which the slide rounds to 10.3.",
+   "case": "s20-platelet-paired",
+   "equations": [
+    "\\bar d=\\frac{1}{n}\\sum d_i",
+    "\\bar d=\\frac{113}{11}=10.2727"
+   ]
+  },
+  {
+   "id": "m2-s20-q002",
+   "module": 20,
+   "topic": "s20paired",
+   "stem": "For the platelet aggregation example, what is the SD of the differences \\(s_d\\)?",
+   "options": [
+    "\\(7.60491\\) percentage points",
+    "\\(7.9761\\) percentage points",
+    "\\(2.40488\\) percentage points",
+    "\\(63.6182\\) percentage points"
+   ],
+   "correct": 1,
+   "why": "Sum the squared deviations (636.18), divide by n − 1 = 10, and take the square root. Dividing by n or forgetting the root gives the wrong values.",
+   "case": "s20-platelet-paired",
+   "equations": [
+    "s_d=\\sqrt{\\frac{\\sum(d_i-\\bar d)^2}{n-1}}",
+    "s_d=\\sqrt{\\frac{636.182}{10}}=7.9761"
+   ]
+  },
+  {
+   "id": "m2-s20-q003",
+   "module": 20,
+   "topic": "s20paired",
+   "stem": "For the platelet aggregation example, what is the standard error of the mean difference \\(s_{\\bar d}\\)?",
+   "options": [
+    "\\(7.9761\\) percentage points",
+    "\\(2.52226\\) percentage points",
+    "\\(2.40488\\) percentage points",
+    "\\(0.7251\\) percentage points"
+   ],
+   "correct": 2,
+   "why": "The standard error divides the SD of the differences by the square root of the number of subjects, 11.",
+   "case": "s20-platelet-paired",
+   "equations": [
+    "s_{\\bar d}=\\frac{s_d}{\\sqrt n}",
+    "s_{\\bar d}=\\frac{7.9761}{\\sqrt{11}}=2.40488"
+   ]
+  },
+  {
+   "id": "m2-s20-q004",
+   "module": 20,
+   "topic": "s20paired",
+   "stem": "For the platelet aggregation example, what is the paired t statistic?",
+   "options": [
+    "\\(4.27161\\)",
+    "\\(4.07282\\)",
+    "\\(1.28794\\)",
+    "\\(4.4801\\)"
+   ],
+   "correct": 0,
+   "why": "Divide the mean difference by its standard error: 10.2727/2.40488 = 4.2716 (4.27 on the slide).",
+   "case": "s20-platelet-paired",
+   "equations": [
+    "t=\\frac{\\bar d}{s_{\\bar d}}",
+    "t=\\frac{10.2727}{2.40488}=4.27161"
+   ]
+  },
+  {
+   "id": "m2-s20-q005",
+   "module": 20,
+   "topic": "s20paired",
+   "stem": "In the oral contraceptive lecture exercise, what is the mean difference (with OC minus without OC)?",
+   "options": [
+    "\\(-4.8\\) mmHg",
+    "\\(4.8\\) mmHg",
+    "\\(48\\) mmHg",
+    "\\(5.33333\\) mmHg"
+   ],
+   "correct": 1,
+   "why": "The ten differences sum to 48 mmHg; dividing by 10 gives 4.8 mmHg. Subtracting in the other order would only flip the sign.",
+   "case": "s20-oc-paired",
+   "equations": [
+    "\\bar d=\\frac{48}{10}=4.8"
+   ]
+  },
+  {
+   "id": "m2-s20-q006",
+   "module": 20,
+   "topic": "s20paired",
+   "stem": "In the oral contraceptive exercise, what is the SD of the differences \\(s_d\\)?",
+   "options": [
+    "\\(4.56557\\) mmHg",
+    "\\(1.44376\\) mmHg",
+    "\\(20.8444\\) mmHg",
+    "\\(4.33128\\) mmHg"
+   ],
+   "correct": 0,
+   "why": "The squared deviations sum to 187.6; dividing by n − 1 = 9 gives 20.844, and its root is 4.5656 mmHg.",
+   "case": "s20-oc-paired",
+   "equations": [
+    "s_d=\\sqrt{\\frac{187.6}{9}}=4.56557"
+   ]
+  },
+  {
+   "id": "m2-s20-q007",
+   "module": 20,
+   "topic": "s20paired",
+   "stem": "In the oral contraceptive exercise, what is the paired t statistic?",
+   "options": [
+    "\\(1.05135\\)",
+    "\\(3.50449\\)",
+    "\\(3.32465\\)",
+    "\\(0.905177\\)"
+   ],
+   "correct": 2,
+   "why": "t = 4.8/1.44376 = 3.3247, which the slide reports as 3.325. The value 0.905 is what the unpaired test gives on the same data.",
+   "case": "s20-oc-paired",
+   "equations": [
+    "t=\\frac{\\bar d}{s_{\\bar d}}=\\frac{4.8}{1.44376}=3.32465"
+   ]
+  },
+  {
+   "id": "m2-s20-q008",
+   "module": 20,
+   "topic": "s20paired",
+   "stem": "In the oral contraceptive exercise, which printed critical value does the slide compare the paired t statistic with to conclude \\(P<0.01\\)?",
+   "options": [
+    "\\(t_{0.01}(18)=2.878\\)",
+    "\\(t_{0.05}(9)=2.262\\)",
+    "\\(t_{0.01}(10)=3.169\\)",
+    "\\(t_{0.01}(9)=3.250\\)"
+   ],
+   "correct": 3,
+   "why": "There are ten subjects, so ν = n − 1 = 9. Row 9, two-tailed 0.01 column, gives 3.250, and 3.325 exceeds it.",
+   "case": "s20-oc-paired",
+   "equations": [
+    "\\nu=n-1=9",
+    "t_{0.01}(9)=3.250"
+   ]
+  }
+ ]
+}

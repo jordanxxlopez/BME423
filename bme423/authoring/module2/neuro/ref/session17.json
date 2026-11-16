@@ -1,0 +1,3785 @@
+{
+ "session": 17,
+ "methods": [
+  {
+   "id": "meaning",
+   "title": "Interpret the confidence level",
+   "trigger": "A question asks what 95% confidence means or what an interval estimates.",
+   "formula": [
+    "\\text{confidence}=100(1-\\alpha)\\%"
+   ]
+  },
+  {
+   "id": "twoMeans",
+   "title": "Two independent means → pooled t interval",
+   "trigger": "Two independent groups have means, SDs, and sample sizes; estimate their population mean difference.",
+   "formula": [
+    "s^2=\\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}",
+    "s_d=\\sqrt{\\frac{s^2}{n_1}+\\frac{s^2}{n_2}},\\quad \\nu=n_1+n_2-2",
+    "(\\bar x_1-\\bar x_2)\\pm t_\\alpha(\\nu)s_d"
+   ]
+  },
+  {
+   "id": "oneMean",
+   "title": "One population mean → one-sample t interval",
+   "trigger": "One group has a sample mean, sample SD, and sample size; estimate the population mean.",
+   "formula": [
+    "s_{\\bar x}=\\frac{s}{\\sqrt n},\\quad \\nu=n-1",
+    "\\bar x\\pm t_\\alpha(\\nu)s_{\\bar x}"
+   ]
+  },
+  {
+   "id": "twoProportions",
+   "title": "Two event proportions → course pooled z interval",
+   "trigger": "Two independent groups each have event counts and totals; estimate the difference in event probability.",
+   "formula": [
+    "\\hat p_i=m_i/n_i,\\quad \\hat p=\\frac{m_1+m_2}{n_1+n_2}",
+    "s_d=\\sqrt{\\hat p(1-\\hat p)\\left(\\frac1{n_1}+\\frac1{n_2}\\right)}",
+    "(\\hat p_1-\\hat p_2)\\pm z_\\alpha s_d"
+   ]
+  },
+  {
+   "id": "oneProportion",
+   "title": "One event proportion → Normal interval",
+   "trigger": "One sample supplies an event count and total; estimate its population proportion.",
+   "formula": [
+    "\\hat p=\\frac mn,\\quad s_{\\hat p}=\\sqrt{\\frac{\\hat p(1-\\hat p)}n}",
+    "\\hat p\\pm z_\\alpha s_{\\hat p}"
+   ]
+  },
+  {
+   "id": "decision",
+   "title": "Use the interval to make a two-sided decision",
+   "trigger": "A confidence interval is given and the question asks whether the null population value is supported.",
+   "formula": [
+    "\\theta_0\\in[L,U]\\Rightarrow\\text{do not reject }H_0",
+    "\\theta_0\\notin[L,U]\\Rightarrow\\text{reject }H_0"
+   ]
+  }
+ ],
+ "cases": [
+  {
+   "id": "ci-heart",
+   "title": "BME423 student heart rate",
+   "topic": "oneMean",
+   "context": "A sample of ten BME423 students has the heart-rate summary below. Construct a 95% interval for the population mean heart rate. Treat the sample as independent observations from a Normal population.",
+   "unit": "beats/min",
+   "table": {
+    "headers": [
+     "Sample size",
+     "Sample mean",
+     "Sample SD"
+    ],
+    "rows": [
+     [
+      10,
+      67,
+      9
+     ]
+    ]
+   },
+   "tasks": [
+    "Construct a 95% confidence interval for the population mean. Show the standard error, degrees of freedom, critical value, margin, and both endpoints.",
+    "Interpret the interval in the measurement units and distinguish it from individual variation."
+   ],
+   "symbols": "\\(\\bar x\\) (sample mean), \\(s\\) (sample SD), \\(n\\) (number sampled), \\(s_{\\bar x}\\) (standard error of the mean), \\(\\mu\\) (population mean), \\(M\\) (margin).",
+   "steps": [
+    {
+     "title": "Identify the population quantity",
+     "general": [
+      "\\text{estimate of }\\mu=\\bar x"
+     ],
+     "work": [
+      "\\bar x=67,\\quad s=9,\\quad n=10"
+     ],
+     "words": "The sample mean estimates the population mean. The SD describes individual measurements; the standard error describes uncertainty in their mean."
+    },
+    {
+     "title": "Calculate the standard error",
+     "general": [
+      "s_{\\bar x}=\\frac{s}{\\sqrt n}"
+     ],
+     "work": [
+      "s_{\\bar x}=\\frac{9}{\\sqrt{10}}=\\frac{9}{3.162278}=2.84605"
+     ],
+     "words": "Divide the sample SD by the square root of sample size. Keep the standard error available for the margin calculation."
+    },
+    {
+     "title": "Choose degrees of freedom and the cutoff",
+     "general": [
+      "\\nu=n-1",
+      "t_c=t_\\alpha(\\nu)"
+     ],
+     "work": [
+      "\\nu=10-1=9",
+      "\\alpha=1-0.95=0.05",
+      "t_{0.05}(9)=2.262"
+     ],
+     "words": "Open t_table.pdf, PDF page 1. Use row 9 and the combined two-tail 0.05 column. The printed cutoff is 2.262. Do not halve the column probability again.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "9",
+      "column": "0.05",
+      "value": 2.262,
+      "actualDf": 9,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Calculate the margin of error",
+     "general": [
+      "M=t_c s_{\\bar x}"
+     ],
+     "work": [
+      "M=2.262(2.84605)=6.437765"
+     ],
+     "words": "The margin has the same measurement units as the sample mean."
+    },
+    {
+     "title": "Calculate the lower endpoint",
+     "general": [
+      "L=\\bar x-M"
+     ],
+     "work": [
+      "L=67-6.437765=60.56224"
+     ],
+     "words": "Subtract the margin from the sample mean."
+    },
+    {
+     "title": "Calculate the upper endpoint",
+     "general": [
+      "U=\\bar x+M"
+     ],
+     "work": [
+      "U=67+6.437765=73.43776"
+     ],
+     "words": "Add the same margin to the sample mean."
+    },
+    {
+     "title": "State the population interval",
+     "general": [
+      "L<\\mu<U"
+     ],
+     "work": [
+      "60.56224<\\mu<73.43776"
+     ],
+     "words": "The 95% interval estimates the population mean in the original measurement units. It is not an interval containing this percentage of individual measurements."
+    }
+   ],
+   "conclusion": "The 95% confidence interval for the population mean is 60.56224 to 73.43776 beats/min.",
+   "source": 10,
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "9",
+    "column": "0.05",
+    "value": 2.262,
+    "actualDf": 9,
+    "approximation": false
+   },
+   "values": {
+    "n": 10,
+    "x": 67,
+    "sd": 9,
+    "confidence": 0.95,
+    "df": 9,
+    "se": 2.846049894151541,
+    "critical": 2.262,
+    "margin": 6.437764860570786,
+    "lower": 60.56223513942921,
+    "upper": 73.43776486057078
+   },
+   "module": 17,
+   "tolerance": 0.002,
+   "answerName": "Lower endpoint",
+   "answer": 60.56223513942921
+  },
+  {
+   "id": "ci-urine",
+   "title": "Diuretic versus placebo urine production",
+   "topic": "twoMeans",
+   "context": "A study compares daily urine production with a diuretic and a placebo. Assume independent Normal responses with a common population variance.",
+   "unit": "mL/day",
+   "table": {
+    "headers": [
+     "Group",
+     "Sample size",
+     "Mean",
+     "SD"
+    ],
+    "rows": [
+     [
+      "diuretic",
+      10,
+      1400,
+      245
+     ],
+     [
+      "placebo",
+      10,
+      1180,
+      144
+     ]
+    ]
+   },
+   "tasks": [
+    "Construct the 95% confidence interval for the population difference, diuretic minus placebo. Show both variance contributions, the pooled variance, SE, df, critical value, margin, and both bounds.",
+    "Using the interval alone, decide whether the means differ at the matching two-sided 0.05 level. State both hypotheses in symbols and words, and conclude in context."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\mu_1-\\mu_2=0",
+    "alternative": "H_A:\\mu_1-\\mu_2\\ne0",
+    "nullWords": "The diuretic and placebo populations have equal means.",
+    "alternativeWords": "The diuretic and placebo population means differ."
+   },
+   "symbols": "\\(\\bar x_i\\) (group sample mean), \\(s_i\\) (group sample SD), \\(n_i\\) (group sample size), \\(s^2\\) (pooled variance), \\(s_d\\) (SE of the difference), \\(d\\) (sample difference), \\(\\Delta\\) (population difference).",
+   "steps": [
+    {
+     "title": "Define the contrast and hypotheses",
+     "general": [
+      "\\Delta=\\mu_1-\\mu_2"
+     ],
+     "work": [
+      "\\Delta=\\mu_{\\mathrm{diuretic}}-\\mu_{\\mathrm{placebo}}"
+     ],
+     "words": "Keep the direction diuretic minus placebo throughout. The null means equal population means; the two-sided alternative means different population means."
+    },
+    {
+     "title": "Calculate the observed difference",
+     "general": [
+      "d=\\bar x_1-\\bar x_2"
+     ],
+     "work": [
+      "d=1400-1180=220"
+     ],
+     "words": "This is the sample estimate of the population difference in mL/day."
+    },
+    {
+     "title": "Square both group SDs",
+     "general": [
+      "v_1=s_1^2",
+      "v_2=s_2^2"
+     ],
+     "work": [
+      "v_1=245^2=60025",
+      "v_2=144^2=20736"
+     ],
+     "words": "Each SD is squared before pooling, giving variances in squared measurement units."
+    },
+    {
+     "title": "Pool both variance contributions",
+     "general": [
+      "s^2=\\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}"
+     ],
+     "work": [
+      "(n_1-1)s_1^2=(10-1)(60025)=540225",
+      "(n_2-1)s_2^2=(10-1)(20736)=186624",
+      "s^2=\\frac{540225+186624}{10+10-2}=\\frac{726849}{18}=40380.5"
+     ],
+     "words": "Weight each group variance by its own degrees of freedom, add the contributions, and divide by the combined degrees of freedom."
+    },
+    {
+     "title": "Calculate the SE of the difference",
+     "general": [
+      "s_d=\\sqrt{\\frac{s^2}{n_1}+\\frac{s^2}{n_2}}"
+     ],
+     "work": [
+      "s_d=\\sqrt{\\frac{40380.5}{10}+\\frac{40380.5}{10}}=\\sqrt{8076.1}=89.86712"
+     ],
+     "words": "Add the two mean-variance contributions inside the root, then take the root. This restores the original measurement units."
+    },
+    {
+     "title": "Find degrees of freedom and the t cutoff",
+     "general": [
+      "\\nu=n_1+n_2-2",
+      "t_c=t_\\alpha(\\nu)"
+     ],
+     "work": [
+      "\\nu=10+10-2=18",
+      "\\alpha=1-0.95=0.05",
+      "t_{0.05}(18)=2.101"
+     ],
+     "words": "Open t_table.pdf, PDF page 1. Use row 18 and the combined two-tail 0.05 column. The printed cutoff is 2.101. Do not halve the column probability again.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "18",
+      "column": "0.05",
+      "value": 2.101,
+      "actualDf": 18,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Calculate the margin",
+     "general": [
+      "M=t_c s_d"
+     ],
+     "work": [
+      "M=2.101(89.86712)=188.8108"
+     ],
+     "words": "Multiply the positive cutoff by the standard error of the difference."
+    },
+    {
+     "title": "Calculate both bounds",
+     "general": [
+      "L=d-M",
+      "U=d+M"
+     ],
+     "work": [
+      "L=220-188.8108=31.18917",
+      "U=220+188.8108=408.8108"
+     ],
+     "words": "The bounds retain the diuretic minus placebo subtraction order."
+    },
+    {
+     "title": "Make the decision using the interval",
+     "general": [
+      "0\\notin[L,U]\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "[31.18917,408.8108]"
+     ],
+     "words": "Zero is outside the interval. Reject the equal-means null at the matching two-sided 0.05 level; no separate t statistic is required."
+    }
+   ],
+   "conclusion": "The 95% CI for diuretic minus placebo is 31.18917 to 408.8108 mL/day. The population means differ, with diuretic higher.",
+   "source": 6,
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "18",
+    "column": "0.05",
+    "value": 2.101,
+    "actualDf": 18,
+    "approximation": false
+   },
+   "values": {
+    "n1": 10,
+    "n2": 10,
+    "x1": 1400,
+    "x2": 1180,
+    "s1": 245,
+    "s2": 144,
+    "confidence": 0.95,
+    "df": 18,
+    "variance": 40380.5,
+    "se": 89.86712413335592,
+    "critical": 2.101,
+    "difference": 220,
+    "margin": 188.81082780418078,
+    "lower": 31.189172195819225,
+    "upper": 408.8108278041808,
+    "reject": true
+   },
+   "module": 17,
+   "tolerance": 0.04543356206667796,
+   "answerName": "Lower endpoint",
+   "answer": 31.189172195819225
+  },
+  {
+   "id": "ci-aspirin",
+   "title": "Aspirin thrombosis interval · slide rounding",
+   "topic": "twoProportions",
+   "context": "A trial compares thrombosis incidence with placebo and aspirin. Reproduce the slide’s displayed proportions 0.72 and 0.32 and its rounded SE of 0.15.",
+   "unit": "proportion difference",
+   "table": {
+    "headers": [
+     "Group",
+     "Events",
+     "Total observations"
+    ],
+    "rows": [
+     [
+      "placebo",
+      18,
+      25
+     ],
+     [
+      "aspirin",
+      6,
+      19
+     ]
+    ]
+   },
+   "tasks": [
+    "Construct the 95% confidence interval for the difference in population event proportions using the Session 17 pooled standard error. Show both sample proportions, the pooled estimate, variance, SE, margin, and endpoints.",
+    "Use the interval to decide whether the event probabilities differ at the matching two-sided 0.05 level. Interpret the direction and distinguish percentage points from a relative reduction."
+   ],
+   "hypotheses": {
+    "null": "H_0:p_1-p_2=0",
+    "alternative": "H_A:p_1-p_2\\ne0",
+    "nullWords": "The placebo and aspirin populations have equal event probabilities.",
+    "alternativeWords": "The placebo and aspirin population event probabilities differ."
+   },
+   "symbols": "\\(m_i\\) (group event count), \\(n_i\\) (group size), \\(\\hat p_i\\) (group sample proportion), \\(\\hat p\\) (pooled estimate), \\(s_d\\) (SE of the difference), \\(d\\) (observed difference).",
+   "steps": [
+    {
+     "title": "Define the population difference",
+     "general": [
+      "\\Delta=p_1-p_2"
+     ],
+     "work": [
+      "\\Delta=p_{\\mathrm{placebo}}-p_{\\mathrm{aspirin}}"
+     ],
+     "words": "Use placebo minus aspirin. Equal population event probabilities correspond to a difference of zero."
+    },
+    {
+     "title": "Calculate both sample proportions",
+     "general": [
+      "\\hat p_i=\\frac{m_i}{n_i}"
+     ],
+     "work": [
+      "\\hat p_1=\\frac{18}{25}=0.72\\approx 0.72",
+      "\\hat p_2=\\frac{6}{19}=0.3157895\\approx 0.32"
+     ],
+     "words": "Each event count is divided by its own group size."
+    },
+    {
+     "title": "Calculate the course pooled proportion",
+     "general": [
+      "\\hat p=\\frac{m_1+m_2}{n_1+n_2}"
+     ],
+     "work": [
+      "\\hat p=\\frac{18+6}{25+19}=\\frac{24}{44}=0.5454545"
+     ],
+     "words": "Combine event counts and group sizes before taking the fraction. This follows the Session 17 pooled convention."
+    },
+    {
+     "title": "Calculate the pooled binary variance",
+     "general": [
+      "s^2=\\hat p(1-\\hat p)"
+     ],
+     "work": [
+      "s^2=0.5454545(1-0.5454545)=0.2479339"
+     ],
+     "words": "The pooled binary variance is used in both group contributions to the SE."
+    },
+    {
+     "title": "Calculate the difference SE",
+     "general": [
+      "s_d=\\sqrt{\\frac{s^2}{n_1}+\\frac{s^2}{n_2}}"
+     ],
+     "work": [
+      "s_d=\\sqrt{\\frac{0.2479339}{25}+\\frac{0.2479339}{19}}=0.151547\\approx 0.15"
+     ],
+     "words": "Keep the two group sizes separate inside the square root. The lecture example uses the displayed rounded SE of 0.15 for its interval."
+    },
+    {
+     "title": "Calculate the difference and margin",
+     "general": [
+      "d=\\hat p_1-\\hat p_2",
+      "M=z_{0.05}s_d"
+     ],
+     "work": [
+      "d=0.72-0.32=0.4",
+      "M=1.96(0.15)=0.294"
+     ],
+     "words": "Use the Normal cutoff 1.96 from the infinite-df row, total two-tail 0.05 column. This reproduces the slide’s early-rounded arithmetic.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 2,
+      "row": "infinity",
+      "column": "0.05",
+      "value": 1.96,
+      "approximation": false,
+      "normalReference": true
+     }
+    },
+    {
+     "title": "Calculate both endpoints",
+     "general": [
+      "L=d-M",
+      "U=d+M"
+     ],
+     "work": [
+      "L=0.4-0.294=0.106",
+      "U=0.4+0.294=0.694"
+     ],
+     "words": "These are absolute differences of event probabilities. Multiply by 100 to express the difference in percentage points."
+    },
+    {
+     "title": "Interpret direction and the zero comparison",
+     "general": [
+      "0\\notin[L,U]\\Rightarrow\\text{reject equal proportions}"
+     ],
+     "work": [
+      "0.106<p_1-p_2<0.694"
+     ],
+     "words": "The interval excludes zero. Retain the placebo minus aspirin order when stating which event probability is higher."
+    }
+   ],
+   "conclusion": "The 95% interval for placebo minus aspirin is 0.106 to 0.694, equivalent to 10.60 to 69.40 percentage points. Equal event probabilities are excluded.",
+   "source": 12,
+   "rounded": true,
+   "values": {
+    "m1": 18,
+    "n1": 25,
+    "m2": 6,
+    "n2": 19,
+    "p1": 0.72,
+    "p2": 0.32,
+    "pooled": 0.5454545454545454,
+    "variance": 0.24793388429752067,
+    "se": 0.15,
+    "rawSE": 0.1515470460848165,
+    "difference": 0.39999999999999997,
+    "critical": 1.96,
+    "confidence": 0.95,
+    "margin": 0.294,
+    "lower": 0.10599999999999998,
+    "upper": 0.694,
+    "reject": true
+   },
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 2,
+    "row": "infinity",
+    "column": "0.05",
+    "value": 1.96,
+    "approximation": false,
+    "normalReference": true
+   },
+   "module": 17,
+   "tolerance": 0.002,
+   "answerName": "Lower endpoint",
+   "answer": 0.10599999999999998
+  },
+  {
+   "id": "ci-aspirin-precision",
+   "title": "Aspirin thrombosis interval · retain intermediate digits",
+   "topic": "twoProportions",
+   "context": "Use the same thrombosis counts, retaining the original fractions and intermediate digits throughout the course pooled calculation.",
+   "unit": "proportion difference",
+   "table": {
+    "headers": [
+     "Group",
+     "Events",
+     "Total observations"
+    ],
+    "rows": [
+     [
+      "placebo",
+      18,
+      25
+     ],
+     [
+      "aspirin",
+      6,
+      19
+     ]
+    ]
+   },
+   "tasks": [
+    "Construct the 95% confidence interval for the difference in population event proportions using the Session 17 pooled standard error. Show both sample proportions, the pooled estimate, variance, SE, margin, and endpoints.",
+    "Use the interval to decide whether the event probabilities differ at the matching two-sided 0.05 level. Interpret the direction and distinguish percentage points from a relative reduction."
+   ],
+   "hypotheses": {
+    "null": "H_0:p_1-p_2=0",
+    "alternative": "H_A:p_1-p_2\\ne0",
+    "nullWords": "The placebo and aspirin populations have equal event probabilities.",
+    "alternativeWords": "The placebo and aspirin population event probabilities differ."
+   },
+   "symbols": "\\(m_i\\) (group event count), \\(n_i\\) (group size), \\(\\hat p_i\\) (group sample proportion), \\(\\hat p\\) (pooled estimate), \\(s_d\\) (SE of the difference), \\(d\\) (observed difference).",
+   "steps": [
+    {
+     "title": "Define the population difference",
+     "general": [
+      "\\Delta=p_1-p_2"
+     ],
+     "work": [
+      "\\Delta=p_{\\mathrm{placebo}}-p_{\\mathrm{aspirin}}"
+     ],
+     "words": "Use placebo minus aspirin. Equal population event probabilities correspond to a difference of zero."
+    },
+    {
+     "title": "Calculate both sample proportions",
+     "general": [
+      "\\hat p_i=\\frac{m_i}{n_i}"
+     ],
+     "work": [
+      "\\hat p_1=\\frac{18}{25}=0.72",
+      "\\hat p_2=\\frac{6}{19}=0.3157895"
+     ],
+     "words": "Each event count is divided by its own group size."
+    },
+    {
+     "title": "Calculate the course pooled proportion",
+     "general": [
+      "\\hat p=\\frac{m_1+m_2}{n_1+n_2}"
+     ],
+     "work": [
+      "\\hat p=\\frac{18+6}{25+19}=\\frac{24}{44}=0.5454545"
+     ],
+     "words": "Combine event counts and group sizes before taking the fraction. This follows the Session 17 pooled convention."
+    },
+    {
+     "title": "Calculate the pooled binary variance",
+     "general": [
+      "s^2=\\hat p(1-\\hat p)"
+     ],
+     "work": [
+      "s^2=0.5454545(1-0.5454545)=0.2479339"
+     ],
+     "words": "The pooled binary variance is used in both group contributions to the SE."
+    },
+    {
+     "title": "Calculate the difference SE",
+     "general": [
+      "s_d=\\sqrt{\\frac{s^2}{n_1}+\\frac{s^2}{n_2}}"
+     ],
+     "work": [
+      "s_d=\\sqrt{\\frac{0.2479339}{25}+\\frac{0.2479339}{19}}=0.151547"
+     ],
+     "words": "Keep the two group sizes separate inside the square root."
+    },
+    {
+     "title": "Calculate the difference and margin",
+     "general": [
+      "d=\\hat p_1-\\hat p_2",
+      "M=z_{0.05}s_d"
+     ],
+     "work": [
+      "d=0.72-0.3157895=0.4042105",
+      "M=1.96(0.151547)=0.2970322"
+     ],
+     "words": "Use the Normal cutoff 1.96 from the infinite-df row, total two-tail 0.05 column.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 2,
+      "row": "infinity",
+      "column": "0.05",
+      "value": 1.96,
+      "approximation": false,
+      "normalReference": true
+     }
+    },
+    {
+     "title": "Calculate both endpoints",
+     "general": [
+      "L=d-M",
+      "U=d+M"
+     ],
+     "work": [
+      "L=0.4042105-0.2970322=0.1071783",
+      "U=0.4042105+0.2970322=0.7012427"
+     ],
+     "words": "These are absolute differences of event probabilities. Multiply by 100 to express the difference in percentage points."
+    },
+    {
+     "title": "Interpret direction and the zero comparison",
+     "general": [
+      "0\\notin[L,U]\\Rightarrow\\text{reject equal proportions}"
+     ],
+     "work": [
+      "0.1071783<p_1-p_2<0.7012427"
+     ],
+     "words": "The interval excludes zero. Retain the placebo minus aspirin order when stating which event probability is higher."
+    }
+   ],
+   "conclusion": "The 95% interval for placebo minus aspirin is 0.1071783 to 0.7012427, equivalent to 10.72 to 70.12 percentage points. Equal event probabilities are excluded.",
+   "source": 12,
+   "rounded": false,
+   "values": {
+    "m1": 18,
+    "n1": 25,
+    "m2": 6,
+    "n2": 19,
+    "p1": 0.72,
+    "p2": 0.3157894736842105,
+    "pooled": 0.5454545454545454,
+    "variance": 0.24793388429752067,
+    "se": 0.1515470460848165,
+    "rawSE": 0.1515470460848165,
+    "difference": 0.40421052631578946,
+    "critical": 1.96,
+    "confidence": 0.95,
+    "margin": 0.29703221032624033,
+    "lower": 0.10717831598954913,
+    "upper": 0.7012427366420297,
+    "reject": true
+   },
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 2,
+    "row": "infinity",
+    "column": "0.05",
+    "value": 1.96,
+    "approximation": false,
+    "normalReference": true
+   },
+   "module": 17,
+   "tolerance": 0.002,
+   "answerName": "Lower endpoint",
+   "answer": 0.10717831598954913
+  },
+  {
+   "id": "ci-survey",
+   "title": "Non-prescribed stimulant survey",
+   "topic": "oneProportion",
+   "context": "Of 500 college-student respondents, 177 answer yes to taking a non-prescribed stimulant in the last year. Determine whether the population proportion differs from one half.",
+   "unit": "proportion",
+   "table": {
+    "headers": [
+     "Event count",
+     "Total observations",
+     "Reference proportion"
+    ],
+    "rows": [
+     [
+      177,
+      500,
+      0.5
+     ]
+    ]
+   },
+   "tasks": [
+    "Construct a 95% CI for the population proportion. Show the estimate, standard error, cutoff, margin, and both bounds.",
+    "Determine whether the population proportion differs from 0.5 using the interval. State the hypotheses in symbols and words and interpret the result."
+   ],
+   "hypotheses": {
+    "null": "H_0:p=0.5",
+    "alternative": "H_A:p\\ne 0.5",
+    "nullWords": "The population event proportion equals 0.5.",
+    "alternativeWords": "The population event proportion differs from 0.5."
+   },
+   "symbols": "\\(m\\) (event count), \\(n\\) (sample size), \\(\\hat p\\) (sample event proportion), \\(p\\) (population event proportion), \\(p_0\\) (null reference), \\(s_{\\hat p}\\) (estimated SE).",
+   "steps": [
+    {
+     "title": "State the proportion and hypotheses",
+     "general": [
+      "H_0:p=p_0,\\qquad H_A:p\\ne p_0"
+     ],
+     "work": [
+      "p_0=0.5"
+     ],
+     "words": "The null states that the population event proportion is 0.5. The two-sided alternative states that it differs from 0.5."
+    },
+    {
+     "title": "Calculate the sample proportion",
+     "general": [
+      "\\hat p=\\frac{m}{n}"
+     ],
+     "work": [
+      "\\hat p=\\frac{177}{500}=0.354"
+     ],
+     "words": "Divide event count by the total number of observations."
+    },
+    {
+     "title": "Calculate the proportion SE",
+     "general": [
+      "s_{\\hat p}=\\sqrt{\\frac{\\hat p(1-\\hat p)}{n}}"
+     ],
+     "work": [
+      "\\hat p(1-\\hat p)=0.354(1-0.354)=0.228684",
+      "s_{\\hat p}=\\sqrt{\\frac{0.228684}{500}}=\\sqrt{0.000457368}=0.02138616"
+     ],
+     "words": "Subtract the proportion from one, multiply, divide by sample size, then take the square root."
+    },
+    {
+     "title": "Select the Normal cutoff",
+     "general": [
+      "z_c=z_\\alpha"
+     ],
+     "work": [
+      "\\alpha=1-0.95=0.05,\\quad z_c=1.96"
+     ],
+     "words": "Use the infinite-df row of the course two-tail t table. For 95% confidence, the positive cutoff is 1.96.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 2,
+      "row": "infinity",
+      "column": "0.05",
+      "value": 1.96,
+      "approximation": false,
+      "normalReference": true
+     }
+    },
+    {
+     "title": "Calculate the margin",
+     "general": [
+      "M=z_c s_{\\hat p}"
+     ],
+     "work": [
+      "M=1.96(0.02138616)=0.04191688"
+     ],
+     "words": "The margin is in proportion units. Multiply by 100 only when converting the final interpretation to percentage points."
+    },
+    {
+     "title": "Calculate the lower bound",
+     "general": [
+      "L=\\hat p-M"
+     ],
+     "work": [
+      "L=0.354-0.04191688=0.3120831"
+     ],
+     "words": "Subtract the margin from the observed proportion."
+    },
+    {
+     "title": "Calculate the upper bound",
+     "general": [
+      "U=\\hat p+M"
+     ],
+     "work": [
+      "U=0.354+0.04191688=0.3959169"
+     ],
+     "words": "Add the same margin to the observed proportion."
+    },
+    {
+     "title": "Compare with the null reference",
+     "general": [
+      "p_0\\notin[L,U]\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "0.3120831<p<0.3959169,\\quad p_0=0.5"
+     ],
+     "words": "Reject equality with 0.5 at the matching two-sided 0.05 level. The comparison is with the stated reference, not automatically with zero."
+    }
+   ],
+   "conclusion": "The 95% CI is 0.3120831 to 0.3959169, or 31.21% to 39.59%. The reference is excluded; the data support a different population proportion.",
+   "source": 14,
+   "values": {
+    "m": 177,
+    "n": 500,
+    "p": 0.354,
+    "reference": 0.5,
+    "confidence": 0.95,
+    "variance": 0.228684,
+    "se": 0.021386163751360363,
+    "critical": 1.96,
+    "margin": 0.04191688095266631,
+    "lower": 0.31208311904733366,
+    "upper": 0.3959168809526663,
+    "reject": true
+   },
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 2,
+    "row": "infinity",
+    "column": "0.05",
+    "value": 1.96,
+    "approximation": false,
+    "normalReference": true
+   },
+   "module": 17,
+   "tolerance": 0.002,
+   "answerName": "Lower endpoint",
+   "answer": 0.31208311904733366
+  },
+  {
+   "id": "ci-glucose",
+   "title": "Session 17 glucose lecture exercise",
+   "topic": "twoMeans",
+   "context": "A drug is purported to reduce fasting plasma glucose in pre-diabetic patients. A trial includes 1,700 participants, divided equally between placebo and drug. Assume independent Normal responses with a common population variance.",
+   "unit": "mg/dL",
+   "table": {
+    "headers": [
+     "Group",
+     "Sample size",
+     "Mean",
+     "SD"
+    ],
+    "rows": [
+     [
+      "placebo",
+      850,
+      112.4,
+      4.7
+     ],
+     [
+      "drug",
+      850,
+      109.1,
+      3.9
+     ]
+    ]
+   },
+   "tasks": [
+    "Construct the 95% confidence interval for the population difference, placebo minus drug. Show both variance contributions, the pooled variance, SE, df, critical value, margin, and both bounds.",
+    "Using the interval alone, decide whether the means differ at the matching two-sided 0.05 level. State both hypotheses in symbols and words, and conclude in context."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\mu_1-\\mu_2=0",
+    "alternative": "H_A:\\mu_1-\\mu_2\\ne0",
+    "nullWords": "The placebo and drug populations have equal means.",
+    "alternativeWords": "The placebo and drug population means differ."
+   },
+   "symbols": "\\(\\bar x_i\\) (group sample mean), \\(s_i\\) (group sample SD), \\(n_i\\) (group sample size), \\(s^2\\) (pooled variance), \\(s_d\\) (SE of the difference), \\(d\\) (sample difference), \\(\\Delta\\) (population difference).",
+   "steps": [
+    {
+     "title": "Define the contrast and hypotheses",
+     "general": [
+      "\\Delta=\\mu_1-\\mu_2"
+     ],
+     "work": [
+      "\\Delta=\\mu_{\\mathrm{placebo}}-\\mu_{\\mathrm{drug}}"
+     ],
+     "words": "Keep the direction placebo minus drug throughout. The null means equal population means; the two-sided alternative means different population means."
+    },
+    {
+     "title": "Calculate the observed difference",
+     "general": [
+      "d=\\bar x_1-\\bar x_2"
+     ],
+     "work": [
+      "d=112.4-109.1=3.3"
+     ],
+     "words": "This is the sample estimate of the population difference in mg/dL."
+    },
+    {
+     "title": "Square both group SDs",
+     "general": [
+      "v_1=s_1^2",
+      "v_2=s_2^2"
+     ],
+     "work": [
+      "v_1=4.7^2=22.09",
+      "v_2=3.9^2=15.21"
+     ],
+     "words": "Each SD is squared before pooling, giving variances in squared measurement units."
+    },
+    {
+     "title": "Pool both variance contributions",
+     "general": [
+      "s^2=\\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}"
+     ],
+     "work": [
+      "(n_1-1)s_1^2=(850-1)(22.09)=18754.41",
+      "(n_2-1)s_2^2=(850-1)(15.21)=12913.29",
+      "s^2=\\frac{18754.41+12913.29}{850+850-2}=\\frac{31667.7}{1698}=18.65"
+     ],
+     "words": "Weight each group variance by its own degrees of freedom, add the contributions, and divide by the combined degrees of freedom."
+    },
+    {
+     "title": "Calculate the SE of the difference",
+     "general": [
+      "s_d=\\sqrt{\\frac{s^2}{n_1}+\\frac{s^2}{n_2}}"
+     ],
+     "work": [
+      "s_d=\\sqrt{\\frac{18.65}{850}+\\frac{18.65}{850}}=\\sqrt{0.04388235}=0.2094812"
+     ],
+     "words": "Add the two mean-variance contributions inside the root, then take the root. This restores the original measurement units."
+    },
+    {
+     "title": "Find degrees of freedom and the t cutoff",
+     "general": [
+      "\\nu=n_1+n_2-2",
+      "t_c=t_\\alpha(\\nu)"
+     ],
+     "work": [
+      "\\nu=850+850-2=1698",
+      "\\alpha=1-0.95=0.05",
+      "t_{0.05}(1698)\\approx t_{0.05}(\\infty)=1.9600"
+     ],
+     "words": "The supplied t table has no row for 1698 df. On PDF page 2, the infinity row and combined two-tail 0.05 column give 1.9600. This is a declared large-df Normal approximation, not an exact finite-df lookup. A conservative printed alternative is row 200, value 1.972; the uploaded lecture does not state a mandatory missing-row rule.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 2,
+      "row": "infinity",
+      "column": "0.05",
+      "value": 1.96,
+      "actualDf": 1698,
+      "approximation": true
+     }
+    },
+    {
+     "title": "Calculate the margin",
+     "general": [
+      "M=t_c s_d"
+     ],
+     "work": [
+      "M=1.96(0.2094812)=0.4105831"
+     ],
+     "words": "Multiply the positive cutoff by the standard error of the difference."
+    },
+    {
+     "title": "Calculate both bounds",
+     "general": [
+      "L=d-M",
+      "U=d+M"
+     ],
+     "work": [
+      "L=3.3-0.4105831=2.889417",
+      "U=3.3+0.4105831=3.710583"
+     ],
+     "words": "The bounds retain the placebo minus drug subtraction order."
+    },
+    {
+     "title": "Make the decision using the interval",
+     "general": [
+      "0\\notin[L,U]\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "[2.889417,3.710583]"
+     ],
+     "words": "Zero is outside the interval. Reject the equal-means null at the matching two-sided 0.05 level; no separate t statistic is required."
+    }
+   ],
+   "conclusion": "The 95% CI for placebo minus drug is 2.889417 to 3.710583 mg/dL. The population means differ, with placebo higher.",
+   "source": 17,
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 2,
+    "row": "infinity",
+    "column": "0.05",
+    "value": 1.96,
+    "actualDf": 1698,
+    "approximation": true
+   },
+   "values": {
+    "n1": 850,
+    "n2": 850,
+    "x1": 112.4,
+    "x2": 109.1,
+    "s1": 4.7,
+    "s2": 3.9,
+    "confidence": 0.95,
+    "df": 1698,
+    "variance": 18.65,
+    "se": 0.20948115175637275,
+    "critical": 1.96,
+    "difference": 3.3000000000000114,
+    "margin": 0.4105830574424906,
+    "lower": 2.8894169425575207,
+    "upper": 3.710583057442502,
+    "reject": true
+   },
+   "module": 17,
+   "tolerance": 0.003013773821076537,
+   "alternativeTableAnswer": {
+    "row": "200",
+    "critical": 1.972,
+    "lower": 2.886903168736444
+   },
+   "answerName": "Lower endpoint",
+   "answer": 2.8894169425575207
+  },
+  {
+   "id": "ci-heart-practice",
+   "title": "Resting heart rate in a student sample",
+   "topic": "oneMean",
+   "context": "A study measures resting heart rate in a student sample and obtains the sample summary below. Assume independent observations from a Normal population.",
+   "unit": "beats/min",
+   "table": {
+    "headers": [
+     "Sample size",
+     "Sample mean",
+     "Sample SD"
+    ],
+    "rows": [
+     [
+      16,
+      72,
+      8
+     ]
+    ]
+   },
+   "tasks": [
+    "Construct a 95% confidence interval for the population mean. Show the standard error, degrees of freedom, critical value, margin, and both endpoints.",
+    "Interpret the interval in the measurement units and distinguish it from individual variation."
+   ],
+   "symbols": "\\(\\bar x\\) (sample mean), \\(s\\) (sample SD), \\(n\\) (number sampled), \\(s_{\\bar x}\\) (standard error of the mean), \\(\\mu\\) (population mean), \\(M\\) (margin).",
+   "steps": [
+    {
+     "title": "Identify the population quantity",
+     "general": [
+      "\\text{estimate of }\\mu=\\bar x"
+     ],
+     "work": [
+      "\\bar x=72,\\quad s=8,\\quad n=16"
+     ],
+     "words": "The sample mean estimates the population mean. The SD describes individual measurements; the standard error describes uncertainty in their mean."
+    },
+    {
+     "title": "Calculate the standard error",
+     "general": [
+      "s_{\\bar x}=\\frac{s}{\\sqrt n}"
+     ],
+     "work": [
+      "s_{\\bar x}=\\frac{8}{\\sqrt{16}}=\\frac{8}{4}=2"
+     ],
+     "words": "Divide the sample SD by the square root of sample size. Keep the standard error available for the margin calculation."
+    },
+    {
+     "title": "Choose degrees of freedom and the cutoff",
+     "general": [
+      "\\nu=n-1",
+      "t_c=t_\\alpha(\\nu)"
+     ],
+     "work": [
+      "\\nu=16-1=15",
+      "\\alpha=1-0.95=0.05",
+      "t_{0.05}(15)=2.131"
+     ],
+     "words": "Open t_table.pdf, PDF page 1. Use row 15 and the combined two-tail 0.05 column. The printed cutoff is 2.131. Do not halve the column probability again.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "15",
+      "column": "0.05",
+      "value": 2.131,
+      "actualDf": 15,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Calculate the margin of error",
+     "general": [
+      "M=t_c s_{\\bar x}"
+     ],
+     "work": [
+      "M=2.131(2)=4.262"
+     ],
+     "words": "The margin has the same measurement units as the sample mean."
+    },
+    {
+     "title": "Calculate the lower endpoint",
+     "general": [
+      "L=\\bar x-M"
+     ],
+     "work": [
+      "L=72-4.262=67.738"
+     ],
+     "words": "Subtract the margin from the sample mean."
+    },
+    {
+     "title": "Calculate the upper endpoint",
+     "general": [
+      "U=\\bar x+M"
+     ],
+     "work": [
+      "U=72+4.262=76.262"
+     ],
+     "words": "Add the same margin to the sample mean."
+    },
+    {
+     "title": "State the population interval",
+     "general": [
+      "L<\\mu<U"
+     ],
+     "work": [
+      "67.738<\\mu<76.262"
+     ],
+     "words": "The 95% interval estimates the population mean in the original measurement units. It is not an interval containing this percentage of individual measurements."
+    }
+   ],
+   "conclusion": "The 95% confidence interval for the population mean is 67.738 to 76.262 beats/min.",
+   "source": null,
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "15",
+    "column": "0.05",
+    "value": 2.131,
+    "actualDf": 15,
+    "approximation": false
+   },
+   "values": {
+    "n": 16,
+    "x": 72,
+    "sd": 8,
+    "confidence": 0.95,
+    "df": 15,
+    "se": 2,
+    "critical": 2.131,
+    "margin": 4.262,
+    "lower": 67.738,
+    "upper": 76.262
+   },
+   "module": 17,
+   "tolerance": 0.002,
+   "answerName": "Lower endpoint",
+   "answer": 67.738
+  },
+  {
+   "id": "ci-reaction",
+   "title": "Reaction time in a laboratory sample",
+   "topic": "oneMean",
+   "context": "A study measures reaction time in a laboratory sample and obtains the sample summary below. Assume independent observations from a Normal population.",
+   "unit": "ms",
+   "table": {
+    "headers": [
+     "Sample size",
+     "Sample mean",
+     "Sample SD"
+    ],
+    "rows": [
+     [
+      25,
+      310,
+      40
+     ]
+    ]
+   },
+   "tasks": [
+    "Construct a 95% confidence interval for the population mean. Show the standard error, degrees of freedom, critical value, margin, and both endpoints.",
+    "Interpret the interval in the measurement units and distinguish it from individual variation."
+   ],
+   "symbols": "\\(\\bar x\\) (sample mean), \\(s\\) (sample SD), \\(n\\) (number sampled), \\(s_{\\bar x}\\) (standard error of the mean), \\(\\mu\\) (population mean), \\(M\\) (margin).",
+   "steps": [
+    {
+     "title": "Identify the population quantity",
+     "general": [
+      "\\text{estimate of }\\mu=\\bar x"
+     ],
+     "work": [
+      "\\bar x=310,\\quad s=40,\\quad n=25"
+     ],
+     "words": "The sample mean estimates the population mean. The SD describes individual measurements; the standard error describes uncertainty in their mean."
+    },
+    {
+     "title": "Calculate the standard error",
+     "general": [
+      "s_{\\bar x}=\\frac{s}{\\sqrt n}"
+     ],
+     "work": [
+      "s_{\\bar x}=\\frac{40}{\\sqrt{25}}=\\frac{40}{5}=8"
+     ],
+     "words": "Divide the sample SD by the square root of sample size. Keep the standard error available for the margin calculation."
+    },
+    {
+     "title": "Choose degrees of freedom and the cutoff",
+     "general": [
+      "\\nu=n-1",
+      "t_c=t_\\alpha(\\nu)"
+     ],
+     "work": [
+      "\\nu=25-1=24",
+      "\\alpha=1-0.95=0.05",
+      "t_{0.05}(24)=2.064"
+     ],
+     "words": "Open t_table.pdf, PDF page 1. Use row 24 and the combined two-tail 0.05 column. The printed cutoff is 2.064. Do not halve the column probability again.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "24",
+      "column": "0.05",
+      "value": 2.064,
+      "actualDf": 24,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Calculate the margin of error",
+     "general": [
+      "M=t_c s_{\\bar x}"
+     ],
+     "work": [
+      "M=2.064(8)=16.512"
+     ],
+     "words": "The margin has the same measurement units as the sample mean."
+    },
+    {
+     "title": "Calculate the lower endpoint",
+     "general": [
+      "L=\\bar x-M"
+     ],
+     "work": [
+      "L=310-16.512=293.488"
+     ],
+     "words": "Subtract the margin from the sample mean."
+    },
+    {
+     "title": "Calculate the upper endpoint",
+     "general": [
+      "U=\\bar x+M"
+     ],
+     "work": [
+      "U=310+16.512=326.512"
+     ],
+     "words": "Add the same margin to the sample mean."
+    },
+    {
+     "title": "State the population interval",
+     "general": [
+      "L<\\mu<U"
+     ],
+     "work": [
+      "293.488<\\mu<326.512"
+     ],
+     "words": "The 95% interval estimates the population mean in the original measurement units. It is not an interval containing this percentage of individual measurements."
+    }
+   ],
+   "conclusion": "The 95% confidence interval for the population mean is 293.488 to 326.512 ms.",
+   "source": null,
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "24",
+    "column": "0.05",
+    "value": 2.064,
+    "actualDf": 24,
+    "approximation": false
+   },
+   "values": {
+    "n": 25,
+    "x": 310,
+    "sd": 40,
+    "confidence": 0.95,
+    "df": 24,
+    "se": 8,
+    "critical": 2.064,
+    "margin": 16.512,
+    "lower": 293.488,
+    "upper": 326.512
+   },
+   "module": 17,
+   "tolerance": 0.0045000000000000005,
+   "answerName": "Lower endpoint",
+   "answer": 293.488
+  },
+  {
+   "id": "ci-pressure",
+   "title": "Systolic pressure in a clinic sample",
+   "topic": "oneMean",
+   "context": "A study measures systolic pressure in a clinic sample and obtains the sample summary below. Assume independent observations from a Normal population.",
+   "unit": "mmHg",
+   "table": {
+    "headers": [
+     "Sample size",
+     "Sample mean",
+     "Sample SD"
+    ],
+    "rows": [
+     [
+      12,
+      124,
+      12
+     ]
+    ]
+   },
+   "tasks": [
+    "Construct a 95% confidence interval for the population mean. Show the standard error, degrees of freedom, critical value, margin, and both endpoints.",
+    "Interpret the interval in the measurement units and distinguish it from individual variation."
+   ],
+   "symbols": "\\(\\bar x\\) (sample mean), \\(s\\) (sample SD), \\(n\\) (number sampled), \\(s_{\\bar x}\\) (standard error of the mean), \\(\\mu\\) (population mean), \\(M\\) (margin).",
+   "steps": [
+    {
+     "title": "Identify the population quantity",
+     "general": [
+      "\\text{estimate of }\\mu=\\bar x"
+     ],
+     "work": [
+      "\\bar x=124,\\quad s=12,\\quad n=12"
+     ],
+     "words": "The sample mean estimates the population mean. The SD describes individual measurements; the standard error describes uncertainty in their mean."
+    },
+    {
+     "title": "Calculate the standard error",
+     "general": [
+      "s_{\\bar x}=\\frac{s}{\\sqrt n}"
+     ],
+     "work": [
+      "s_{\\bar x}=\\frac{12}{\\sqrt{12}}=\\frac{12}{3.464102}=3.464102"
+     ],
+     "words": "Divide the sample SD by the square root of sample size. Keep the standard error available for the margin calculation."
+    },
+    {
+     "title": "Choose degrees of freedom and the cutoff",
+     "general": [
+      "\\nu=n-1",
+      "t_c=t_\\alpha(\\nu)"
+     ],
+     "work": [
+      "\\nu=12-1=11",
+      "\\alpha=1-0.95=0.05",
+      "t_{0.05}(11)=2.201"
+     ],
+     "words": "Open t_table.pdf, PDF page 1. Use row 11 and the combined two-tail 0.05 column. The printed cutoff is 2.201. Do not halve the column probability again.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "11",
+      "column": "0.05",
+      "value": 2.201,
+      "actualDf": 11,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Calculate the margin of error",
+     "general": [
+      "M=t_c s_{\\bar x}"
+     ],
+     "work": [
+      "M=2.201(3.464102)=7.624488"
+     ],
+     "words": "The margin has the same measurement units as the sample mean."
+    },
+    {
+     "title": "Calculate the lower endpoint",
+     "general": [
+      "L=\\bar x-M"
+     ],
+     "work": [
+      "L=124-7.624488=116.3755"
+     ],
+     "words": "Subtract the margin from the sample mean."
+    },
+    {
+     "title": "Calculate the upper endpoint",
+     "general": [
+      "U=\\bar x+M"
+     ],
+     "work": [
+      "U=124+7.624488=131.6245"
+     ],
+     "words": "Add the same margin to the sample mean."
+    },
+    {
+     "title": "State the population interval",
+     "general": [
+      "L<\\mu<U"
+     ],
+     "work": [
+      "116.3755<\\mu<131.6245"
+     ],
+     "words": "The 95% interval estimates the population mean in the original measurement units. It is not an interval containing this percentage of individual measurements."
+    }
+   ],
+   "conclusion": "The 95% confidence interval for the population mean is 116.3755 to 131.6245 mmHg.",
+   "source": null,
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "11",
+    "column": "0.05",
+    "value": 2.201,
+    "actualDf": 11,
+    "approximation": false
+   },
+   "values": {
+    "n": 12,
+    "x": 124,
+    "sd": 12,
+    "confidence": 0.95,
+    "df": 11,
+    "se": 3.464101615137755,
+    "critical": 2.201,
+    "margin": 7.624487654918199,
+    "lower": 116.3755123450818,
+    "upper": 131.6244876549182
+   },
+   "module": 17,
+   "tolerance": 0.0022320508075688774,
+   "answerName": "Lower endpoint",
+   "answer": 116.3755123450818
+  },
+  {
+   "id": "ci-respiration",
+   "title": "Respiration rate after quiet rest",
+   "topic": "oneMean",
+   "context": "A study measures respiration rate after quiet rest and obtains the sample summary below. Assume independent observations from a Normal population.",
+   "unit": "breaths/min",
+   "table": {
+    "headers": [
+     "Sample size",
+     "Sample mean",
+     "Sample SD"
+    ],
+    "rows": [
+     [
+      20,
+      16,
+      3
+     ]
+    ]
+   },
+   "tasks": [
+    "Construct a 99% confidence interval for the population mean. Show the standard error, degrees of freedom, critical value, margin, and both endpoints.",
+    "Interpret the interval in the measurement units and distinguish it from individual variation."
+   ],
+   "symbols": "\\(\\bar x\\) (sample mean), \\(s\\) (sample SD), \\(n\\) (number sampled), \\(s_{\\bar x}\\) (standard error of the mean), \\(\\mu\\) (population mean), \\(M\\) (margin).",
+   "steps": [
+    {
+     "title": "Identify the population quantity",
+     "general": [
+      "\\text{estimate of }\\mu=\\bar x"
+     ],
+     "work": [
+      "\\bar x=16,\\quad s=3,\\quad n=20"
+     ],
+     "words": "The sample mean estimates the population mean. The SD describes individual measurements; the standard error describes uncertainty in their mean."
+    },
+    {
+     "title": "Calculate the standard error",
+     "general": [
+      "s_{\\bar x}=\\frac{s}{\\sqrt n}"
+     ],
+     "work": [
+      "s_{\\bar x}=\\frac{3}{\\sqrt{20}}=\\frac{3}{4.472136}=0.6708204"
+     ],
+     "words": "Divide the sample SD by the square root of sample size. Keep the standard error available for the margin calculation."
+    },
+    {
+     "title": "Choose degrees of freedom and the cutoff",
+     "general": [
+      "\\nu=n-1",
+      "t_c=t_\\alpha(\\nu)"
+     ],
+     "work": [
+      "\\nu=20-1=19",
+      "\\alpha=1-0.99=0.01",
+      "t_{0.01}(19)=2.861"
+     ],
+     "words": "Open t_table.pdf, PDF page 1. Use row 19 and the combined two-tail 0.01 column. The printed cutoff is 2.861. Do not halve the column probability again.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "19",
+      "column": "0.01",
+      "value": 2.861,
+      "actualDf": 19,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Calculate the margin of error",
+     "general": [
+      "M=t_c s_{\\bar x}"
+     ],
+     "work": [
+      "M=2.861(0.6708204)=1.919217"
+     ],
+     "words": "The margin has the same measurement units as the sample mean."
+    },
+    {
+     "title": "Calculate the lower endpoint",
+     "general": [
+      "L=\\bar x-M"
+     ],
+     "work": [
+      "L=16-1.919217=14.08078"
+     ],
+     "words": "Subtract the margin from the sample mean."
+    },
+    {
+     "title": "Calculate the upper endpoint",
+     "general": [
+      "U=\\bar x+M"
+     ],
+     "work": [
+      "U=16+1.919217=17.91922"
+     ],
+     "words": "Add the same margin to the sample mean."
+    },
+    {
+     "title": "State the population interval",
+     "general": [
+      "L<\\mu<U"
+     ],
+     "work": [
+      "14.08078<\\mu<17.91922"
+     ],
+     "words": "The 99% interval estimates the population mean in the original measurement units. It is not an interval containing this percentage of individual measurements."
+    }
+   ],
+   "conclusion": "The 99% confidence interval for the population mean is 14.08078 to 17.91922 breaths/min.",
+   "source": null,
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "19",
+    "column": "0.01",
+    "value": 2.861,
+    "actualDf": 19,
+    "approximation": false
+   },
+   "values": {
+    "n": 20,
+    "x": 16,
+    "sd": 3,
+    "confidence": 0.99,
+    "df": 19,
+    "se": 0.6708203932499369,
+    "critical": 2.861,
+    "margin": 1.9192171450880697,
+    "lower": 14.08078285491193,
+    "upper": 17.91921714508807
+   },
+   "module": 17,
+   "tolerance": 0.002,
+   "answerName": "Lower endpoint",
+   "answer": 14.08078285491193
+  },
+  {
+   "id": "ci-neural",
+   "title": "Neural response under two conditions",
+   "topic": "twoMeans",
+   "context": "An independent-group biomedical study collects the following measurements. Assume independent Normal responses with a common population variance.",
+   "unit": "score units",
+   "table": {
+    "headers": [
+     "Group",
+     "Sample size",
+     "Mean",
+     "SD"
+    ],
+    "rows": [
+     [
+      "group1",
+      12,
+      18,
+      4
+     ],
+     [
+      "group2",
+      16,
+      15,
+      5
+     ]
+    ]
+   },
+   "tasks": [
+    "Construct the 95% confidence interval for the population difference, group1 minus group2. Show both variance contributions, the pooled variance, SE, df, critical value, margin, and both bounds.",
+    "Using the interval alone, decide whether the means differ at the matching two-sided 0.05 level. State both hypotheses in symbols and words, and conclude in context."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\mu_1-\\mu_2=0",
+    "alternative": "H_A:\\mu_1-\\mu_2\\ne0",
+    "nullWords": "The group1 and group2 populations have equal means.",
+    "alternativeWords": "The group1 and group2 population means differ."
+   },
+   "symbols": "\\(\\bar x_i\\) (group sample mean), \\(s_i\\) (group sample SD), \\(n_i\\) (group sample size), \\(s^2\\) (pooled variance), \\(s_d\\) (SE of the difference), \\(d\\) (sample difference), \\(\\Delta\\) (population difference).",
+   "steps": [
+    {
+     "title": "Define the contrast and hypotheses",
+     "general": [
+      "\\Delta=\\mu_1-\\mu_2"
+     ],
+     "work": [
+      "\\Delta=\\mu_{\\mathrm{group1}}-\\mu_{\\mathrm{group2}}"
+     ],
+     "words": "Keep the direction group1 minus group2 throughout. The null means equal population means; the two-sided alternative means different population means."
+    },
+    {
+     "title": "Calculate the observed difference",
+     "general": [
+      "d=\\bar x_1-\\bar x_2"
+     ],
+     "work": [
+      "d=18-15=3"
+     ],
+     "words": "This is the sample estimate of the population difference in score units."
+    },
+    {
+     "title": "Square both group SDs",
+     "general": [
+      "v_1=s_1^2",
+      "v_2=s_2^2"
+     ],
+     "work": [
+      "v_1=4^2=16",
+      "v_2=5^2=25"
+     ],
+     "words": "Each SD is squared before pooling, giving variances in squared measurement units."
+    },
+    {
+     "title": "Pool both variance contributions",
+     "general": [
+      "s^2=\\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}"
+     ],
+     "work": [
+      "(n_1-1)s_1^2=(12-1)(16)=176",
+      "(n_2-1)s_2^2=(16-1)(25)=375",
+      "s^2=\\frac{176+375}{12+16-2}=\\frac{551}{26}=21.19231"
+     ],
+     "words": "Weight each group variance by its own degrees of freedom, add the contributions, and divide by the combined degrees of freedom."
+    },
+    {
+     "title": "Calculate the SE of the difference",
+     "general": [
+      "s_d=\\sqrt{\\frac{s^2}{n_1}+\\frac{s^2}{n_2}}"
+     ],
+     "work": [
+      "s_d=\\sqrt{\\frac{21.19231}{12}+\\frac{21.19231}{16}}=\\sqrt{3.090545}=1.757995"
+     ],
+     "words": "Add the two mean-variance contributions inside the root, then take the root. This restores the original measurement units."
+    },
+    {
+     "title": "Find degrees of freedom and the t cutoff",
+     "general": [
+      "\\nu=n_1+n_2-2",
+      "t_c=t_\\alpha(\\nu)"
+     ],
+     "work": [
+      "\\nu=12+16-2=26",
+      "\\alpha=1-0.95=0.05",
+      "t_{0.05}(26)=2.056"
+     ],
+     "words": "Open t_table.pdf, PDF page 1. Use row 26 and the combined two-tail 0.05 column. The printed cutoff is 2.056. Do not halve the column probability again.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "26",
+      "column": "0.05",
+      "value": 2.056,
+      "actualDf": 26,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Calculate the margin",
+     "general": [
+      "M=t_c s_d"
+     ],
+     "work": [
+      "M=2.056(1.757995)=3.614437"
+     ],
+     "words": "Multiply the positive cutoff by the standard error of the difference."
+    },
+    {
+     "title": "Calculate both bounds",
+     "general": [
+      "L=d-M",
+      "U=d+M"
+     ],
+     "work": [
+      "L=3-3.614437=-0.6144368",
+      "U=3+3.614437=6.614437"
+     ],
+     "words": "The bounds retain the group1 minus group2 subtraction order."
+    },
+    {
+     "title": "Make the decision using the interval",
+     "general": [
+      "0\\in[L,U]\\Rightarrow\\text{do not reject }H_0"
+     ],
+     "work": [
+      "[-0.6144368,6.614437]"
+     ],
+     "words": "Zero is inside the interval. Do not reject the equal-means null at the matching two-sided 0.05 level; no separate t statistic is required."
+    }
+   ],
+   "conclusion": "The 95% CI for group1 minus group2 is -0.6144368 to 6.614437 score units. The interval includes equal population means, so the comparison does not reject equality.",
+   "source": null,
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "26",
+    "column": "0.05",
+    "value": 2.056,
+    "actualDf": 26,
+    "approximation": false
+   },
+   "values": {
+    "n1": 12,
+    "n2": 16,
+    "x1": 18,
+    "x2": 15,
+    "s1": 4,
+    "s2": 5,
+    "confidence": 0.95,
+    "df": 26,
+    "variance": 21.192307692307693,
+    "se": 1.7579945596602033,
+    "critical": 2.056,
+    "difference": 3,
+    "margin": 3.6144368146613783,
+    "lower": -0.6144368146613783,
+    "upper": 6.614436814661378,
+    "reject": false
+   },
+   "module": 17,
+   "tolerance": 0.002,
+   "answerName": "Lower endpoint",
+   "answer": -0.6144368146613783
+  },
+  {
+   "id": "ci-sleep",
+   "title": "Sleep duration in two treatment groups",
+   "topic": "twoMeans",
+   "context": "An independent-group biomedical study collects the following measurements. Assume independent Normal responses with a common population variance.",
+   "unit": "hours",
+   "table": {
+    "headers": [
+     "Group",
+     "Sample size",
+     "Mean",
+     "SD"
+    ],
+    "rows": [
+     [
+      "group1",
+      18,
+      7.2,
+      1.1
+     ],
+     [
+      "group2",
+      18,
+      6.8,
+      1.2
+     ]
+    ]
+   },
+   "tasks": [
+    "Construct the 95% confidence interval for the population difference, group1 minus group2. Show both variance contributions, the pooled variance, SE, df, critical value, margin, and both bounds.",
+    "Using the interval alone, decide whether the means differ at the matching two-sided 0.05 level. State both hypotheses in symbols and words, and conclude in context."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\mu_1-\\mu_2=0",
+    "alternative": "H_A:\\mu_1-\\mu_2\\ne0",
+    "nullWords": "The group1 and group2 populations have equal means.",
+    "alternativeWords": "The group1 and group2 population means differ."
+   },
+   "symbols": "\\(\\bar x_i\\) (group sample mean), \\(s_i\\) (group sample SD), \\(n_i\\) (group sample size), \\(s^2\\) (pooled variance), \\(s_d\\) (SE of the difference), \\(d\\) (sample difference), \\(\\Delta\\) (population difference).",
+   "steps": [
+    {
+     "title": "Define the contrast and hypotheses",
+     "general": [
+      "\\Delta=\\mu_1-\\mu_2"
+     ],
+     "work": [
+      "\\Delta=\\mu_{\\mathrm{group1}}-\\mu_{\\mathrm{group2}}"
+     ],
+     "words": "Keep the direction group1 minus group2 throughout. The null means equal population means; the two-sided alternative means different population means."
+    },
+    {
+     "title": "Calculate the observed difference",
+     "general": [
+      "d=\\bar x_1-\\bar x_2"
+     ],
+     "work": [
+      "d=7.2-6.8=0.4"
+     ],
+     "words": "This is the sample estimate of the population difference in hours."
+    },
+    {
+     "title": "Square both group SDs",
+     "general": [
+      "v_1=s_1^2",
+      "v_2=s_2^2"
+     ],
+     "work": [
+      "v_1=1.1^2=1.21",
+      "v_2=1.2^2=1.44"
+     ],
+     "words": "Each SD is squared before pooling, giving variances in squared measurement units."
+    },
+    {
+     "title": "Pool both variance contributions",
+     "general": [
+      "s^2=\\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}"
+     ],
+     "work": [
+      "(n_1-1)s_1^2=(18-1)(1.21)=20.57",
+      "(n_2-1)s_2^2=(18-1)(1.44)=24.48",
+      "s^2=\\frac{20.57+24.48}{18+18-2}=\\frac{45.05}{34}=1.325"
+     ],
+     "words": "Weight each group variance by its own degrees of freedom, add the contributions, and divide by the combined degrees of freedom."
+    },
+    {
+     "title": "Calculate the SE of the difference",
+     "general": [
+      "s_d=\\sqrt{\\frac{s^2}{n_1}+\\frac{s^2}{n_2}}"
+     ],
+     "work": [
+      "s_d=\\sqrt{\\frac{1.325}{18}+\\frac{1.325}{18}}=\\sqrt{0.1472222}=0.3836955"
+     ],
+     "words": "Add the two mean-variance contributions inside the root, then take the root. This restores the original measurement units."
+    },
+    {
+     "title": "Find degrees of freedom and the t cutoff",
+     "general": [
+      "\\nu=n_1+n_2-2",
+      "t_c=t_\\alpha(\\nu)"
+     ],
+     "work": [
+      "\\nu=18+18-2=34",
+      "\\alpha=1-0.95=0.05",
+      "t_{0.05}(34)=2.032"
+     ],
+     "words": "Open t_table.pdf, PDF page 1. Use row 34 and the combined two-tail 0.05 column. The printed cutoff is 2.032. Do not halve the column probability again.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "34",
+      "column": "0.05",
+      "value": 2.032,
+      "actualDf": 34,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Calculate the margin",
+     "general": [
+      "M=t_c s_d"
+     ],
+     "work": [
+      "M=2.032(0.3836955)=0.7796692"
+     ],
+     "words": "Multiply the positive cutoff by the standard error of the difference."
+    },
+    {
+     "title": "Calculate both bounds",
+     "general": [
+      "L=d-M",
+      "U=d+M"
+     ],
+     "work": [
+      "L=0.4-0.7796692=-0.3796692",
+      "U=0.4+0.7796692=1.179669"
+     ],
+     "words": "The bounds retain the group1 minus group2 subtraction order."
+    },
+    {
+     "title": "Make the decision using the interval",
+     "general": [
+      "0\\in[L,U]\\Rightarrow\\text{do not reject }H_0"
+     ],
+     "work": [
+      "[-0.3796692,1.179669]"
+     ],
+     "words": "Zero is inside the interval. Do not reject the equal-means null at the matching two-sided 0.05 level; no separate t statistic is required."
+    }
+   ],
+   "conclusion": "The 95% CI for group1 minus group2 is -0.3796692 to 1.179669 hours. The interval includes equal population means, so the comparison does not reject equality.",
+   "source": null,
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "34",
+    "column": "0.05",
+    "value": 2.032,
+    "actualDf": 34,
+    "approximation": false
+   },
+   "values": {
+    "n1": 18,
+    "n2": 18,
+    "x1": 7.2,
+    "x2": 6.8,
+    "s1": 1.1,
+    "s2": 1.2,
+    "confidence": 0.95,
+    "df": 34,
+    "variance": 1.325,
+    "se": 0.38369548110737794,
+    "critical": 2.032,
+    "difference": 0.40000000000000036,
+    "margin": 0.779669217610192,
+    "lower": -0.3796692176101917,
+    "upper": 1.1796692176101924,
+    "reject": false
+   },
+   "module": 17,
+   "tolerance": 0.002,
+   "answerName": "Lower endpoint",
+   "answer": -0.3796692176101917
+  },
+  {
+   "id": "ci-pain",
+   "title": "Pain scores after intervention versus control",
+   "topic": "twoMeans",
+   "context": "An independent-group biomedical study collects the following measurements. Assume independent Normal responses with a common population variance.",
+   "unit": "score units",
+   "table": {
+    "headers": [
+     "Group",
+     "Sample size",
+     "Mean",
+     "SD"
+    ],
+    "rows": [
+     [
+      "group1",
+      20,
+      3.4,
+      1.3
+     ],
+     [
+      "group2",
+      24,
+      4.5,
+      1.5
+     ]
+    ]
+   },
+   "tasks": [
+    "Construct the 95% confidence interval for the population difference, group1 minus group2. Show both variance contributions, the pooled variance, SE, df, critical value, margin, and both bounds.",
+    "Using the interval alone, decide whether the means differ at the matching two-sided 0.05 level. State both hypotheses in symbols and words, and conclude in context."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\mu_1-\\mu_2=0",
+    "alternative": "H_A:\\mu_1-\\mu_2\\ne0",
+    "nullWords": "The group1 and group2 populations have equal means.",
+    "alternativeWords": "The group1 and group2 population means differ."
+   },
+   "symbols": "\\(\\bar x_i\\) (group sample mean), \\(s_i\\) (group sample SD), \\(n_i\\) (group sample size), \\(s^2\\) (pooled variance), \\(s_d\\) (SE of the difference), \\(d\\) (sample difference), \\(\\Delta\\) (population difference).",
+   "steps": [
+    {
+     "title": "Define the contrast and hypotheses",
+     "general": [
+      "\\Delta=\\mu_1-\\mu_2"
+     ],
+     "work": [
+      "\\Delta=\\mu_{\\mathrm{group1}}-\\mu_{\\mathrm{group2}}"
+     ],
+     "words": "Keep the direction group1 minus group2 throughout. The null means equal population means; the two-sided alternative means different population means."
+    },
+    {
+     "title": "Calculate the observed difference",
+     "general": [
+      "d=\\bar x_1-\\bar x_2"
+     ],
+     "work": [
+      "d=3.4-4.5=-1.1"
+     ],
+     "words": "This is the sample estimate of the population difference in score units."
+    },
+    {
+     "title": "Square both group SDs",
+     "general": [
+      "v_1=s_1^2",
+      "v_2=s_2^2"
+     ],
+     "work": [
+      "v_1=1.3^2=1.69",
+      "v_2=1.5^2=2.25"
+     ],
+     "words": "Each SD is squared before pooling, giving variances in squared measurement units."
+    },
+    {
+     "title": "Pool both variance contributions",
+     "general": [
+      "s^2=\\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}"
+     ],
+     "work": [
+      "(n_1-1)s_1^2=(20-1)(1.69)=32.11",
+      "(n_2-1)s_2^2=(24-1)(2.25)=51.75",
+      "s^2=\\frac{32.11+51.75}{20+24-2}=\\frac{83.86}{42}=1.996667"
+     ],
+     "words": "Weight each group variance by its own degrees of freedom, add the contributions, and divide by the combined degrees of freedom."
+    },
+    {
+     "title": "Calculate the SE of the difference",
+     "general": [
+      "s_d=\\sqrt{\\frac{s^2}{n_1}+\\frac{s^2}{n_2}}"
+     ],
+     "work": [
+      "s_d=\\sqrt{\\frac{1.996667}{20}+\\frac{1.996667}{24}}=\\sqrt{0.1830278}=0.4278175"
+     ],
+     "words": "Add the two mean-variance contributions inside the root, then take the root. This restores the original measurement units."
+    },
+    {
+     "title": "Find degrees of freedom and the t cutoff",
+     "general": [
+      "\\nu=n_1+n_2-2",
+      "t_c=t_\\alpha(\\nu)"
+     ],
+     "work": [
+      "\\nu=20+24-2=42",
+      "\\alpha=1-0.95=0.05",
+      "t_{0.05}(42)=2.018"
+     ],
+     "words": "Open t_table.pdf, PDF page 1. Use row 42 and the combined two-tail 0.05 column. The printed cutoff is 2.018. Do not halve the column probability again.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "42",
+      "column": "0.05",
+      "value": 2.018,
+      "actualDf": 42,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Calculate the margin",
+     "general": [
+      "M=t_c s_d"
+     ],
+     "work": [
+      "M=2.018(0.4278175)=0.8633356"
+     ],
+     "words": "Multiply the positive cutoff by the standard error of the difference."
+    },
+    {
+     "title": "Calculate both bounds",
+     "general": [
+      "L=d-M",
+      "U=d+M"
+     ],
+     "work": [
+      "L=-1.1-0.8633356=-1.963336",
+      "U=-1.1+0.8633356=-0.2366644"
+     ],
+     "words": "The bounds retain the group1 minus group2 subtraction order."
+    },
+    {
+     "title": "Make the decision using the interval",
+     "general": [
+      "0\\notin[L,U]\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "[-1.963336,-0.2366644]"
+     ],
+     "words": "Zero is outside the interval. Reject the equal-means null at the matching two-sided 0.05 level; no separate t statistic is required."
+    }
+   ],
+   "conclusion": "The 95% CI for group1 minus group2 is -1.963336 to -0.2366644 score units. The population means differ, with group1 lower.",
+   "source": null,
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "42",
+    "column": "0.05",
+    "value": 2.018,
+    "actualDf": 42,
+    "approximation": false
+   },
+   "values": {
+    "n1": 20,
+    "n2": 24,
+    "x1": 3.4,
+    "x2": 4.5,
+    "s1": 1.3,
+    "s2": 1.5,
+    "confidence": 0.95,
+    "df": 42,
+    "variance": 1.9966666666666666,
+    "se": 0.427817458477068,
+    "critical": 2.018,
+    "difference": -1.1,
+    "margin": 0.8633356312067231,
+    "lower": -1.9633356312067232,
+    "upper": -0.236664368793277,
+    "reject": true
+   },
+   "module": 17,
+   "tolerance": 0.002,
+   "answerName": "Lower endpoint",
+   "answer": -1.9633356312067232
+  },
+  {
+   "id": "ci-latency",
+   "title": "Evoked-response latency in two groups",
+   "topic": "twoMeans",
+   "context": "An independent-group biomedical study collects the following measurements. Assume independent Normal responses with a common population variance.",
+   "unit": "ms",
+   "table": {
+    "headers": [
+     "Group",
+     "Sample size",
+     "Mean",
+     "SD"
+    ],
+    "rows": [
+     [
+      "group1",
+      15,
+      102,
+      10
+     ],
+     [
+      "group2",
+      17,
+      106,
+      11
+     ]
+    ]
+   },
+   "tasks": [
+    "Construct the 95% confidence interval for the population difference, group1 minus group2. Show both variance contributions, the pooled variance, SE, df, critical value, margin, and both bounds.",
+    "Using the interval alone, decide whether the means differ at the matching two-sided 0.05 level. State both hypotheses in symbols and words, and conclude in context."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\mu_1-\\mu_2=0",
+    "alternative": "H_A:\\mu_1-\\mu_2\\ne0",
+    "nullWords": "The group1 and group2 populations have equal means.",
+    "alternativeWords": "The group1 and group2 population means differ."
+   },
+   "symbols": "\\(\\bar x_i\\) (group sample mean), \\(s_i\\) (group sample SD), \\(n_i\\) (group sample size), \\(s^2\\) (pooled variance), \\(s_d\\) (SE of the difference), \\(d\\) (sample difference), \\(\\Delta\\) (population difference).",
+   "steps": [
+    {
+     "title": "Define the contrast and hypotheses",
+     "general": [
+      "\\Delta=\\mu_1-\\mu_2"
+     ],
+     "work": [
+      "\\Delta=\\mu_{\\mathrm{group1}}-\\mu_{\\mathrm{group2}}"
+     ],
+     "words": "Keep the direction group1 minus group2 throughout. The null means equal population means; the two-sided alternative means different population means."
+    },
+    {
+     "title": "Calculate the observed difference",
+     "general": [
+      "d=\\bar x_1-\\bar x_2"
+     ],
+     "work": [
+      "d=102-106=-4"
+     ],
+     "words": "This is the sample estimate of the population difference in ms."
+    },
+    {
+     "title": "Square both group SDs",
+     "general": [
+      "v_1=s_1^2",
+      "v_2=s_2^2"
+     ],
+     "work": [
+      "v_1=10^2=100",
+      "v_2=11^2=121"
+     ],
+     "words": "Each SD is squared before pooling, giving variances in squared measurement units."
+    },
+    {
+     "title": "Pool both variance contributions",
+     "general": [
+      "s^2=\\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}"
+     ],
+     "work": [
+      "(n_1-1)s_1^2=(15-1)(100)=1400",
+      "(n_2-1)s_2^2=(17-1)(121)=1936",
+      "s^2=\\frac{1400+1936}{15+17-2}=\\frac{3336}{30}=111.2"
+     ],
+     "words": "Weight each group variance by its own degrees of freedom, add the contributions, and divide by the combined degrees of freedom."
+    },
+    {
+     "title": "Calculate the SE of the difference",
+     "general": [
+      "s_d=\\sqrt{\\frac{s^2}{n_1}+\\frac{s^2}{n_2}}"
+     ],
+     "work": [
+      "s_d=\\sqrt{\\frac{111.2}{15}+\\frac{111.2}{17}}=\\sqrt{13.95451}=3.735574"
+     ],
+     "words": "Add the two mean-variance contributions inside the root, then take the root. This restores the original measurement units."
+    },
+    {
+     "title": "Find degrees of freedom and the t cutoff",
+     "general": [
+      "\\nu=n_1+n_2-2",
+      "t_c=t_\\alpha(\\nu)"
+     ],
+     "work": [
+      "\\nu=15+17-2=30",
+      "\\alpha=1-0.95=0.05",
+      "t_{0.05}(30)=2.042"
+     ],
+     "words": "Open t_table.pdf, PDF page 1. Use row 30 and the combined two-tail 0.05 column. The printed cutoff is 2.042. Do not halve the column probability again.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "30",
+      "column": "0.05",
+      "value": 2.042,
+      "actualDf": 30,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Calculate the margin",
+     "general": [
+      "M=t_c s_d"
+     ],
+     "work": [
+      "M=2.042(3.735574)=7.628041"
+     ],
+     "words": "Multiply the positive cutoff by the standard error of the difference."
+    },
+    {
+     "title": "Calculate both bounds",
+     "general": [
+      "L=d-M",
+      "U=d+M"
+     ],
+     "work": [
+      "L=-4-7.628041=-11.62804",
+      "U=-4+7.628041=3.628041"
+     ],
+     "words": "The bounds retain the group1 minus group2 subtraction order."
+    },
+    {
+     "title": "Make the decision using the interval",
+     "general": [
+      "0\\in[L,U]\\Rightarrow\\text{do not reject }H_0"
+     ],
+     "work": [
+      "[-11.62804,3.628041]"
+     ],
+     "words": "Zero is inside the interval. Do not reject the equal-means null at the matching two-sided 0.05 level; no separate t statistic is required."
+    }
+   ],
+   "conclusion": "The 95% CI for group1 minus group2 is -11.62804 to 3.628041 ms. The interval includes equal population means, so the comparison does not reject equality.",
+   "source": null,
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "30",
+    "column": "0.05",
+    "value": 2.042,
+    "actualDf": 30,
+    "approximation": false
+   },
+   "values": {
+    "n1": 15,
+    "n2": 17,
+    "x1": 102,
+    "x2": 106,
+    "s1": 10,
+    "s2": 11,
+    "confidence": 0.95,
+    "df": 30,
+    "variance": 111.2,
+    "se": 3.7355735575573354,
+    "critical": 2.042,
+    "difference": -4,
+    "margin": 7.628041204532078,
+    "lower": -11.628041204532078,
+    "upper": 3.628041204532078,
+    "reject": false
+   },
+   "module": 17,
+   "tolerance": 0.0023677867787786676,
+   "answerName": "Lower endpoint",
+   "answer": -11.628041204532078
+  },
+  {
+   "id": "ci-screen",
+   "title": "Positive screening responses",
+   "topic": "oneProportion",
+   "context": "A biomedical survey or follow-up study records a binary outcome for each independently sampled participant.",
+   "unit": "proportion",
+   "table": {
+    "headers": [
+     "Event count",
+     "Total observations",
+     "Reference proportion"
+    ],
+    "rows": [
+     [
+      84,
+      300,
+      0.25
+     ]
+    ]
+   },
+   "tasks": [
+    "Construct a 99% CI for the population proportion. Show the estimate, standard error, cutoff, margin, and both bounds.",
+    "Determine whether the population proportion differs from 0.25 using the interval. State the hypotheses in symbols and words and interpret the result."
+   ],
+   "hypotheses": {
+    "null": "H_0:p=0.25",
+    "alternative": "H_A:p\\ne 0.25",
+    "nullWords": "The population event proportion equals 0.25.",
+    "alternativeWords": "The population event proportion differs from 0.25."
+   },
+   "symbols": "\\(m\\) (event count), \\(n\\) (sample size), \\(\\hat p\\) (sample event proportion), \\(p\\) (population event proportion), \\(p_0\\) (null reference), \\(s_{\\hat p}\\) (estimated SE).",
+   "steps": [
+    {
+     "title": "State the proportion and hypotheses",
+     "general": [
+      "H_0:p=p_0,\\qquad H_A:p\\ne p_0"
+     ],
+     "work": [
+      "p_0=0.25"
+     ],
+     "words": "The null states that the population event proportion is 0.25. The two-sided alternative states that it differs from 0.25."
+    },
+    {
+     "title": "Calculate the sample proportion",
+     "general": [
+      "\\hat p=\\frac{m}{n}"
+     ],
+     "work": [
+      "\\hat p=\\frac{84}{300}=0.28"
+     ],
+     "words": "Divide event count by the total number of observations."
+    },
+    {
+     "title": "Calculate the proportion SE",
+     "general": [
+      "s_{\\hat p}=\\sqrt{\\frac{\\hat p(1-\\hat p)}{n}}"
+     ],
+     "work": [
+      "\\hat p(1-\\hat p)=0.28(1-0.28)=0.2016",
+      "s_{\\hat p}=\\sqrt{\\frac{0.2016}{300}}=\\sqrt{0.000672}=0.02592296"
+     ],
+     "words": "Subtract the proportion from one, multiply, divide by sample size, then take the square root."
+    },
+    {
+     "title": "Select the Normal cutoff",
+     "general": [
+      "z_c=z_\\alpha"
+     ],
+     "work": [
+      "\\alpha=1-0.99=0.01,\\quad z_c=2.5758"
+     ],
+     "words": "Use the infinite-df row of the course two-tail t table. For 99% confidence, the positive cutoff is 2.5758.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 2,
+      "row": "infinity",
+      "column": "0.01",
+      "value": 2.5758,
+      "approximation": false,
+      "normalReference": true
+     }
+    },
+    {
+     "title": "Calculate the margin",
+     "general": [
+      "M=z_c s_{\\hat p}"
+     ],
+     "work": [
+      "M=2.5758(0.02592296)=0.06677237"
+     ],
+     "words": "The margin is in proportion units. Multiply by 100 only when converting the final interpretation to percentage points."
+    },
+    {
+     "title": "Calculate the lower bound",
+     "general": [
+      "L=\\hat p-M"
+     ],
+     "work": [
+      "L=0.28-0.06677237=0.2132276"
+     ],
+     "words": "Subtract the margin from the observed proportion."
+    },
+    {
+     "title": "Calculate the upper bound",
+     "general": [
+      "U=\\hat p+M"
+     ],
+     "work": [
+      "U=0.28+0.06677237=0.3467724"
+     ],
+     "words": "Add the same margin to the observed proportion."
+    },
+    {
+     "title": "Compare with the null reference",
+     "general": [
+      "p_0\\in[L,U]\\Rightarrow\\text{do not reject }H_0"
+     ],
+     "work": [
+      "0.2132276<p<0.3467724,\\quad p_0=0.25"
+     ],
+     "words": "Do not reject equality with 0.25 at the matching two-sided 0.01 level. The comparison is with the stated reference, not automatically with zero."
+    }
+   ],
+   "conclusion": "The 99% CI is 0.2132276 to 0.3467724, or 21.32% to 34.68%. The reference is included; the data do not reject that population proportion.",
+   "source": null,
+   "values": {
+    "m": 84,
+    "n": 300,
+    "p": 0.28,
+    "reference": 0.25,
+    "confidence": 0.99,
+    "variance": 0.2016,
+    "se": 0.02592296279363144,
+    "critical": 2.5758,
+    "margin": 0.06677236756383587,
+    "lower": 0.21322763243616416,
+    "upper": 0.3467723675638359,
+    "reject": false
+   },
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 2,
+    "row": "infinity",
+    "column": "0.01",
+    "value": 2.5758,
+    "approximation": false,
+    "normalReference": true
+   },
+   "module": 17,
+   "tolerance": 0.002,
+   "answerName": "Lower endpoint",
+   "answer": 0.21322763243616416
+  },
+  {
+   "id": "ci-recall",
+   "title": "Successful recall responses",
+   "topic": "oneProportion",
+   "context": "A biomedical survey or follow-up study records a binary outcome for each independently sampled participant.",
+   "unit": "proportion",
+   "table": {
+    "headers": [
+     "Event count",
+     "Total observations",
+     "Reference proportion"
+    ],
+    "rows": [
+     [
+      126,
+      200,
+      0.5
+     ]
+    ]
+   },
+   "tasks": [
+    "Construct a 95% CI for the population proportion. Show the estimate, standard error, cutoff, margin, and both bounds.",
+    "Determine whether the population proportion differs from 0.5 using the interval. State the hypotheses in symbols and words and interpret the result."
+   ],
+   "hypotheses": {
+    "null": "H_0:p=0.5",
+    "alternative": "H_A:p\\ne 0.5",
+    "nullWords": "The population event proportion equals 0.5.",
+    "alternativeWords": "The population event proportion differs from 0.5."
+   },
+   "symbols": "\\(m\\) (event count), \\(n\\) (sample size), \\(\\hat p\\) (sample event proportion), \\(p\\) (population event proportion), \\(p_0\\) (null reference), \\(s_{\\hat p}\\) (estimated SE).",
+   "steps": [
+    {
+     "title": "State the proportion and hypotheses",
+     "general": [
+      "H_0:p=p_0,\\qquad H_A:p\\ne p_0"
+     ],
+     "work": [
+      "p_0=0.5"
+     ],
+     "words": "The null states that the population event proportion is 0.5. The two-sided alternative states that it differs from 0.5."
+    },
+    {
+     "title": "Calculate the sample proportion",
+     "general": [
+      "\\hat p=\\frac{m}{n}"
+     ],
+     "work": [
+      "\\hat p=\\frac{126}{200}=0.63"
+     ],
+     "words": "Divide event count by the total number of observations."
+    },
+    {
+     "title": "Calculate the proportion SE",
+     "general": [
+      "s_{\\hat p}=\\sqrt{\\frac{\\hat p(1-\\hat p)}{n}}"
+     ],
+     "work": [
+      "\\hat p(1-\\hat p)=0.63(1-0.63)=0.2331",
+      "s_{\\hat p}=\\sqrt{\\frac{0.2331}{200}}=\\sqrt{0.0011655}=0.03413942"
+     ],
+     "words": "Subtract the proportion from one, multiply, divide by sample size, then take the square root."
+    },
+    {
+     "title": "Select the Normal cutoff",
+     "general": [
+      "z_c=z_\\alpha"
+     ],
+     "work": [
+      "\\alpha=1-0.95=0.05,\\quad z_c=1.96"
+     ],
+     "words": "Use the infinite-df row of the course two-tail t table. For 95% confidence, the positive cutoff is 1.96.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 2,
+      "row": "infinity",
+      "column": "0.05",
+      "value": 1.96,
+      "approximation": false,
+      "normalReference": true
+     }
+    },
+    {
+     "title": "Calculate the margin",
+     "general": [
+      "M=z_c s_{\\hat p}"
+     ],
+     "work": [
+      "M=1.96(0.03413942)=0.06691326"
+     ],
+     "words": "The margin is in proportion units. Multiply by 100 only when converting the final interpretation to percentage points."
+    },
+    {
+     "title": "Calculate the lower bound",
+     "general": [
+      "L=\\hat p-M"
+     ],
+     "work": [
+      "L=0.63-0.06691326=0.5630867"
+     ],
+     "words": "Subtract the margin from the observed proportion."
+    },
+    {
+     "title": "Calculate the upper bound",
+     "general": [
+      "U=\\hat p+M"
+     ],
+     "work": [
+      "U=0.63+0.06691326=0.6969133"
+     ],
+     "words": "Add the same margin to the observed proportion."
+    },
+    {
+     "title": "Compare with the null reference",
+     "general": [
+      "p_0\\notin[L,U]\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "0.5630867<p<0.6969133,\\quad p_0=0.5"
+     ],
+     "words": "Reject equality with 0.5 at the matching two-sided 0.05 level. The comparison is with the stated reference, not automatically with zero."
+    }
+   ],
+   "conclusion": "The 95% CI is 0.5630867 to 0.6969133, or 56.31% to 69.69%. The reference is excluded; the data support a different population proportion.",
+   "source": null,
+   "values": {
+    "m": 126,
+    "n": 200,
+    "p": 0.63,
+    "reference": 0.5,
+    "confidence": 0.95,
+    "variance": 0.2331,
+    "se": 0.034139420030223126,
+    "critical": 1.96,
+    "margin": 0.06691326325923733,
+    "lower": 0.5630867367407627,
+    "upper": 0.6969132632592373,
+    "reject": true
+   },
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 2,
+    "row": "infinity",
+    "column": "0.05",
+    "value": 1.96,
+    "approximation": false,
+    "normalReference": true
+   },
+   "module": 17,
+   "tolerance": 0.002,
+   "answerName": "Lower endpoint",
+   "answer": 0.5630867367407627
+  },
+  {
+   "id": "ci-symptom",
+   "title": "Symptom reports during follow-up",
+   "topic": "oneProportion",
+   "context": "A biomedical survey or follow-up study records a binary outcome for each independently sampled participant.",
+   "unit": "proportion",
+   "table": {
+    "headers": [
+     "Event count",
+     "Total observations",
+     "Reference proportion"
+    ],
+    "rows": [
+     [
+      72,
+      240,
+      0.3
+     ]
+    ]
+   },
+   "tasks": [
+    "Construct a 95% CI for the population proportion. Show the estimate, standard error, cutoff, margin, and both bounds.",
+    "Determine whether the population proportion differs from 0.3 using the interval. State the hypotheses in symbols and words and interpret the result."
+   ],
+   "hypotheses": {
+    "null": "H_0:p=0.3",
+    "alternative": "H_A:p\\ne 0.3",
+    "nullWords": "The population event proportion equals 0.3.",
+    "alternativeWords": "The population event proportion differs from 0.3."
+   },
+   "symbols": "\\(m\\) (event count), \\(n\\) (sample size), \\(\\hat p\\) (sample event proportion), \\(p\\) (population event proportion), \\(p_0\\) (null reference), \\(s_{\\hat p}\\) (estimated SE).",
+   "steps": [
+    {
+     "title": "State the proportion and hypotheses",
+     "general": [
+      "H_0:p=p_0,\\qquad H_A:p\\ne p_0"
+     ],
+     "work": [
+      "p_0=0.3"
+     ],
+     "words": "The null states that the population event proportion is 0.3. The two-sided alternative states that it differs from 0.3."
+    },
+    {
+     "title": "Calculate the sample proportion",
+     "general": [
+      "\\hat p=\\frac{m}{n}"
+     ],
+     "work": [
+      "\\hat p=\\frac{72}{240}=0.3"
+     ],
+     "words": "Divide event count by the total number of observations."
+    },
+    {
+     "title": "Calculate the proportion SE",
+     "general": [
+      "s_{\\hat p}=\\sqrt{\\frac{\\hat p(1-\\hat p)}{n}}"
+     ],
+     "work": [
+      "\\hat p(1-\\hat p)=0.3(1-0.3)=0.21",
+      "s_{\\hat p}=\\sqrt{\\frac{0.21}{240}}=\\sqrt{0.000875}=0.0295804"
+     ],
+     "words": "Subtract the proportion from one, multiply, divide by sample size, then take the square root."
+    },
+    {
+     "title": "Select the Normal cutoff",
+     "general": [
+      "z_c=z_\\alpha"
+     ],
+     "work": [
+      "\\alpha=1-0.95=0.05,\\quad z_c=1.96"
+     ],
+     "words": "Use the infinite-df row of the course two-tail t table. For 95% confidence, the positive cutoff is 1.96.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 2,
+      "row": "infinity",
+      "column": "0.05",
+      "value": 1.96,
+      "approximation": false,
+      "normalReference": true
+     }
+    },
+    {
+     "title": "Calculate the margin",
+     "general": [
+      "M=z_c s_{\\hat p}"
+     ],
+     "work": [
+      "M=1.96(0.0295804)=0.05797758"
+     ],
+     "words": "The margin is in proportion units. Multiply by 100 only when converting the final interpretation to percentage points."
+    },
+    {
+     "title": "Calculate the lower bound",
+     "general": [
+      "L=\\hat p-M"
+     ],
+     "work": [
+      "L=0.3-0.05797758=0.2420224"
+     ],
+     "words": "Subtract the margin from the observed proportion."
+    },
+    {
+     "title": "Calculate the upper bound",
+     "general": [
+      "U=\\hat p+M"
+     ],
+     "work": [
+      "U=0.3+0.05797758=0.3579776"
+     ],
+     "words": "Add the same margin to the observed proportion."
+    },
+    {
+     "title": "Compare with the null reference",
+     "general": [
+      "p_0\\in[L,U]\\Rightarrow\\text{do not reject }H_0"
+     ],
+     "work": [
+      "0.2420224<p<0.3579776,\\quad p_0=0.3"
+     ],
+     "words": "Do not reject equality with 0.3 at the matching two-sided 0.05 level. The comparison is with the stated reference, not automatically with zero."
+    }
+   ],
+   "conclusion": "The 95% CI is 0.2420224 to 0.3579776, or 24.20% to 35.80%. The reference is included; the data do not reject that population proportion.",
+   "source": null,
+   "values": {
+    "m": 72,
+    "n": 240,
+    "p": 0.3,
+    "reference": 0.3,
+    "confidence": 0.95,
+    "variance": 0.21,
+    "se": 0.02958039891549808,
+    "critical": 1.96,
+    "margin": 0.05797758187437624,
+    "lower": 0.24202241812562375,
+    "upper": 0.3579775818743762,
+    "reject": false
+   },
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 2,
+    "row": "infinity",
+    "column": "0.05",
+    "value": 1.96,
+    "approximation": false,
+    "normalReference": true
+   },
+   "module": 17,
+   "tolerance": 0.002,
+   "answerName": "Lower endpoint",
+   "answer": 0.24202241812562375
+  },
+  {
+   "id": "ci-response",
+   "title": "Clinical response proportion",
+   "topic": "oneProportion",
+   "context": "A biomedical survey or follow-up study records a binary outcome for each independently sampled participant.",
+   "unit": "proportion",
+   "table": {
+    "headers": [
+     "Event count",
+     "Total observations",
+     "Reference proportion"
+    ],
+    "rows": [
+     [
+      156,
+      400,
+      0.4
+     ]
+    ]
+   },
+   "tasks": [
+    "Construct a 95% CI for the population proportion. Show the estimate, standard error, cutoff, margin, and both bounds.",
+    "Determine whether the population proportion differs from 0.4 using the interval. State the hypotheses in symbols and words and interpret the result."
+   ],
+   "hypotheses": {
+    "null": "H_0:p=0.4",
+    "alternative": "H_A:p\\ne 0.4",
+    "nullWords": "The population event proportion equals 0.4.",
+    "alternativeWords": "The population event proportion differs from 0.4."
+   },
+   "symbols": "\\(m\\) (event count), \\(n\\) (sample size), \\(\\hat p\\) (sample event proportion), \\(p\\) (population event proportion), \\(p_0\\) (null reference), \\(s_{\\hat p}\\) (estimated SE).",
+   "steps": [
+    {
+     "title": "State the proportion and hypotheses",
+     "general": [
+      "H_0:p=p_0,\\qquad H_A:p\\ne p_0"
+     ],
+     "work": [
+      "p_0=0.4"
+     ],
+     "words": "The null states that the population event proportion is 0.4. The two-sided alternative states that it differs from 0.4."
+    },
+    {
+     "title": "Calculate the sample proportion",
+     "general": [
+      "\\hat p=\\frac{m}{n}"
+     ],
+     "work": [
+      "\\hat p=\\frac{156}{400}=0.39"
+     ],
+     "words": "Divide event count by the total number of observations."
+    },
+    {
+     "title": "Calculate the proportion SE",
+     "general": [
+      "s_{\\hat p}=\\sqrt{\\frac{\\hat p(1-\\hat p)}{n}}"
+     ],
+     "work": [
+      "\\hat p(1-\\hat p)=0.39(1-0.39)=0.2379",
+      "s_{\\hat p}=\\sqrt{\\frac{0.2379}{400}}=\\sqrt{0.00059475}=0.0243875"
+     ],
+     "words": "Subtract the proportion from one, multiply, divide by sample size, then take the square root."
+    },
+    {
+     "title": "Select the Normal cutoff",
+     "general": [
+      "z_c=z_\\alpha"
+     ],
+     "work": [
+      "\\alpha=1-0.95=0.05,\\quad z_c=1.96"
+     ],
+     "words": "Use the infinite-df row of the course two-tail t table. For 95% confidence, the positive cutoff is 1.96.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 2,
+      "row": "infinity",
+      "column": "0.05",
+      "value": 1.96,
+      "approximation": false,
+      "normalReference": true
+     }
+    },
+    {
+     "title": "Calculate the margin",
+     "general": [
+      "M=z_c s_{\\hat p}"
+     ],
+     "work": [
+      "M=1.96(0.0243875)=0.04779949"
+     ],
+     "words": "The margin is in proportion units. Multiply by 100 only when converting the final interpretation to percentage points."
+    },
+    {
+     "title": "Calculate the lower bound",
+     "general": [
+      "L=\\hat p-M"
+     ],
+     "work": [
+      "L=0.39-0.04779949=0.3422005"
+     ],
+     "words": "Subtract the margin from the observed proportion."
+    },
+    {
+     "title": "Calculate the upper bound",
+     "general": [
+      "U=\\hat p+M"
+     ],
+     "work": [
+      "U=0.39+0.04779949=0.4377995"
+     ],
+     "words": "Add the same margin to the observed proportion."
+    },
+    {
+     "title": "Compare with the null reference",
+     "general": [
+      "p_0\\in[L,U]\\Rightarrow\\text{do not reject }H_0"
+     ],
+     "work": [
+      "0.3422005<p<0.4377995,\\quad p_0=0.4"
+     ],
+     "words": "Do not reject equality with 0.4 at the matching two-sided 0.05 level. The comparison is with the stated reference, not automatically with zero."
+    }
+   ],
+   "conclusion": "The 95% CI is 0.3422005 to 0.4377995, or 34.22% to 43.78%. The reference is included; the data do not reject that population proportion.",
+   "source": null,
+   "values": {
+    "m": 156,
+    "n": 400,
+    "p": 0.39,
+    "reference": 0.4,
+    "confidence": 0.95,
+    "variance": 0.2379,
+    "se": 0.024387496796514398,
+    "critical": 1.96,
+    "margin": 0.04779949372116822,
+    "lower": 0.3422005062788318,
+    "upper": 0.4377994937211682,
+    "reject": false
+   },
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 2,
+    "row": "infinity",
+    "column": "0.05",
+    "value": 1.96,
+    "approximation": false,
+    "normalReference": true
+   },
+   "module": 17,
+   "tolerance": 0.002,
+   "answerName": "Lower endpoint",
+   "answer": 0.3422005062788318
+  },
+  {
+   "id": "ci-event",
+   "title": "Event proportions in two treatment groups",
+   "topic": "twoProportions",
+   "context": "A study compares two independent groups with an event/no-event outcome for every participant.",
+   "unit": "proportion difference",
+   "table": {
+    "headers": [
+     "Group",
+     "Events",
+     "Total observations"
+    ],
+    "rows": [
+     [
+      "group1",
+      35,
+      100
+     ],
+     [
+      "group2",
+      20,
+      100
+     ]
+    ]
+   },
+   "tasks": [
+    "Construct the 95% confidence interval for the difference in population event proportions using the Session 17 pooled standard error. Show both sample proportions, the pooled estimate, variance, SE, margin, and endpoints.",
+    "Use the interval to decide whether the event probabilities differ at the matching two-sided 0.05 level. Interpret the direction and distinguish percentage points from a relative reduction."
+   ],
+   "hypotheses": {
+    "null": "H_0:p_1-p_2=0",
+    "alternative": "H_A:p_1-p_2\\ne0",
+    "nullWords": "The group1 and group2 populations have equal event probabilities.",
+    "alternativeWords": "The group1 and group2 population event probabilities differ."
+   },
+   "symbols": "\\(m_i\\) (group event count), \\(n_i\\) (group size), \\(\\hat p_i\\) (group sample proportion), \\(\\hat p\\) (pooled estimate), \\(s_d\\) (SE of the difference), \\(d\\) (observed difference).",
+   "steps": [
+    {
+     "title": "Define the population difference",
+     "general": [
+      "\\Delta=p_1-p_2"
+     ],
+     "work": [
+      "\\Delta=p_{\\mathrm{group1}}-p_{\\mathrm{group2}}"
+     ],
+     "words": "Use group1 minus group2. Equal population event probabilities correspond to a difference of zero."
+    },
+    {
+     "title": "Calculate both sample proportions",
+     "general": [
+      "\\hat p_i=\\frac{m_i}{n_i}"
+     ],
+     "work": [
+      "\\hat p_1=\\frac{35}{100}=0.35",
+      "\\hat p_2=\\frac{20}{100}=0.2"
+     ],
+     "words": "Each event count is divided by its own group size."
+    },
+    {
+     "title": "Calculate the course pooled proportion",
+     "general": [
+      "\\hat p=\\frac{m_1+m_2}{n_1+n_2}"
+     ],
+     "work": [
+      "\\hat p=\\frac{35+20}{100+100}=\\frac{55}{200}=0.275"
+     ],
+     "words": "Combine event counts and group sizes before taking the fraction. This follows the Session 17 pooled convention."
+    },
+    {
+     "title": "Calculate the pooled binary variance",
+     "general": [
+      "s^2=\\hat p(1-\\hat p)"
+     ],
+     "work": [
+      "s^2=0.275(1-0.275)=0.199375"
+     ],
+     "words": "The pooled binary variance is used in both group contributions to the SE."
+    },
+    {
+     "title": "Calculate the difference SE",
+     "general": [
+      "s_d=\\sqrt{\\frac{s^2}{n_1}+\\frac{s^2}{n_2}}"
+     ],
+     "work": [
+      "s_d=\\sqrt{\\frac{0.199375}{100}+\\frac{0.199375}{100}}=0.06314665"
+     ],
+     "words": "Keep the two group sizes separate inside the square root."
+    },
+    {
+     "title": "Calculate the difference and margin",
+     "general": [
+      "d=\\hat p_1-\\hat p_2",
+      "M=z_{0.05}s_d"
+     ],
+     "work": [
+      "d=0.35-0.2=0.15",
+      "M=1.96(0.06314665)=0.1237674"
+     ],
+     "words": "Use the Normal cutoff 1.96 from the infinite-df row, total two-tail 0.05 column.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 2,
+      "row": "infinity",
+      "column": "0.05",
+      "value": 1.96,
+      "approximation": false,
+      "normalReference": true
+     }
+    },
+    {
+     "title": "Calculate both endpoints",
+     "general": [
+      "L=d-M",
+      "U=d+M"
+     ],
+     "work": [
+      "L=0.15-0.1237674=0.02623256",
+      "U=0.15+0.1237674=0.2737674"
+     ],
+     "words": "These are absolute differences of event probabilities. Multiply by 100 to express the difference in percentage points."
+    },
+    {
+     "title": "Interpret direction and the zero comparison",
+     "general": [
+      "0\\notin[L,U]\\Rightarrow\\text{reject equal proportions}"
+     ],
+     "work": [
+      "0.02623256<p_1-p_2<0.2737674"
+     ],
+     "words": "The interval excludes zero. Retain the group1 minus group2 order when stating which event probability is higher."
+    }
+   ],
+   "conclusion": "The 95% interval for group1 minus group2 is 0.02623256 to 0.2737674, equivalent to 2.62 to 27.38 percentage points. Equal event probabilities are excluded.",
+   "source": null,
+   "rounded": false,
+   "values": {
+    "m1": 35,
+    "n1": 100,
+    "m2": 20,
+    "n2": 100,
+    "p1": 0.35,
+    "p2": 0.2,
+    "pooled": 0.275,
+    "variance": 0.199375,
+    "se": 0.06314665470157545,
+    "rawSE": 0.06314665470157545,
+    "difference": 0.14999999999999997,
+    "critical": 1.96,
+    "confidence": 0.95,
+    "margin": 0.12376744321508787,
+    "lower": 0.026232556784912098,
+    "upper": 0.27376744321508784,
+    "reject": true
+   },
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 2,
+    "row": "infinity",
+    "column": "0.05",
+    "value": 1.96,
+    "approximation": false,
+    "normalReference": true
+   },
+   "module": 17,
+   "tolerance": 0.002,
+   "answerName": "Lower endpoint",
+   "answer": 0.026232556784912098
+  },
+  {
+   "id": "ci-adverse",
+   "title": "Adverse-event proportions",
+   "topic": "twoProportions",
+   "context": "A study compares two independent groups with an event/no-event outcome for every participant.",
+   "unit": "proportion difference",
+   "table": {
+    "headers": [
+     "Group",
+     "Events",
+     "Total observations"
+    ],
+    "rows": [
+     [
+      "group1",
+      18,
+      120
+     ],
+     [
+      "group2",
+      12,
+      110
+     ]
+    ]
+   },
+   "tasks": [
+    "Construct the 95% confidence interval for the difference in population event proportions using the Session 17 pooled standard error. Show both sample proportions, the pooled estimate, variance, SE, margin, and endpoints.",
+    "Use the interval to decide whether the event probabilities differ at the matching two-sided 0.05 level. Interpret the direction and distinguish percentage points from a relative reduction."
+   ],
+   "hypotheses": {
+    "null": "H_0:p_1-p_2=0",
+    "alternative": "H_A:p_1-p_2\\ne0",
+    "nullWords": "The group1 and group2 populations have equal event probabilities.",
+    "alternativeWords": "The group1 and group2 population event probabilities differ."
+   },
+   "symbols": "\\(m_i\\) (group event count), \\(n_i\\) (group size), \\(\\hat p_i\\) (group sample proportion), \\(\\hat p\\) (pooled estimate), \\(s_d\\) (SE of the difference), \\(d\\) (observed difference).",
+   "steps": [
+    {
+     "title": "Define the population difference",
+     "general": [
+      "\\Delta=p_1-p_2"
+     ],
+     "work": [
+      "\\Delta=p_{\\mathrm{group1}}-p_{\\mathrm{group2}}"
+     ],
+     "words": "Use group1 minus group2. Equal population event probabilities correspond to a difference of zero."
+    },
+    {
+     "title": "Calculate both sample proportions",
+     "general": [
+      "\\hat p_i=\\frac{m_i}{n_i}"
+     ],
+     "work": [
+      "\\hat p_1=\\frac{18}{120}=0.15",
+      "\\hat p_2=\\frac{12}{110}=0.1090909"
+     ],
+     "words": "Each event count is divided by its own group size."
+    },
+    {
+     "title": "Calculate the course pooled proportion",
+     "general": [
+      "\\hat p=\\frac{m_1+m_2}{n_1+n_2}"
+     ],
+     "work": [
+      "\\hat p=\\frac{18+12}{120+110}=\\frac{30}{230}=0.1304348"
+     ],
+     "words": "Combine event counts and group sizes before taking the fraction. This follows the Session 17 pooled convention."
+    },
+    {
+     "title": "Calculate the pooled binary variance",
+     "general": [
+      "s^2=\\hat p(1-\\hat p)"
+     ],
+     "work": [
+      "s^2=0.1304348(1-0.1304348)=0.1134216"
+     ],
+     "words": "The pooled binary variance is used in both group contributions to the SE."
+    },
+    {
+     "title": "Calculate the difference SE",
+     "general": [
+      "s_d=\\sqrt{\\frac{s^2}{n_1}+\\frac{s^2}{n_2}}"
+     ],
+     "work": [
+      "s_d=\\sqrt{\\frac{0.1134216}{120}+\\frac{0.1134216}{110}}=0.04445542"
+     ],
+     "words": "Keep the two group sizes separate inside the square root."
+    },
+    {
+     "title": "Calculate the difference and margin",
+     "general": [
+      "d=\\hat p_1-\\hat p_2",
+      "M=z_{0.05}s_d"
+     ],
+     "work": [
+      "d=0.15-0.1090909=0.04090909",
+      "M=1.96(0.04445542)=0.08713263"
+     ],
+     "words": "Use the Normal cutoff 1.96 from the infinite-df row, total two-tail 0.05 column.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 2,
+      "row": "infinity",
+      "column": "0.05",
+      "value": 1.96,
+      "approximation": false,
+      "normalReference": true
+     }
+    },
+    {
+     "title": "Calculate both endpoints",
+     "general": [
+      "L=d-M",
+      "U=d+M"
+     ],
+     "work": [
+      "L=0.04090909-0.08713263=-0.04622354",
+      "U=0.04090909+0.08713263=0.1280417"
+     ],
+     "words": "These are absolute differences of event probabilities. Multiply by 100 to express the difference in percentage points."
+    },
+    {
+     "title": "Interpret direction and the zero comparison",
+     "general": [
+      "0\\in[L,U]\\Rightarrow\\text{do not reject equal proportions}"
+     ],
+     "work": [
+      "-0.04622354<p_1-p_2<0.1280417"
+     ],
+     "words": "The interval includes zero. Retain the group1 minus group2 order when stating which event probability is higher."
+    }
+   ],
+   "conclusion": "The 95% interval for group1 minus group2 is -0.04622354 to 0.1280417, equivalent to -4.62 to 12.80 percentage points. Equal event probabilities remain included.",
+   "source": null,
+   "rounded": false,
+   "values": {
+    "m1": 18,
+    "n1": 120,
+    "m2": 12,
+    "n2": 110,
+    "p1": 0.15,
+    "p2": 0.10909090909090909,
+    "pooled": 0.13043478260869565,
+    "variance": 0.11342155009451796,
+    "se": 0.044455422447438706,
+    "rawSE": 0.044455422447438706,
+    "difference": 0.04090909090909091,
+    "critical": 1.96,
+    "confidence": 0.95,
+    "margin": 0.08713262799697986,
+    "lower": -0.046223537087888955,
+    "upper": 0.12804171890607077,
+    "reject": false
+   },
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 2,
+    "row": "infinity",
+    "column": "0.05",
+    "value": 1.96,
+    "approximation": false,
+    "normalReference": true
+   },
+   "module": 17,
+   "tolerance": 0.002,
+   "answerName": "Lower endpoint",
+   "answer": -0.046223537087888955
+  },
+  {
+   "id": "ci-improvement",
+   "title": "Improvement after two interventions",
+   "topic": "twoProportions",
+   "context": "A study compares two independent groups with an event/no-event outcome for every participant.",
+   "unit": "proportion difference",
+   "table": {
+    "headers": [
+     "Group",
+     "Events",
+     "Total observations"
+    ],
+    "rows": [
+     [
+      "group1",
+      72,
+      120
+     ],
+     [
+      "group2",
+      48,
+      100
+     ]
+    ]
+   },
+   "tasks": [
+    "Construct the 95% confidence interval for the difference in population event proportions using the Session 17 pooled standard error. Show both sample proportions, the pooled estimate, variance, SE, margin, and endpoints.",
+    "Use the interval to decide whether the event probabilities differ at the matching two-sided 0.05 level. Interpret the direction and distinguish percentage points from a relative reduction."
+   ],
+   "hypotheses": {
+    "null": "H_0:p_1-p_2=0",
+    "alternative": "H_A:p_1-p_2\\ne0",
+    "nullWords": "The group1 and group2 populations have equal event probabilities.",
+    "alternativeWords": "The group1 and group2 population event probabilities differ."
+   },
+   "symbols": "\\(m_i\\) (group event count), \\(n_i\\) (group size), \\(\\hat p_i\\) (group sample proportion), \\(\\hat p\\) (pooled estimate), \\(s_d\\) (SE of the difference), \\(d\\) (observed difference).",
+   "steps": [
+    {
+     "title": "Define the population difference",
+     "general": [
+      "\\Delta=p_1-p_2"
+     ],
+     "work": [
+      "\\Delta=p_{\\mathrm{group1}}-p_{\\mathrm{group2}}"
+     ],
+     "words": "Use group1 minus group2. Equal population event probabilities correspond to a difference of zero."
+    },
+    {
+     "title": "Calculate both sample proportions",
+     "general": [
+      "\\hat p_i=\\frac{m_i}{n_i}"
+     ],
+     "work": [
+      "\\hat p_1=\\frac{72}{120}=0.6",
+      "\\hat p_2=\\frac{48}{100}=0.48"
+     ],
+     "words": "Each event count is divided by its own group size."
+    },
+    {
+     "title": "Calculate the course pooled proportion",
+     "general": [
+      "\\hat p=\\frac{m_1+m_2}{n_1+n_2}"
+     ],
+     "work": [
+      "\\hat p=\\frac{72+48}{120+100}=\\frac{120}{220}=0.5454545"
+     ],
+     "words": "Combine event counts and group sizes before taking the fraction. This follows the Session 17 pooled convention."
+    },
+    {
+     "title": "Calculate the pooled binary variance",
+     "general": [
+      "s^2=\\hat p(1-\\hat p)"
+     ],
+     "work": [
+      "s^2=0.5454545(1-0.5454545)=0.2479339"
+     ],
+     "words": "The pooled binary variance is used in both group contributions to the SE."
+    },
+    {
+     "title": "Calculate the difference SE",
+     "general": [
+      "s_d=\\sqrt{\\frac{s^2}{n_1}+\\frac{s^2}{n_2}}"
+     ],
+     "work": [
+      "s_d=\\sqrt{\\frac{0.2479339}{120}+\\frac{0.2479339}{100}}=0.06741999"
+     ],
+     "words": "Keep the two group sizes separate inside the square root."
+    },
+    {
+     "title": "Calculate the difference and margin",
+     "general": [
+      "d=\\hat p_1-\\hat p_2",
+      "M=z_{0.05}s_d"
+     ],
+     "work": [
+      "d=0.6-0.48=0.12",
+      "M=1.96(0.06741999)=0.1321432"
+     ],
+     "words": "Use the Normal cutoff 1.96 from the infinite-df row, total two-tail 0.05 column.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 2,
+      "row": "infinity",
+      "column": "0.05",
+      "value": 1.96,
+      "approximation": false,
+      "normalReference": true
+     }
+    },
+    {
+     "title": "Calculate both endpoints",
+     "general": [
+      "L=d-M",
+      "U=d+M"
+     ],
+     "work": [
+      "L=0.12-0.1321432=-0.01214317",
+      "U=0.12+0.1321432=0.2521432"
+     ],
+     "words": "These are absolute differences of event probabilities. Multiply by 100 to express the difference in percentage points."
+    },
+    {
+     "title": "Interpret direction and the zero comparison",
+     "general": [
+      "0\\in[L,U]\\Rightarrow\\text{do not reject equal proportions}"
+     ],
+     "work": [
+      "-0.01214317<p_1-p_2<0.2521432"
+     ],
+     "words": "The interval includes zero. Retain the group1 minus group2 order when stating which event probability is higher."
+    }
+   ],
+   "conclusion": "The 95% interval for group1 minus group2 is -0.01214317 to 0.2521432, equivalent to -1.21 to 25.21 percentage points. Equal event probabilities remain included.",
+   "source": null,
+   "rounded": false,
+   "values": {
+    "m1": 72,
+    "n1": 120,
+    "m2": 48,
+    "n2": 100,
+    "p1": 0.6,
+    "p2": 0.48,
+    "pooled": 0.5454545454545454,
+    "variance": 0.24793388429752067,
+    "se": 0.06741998624632421,
+    "rawSE": 0.06741998624632421,
+    "difference": 0.12,
+    "critical": 1.96,
+    "confidence": 0.95,
+    "margin": 0.13214317304279546,
+    "lower": -0.012143173042795469,
+    "upper": 0.25214317304279543,
+    "reject": false
+   },
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 2,
+    "row": "infinity",
+    "column": "0.05",
+    "value": 1.96,
+    "approximation": false,
+    "normalReference": true
+   },
+   "module": 17,
+   "tolerance": 0.002,
+   "answerName": "Lower endpoint",
+   "answer": -0.012143173042795469
+  },
+  {
+   "id": "ci-completion",
+   "title": "Completion of a follow-up assessment",
+   "topic": "twoProportions",
+   "context": "A study compares two independent groups with an event/no-event outcome for every participant.",
+   "unit": "proportion difference",
+   "table": {
+    "headers": [
+     "Group",
+     "Events",
+     "Total observations"
+    ],
+    "rows": [
+     [
+      "group1",
+      90,
+      150
+     ],
+     [
+      "group2",
+      95,
+      150
+     ]
+    ]
+   },
+   "tasks": [
+    "Construct the 95% confidence interval for the difference in population event proportions using the Session 17 pooled standard error. Show both sample proportions, the pooled estimate, variance, SE, margin, and endpoints.",
+    "Use the interval to decide whether the event probabilities differ at the matching two-sided 0.05 level. Interpret the direction and distinguish percentage points from a relative reduction."
+   ],
+   "hypotheses": {
+    "null": "H_0:p_1-p_2=0",
+    "alternative": "H_A:p_1-p_2\\ne0",
+    "nullWords": "The group1 and group2 populations have equal event probabilities.",
+    "alternativeWords": "The group1 and group2 population event probabilities differ."
+   },
+   "symbols": "\\(m_i\\) (group event count), \\(n_i\\) (group size), \\(\\hat p_i\\) (group sample proportion), \\(\\hat p\\) (pooled estimate), \\(s_d\\) (SE of the difference), \\(d\\) (observed difference).",
+   "steps": [
+    {
+     "title": "Define the population difference",
+     "general": [
+      "\\Delta=p_1-p_2"
+     ],
+     "work": [
+      "\\Delta=p_{\\mathrm{group1}}-p_{\\mathrm{group2}}"
+     ],
+     "words": "Use group1 minus group2. Equal population event probabilities correspond to a difference of zero."
+    },
+    {
+     "title": "Calculate both sample proportions",
+     "general": [
+      "\\hat p_i=\\frac{m_i}{n_i}"
+     ],
+     "work": [
+      "\\hat p_1=\\frac{90}{150}=0.6",
+      "\\hat p_2=\\frac{95}{150}=0.6333333"
+     ],
+     "words": "Each event count is divided by its own group size."
+    },
+    {
+     "title": "Calculate the course pooled proportion",
+     "general": [
+      "\\hat p=\\frac{m_1+m_2}{n_1+n_2}"
+     ],
+     "work": [
+      "\\hat p=\\frac{90+95}{150+150}=\\frac{185}{300}=0.6166667"
+     ],
+     "words": "Combine event counts and group sizes before taking the fraction. This follows the Session 17 pooled convention."
+    },
+    {
+     "title": "Calculate the pooled binary variance",
+     "general": [
+      "s^2=\\hat p(1-\\hat p)"
+     ],
+     "work": [
+      "s^2=0.6166667(1-0.6166667)=0.2363889"
+     ],
+     "words": "The pooled binary variance is used in both group contributions to the SE."
+    },
+    {
+     "title": "Calculate the difference SE",
+     "general": [
+      "s_d=\\sqrt{\\frac{s^2}{n_1}+\\frac{s^2}{n_2}}"
+     ],
+     "work": [
+      "s_d=\\sqrt{\\frac{0.2363889}{150}+\\frac{0.2363889}{150}}=0.05614136"
+     ],
+     "words": "Keep the two group sizes separate inside the square root."
+    },
+    {
+     "title": "Calculate the difference and margin",
+     "general": [
+      "d=\\hat p_1-\\hat p_2",
+      "M=z_{0.05}s_d"
+     ],
+     "work": [
+      "d=0.6-0.6333333=-0.03333333",
+      "M=1.96(0.05614136)=0.1100371"
+     ],
+     "words": "Use the Normal cutoff 1.96 from the infinite-df row, total two-tail 0.05 column.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 2,
+      "row": "infinity",
+      "column": "0.05",
+      "value": 1.96,
+      "approximation": false,
+      "normalReference": true
+     }
+    },
+    {
+     "title": "Calculate both endpoints",
+     "general": [
+      "L=d-M",
+      "U=d+M"
+     ],
+     "work": [
+      "L=-0.03333333-0.1100371=-0.1433704",
+      "U=-0.03333333+0.1100371=0.07670372"
+     ],
+     "words": "These are absolute differences of event probabilities. Multiply by 100 to express the difference in percentage points."
+    },
+    {
+     "title": "Interpret direction and the zero comparison",
+     "general": [
+      "0\\in[L,U]\\Rightarrow\\text{do not reject equal proportions}"
+     ],
+     "work": [
+      "-0.1433704<p_1-p_2<0.07670372"
+     ],
+     "words": "The interval includes zero. Retain the group1 minus group2 order when stating which event probability is higher."
+    }
+   ],
+   "conclusion": "The 95% interval for group1 minus group2 is -0.1433704 to 0.07670372, equivalent to -14.34 to 7.67 percentage points. Equal event probabilities remain included.",
+   "source": null,
+   "rounded": false,
+   "values": {
+    "m1": 90,
+    "n1": 150,
+    "m2": 95,
+    "n2": 150,
+    "p1": 0.6,
+    "p2": 0.6333333333333333,
+    "pooled": 0.6166666666666667,
+    "variance": 0.23638888888888887,
+    "se": 0.05614135598515457,
+    "rawSE": 0.05614135598515457,
+    "difference": -0.033333333333333326,
+    "critical": 1.96,
+    "confidence": 0.95,
+    "margin": 0.11003705773090296,
+    "lower": -0.14337039106423627,
+    "upper": 0.07670372439756963,
+    "reject": false
+   },
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 2,
+    "row": "infinity",
+    "column": "0.05",
+    "value": 1.96,
+    "approximation": false,
+    "normalReference": true
+   },
+   "module": 17,
+   "tolerance": 0.002,
+   "answerName": "Lower endpoint",
+   "answer": -0.14337039106423627
+  }
+ ],
+ "sampleQuestions": [
+  {
+   "id": "m2-s17-q001",
+   "module": 17,
+   "topic": "oneMean",
+   "stem": "For the bme423 student heart rate study, construct the requested 95% interval using the stated course method. What is its lower endpoint?",
+   "options": [
+    "\\(60.56224\\) beats/min",
+    "\\(64.42489\\) beats/min",
+    "\\(56.69958\\) beats/min",
+    "\\(68.28755\\) beats/min"
+   ],
+   "correct": 0,
+   "why": "The lower endpoint is 60.56224 beats/min. Subtract the margin from the sample mean.",
+   "case": "ci-heart",
+   "equations": [
+    "L=\\bar x-M",
+    "L=67-6.437765=60.56224"
+   ]
+  },
+  {
+   "id": "m2-s17-q002",
+   "module": 17,
+   "topic": "oneMean",
+   "stem": "For the bme423 student heart rate study, construct the requested 95% interval using the stated course method. What is its upper endpoint?",
+   "options": [
+    "\\(73.43776\\) beats/min",
+    "\\(77.30042\\) beats/min",
+    "\\(69.57511\\) beats/min",
+    "\\(81.16308\\) beats/min"
+   ],
+   "correct": 0,
+   "why": "The upper endpoint is 73.43776 beats/min. Add the same margin to the sample mean.",
+   "case": "ci-heart",
+   "equations": [
+    "U=\\bar x+M",
+    "U=67+6.437765=73.43776"
+   ]
+  },
+  {
+   "id": "m2-s17-q003",
+   "module": 17,
+   "topic": "oneMean",
+   "stem": "For the bme423 student heart rate study, construct the requested 95% interval using the stated course method. What is its standard error?",
+   "options": [
+    "\\(2.84605\\) beats/min",
+    "\\(6.708709\\) beats/min",
+    "\\(-1.016609\\) beats/min",
+    "\\(10.57137\\) beats/min"
+   ],
+   "correct": 0,
+   "why": "The standard error is 2.84605 beats/min. Divide the sample SD by the square root of sample size. Keep the standard error available for the margin calculation.",
+   "case": "ci-heart",
+   "equations": [
+    "s_{\\bar x}=\\frac{s}{\\sqrt n}",
+    "s_{\\bar x}=\\frac{9}{\\sqrt{10}}=\\frac{9}{3.162278}=2.84605"
+   ]
+  },
+  {
+   "id": "m2-s17-q004",
+   "module": 17,
+   "topic": "twoMeans",
+   "stem": "For the diuretic versus placebo urine production study, construct the requested 95% interval using the stated course method. What is its lower endpoint?",
+   "options": [
+    "\\(31.18917\\) mL/day",
+    "\\(144.4757\\) mL/day",
+    "\\(-82.09732\\) mL/day",
+    "\\(257.7622\\) mL/day"
+   ],
+   "correct": 0,
+   "why": "The lower endpoint is 31.18917 mL/day. The bounds retain the diuretic minus placebo subtraction order.",
+   "case": "ci-urine",
+   "equations": [
+    "L=d-M",
+    "U=d+M",
+    "L=220-188.8108=31.18917",
+    "U=220+188.8108=408.8108"
+   ]
+  },
+  {
+   "id": "m2-s17-q005",
+   "module": 17,
+   "topic": "twoMeans",
+   "stem": "For the diuretic versus placebo urine production study, construct the requested 95% interval using the stated course method. What is its upper endpoint?",
+   "options": [
+    "\\(408.8108\\) mL/day",
+    "\\(522.0973\\) mL/day",
+    "\\(295.5243\\) mL/day",
+    "\\(635.3838\\) mL/day"
+   ],
+   "correct": 0,
+   "why": "The upper endpoint is 408.8108 mL/day. The bounds retain the diuretic minus placebo subtraction order.",
+   "case": "ci-urine",
+   "equations": [
+    "L=d-M",
+    "U=d+M",
+    "L=220-188.8108=31.18917",
+    "U=220+188.8108=408.8108"
+   ]
+  },
+  {
+   "id": "m2-s17-q006",
+   "module": 17,
+   "topic": "twoMeans",
+   "stem": "For the diuretic versus placebo urine production study, construct the requested 95% interval using the stated course method. What is its standard error?",
+   "options": [
+    "\\(89.86712\\) mL/day",
+    "\\(203.1536\\) mL/day",
+    "\\(-23.41937\\) mL/day",
+    "\\(316.4401\\) mL/day"
+   ],
+   "correct": 0,
+   "why": "The standard error is 89.86712 mL/day. Add the two mean-variance contributions inside the root, then take the root. This restores the original measurement units.",
+   "case": "ci-urine",
+   "equations": [
+    "s_d=\\sqrt{\\frac{s^2}{n_1}+\\frac{s^2}{n_2}}",
+    "s_d=\\sqrt{\\frac{40380.5}{10}+\\frac{40380.5}{10}}=\\sqrt{8076.1}=89.86712"
+   ]
+  },
+  {
+   "id": "m2-s17-q007",
+   "module": 17,
+   "topic": "twoProportions",
+   "stem": "For the aspirin thrombosis interval · slide rounding study, construct the requested 95% interval using the stated course method. What is its lower endpoint?",
+   "options": [
+    "\\(0.106\\) proportion difference",
+    "\\(0.2824\\) proportion difference",
+    "\\(-0.0704\\) proportion difference",
+    "\\(0.4588\\) proportion difference"
+   ],
+   "correct": 0,
+   "why": "The lower endpoint is 0.106 proportion difference. These are absolute differences of event probabilities. Multiply by 100 to express the difference in percentage points.",
+   "case": "ci-aspirin",
+   "equations": [
+    "L=d-M",
+    "U=d+M",
+    "L=0.4-0.294=0.106",
+    "U=0.4+0.294=0.694"
+   ]
+  },
+  {
+   "id": "m2-s17-q008",
+   "module": 17,
+   "topic": "twoProportions",
+   "stem": "For the aspirin thrombosis interval · slide rounding study, construct the requested 95% interval using the stated course method. What is its upper endpoint?",
+   "options": [
+    "\\(0.694\\) proportion difference",
+    "\\(0.8704\\) proportion difference",
+    "\\(0.5176\\) proportion difference",
+    "\\(1.0468\\) proportion difference"
+   ],
+   "correct": 0,
+   "why": "The upper endpoint is 0.694 proportion difference. These are absolute differences of event probabilities. Multiply by 100 to express the difference in percentage points.",
+   "case": "ci-aspirin",
+   "equations": [
+    "L=d-M",
+    "U=d+M",
+    "L=0.4-0.294=0.106",
+    "U=0.4+0.294=0.694"
+   ]
+  }
+ ]
+}

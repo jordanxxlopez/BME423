@@ -1,0 +1,1862 @@
+{
+ "cases": [
+  {
+   "id": "n17-abr-wave-v",
+   "title": "Auditory brainstem response wave V latency",
+   "topic": "oneMean",
+   "context": "A study was reported concerning the auditory brainstem response (ABR), which is the electrical activity recorded from the scalp in the first 10 milliseconds (ms) after a brief click is played to the ear. In 16 adults with normal hearing, the latency of wave V (time elapsed between the click and the fifth peak of the response) was measured for clicks presented at 80 decibels (dB). The mean and standard deviation (SD) of the recorded latencies are shown below. Assume that any quantities of interest are Normally distributed.",
+   "unit": "ms",
+   "table": {
+    "headers": [
+     "Number of subjects",
+     "Mean wave V latency (ms)",
+     "SD (ms)"
+    ],
+    "rows": [
+     [
+      16,
+      5.68,
+      0.26
+     ]
+    ]
+   },
+   "tasks": [
+    "What is the 95% confidence interval for the mean wave V latency in adults with normal hearing? DO NOT use R. Make sure to show your intermediate calculations.",
+    "Provide your result in a single complete sentence that would convey your conclusion in a way that could be understood by a non-expert in statistics or medicine (e.g., a typical reader of a local newspaper)."
+   ],
+   "symbols": "\\(\\bar x\\) (sample mean), \\(s\\) (sample SD), \\(n\\) (number sampled), \\(s_{\\bar x}\\) (standard error of the mean), \\(\\mu\\) (population mean), \\(M\\) (margin).",
+   "steps": [
+    {
+     "title": "Identify the population quantity",
+     "general": [
+      "\\text{estimate of }\\mu=\\bar x"
+     ],
+     "work": [
+      "\\bar x=5.68,\\quad s=0.26,\\quad n=16"
+     ],
+     "words": "The procedure is a one-sample t confidence interval for one population mean. The sample mean estimates the population mean wave V latency. The SD describes how individual measurements vary. The standard error describes the uncertainty in their mean."
+    },
+    {
+     "title": "Calculate the standard error",
+     "general": [
+      "s_{\\bar x}=\\frac{s}{\\sqrt n}"
+     ],
+     "work": [
+      "s_{\\bar x}=\\frac{0.26}{\\sqrt{16}}=\\frac{0.26}{4}=0.065"
+     ],
+     "words": "Divide the sample SD by the square root of the sample size. Keep the standard error available for the margin calculation."
+    },
+    {
+     "title": "Choose degrees of freedom and the cutoff",
+     "general": [
+      "\\nu=n-1",
+      "t_c=t_\\alpha(\\nu)"
+     ],
+     "work": [
+      "\\nu=16-1=15",
+      "\\alpha=1-0.95=0.05",
+      "t_{0.05}(15)=2.131"
+     ],
+     "words": "Open t_table.pdf, PDF page 1. Use row 15 and the combined two-tail 0.05 column. The printed cutoff is 2.131. Do not halve the column probability again.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "15",
+      "column": "0.05",
+      "value": 2.131,
+      "actualDf": 15,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Calculate the margin of error",
+     "general": [
+      "M=t_c s_{\\bar x}"
+     ],
+     "work": [
+      "M=2.131(0.065)=0.138515"
+     ],
+     "words": "Multiply the cutoff by the standard error. The margin has the same measurement units as the sample mean."
+    },
+    {
+     "title": "Calculate the lower endpoint",
+     "general": [
+      "L=\\bar x-M"
+     ],
+     "work": [
+      "L=5.68-0.138515=5.541485"
+     ],
+     "words": "Subtract the margin from the sample mean."
+    },
+    {
+     "title": "Calculate the upper endpoint",
+     "general": [
+      "U=\\bar x+M"
+     ],
+     "work": [
+      "U=5.68+0.138515=5.818515"
+     ],
+     "words": "Add the same margin to the sample mean."
+    },
+    {
+     "title": "State the population interval",
+     "general": [
+      "L<\\mu<U"
+     ],
+     "work": [
+      "5.541485<\\mu<5.818515"
+     ],
+     "words": "The 95% interval estimates the population mean wave V latency in ms. It is not an interval that contains 95% of the individual latencies."
+    }
+   ],
+   "conclusion": "The 95% confidence interval for the population mean wave V latency is 5.541485 to 5.818515 ms. With 95% confidence, the average time for the fifth ABR peak to appear in adults with normal hearing is between about 5.54 and 5.82 ms after the click.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "15",
+    "column": "0.05",
+    "value": 2.131,
+    "actualDf": 15,
+    "approximation": false
+   },
+   "values": {
+    "n": 16,
+    "x": 5.68,
+    "sd": 0.26,
+    "confidence": 0.95,
+    "df": 15,
+    "se": 0.065,
+    "critical": 2.131,
+    "margin": 0.138515,
+    "lower": 5.541485,
+    "upper": 5.818515
+   },
+   "module": 17,
+   "tolerance": 0.027707,
+   "answerName": "Lower endpoint",
+   "answer": 5.541485
+  },
+  {
+   "id": "n17-rem-latency",
+   "title": "REM sleep latency in the sleep laboratory",
+   "topic": "oneMean",
+   "context": "In a study looking at sleep architecture (the pattern of sleep stages across the night), 22 healthy young adults each spent one night in a sleep laboratory with polysomnography (simultaneous recording of brain waves, eye movements and muscle tone). For each subject, the rapid eye movement (REM) latency (time elapsed between falling asleep and the first period of REM sleep) was recorded in minutes (min). The mean and standard deviation (SD) of the recorded REM latencies are shown below. Assume that any quantities of interest are Normally distributed.",
+   "unit": "min",
+   "table": {
+    "headers": [
+     "Number of subjects",
+     "Mean REM latency (min)",
+     "SD (min)"
+    ],
+    "rows": [
+     [
+      22,
+      84.6,
+      18.3
+     ]
+    ]
+   },
+   "tasks": [
+    "What is the 99% confidence interval for the mean REM latency in this population? DO NOT use R. Make sure to show your intermediate calculations.",
+    "Explain what the interval says about the mean REM latency and what it does not say about the REM latency of a single person."
+   ],
+   "symbols": "\\(\\bar x\\) (sample mean), \\(s\\) (sample SD), \\(n\\) (number sampled), \\(s_{\\bar x}\\) (standard error of the mean), \\(\\mu\\) (population mean), \\(M\\) (margin).",
+   "steps": [
+    {
+     "title": "Identify the population quantity",
+     "general": [
+      "\\text{estimate of }\\mu=\\bar x"
+     ],
+     "work": [
+      "\\bar x=84.6,\\quad s=18.3,\\quad n=22"
+     ],
+     "words": "The procedure is a one-sample t confidence interval for one population mean. The sample mean estimates the population mean REM latency. The SD describes how individual measurements vary. The standard error describes the uncertainty in their mean."
+    },
+    {
+     "title": "Calculate the standard error",
+     "general": [
+      "s_{\\bar x}=\\frac{s}{\\sqrt n}"
+     ],
+     "work": [
+      "s_{\\bar x}=\\frac{18.3}{\\sqrt{22}}=\\frac{18.3}{4.690416}=3.901573"
+     ],
+     "words": "Divide the sample SD by the square root of the sample size. Keep the standard error available for the margin calculation."
+    },
+    {
+     "title": "Choose degrees of freedom and the cutoff",
+     "general": [
+      "\\nu=n-1",
+      "t_c=t_\\alpha(\\nu)"
+     ],
+     "work": [
+      "\\nu=22-1=21",
+      "\\alpha=1-0.99=0.01",
+      "t_{0.01}(21)=2.831"
+     ],
+     "words": "Open t_table.pdf, PDF page 1. Use row 21 and the combined two-tail 0.01 column. The printed cutoff is 2.831. Do not halve the column probability again.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "21",
+      "column": "0.01",
+      "value": 2.831,
+      "actualDf": 21,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Calculate the margin of error",
+     "general": [
+      "M=t_c s_{\\bar x}"
+     ],
+     "work": [
+      "M=2.831(3.901573)=11.04535"
+     ],
+     "words": "Multiply the cutoff by the standard error. The margin has the same measurement units as the sample mean."
+    },
+    {
+     "title": "Calculate the lower endpoint",
+     "general": [
+      "L=\\bar x-M"
+     ],
+     "work": [
+      "L=84.6-11.04535=73.55465"
+     ],
+     "words": "Subtract the margin from the sample mean."
+    },
+    {
+     "title": "Calculate the upper endpoint",
+     "general": [
+      "U=\\bar x+M"
+     ],
+     "work": [
+      "U=84.6+11.04535=95.64535"
+     ],
+     "words": "Add the same margin to the sample mean."
+    },
+    {
+     "title": "State the population interval",
+     "general": [
+      "L<\\mu<U"
+     ],
+     "work": [
+      "73.55465<\\mu<95.64535"
+     ],
+     "words": "The 99% interval estimates the population mean REM latency in min. It is wider than a 95% interval from the same data because the cutoff is larger. It is not an interval that contains 99% of the individual latencies."
+    }
+   ],
+   "conclusion": "The 99% confidence interval for the population mean REM latency is 73.55465 to 95.64535 min. The interval describes the average REM latency of healthy young adults. It does not describe the range of REM latencies of individual sleepers.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "21",
+    "column": "0.01",
+    "value": 2.831,
+    "actualDf": 21,
+    "approximation": false
+   },
+   "values": {
+    "n": 22,
+    "x": 84.6,
+    "sd": 18.3,
+    "confidence": 0.99,
+    "df": 21,
+    "se": 3.901573109307671,
+    "critical": 2.831,
+    "margin": 11.045353472450016,
+    "lower": 73.55464652754998,
+    "upper": 95.64535347245001
+   },
+   "module": 17,
+   "tolerance": 0.367773,
+   "answerName": "Lower endpoint",
+   "answer": 73.55464652754998
+  },
+  {
+   "id": "n17-stroop-interference",
+   "title": "Stroop interference in reaction time",
+   "topic": "oneMean",
+   "context": "Researchers interested in selective attention did a study with the Stroop task, in which a subject names the ink color of a color word. For each of 28 university students, the Stroop interference (mean reaction time on incongruent trials, such as the word RED printed in blue, minus mean reaction time on congruent trials, such as the word RED printed in red) was calculated in milliseconds (ms). The mean and standard deviation (SD) of the interference values are shown below. Assume that any quantities of interest are Normally distributed.",
+   "unit": "ms",
+   "table": {
+    "headers": [
+     "Number of subjects",
+     "Mean Stroop interference (ms)",
+     "SD (ms)"
+    ],
+    "rows": [
+     [
+      28,
+      96.4,
+      31.5
+     ]
+    ]
+   },
+   "tasks": [
+    "What is the 95% confidence interval for the mean Stroop interference in this population? DO NOT use R. Make sure to show your intermediate calculations.",
+    "A Stroop interference of 0 ms would mean that incongruent and congruent trials take the same time on average. Using only your calculations for the interval, is there evidence that the mean Stroop interference is different from 0 ms? Please state how you reached your conclusions."
+   ],
+   "symbols": "\\(\\bar x\\) (sample mean), \\(s\\) (sample SD), \\(n\\) (number sampled), \\(s_{\\bar x}\\) (standard error of the mean), \\(\\mu\\) (population mean), \\(M\\) (margin).",
+   "steps": [
+    {
+     "title": "Identify the population quantity",
+     "general": [
+      "\\text{estimate of }\\mu=\\bar x"
+     ],
+     "work": [
+      "\\bar x=96.4,\\quad s=31.5,\\quad n=28"
+     ],
+     "words": "The procedure is a one-sample t confidence interval for one population mean. The sample mean estimates the population mean Stroop interference. The SD describes how individual measurements vary. The standard error describes the uncertainty in their mean."
+    },
+    {
+     "title": "Calculate the standard error",
+     "general": [
+      "s_{\\bar x}=\\frac{s}{\\sqrt n}"
+     ],
+     "work": [
+      "s_{\\bar x}=\\frac{31.5}{\\sqrt{28}}=\\frac{31.5}{5.291503}=5.95294"
+     ],
+     "words": "Divide the sample SD by the square root of the sample size. Keep the standard error available for the margin calculation."
+    },
+    {
+     "title": "Choose degrees of freedom and the cutoff",
+     "general": [
+      "\\nu=n-1",
+      "t_c=t_\\alpha(\\nu)"
+     ],
+     "work": [
+      "\\nu=28-1=27",
+      "\\alpha=1-0.95=0.05",
+      "t_{0.05}(27)=2.052"
+     ],
+     "words": "Open t_table.pdf, PDF page 1. Use row 27 and the combined two-tail 0.05 column. The printed cutoff is 2.052. Do not halve the column probability again.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "27",
+      "column": "0.05",
+      "value": 2.052,
+      "actualDf": 27,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Calculate the margin of error",
+     "general": [
+      "M=t_c s_{\\bar x}"
+     ],
+     "work": [
+      "M=2.052(5.95294)=12.21543"
+     ],
+     "words": "Multiply the cutoff by the standard error. The margin has the same measurement units as the sample mean."
+    },
+    {
+     "title": "Calculate the lower endpoint",
+     "general": [
+      "L=\\bar x-M"
+     ],
+     "work": [
+      "L=96.4-12.21543=84.18457"
+     ],
+     "words": "Subtract the margin from the sample mean."
+    },
+    {
+     "title": "Calculate the upper endpoint",
+     "general": [
+      "U=\\bar x+M"
+     ],
+     "work": [
+      "U=96.4+12.21543=108.6154"
+     ],
+     "words": "Add the same margin to the sample mean."
+    },
+    {
+     "title": "State the population interval",
+     "general": [
+      "L<\\mu<U"
+     ],
+     "work": [
+      "84.18457<\\mu<108.6154"
+     ],
+     "words": "The 95% interval estimates the population mean Stroop interference in ms. Every value in the interval is above 0, so the interval does not contain 0. The interval is not a range that contains 95% of the individual interference values."
+    }
+   ],
+   "conclusion": "The 95% confidence interval for the population mean Stroop interference is 84.18457 to 108.6154 ms. The interval does not contain 0, so there is a difference in mean reaction time between incongruent and congruent trials (P < 0.05), with incongruent trials slower.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "27",
+    "column": "0.05",
+    "value": 2.052,
+    "actualDf": 27,
+    "approximation": false
+   },
+   "values": {
+    "n": 28,
+    "x": 96.4,
+    "sd": 31.5,
+    "confidence": 0.95,
+    "df": 27,
+    "se": 5.952940449895329,
+    "critical": 2.052,
+    "margin": 12.215433803185215,
+    "lower": 84.18456619681479,
+    "upper": 108.61543380318523
+   },
+   "module": 17,
+   "tolerance": 0.420923,
+   "answerName": "Lower endpoint",
+   "answer": 84.18456619681479
+  },
+  {
+   "id": "n17-cochlear-implant-sentences",
+   "title": "Cochlear implant sentence recognition",
+   "topic": "twoMeans",
+   "context": "A study was reported concerning speech understanding with a cochlear implant (a surgically placed device that stimulates the auditory nerve electrically). Adult implant users were tested 12 months after the implant was switched on with a sentence recognition test in background noise, scored as the percentage of words repeated correctly (% correct). The users were divided into two groups according to how long they had been deaf before surgery. The mean and standard deviation (SD) of the scores in each group are shown below. Assume that any quantities of interest are Normally distributed.",
+   "unit": "% correct",
+   "table": {
+    "headers": [
+     "Group",
+     "Number of subjects",
+     "Mean sentence score (% correct)",
+     "SD (% correct)"
+    ],
+    "rows": [
+     [
+      "Short deafness (under 10 years)",
+      12,
+      71.5,
+      11.2
+     ],
+     [
+      "Long deafness (10 years or more)",
+      14,
+      58.3,
+      13.6
+     ]
+    ]
+   },
+   "tasks": [
+    "What is the 95% confidence interval for the difference in the mean sentence score between the two groups? DO NOT use R. Make sure to show your intermediate calculations.",
+    "Using only your calculations for the interval, is there evidence that the mean sentence score is different in these two groups? Please state how you reached your conclusions."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\mu_1-\\mu_2=0",
+    "alternative": "H_A:\\mu_1-\\mu_2\\ne0",
+    "nullWords": "The mean sentence score is the same in the short deafness and long deafness populations.",
+    "alternativeWords": "The mean sentence score is different in the short deafness and long deafness populations."
+   },
+   "symbols": "\\(\\bar x_i\\) (group sample mean), \\(s_i\\) (group sample SD), \\(n_i\\) (group sample size), \\(s^2\\) (pooled variance), \\(s_d\\) (SE of the difference), \\(d\\) (sample difference), \\(\\Delta\\) (population difference).",
+   "steps": [
+    {
+     "title": "Define the contrast and hypotheses",
+     "general": [
+      "\\Delta=\\mu_1-\\mu_2"
+     ],
+     "work": [
+      "\\Delta=\\mu_{\\mathrm{short}}-\\mu_{\\mathrm{long}}"
+     ],
+     "words": "The procedure is a pooled t confidence interval for the difference between two independent means. Keep the direction short deafness minus long deafness throughout. The null states that the mean sentence score is the same in the two populations. The two-sided alternative states that the two population means differ."
+    },
+    {
+     "title": "Calculate the observed difference",
+     "general": [
+      "d=\\bar x_1-\\bar x_2"
+     ],
+     "work": [
+      "d=71.5-58.3=13.2"
+     ],
+     "words": "This is the sample estimate of the population difference in % correct."
+    },
+    {
+     "title": "Square both group SDs",
+     "general": [
+      "v_1=s_1^2",
+      "v_2=s_2^2"
+     ],
+     "work": [
+      "v_1=11.2^2=125.44",
+      "v_2=13.6^2=184.96"
+     ],
+     "words": "Each SD is squared before pooling, which gives variances in squared measurement units."
+    },
+    {
+     "title": "Pool both variance contributions",
+     "general": [
+      "s^2=\\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}"
+     ],
+     "work": [
+      "(n_1-1)s_1^2=(12-1)(125.44)=1379.84",
+      "(n_2-1)s_2^2=(14-1)(184.96)=2404.48",
+      "s^2=\\frac{1379.84+2404.48}{12+14-2}=\\frac{3784.32}{24}=157.68"
+     ],
+     "words": "Weight each group variance by its own degrees of freedom, add the contributions, and divide by the combined degrees of freedom."
+    },
+    {
+     "title": "Calculate the SE of the difference",
+     "general": [
+      "s_d=\\sqrt{\\frac{s^2}{n_1}+\\frac{s^2}{n_2}}"
+     ],
+     "work": [
+      "s_d=\\sqrt{\\frac{157.68}{12}+\\frac{157.68}{14}}=\\sqrt{24.40286}=4.939925"
+     ],
+     "words": "Add the two mean-variance contributions inside the root, then take the root. This restores the original measurement units."
+    },
+    {
+     "title": "Find degrees of freedom and the t cutoff",
+     "general": [
+      "\\nu=n_1+n_2-2",
+      "t_c=t_\\alpha(\\nu)"
+     ],
+     "work": [
+      "\\nu=12+14-2=24",
+      "\\alpha=1-0.95=0.05",
+      "t_{0.05}(24)=2.064"
+     ],
+     "words": "Open t_table.pdf, PDF page 1. Use row 24 and the combined two-tail 0.05 column. The printed cutoff is 2.064. Do not halve the column probability again.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "24",
+      "column": "0.05",
+      "value": 2.064,
+      "actualDf": 24,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Calculate the margin",
+     "general": [
+      "M=t_c s_d"
+     ],
+     "work": [
+      "M=2.064(4.939925)=10.196"
+     ],
+     "words": "Multiply the positive cutoff by the standard error of the difference."
+    },
+    {
+     "title": "Calculate both bounds",
+     "general": [
+      "L=d-M",
+      "U=d+M"
+     ],
+     "work": [
+      "L=13.2-10.196=3.003995",
+      "U=13.2+10.196=23.396"
+     ],
+     "words": "The bounds retain the short deafness minus long deafness subtraction order."
+    },
+    {
+     "title": "Make the decision using the interval",
+     "general": [
+      "0\\notin[L,U]\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "[3.003995,23.396]"
+     ],
+     "words": "Zero is outside the interval, so the interval does not contain 0. Reject the null of equal mean sentence score at the matching two-sided 0.05 level, so P < 0.05. No separate t statistic is required."
+    }
+   ],
+   "conclusion": "The 95% confidence interval for short deafness minus long deafness is 3.003995 to 23.396 % correct. The interval does not contain 0, so there is a difference in mean sentence score between the two groups (P < 0.05), with the short deafness group higher.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "24",
+    "column": "0.05",
+    "value": 2.064,
+    "actualDf": 24,
+    "approximation": false
+   },
+   "values": {
+    "n1": 12,
+    "n2": 14,
+    "x1": 71.5,
+    "x2": 58.3,
+    "s1": 11.2,
+    "s2": 13.6,
+    "confidence": 0.95,
+    "df": 24,
+    "variance": 157.67999999999998,
+    "se": 4.939924811457876,
+    "critical": 2.064,
+    "difference": 13.200000000000003,
+    "margin": 10.196004810849058,
+    "lower": 3.0039951891509453,
+    "upper": 23.39600481084906,
+    "reject": true
+   },
+   "module": 17,
+   "tolerance": 0.01502,
+   "answerName": "Lower endpoint",
+   "answer": 3.0039951891509453
+  },
+  {
+   "id": "n17-tinnitus-sound-therapy",
+   "title": "Tinnitus handicap after sound therapy",
+   "topic": "twoMeans",
+   "context": "In a clinical trial, adults with chronic tinnitus (a ringing or buzzing sound heard when no external sound is present) were randomly assigned to 12 weeks of sound therapy (listening to low-level broadband noise each day) or to counseling only. At the end of the 12 weeks, each subject completed the Tinnitus Handicap Inventory (THI), a questionnaire scored from 0 to 100 points on which a higher score means a greater handicap. The mean and standard deviation (SD) of the THI scores in each group are shown below. Assume that any quantities of interest are Normally distributed.",
+   "unit": "points",
+   "table": {
+    "headers": [
+     "Group",
+     "Number of subjects",
+     "Mean THI score (points)",
+     "SD (points)"
+    ],
+    "rows": [
+     [
+      "Sound therapy",
+      15,
+      38.4,
+      14.9
+     ],
+     [
+      "Counseling only",
+      13,
+      46.2,
+      16.3
+     ]
+    ]
+   },
+   "tasks": [
+    "What is the 95% confidence interval for the difference in the mean THI score between the two treatment groups? DO NOT use R.",
+    "Based on the recorded data, is there evidence that the mean THI score is different in these two groups? Answer this question without doing a t test."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\mu_1-\\mu_2=0",
+    "alternative": "H_A:\\mu_1-\\mu_2\\ne0",
+    "nullWords": "The mean THI score is the same in the sound therapy and counseling only populations.",
+    "alternativeWords": "The mean THI score is different in the sound therapy and counseling only populations."
+   },
+   "symbols": "\\(\\bar x_i\\) (group sample mean), \\(s_i\\) (group sample SD), \\(n_i\\) (group sample size), \\(s^2\\) (pooled variance), \\(s_d\\) (SE of the difference), \\(d\\) (sample difference), \\(\\Delta\\) (population difference).",
+   "steps": [
+    {
+     "title": "Define the contrast and hypotheses",
+     "general": [
+      "\\Delta=\\mu_1-\\mu_2"
+     ],
+     "work": [
+      "\\Delta=\\mu_{\\mathrm{sound}}-\\mu_{\\mathrm{counseling}}"
+     ],
+     "words": "The procedure is a pooled t confidence interval for the difference between two independent means. Keep the direction sound therapy minus counseling only throughout. The null states that the mean THI score is the same in the two populations. The two-sided alternative states that the two population means differ."
+    },
+    {
+     "title": "Calculate the observed difference",
+     "general": [
+      "d=\\bar x_1-\\bar x_2"
+     ],
+     "work": [
+      "d=38.4-46.2=-7.8"
+     ],
+     "words": "This is the sample estimate of the population difference in points."
+    },
+    {
+     "title": "Square both group SDs",
+     "general": [
+      "v_1=s_1^2",
+      "v_2=s_2^2"
+     ],
+     "work": [
+      "v_1=14.9^2=222.01",
+      "v_2=16.3^2=265.69"
+     ],
+     "words": "Each SD is squared before pooling, which gives variances in squared measurement units."
+    },
+    {
+     "title": "Pool both variance contributions",
+     "general": [
+      "s^2=\\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}"
+     ],
+     "work": [
+      "(n_1-1)s_1^2=(15-1)(222.01)=3108.14",
+      "(n_2-1)s_2^2=(13-1)(265.69)=3188.28",
+      "s^2=\\frac{3108.14+3188.28}{15+13-2}=\\frac{6296.42}{26}=242.17"
+     ],
+     "words": "Weight each group variance by its own degrees of freedom, add the contributions, and divide by the combined degrees of freedom."
+    },
+    {
+     "title": "Calculate the SE of the difference",
+     "general": [
+      "s_d=\\sqrt{\\frac{s^2}{n_1}+\\frac{s^2}{n_2}}"
+     ],
+     "work": [
+      "s_d=\\sqrt{\\frac{242.17}{15}+\\frac{242.17}{13}}=\\sqrt{34.77313}=5.896874"
+     ],
+     "words": "Add the two mean-variance contributions inside the root, then take the root. This restores the original measurement units."
+    },
+    {
+     "title": "Find degrees of freedom and the t cutoff",
+     "general": [
+      "\\nu=n_1+n_2-2",
+      "t_c=t_\\alpha(\\nu)"
+     ],
+     "work": [
+      "\\nu=15+13-2=26",
+      "\\alpha=1-0.95=0.05",
+      "t_{0.05}(26)=2.056"
+     ],
+     "words": "Open t_table.pdf, PDF page 1. Use row 26 and the combined two-tail 0.05 column. The printed cutoff is 2.056. Do not halve the column probability again.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "26",
+      "column": "0.05",
+      "value": 2.056,
+      "actualDf": 26,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Calculate the margin",
+     "general": [
+      "M=t_c s_d"
+     ],
+     "work": [
+      "M=2.056(5.896874)=12.12397"
+     ],
+     "words": "Multiply the positive cutoff by the standard error of the difference."
+    },
+    {
+     "title": "Calculate both bounds",
+     "general": [
+      "L=d-M",
+      "U=d+M"
+     ],
+     "work": [
+      "L=-7.8-12.12397=-19.92397",
+      "U=-7.8+12.12397=4.323974"
+     ],
+     "words": "The bounds retain the sound therapy minus counseling only subtraction order."
+    },
+    {
+     "title": "Make the decision using the interval",
+     "general": [
+      "0\\in[L,U]\\Rightarrow\\text{do not reject }H_0"
+     ],
+     "work": [
+      "[-19.92397,4.323974]"
+     ],
+     "words": "Zero is inside the interval, so the interval contains 0. Do not reject the null of equal mean THI score at the matching two-sided 0.05 level, so P > 0.05. No separate t statistic is required."
+    }
+   ],
+   "conclusion": "The 95% confidence interval for sound therapy minus counseling only is -19.92397 to 4.323974 points. The interval contains 0, so there is no evidence of a difference in mean THI score between the two groups (P > 0.05).",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "26",
+    "column": "0.05",
+    "value": 2.056,
+    "actualDf": 26,
+    "approximation": false
+   },
+   "values": {
+    "n1": 15,
+    "n2": 13,
+    "x1": 38.4,
+    "x2": 46.2,
+    "s1": 14.9,
+    "s2": 16.3,
+    "confidence": 0.95,
+    "df": 26,
+    "variance": 242.17000000000002,
+    "se": 5.896874443731035,
+    "critical": 2.056,
+    "difference": -7.800000000000004,
+    "margin": 12.123973856311009,
+    "lower": -19.923973856311015,
+    "upper": 4.323973856311005,
+    "reject": false
+   },
+   "module": 17,
+   "tolerance": 0.09962,
+   "answerName": "Lower endpoint",
+   "answer": -19.923973856311015
+  },
+  {
+   "id": "n17-water-maze-aging",
+   "title": "Water maze escape latency in young and aged rats",
+   "topic": "twoMeans",
+   "context": "Researchers interested in spatial memory and aging did a study with the Morris water maze, in which a rat swims in a pool of cloudy water until it finds a hidden platform. After five days of training, the escape latency (time elapsed between release into the pool and climbing onto the platform) was recorded in seconds (s) for a group of young rats and a group of aged rats. The mean and standard deviation (SD) of the escape latencies in each group are shown below. Assume that any quantities of interest are Normally distributed.",
+   "unit": "s",
+   "table": {
+    "headers": [
+     "Group",
+     "Number of rats",
+     "Mean escape latency (s)",
+     "SD (s)"
+    ],
+    "rows": [
+     [
+      "Young",
+      25,
+      22.4,
+      7.4
+     ],
+     [
+      "Aged",
+      24,
+      29.6,
+      9.1
+     ]
+    ]
+   },
+   "tasks": [
+    "What is the 95% confidence interval for the difference in the mean escape latency between the two groups? DO NOT use R. Make sure to show your intermediate calculations.",
+    "Based on the recorded data, is there evidence that the mean escape latency is different in these two groups? Answer this question without doing a t test."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\mu_1-\\mu_2=0",
+    "alternative": "H_A:\\mu_1-\\mu_2\\ne0",
+    "nullWords": "The mean escape latency is the same in the young and aged populations.",
+    "alternativeWords": "The mean escape latency is different in the young and aged populations."
+   },
+   "symbols": "\\(\\bar x_i\\) (group sample mean), \\(s_i\\) (group sample SD), \\(n_i\\) (group sample size), \\(s^2\\) (pooled variance), \\(s_d\\) (SE of the difference), \\(d\\) (sample difference), \\(\\Delta\\) (population difference).",
+   "steps": [
+    {
+     "title": "Define the contrast and hypotheses",
+     "general": [
+      "\\Delta=\\mu_1-\\mu_2"
+     ],
+     "work": [
+      "\\Delta=\\mu_{\\mathrm{young}}-\\mu_{\\mathrm{aged}}"
+     ],
+     "words": "The procedure is a pooled t confidence interval for the difference between two independent means. Keep the direction young minus aged throughout. The null states that the mean escape latency is the same in the two populations. The two-sided alternative states that the two population means differ."
+    },
+    {
+     "title": "Calculate the observed difference",
+     "general": [
+      "d=\\bar x_1-\\bar x_2"
+     ],
+     "work": [
+      "d=22.4-29.6=-7.2"
+     ],
+     "words": "This is the sample estimate of the population difference in s."
+    },
+    {
+     "title": "Square both group SDs",
+     "general": [
+      "v_1=s_1^2",
+      "v_2=s_2^2"
+     ],
+     "work": [
+      "v_1=7.4^2=54.76",
+      "v_2=9.1^2=82.81"
+     ],
+     "words": "Each SD is squared before pooling, which gives variances in squared measurement units."
+    },
+    {
+     "title": "Pool both variance contributions",
+     "general": [
+      "s^2=\\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}"
+     ],
+     "work": [
+      "(n_1-1)s_1^2=(25-1)(54.76)=1314.24",
+      "(n_2-1)s_2^2=(24-1)(82.81)=1904.63",
+      "s^2=\\frac{1314.24+1904.63}{25+24-2}=\\frac{3218.87}{47}=68.4866"
+     ],
+     "words": "Weight each group variance by its own degrees of freedom, add the contributions, and divide by the combined degrees of freedom."
+    },
+    {
+     "title": "Calculate the SE of the difference",
+     "general": [
+      "s_d=\\sqrt{\\frac{s^2}{n_1}+\\frac{s^2}{n_2}}"
+     ],
+     "work": [
+      "s_d=\\sqrt{\\frac{68.4866}{25}+\\frac{68.4866}{24}}=\\sqrt{5.593072}=2.364968"
+     ],
+     "words": "Add the two mean-variance contributions inside the root, then take the root. This restores the original measurement units."
+    },
+    {
+     "title": "Find degrees of freedom and the t cutoff",
+     "general": [
+      "\\nu=n_1+n_2-2",
+      "t_c=t_\\alpha(\\nu)"
+     ],
+     "work": [
+      "\\nu=25+24-2=47",
+      "\\alpha=1-0.95=0.05",
+      "t_{0.05}(47)\\approx t_{0.05}(46)=2.013"
+     ],
+     "words": "The printed t table has no row for 47 degrees of freedom. On PDF page 1, the nearest printed row below is row 46, and its combined two-tail 0.05 column gives 2.013. Using the smaller printed row makes the cutoff slightly larger, so the interval is conservative. Do not halve the column probability again.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "46",
+      "column": "0.05",
+      "value": 2.013,
+      "actualDf": 47,
+      "approximation": true
+     }
+    },
+    {
+     "title": "Calculate the margin",
+     "general": [
+      "M=t_c s_d"
+     ],
+     "work": [
+      "M=2.013(2.364968)=4.76068"
+     ],
+     "words": "Multiply the positive cutoff by the standard error of the difference."
+    },
+    {
+     "title": "Calculate both bounds",
+     "general": [
+      "L=d-M",
+      "U=d+M"
+     ],
+     "work": [
+      "L=-7.2-4.76068=-11.96068",
+      "U=-7.2+4.76068=-2.43932"
+     ],
+     "words": "The bounds retain the young minus aged subtraction order."
+    },
+    {
+     "title": "Make the decision using the interval",
+     "general": [
+      "0\\notin[L,U]\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "[-11.96068,-2.43932]"
+     ],
+     "words": "Zero is outside the interval, so the interval does not contain 0. Reject the null of equal mean escape latency at the matching two-sided 0.05 level, so P < 0.05. No separate t statistic is required."
+    }
+   ],
+   "conclusion": "The 95% confidence interval for young minus aged is -11.96068 to -2.43932 s. The interval does not contain 0, so there is a difference in mean escape latency between the two groups (P < 0.05), with the aged group higher.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "46",
+    "column": "0.05",
+    "value": 2.013,
+    "actualDf": 47,
+    "approximation": true
+   },
+   "values": {
+    "n1": 25,
+    "n2": 24,
+    "x1": 22.4,
+    "x2": 29.6,
+    "s1": 7.4,
+    "s2": 9.1,
+    "confidence": 0.95,
+    "df": 47,
+    "variance": 68.48659574468086,
+    "se": 2.364967650056889,
+    "critical": 2.013,
+    "difference": -7.200000000000003,
+    "margin": 4.760679879564517,
+    "lower": -11.96067987956452,
+    "upper": -2.439320120435486,
+    "reject": true
+   },
+   "module": 17,
+   "tolerance": 0.059803,
+   "alternativeTableAnswer": {
+    "row": "48",
+    "critical": 2.011,
+    "lower": -11.955949944264407
+   },
+   "answerName": "Lower endpoint",
+   "answer": -11.96067987956452
+  },
+  {
+   "id": "n17-noise-notch-venue-workers",
+   "title": "Noise notch in music venue workers",
+   "topic": "oneProportion",
+   "context": "A study was reported concerning hearing in people who work in live music venues. Each of 240 workers had a pure-tone audiogram (a test of the quietest tone a person can hear at each frequency, in decibels hearing level, dB HL). A worker was scored as having a noise notch if the threshold at 4 kilohertz (kHz) was at least 15 dB HL worse than the thresholds at the neighboring test frequencies. A noise notch was found in 78 of the 240 workers. For adults of the same age who do not work in loud places, the proportion with a noise notch is taken to be 0.20.",
+   "unit": "proportion",
+   "table": {
+    "headers": [
+     "Workers with a noise notch",
+     "Workers tested",
+     "Reference proportion"
+    ],
+    "rows": [
+     [
+      78,
+      240,
+      0.2
+     ]
+    ]
+   },
+   "tasks": [
+    "What is the 99% confidence interval for the proportion of music venue workers with a noise notch? DO NOT use R. Make sure to show your intermediate calculations.",
+    "Using only your calculations for the interval, is there evidence that the proportion of music venue workers with a noise notch is different from 0.20? Please state how you reached your conclusions."
+   ],
+   "hypotheses": {
+    "null": "H_0:p=0.20",
+    "alternative": "H_A:p\\ne 0.20",
+    "nullWords": "The population proportion of music venue workers with a noise notch equals 0.20.",
+    "alternativeWords": "The population proportion of music venue workers with a noise notch differs from 0.20."
+   },
+   "symbols": "\\(m\\) (event count), \\(n\\) (sample size), \\(\\hat p\\) (sample event proportion), \\(p\\) (population event proportion), \\(p_0\\) (null reference), \\(s_{\\hat p}\\) (estimated SE).",
+   "steps": [
+    {
+     "title": "State the proportion and hypotheses",
+     "general": [
+      "H_0:p=p_0,\\qquad H_A:p\\ne p_0"
+     ],
+     "work": [
+      "p_0=0.20"
+     ],
+     "words": "The procedure is a Normal (z) confidence interval for one population proportion. The null states that the population proportion of music venue workers with a noise notch is 0.20. The two-sided alternative states that it differs from 0.20."
+    },
+    {
+     "title": "Calculate the sample proportion",
+     "general": [
+      "\\hat p=\\frac{m}{n}"
+     ],
+     "work": [
+      "\\hat p=\\frac{78}{240}=0.325"
+     ],
+     "words": "Divide the event count by the total number of observations."
+    },
+    {
+     "title": "Calculate the proportion SE",
+     "general": [
+      "s_{\\hat p}=\\sqrt{\\frac{\\hat p(1-\\hat p)}{n}}"
+     ],
+     "work": [
+      "\\hat p(1-\\hat p)=0.325(1-0.325)=0.219375",
+      "s_{\\hat p}=\\sqrt{\\frac{0.219375}{240}}=\\sqrt{0.0009140625}=0.03023347"
+     ],
+     "words": "Subtract the proportion from one, multiply, divide by the sample size, then take the square root."
+    },
+    {
+     "title": "Select the Normal cutoff",
+     "general": [
+      "z_c=z_\\alpha"
+     ],
+     "work": [
+      "\\alpha=1-0.99=0.01,\\quad z_c=2.5758"
+     ],
+     "words": "Use the infinity row of the printed two-tail t table, PDF page 2. For 99% confidence, the combined two-tail 0.01 column gives the positive cutoff 2.5758.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 2,
+      "row": "infinity",
+      "column": "0.01",
+      "value": 2.5758,
+      "approximation": false,
+      "normalReference": true
+     }
+    },
+    {
+     "title": "Calculate the margin",
+     "general": [
+      "M=z_c s_{\\hat p}"
+     ],
+     "work": [
+      "M=2.5758(0.03023347)=0.07787536"
+     ],
+     "words": "The margin is in proportion units. Multiply by 100 only when converting the final interpretation to percentage points."
+    },
+    {
+     "title": "Calculate the lower bound",
+     "general": [
+      "L=\\hat p-M"
+     ],
+     "work": [
+      "L=0.325-0.07787536=0.2471246"
+     ],
+     "words": "Subtract the margin from the observed proportion."
+    },
+    {
+     "title": "Calculate the upper bound",
+     "general": [
+      "U=\\hat p+M"
+     ],
+     "work": [
+      "U=0.325+0.07787536=0.4028754"
+     ],
+     "words": "Add the same margin to the observed proportion."
+    },
+    {
+     "title": "Compare with the null reference",
+     "general": [
+      "p_0\\notin[L,U]\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "0.2471246<p<0.4028754,\\quad p_0=0.20"
+     ],
+     "words": "The reference 0.20 is outside the interval. Reject equality with 0.20 at the matching two-sided 0.01 level, so P < 0.01. The comparison is with the stated reference, not automatically with zero."
+    }
+   ],
+   "conclusion": "The 99% confidence interval is 0.2471246 to 0.4028754, or 24.71% to 40.29%. The interval does not contain 0.20, so the proportion of music venue workers with a noise notch is different from 0.20 (P < 0.01).",
+   "source": "Original neuroscience practice example",
+   "values": {
+    "m": 78,
+    "n": 240,
+    "p": 0.325,
+    "reference": 0.2,
+    "confidence": 0.99,
+    "variance": 0.21937500000000001,
+    "se": 0.03023346655611956,
+    "critical": 2.5758,
+    "margin": 0.07787536315525277,
+    "lower": 0.24712463684474723,
+    "upper": 0.4028753631552528,
+    "reject": true
+   },
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 2,
+    "row": "infinity",
+    "column": "0.01",
+    "value": 2.5758,
+    "approximation": false,
+    "normalReference": true
+   },
+   "module": 17,
+   "tolerance": 0.002,
+   "answerName": "Lower endpoint",
+   "answer": 0.24712463684474723
+  },
+  {
+   "id": "n17-sleep-paralysis-survey",
+   "title": "Sleep paralysis in a student survey",
+   "topic": "oneProportion",
+   "context": "In a study looking at unusual sleep experiences, 356 university students completed a questionnaire about sleep paralysis (a brief period on falling asleep or waking up during which a person is awake and aware but cannot move or speak). Of the 356 students, 96 reported at least one episode of sleep paralysis in their lifetime. An earlier survey at another university had suggested that the proportion of students with at least one episode is 0.30.",
+   "unit": "proportion",
+   "table": {
+    "headers": [
+     "Students reporting an episode",
+     "Students surveyed",
+     "Reference proportion"
+    ],
+    "rows": [
+     [
+      96,
+      356,
+      0.3
+     ]
+    ]
+   },
+   "tasks": [
+    "What is the 95% confidence interval for the proportion of students who have had at least one episode of sleep paralysis? DO NOT use R. Make sure to show your intermediate calculations.",
+    "Using only your calculations for the interval, is there evidence that this proportion is different from 0.30? Please state how you reached your conclusions."
+   ],
+   "hypotheses": {
+    "null": "H_0:p=0.30",
+    "alternative": "H_A:p\\ne 0.30",
+    "nullWords": "The population proportion of students reporting at least one episode of sleep paralysis equals 0.30.",
+    "alternativeWords": "The population proportion of students reporting at least one episode of sleep paralysis differs from 0.30."
+   },
+   "symbols": "\\(m\\) (event count), \\(n\\) (sample size), \\(\\hat p\\) (sample event proportion), \\(p\\) (population event proportion), \\(p_0\\) (null reference), \\(s_{\\hat p}\\) (estimated SE).",
+   "steps": [
+    {
+     "title": "State the proportion and hypotheses",
+     "general": [
+      "H_0:p=p_0,\\qquad H_A:p\\ne p_0"
+     ],
+     "work": [
+      "p_0=0.30"
+     ],
+     "words": "The procedure is a Normal (z) confidence interval for one population proportion. The null states that the population proportion of students reporting at least one episode of sleep paralysis is 0.30. The two-sided alternative states that it differs from 0.30."
+    },
+    {
+     "title": "Calculate the sample proportion",
+     "general": [
+      "\\hat p=\\frac{m}{n}"
+     ],
+     "work": [
+      "\\hat p=\\frac{96}{356}=0.2696629"
+     ],
+     "words": "Divide the event count by the total number of observations."
+    },
+    {
+     "title": "Calculate the proportion SE",
+     "general": [
+      "s_{\\hat p}=\\sqrt{\\frac{\\hat p(1-\\hat p)}{n}}"
+     ],
+     "work": [
+      "\\hat p(1-\\hat p)=0.2696629(1-0.2696629)=0.1969448",
+      "s_{\\hat p}=\\sqrt{\\frac{0.1969448}{356}}=\\sqrt{0.0005532158}=0.02352054"
+     ],
+     "words": "Subtract the proportion from one, multiply, divide by the sample size, then take the square root."
+    },
+    {
+     "title": "Select the Normal cutoff",
+     "general": [
+      "z_c=z_\\alpha"
+     ],
+     "work": [
+      "\\alpha=1-0.95=0.05,\\quad z_c=1.96"
+     ],
+     "words": "Use the infinity row of the printed two-tail t table, PDF page 2. For 95% confidence, the combined two-tail 0.05 column gives the positive cutoff 1.96.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 2,
+      "row": "infinity",
+      "column": "0.05",
+      "value": 1.96,
+      "approximation": false,
+      "normalReference": true
+     }
+    },
+    {
+     "title": "Calculate the margin",
+     "general": [
+      "M=z_c s_{\\hat p}"
+     ],
+     "work": [
+      "M=1.96(0.02352054)=0.04610026"
+     ],
+     "words": "The margin is in proportion units. Multiply by 100 only when converting the final interpretation to percentage points."
+    },
+    {
+     "title": "Calculate the lower bound",
+     "general": [
+      "L=\\hat p-M"
+     ],
+     "work": [
+      "L=0.2696629-0.04610026=0.2235627"
+     ],
+     "words": "Subtract the margin from the observed proportion."
+    },
+    {
+     "title": "Calculate the upper bound",
+     "general": [
+      "U=\\hat p+M"
+     ],
+     "work": [
+      "U=0.2696629+0.04610026=0.3157632"
+     ],
+     "words": "Add the same margin to the observed proportion."
+    },
+    {
+     "title": "Compare with the null reference",
+     "general": [
+      "p_0\\in[L,U]\\Rightarrow\\text{do not reject }H_0"
+     ],
+     "work": [
+      "0.2235627<p<0.3157632,\\quad p_0=0.30"
+     ],
+     "words": "The reference 0.30 is inside the interval. Do not reject equality with 0.30 at the matching two-sided 0.05 level, so P > 0.05. The comparison is with the stated reference, not automatically with zero."
+    }
+   ],
+   "conclusion": "The 95% confidence interval is 0.2235627 to 0.3157632, or 22.36% to 31.58%. The interval contains 0.30, so there is no evidence that the proportion of students reporting at least one episode of sleep paralysis is different from 0.30 (P > 0.05).",
+   "source": "Original neuroscience practice example",
+   "values": {
+    "m": 96,
+    "n": 356,
+    "p": 0.2696629213483146,
+    "reference": 0.3,
+    "confidence": 0.95,
+    "variance": 0.1969448301982073,
+    "se": 0.02352054028213433,
+    "critical": 1.96,
+    "margin": 0.04610025895298329,
+    "lower": 0.22356266239533132,
+    "upper": 0.3157631803012979,
+    "reject": false
+   },
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 2,
+    "row": "infinity",
+    "column": "0.05",
+    "value": 1.96,
+    "approximation": false,
+    "normalReference": true
+   },
+   "module": 17,
+   "tolerance": 0.002,
+   "answerName": "Lower endpoint",
+   "answer": 0.22356266239533132
+  },
+  {
+   "id": "n17-insomnia-cbt-remission",
+   "title": "Insomnia remission after behavioral therapy",
+   "topic": "twoProportions",
+   "context": "In a clinical trial, adults with chronic insomnia (difficulty falling asleep or staying asleep on at least three nights per week for at least three months) were randomly assigned to cognitive behavioral therapy for insomnia (CBT-I, a structured program for changing sleep habits and beliefs about sleep) or to a sleep education class. After 8 weeks, each subject was classified as in remission or not in remission on the basis of the Insomnia Severity Index (ISI), a questionnaire on which a score below 8 points counts as remission. In the CBT-I group, 41 of 85 subjects were in remission. In the sleep education group, 27 of 88 subjects were in remission.",
+   "unit": "proportion difference",
+   "table": {
+    "headers": [
+     "Group",
+     "Subjects in remission",
+     "Subjects in group"
+    ],
+    "rows": [
+     [
+      "CBT-I",
+      41,
+      85
+     ],
+     [
+      "Sleep education",
+      27,
+      88
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) What is the 95% confidence interval for the difference in the proportion of subjects in remission between the two treatment groups? DO NOT use R.",
+    "(ii) What is the 99% confidence interval for the difference in the proportion of subjects in remission between the two treatment groups?",
+    "(iii) Using only your calculations for Parts (i) and (ii), is the difference in the proportion of subjects in remission between these two groups statistically significant with P < 0.05? With P < 0.01? Please state how you reached your conclusions."
+   ],
+   "hypotheses": {
+    "null": "H_0:p_1-p_2=0",
+    "alternative": "H_A:p_1-p_2\\ne0",
+    "nullWords": "The proportion of subjects in remission is the same in the CBT-I and sleep education populations.",
+    "alternativeWords": "The proportion of subjects in remission is different in the CBT-I and sleep education populations."
+   },
+   "symbols": "\\(m_i\\) (group event count), \\(n_i\\) (group size), \\(\\hat p_i\\) (group sample proportion), \\(\\hat p\\) (pooled estimate), \\(s_d\\) (SE of the difference), \\(d\\) (observed difference).",
+   "steps": [
+    {
+     "title": "Define the population difference",
+     "general": [
+      "\\Delta=p_1-p_2"
+     ],
+     "work": [
+      "\\Delta=p_{\\mathrm{CBT\\text{-}I}}-p_{\\mathrm{sleep}}"
+     ],
+     "words": "The procedure is a Normal (z) confidence interval for the difference between two independent proportions, with the pooled standard error. Use CBT-I minus sleep education. The null states that the proportion of subjects in remission is the same in the two populations, which corresponds to a difference of zero."
+    },
+    {
+     "title": "Calculate both sample proportions",
+     "general": [
+      "\\hat p_i=\\frac{m_i}{n_i}"
+     ],
+     "work": [
+      "\\hat p_1=\\frac{41}{85}=0.4823529",
+      "\\hat p_2=\\frac{27}{88}=0.3068182"
+     ],
+     "words": "Each event count is divided by its own group size."
+    },
+    {
+     "title": "Calculate the course pooled proportion",
+     "general": [
+      "\\hat p=\\frac{m_1+m_2}{n_1+n_2}"
+     ],
+     "work": [
+      "\\hat p=\\frac{41+27}{85+88}=\\frac{68}{173}=0.3930636"
+     ],
+     "words": "Combine the event counts and the group sizes before taking the fraction. This is the pooled convention used in this course."
+    },
+    {
+     "title": "Calculate the pooled binary variance",
+     "general": [
+      "s^2=\\hat p(1-\\hat p)"
+     ],
+     "work": [
+      "s^2=0.3930636(1-0.3930636)=0.2385646"
+     ],
+     "words": "The pooled binary variance is used in both group contributions to the SE."
+    },
+    {
+     "title": "Calculate the difference SE",
+     "general": [
+      "s_d=\\sqrt{\\frac{s^2}{n_1}+\\frac{s^2}{n_2}}"
+     ],
+     "work": [
+      "s_d=\\sqrt{\\frac{0.2385646}{85}+\\frac{0.2385646}{88}}=\\sqrt{0.005517604}=0.07428057"
+     ],
+     "words": "Keep the two group sizes separate inside the square root."
+    },
+    {
+     "title": "Calculate the difference and margin",
+     "general": [
+      "d=\\hat p_1-\\hat p_2",
+      "M=z_{0.05}s_d"
+     ],
+     "work": [
+      "d=0.4823529-0.3068182=0.1755348",
+      "M=1.96(0.07428057)=0.1455899"
+     ],
+     "words": "Use the Normal cutoff 1.96 from the infinity row, combined two-tail 0.05 column, on PDF page 2 of the printed t table.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 2,
+      "row": "infinity",
+      "column": "0.05",
+      "value": 1.96,
+      "approximation": false,
+      "normalReference": true
+     }
+    },
+    {
+     "title": "Calculate both endpoints",
+     "general": [
+      "L=d-M",
+      "U=d+M"
+     ],
+     "work": [
+      "L=0.1755348-0.1455899=0.02994483",
+      "U=0.1755348+0.1455899=0.3211247"
+     ],
+     "words": "These are absolute differences of event proportions. Multiply by 100 to express the difference in percentage points."
+    },
+    {
+     "title": "Calculate the 99% margin",
+     "general": [
+      "M_{99}=z_{0.01}s_d"
+     ],
+     "work": [
+      "\\alpha=1-0.99=0.01,\\quad z_{0.01}=2.5758",
+      "M_{99}=2.5758(0.07428057)=0.1913319"
+     ],
+     "words": "The estimate and the standard error do not change. Only the cutoff changes. Use 2.5758 from the infinity row, combined two-tail 0.01 column.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 2,
+      "row": "infinity",
+      "column": "0.01",
+      "value": 2.5758,
+      "approximation": false,
+      "normalReference": true
+     }
+    },
+    {
+     "title": "Calculate both 99% endpoints",
+     "general": [
+      "L_{99}=d-M_{99}",
+      "U_{99}=d+M_{99}"
+     ],
+     "work": [
+      "L_{99}=0.1755348-0.1913319=-0.01579715",
+      "U_{99}=0.1755348+0.1913319=0.3668667"
+     ],
+     "words": "The 99% interval is wider than the 95% interval because the cutoff is larger."
+    },
+    {
+     "title": "Compare the 95% interval with zero",
+     "general": [
+      "0\\notin[L,U]\\Rightarrow\\text{reject equal proportions}"
+     ],
+     "work": [
+      "0.02994483<p_1-p_2<0.3211247"
+     ],
+     "words": "The 95% interval does not contain 0. The difference is statistically significant with P < 0.05."
+    },
+    {
+     "title": "Compare the 99% interval with zero",
+     "general": [
+      "0\\in[L_{99},U_{99}]\\Rightarrow\\text{do not reject equal proportions}"
+     ],
+     "work": [
+      "-0.01579715<p_1-p_2<0.3668667"
+     ],
+     "words": "The 99% interval contains 0. The difference is not statistically significant with P < 0.01. Together the two intervals place the P value between 0.01 and 0.05."
+    }
+   ],
+   "conclusion": "The 95% confidence interval for CBT-I minus sleep education is 0.02994483 to 0.3211247 and the 99% confidence interval is -0.01579715 to 0.3668667. The 95% interval does not contain 0 and the 99% interval contains 0. There is a difference in the proportion of subjects in remission between the two groups with P < 0.05 but not with P < 0.01, so 0.01 < P < 0.05.",
+   "source": "Original neuroscience practice example",
+   "rounded": false,
+   "values": {
+    "m1": 41,
+    "n1": 85,
+    "m2": 27,
+    "n2": 88,
+    "p1": 0.4823529411764706,
+    "p2": 0.3068181818181818,
+    "pooled": 0.3930635838150289,
+    "variance": 0.23856460289351467,
+    "se": 0.07428057473862018,
+    "rawSE": 0.07428057473862018,
+    "difference": 0.17553475935828877,
+    "critical": 1.96,
+    "confidence": 0.95,
+    "margin": 0.14558992648769556,
+    "lower": 0.029944832870593213,
+    "upper": 0.3211246858459843,
+    "reject": true,
+    "critical99": 2.5758,
+    "margin99": 0.19133190441173786,
+    "lower99": -0.01579714505344909,
+    "upper99": 0.36686666377002664,
+    "reject99": false
+   },
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 2,
+    "row": "infinity",
+    "column": "0.05",
+    "value": 1.96,
+    "approximation": false,
+    "normalReference": true
+   },
+   "module": 17,
+   "tolerance": 0.002,
+   "answerName": "Lower endpoint",
+   "answer": 0.029944832870593213
+  },
+  {
+   "id": "n17-concussion-early-exercise",
+   "title": "Persistent symptoms after concussion",
+   "topic": "twoProportions",
+   "context": "A study was reported concerning recovery from sport-related concussion (a mild traumatic brain injury) in adolescent athletes. Within one week of injury, athletes were randomly assigned to early light exercise (20 minutes of supervised stationary cycling each day) or to strict rest. An athlete was scored as having persistent symptoms if a standard symptom checklist was still above the pre-season baseline 4 weeks after the injury. Persistent symptoms were recorded in 14 of 62 athletes in the early exercise group and in 21 of 58 athletes in the strict rest group.",
+   "unit": "proportion difference",
+   "table": {
+    "headers": [
+     "Group",
+     "Athletes with persistent symptoms",
+     "Athletes in group"
+    ],
+    "rows": [
+     [
+      "Early exercise",
+      14,
+      62
+     ],
+     [
+      "Strict rest",
+      21,
+      58
+     ]
+    ]
+   },
+   "tasks": [
+    "What is the 95% confidence interval for the difference in the proportion of athletes with persistent symptoms between the two treatment groups? DO NOT use R. Make sure to show your intermediate calculations.",
+    "Using only your calculations for the interval, is there evidence that the proportion of athletes with persistent symptoms is different in these two groups? Please state how you reached your conclusions."
+   ],
+   "hypotheses": {
+    "null": "H_0:p_1-p_2=0",
+    "alternative": "H_A:p_1-p_2\\ne0",
+    "nullWords": "The proportion of athletes with persistent symptoms is the same in the early exercise and strict rest populations.",
+    "alternativeWords": "The proportion of athletes with persistent symptoms is different in the early exercise and strict rest populations."
+   },
+   "symbols": "\\(m_i\\) (group event count), \\(n_i\\) (group size), \\(\\hat p_i\\) (group sample proportion), \\(\\hat p\\) (pooled estimate), \\(s_d\\) (SE of the difference), \\(d\\) (observed difference).",
+   "steps": [
+    {
+     "title": "Define the population difference",
+     "general": [
+      "\\Delta=p_1-p_2"
+     ],
+     "work": [
+      "\\Delta=p_{\\mathrm{early}}-p_{\\mathrm{strict}}"
+     ],
+     "words": "The procedure is a Normal (z) confidence interval for the difference between two independent proportions, with the pooled standard error. Use early exercise minus strict rest. The null states that the proportion of athletes with persistent symptoms is the same in the two populations, which corresponds to a difference of zero."
+    },
+    {
+     "title": "Calculate both sample proportions",
+     "general": [
+      "\\hat p_i=\\frac{m_i}{n_i}"
+     ],
+     "work": [
+      "\\hat p_1=\\frac{14}{62}=0.2258065",
+      "\\hat p_2=\\frac{21}{58}=0.362069"
+     ],
+     "words": "Each event count is divided by its own group size."
+    },
+    {
+     "title": "Calculate the course pooled proportion",
+     "general": [
+      "\\hat p=\\frac{m_1+m_2}{n_1+n_2}"
+     ],
+     "work": [
+      "\\hat p=\\frac{14+21}{62+58}=\\frac{35}{120}=0.2916667"
+     ],
+     "words": "Combine the event counts and the group sizes before taking the fraction. This is the pooled convention used in this course."
+    },
+    {
+     "title": "Calculate the pooled binary variance",
+     "general": [
+      "s^2=\\hat p(1-\\hat p)"
+     ],
+     "work": [
+      "s^2=0.2916667(1-0.2916667)=0.2065972"
+     ],
+     "words": "The pooled binary variance is used in both group contributions to the SE."
+    },
+    {
+     "title": "Calculate the difference SE",
+     "general": [
+      "s_d=\\sqrt{\\frac{s^2}{n_1}+\\frac{s^2}{n_2}}"
+     ],
+     "work": [
+      "s_d=\\sqrt{\\frac{0.2065972}{62}+\\frac{0.2065972}{58}}=\\sqrt{0.006894234}=0.08303153"
+     ],
+     "words": "Keep the two group sizes separate inside the square root."
+    },
+    {
+     "title": "Calculate the difference and margin",
+     "general": [
+      "d=\\hat p_1-\\hat p_2",
+      "M=z_{0.05}s_d"
+     ],
+     "work": [
+      "d=0.2258065-0.362069=-0.1362625",
+      "M=1.96(0.08303153)=0.1627418"
+     ],
+     "words": "Use the Normal cutoff 1.96 from the infinity row, combined two-tail 0.05 column, on PDF page 2 of the printed t table.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 2,
+      "row": "infinity",
+      "column": "0.05",
+      "value": 1.96,
+      "approximation": false,
+      "normalReference": true
+     }
+    },
+    {
+     "title": "Calculate both endpoints",
+     "general": [
+      "L=d-M",
+      "U=d+M"
+     ],
+     "work": [
+      "L=-0.1362625-0.1627418=-0.2990043",
+      "U=-0.1362625+0.1627418=0.02647928"
+     ],
+     "words": "These are absolute differences of event proportions. Multiply by 100 to express the difference in percentage points."
+    },
+    {
+     "title": "Interpret direction and the zero comparison",
+     "general": [
+      "0\\in[L,U]\\Rightarrow\\text{do not reject equal proportions}"
+     ],
+     "work": [
+      "-0.2990043<p_1-p_2<0.02647928"
+     ],
+     "words": "The interval contains 0. Do not reject equal proportions at the matching two-sided 0.05 level, so P > 0.05. The observed difference is negative because the strict rest proportion is the larger one in this sample."
+    }
+   ],
+   "conclusion": "The 95% confidence interval for early exercise minus strict rest is -0.2990043 to 0.02647928, equivalent to -29.90 to 2.65 percentage points. The interval contains 0, so there is no evidence of a difference in the proportion of athletes with persistent symptoms between the two groups (P > 0.05).",
+   "source": "Original neuroscience practice example",
+   "rounded": false,
+   "values": {
+    "m1": 14,
+    "n1": 62,
+    "m2": 21,
+    "n2": 58,
+    "p1": 0.22580645161290322,
+    "p2": 0.3620689655172414,
+    "pooled": 0.2916666666666667,
+    "variance": 0.2065972222222222,
+    "se": 0.0830315261478776,
+    "rawSE": 0.0830315261478776,
+    "difference": -0.13626251390433816,
+    "critical": 1.96,
+    "confidence": 0.95,
+    "margin": 0.1627417912498401,
+    "lower": -0.29900430515417825,
+    "upper": 0.026479277345501928,
+    "reject": false
+   },
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 2,
+    "row": "infinity",
+    "column": "0.05",
+    "value": 1.96,
+    "approximation": false,
+    "normalReference": true
+   },
+   "module": 17,
+   "tolerance": 0.002,
+   "answerName": "Lower endpoint",
+   "answer": -0.29900430515417825
+  }
+ ],
+ "questions": [
+  {
+   "id": "m2-n17-qa01",
+   "module": 17,
+   "topic": "oneMean",
+   "stem": "In the auditory brainstem response study, 16 adults with normal hearing had a mean wave V latency of 5.68 ms with an SD of 0.26 ms. What is the lower endpoint of the 95% confidence interval for the population mean latency?",
+   "options": [
+    "\\(5.5526\\) ms",
+    "\\(5.12594\\) ms",
+    "\\(5.541485\\) ms",
+    "\\(5.645371\\) ms"
+   ],
+   "correct": 2,
+   "why": "The standard error is 0.26 divided by the square root of 16, which is 0.065 ms. With 15 degrees of freedom the printed cutoff is 2.131, so the margin is 0.138515 ms. The other values use 1.96, the SD in place of the standard error, or the SD divided by 16 in place of its square root.",
+   "case": "n17-abr-wave-v",
+   "equations": [
+    "L=\\bar x-t_\\alpha(\\nu)\\frac{s}{\\sqrt n}",
+    "L=5.68-2.131(0.065)=5.541485"
+   ]
+  },
+  {
+   "id": "m2-n17-qa02",
+   "module": 17,
+   "topic": "oneMean",
+   "stem": "In the sleep laboratory study, 22 healthy young adults had a mean REM latency of 84.6 min with an SD of 18.3 min. What is the margin of error of the 99% confidence interval for the population mean REM latency?",
+   "options": [
+    "\\(11.04535\\) min",
+    "\\(8.115272\\) min",
+    "\\(10.04967\\) min",
+    "\\(51.8073\\) min"
+   ],
+   "correct": 0,
+   "why": "The standard error is 18.3 divided by the square root of 22. With 21 degrees of freedom the printed cutoff in the 0.01 column is 2.831. The other values use the 0.05 column, the Normal cutoff 2.5758, or the SD in place of the standard error.",
+   "case": "n17-rem-latency",
+   "equations": [
+    "M=t_\\alpha(\\nu)\\frac{s}{\\sqrt n}",
+    "M=2.831(3.901573)=11.04535"
+   ]
+  },
+  {
+   "id": "m2-n17-qa03",
+   "module": 17,
+   "topic": "twoMeans",
+   "stem": "In the cochlear implant study, the short deafness group (n = 12) had a mean sentence score of 71.5% correct with an SD of 11.2, and the long deafness group (n = 14) had a mean of 58.3% correct with an SD of 13.6. What is the standard error of the difference between the two means, using the pooled variance?",
+   "options": [
+    "\\(12.55707\\) % correct",
+    "\\(2.462644\\) % correct",
+    "\\(24.40286\\) % correct",
+    "\\(4.939925\\) % correct"
+   ],
+   "correct": 3,
+   "why": "The pooled variance is 157.68. Dividing it by each group size, adding, and taking the square root gives 4.939925. The other values are the pooled SD, the pooled variance divided by the total sample size before the root, and the sum inside the root without the square root.",
+   "case": "n17-cochlear-implant-sentences",
+   "equations": [
+    "s_d=\\sqrt{\\frac{s^2}{n_1}+\\frac{s^2}{n_2}}",
+    "s_d=\\sqrt{\\frac{157.68}{12}+\\frac{157.68}{14}}=4.939925"
+   ]
+  },
+  {
+   "id": "m2-n17-qa04",
+   "module": 17,
+   "topic": "twoMeans",
+   "stem": "In the water maze study there were 25 young rats and 24 aged rats, and a 95% confidence interval for the difference between the two mean escape latencies was requested. The printed t table has rows 46 and 48 but no row 47. Which cutoff gives the conservative interval?",
+   "options": [
+    "\\(2.064\\), from row 24",
+    "\\(2.013\\), from row 46",
+    "\\(2.011\\), from row 48",
+    "\\(1.960\\), from the infinity row"
+   ],
+   "correct": 1,
+   "why": "The degrees of freedom are 25 + 24 - 2 = 47. When the row is not printed, the nearest smaller printed row has the slightly larger cutoff, so the interval is a little wider and conservative.",
+   "case": "n17-water-maze-aging",
+   "equations": [
+    "\\nu=n_1+n_2-2=25+24-2=47",
+    "t_{0.05}(47)\\approx t_{0.05}(46)=2.013"
+   ]
+  },
+  {
+   "id": "m2-n17-qa05",
+   "module": 17,
+   "topic": "oneProportion",
+   "stem": "A noise notch was found in 78 of 240 music venue workers. What is the lower endpoint of the 99% confidence interval for the proportion of workers with a noise notch?",
+   "options": [
+    "\\(0.2657424\\)",
+    "\\(0.2471246\\)",
+    "\\(0.2584931\\)",
+    "\\(0.2546679\\)"
+   ],
+   "correct": 1,
+   "why": "The sample proportion is 0.325 and its standard error is 0.03023347. For 99% confidence the cutoff is 2.5758 from the infinity row, 0.01 column. The other values use 1.96, the reference proportion 0.20 inside the standard error, or the 0.02 column.",
+   "case": "n17-noise-notch-venue-workers",
+   "equations": [
+    "L=\\hat p-z_\\alpha\\sqrt{\\frac{\\hat p(1-\\hat p)}{n}}",
+    "L=0.325-2.5758(0.03023347)=0.2471246"
+   ]
+  },
+  {
+   "id": "m2-n17-qa06",
+   "module": 17,
+   "topic": "twoProportions",
+   "stem": "In the insomnia trial, 41 of 85 subjects given cognitive behavioral therapy and 27 of 88 subjects given sleep education were in remission. Using the pooled proportion, what is the standard error of the difference between the two sample proportions?",
+   "options": [
+    "\\(0.0371347\\)",
+    "\\(0.07317335\\)",
+    "\\(0.005517604\\)",
+    "\\(0.07428057\\)"
+   ],
+   "correct": 3,
+   "why": "The pooled proportion is 68/173 = 0.3930636, so the pooled variance is 0.2385646. Dividing by each group size, adding, and taking the root gives 0.07428057. The other values divide by the total sample size, use the two separate proportions, or leave out the square root.",
+   "case": "n17-insomnia-cbt-remission",
+   "equations": [
+    "s_d=\\sqrt{\\hat p(1-\\hat p)\\left(\\frac1{n_1}+\\frac1{n_2}\\right)}",
+    "s_d=\\sqrt{0.2385646\\left(\\frac1{85}+\\frac1{88}\\right)}=0.07428057"
+   ]
+  },
+  {
+   "id": "m2-n17-qa07",
+   "module": 17,
+   "topic": "decision",
+   "stem": "In a study of tinnitus, the difference in the proportion of patients reporting relief between two treatment groups was estimated. The 95% confidence interval for the difference did not contain 0, and the 99% confidence interval did contain 0. Which statement about the two-sided P value follows from these two intervals alone?",
+   "options": [
+    "\\(P<0.01\\)",
+    "\\(P>0.05\\)",
+    "\\(0.01<P<0.05\\)",
+    "Nothing can be said without the z statistic"
+   ],
+   "correct": 2,
+   "why": "A 95% interval that excludes 0 means the difference is significant with P < 0.05. A 99% interval that contains 0 means it is not significant with P < 0.01.",
+   "case": null,
+   "equations": [
+    "0\\notin[L_{95},U_{95}]\\Rightarrow P<0.05",
+    "0\\in[L_{99},U_{99}]\\Rightarrow P>0.01"
+   ]
+  },
+  {
+   "id": "m2-n17-qa08",
+   "module": 17,
+   "topic": "twoMeans",
+   "stem": "Researchers measured the frequency discrimination threshold (the smallest pitch change a listener can detect, in hertz) in 14 trained musicians and in 17 other adults who had never played an instrument. The mean, SD and sample size of each group were reported. Which interval estimates the difference between the two population means?",
+   "options": [
+    "A pooled t interval with \\(\\nu=14+17-2=29\\)",
+    "A one-sample t interval with \\(\\nu=30\\)",
+    "A z interval for two proportions with the pooled \\(\\hat p\\)",
+    "A one-sample t interval on 14 paired differences with \\(\\nu=13\\)"
+   ],
+   "correct": 0,
+   "why": "The two groups contain different people, so the samples are independent and the outcome is a measured mean. The pooled variance has n1 + n2 - 2 degrees of freedom.",
+   "case": null,
+   "equations": [
+    "(\\bar x_1-\\bar x_2)\\pm t_\\alpha(\\nu)s_d",
+    "\\nu=n_1+n_2-2"
+   ]
+  },
+  {
+   "id": "m2-n17-qa09",
+   "module": 17,
+   "topic": "meaning",
+   "stem": "A 95% confidence interval for the mean total sleep time of shift workers is reported as 5.9 to 6.5 hours. What does this interval estimate?",
+   "options": [
+    "The range that contains the sleep time of 95% of individual shift workers",
+    "The range of sample means that will occur in 95% of future studies",
+    "A range for the sample mean of this study",
+    "A range of plausible values for the population mean sleep time of shift workers"
+   ],
+   "correct": 3,
+   "why": "A confidence interval is a statement about the population mean. It is built from the standard error, not from the SD, so it does not describe how individual workers vary.",
+   "case": null,
+   "equations": [
+    "\\bar x\\pm t_\\alpha(\\nu)s_{\\bar x}",
+    "\\text{confidence}=100(1-\\alpha)\\%"
+   ]
+  },
+  {
+   "id": "m2-n17-qa10",
+   "module": 17,
+   "topic": "oneProportion",
+   "stem": "In a hearing screening program, 52 of 410 newborns did not pass an otoacoustic emission test (a recording of the faint sound that a healthy inner ear produces in response to a click). Which cutoff is used for the 95% confidence interval for the population proportion that does not pass?",
+   "options": [
+    "\\(t_{0.05}(409)\\), taken from row 200 as \\(1.972\\)",
+    "\\(z=1.96\\), from the infinity row of the two-tail t table",
+    "\\(t_{0.05}(51)\\), about \\(2.007\\)",
+    "\\(z=1.6449\\), from the 0.10 column of the infinity row"
+   ],
+   "correct": 1,
+   "why": "An interval for a proportion uses the Normal cutoff, which is printed in the infinity row. For 95% confidence the combined two-tail probability is 0.05, so the cutoff is 1.96.",
+   "case": null,
+   "equations": [
+    "\\hat p\\pm z_\\alpha s_{\\hat p}",
+    "s_{\\hat p}=\\sqrt{\\frac{\\hat p(1-\\hat p)}n}"
+   ]
+  }
+ ],
+ "notes": [
+  "All data are invented for practice. No real study, author or drug effect is cited.",
+  "n17-water-maze-aging has 47 degrees of freedom, which is not a printed row (the table prints 46 and 48). The solution uses row 46 (2.013) as the conservative bracket and stores approximation true with actualDf 47. alternativeTableAnswer records the lower endpoint if row 48 (2.011) is used, in the same form as ci-glucose.",
+  "n17-insomnia-cbt-remission asks for both a 95% and a 99% interval. The standard twoProportions values keys hold the 95% interval. The 99% results are in the extra keys critical99, margin99, lower99, upper99 and reject99, and the case has 11 steps instead of 8.",
+  "Intervals that contain the null value: n17-tinnitus-sound-therapy, n17-sleep-paralysis-survey, n17-concussion-early-exercise, and the 99% interval of n17-insomnia-cbt-remission.",
+  "n17-rem-latency and n17-noise-notch-venue-workers use 99% confidence (0.01 column). All other intervals are 95%.",
+  "Table headers carry the variable name and unit instead of the generic ref headers, with the same column order as the ref case of each method.",
+  "The ref cases store the step table lookup under the key tableLookup, so the new cases do the same.",
+  "Work lines show 7 significant figures and carry full precision between steps, as in the ref cases.",
+  "Question topics m2-n17-qa07 (decision) and m2-n17-qa09 (meaning) use the session method ids for reading an interval."
+ ]
+}

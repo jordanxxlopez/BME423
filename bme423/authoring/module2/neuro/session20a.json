@@ -1,0 +1,2476 @@
+{
+ "cases": [
+  {
+   "id": "n20-alpha-eyes-closed",
+   "title": "EEG alpha power with eyes open and eyes closed",
+   "topic": "s20paired",
+   "context": "Researchers interested in the alpha rhythm of the electroencephalogram (EEG) (an 8 to 12 Hz oscillation recorded from the scalp) did a study to evaluate whether alpha power over the occipital cortex (the visual area at the back of the brain) depends on whether the eyes are open. Each subject was evaluated during 3 minutes of rest with the eyes open (measurement 1) and again during 3 minutes of rest with the eyes closed (measurement 2). Alpha power was recorded at electrode Oz (a scalp site at the back of the head) in microvolts squared (μV²).",
+   "unit": "μV²",
+   "table": {
+    "headers": [
+     "Subject",
+     "Eyes open alpha power (μV²)",
+     "Eyes closed alpha power (μV²)"
+    ],
+    "rows": [
+     [
+      1,
+      4.2,
+      9.8
+     ],
+     [
+      2,
+      6.1,
+      11.4
+     ],
+     [
+      3,
+      3.8,
+      3.5
+     ],
+     [
+      4,
+      7.5,
+      15.2
+     ],
+     [
+      5,
+      5.0,
+      8.7
+     ],
+     [
+      6,
+      9.3,
+      14.9
+     ],
+     [
+      7,
+      4.6,
+      10.3
+     ],
+     [
+      8,
+      6.8,
+      9.9
+     ],
+     [
+      9,
+      5.5,
+      12.6
+     ],
+     [
+      10,
+      8.1,
+      13.0
+     ]
+    ]
+   },
+   "tasks": [
+    "Based on the recorded data, is there evidence that alpha power is different in these two states? Assume that any quantities of interest are Normally distributed. DO NOT use R."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\delta=0",
+    "alternative": "H_A:\\delta\\ne0",
+    "nullWords": "Closing the eyes produces no change in mean occipital alpha power (the true mean eyes closed minus eyes open difference is zero).",
+    "alternativeWords": "Closing the eyes changes mean occipital alpha power (the true mean eyes closed minus eyes open difference is not zero)."
+   },
+   "symbols": "\\(d_i\\) (difference in subject \\(i\\)), \\(\\bar d\\) (mean difference), \\(s_d\\) (SD of the differences), \\(s_{\\bar d}\\) (standard error of the mean difference), \\(\\delta\\) (true mean difference), \\(n\\) (number of subjects), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\delta=0",
+      "H_A:\\delta\\ne0"
+     ],
+     "work": [
+      "\\delta=\\mu_{\\mathrm{closed}}-\\mu_{\\mathrm{open}}"
+     ],
+     "words": "Each subject is measured under both conditions, so the procedure is the paired t test on the within-subject differences. Closing the eyes produces no change in mean occipital alpha power (the true mean eyes closed minus eyes open difference is zero). Closing the eyes changes mean occipital alpha power (the true mean eyes closed minus eyes open difference is not zero)."
+    },
+    {
+     "title": "Form one difference per subject",
+     "general": [
+      "d_i=x1_i-x2_i,\\quad i=1,\\dots,n"
+     ],
+     "work": [
+      "d_i=(9.8-4.2,11.4-6.1,3.5-3.8,15.2-7.5,8.7-5,14.9-9.3,10.3-4.6,9.9-6.8,12.6-5.5,13-8.1)",
+      "d_i=(5.6,5.3,-0.3,7.7,3.7,5.6,5.7,3.1,7.1,4.9),\\quad n=10"
+     ],
+     "words": "Subtract in the same direction for every subject (eyes closed minus eyes open). Subject 3 has a difference of the opposite sign, and it stays in the list with its sign. The analysis now uses only these 10 numbers."
+    },
+    {
+     "title": "Calculate the mean difference",
+     "general": [
+      "\\bar d=\\frac{1}{n}\\sum_{i=1}^{n}d_i"
+     ],
+     "work": [
+      "\\bar d=\\frac{48.4}{10}=4.84"
+     ],
+     "words": "The mean difference estimates the true mean change \\(\\delta\\) in μV²."
+    },
+    {
+     "title": "Calculate the SD of the differences",
+     "general": [
+      "s_d^2=\\frac{1}{n-1}\\sum_{i=1}^{n}(d_i-\\bar d)^2",
+      "s_d=\\sqrt{s_d^2}"
+     ],
+     "work": [
+      "\\sum(d_i-\\bar d)^2=46.144",
+      "s_d^2=\\frac{46.144}{9}=5.12711",
+      "s_d=2.26431"
+     ],
+     "words": "Square each deviation of a difference from the mean difference, add them, divide by \\(n-1\\), and take the root."
+    },
+    {
+     "title": "Calculate the standard error of the mean difference",
+     "general": [
+      "s_{\\bar d}=\\frac{s_d}{\\sqrt n}"
+     ],
+     "work": [
+      "s_{\\bar d}=\\frac{2.26431}{\\sqrt{10}}=0.716038"
+     ],
+     "words": "The standard error describes how much the mean difference varies from sample to sample."
+    },
+    {
+     "title": "Calculate the t statistic",
+     "general": [
+      "t=\\frac{\\bar d-\\delta}{s_{\\bar d}}=\\frac{\\bar d}{s_{\\bar d}}\\quad(\\delta=0\\text{ under }H_0)"
+     ],
+     "work": [
+      "t=\\frac{4.84}{0.716038}=6.75941"
+     ],
+     "words": "Under the null hypothesis the true mean difference is zero, so the numerator is the mean difference itself."
+    },
+    {
+     "title": "Find the degrees of freedom and the critical value",
+     "general": [
+      "\\nu=n-1",
+      "t_c=t_{0.05}(\\nu)"
+     ],
+     "work": [
+      "\\nu=10-1=9",
+      "t_{0.05}(9)=2.262"
+     ],
+     "words": "Open t_table.pdf, PDF page 1. Start with α = 0.05. Use row 9 and the two-tailed 0.05 column. The printed cutoff is 2.262.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "9",
+      "column": "0.05",
+      "value": 2.262,
+      "actualDf": 9,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "|t|>t_\\alpha(\\nu)\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "|t|=6.75941>t_{0.05}(9)=2.262",
+      "|t|=6.75941>t_{0.001}(9)=4.781",
+      "P<0.001"
+     ],
+     "words": "The statistic exceeds the 0.05 cutoff, so reject the null hypothesis. In row 9 it also passes every stricter column up to the 0.001 column (4.781), so P < 0.001."
+    }
+   ],
+   "conclusion": "The mean eyes closed minus eyes open difference is 4.84 μV², t = 6.75941 with 9 degrees of freedom, above 2.262. Reject the null hypothesis. There is a difference in occipital alpha power between the two states, and alpha power is higher with the eyes closed (P < 0.001).",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "9",
+    "column": "0.05",
+    "value": 2.262,
+    "actualDf": 9,
+    "approximation": false
+   },
+   "values": {
+    "n": 10,
+    "differences": [
+     5.6,
+     5.3,
+     -0.3,
+     7.7,
+     3.7,
+     5.6,
+     5.7,
+     3.1,
+     7.1,
+     4.9
+    ],
+    "dbar": 4.84,
+    "sumSqDev": 46.14399999999999,
+    "varianceD": 5.12711111111111,
+    "sd": 2.2643125029710696,
+    "se": 0.716038484378536,
+    "t": 6.759413223719018,
+    "df": 9,
+    "critical": 2.262,
+    "exactP": 8.276202781045886e-05,
+    "reject": true
+   },
+   "module": 20,
+   "tolerance": 0.03379706611859509,
+   "answerName": "t statistic",
+   "answer": 6.759413223719018
+  },
+  {
+   "id": "n20-tens-pressure-pain",
+   "title": "Pressure pain threshold before and after TENS",
+   "topic": "s20paired",
+   "context": "Researchers interested in pain relief did a study to evaluate whether transcutaneous electrical nerve stimulation (TENS) (a mild electrical current delivered through skin electrodes) changes the pressure pain threshold (lowest pressure on the forearm that the subject reports as painful). Each subject was evaluated before a 20 minute TENS session (measurement 1) and again immediately after the session (measurement 2). Thresholds were recorded with a handheld algometer (a pressure gauge pressed against the skin) in kilopascals (kPa).",
+   "unit": "kPa",
+   "table": {
+    "headers": [
+     "Subject",
+     "Threshold before TENS (kPa)",
+     "Threshold after TENS (kPa)"
+    ],
+    "rows": [
+     [
+      1,
+      310,
+      325
+     ],
+     [
+      2,
+      285,
+      270
+     ],
+     [
+      3,
+      402,
+      415
+     ],
+     [
+      4,
+      356,
+      349
+     ],
+     [
+      5,
+      298,
+      322
+     ],
+     [
+      6,
+      441,
+      436
+     ],
+     [
+      7,
+      367,
+      391
+     ],
+     [
+      8,
+      329,
+      318
+     ],
+     [
+      9,
+      275,
+      290
+     ],
+     [
+      10,
+      390,
+      402
+     ],
+     [
+      11,
+      345,
+      339
+     ]
+    ]
+   },
+   "tasks": [
+    "Based on the recorded data, is there evidence that the pressure pain threshold is different in these two states? Assume that any quantities of interest are Normally distributed. DO NOT use R.",
+    "Provide your result in a single complete sentence that would convey your conclusion in a way that could be understood by a non-expert in statistics or medicine (e.g., a typical reader of a local newspaper)."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\delta=0",
+    "alternative": "H_A:\\delta\\ne0",
+    "nullWords": "The TENS session produces no change in the mean pressure pain threshold (the true mean after minus before difference is zero).",
+    "alternativeWords": "The TENS session changes the mean pressure pain threshold (the true mean after minus before difference is not zero)."
+   },
+   "symbols": "\\(d_i\\) (difference in subject \\(i\\)), \\(\\bar d\\) (mean difference), \\(s_d\\) (SD of the differences), \\(s_{\\bar d}\\) (standard error of the mean difference), \\(\\delta\\) (true mean difference), \\(n\\) (number of subjects), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\delta=0",
+      "H_A:\\delta\\ne0"
+     ],
+     "work": [
+      "\\delta=\\mu_{\\mathrm{after}}-\\mu_{\\mathrm{before}}"
+     ],
+     "words": "Each subject is measured under both conditions, so the procedure is the paired t test on the within-subject differences. The TENS session produces no change in the mean pressure pain threshold (the true mean after minus before difference is zero). The TENS session changes the mean pressure pain threshold (the true mean after minus before difference is not zero)."
+    },
+    {
+     "title": "Form one difference per subject",
+     "general": [
+      "d_i=x1_i-x2_i,\\quad i=1,\\dots,n"
+     ],
+     "work": [
+      "d_i=(325-310,270-285,415-402,349-356,322-298,436-441,391-367,318-329,290-275,402-390,339-345)",
+      "d_i=(15,-15,13,-7,24,-5,24,-11,15,12,-6),\\quad n=11"
+     ],
+     "words": "Subtract in the same direction for every subject (after minus before). Five subjects have a lower threshold after the session, so their differences are negative and keep their sign. The analysis now uses only these 11 numbers."
+    },
+    {
+     "title": "Calculate the mean difference",
+     "general": [
+      "\\bar d=\\frac{1}{n}\\sum_{i=1}^{n}d_i"
+     ],
+     "work": [
+      "\\bar d=\\frac{59}{11}=5.36364"
+     ],
+     "words": "The mean difference estimates the true mean change \\(\\delta\\) in kPa."
+    },
+    {
+     "title": "Calculate the SD of the differences",
+     "general": [
+      "s_d^2=\\frac{1}{n-1}\\sum_{i=1}^{n}(d_i-\\bar d)^2",
+      "s_d=\\sqrt{s_d^2}"
+     ],
+     "work": [
+      "\\sum(d_i-\\bar d)^2=2054.55",
+      "s_d^2=\\frac{2054.55}{10}=205.455",
+      "s_d=14.3337"
+     ],
+     "words": "Square each deviation of a difference from the mean difference, add them, divide by \\(n-1\\), and take the root."
+    },
+    {
+     "title": "Calculate the standard error of the mean difference",
+     "general": [
+      "s_{\\bar d}=\\frac{s_d}{\\sqrt n}"
+     ],
+     "work": [
+      "s_{\\bar d}=\\frac{14.3337}{\\sqrt{11}}=4.32177"
+     ],
+     "words": "The standard error describes how much the mean difference varies from sample to sample."
+    },
+    {
+     "title": "Calculate the t statistic",
+     "general": [
+      "t=\\frac{\\bar d-\\delta}{s_{\\bar d}}=\\frac{\\bar d}{s_{\\bar d}}\\quad(\\delta=0\\text{ under }H_0)"
+     ],
+     "work": [
+      "t=\\frac{5.36364}{4.32177}=1.24107"
+     ],
+     "words": "Under the null hypothesis the true mean difference is zero, so the numerator is the mean difference itself."
+    },
+    {
+     "title": "Find the degrees of freedom and the critical value",
+     "general": [
+      "\\nu=n-1",
+      "t_c=t_{0.05}(\\nu)"
+     ],
+     "work": [
+      "\\nu=11-1=10",
+      "t_{0.05}(10)=2.228"
+     ],
+     "words": "Open t_table.pdf, PDF page 1. Start with α = 0.05. Use row 10 and the two-tailed 0.05 column. The printed cutoff is 2.228.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "10",
+      "column": "0.05",
+      "value": 2.228,
+      "actualDf": 10,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "|t|<t_\\alpha(\\nu)\\Rightarrow\\text{do not reject }H_0"
+     ],
+     "work": [
+      "|t|=1.24107<t_{0.05}(10)=2.228",
+      "t_{0.50}(10)=0.700<1.24107<t_{0.20}(10)=1.372",
+      "0.20<P<0.50"
+     ],
+     "words": "The statistic is below the 0.05 cutoff, so the null hypothesis is not rejected. No P range is required for a non-rejection, but row 10 places P between 0.20 and 0.50."
+    }
+   ],
+   "conclusion": "The mean after minus before difference is 5.36364 kPa, t = 1.24107 with 10 degrees of freedom, below 2.228. Do not reject the null hypothesis. These data give no evidence that the pressure pain threshold is different before and after the TENS session (P > 0.05).",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "10",
+    "column": "0.05",
+    "value": 2.228,
+    "actualDf": 10,
+    "approximation": false
+   },
+   "values": {
+    "n": 11,
+    "differences": [
+     15,
+     -15,
+     13,
+     -7,
+     24,
+     -5,
+     24,
+     -11,
+     15,
+     12,
+     -6
+    ],
+    "dbar": 5.363636363636363,
+    "sumSqDev": 2054.5454545454545,
+    "varianceD": 205.45454545454544,
+    "sd": 14.333685689819818,
+    "se": 4.321768845092623,
+    "t": 1.24107432763943,
+    "df": 10,
+    "critical": 2.228,
+    "exactP": 0.24290299827615325,
+    "reject": false
+   },
+   "module": 20,
+   "tolerance": 0.00620537163819715,
+   "answerName": "t statistic",
+   "answer": 1.24107432763943
+  },
+  {
+   "id": "n20-p300-sleep-loss",
+   "title": "P300 amplitude rested and after 24 hours without sleep",
+   "topic": "s20paired",
+   "context": "Researchers interested in sleep loss and attention did a study to evaluate the P300 (a positive EEG deflection about 300 milliseconds (ms) after a rare target tone) in an auditory oddball task (a series of frequent standard tones with occasional rare target tones). Each subject was evaluated after a normal night of sleep (measurement 1) and again after 24 hours without sleep (measurement 2). P300 amplitude was recorded at electrode Pz (a scalp site on the midline over the parietal lobe) in microvolts (μV).",
+   "unit": "μV",
+   "table": {
+    "headers": [
+     "Subject",
+     "Rested P300 amplitude (μV)",
+     "Sleep deprived P300 amplitude (μV)"
+    ],
+    "rows": [
+     [
+      1,
+      12.4,
+      10.9
+     ],
+     [
+      2,
+      9.8,
+      10.3
+     ],
+     [
+      3,
+      15.1,
+      11.2
+     ],
+     [
+      4,
+      11.3,
+      12.0
+     ],
+     [
+      5,
+      8.6,
+      6.4
+     ],
+     [
+      6,
+      13.9,
+      13.1
+     ],
+     [
+      7,
+      10.5,
+      7.3
+     ],
+     [
+      8,
+      14.2,
+      14.3
+     ],
+     [
+      9,
+      9.1,
+      9.6
+     ],
+     [
+      10,
+      12.0,
+      9.4
+     ]
+    ]
+   },
+   "tasks": [
+    "Based on the recorded data, is there evidence that P300 amplitude is different in these two states? Assume that any quantities of interest are Normally distributed. DO NOT use R."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\delta=0",
+    "alternative": "H_A:\\delta\\ne0",
+    "nullWords": "Sleep deprivation produces no change in mean P300 amplitude (the true mean sleep deprived minus rested difference is zero).",
+    "alternativeWords": "Sleep deprivation changes mean P300 amplitude (the true mean sleep deprived minus rested difference is not zero)."
+   },
+   "symbols": "\\(d_i\\) (difference in subject \\(i\\)), \\(\\bar d\\) (mean difference), \\(s_d\\) (SD of the differences), \\(s_{\\bar d}\\) (standard error of the mean difference), \\(\\delta\\) (true mean difference), \\(n\\) (number of subjects), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\delta=0",
+      "H_A:\\delta\\ne0"
+     ],
+     "work": [
+      "\\delta=\\mu_{\\mathrm{deprived}}-\\mu_{\\mathrm{rested}}"
+     ],
+     "words": "Each subject is measured under both conditions, so the procedure is the paired t test on the within-subject differences. Sleep deprivation produces no change in mean P300 amplitude (the true mean sleep deprived minus rested difference is zero). Sleep deprivation changes mean P300 amplitude (the true mean sleep deprived minus rested difference is not zero)."
+    },
+    {
+     "title": "Form one difference per subject",
+     "general": [
+      "d_i=x1_i-x2_i,\\quad i=1,\\dots,n"
+     ],
+     "work": [
+      "d_i=(10.9-12.4,10.3-9.8,11.2-15.1,12-11.3,6.4-8.6,13.1-13.9,7.3-10.5,14.3-14.2,9.6-9.1,9.4-12)",
+      "d_i=(-1.5,0.5,-3.9,0.7,-2.2,-0.8,-3.2,0.1,0.5,-2.6),\\quad n=10"
+     ],
+     "words": "Subtract in the same direction for every subject (sleep deprived minus rested). Most differences are negative, and four subjects have a small positive difference that keeps its sign. The analysis now uses only these 10 numbers."
+    },
+    {
+     "title": "Calculate the mean difference",
+     "general": [
+      "\\bar d=\\frac{1}{n}\\sum_{i=1}^{n}d_i"
+     ],
+     "work": [
+      "\\bar d=\\frac{-12.4}{10}=-1.24"
+     ],
+     "words": "The mean difference estimates the true mean change \\(\\delta\\) in μV."
+    },
+    {
+     "title": "Calculate the SD of the differences",
+     "general": [
+      "s_d^2=\\frac{1}{n-1}\\sum_{i=1}^{n}(d_i-\\bar d)^2",
+      "s_d=\\sqrt{s_d^2}"
+     ],
+     "work": [
+      "\\sum(d_i-\\bar d)^2=25.564",
+      "s_d^2=\\frac{25.564}{9}=2.84044",
+      "s_d=1.68536"
+     ],
+     "words": "Square each deviation of a difference from the mean difference, add them, divide by \\(n-1\\), and take the root."
+    },
+    {
+     "title": "Calculate the standard error of the mean difference",
+     "general": [
+      "s_{\\bar d}=\\frac{s_d}{\\sqrt n}"
+     ],
+     "work": [
+      "s_{\\bar d}=\\frac{1.68536}{\\sqrt{10}}=0.532958"
+     ],
+     "words": "The standard error describes how much the mean difference varies from sample to sample."
+    },
+    {
+     "title": "Calculate the t statistic",
+     "general": [
+      "t=\\frac{\\bar d-\\delta}{s_{\\bar d}}=\\frac{\\bar d}{s_{\\bar d}}\\quad(\\delta=0\\text{ under }H_0)"
+     ],
+     "work": [
+      "t=\\frac{-1.24}{0.532958}=-2.32664"
+     ],
+     "words": "Under the null hypothesis the true mean difference is zero, so the numerator is the mean difference itself. The sign of t only shows the direction of the subtraction, so the table comparison uses \\(|t|\\)."
+    },
+    {
+     "title": "Find the degrees of freedom and the critical value",
+     "general": [
+      "\\nu=n-1",
+      "t_c=t_{0.05}(\\nu)"
+     ],
+     "work": [
+      "\\nu=10-1=9",
+      "t_{0.05}(9)=2.262"
+     ],
+     "words": "Open t_table.pdf, PDF page 1. Start with α = 0.05. Use row 9 and the two-tailed 0.05 column. The printed cutoff is 2.262.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "9",
+      "column": "0.05",
+      "value": 2.262,
+      "actualDf": 9,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "|t|>t_\\alpha(\\nu)\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "|t|=2.32664>t_{0.05}(9)=2.262",
+      "t_{0.05}(9)=2.262<2.32664<t_{0.02}(9)=2.821",
+      "0.02<P<0.05"
+     ],
+     "words": "The statistic exceeds the 0.05 cutoff, so reject the null hypothesis. In row 9 it passes the 0.05 column but not the 0.02 column (2.821), so 0.02 < P < 0.05. The statistic is only a little above the 0.05 cutoff, so the decision would change at the 0.02 level."
+    }
+   ],
+   "conclusion": "The mean sleep deprived minus rested difference is -1.24 μV, t = -2.32664 with 9 degrees of freedom, and the size of t is above 2.262. Reject the null hypothesis. There is a difference in P300 amplitude between the two states, and the amplitude is smaller after 24 hours without sleep (P < 0.05). The statistic is close to the cutoff, so the result does not hold at the 0.02 level.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "9",
+    "column": "0.05",
+    "value": 2.262,
+    "actualDf": 9,
+    "approximation": false
+   },
+   "values": {
+    "n": 10,
+    "differences": [
+     -1.5,
+     0.5,
+     -3.9,
+     0.7,
+     -2.2,
+     -0.8,
+     -3.2,
+     0.1,
+     0.5,
+     -2.6
+    ],
+    "dbar": -1.24,
+    "sumSqDev": 25.564,
+    "varianceD": 2.8404444444444445,
+    "sd": 1.6853618141053406,
+    "se": 0.5329582014046171,
+    "t": -2.3266364918148676,
+    "df": 9,
+    "critical": 2.262,
+    "exactP": 0.044994252835338915,
+    "reject": true
+   },
+   "module": 20,
+   "tolerance": 0.011633182459074338,
+   "answerName": "t statistic",
+   "answer": -2.3266364918148676
+  },
+  {
+   "id": "n20-pupil-arithmetic",
+   "title": "Pupil diameter during easy and hard mental arithmetic",
+   "topic": "s20paired",
+   "context": "Researchers interested in mental effort did a study to evaluate pupil diameter (width of the pupil measured by an infrared eye tracker) during mental arithmetic. Each subject was evaluated while adding single digit numbers (measurement 1) and again while multiplying two digit numbers (measurement 2). Mean pupil diameter was recorded in millimeters (mm) under constant room lighting.",
+   "unit": "mm",
+   "table": {
+    "headers": [
+     "Subject",
+     "Pupil diameter, easy task (mm)",
+     "Pupil diameter, hard task (mm)"
+    ],
+    "rows": [
+     [
+      1,
+      3.42,
+      3.81
+     ],
+     [
+      2,
+      3.9,
+      3.84
+     ],
+     [
+      3,
+      3.15,
+      3.49
+     ],
+     [
+      4,
+      4.21,
+      4.08
+     ],
+     [
+      5,
+      3.66,
+      4.2
+     ],
+     [
+      6,
+      3.38,
+      3.52
+     ],
+     [
+      7,
+      4.05,
+      4.33
+     ],
+     [
+      8,
+      3.71,
+      3.67
+     ],
+     [
+      9,
+      3.27,
+      3.7
+     ],
+     [
+      10,
+      3.84,
+      4.31
+     ],
+     [
+      11,
+      3.55,
+      3.83
+     ]
+    ]
+   },
+   "tasks": [
+    "Based on the recorded data, is there evidence that pupil diameter is different in these two states? Assume that any quantities of interest are Normally distributed. DO NOT use R."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\delta=0",
+    "alternative": "H_A:\\delta\\ne0",
+    "nullWords": "Task difficulty produces no change in mean pupil diameter (the true mean hard task minus easy task difference is zero).",
+    "alternativeWords": "Task difficulty changes mean pupil diameter (the true mean hard task minus easy task difference is not zero)."
+   },
+   "symbols": "\\(d_i\\) (difference in subject \\(i\\)), \\(\\bar d\\) (mean difference), \\(s_d\\) (SD of the differences), \\(s_{\\bar d}\\) (standard error of the mean difference), \\(\\delta\\) (true mean difference), \\(n\\) (number of subjects), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\delta=0",
+      "H_A:\\delta\\ne0"
+     ],
+     "work": [
+      "\\delta=\\mu_{\\mathrm{hard}}-\\mu_{\\mathrm{easy}}"
+     ],
+     "words": "Each subject is measured under both conditions, so the procedure is the paired t test on the within-subject differences. Task difficulty produces no change in mean pupil diameter (the true mean hard task minus easy task difference is zero). Task difficulty changes mean pupil diameter (the true mean hard task minus easy task difference is not zero)."
+    },
+    {
+     "title": "Form one difference per subject",
+     "general": [
+      "d_i=x1_i-x2_i,\\quad i=1,\\dots,n"
+     ],
+     "work": [
+      "d_i=(3.81-3.42,3.84-3.9,3.49-3.15,4.08-4.21,4.2-3.66,3.52-3.38,4.33-4.05,3.67-3.71,3.7-3.27,4.31-3.84,3.83-3.55)",
+      "d_i=(0.39,-0.06,0.34,-0.13,0.54,0.14,0.28,-0.04,0.43,0.47,0.28),\\quad n=11"
+     ],
+     "words": "Subtract in the same direction for every subject (hard task minus easy task). Subjects 2, 4 and 8 have a difference of the opposite sign, and each keeps its sign. The analysis now uses only these 11 numbers."
+    },
+    {
+     "title": "Calculate the mean difference",
+     "general": [
+      "\\bar d=\\frac{1}{n}\\sum_{i=1}^{n}d_i"
+     ],
+     "work": [
+      "\\bar d=\\frac{2.64}{11}=0.24"
+     ],
+     "words": "The mean difference estimates the true mean change \\(\\delta\\) in mm."
+    },
+    {
+     "title": "Calculate the SD of the differences",
+     "general": [
+      "s_d^2=\\frac{1}{n-1}\\sum_{i=1}^{n}(d_i-\\bar d)^2",
+      "s_d=\\sqrt{s_d^2}"
+     ],
+     "work": [
+      "\\sum(d_i-\\bar d)^2=0.53",
+      "s_d^2=\\frac{0.53}{10}=0.053",
+      "s_d=0.230217"
+     ],
+     "words": "Square each deviation of a difference from the mean difference, add them, divide by \\(n-1\\), and take the root."
+    },
+    {
+     "title": "Calculate the standard error of the mean difference",
+     "general": [
+      "s_{\\bar d}=\\frac{s_d}{\\sqrt n}"
+     ],
+     "work": [
+      "s_{\\bar d}=\\frac{0.230217}{\\sqrt{11}}=0.0694131"
+     ],
+     "words": "The standard error describes how much the mean difference varies from sample to sample."
+    },
+    {
+     "title": "Calculate the t statistic",
+     "general": [
+      "t=\\frac{\\bar d-\\delta}{s_{\\bar d}}=\\frac{\\bar d}{s_{\\bar d}}\\quad(\\delta=0\\text{ under }H_0)"
+     ],
+     "work": [
+      "t=\\frac{0.24}{0.0694131}=3.45756"
+     ],
+     "words": "Under the null hypothesis the true mean difference is zero, so the numerator is the mean difference itself."
+    },
+    {
+     "title": "Find the degrees of freedom and the critical value",
+     "general": [
+      "\\nu=n-1",
+      "t_c=t_{0.05}(\\nu)"
+     ],
+     "work": [
+      "\\nu=11-1=10",
+      "t_{0.05}(10)=2.228"
+     ],
+     "words": "Open t_table.pdf, PDF page 1. Start with α = 0.05. Use row 10 and the two-tailed 0.05 column. The printed cutoff is 2.228.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "10",
+      "column": "0.05",
+      "value": 2.228,
+      "actualDf": 10,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "|t|>t_\\alpha(\\nu)\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "|t|=3.45756>t_{0.05}(10)=2.228",
+      "t_{0.01}(10)=3.169<3.45756<t_{0.005}(10)=3.581",
+      "0.005<P<0.01"
+     ],
+     "words": "The statistic exceeds the 0.05 cutoff, so reject the null hypothesis. In row 10 it also passes the 0.01 column (3.169) but not the 0.005 column (3.581), so P < 0.01."
+    }
+   ],
+   "conclusion": "The mean hard task minus easy task difference is 0.24 mm, t = 3.45756 with 10 degrees of freedom, above 2.228. Reject the null hypothesis. There is a difference in pupil diameter between the two tasks, and the pupil is wider during the hard task (P < 0.01).",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "10",
+    "column": "0.05",
+    "value": 2.228,
+    "actualDf": 10,
+    "approximation": false
+   },
+   "values": {
+    "n": 11,
+    "differences": [
+     0.39,
+     -0.06,
+     0.34,
+     -0.13,
+     0.54,
+     0.14,
+     0.28,
+     -0.04,
+     0.43,
+     0.47,
+     0.28
+    ],
+    "dbar": 0.23999999999999996,
+    "sumSqDev": 0.53,
+    "varianceD": 0.053000000000000005,
+    "sd": 0.23021728866442678,
+    "se": 0.06941312425025846,
+    "t": 3.4575593966166465,
+    "df": 10,
+    "critical": 2.228,
+    "exactP": 0.006147830826751867,
+    "reject": true
+   },
+   "module": 20,
+   "tolerance": 0.017287796983083234,
+   "answerName": "t statistic",
+   "answer": 3.4575593966166465
+  },
+  {
+   "id": "n20-amygdala-faces-unpaired",
+   "title": "Amygdala BOLD response to neutral and fearful faces, analyzed as two groups",
+   "topic": "s20unpaired",
+   "context": "In a functional magnetic resonance imaging (fMRI) study, ten subjects viewed neutral faces and fearful faces in the scanner. The blood oxygen level dependent (BOLD) signal change in the amygdala (an almond-shaped structure deep in the temporal lobe), expressed as the percent change from a fixation baseline, was recorded for each subject in both conditions. An analyst then compared the two columns as if they came from two separate groups of ten different people. Assume that any quantities of interest are Normally distributed.",
+   "unit": "% signal change",
+   "table": {
+    "headers": [
+     "Subject",
+     "Neutral faces BOLD change (%)",
+     "Fearful faces BOLD change (%)"
+    ],
+    "rows": [
+     [
+      1,
+      0.21,
+      0.3
+     ],
+     [
+      2,
+      0.48,
+      0.55
+     ],
+     [
+      3,
+      0.12,
+      0.25
+     ],
+     [
+      4,
+      0.65,
+      0.71
+     ],
+     [
+      5,
+      0.33,
+      0.31
+     ],
+     [
+      6,
+      0.8,
+      0.93
+     ],
+     [
+      7,
+      0.27,
+      0.38
+     ],
+     [
+      8,
+      0.55,
+      0.6
+     ],
+     [
+      9,
+      0.4,
+      0.52
+     ],
+     [
+      10,
+      0.72,
+      0.77
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) Treat the two columns as two separate groups of ten different people. Based on that analysis, is there evidence that the amygdala BOLD signal change is different for neutral and fearful faces? DO NOT use R.",
+    "(ii) A paired analysis of the same data gives t = 5.31412 with 9 degrees of freedom. Using only your calculations for Part (i) and this value, state which analysis fits the design of this study. Please state how you reached your conclusions."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\mu_{\\mathrm{fearful}}=\\mu_{\\mathrm{neutral}}",
+    "alternative": "H_A:\\mu_{\\mathrm{fearful}}\\ne\\mu_{\\mathrm{neutral}}",
+    "nullWords": "The mean amygdala BOLD signal change is the same for neutral faces and fearful faces.",
+    "alternativeWords": "The mean amygdala BOLD signal change is different for neutral faces and fearful faces."
+   },
+   "symbols": "\\(\\bar x_i\\) (group sample mean), \\(s_i\\) (group sample SD), \\(n_i\\) (group size), \\(s^2\\) (pooled variance), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\mu_1=\\mu_2",
+      "H_A:\\mu_1\\ne\\mu_2"
+     ],
+     "work": [
+      "\\mu_1=\\mu_{\\mathrm{fearful}},\\ \\mu_2=\\mu_{\\mathrm{neutral}}"
+     ],
+     "words": "The unpaired t test compares two group means as if every number came from a different person. The mean amygdala BOLD signal change is the same for neutral faces and fearful faces."
+    },
+    {
+     "title": "Calculate the group means and SDs",
+     "general": [
+      "\\bar x=\\frac{1}{n}\\sum x_i",
+      "s=\\sqrt{\\frac{\\sum(x_i-\\bar x)^2}{n-1}}"
+     ],
+     "work": [
+      "\\bar x_1=\\frac{5.32}{10}=0.532,\\ s_1=0.225477",
+      "\\bar x_2=\\frac{4.53}{10}=0.453,\\ s_2=0.226571"
+     ],
+     "words": "The SDs are large compared with the gap between the two means because the subjects differ a lot from one another in how strongly the amygdala responds to any face."
+    },
+    {
+     "title": "Pool the variances",
+     "general": [
+      "s^2=\\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}"
+     ],
+     "work": [
+      "s^2=\\frac{9(0.05084)+9(0.0513344)}{18}=0.0510872"
+     ],
+     "words": "Each group variance is weighted by its own degrees of freedom."
+    },
+    {
+     "title": "Calculate the standard error and t",
+     "general": [
+      "t=\\frac{\\bar x_1-\\bar x_2}{\\sqrt{s^2/n_1+s^2/n_2}}"
+     ],
+     "work": [
+      "\\sqrt{\\frac{0.0510872}{10}+\\frac{0.0510872}{10}}=0.101081",
+      "t=\\frac{0.532-0.453}{0.101081}=0.781549"
+     ],
+     "words": "The numerator is the same 0.079 percentage points of signal change as the paired analysis, but the denominator now carries the between-subject spread."
+    },
+    {
+     "title": "Find the degrees of freedom and the critical value",
+     "general": [
+      "\\nu=n_1+n_2-2",
+      "t_c=t_{0.05}(\\nu)"
+     ],
+     "work": [
+      "\\nu=10+10-2=18",
+      "t_{0.05}(18)=2.101"
+     ],
+     "words": "Open t_table.pdf, PDF page 1. Start with α = 0.05. Use row 18 and the two-tailed 0.05 column. The printed cutoff is 2.101.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "18",
+      "column": "0.05",
+      "value": 2.101,
+      "actualDf": 18,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision",
+     "general": [
+      "|t|<t_\\alpha(\\nu)\\Rightarrow\\text{do not reject }H_0"
+     ],
+     "work": [
+      "|t|=0.781549<t_{0.05}(18)=2.101",
+      "t_{0.50}(18)=0.688<0.781549<t_{0.20}(18)=1.330",
+      "0.20<P<0.50"
+     ],
+     "words": "The unpaired test does not reject the null hypothesis (P > 0.05). The paired test on the same numbers gives t = 5.31412 with 9 degrees of freedom and rejects it (P < 0.001), because pairing removes the large differences between subjects and leaves only each subject's own change. The same subjects appear in both columns, so the paired test is the analysis that fits this design."
+    }
+   ],
+   "conclusion": "Analyzed as two separate groups, t = 0.781549 with 18 degrees of freedom is below 2.101, so the unpaired test finds no evidence of a difference (P > 0.05). The paired test on the same data gives t = 5.31412 with 9 degrees of freedom and finds a difference (P < 0.001). The same ten subjects were scanned in both conditions, so the paired test fits the design, and ignoring the pairing hides the difference between the two conditions.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "18",
+    "column": "0.05",
+    "value": 2.101,
+    "actualDf": 18,
+    "approximation": false
+   },
+   "values": {
+    "n1": 10,
+    "n2": 10,
+    "x1": 0.5319999999999998,
+    "x2": 0.453,
+    "s1": 0.22547727158186032,
+    "s2": 0.22657105826747698,
+    "pooledVariance": 0.05108722222222222,
+    "se": 0.10108137535888817,
+    "t": 0.7815485268132856,
+    "df": 18,
+    "critical": 2.101,
+    "exactP": 0.44463897745978986,
+    "reject": false
+   },
+   "module": 20,
+   "tolerance": 0.003907742634066428,
+   "answerName": "t statistic",
+   "answer": 0.7815485268132856
+  },
+  {
+   "id": "n20-cold-pressor-music-r",
+   "title": "Cold pressor tolerance in silence and with music, by hand and in R",
+   "topic": "s20pairedR",
+   "context": "Researchers interested in music and pain did a study to evaluate cold pressor tolerance (time a subject keeps a hand in 2 °C water before withdrawing it). Each subject was evaluated in silence (measurement 1) and again while listening to self-chosen music (measurement 2). Tolerance was recorded in seconds (s).",
+   "unit": "s",
+   "table": {
+    "headers": [
+     "Subject",
+     "Tolerance in silence (s)",
+     "Tolerance with music (s)"
+    ],
+    "rows": [
+     [
+      1,
+      42,
+      55
+     ],
+     [
+      2,
+      65,
+      61
+     ],
+     [
+      3,
+      31,
+      29
+     ],
+     [
+      4,
+      88,
+      104
+     ],
+     [
+      5,
+      54,
+      70
+     ],
+     [
+      6,
+      73,
+      69
+     ],
+     [
+      7,
+      47,
+      66
+     ],
+     [
+      8,
+      96,
+      101
+     ],
+     [
+      9,
+      59,
+      75
+     ],
+     [
+      10,
+      38,
+      43
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) Based on the recorded data, is there evidence that cold pressor tolerance is different in these two states? Assume that any quantities of interest are Normally distributed. DO NOT use R.",
+    "(ii) Answer the question in Part (i) using the R function for the test you did in Part (i). Show your R code and the output. Mark each of the lines of the output that correspond to sections of your \"by hand\" calculations and answers in Part (i). State which of your intermediate values R does not print."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\delta=0",
+    "alternative": "H_A:\\delta\\ne0",
+    "nullWords": "Listening to music produces no change in mean cold pressor tolerance (the true mean music minus silence difference is zero).",
+    "alternativeWords": "Listening to music changes mean cold pressor tolerance (the true mean music minus silence difference is not zero)."
+   },
+   "symbols": "\\(d_i\\) (difference in subject \\(i\\)), \\(\\bar d\\) (mean difference), \\(s_d\\) (SD of the differences), \\(s_{\\bar d}\\) (standard error of the mean difference), \\(\\delta\\) (true mean difference), \\(n\\) (number of subjects), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\delta=0",
+      "H_A:\\delta\\ne0"
+     ],
+     "work": [
+      "\\delta=\\mu_{\\mathrm{music}}-\\mu_{\\mathrm{silence}}"
+     ],
+     "words": "Each subject is measured under both conditions, so the procedure is the paired t test on the within-subject differences. Listening to music produces no change in mean cold pressor tolerance (the true mean music minus silence difference is zero). Listening to music changes mean cold pressor tolerance (the true mean music minus silence difference is not zero)."
+    },
+    {
+     "title": "Form one difference per subject",
+     "general": [
+      "d_i=x1_i-x2_i,\\quad i=1,\\dots,n"
+     ],
+     "work": [
+      "d_i=(55-42,61-65,29-31,104-88,70-54,69-73,66-47,101-96,75-59,43-38)",
+      "d_i=(13,-4,-2,16,16,-4,19,5,16,5),\\quad n=10"
+     ],
+     "words": "Subtract in the same direction for every subject (music minus silence). Subjects 2, 3 and 6 have a difference of the opposite sign, and each keeps its sign. The analysis now uses only these 10 numbers."
+    },
+    {
+     "title": "Calculate the mean difference",
+     "general": [
+      "\\bar d=\\frac{1}{n}\\sum_{i=1}^{n}d_i"
+     ],
+     "work": [
+      "\\bar d=\\frac{80}{10}=8"
+     ],
+     "words": "The mean difference estimates the true mean change \\(\\delta\\) in s."
+    },
+    {
+     "title": "Calculate the SD of the differences",
+     "general": [
+      "s_d^2=\\frac{1}{n-1}\\sum_{i=1}^{n}(d_i-\\bar d)^2",
+      "s_d=\\sqrt{s_d^2}"
+     ],
+     "work": [
+      "\\sum(d_i-\\bar d)^2=744",
+      "s_d^2=\\frac{744}{9}=82.6667",
+      "s_d=9.09212"
+     ],
+     "words": "Square each deviation of a difference from the mean difference, add them, divide by \\(n-1\\), and take the root."
+    },
+    {
+     "title": "Calculate the standard error of the mean difference",
+     "general": [
+      "s_{\\bar d}=\\frac{s_d}{\\sqrt n}"
+     ],
+     "work": [
+      "s_{\\bar d}=\\frac{9.09212}{\\sqrt{10}}=2.87518"
+     ],
+     "words": "The standard error describes how much the mean difference varies from sample to sample."
+    },
+    {
+     "title": "Calculate the t statistic",
+     "general": [
+      "t=\\frac{\\bar d-\\delta}{s_{\\bar d}}=\\frac{\\bar d}{s_{\\bar d}}\\quad(\\delta=0\\text{ under }H_0)"
+     ],
+     "work": [
+      "t=\\frac{8}{2.87518}=2.78243"
+     ],
+     "words": "Under the null hypothesis the true mean difference is zero, so the numerator is the mean difference itself."
+    },
+    {
+     "title": "Find the degrees of freedom and the critical value",
+     "general": [
+      "\\nu=n-1",
+      "t_c=t_{0.05}(\\nu)"
+     ],
+     "work": [
+      "\\nu=10-1=9",
+      "t_{0.05}(9)=2.262"
+     ],
+     "words": "Open t_table.pdf, PDF page 1. Start with α = 0.05. Use row 9 and the two-tailed 0.05 column. The printed cutoff is 2.262.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "9",
+      "column": "0.05",
+      "value": 2.262,
+      "actualDf": 9,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "|t|>t_\\alpha(\\nu)\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "|t|=2.78243>t_{0.05}(9)=2.262",
+      "t_{0.05}(9)=2.262<2.78243<t_{0.02}(9)=2.821",
+      "0.02<P<0.05"
+     ],
+     "words": "The statistic exceeds the 0.05 cutoff, so reject the null hypothesis. In row 9 it passes the 0.05 column but not the 0.02 column (2.821), so 0.02 < P < 0.05."
+    },
+    {
+     "title": "Run the same test in R",
+     "general": [
+      "\\texttt{t.test(x1, x2, paired = TRUE)}"
+     ],
+     "work": [
+      "\\texttt{silence <- c(42,65,31,88,54,73,47,96,59,38)}",
+      "\\texttt{music <- c(55,61,29,104,70,69,66,101,75,43)}",
+      "\\texttt{t.test(music, silence, paired = TRUE)}"
+     ],
+     "words": "List music first and silence second so R subtracts music minus silence, the same direction as the hand calculation. The output (R 4.6.1) is headed Paired t-test and names the data as music and silence. It reports t = 2.7824, df = 9 and p-value = 0.02132. It states the alternative hypothesis that the true mean difference is not equal to 0. It gives a 95 percent confidence interval from 1.495888 to 14.504112 and the sample estimate mean difference 8."
+    },
+    {
+     "title": "Mark each R line against the hand calculation",
+     "general": [
+      "t=\\bar d/s_{\\bar d},\\ \\nu=n-1",
+      "\\bar d\\pm t_{0.05}(\\nu)\\,s_{\\bar d}"
+     ],
+     "work": [
+      "\\text{Paired t-test}\\leftrightarrow\\text{procedure (paired t test)}",
+      "\\text{alternative: true mean difference}\\ne0\\leftrightarrow H_A:\\delta\\ne0",
+      "\\text{t = 2.7824}\\leftrightarrow t=2.78243",
+      "\\text{df = 9}\\leftrightarrow \\nu=n-1=9",
+      "\\text{p-value = 0.02132}\\leftrightarrow 0.02<P<0.05",
+      "\\text{mean difference 8}\\leftrightarrow\\bar d=8",
+      "\\text{95\\% CI 1.495888 to 14.504112}\\leftrightarrow 8\\pm2.262(2.87518)=[1.49634,14.5037]"
+     ],
+     "words": "R does not print \\(s_d\\) or \\(s_{\\bar d}\\) because they are inside t. R reports an exact P value instead of a table bracket, and its interval uses the exact quantile 2.262157 rather than the printed 2.262, so the hand interval differs only slightly in the later decimals. The interval does not contain 0, which matches rejecting the null hypothesis."
+    }
+   ],
+   "conclusion": "The mean music minus silence difference is 8 s, t = 2.78243 with 9 degrees of freedom, above 2.262 (0.02 < P < 0.05, and R gives P = 0.02132). Reject the null hypothesis. There is a difference in cold pressor tolerance between the two states, and subjects keep the hand in the water longer with music.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "9",
+    "column": "0.05",
+    "value": 2.262,
+    "actualDf": 9,
+    "approximation": false
+   },
+   "values": {
+    "n": 10,
+    "differences": [
+     13,
+     -4,
+     -2,
+     16,
+     16,
+     -4,
+     19,
+     5,
+     16,
+     5
+    ],
+    "dbar": 8.0,
+    "sumSqDev": 744.0,
+    "varianceD": 82.66666666666667,
+    "sd": 9.092121131323903,
+    "se": 2.875181153713043,
+    "t": 2.78243337456101,
+    "df": 9,
+    "critical": 2.262,
+    "exactP": 0.021315816732838402,
+    "reject": true,
+    "ciLowerPrinted": 1.4963402303010964,
+    "ciUpperPrinted": 14.503659769698903,
+    "ciLowerR": 1.495888358785633,
+    "ciUpperR": 14.504111641214367,
+    "rOutput": [
+     "Paired t-test",
+     "data:  music and silence",
+     "t = 2.7824, df = 9, p-value = 0.02132",
+     "alternative hypothesis: true mean difference is not equal to 0",
+     "95 percent confidence interval:",
+     "  1.495888 14.504112",
+     "sample estimates:",
+     "mean difference ",
+     "              8 "
+    ],
+    "rCode": "t.test(music, silence, paired = TRUE)"
+   },
+   "module": 20,
+   "tolerance": 0.01391216687280505,
+   "answerName": "t statistic",
+   "answer": 2.78243337456101
+  },
+  {
+   "id": "n20-sleep-word-pairs-r",
+   "title": "Word pair recall after a waking interval and after sleep, by hand and in R",
+   "topic": "s20pairedR",
+   "context": "Researchers interested in sleep and memory did a study to evaluate recall of word pairs (number of pairs remembered out of 40 pairs learned). Each subject was evaluated after a 12 hour interval spent awake (measurement 1) and again, with a new list, after a 12 hour interval that included a night of sleep (measurement 2).",
+   "unit": "word pairs",
+   "table": {
+    "headers": [
+     "Subject",
+     "Recall after wake interval (pairs)",
+     "Recall after sleep interval (pairs)"
+    ],
+    "rows": [
+     [
+      1,
+      22,
+      26
+     ],
+     [
+      2,
+      27,
+      29
+     ],
+     [
+      3,
+      18,
+      21
+     ],
+     [
+      4,
+      30,
+      27
+     ],
+     [
+      5,
+      25,
+      31
+     ],
+     [
+      6,
+      21,
+      22
+     ],
+     [
+      7,
+      28,
+      30
+     ],
+     [
+      8,
+      24,
+      29
+     ],
+     [
+      9,
+      19,
+      20
+     ],
+     [
+      10,
+      26,
+      25
+     ],
+     [
+      11,
+      23,
+      28
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) Based on the recorded data, is there evidence that word pair recall is different in these two states? Assume that any quantities of interest are Normally distributed. DO NOT use R.",
+    "(ii) Answer the question in Part (i) using the R function for the test you did in Part (i). Show your R code and the output. Mark each of the lines of the output that correspond to sections of your \"by hand\" calculations and answers in Part (i). State which of your intermediate values R does not print."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\delta=0",
+    "alternative": "H_A:\\delta\\ne0",
+    "nullWords": "Sleep during the interval produces no change in mean word pair recall (the true mean sleep minus wake difference is zero).",
+    "alternativeWords": "Sleep during the interval changes mean word pair recall (the true mean sleep minus wake difference is not zero)."
+   },
+   "symbols": "\\(d_i\\) (difference in subject \\(i\\)), \\(\\bar d\\) (mean difference), \\(s_d\\) (SD of the differences), \\(s_{\\bar d}\\) (standard error of the mean difference), \\(\\delta\\) (true mean difference), \\(n\\) (number of subjects), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\delta=0",
+      "H_A:\\delta\\ne0"
+     ],
+     "work": [
+      "\\delta=\\mu_{\\mathrm{sleep}}-\\mu_{\\mathrm{wake}}"
+     ],
+     "words": "Each subject is measured under both conditions, so the procedure is the paired t test on the within-subject differences. Sleep during the interval produces no change in mean word pair recall (the true mean sleep minus wake difference is zero). Sleep during the interval changes mean word pair recall (the true mean sleep minus wake difference is not zero)."
+    },
+    {
+     "title": "Form one difference per subject",
+     "general": [
+      "d_i=x1_i-x2_i,\\quad i=1,\\dots,n"
+     ],
+     "work": [
+      "d_i=(26-22,29-27,21-18,27-30,31-25,22-21,30-28,29-24,20-19,25-26,28-23)",
+      "d_i=(4,2,3,-3,6,1,2,5,1,-1,5),\\quad n=11"
+     ],
+     "words": "Subtract in the same direction for every subject (sleep minus wake). Subjects 4 and 10 have a difference of the opposite sign, and each keeps its sign. The analysis now uses only these 11 numbers."
+    },
+    {
+     "title": "Calculate the mean difference",
+     "general": [
+      "\\bar d=\\frac{1}{n}\\sum_{i=1}^{n}d_i"
+     ],
+     "work": [
+      "\\bar d=\\frac{25}{11}=2.27273"
+     ],
+     "words": "The mean difference estimates the true mean change \\(\\delta\\) in word pairs."
+    },
+    {
+     "title": "Calculate the SD of the differences",
+     "general": [
+      "s_d^2=\\frac{1}{n-1}\\sum_{i=1}^{n}(d_i-\\bar d)^2",
+      "s_d=\\sqrt{s_d^2}"
+     ],
+     "work": [
+      "\\sum(d_i-\\bar d)^2=74.1818",
+      "s_d^2=\\frac{74.1818}{10}=7.41818",
+      "s_d=2.72363"
+     ],
+     "words": "Square each deviation of a difference from the mean difference, add them, divide by \\(n-1\\), and take the root."
+    },
+    {
+     "title": "Calculate the standard error of the mean difference",
+     "general": [
+      "s_{\\bar d}=\\frac{s_d}{\\sqrt n}"
+     ],
+     "work": [
+      "s_{\\bar d}=\\frac{2.72363}{\\sqrt{11}}=0.821207"
+     ],
+     "words": "The standard error describes how much the mean difference varies from sample to sample."
+    },
+    {
+     "title": "Calculate the t statistic",
+     "general": [
+      "t=\\frac{\\bar d-\\delta}{s_{\\bar d}}=\\frac{\\bar d}{s_{\\bar d}}\\quad(\\delta=0\\text{ under }H_0)"
+     ],
+     "work": [
+      "t=\\frac{2.27273}{0.821207}=2.76755"
+     ],
+     "words": "Under the null hypothesis the true mean difference is zero, so the numerator is the mean difference itself."
+    },
+    {
+     "title": "Find the degrees of freedom and the critical value",
+     "general": [
+      "\\nu=n-1",
+      "t_c=t_{0.05}(\\nu)"
+     ],
+     "work": [
+      "\\nu=11-1=10",
+      "t_{0.05}(10)=2.228"
+     ],
+     "words": "Open t_table.pdf, PDF page 1. Start with α = 0.05. Use row 10 and the two-tailed 0.05 column. The printed cutoff is 2.228.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "10",
+      "column": "0.05",
+      "value": 2.228,
+      "actualDf": 10,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "|t|>t_\\alpha(\\nu)\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "|t|=2.76755>t_{0.05}(10)=2.228",
+      "t_{0.02}(10)=2.764<2.76755<t_{0.01}(10)=3.169",
+      "0.01<P<0.02"
+     ],
+     "words": "The statistic exceeds the 0.05 cutoff, so reject the null hypothesis. In row 10 it also passes the 0.02 column (2.764) but not the 0.01 column (3.169), so P < 0.02."
+    },
+    {
+     "title": "Run the same test in R",
+     "general": [
+      "\\texttt{t.test(x1, x2, paired = TRUE)}"
+     ],
+     "work": [
+      "\\texttt{wake <- c(22,27,18,30,25,21,28,24,19,26,23)}",
+      "\\texttt{sleep <- c(26,29,21,27,31,22,30,29,20,25,28)}",
+      "\\texttt{t.test(sleep, wake, paired = TRUE)}"
+     ],
+     "words": "List sleep first and wake second so R subtracts sleep minus wake, the same direction as the hand calculation. The output (R 4.6.1) is headed Paired t-test and names the data as sleep and wake. It reports t = 2.7675, df = 10 and p-value = 0.01987. It states the alternative hypothesis that the true mean difference is not equal to 0. It gives a 95 percent confidence interval from 0.4429651 to 4.1024894 and the sample estimate mean difference 2.272727."
+    },
+    {
+     "title": "Mark each R line against the hand calculation",
+     "general": [
+      "t=\\bar d/s_{\\bar d},\\ \\nu=n-1",
+      "\\bar d\\pm t_{0.05}(\\nu)\\,s_{\\bar d}"
+     ],
+     "work": [
+      "\\text{Paired t-test}\\leftrightarrow\\text{procedure (paired t test)}",
+      "\\text{alternative: true mean difference}\\ne0\\leftrightarrow H_A:\\delta\\ne0",
+      "\\text{t = 2.7675}\\leftrightarrow t=2.76755",
+      "\\text{df = 10}\\leftrightarrow \\nu=n-1=10",
+      "\\text{p-value = 0.01987}\\leftrightarrow 0.01<P<0.02",
+      "\\text{mean difference 2.272727}\\leftrightarrow\\bar d=2.27273",
+      "\\text{95\\% CI 0.4429651 to 4.1024894}\\leftrightarrow 2.27273\\pm2.228(0.821207)=[0.443079,4.10238]"
+     ],
+     "words": "R does not print \\(s_d\\) or \\(s_{\\bar d}\\) because they are inside t. R reports an exact P value instead of a table bracket, and its interval uses the exact quantile 2.228139 rather than the printed 2.228, so the hand interval differs only slightly in the later decimals. The interval does not contain 0, which matches rejecting the null hypothesis."
+    }
+   ],
+   "conclusion": "The mean sleep minus wake difference is 2.27273 word pairs, t = 2.76755 with 10 degrees of freedom, above 2.228 (0.01 < P < 0.02, and R gives P = 0.01987). Reject the null hypothesis. There is a difference in word pair recall between the two intervals, and recall is higher after the interval with sleep.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "10",
+    "column": "0.05",
+    "value": 2.228,
+    "actualDf": 10,
+    "approximation": false
+   },
+   "values": {
+    "n": 11,
+    "differences": [
+     4,
+     2,
+     3,
+     -3,
+     6,
+     1,
+     2,
+     5,
+     1,
+     -1,
+     5
+    ],
+    "dbar": 2.272727272727273,
+    "sumSqDev": 74.18181818181819,
+    "varianceD": 7.418181818181819,
+    "sd": 2.723633936156219,
+    "se": 0.8212065302280884,
+    "t": 2.7675465173127978,
+    "df": 10,
+    "critical": 2.228,
+    "exactP": 0.019870784995618077,
+    "reject": true,
+    "ciLowerPrinted": 0.44307912337909183,
+    "ciUpperPrinted": 4.102375422075454,
+    "ciLowerR": 0.4429650972212287,
+    "ciUpperR": 4.102489448233317,
+    "rOutput": [
+     "Paired t-test",
+     "data:  sleep and wake",
+     "t = 2.7675, df = 10, p-value = 0.01987",
+     "alternative hypothesis: true mean difference is not equal to 0",
+     "95 percent confidence interval:",
+     " 0.4429651 4.1024894",
+     "sample estimates:",
+     "mean difference ",
+     "       2.272727 "
+    ],
+    "rCode": "t.test(sleep, wake, paired = TRUE)"
+   },
+   "module": 20,
+   "tolerance": 0.013837732586563989,
+   "answerName": "t statistic",
+   "answer": 2.7675465173127978
+  },
+  {
+   "id": "n20-v1-contrast-rmanova",
+   "title": "V1 BOLD response at three checkerboard contrasts",
+   "topic": "s20rmanova",
+   "context": "In an fMRI study looking at contrast sensitivity, five subjects each viewed a flickering checkerboard at three contrast levels in separate scanning runs. The BOLD signal change in primary visual cortex (V1) (percent change from a gray screen baseline) was recorded for each subject at each contrast level.",
+   "unit": "% signal change",
+   "table": {
+    "headers": [
+     "Subject",
+     "Low contrast (%)",
+     "Medium contrast (%)",
+     "High contrast (%)"
+    ],
+    "rows": [
+     [
+      1,
+      0.62,
+      1.05,
+      1.48
+     ],
+     [
+      2,
+      0.41,
+      0.92,
+      0.88
+     ],
+     [
+      3,
+      0.85,
+      1.21,
+      1.77
+     ],
+     [
+      4,
+      0.55,
+      0.48,
+      1.12
+     ],
+     [
+      5,
+      0.7,
+      1.34,
+      1.39
+     ]
+    ]
+   },
+   "tasks": [
+    "Is there a difference in the V1 BOLD signal change among the three contrast levels? Assume that any quantities of interest are Normally distributed. DO NOT use R. (Note: If a difference exists, do not identify which groups are different.)",
+    "Make sure to show your intermediate calculations."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\mu_1=\\dots=\\mu_m",
+    "alternative": "H_A:\\text{at least one treatment mean differs}",
+    "nullWords": "The mean V1 BOLD signal change is the same at all three contrast levels.",
+    "alternativeWords": "At least one contrast level has a different mean V1 BOLD signal change."
+   },
+   "symbols": "\\(x_{ts}\\) (response to treatment \\(t\\) in subject \\(s\\)), \\(\\bar S_s\\) (subject mean), \\(\\bar T_t\\) (treatment mean), \\(\\bar X\\) (grand mean), \\(m\\) (number of treatments), \\(n\\) (number of subjects), \\(SS\\) (sum of squares), \\(MS\\) (mean square), \\(F\\) (F statistic).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\mu_1=\\mu_2=\\dots=\\mu_m",
+      "H_A:\\text{not all treatment means are equal}"
+     ],
+     "work": [
+      "\\mu_{\\mathrm{low}}=\\mu_{\\mathrm{medium}}=\\mu_{\\mathrm{high}}"
+     ],
+     "words": "Every subject receives every treatment, so the procedure is repeated measures ANOVA. The mean V1 BOLD signal change is the same at all three contrast levels. At least one contrast level has a different mean V1 BOLD signal change."
+    },
+    {
+     "title": "Calculate the subject means",
+     "general": [
+      "\\bar S_s=\\frac{1}{m}\\sum_{t=1}^{m}x_{ts}"
+     ],
+     "work": [
+      "\\bar S=(1.05,\\ 0.736667,\\ 1.27667,\\ 0.716667,\\ 1.14333)"
+     ],
+     "words": "Average across the 3 treatments within each subject."
+    },
+    {
+     "title": "Calculate the treatment means and the grand mean",
+     "general": [
+      "\\bar T_t=\\frac{1}{n}\\sum_{s=1}^{n}x_{ts}",
+      "\\bar X=\\frac{1}{mn}\\sum_t\\sum_s x_{ts}"
+     ],
+     "work": [
+      "\\bar T=(0.626,\\ 1,\\ 1.328)",
+      "\\bar X=\\frac{14.77}{15}=0.984667"
+     ],
+     "words": "Average down each treatment column across the 5 subjects, then average all 15 observations."
+    },
+    {
+     "title": "Calculate the sum of squares within subjects",
+     "general": [
+      "SS_{wit\\,subjs}=\\sum_{s=1}^{n}\\sum_{t=1}^{m}(x_{ts}-\\bar S_s)^2=\\sum_s SS_s",
+      "DF_{wit\\,subjs}=n(m-1)"
+     ],
+     "work": [
+      "SS_s=(0.3698,\\ 0.160867,\\ 0.429867,\\ 0.246467,\\ 0.296067)",
+      "SS_{wit\\,subjs}=1.50307",
+      "DF_{wit\\,subjs}=5(3-1)=10"
+     ],
+     "words": "Each subject's own spread around their own mean is added up. Differences between subjects (SS between subjects = 0.744107) are set aside."
+    },
+    {
+     "title": "Calculate the treatment sum of squares",
+     "general": [
+      "SS_{treat}=n\\sum_{t=1}^{m}(\\bar T_t-\\bar X)^2",
+      "DF_{treat}=m-1"
+     ],
+     "work": [
+      "SS_{treat}=5[(0.626-0.984667)^2+(1-0.984667)^2+(1.328-0.984667)^2]=1.23377",
+      "DF_{treat}=3-1=2"
+     ],
+     "words": "The factor n appears because each treatment mean is based on n subjects."
+    },
+    {
+     "title": "Calculate the residual sum of squares",
+     "general": [
+      "SS_{res}=SS_{wit\\,subjs}-SS_{treat}",
+      "DF_{res}=(n-1)(m-1)"
+     ],
+     "work": [
+      "SS_{res}=1.50307-1.23377=0.269293",
+      "DF_{res}=(5-1)(3-1)=8"
+     ],
+     "words": "What remains of the within-subject variation after the treatment effect is removed is the residual."
+    },
+    {
+     "title": "Calculate the mean squares and F",
+     "general": [
+      "F=\\frac{SS_{treat}/DF_{treat}}{SS_{res}/DF_{res}}=\\frac{MS_{treat}}{MS_{res}}"
+     ],
+     "work": [
+      "MS_{treat}=\\frac{1.23377}{2}=0.616887",
+      "MS_{res}=\\frac{0.269293}{8}=0.0336617",
+      "F=\\frac{0.616887}{0.0336617}=18.3261"
+     ],
+     "words": "A large F means the treatment means differ more than the leftover within-subject noise would explain."
+    },
+    {
+     "title": "Find the critical F",
+     "general": [
+      "F_{crit}=F_\\alpha(DF_{treat},DF_{res})=F_\\alpha(\\nu_n,\\nu_d)"
+     ],
+     "work": [
+      "F_{0.05}(2,8)=4.46"
+     ],
+     "words": "Open F_table.pdf, PDF page 1. Start with α = 0.05. Use numerator column \\(\\nu_n=2\\) and denominator row \\(\\nu_d=8\\). The lightface (P < .05) value is 4.46. The boldface (P < .01) value is 8.65.",
+     "classTable": {
+      "path": "sources/tables/F_table.pdf",
+      "page": 1,
+      "row": "8",
+      "column": "2 (lightface, P<.05)",
+      "value": 4.46,
+      "actualDf": [
+       2,
+       8
+      ],
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "F>F_{crit}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "F=18.3261>4.46",
+      "F=18.3261>8.65\\ (P<0.01)"
+     ],
+     "words": "F exceeds the lightface 0.05 value, so reject the null hypothesis. It also exceeds the boldface 0.01 value, so P < 0.01."
+    }
+   ],
+   "conclusion": "F = 18.3261 with 2 and 8 degrees of freedom exceeds 4.46 and also the boldface 8.65. Reject the null hypothesis. There is a difference in the mean V1 BOLD signal change among the three contrast levels (P < 0.01).",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/F_table.pdf",
+    "page": 1,
+    "row": "8",
+    "column": "2 (lightface, P<.05)",
+    "value": 4.46,
+    "actualDf": [
+     2,
+     8
+    ],
+    "approximation": false
+   },
+   "values": {
+    "n": 5,
+    "m": 3,
+    "subjectMeans": [
+     1.05,
+     0.7366666666666667,
+     1.2766666666666666,
+     0.7166666666666668,
+     1.1433333333333333
+    ],
+    "treatmentMeans": [
+     0.626,
+     1,
+     1.3279999999999998
+    ],
+    "grandMean": 0.9846666666666667,
+    "SStotal": 2.247173333333333,
+    "SSbetweenSubjects": 0.7441066666666662,
+    "SSwithinSubjects": 1.503066666666667,
+    "SStreat": 1.2337733333333327,
+    "SSres": 0.2692933333333343,
+    "DFtreat": 2,
+    "DFres": 8,
+    "MStreat": 0.6168866666666664,
+    "MSres": 0.033661666666666784,
+    "F": 18.326088032876097,
+    "critical05": 4.46,
+    "critical01": 8.65,
+    "exactP": 0.0010303610521245538,
+    "reject": true
+   },
+   "module": 20,
+   "tolerance": 0.09163044016438049,
+   "answerName": "F statistic",
+   "answer": 18.326088032876097
+  },
+  {
+   "id": "n20-heat-pain-cream-rmanova",
+   "title": "Heat pain threshold with no cream, placebo cream and numbing cream",
+   "topic": "s20rmanova",
+   "context": "Researchers interested in topical pain relief did a study to evaluate the heat pain threshold (lowest temperature of a heated probe on the forearm that the subject reports as painful). Six subjects were each tested on three separate days, once with no cream, once with an inert placebo cream, and once with a numbing cream. Thresholds were recorded in degrees Celsius (°C).",
+   "unit": "°C",
+   "table": {
+    "headers": [
+     "Subject",
+     "No cream (°C)",
+     "Placebo cream (°C)",
+     "Numbing cream (°C)"
+    ],
+    "rows": [
+     [
+      1,
+      43.8,
+      44.1,
+      45.6
+     ],
+     [
+      2,
+      45.2,
+      45.0,
+      45.7
+     ],
+     [
+      3,
+      42.5,
+      43.9,
+      43.6
+     ],
+     [
+      4,
+      46.0,
+      46.4,
+      47.9
+     ],
+     [
+      5,
+      44.3,
+      43.8,
+      44.6
+     ],
+     [
+      6,
+      43.1,
+      44.6,
+      44.0
+     ]
+    ]
+   },
+   "tasks": [
+    "Is there a difference in the heat pain threshold among the three conditions? Use a significance level of α = 0.05 for your inference. (Note: If a difference exists, do not identify which groups are different.)",
+    "Assume that any quantities of interest are Normally distributed. DO NOT use R."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\mu_1=\\dots=\\mu_m",
+    "alternative": "H_A:\\text{at least one treatment mean differs}",
+    "nullWords": "The mean heat pain threshold is the same with no cream, placebo cream and numbing cream.",
+    "alternativeWords": "At least one condition has a different mean heat pain threshold."
+   },
+   "symbols": "\\(x_{ts}\\) (response to treatment \\(t\\) in subject \\(s\\)), \\(\\bar S_s\\) (subject mean), \\(\\bar T_t\\) (treatment mean), \\(\\bar X\\) (grand mean), \\(m\\) (number of treatments), \\(n\\) (number of subjects), \\(SS\\) (sum of squares), \\(MS\\) (mean square), \\(F\\) (F statistic).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\mu_1=\\mu_2=\\dots=\\mu_m",
+      "H_A:\\text{not all treatment means are equal}"
+     ],
+     "work": [
+      "\\mu_{\\mathrm{none}}=\\mu_{\\mathrm{placebo}}=\\mu_{\\mathrm{numbing}}"
+     ],
+     "words": "Every subject receives every treatment, so the procedure is repeated measures ANOVA. The mean heat pain threshold is the same with no cream, placebo cream and numbing cream. At least one condition has a different mean heat pain threshold."
+    },
+    {
+     "title": "Calculate the subject means",
+     "general": [
+      "\\bar S_s=\\frac{1}{m}\\sum_{t=1}^{m}x_{ts}"
+     ],
+     "work": [
+      "\\bar S=(44.5,\\ 45.3,\\ 43.3333,\\ 46.7667,\\ 44.2333,\\ 43.9)"
+     ],
+     "words": "Average across the 3 treatments within each subject."
+    },
+    {
+     "title": "Calculate the treatment means and the grand mean",
+     "general": [
+      "\\bar T_t=\\frac{1}{n}\\sum_{s=1}^{n}x_{ts}",
+      "\\bar X=\\frac{1}{mn}\\sum_t\\sum_s x_{ts}"
+     ],
+     "work": [
+      "\\bar T=(44.15,\\ 44.6333,\\ 45.2333)",
+      "\\bar X=\\frac{804.1}{18}=44.6722"
+     ],
+     "words": "Average down each treatment column across the 6 subjects, then average all 18 observations."
+    },
+    {
+     "title": "Calculate the sum of squares within subjects",
+     "general": [
+      "SS_{wit\\,subjs}=\\sum_{s=1}^{n}\\sum_{t=1}^{m}(x_{ts}-\\bar S_s)^2=\\sum_s SS_s",
+      "DF_{wit\\,subjs}=n(m-1)"
+     ],
+     "work": [
+      "SS_s=(1.86,\\ 0.26,\\ 1.08667,\\ 2.00667,\\ 0.326667,\\ 1.14)",
+      "SS_{wit\\,subjs}=6.68",
+      "DF_{wit\\,subjs}=6(3-1)=12"
+     ],
+     "words": "Each subject's own spread around their own mean is added up. Differences between subjects (SS between subjects = 22.1761) are set aside."
+    },
+    {
+     "title": "Calculate the treatment sum of squares",
+     "general": [
+      "SS_{treat}=n\\sum_{t=1}^{m}(\\bar T_t-\\bar X)^2",
+      "DF_{treat}=m-1"
+     ],
+     "work": [
+      "SS_{treat}=6[(44.15-44.6722)^2+(44.6333-44.6722)^2+(45.2333-44.6722)^2]=3.53444",
+      "DF_{treat}=3-1=2"
+     ],
+     "words": "The factor n appears because each treatment mean is based on n subjects."
+    },
+    {
+     "title": "Calculate the residual sum of squares",
+     "general": [
+      "SS_{res}=SS_{wit\\,subjs}-SS_{treat}",
+      "DF_{res}=(n-1)(m-1)"
+     ],
+     "work": [
+      "SS_{res}=6.68-3.53444=3.14556",
+      "DF_{res}=(6-1)(3-1)=10"
+     ],
+     "words": "What remains of the within-subject variation after the treatment effect is removed is the residual."
+    },
+    {
+     "title": "Calculate the mean squares and F",
+     "general": [
+      "F=\\frac{SS_{treat}/DF_{treat}}{SS_{res}/DF_{res}}=\\frac{MS_{treat}}{MS_{res}}"
+     ],
+     "work": [
+      "MS_{treat}=\\frac{3.53444}{2}=1.76722",
+      "MS_{res}=\\frac{3.14556}{10}=0.314556",
+      "F=\\frac{1.76722}{0.314556}=5.61816"
+     ],
+     "words": "A large F means the treatment means differ more than the leftover within-subject noise would explain."
+    },
+    {
+     "title": "Find the critical F",
+     "general": [
+      "F_{crit}=F_\\alpha(DF_{treat},DF_{res})=F_\\alpha(\\nu_n,\\nu_d)"
+     ],
+     "work": [
+      "F_{0.05}(2,10)=4.10"
+     ],
+     "words": "Open F_table.pdf, PDF page 1. Start with α = 0.05. Use numerator column \\(\\nu_n=2\\) and denominator row \\(\\nu_d=10\\). The lightface (P < .05) value is 4.10. The boldface (P < .01) value is 7.56.",
+     "classTable": {
+      "path": "sources/tables/F_table.pdf",
+      "page": 1,
+      "row": "10",
+      "column": "2 (lightface, P<.05)",
+      "value": 4.1,
+      "actualDf": [
+       2,
+       10
+      ],
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "F>F_{crit}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "F=5.61816>4.10",
+      "F=5.61816<7.56\\ (0.01<P<0.05)"
+     ],
+     "words": "F exceeds the lightface 0.05 value, so reject the null hypothesis. It does not reach the boldface 0.01 value, so 0.01 < P < 0.05."
+    }
+   ],
+   "conclusion": "F = 5.61816 with 2 and 10 degrees of freedom exceeds 4.10 but not the boldface 7.56. Reject the null hypothesis at α = 0.05. There is a difference in the mean heat pain threshold among the three conditions (P < 0.05).",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/F_table.pdf",
+    "page": 1,
+    "row": "10",
+    "column": "2 (lightface, P<.05)",
+    "value": 4.1,
+    "actualDf": [
+     2,
+     10
+    ],
+    "approximation": false
+   },
+   "values": {
+    "n": 6,
+    "m": 3,
+    "subjectMeans": [
+     44.5,
+     45.300000000000004,
+     43.333333333333336,
+     46.76666666666667,
+     44.23333333333333,
+     43.9
+    ],
+    "treatmentMeans": [
+     44.150000000000006,
+     44.63333333333333,
+     45.23333333333333
+    ],
+    "grandMean": 44.672222222222224,
+    "SStotal": 28.856111111111115,
+    "SSbetweenSubjects": 22.176111111111204,
+    "SSwithinSubjects": 6.680000000000008,
+    "SStreat": 3.5344444444443672,
+    "SSres": 3.1455555555556405,
+    "DFtreat": 2,
+    "DFres": 10,
+    "MStreat": 1.7672222222221836,
+    "MSres": 0.314555555555564,
+    "F": 5.6181561285762,
+    "critical05": 4.1,
+    "critical01": 7.56,
+    "exactP": 0.023152851552895065,
+    "reject": true
+   },
+   "module": 20,
+   "tolerance": 0.028090780642881,
+   "answerName": "F statistic",
+   "answer": 5.6181561285762
+  },
+  {
+   "id": "n20-vigilance-time-of-day-rmanova",
+   "title": "Vigilance reaction time at three times of day",
+   "topic": "s20rmanova",
+   "context": "In a study looking at alertness across the day, five subjects each completed a psychomotor vigilance task (pressing a button as soon as a counter appears on a screen) at 8 AM, 2 PM and 8 PM on the same day. Mean reaction time was recorded in milliseconds (ms).",
+   "unit": "ms",
+   "table": {
+    "headers": [
+     "Subject",
+     "Reaction Time at 8 AM (ms)",
+     "Reaction Time at 2 PM (ms)",
+     "Reaction Time at 8 PM (ms)"
+    ],
+    "rows": [
+     [
+      1,
+      268,
+      255,
+      262
+     ],
+     [
+      2,
+      301,
+      310,
+      296
+     ],
+     [
+      3,
+      247,
+      239,
+      258
+     ],
+     [
+      4,
+      284,
+      270,
+      275
+     ],
+     [
+      5,
+      322,
+      305,
+      331
+     ]
+    ]
+   },
+   "tasks": [
+    "Is there a difference in reaction time over time? Assume that any quantities of interest are Normally distributed. DO NOT use R.",
+    "Provide your result in a single complete sentence that would convey your conclusion in a way that could be understood by a non-expert in statistics or medicine (e.g., a typical reader of a local newspaper)."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\mu_1=\\dots=\\mu_m",
+    "alternative": "H_A:\\text{at least one treatment mean differs}",
+    "nullWords": "Mean reaction time is the same at 8 AM, 2 PM and 8 PM.",
+    "alternativeWords": "At least one time of day has a different mean reaction time."
+   },
+   "symbols": "\\(x_{ts}\\) (response to treatment \\(t\\) in subject \\(s\\)), \\(\\bar S_s\\) (subject mean), \\(\\bar T_t\\) (treatment mean), \\(\\bar X\\) (grand mean), \\(m\\) (number of treatments), \\(n\\) (number of subjects), \\(SS\\) (sum of squares), \\(MS\\) (mean square), \\(F\\) (F statistic).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\mu_1=\\mu_2=\\dots=\\mu_m",
+      "H_A:\\text{not all treatment means are equal}"
+     ],
+     "work": [
+      "\\mu_{\\mathrm{8AM}}=\\mu_{\\mathrm{2PM}}=\\mu_{\\mathrm{8PM}}"
+     ],
+     "words": "Every subject receives every treatment, so the procedure is repeated measures ANOVA. Mean reaction time is the same at 8 AM, 2 PM and 8 PM. At least one time of day has a different mean reaction time."
+    },
+    {
+     "title": "Calculate the subject means",
+     "general": [
+      "\\bar S_s=\\frac{1}{m}\\sum_{t=1}^{m}x_{ts}"
+     ],
+     "work": [
+      "\\bar S=(261.667,\\ 302.333,\\ 248,\\ 276.333,\\ 319.333)"
+     ],
+     "words": "Average across the 3 treatments within each subject."
+    },
+    {
+     "title": "Calculate the treatment means and the grand mean",
+     "general": [
+      "\\bar T_t=\\frac{1}{n}\\sum_{s=1}^{n}x_{ts}",
+      "\\bar X=\\frac{1}{mn}\\sum_t\\sum_s x_{ts}"
+     ],
+     "work": [
+      "\\bar T=(284.4,\\ 275.8,\\ 284.4)",
+      "\\bar X=\\frac{4223}{15}=281.533"
+     ],
+     "words": "Average down each treatment column across the 5 subjects, then average all 15 observations."
+    },
+    {
+     "title": "Calculate the sum of squares within subjects",
+     "general": [
+      "SS_{wit\\,subjs}=\\sum_{s=1}^{n}\\sum_{t=1}^{m}(x_{ts}-\\bar S_s)^2=\\sum_s SS_s",
+      "DF_{wit\\,subjs}=n(m-1)"
+     ],
+     "work": [
+      "SS_s=(84.6667,\\ 100.667,\\ 182,\\ 100.667,\\ 348.667)",
+      "SS_{wit\\,subjs}=816.667",
+      "DF_{wit\\,subjs}=5(3-1)=10"
+     ],
+     "words": "Each subject's own spread around their own mean is added up. Differences between subjects (SS between subjects = 10223.1) are set aside."
+    },
+    {
+     "title": "Calculate the treatment sum of squares",
+     "general": [
+      "SS_{treat}=n\\sum_{t=1}^{m}(\\bar T_t-\\bar X)^2",
+      "DF_{treat}=m-1"
+     ],
+     "work": [
+      "SS_{treat}=5[(284.4-281.533)^2+(275.8-281.533)^2+(284.4-281.533)^2]=246.533",
+      "DF_{treat}=3-1=2"
+     ],
+     "words": "The factor n appears because each treatment mean is based on n subjects."
+    },
+    {
+     "title": "Calculate the residual sum of squares",
+     "general": [
+      "SS_{res}=SS_{wit\\,subjs}-SS_{treat}",
+      "DF_{res}=(n-1)(m-1)"
+     ],
+     "work": [
+      "SS_{res}=816.667-246.533=570.133",
+      "DF_{res}=(5-1)(3-1)=8"
+     ],
+     "words": "What remains of the within-subject variation after the treatment effect is removed is the residual."
+    },
+    {
+     "title": "Calculate the mean squares and F",
+     "general": [
+      "F=\\frac{SS_{treat}/DF_{treat}}{SS_{res}/DF_{res}}=\\frac{MS_{treat}}{MS_{res}}"
+     ],
+     "work": [
+      "MS_{treat}=\\frac{246.533}{2}=123.267",
+      "MS_{res}=\\frac{570.133}{8}=71.2667",
+      "F=\\frac{123.267}{71.2667}=1.72965"
+     ],
+     "words": "A large F means the treatment means differ more than the leftover within-subject noise would explain."
+    },
+    {
+     "title": "Find the critical F",
+     "general": [
+      "F_{crit}=F_\\alpha(DF_{treat},DF_{res})=F_\\alpha(\\nu_n,\\nu_d)"
+     ],
+     "work": [
+      "F_{0.05}(2,8)=4.46"
+     ],
+     "words": "Open F_table.pdf, PDF page 1. Start with α = 0.05. Use numerator column \\(\\nu_n=2\\) and denominator row \\(\\nu_d=8\\). The lightface (P < .05) value is 4.46. The boldface (P < .01) value is 8.65.",
+     "classTable": {
+      "path": "sources/tables/F_table.pdf",
+      "page": 1,
+      "row": "8",
+      "column": "2 (lightface, P<.05)",
+      "value": 4.46,
+      "actualDf": [
+       2,
+       8
+      ],
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "F<F_{crit}\\Rightarrow\\text{do not reject }H_0"
+     ],
+     "work": [
+      "F=1.72965<4.46",
+      "P>0.05"
+     ],
+     "words": "F is below the lightface 0.05 value, so the null hypothesis is not rejected. The table has no column above 0.05, so the P range is P > 0.05. The subjects differ a lot from one another, but that spread is set aside and does not enter F."
+    }
+   ],
+   "conclusion": "F = 1.72965 with 2 and 8 degrees of freedom is below 4.46. Do not reject the null hypothesis. These data give no evidence that reaction time on the vigilance task is different at the three times of day (P > 0.05).",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/F_table.pdf",
+    "page": 1,
+    "row": "8",
+    "column": "2 (lightface, P<.05)",
+    "value": 4.46,
+    "actualDf": [
+     2,
+     8
+    ],
+    "approximation": false
+   },
+   "values": {
+    "n": 5,
+    "m": 3,
+    "subjectMeans": [
+     261.6666666666667,
+     302.3333333333333,
+     248,
+     276.3333333333333,
+     319.3333333333333
+    ],
+    "treatmentMeans": [
+     284.4,
+     275.8,
+     284.4
+    ],
+    "grandMean": 281.53333333333336,
+    "SStotal": 11039.733333333334,
+    "SSbetweenSubjects": 10223.066666666658,
+    "SSwithinSubjects": 816.6666666666667,
+    "SStreat": 246.53333333333137,
+    "SSres": 570.1333333333354,
+    "DFtreat": 2,
+    "DFres": 8,
+    "MStreat": 123.26666666666569,
+    "MSres": 71.26666666666692,
+    "F": 1.7296538821328145,
+    "critical05": 4.46,
+    "critical01": 8.65,
+    "exactP": 0.2375343455615944,
+    "reject": false
+   },
+   "module": 20,
+   "tolerance": 0.008648269410664072,
+   "answerName": "F statistic",
+   "answer": 1.7296538821328145
+  }
+ ],
+ "questions": [
+  {
+   "id": "m2-n20-qa01",
+   "module": 20,
+   "topic": "s20paired",
+   "stem": "In the EEG alpha power study (ten subjects, eyes closed minus eyes open), what is the mean difference \\(\\bar d\\)?",
+   "options": [
+    "\\(5.37778\\) μV²",
+    "\\(48.4\\) μV²",
+    "\\(4.84\\) μV²",
+    "\\(4.9\\) μV²"
+   ],
+   "correct": 2,
+   "why": "The ten differences sum to 48.4 μV², with the negative difference of subject 3 kept as negative. Dividing by n = 10 gives 4.84 μV².",
+   "case": "n20-alpha-eyes-closed",
+   "equations": [
+    "\\bar d=\\frac{1}{n}\\sum d_i",
+    "\\bar d=\\frac{48.4}{10}=4.84"
+   ]
+  },
+  {
+   "id": "m2-n20-qa02",
+   "module": 20,
+   "topic": "s20paired",
+   "stem": "In the TENS pressure pain threshold study (eleven subjects, after minus before), what is the SD of the differences \\(s_d\\)?",
+   "options": [
+    "\\(14.3337\\) kPa",
+    "\\(13.6666\\) kPa",
+    "\\(4.32177\\) kPa",
+    "\\(205.455\\) kPa"
+   ],
+   "correct": 0,
+   "why": "The squared deviations sum to 2054.55. Dividing by n − 1 = 10 gives 205.455, and its root is 14.3337 kPa. Dividing by n, stopping at the variance, or dividing again by the root of n gives the other values.",
+   "case": "n20-tens-pressure-pain",
+   "equations": [
+    "s_d=\\sqrt{\\frac{\\sum(d_i-\\bar d)^2}{n-1}}",
+    "s_d=\\sqrt{\\frac{2054.55}{10}}=14.3337"
+   ]
+  },
+  {
+   "id": "m2-n20-qa03",
+   "module": 20,
+   "topic": "s20paired",
+   "stem": "In the P300 sleep loss study (ten subjects, sleep deprived minus rested), what is the t statistic for the test that fits the design?",
+   "options": [
+    "\\(-1.18835\\)",
+    "\\(-0.735747\\)",
+    "\\(-2.20724\\)",
+    "\\(-2.32664\\)"
+   ],
+   "correct": 3,
+   "why": "Each subject is measured in both states, so t is the mean difference over its standard error, -1.24/0.532958 = -2.32664. The value -1.18835 is what the unpaired test gives on the same numbers.",
+   "case": "n20-p300-sleep-loss",
+   "equations": [
+    "t=\\frac{\\bar d}{s_{\\bar d}}",
+    "t=\\frac{-1.24}{0.532958}=-2.32664"
+   ]
+  },
+  {
+   "id": "m2-n20-qa04",
+   "module": 20,
+   "topic": "s20unpaired",
+   "stem": "In the amygdala BOLD study, the two columns are treated as two separate groups of ten. What is the unpaired (pooled) t statistic?",
+   "options": [
+    "\\(5.31412\\)",
+    "\\(0.781549\\)",
+    "\\(0.349519\\)",
+    "\\(1.10528\\)"
+   ],
+   "correct": 1,
+   "why": "The pooled variance is 0.0510872, so the standard error is 0.101081 and t = 0.079/0.101081 = 0.781549. The value 5.31412 is the paired t on the same data.",
+   "case": "n20-amygdala-faces-unpaired",
+   "equations": [
+    "t=\\frac{\\bar x_1-\\bar x_2}{\\sqrt{s^2/n_1+s^2/n_2}}",
+    "t=\\frac{0.532-0.453}{0.101081}=0.781549"
+   ]
+  },
+  {
+   "id": "m2-n20-qa05",
+   "module": 20,
+   "topic": "s20pairedR",
+   "stem": "In the cold pressor study, R prints a 95 percent confidence interval for the mean music minus silence difference. What is the lower endpoint when it is calculated by hand with the printed cutoff \\(t_{0.05}(9)=2.262\\)?",
+   "options": [
+    "\\(-12.5664\\) s",
+    "\\(5.12482\\) s",
+    "\\(1.49634\\) s",
+    "\\(2.36464\\) s"
+   ],
+   "correct": 2,
+   "why": "The interval is the mean difference plus or minus the printed cutoff times the standard error, 8 − 2.262(2.87518) = 1.49634 s. It matches the lower endpoint in the R output to about two decimals, and it is above 0.",
+   "case": "n20-cold-pressor-music-r",
+   "equations": [
+    "\\bar d\\pm t_{0.05}(\\nu)\\,s_{\\bar d}",
+    "8-2.262(2.87518)=1.49634"
+   ]
+  },
+  {
+   "id": "m2-n20-qa06",
+   "module": 20,
+   "topic": "s20rmanova",
+   "stem": "In the heat pain threshold study (six subjects, three cream conditions), what is the F statistic?",
+   "options": [
+    "\\(5.61816\\)",
+    "\\(3.17465\\)",
+    "\\(1.12363\\)",
+    "\\(1.04686\\)"
+   ],
+   "correct": 0,
+   "why": "F is the treatment mean square over the residual mean square, 1.76722/0.314556 = 5.61816. Leaving the between-subject spread in the denominator, as an ANOVA for separate groups does, gives a much smaller value.",
+   "case": "n20-heat-pain-cream-rmanova",
+   "equations": [
+    "F=\\frac{SS_{treat}/DF_{treat}}{SS_{res}/DF_{res}}",
+    "F=\\frac{1.76722}{0.314556}=5.61816"
+   ]
+  },
+  {
+   "id": "m2-n20-qa07",
+   "module": 20,
+   "topic": "s20paired",
+   "stem": "Twelve listeners have their speech reception threshold in noise (lowest signal-to-noise ratio at which half of the sentences are repeated correctly) measured without a hearing aid and again with a hearing aid. Which procedure fits this design?",
+   "options": [
+    "An unpaired t test on the two columns, with \\(\\nu=22\\)",
+    "A paired t test on the twelve within-subject differences, with \\(\\nu=11\\)",
+    "A chi-square test on a 2 by 2 table of the thresholds",
+    "An unpaired t test on the twelve differences against the twelve aided thresholds"
+   ],
+   "correct": 1,
+   "why": "Each listener is measured in both states on an interval scale, so the test is the paired t test on the differences. The degrees of freedom are n − 1 = 11.",
+   "case": null,
+   "equations": [
+    "d_i=x1_i-x2_i",
+    "t=\\frac{\\bar d}{s_{\\bar d}},\\quad\\nu=n-1"
+   ]
+  },
+  {
+   "id": "m2-n20-qa08",
+   "module": 20,
+   "topic": "s20unpaired",
+   "stem": "Ten patients rate migraine pain before and after a nerve block. The paired t test rejects the null hypothesis, but an unpaired t test on the same two columns does not. What explains the unpaired result?",
+   "options": [
+    "The unpaired test uses fewer degrees of freedom, so its cutoff is larger",
+    "The unpaired test changes the mean difference in the numerator",
+    "The unpaired test is one-sided, so it needs a larger t",
+    "The unpaired standard error keeps the large differences between patients, so the same mean change is divided by a much larger number"
+   ],
+   "correct": 3,
+   "why": "Both tests have the same numerator. The unpaired denominator is built from the spread between patients, while the paired denominator uses only the spread of each patient's own change.",
+   "case": null,
+   "equations": [
+    "t=\\frac{\\bar x_1-\\bar x_2}{\\sqrt{s^2/n_1+s^2/n_2}}",
+    "t=\\frac{\\bar d}{s_d/\\sqrt n}"
+   ]
+  },
+  {
+   "id": "m2-n20-qa09",
+   "module": 20,
+   "topic": "s20rmanova",
+   "stem": "Eight drummers each tap along with a metronome at three tempos, and timing error is recorded at each tempo. In the repeated measures ANOVA, which degrees of freedom are used to find the critical F?",
+   "options": [
+    "\\(\\nu_n=2\\) and \\(\\nu_d=21\\)",
+    "\\(\\nu_n=3\\) and \\(\\nu_d=7\\)",
+    "\\(\\nu_n=2\\) and \\(\\nu_d=14\\)",
+    "\\(\\nu_n=2\\) and \\(\\nu_d=16\\)"
+   ],
+   "correct": 2,
+   "why": "The numerator uses m − 1 = 2 and the denominator uses the residual, (n − 1)(m − 1) = 7 × 2 = 14. The value 21 belongs to an ANOVA with three separate groups of eight, and 16 is the full within-subject degrees of freedom.",
+   "case": null,
+   "equations": [
+    "DF_{treat}=m-1=2",
+    "DF_{res}=(n-1)(m-1)=14"
+   ]
+  },
+  {
+   "id": "m2-n20-qa10",
+   "module": 20,
+   "topic": "s20pairedR",
+   "stem": "R output for a paired t test of resting tremor amplitude in ten patients before and after a drug includes \"p-value = 0.1142\" and the lines \"95 percent confidence interval:\" and \"-0.82 6.41\". Which reading of the output is correct?",
+   "options": [
+    "The interval contains 0 and the p-value is above 0.05, so the null hypothesis is not rejected",
+    "The interval is mostly positive, so there is a difference at the 0.05 level",
+    "The p-value is the probability that the drug has no effect",
+    "The interval shows that 95 percent of the subjects changed by between −0.82 and 6.41"
+   ],
+   "correct": 0,
+   "why": "A 95 percent interval for the mean difference that contains 0 goes with a two-sided P above 0.05. Both lines of the output give the same decision, which is not to reject the null hypothesis.",
+   "case": null,
+   "equations": [
+    "\\bar d\\pm t_{0.05}(\\nu)\\,s_{\\bar d}"
+   ]
+  }
+ ],
+ "notes": [
+  "All data are invented for practice. Critical values are the printed ones in sources/tables/t_table.pdf (rows 9, 10, 18) and F_table.pdf page 1 (columns 2, rows 6, 8, 10). No df row had to be bracketed.",
+  "Differences are always measurement 2 minus measurement 1, as in the ref pairedR case. n20-p300-sleep-loss has a negative t (answer is the signed t, the table comparison uses |t|).",
+  "Outcome mix. Do not reject: n20-tens-pressure-pain, n20-amygdala-faces-unpaired (by design), n20-vigilance-time-of-day-rmanova. Close to a cutoff: n20-p300-sleep-loss (|t| just above t0.05(9) = 2.262). Between 0.05 and 0.01: n20-heat-pain-cream-rmanova.",
+  "n20-amygdala-faces-unpaired shows the raw Subject table (the ref unpaired case shows a summary table) so that the means, SDs and the quoted paired t can be recomputed from raw data. Its values keys match the ref case.",
+  "The two s20pairedR cases store real Rscript output (R 4.6.1) in values.rOutput and values.rCode, like the ref case. The step words quote the output without colons because of the no colon rule, so the exact printed lines are the ones in values.rOutput.",
+  "Unlike the ref cases, conclusions and step words contain no colons or semicolons (spec rule), so 'Reject the null hypothesis.' is followed by a new sentence.",
+  "Style review. His own phrases are restored in context and tasks with their punctuation, for example \"(Note: If a difference exists, do not identify which groups are different.)\" and his R ask for the paired R cases, so tasks may contain colons and the check script allows colons and semicolons in context and tasks only. The test name was removed from the three repeated measures titles."
+ ]
+}

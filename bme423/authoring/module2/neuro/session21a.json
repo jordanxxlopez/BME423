@@ -1,0 +1,2258 @@
+{
+ "cases": [
+  {
+   "id": "n21-mmn-deviant-type",
+   "title": "Mismatch negativity amplitude for three kinds of deviant tone",
+   "topic": "s21rmAnova",
+   "context": "In a study looking at automatic change detection in the auditory cortex, the mismatch negativity (MMN, a negative deflection in the electrical activity of the brain recorded at the scalp that appears when a rare tone breaks a repeating sequence of standard tones) was recorded in 6 adult listeners. Each listener heard three stimulus conditions in separate blocks. The rare tone differed from the standard tone in frequency, in duration or in intensity. The table below shows the MMN amplitude in microvolts (μV) at the frontal midline electrode for each listener in each condition. A more negative value is a larger response. Is there a difference in MMN amplitude across the three stimulus conditions? Assume that any quantities of interest are Normally distributed.",
+   "unit": "μV",
+   "table": {
+    "headers": [
+     "Subject",
+     "Frequency deviant (μV)",
+     "Duration deviant (μV)",
+     "Intensity deviant (μV)"
+    ],
+    "rows": [
+     [
+      "1",
+      -3.2,
+      -3.4,
+      -2.1
+     ],
+     [
+      "2",
+      -4.5,
+      -4.2,
+      -3.0
+     ],
+     [
+      "3",
+      -2.6,
+      -3.1,
+      -1.8
+     ],
+     [
+      "4",
+      -3.9,
+      -4.3,
+      -2.5
+     ],
+     [
+      "5",
+      -2.9,
+      -2.6,
+      -1.7
+     ],
+     [
+      "6",
+      -3.5,
+      -3.9,
+      -2.6
+     ]
+    ]
+   },
+   "tasks": [
+    "Is there a difference in MMN amplitude across the three stimulus conditions? (Note: If a difference exists, do not identify which conditions are different.)",
+    "Make sure to show your intermediate calculations. DO NOT use R."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\mu_{freq}=\\mu_{dur}=\\mu_{int}",
+    "alternative": "H_A:\\text{not all three population means are equal}",
+    "nullWords": "The mean MMN amplitude of the listener population is the same for frequency, duration and intensity deviants.",
+    "alternativeWords": "The mean MMN amplitude differs for at least one of the three stimulus conditions."
+   },
+   "symbols": "\\(x_{ts}\\) (observation for treatment \\(t\\), subject \\(s\\)), \\(m\\) (number of treatments), \\(n\\) (number of subjects), \\(\\bar S_s\\) (subject mean), \\(\\bar T_t\\) (treatment mean), \\(\\bar X\\) (grand mean), \\(SS\\) (sum of squares), \\(DF\\) (degrees of freedom), \\(MS\\) (mean square), \\(F\\) (F statistic).",
+   "steps": [
+    {
+     "title": "State the procedure and design",
+     "general": [
+      "x_{ts},\\quad t=1,\\dots,m,\\quad s=1,\\dots,n"
+     ],
+     "work": [
+      "m=3\\ \\text{treatments},\\quad n=6\\ \\text{subjects}"
+     ],
+     "words": "The same 6 listeners are measured under all 3 stimulus conditions, so the observations are repeated measures on the same subjects. Repeated measures ANOVA is the procedure. It removes the large differences between listeners from the error term before comparing the stimulus conditions."
+    },
+    {
+     "title": "State the hypotheses",
+     "general": [
+      "H_0:\\mu_1=\\mu_2=\\dots=\\mu_m"
+     ],
+     "work": [
+      "H_0:\\mu_{freq}=\\mu_{dur}=\\mu_{int}"
+     ],
+     "words": "The mean MMN amplitude of the listener population is the same for frequency, duration and intensity deviants. The mean MMN amplitude differs for at least one of the three stimulus conditions."
+    },
+    {
+     "title": "Calculate each subject mean",
+     "general": [
+      "\\bar S_s=\\frac{1}{m}\\sum_{t=1}^{m}x_{ts}"
+     ],
+     "work": [
+      "\\bar S_1=\\frac{-3.2+(-3.4)+(-2.1)}{3}=-2.9",
+      "\\bar S_2=\\frac{-4.5+(-4.2)+(-3)}{3}=-3.9",
+      "\\bar S_3=\\frac{-2.6+(-3.1)+(-1.8)}{3}=-2.5",
+      "\\bar S_4=\\frac{-3.9+(-4.3)+(-2.5)}{3}=-3.5667",
+      "\\bar S_5=\\frac{-2.9+(-2.6)+(-1.7)}{3}=-2.4",
+      "\\bar S_6=\\frac{-3.5+(-3.9)+(-2.6)}{3}=-3.3333"
+     ],
+     "words": "Average each listener across all 3 stimulus conditions. Each row of the table gives one subject mean."
+    },
+    {
+     "title": "Calculate the treatment means and the grand mean",
+     "general": [
+      "\\bar T_t=\\frac{1}{n}\\sum_{s=1}^{n}x_{ts}",
+      "\\bar X=\\frac{1}{m}\\sum_{t=1}^{m}\\bar T_t"
+     ],
+     "work": [
+      "\\bar T_1=\\frac{-3.2+(-4.5)+(-2.6)+(-3.9)+(-2.9)+(-3.5)}{6}=-3.4333",
+      "\\bar T_2=\\frac{-3.4+(-4.2)+(-3.1)+(-4.3)+(-2.6)+(-3.9)}{6}=-3.5833",
+      "\\bar T_3=\\frac{-2.1+(-3)+(-1.8)+(-2.5)+(-1.7)+(-2.6)}{6}=-2.2833",
+      "\\bar X=\\frac{-3.4333+(-3.5833)+(-2.2833)}{3}=-3.1"
+     ],
+     "words": "Average each column over the 6 listeners. The grand mean is the mean of all 18 observations, which equals the mean of the treatment means."
+    },
+    {
+     "title": "Calculate the within-subjects sum of squares",
+     "general": [
+      "SS_{wit\\,subjs}=\\sum_{s=1}^{n}\\sum_{t=1}^{m}(x_{ts}-\\bar S_s)^2=\\sum_{s=1}^{n}SS_s"
+     ],
+     "work": [
+      "SS_1=(-3.2-(-2.9))^2+(-3.4-(-2.9))^2+(-2.1-(-2.9))^2=0.98",
+      "SS_2=(-4.5-(-3.9))^2+(-4.2-(-3.9))^2+(-3-(-3.9))^2=1.26",
+      "SS_3=(-2.6-(-2.5))^2+(-3.1-(-2.5))^2+(-1.8-(-2.5))^2=0.86",
+      "SS_4=(-3.9-(-3.5667))^2+(-4.3-(-3.5667))^2+(-2.5-(-3.5667))^2=1.7867",
+      "SS_5=(-2.9-(-2.4))^2+(-2.6-(-2.4))^2+(-1.7-(-2.4))^2=0.78",
+      "SS_6=(-3.5-(-3.3333))^2+(-3.9-(-3.3333))^2+(-2.6-(-3.3333))^2=0.8867",
+      "SS_{wit\\,subjs}=0.98+1.26+0.86+1.7867+0.78+0.8867=6.5533"
+     ],
+     "words": "Each listener is compared only with its own mean, so differences between listeners never enter this sum. It holds the treatment effect plus residual scatter."
+    },
+    {
+     "title": "Calculate the treatment sum of squares",
+     "general": [
+      "SS_{treat}=n\\sum_{t=1}^{m}(\\bar T_t-\\bar X)^2"
+     ],
+     "work": [
+      "SS_{treat}=6\\left[(-3.4333-(-3.1))^2+(-3.5833-(-3.1))^2+(-2.2833-(-3.1))^2\\right]=6.07"
+     ],
+     "words": "Multiply by n because each treatment mean involves n subjects."
+    },
+    {
+     "title": "Calculate the residual sum of squares",
+     "general": [
+      "SS_{res}=SS_{wit\\,subjs}-SS_{treat}"
+     ],
+     "work": [
+      "SS_{res}=6.5533-6.07=0.4833"
+     ],
+     "words": "The residual is the within-subject variation that the treatment means do not explain."
+    },
+    {
+     "title": "Find the degrees of freedom and mean squares",
+     "general": [
+      "DF_{treat}=m-1,\\quad DF_{res}=(n-1)(m-1)",
+      "MS_{treat}=\\frac{SS_{treat}}{DF_{treat}},\\quad MS_{res}=\\frac{SS_{res}}{DF_{res}}"
+     ],
+     "work": [
+      "DF_{treat}=3-1=2,\\quad DF_{res}=(6-1)(3-1)=10",
+      "MS_{treat}=\\frac{6.07}{2}=3.035,\\quad MS_{res}=\\frac{0.4833}{10}=0.0483333"
+     ],
+     "words": "Each sum of squares is divided by its own degrees of freedom to give a variance estimate."
+    },
+    {
+     "title": "Calculate the F statistic",
+     "general": [
+      "F=\\frac{MS_{treat}}{MS_{res}}"
+     ],
+     "work": [
+      "F=\\frac{3.035}{0.0483333}=62.7931"
+     ],
+     "words": "Treatment variance is compared with residual variance. Values near 1 or below are what equal treatment means produce."
+    },
+    {
+     "title": "Find the critical value",
+     "general": [
+      "F_{crit}=F_{\\alpha}(DF_{treat},DF_{res})=F_{\\alpha}(\\nu_n,\\nu_d)"
+     ],
+     "work": [
+      "F_{0.05}(2,10)=4.10",
+      "F_{0.01}(2,10)=7.56"
+     ],
+     "words": "Start with α = 0.05. Open F_table.pdf, PDF page 1. Use numerator column ν_n=2 and denominator row ν_d=10. The lightface entry 4.10 is the 0.05 cutoff and the boldface entry 7.56 is the 0.01 cutoff. Swapping the two df selects a different, wrong cell.",
+     "classTable": {
+      "path": "sources/tables/F_table.pdf",
+      "page": 1,
+      "row": "10",
+      "column": "2 (0.05 lightface)",
+      "value": 4.1,
+      "actualDf": [
+       2,
+       10
+      ],
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision",
+     "general": [
+      "F>F_{crit}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "F=62.7931>4.10,\\quad F>7.56\\Rightarrow P<0.01"
+     ],
+     "words": "F is above both the 0.05 and the 0.01 cutoffs, so reject the null hypothesis with P < 0.01."
+    }
+   ],
+   "conclusion": "F = 62.793 with 2 and 10 degrees of freedom exceeds F_0.01(2,10) = 7.56. Reject H0, P < 0.01. There is a difference in mean MMN amplitude across the frequency, duration and intensity deviant conditions. Holm-corrected pairwise t tests are then needed to locate the difference.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/F_table.pdf",
+    "page": 1,
+    "row": "10",
+    "column": "2 (0.05 lightface)",
+    "value": 4.1,
+    "actualDf": [
+     2,
+     10
+    ],
+    "approximation": false
+   },
+   "values": {
+    "n": 6,
+    "m": 3,
+    "subjectMeans": [
+     -2.9,
+     -3.9,
+     -2.5,
+     -3.5666666666666664,
+     -2.4,
+     -3.3333333333333335
+    ],
+    "treatmentMeans": [
+     -3.4333333333333336,
+     -3.5833333333333335,
+     -2.283333333333333
+    ],
+    "grandMean": -3.1,
+    "subjectSS": [
+     0.9799999999999999,
+     1.26,
+     0.8600000000000001,
+     1.7866666666666664,
+     0.78,
+     0.8866666666666665
+    ],
+    "ssWithin": 6.553333333333333,
+    "ssTreat": 6.070000000000003,
+    "ssRes": 0.48333333333332984,
+    "ssBetween": 5.406666666666666,
+    "ssTotal": 11.959999999999999,
+    "dfTreat": 2,
+    "dfRes": 10,
+    "msTreat": 3.0350000000000015,
+    "msRes": 0.048333333333332985,
+    "F": 62.79310344827635,
+    "exactP": 2.182340154752127e-06,
+    "critical": 4.1,
+    "critical01": 7.56,
+    "reject": true,
+    "pRange": "P<0.01"
+   },
+   "module": 21,
+   "tolerance": 0.313966,
+   "answerName": "F statistic",
+   "answer": 62.79310344827635
+  },
+  {
+   "id": "n21-insomnia-sleep-latency",
+   "title": "Sleep onset latency at baseline, 2 weeks and 6 weeks of insomnia therapy",
+   "topic": "s21rmAnova",
+   "context": "In a clinical trial, sleep onset latency (time from lights out to the first period of sleep on a polysomnogram, an overnight sleep recording) was measured in minutes (min) in 5 patients with chronic insomnia at baseline, after 2 weeks and after 6 weeks of cognitive behavioural therapy (CBT, a structured programme that changes sleep habits and beliefs about sleep). Is there a difference in sleep onset latency over time? Assume that any quantities of interest are Normally distributed.",
+   "unit": "min",
+   "table": {
+    "headers": [
+     "Patient",
+     "Baseline (min)",
+     "2 weeks (min)",
+     "6 weeks (min)"
+    ],
+    "rows": [
+     [
+      "1",
+      52,
+      44,
+      30
+     ],
+     [
+      "2",
+      41,
+      37,
+      28
+     ],
+     [
+      "3",
+      65,
+      49,
+      35
+     ],
+     [
+      "4",
+      38,
+      35,
+      22
+     ],
+     [
+      "5",
+      47,
+      36,
+      27
+     ]
+    ]
+   },
+   "tasks": [
+    "Is there a difference in sleep onset latency over time?",
+    "Make sure to show your intermediate calculations. DO NOT use R."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\mu_{base}=\\mu_{2wk}=\\mu_{6wk}",
+    "alternative": "H_A:\\text{not all three population means are equal}",
+    "nullWords": "The mean sleep onset latency of the patient population is the same at baseline, after 2 weeks and after 6 weeks of therapy.",
+    "alternativeWords": "The mean sleep onset latency differs for at least one of the three times."
+   },
+   "symbols": "\\(x_{ts}\\) (observation for treatment \\(t\\), subject \\(s\\)), \\(m\\) (number of treatments), \\(n\\) (number of subjects), \\(\\bar S_s\\) (subject mean), \\(\\bar T_t\\) (treatment mean), \\(\\bar X\\) (grand mean), \\(SS\\) (sum of squares), \\(DF\\) (degrees of freedom), \\(MS\\) (mean square), \\(F\\) (F statistic).",
+   "steps": [
+    {
+     "title": "State the procedure and design",
+     "general": [
+      "x_{ts},\\quad t=1,\\dots,m,\\quad s=1,\\dots,n"
+     ],
+     "work": [
+      "m=3\\ \\text{treatments},\\quad n=5\\ \\text{subjects}"
+     ],
+     "words": "The same 5 patients are measured at all 3 times, so the observations are repeated measures on the same subjects. Repeated measures ANOVA is the procedure. It removes the large differences between patients from the error term before comparing the times."
+    },
+    {
+     "title": "State the hypotheses",
+     "general": [
+      "H_0:\\mu_1=\\mu_2=\\dots=\\mu_m"
+     ],
+     "work": [
+      "H_0:\\mu_{base}=\\mu_{2wk}=\\mu_{6wk}"
+     ],
+     "words": "The mean sleep onset latency of the patient population is the same at baseline, after 2 weeks and after 6 weeks of therapy. The mean sleep onset latency differs for at least one of the three times."
+    },
+    {
+     "title": "Calculate each subject mean",
+     "general": [
+      "\\bar S_s=\\frac{1}{m}\\sum_{t=1}^{m}x_{ts}"
+     ],
+     "work": [
+      "\\bar S_1=\\frac{52+44+30}{3}=42",
+      "\\bar S_2=\\frac{41+37+28}{3}=35.3333",
+      "\\bar S_3=\\frac{65+49+35}{3}=49.6667",
+      "\\bar S_4=\\frac{38+35+22}{3}=31.6667",
+      "\\bar S_5=\\frac{47+36+27}{3}=36.6667"
+     ],
+     "words": "Average each patient across all 3 times. Each row of the table gives one subject mean."
+    },
+    {
+     "title": "Calculate the treatment means and the grand mean",
+     "general": [
+      "\\bar T_t=\\frac{1}{n}\\sum_{s=1}^{n}x_{ts}",
+      "\\bar X=\\frac{1}{m}\\sum_{t=1}^{m}\\bar T_t"
+     ],
+     "work": [
+      "\\bar T_1=\\frac{52+41+65+38+47}{5}=48.6",
+      "\\bar T_2=\\frac{44+37+49+35+36}{5}=40.2",
+      "\\bar T_3=\\frac{30+28+35+22+27}{5}=28.4",
+      "\\bar X=\\frac{48.6+40.2+28.4}{3}=39.0667"
+     ],
+     "words": "Average each column over the 5 patients. The grand mean is the mean of all 15 observations, which equals the mean of the treatment means."
+    },
+    {
+     "title": "Calculate the within-subjects sum of squares",
+     "general": [
+      "SS_{wit\\,subjs}=\\sum_{s=1}^{n}\\sum_{t=1}^{m}(x_{ts}-\\bar S_s)^2=\\sum_{s=1}^{n}SS_s"
+     ],
+     "work": [
+      "SS_1=(52-42)^2+(44-42)^2+(30-42)^2=248",
+      "SS_2=(41-35.3333)^2+(37-35.3333)^2+(28-35.3333)^2=88.6667",
+      "SS_3=(65-49.6667)^2+(49-49.6667)^2+(35-49.6667)^2=450.6667",
+      "SS_4=(38-31.6667)^2+(35-31.6667)^2+(22-31.6667)^2=144.6667",
+      "SS_5=(47-36.6667)^2+(36-36.6667)^2+(27-36.6667)^2=200.6667",
+      "SS_{wit\\,subjs}=248+88.6667+450.6667+144.6667+200.6667=1132.6667"
+     ],
+     "words": "Each patient is compared only with its own mean, so differences between patients never enter this sum. It holds the treatment effect plus residual scatter."
+    },
+    {
+     "title": "Calculate the treatment sum of squares",
+     "general": [
+      "SS_{treat}=n\\sum_{t=1}^{m}(\\bar T_t-\\bar X)^2"
+     ],
+     "work": [
+      "SS_{treat}=5\\left[(48.6-39.0667)^2+(40.2-39.0667)^2+(28.4-39.0667)^2\\right]=1029.7333"
+     ],
+     "words": "Multiply by n because each treatment mean involves n subjects."
+    },
+    {
+     "title": "Calculate the residual sum of squares",
+     "general": [
+      "SS_{res}=SS_{wit\\,subjs}-SS_{treat}"
+     ],
+     "work": [
+      "SS_{res}=1132.6667-1029.7333=102.9333"
+     ],
+     "words": "The residual is the within-subject variation that the treatment means do not explain."
+    },
+    {
+     "title": "Find the degrees of freedom and mean squares",
+     "general": [
+      "DF_{treat}=m-1,\\quad DF_{res}=(n-1)(m-1)",
+      "MS_{treat}=\\frac{SS_{treat}}{DF_{treat}},\\quad MS_{res}=\\frac{SS_{res}}{DF_{res}}"
+     ],
+     "work": [
+      "DF_{treat}=3-1=2,\\quad DF_{res}=(5-1)(3-1)=8",
+      "MS_{treat}=\\frac{1029.7333}{2}=514.866667,\\quad MS_{res}=\\frac{102.9333}{8}=12.866667"
+     ],
+     "words": "Each sum of squares is divided by its own degrees of freedom to give a variance estimate."
+    },
+    {
+     "title": "Calculate the F statistic",
+     "general": [
+      "F=\\frac{MS_{treat}}{MS_{res}}"
+     ],
+     "work": [
+      "F=\\frac{514.866667}{12.866667}=40.0155"
+     ],
+     "words": "Treatment variance is compared with residual variance. Values near 1 or below are what equal treatment means produce."
+    },
+    {
+     "title": "Find the critical value",
+     "general": [
+      "F_{crit}=F_{\\alpha}(DF_{treat},DF_{res})=F_{\\alpha}(\\nu_n,\\nu_d)"
+     ],
+     "work": [
+      "F_{0.05}(2,8)=4.46",
+      "F_{0.01}(2,8)=8.65"
+     ],
+     "words": "Start with α = 0.05. Open F_table.pdf, PDF page 1. Use numerator column ν_n=2 and denominator row ν_d=8. The lightface entry 4.46 is the 0.05 cutoff and the boldface entry 8.65 is the 0.01 cutoff. Swapping the two df selects a different, wrong cell.",
+     "classTable": {
+      "path": "sources/tables/F_table.pdf",
+      "page": 1,
+      "row": "8",
+      "column": "2 (0.05 lightface)",
+      "value": 4.46,
+      "actualDf": [
+       2,
+       8
+      ],
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision",
+     "general": [
+      "F>F_{crit}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "F=40.0155>4.46,\\quad F>8.65\\Rightarrow P<0.01"
+     ],
+     "words": "F is above both the 0.05 and the 0.01 cutoffs, so reject the null hypothesis with P < 0.01."
+    }
+   ],
+   "conclusion": "F = 40.016 with 2 and 8 degrees of freedom exceeds F_0.01(2,8) = 8.65. Reject H0, P < 0.01. There is a difference in mean sleep onset latency among baseline, 2 weeks and 6 weeks of therapy. Holm-corrected pairwise t tests are then needed to locate the difference.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/F_table.pdf",
+    "page": 1,
+    "row": "8",
+    "column": "2 (0.05 lightface)",
+    "value": 4.46,
+    "actualDf": [
+     2,
+     8
+    ],
+    "approximation": false
+   },
+   "values": {
+    "n": 5,
+    "m": 3,
+    "subjectMeans": [
+     42.0,
+     35.333333333333336,
+     49.666666666666664,
+     31.666666666666668,
+     36.666666666666664
+    ],
+    "treatmentMeans": [
+     48.6,
+     40.2,
+     28.4
+    ],
+    "grandMean": 39.06666666666667,
+    "subjectSS": [
+     248.0,
+     88.66666666666667,
+     450.66666666666663,
+     144.66666666666666,
+     200.66666666666666
+    ],
+    "ssWithin": 1132.6666666666665,
+    "ssTreat": 1029.7333333333338,
+    "ssRes": 102.93333333333271,
+    "ssBetween": 586.2666666666664,
+    "ssTotal": 1718.9333333333334,
+    "dfTreat": 2,
+    "dfRes": 8,
+    "msTreat": 514.8666666666669,
+    "msRes": 12.866666666666589,
+    "F": 40.01554404145104,
+    "exactP": 6.820491445012263e-05,
+    "critical": 4.46,
+    "critical01": 8.65,
+    "reject": true,
+    "pRange": "P<0.01"
+   },
+   "module": 21,
+   "tolerance": 0.200078,
+   "answerName": "F statistic",
+   "answer": 40.01554404145104
+  },
+  {
+   "id": "n21-placebo-heat-pain",
+   "title": "Heat pain threshold at 15, 30 and 60 minutes after a placebo cream",
+   "topic": "s21rmAnova",
+   "context": "In a clinical trial, heat pain threshold (the temperature of a heated probe on the forearm at which warmth first becomes painful) was measured in degrees Celsius (°C) in 4 healthy volunteers at 15, 30 and 60 minutes after a placebo cream (a cream with no active ingredient) was applied to the skin. Is there a difference in heat pain threshold over time? Assume that any quantities of interest are Normally distributed.",
+   "unit": "°C",
+   "table": {
+    "headers": [
+     "Subject",
+     "15 minutes (°C)",
+     "30 minutes (°C)",
+     "60 minutes (°C)"
+    ],
+    "rows": [
+     [
+      "1",
+      44.2,
+      45.0,
+      44.9
+     ],
+     [
+      "2",
+      46.1,
+      45.4,
+      46.0
+     ],
+     [
+      "3",
+      43.5,
+      44.1,
+      43.4
+     ],
+     [
+      "4",
+      45.3,
+      45.6,
+      46.0
+     ]
+    ]
+   },
+   "tasks": [
+    "Is there a difference in heat pain threshold over time?",
+    "Make sure to show your intermediate calculations. DO NOT use R."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\mu_{15}=\\mu_{30}=\\mu_{60}",
+    "alternative": "H_A:\\text{not all three population means are equal}",
+    "nullWords": "The mean heat pain threshold of the volunteer population is the same at 15, 30 and 60 minutes after the placebo cream.",
+    "alternativeWords": "The mean heat pain threshold differs for at least one of the three times."
+   },
+   "symbols": "\\(x_{ts}\\) (observation for treatment \\(t\\), subject \\(s\\)), \\(m\\) (number of treatments), \\(n\\) (number of subjects), \\(\\bar S_s\\) (subject mean), \\(\\bar T_t\\) (treatment mean), \\(\\bar X\\) (grand mean), \\(SS\\) (sum of squares), \\(DF\\) (degrees of freedom), \\(MS\\) (mean square), \\(F\\) (F statistic).",
+   "steps": [
+    {
+     "title": "State the procedure and design",
+     "general": [
+      "x_{ts},\\quad t=1,\\dots,m,\\quad s=1,\\dots,n"
+     ],
+     "work": [
+      "m=3\\ \\text{treatments},\\quad n=4\\ \\text{subjects}"
+     ],
+     "words": "The same 4 volunteers are measured at all 3 times, so the observations are repeated measures on the same subjects. Repeated measures ANOVA is the procedure. It removes the large differences between volunteers from the error term before comparing the times."
+    },
+    {
+     "title": "State the hypotheses",
+     "general": [
+      "H_0:\\mu_1=\\mu_2=\\dots=\\mu_m"
+     ],
+     "work": [
+      "H_0:\\mu_{15}=\\mu_{30}=\\mu_{60}"
+     ],
+     "words": "The mean heat pain threshold of the volunteer population is the same at 15, 30 and 60 minutes after the placebo cream. The mean heat pain threshold differs for at least one of the three times."
+    },
+    {
+     "title": "Calculate each subject mean",
+     "general": [
+      "\\bar S_s=\\frac{1}{m}\\sum_{t=1}^{m}x_{ts}"
+     ],
+     "work": [
+      "\\bar S_1=\\frac{44.2+45+44.9}{3}=44.7",
+      "\\bar S_2=\\frac{46.1+45.4+46}{3}=45.8333",
+      "\\bar S_3=\\frac{43.5+44.1+43.4}{3}=43.6667",
+      "\\bar S_4=\\frac{45.3+45.6+46}{3}=45.6333"
+     ],
+     "words": "Average each volunteer across all 3 times. Each row of the table gives one subject mean."
+    },
+    {
+     "title": "Calculate the treatment means and the grand mean",
+     "general": [
+      "\\bar T_t=\\frac{1}{n}\\sum_{s=1}^{n}x_{ts}",
+      "\\bar X=\\frac{1}{m}\\sum_{t=1}^{m}\\bar T_t"
+     ],
+     "work": [
+      "\\bar T_1=\\frac{44.2+46.1+43.5+45.3}{4}=44.775",
+      "\\bar T_2=\\frac{45+45.4+44.1+45.6}{4}=45.025",
+      "\\bar T_3=\\frac{44.9+46+43.4+46}{4}=45.075",
+      "\\bar X=\\frac{44.775+45.025+45.075}{3}=44.9583"
+     ],
+     "words": "Average each column over the 4 volunteers. The grand mean is the mean of all 12 observations, which equals the mean of the treatment means."
+    },
+    {
+     "title": "Calculate the within-subjects sum of squares",
+     "general": [
+      "SS_{wit\\,subjs}=\\sum_{s=1}^{n}\\sum_{t=1}^{m}(x_{ts}-\\bar S_s)^2=\\sum_{s=1}^{n}SS_s"
+     ],
+     "work": [
+      "SS_1=(44.2-44.7)^2+(45-44.7)^2+(44.9-44.7)^2=0.38",
+      "SS_2=(46.1-45.8333)^2+(45.4-45.8333)^2+(46-45.8333)^2=0.2867",
+      "SS_3=(43.5-43.6667)^2+(44.1-43.6667)^2+(43.4-43.6667)^2=0.2867",
+      "SS_4=(45.3-45.6333)^2+(45.6-45.6333)^2+(46-45.6333)^2=0.2467",
+      "SS_{wit\\,subjs}=0.38+0.2867+0.2867+0.2467=1.2"
+     ],
+     "words": "Each volunteer is compared only with its own mean, so differences between volunteers never enter this sum. It holds the treatment effect plus residual scatter."
+    },
+    {
+     "title": "Calculate the treatment sum of squares",
+     "general": [
+      "SS_{treat}=n\\sum_{t=1}^{m}(\\bar T_t-\\bar X)^2"
+     ],
+     "work": [
+      "SS_{treat}=4\\left[(44.775-44.9583)^2+(45.025-44.9583)^2+(45.075-44.9583)^2\\right]=0.2067"
+     ],
+     "words": "Multiply by n because each treatment mean involves n subjects."
+    },
+    {
+     "title": "Calculate the residual sum of squares",
+     "general": [
+      "SS_{res}=SS_{wit\\,subjs}-SS_{treat}"
+     ],
+     "work": [
+      "SS_{res}=1.2-0.2067=0.9933"
+     ],
+     "words": "The residual is the within-subject variation that the treatment means do not explain."
+    },
+    {
+     "title": "Find the degrees of freedom and mean squares",
+     "general": [
+      "DF_{treat}=m-1,\\quad DF_{res}=(n-1)(m-1)",
+      "MS_{treat}=\\frac{SS_{treat}}{DF_{treat}},\\quad MS_{res}=\\frac{SS_{res}}{DF_{res}}"
+     ],
+     "work": [
+      "DF_{treat}=3-1=2,\\quad DF_{res}=(4-1)(3-1)=6",
+      "MS_{treat}=\\frac{0.2067}{2}=0.103333,\\quad MS_{res}=\\frac{0.9933}{6}=0.165556"
+     ],
+     "words": "Each sum of squares is divided by its own degrees of freedom to give a variance estimate."
+    },
+    {
+     "title": "Calculate the F statistic",
+     "general": [
+      "F=\\frac{MS_{treat}}{MS_{res}}"
+     ],
+     "work": [
+      "F=\\frac{0.103333}{0.165556}=0.6242"
+     ],
+     "words": "Treatment variance is compared with residual variance. Values near 1 or below are what equal treatment means produce."
+    },
+    {
+     "title": "Find the critical value",
+     "general": [
+      "F_{crit}=F_{\\alpha}(DF_{treat},DF_{res})=F_{\\alpha}(\\nu_n,\\nu_d)"
+     ],
+     "work": [
+      "F_{0.05}(2,6)=5.14",
+      "F_{0.01}(2,6)=10.92"
+     ],
+     "words": "Start with α = 0.05. Open F_table.pdf, PDF page 1. Use numerator column ν_n=2 and denominator row ν_d=6. The lightface entry 5.14 is the 0.05 cutoff and the boldface entry 10.92 is the 0.01 cutoff. Swapping the two df selects a different, wrong cell.",
+     "classTable": {
+      "path": "sources/tables/F_table.pdf",
+      "page": 1,
+      "row": "6",
+      "column": "2 (0.05 lightface)",
+      "value": 5.14,
+      "actualDf": [
+       2,
+       6
+      ],
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision",
+     "general": [
+      "F>F_{crit}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "F=0.6242<5.14"
+     ],
+     "words": "The F statistic is below the 0.05 cutoff, so do not reject the null hypothesis (P > 0.05). No pairwise comparisons follow because the overall test does not reject."
+    }
+   ],
+   "conclusion": "F = 0.624 with 2 and 6 degrees of freedom is below F_0.05(2,6) = 5.14. Do not reject H0 (P > 0.05). There is no evidence of a difference in mean heat pain threshold among 15, 30 and 60 minutes after the placebo cream. No pairwise comparisons are made.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/F_table.pdf",
+    "page": 1,
+    "row": "6",
+    "column": "2 (0.05 lightface)",
+    "value": 5.14,
+    "actualDf": [
+     2,
+     6
+    ],
+    "approximation": false
+   },
+   "values": {
+    "n": 4,
+    "m": 3,
+    "subjectMeans": [
+     44.699999999999996,
+     45.833333333333336,
+     43.666666666666664,
+     45.63333333333333
+    ],
+    "treatmentMeans": [
+     44.775,
+     45.025,
+     45.075
+    ],
+    "grandMean": 44.958333333333336,
+    "subjectSS": [
+     0.3799999999999966,
+     0.2866666666666687,
+     0.2866666666666687,
+     0.24666666666666845
+    ],
+    "ssWithin": 1.2000000000000024,
+    "ssTreat": 0.20666666666667063,
+    "ssRes": 0.9933333333333317,
+    "ssBetween": 8.869166666666702,
+    "ssTotal": 10.069166666666666,
+    "dfTreat": 2,
+    "dfRes": 6,
+    "msTreat": 0.10333333333333532,
+    "msRes": 0.1655555555555553,
+    "F": 0.6241610738255163,
+    "exactP": 0.5672066186556866,
+    "critical": 5.14,
+    "critical01": 10.92,
+    "reject": false,
+    "pRange": "P>0.05"
+   },
+   "module": 21,
+   "tolerance": 0.003121,
+   "answerName": "F statistic",
+   "answer": 0.6241610738255163
+  },
+  {
+   "id": "n21-mmn-deviant-holm",
+   "title": "Holm-corrected comparisons of the three deviant tones",
+   "topic": "s21holm",
+   "context": "In a study looking at automatic change detection in the auditory cortex, the mismatch negativity (MMN, a negative deflection in the electrical activity of the brain recorded at the scalp that appears when a rare tone breaks a repeating sequence) was recorded in the same 6 listeners for a frequency deviant, a duration deviant and an intensity deviant. A repeated-measures analysis of variance (ANOVA) was performed on the data, resulting in the conclusion that there is a difference in MMN amplitude among the three stimulus conditions (F = 62.793, P < 0.01). From the ANOVA, the treatment means were -3.4333, -3.5833 and -2.2833 microvolts (μV) for the frequency, duration and intensity deviants (each mean is based on n = 6 listeners), and the residual mean square was MS_res = 0.048333 with DF_res = 10 residual degrees of freedom. A more negative value is a larger response.",
+   "unit": "μV",
+   "table": {
+    "headers": [
+     "Condition",
+     "Treatment mean (μV)"
+    ],
+    "rows": [
+     [
+      "Frequency deviant",
+      -3.4333
+     ],
+     [
+      "Duration deviant",
+      -3.5833
+     ],
+     [
+      "Intensity deviant",
+      -2.2833
+     ]
+    ]
+   },
+   "tasks": [
+    "Perform the appropriate form of multiple pairwise comparisons, testing every stimulus condition against every other stimulus condition, using the Holm correction to determine which of the three stimulus conditions differ from one another. Use the relevant information from the ANOVA results given above to do your calculations.",
+    "Present your final/overall conclusion on which stimulus conditions are different from one another (and which stimulus conditions are not different) using an overall level of significance of 0.05. Please state how you reached your conclusions."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\mu_i=\\mu_j\\ \\text{for the pair being compared}",
+    "alternative": "H_A:\\mu_i\\ne\\mu_j",
+    "nullWords": "For the pair being compared, mean MMN amplitude is the same for the two kinds of deviant tone.",
+    "alternativeWords": "For that pair, mean MMN amplitude differs between the two kinds of deviant tone."
+   },
+   "symbols": "\\(\\bar T_i\\) (treatment mean), \\(MS_{res}\\) (residual mean square), \\(n\\) (number of subjects), \\(DF_{res}\\) (residual degrees of freedom), \\(k\\) (number of pairwise comparisons), \\(\\alpha_j\\) (Holm level for the \\(j\\)th comparison), \\(\\alpha_T\\) (overall level).",
+   "steps": [
+    {
+     "title": "State the procedure",
+     "general": [
+      "t=\\frac{\\bar T_i-\\bar T_j}{\\sqrt{2MS_{res}/n}},\\quad \\nu=DF_{res}=(n-1)(m-1)"
+     ],
+     "work": [
+      "MS_{res}=0.048333,\\quad n=6,\\quad \\nu=10"
+     ],
+     "words": "The overall F test rejected, so pairwise t tests with the Holm correction locate the differences. The repeated-measures version uses MS_res in the standard error and DF_res for the t table."
+    },
+    {
+     "title": "State the hypotheses for each pair",
+     "general": [
+      "H_0:\\mu_i=\\mu_j"
+     ],
+     "work": [
+      "H_0:\\mu_i=\\mu_j\\ \\text{for the pair being compared}"
+     ],
+     "words": "For the pair being compared, mean MMN amplitude is the same for the two kinds of deviant tone. For that pair, mean MMN amplitude differs between the two kinds of deviant tone."
+    },
+    {
+     "title": "Calculate the standard error of a difference",
+     "general": [
+      "SE=\\sqrt{\\frac{2MS_{res}}{n}}"
+     ],
+     "work": [
+      "SE=\\sqrt{\\frac{2(0.048333)}{6}}=0.126929"
+     ],
+     "words": "The same standard error serves every pair because every treatment mean is based on the same n subjects."
+    },
+    {
+     "title": "Calculate every pairwise t statistic",
+     "general": [
+      "t=\\frac{\\bar T_i-\\bar T_j}{SE}"
+     ],
+     "work": [
+      "t_{\\text{Duration deviant vs Intensity deviant}}=\\frac{-3.5833-(-2.2833)}{0.126929}=-10.242",
+      "t_{\\text{Frequency deviant vs Intensity deviant}}=\\frac{-3.4333-(-2.2833)}{0.126929}=-9.060",
+      "t_{\\text{Frequency deviant vs Duration deviant}}=\\frac{-3.4333-(-3.5833)}{0.126929}=1.182"
+     ],
+     "words": "Keep the subtraction order. The sign only gives the direction, and the ranking uses |t|."
+    },
+    {
+     "title": "Order by |t| and set the Holm levels",
+     "general": [
+      "\\alpha_j=\\frac{\\alpha_T}{k-j+1},\\quad j=1,\\dots,k"
+     ],
+     "work": [
+      "k=3,\\quad \\alpha_1=\\frac{0.05}{3}=0.0167,\\quad \\alpha_2=\\frac{0.05}{2}=0.025,\\quad \\alpha_3=\\frac{0.05}{1}=0.05",
+      "|t|:\\ 10.242>9.060>1.182"
+     ],
+     "words": "The largest |t| is tested at the strictest level. Testing stops at the first comparison that is not significant."
+    },
+    {
+     "title": "Comparison 1: Duration deviant vs Intensity deviant",
+     "general": [
+      "|t|>t_{\\alpha_1}(\\nu)\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "\\alpha_1=0.0167,\\quad t_{0.01}(10)=3.169\\ \\text{(stricter printed column)}",
+      "|t|=10.242>3.169"
+     ],
+     "words": "The 0.0167 column is not printed. In t_table.pdf, PDF page 1, row 10, the printed neighbors are the 0.02 column (2.764) and the 0.01 column (3.169). Use the stricter 0.01 column, 3.169, because a statistic beyond it is significant at 0.0167 as well. |t| = 10.242 > 3.169, so the Duration deviant and Intensity deviant means differ (P<0.001 before adjustment).",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "10",
+      "actualDf": 10,
+      "column": "0.01",
+      "value": 3.169,
+      "approximation": true,
+      "bracket": [
+       "0.02",
+       "0.01"
+      ],
+      "bracketValues": [
+       2.764,
+       3.169
+      ]
+     }
+    },
+    {
+     "title": "Comparison 2: Frequency deviant vs Intensity deviant",
+     "general": [
+      "|t|>t_{\\alpha_2}(\\nu)\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "\\alpha_2=0.025,\\quad t_{0.02}(10)=2.764\\ \\text{(stricter printed column)}",
+      "|t|=9.060>2.764"
+     ],
+     "words": "The 0.025 column is not printed. In t_table.pdf, PDF page 1, row 10, the printed neighbors are the 0.05 column (2.228) and the 0.02 column (2.764). Use the stricter 0.02 column, 2.764, because a statistic beyond it is significant at 0.025 as well. |t| = 9.060 > 2.764, so the Frequency deviant and Intensity deviant means differ (P<0.001 before adjustment).",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "10",
+      "actualDf": 10,
+      "column": "0.02",
+      "value": 2.764,
+      "approximation": true,
+      "bracket": [
+       "0.05",
+       "0.02"
+      ],
+      "bracketValues": [
+       2.228,
+       2.764
+      ]
+     }
+    },
+    {
+     "title": "Comparison 3: Frequency deviant vs Duration deviant",
+     "general": [
+      "|t|>t_{\\alpha_3}(\\nu)\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "\\alpha_3=0.05,\\quad t_{0.05}(10)=2.228",
+      "|t|=1.182<2.228"
+     ],
+     "words": "Open t_table.pdf, PDF page 1, row 10, combined two-tail 0.05 column. The entry is 2.228. |t| = 1.182 < 2.228, so the Frequency deviant and Duration deviant means are not shown to differ (0.20<P<0.50 before adjustment), and Holm testing stops here.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "10",
+      "actualDf": 10,
+      "column": "0.05",
+      "value": 2.228,
+      "approximation": false
+     }
+    }
+   ],
+   "conclusion": "Two of the three pairs differ at the Holm-corrected levels. The intensity deviant gives a smaller (less negative) MMN than the duration deviant (t = -10.242) and than the frequency deviant (t = -9.060). The frequency and duration deviant means are not shown to differ (|t| = 1.182 < 2.228).",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "10",
+    "actualDf": 10,
+    "column": "0.01",
+    "value": 3.169,
+    "approximation": true,
+    "bracket": [
+     "0.02",
+     "0.01"
+    ],
+    "bracketValues": [
+     2.764,
+     3.169
+    ]
+   },
+   "values": {
+    "n": 6,
+    "dfRes": 10,
+    "msRes": 0.048333,
+    "means": {
+     "Frequency deviant": -3.4333,
+     "Duration deviant": -3.5833,
+     "Intensity deviant": -2.2833
+    },
+    "se": 0.1269291140755343,
+    "tValues": {
+     "Duration deviant vs Intensity deviant": -10.241937080143662,
+     "Frequency deviant vs Intensity deviant": -9.060175109357857,
+     "Frequency deviant vs Duration deviant": 1.1817619707858067
+    },
+    "holmAlphas": [
+     0.016666666666666666,
+     0.025,
+     0.05
+    ],
+    "outcomes": {
+     "Duration deviant vs Intensity deviant": true,
+     "Frequency deviant vs Intensity deviant": true,
+     "Frequency deviant vs Duration deviant": false
+    }
+   },
+   "module": 21,
+   "tolerance": 0.05121,
+   "answerName": "t statistic (largest |t| comparison)",
+   "answer": -10.241937080143662
+  },
+  {
+   "id": "n21-insomnia-sleep-latency-holm",
+   "title": "Holm-corrected comparisons of sleep onset latency times",
+   "topic": "s21holm",
+   "context": "In a clinical trial, sleep onset latency (time from lights out to the first period of sleep) was measured in the same 5 patients with chronic insomnia at baseline, after 2 weeks and after 6 weeks of cognitive behavioural therapy (CBT, a structured programme that changes sleep habits and beliefs about sleep). A repeated-measures analysis of variance (ANOVA) was performed on the data, resulting in the conclusion that there is a difference in sleep onset latency among the three times (F = 40.016, P < 0.01). From the ANOVA, the treatment means were 48.6, 40.2 and 28.4 minutes (min) at baseline, 2 weeks and 6 weeks (each mean is based on n = 5 patients), and the residual mean square was MS_res = 12.866667 with DF_res = 8 residual degrees of freedom.",
+   "unit": "min",
+   "table": {
+    "headers": [
+     "Condition",
+     "Treatment mean (min)"
+    ],
+    "rows": [
+     [
+      "Baseline",
+      48.6
+     ],
+     [
+      "2 weeks",
+      40.2
+     ],
+     [
+      "6 weeks",
+      28.4
+     ]
+    ]
+   },
+   "tasks": [
+    "Perform the appropriate form of multiple pairwise comparisons, testing every time against every other time, using the Holm correction to determine which of the three times differ from one another. Use the relevant information from the ANOVA results given above to do your calculations.",
+    "Present your final/overall conclusion on which times are different from one another (and which times are not different) using an overall level of significance of 0.05. Please state how you reached your conclusions."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\mu_i=\\mu_j\\ \\text{for the pair being compared}",
+    "alternative": "H_A:\\mu_i\\ne\\mu_j",
+    "nullWords": "For the pair being compared, mean sleep onset latency is the same at the two times.",
+    "alternativeWords": "For that pair, mean sleep onset latency differs between the two times."
+   },
+   "symbols": "\\(\\bar T_i\\) (treatment mean), \\(MS_{res}\\) (residual mean square), \\(n\\) (number of subjects), \\(DF_{res}\\) (residual degrees of freedom), \\(k\\) (number of pairwise comparisons), \\(\\alpha_j\\) (Holm level for the \\(j\\)th comparison), \\(\\alpha_T\\) (overall level).",
+   "steps": [
+    {
+     "title": "State the procedure",
+     "general": [
+      "t=\\frac{\\bar T_i-\\bar T_j}{\\sqrt{2MS_{res}/n}},\\quad \\nu=DF_{res}=(n-1)(m-1)"
+     ],
+     "work": [
+      "MS_{res}=12.866667,\\quad n=5,\\quad \\nu=8"
+     ],
+     "words": "The overall F test rejected, so pairwise t tests with the Holm correction locate the differences. The repeated-measures version uses MS_res in the standard error and DF_res for the t table."
+    },
+    {
+     "title": "State the hypotheses for each pair",
+     "general": [
+      "H_0:\\mu_i=\\mu_j"
+     ],
+     "work": [
+      "H_0:\\mu_i=\\mu_j\\ \\text{for the pair being compared}"
+     ],
+     "words": "For the pair being compared, mean sleep onset latency is the same at the two times. For that pair, mean sleep onset latency differs between the two times."
+    },
+    {
+     "title": "Calculate the standard error of a difference",
+     "general": [
+      "SE=\\sqrt{\\frac{2MS_{res}}{n}}"
+     ],
+     "work": [
+      "SE=\\sqrt{\\frac{2(12.866667)}{5}}=2.268627"
+     ],
+     "words": "The same standard error serves every pair because every treatment mean is based on the same n subjects."
+    },
+    {
+     "title": "Calculate every pairwise t statistic",
+     "general": [
+      "t=\\frac{\\bar T_i-\\bar T_j}{SE}"
+     ],
+     "work": [
+      "t_{\\text{Baseline vs 6 weeks}}=\\frac{48.6-28.4}{2.268627}=8.904",
+      "t_{\\text{2 weeks vs 6 weeks}}=\\frac{40.2-28.4}{2.268627}=5.201",
+      "t_{\\text{Baseline vs 2 weeks}}=\\frac{48.6-40.2}{2.268627}=3.703"
+     ],
+     "words": "Keep the subtraction order. The sign only gives the direction, and the ranking uses |t|."
+    },
+    {
+     "title": "Order by |t| and set the Holm levels",
+     "general": [
+      "\\alpha_j=\\frac{\\alpha_T}{k-j+1},\\quad j=1,\\dots,k"
+     ],
+     "work": [
+      "k=3,\\quad \\alpha_1=\\frac{0.05}{3}=0.0167,\\quad \\alpha_2=\\frac{0.05}{2}=0.025,\\quad \\alpha_3=\\frac{0.05}{1}=0.05",
+      "|t|:\\ 8.904>5.201>3.703"
+     ],
+     "words": "The largest |t| is tested at the strictest level. Testing stops at the first comparison that is not significant."
+    },
+    {
+     "title": "Comparison 1: Baseline vs 6 weeks",
+     "general": [
+      "|t|>t_{\\alpha_1}(\\nu)\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "\\alpha_1=0.0167,\\quad t_{0.01}(8)=3.355\\ \\text{(stricter printed column)}",
+      "|t|=8.904>3.355"
+     ],
+     "words": "The 0.0167 column is not printed. In t_table.pdf, PDF page 1, row 8, the printed neighbors are the 0.02 column (2.896) and the 0.01 column (3.355). Use the stricter 0.01 column, 3.355, because a statistic beyond it is significant at 0.0167 as well. |t| = 8.904 > 3.355, so the Baseline and 6 weeks means differ (P<0.001 before adjustment).",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "8",
+      "actualDf": 8,
+      "column": "0.01",
+      "value": 3.355,
+      "approximation": true,
+      "bracket": [
+       "0.02",
+       "0.01"
+      ],
+      "bracketValues": [
+       2.896,
+       3.355
+      ]
+     }
+    },
+    {
+     "title": "Comparison 2: 2 weeks vs 6 weeks",
+     "general": [
+      "|t|>t_{\\alpha_2}(\\nu)\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "\\alpha_2=0.025,\\quad t_{0.02}(8)=2.896\\ \\text{(stricter printed column)}",
+      "|t|=5.201>2.896"
+     ],
+     "words": "The 0.025 column is not printed. In t_table.pdf, PDF page 1, row 8, the printed neighbors are the 0.05 column (2.306) and the 0.02 column (2.896). Use the stricter 0.02 column, 2.896, because a statistic beyond it is significant at 0.025 as well. |t| = 5.201 > 2.896, so the 2 weeks and 6 weeks means differ (P<0.001 before adjustment).",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "8",
+      "actualDf": 8,
+      "column": "0.02",
+      "value": 2.896,
+      "approximation": true,
+      "bracket": [
+       "0.05",
+       "0.02"
+      ],
+      "bracketValues": [
+       2.306,
+       2.896
+      ]
+     }
+    },
+    {
+     "title": "Comparison 3: Baseline vs 2 weeks",
+     "general": [
+      "|t|>t_{\\alpha_3}(\\nu)\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "\\alpha_3=0.05,\\quad t_{0.05}(8)=2.306",
+      "|t|=3.703>2.306"
+     ],
+     "words": "Open t_table.pdf, PDF page 1, row 8, combined two-tail 0.05 column. The entry is 2.306. |t| = 3.703 > 2.306, so the Baseline and 2 weeks means differ (0.005<P<0.01 before adjustment).",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "8",
+      "actualDf": 8,
+      "column": "0.05",
+      "value": 2.306,
+      "approximation": false
+     }
+    }
+   ],
+   "conclusion": "All three pairs differ at the Holm-corrected levels. Sleep onset latency is shorter at 6 weeks than at baseline (t = 8.904), shorter at 6 weeks than at 2 weeks (t = 5.201) and shorter at 2 weeks than at baseline (t = 3.703).",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "8",
+    "actualDf": 8,
+    "column": "0.01",
+    "value": 3.355,
+    "approximation": true,
+    "bracket": [
+     "0.02",
+     "0.01"
+    ],
+    "bracketValues": [
+     2.896,
+     3.355
+    ]
+   },
+   "values": {
+    "n": 5,
+    "dfRes": 8,
+    "msRes": 12.866667,
+    "means": {
+     "Baseline": 48.6,
+     "2 weeks": 40.2,
+     "6 weeks": 28.4
+    },
+    "se": 2.2686266330094953,
+    "tValues": {
+     "Baseline vs 6 weeks": 8.904065440333502,
+     "2 weeks vs 6 weeks": 5.201384762175017,
+     "Baseline vs 2 weeks": 3.702680678158485
+    },
+    "holmAlphas": [
+     0.016666666666666666,
+     0.025,
+     0.05
+    ],
+    "outcomes": {
+     "Baseline vs 6 weeks": true,
+     "2 weeks vs 6 weeks": true,
+     "Baseline vs 2 weeks": true
+    }
+   },
+   "module": 21,
+   "tolerance": 0.04452,
+   "answerName": "t statistic (largest |t| comparison)",
+   "answer": 8.904065440333502
+  },
+  {
+   "id": "n21-dbs-tremor-holm",
+   "title": "Holm-corrected comparisons of tremor under three deep brain stimulation settings",
+   "topic": "s21holm",
+   "context": "A study was reported concerning deep brain stimulation (DBS, electrical pulses delivered through an electrode implanted in the subthalamic nucleus, a small structure deep in the brain) in 5 patients with Parkinson's disease. Resting tremor amplitude (the size of the shaking of the hand at rest) was measured in millimetres (mm) with a wrist accelerometer (a small motion sensor). Each of the 5 patients was measured under three conditions (stimulation off, stimulation at 60 hertz (Hz) and stimulation at 130 Hz). The individual measurements are not shown. A repeated-measures analysis of variance (ANOVA) was performed on the data, resulting in the conclusion that there is a difference in resting tremor amplitude among the three stimulation conditions (F = 7.3 with 2 and 8 degrees of freedom, 0.01 < P < 0.05). From the ANOVA, the treatment means were 16.4, 13.6 and 10 mm for stimulation off, 60 Hz and 130 Hz (each mean is based on n = 5 patients), and the residual mean square was MS_res = 7.05 with DF_res = 8 residual degrees of freedom. Assume that any quantities of interest are Normally distributed.",
+   "unit": "mm",
+   "table": {
+    "headers": [
+     "Condition",
+     "Treatment mean (mm)"
+    ],
+    "rows": [
+     [
+      "Stimulation off",
+      16.4
+     ],
+     [
+      "60 Hz",
+      13.6
+     ],
+     [
+      "130 Hz",
+      10.0
+     ]
+    ]
+   },
+   "tasks": [
+    "Perform the appropriate form of multiple pairwise comparisons, testing every stimulation condition against every other stimulation condition, using the Holm correction to determine which of the three stimulation conditions differ from one another. Use the relevant information from the ANOVA results given above to do your calculations.",
+    "Present your final/overall conclusion on which stimulation conditions are different from one another (and which stimulation conditions are not different) using an overall level of significance of 0.05. Please state how you reached your conclusions."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\mu_i=\\mu_j\\ \\text{for the pair being compared}",
+    "alternative": "H_A:\\mu_i\\ne\\mu_j",
+    "nullWords": "For the pair being compared, mean resting tremor amplitude is the same under the two stimulation conditions.",
+    "alternativeWords": "For that pair, mean resting tremor amplitude differs between the two stimulation conditions."
+   },
+   "symbols": "\\(\\bar T_i\\) (treatment mean), \\(MS_{res}\\) (residual mean square), \\(n\\) (number of subjects), \\(DF_{res}\\) (residual degrees of freedom), \\(k\\) (number of pairwise comparisons), \\(\\alpha_j\\) (Holm level for the \\(j\\)th comparison), \\(\\alpha_T\\) (overall level).",
+   "steps": [
+    {
+     "title": "State the procedure",
+     "general": [
+      "t=\\frac{\\bar T_i-\\bar T_j}{\\sqrt{2MS_{res}/n}},\\quad \\nu=DF_{res}=(n-1)(m-1)"
+     ],
+     "work": [
+      "MS_{res}=7.05,\\quad n=5,\\quad \\nu=8"
+     ],
+     "words": "The overall F test rejected, so pairwise t tests with the Holm correction locate the differences. The repeated-measures version uses MS_res in the standard error and DF_res for the t table."
+    },
+    {
+     "title": "State the hypotheses for each pair",
+     "general": [
+      "H_0:\\mu_i=\\mu_j"
+     ],
+     "work": [
+      "H_0:\\mu_i=\\mu_j\\ \\text{for the pair being compared}"
+     ],
+     "words": "For the pair being compared, mean resting tremor amplitude is the same under the two stimulation conditions. For that pair, mean resting tremor amplitude differs between the two stimulation conditions."
+    },
+    {
+     "title": "Calculate the standard error of a difference",
+     "general": [
+      "SE=\\sqrt{\\frac{2MS_{res}}{n}}"
+     ],
+     "work": [
+      "SE=\\sqrt{\\frac{2(7.05)}{5}}=1.679286"
+     ],
+     "words": "The same standard error serves every pair because every treatment mean is based on the same n subjects."
+    },
+    {
+     "title": "Calculate every pairwise t statistic",
+     "general": [
+      "t=\\frac{\\bar T_i-\\bar T_j}{SE}"
+     ],
+     "work": [
+      "t_{\\text{Stimulation off vs 130 Hz}}=\\frac{16.4-10}{1.679286}=3.811",
+      "t_{\\text{60 Hz vs 130 Hz}}=\\frac{13.6-10}{1.679286}=2.144",
+      "t_{\\text{Stimulation off vs 60 Hz}}=\\frac{16.4-13.6}{1.679286}=1.667"
+     ],
+     "words": "Keep the subtraction order. The sign only gives the direction, and the ranking uses |t|."
+    },
+    {
+     "title": "Order by |t| and set the Holm levels",
+     "general": [
+      "\\alpha_j=\\frac{\\alpha_T}{k-j+1},\\quad j=1,\\dots,k"
+     ],
+     "work": [
+      "k=3,\\quad \\alpha_1=\\frac{0.05}{3}=0.0167,\\quad \\alpha_2=\\frac{0.05}{2}=0.025,\\quad \\alpha_3=\\frac{0.05}{1}=0.05",
+      "|t|:\\ 3.811>2.144>1.667"
+     ],
+     "words": "The largest |t| is tested at the strictest level. Testing stops at the first comparison that is not significant."
+    },
+    {
+     "title": "Comparison 1: Stimulation off vs 130 Hz",
+     "general": [
+      "|t|>t_{\\alpha_1}(\\nu)\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "\\alpha_1=0.0167,\\quad t_{0.01}(8)=3.355\\ \\text{(stricter printed column)}",
+      "|t|=3.811>3.355"
+     ],
+     "words": "The 0.0167 column is not printed. In t_table.pdf, PDF page 1, row 8, the printed neighbors are the 0.02 column (2.896) and the 0.01 column (3.355). Use the stricter 0.01 column, 3.355, because a statistic beyond it is significant at 0.0167 as well. |t| = 3.811 > 3.355, so the Stimulation off and 130 Hz means differ (0.005<P<0.01 before adjustment).",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "8",
+      "actualDf": 8,
+      "column": "0.01",
+      "value": 3.355,
+      "approximation": true,
+      "bracket": [
+       "0.02",
+       "0.01"
+      ],
+      "bracketValues": [
+       2.896,
+       3.355
+      ]
+     }
+    },
+    {
+     "title": "Comparison 2: 60 Hz vs 130 Hz",
+     "general": [
+      "|t|>t_{\\alpha_2}(\\nu)\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "\\alpha_2=0.025,\\quad t_{0.05}(8)=2.306,\\quad t_{0.02}(8)=2.896",
+      "|t|=2.144<2.306<2.896"
+     ],
+     "words": "The 0.025 column is not printed. In t_table.pdf, PDF page 1, row 8, the printed neighbors are the 0.05 column (2.306) and the 0.02 column (2.896), so the 0.025 cutoff lies between them. |t| = 2.144 is below even the 0.05 column, so it is below the 0.025 cutoff as well. The 60 Hz and 130 Hz means are not shown to differ (0.05<P<0.10 before adjustment), and Holm testing stops here.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "8",
+      "actualDf": 8,
+      "column": "0.05",
+      "value": 2.306,
+      "approximation": true,
+      "bracket": [
+       "0.05",
+       "0.02"
+      ],
+      "bracketValues": [
+       2.306,
+       2.896
+      ]
+     }
+    },
+    {
+     "title": "Comparison 3: Stimulation off vs 60 Hz",
+     "general": [
+      "|t|>t_{\\alpha_3}(\\nu)\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "\\alpha_3=0.05,\\quad t_{0.05}(8)=2.306",
+      "|t|=1.667<2.306"
+     ],
+     "words": "Holm testing has already stopped at the previous comparison, so this comparison is not declared significant. For reference, t_table.pdf, PDF page 1, row 8, combined two-tail 0.05 column gives 2.306, and |t| = 1.667 is below it. The Stimulation off and 60 Hz means are not shown to differ.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "8",
+      "actualDf": 8,
+      "column": "0.05",
+      "value": 2.306,
+      "approximation": false
+     }
+    }
+   ],
+   "conclusion": "Only one pair differs at the Holm-corrected levels. Tremor amplitude is smaller with 130 Hz stimulation than with stimulation off (t = 3.811, |t| > 3.355). The next largest comparison (60 Hz vs 130 Hz, |t| = 2.144) is below the cutoff, so Holm testing stops and the other two pairs are not shown to differ.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "8",
+    "actualDf": 8,
+    "column": "0.01",
+    "value": 3.355,
+    "approximation": true,
+    "bracket": [
+     "0.02",
+     "0.01"
+    ],
+    "bracketValues": [
+     2.896,
+     3.355
+    ]
+   },
+   "values": {
+    "n": 5,
+    "dfRes": 8,
+    "msRes": 7.05,
+    "means": {
+     "Stimulation off": 16.4,
+     "60 Hz": 13.6,
+     "130 Hz": 10.0
+    },
+    "se": 1.6792855623746665,
+    "tValues": {
+     "Stimulation off vs 130 Hz": 3.8111445387226466,
+     "60 Hz vs 130 Hz": 2.143768803031489,
+     "Stimulation off vs 60 Hz": 1.6673757356911576
+    },
+    "holmAlphas": [
+     0.016666666666666666,
+     0.025,
+     0.05
+    ],
+    "outcomes": {
+     "Stimulation off vs 130 Hz": true,
+     "60 Hz vs 130 Hz": false,
+     "Stimulation off vs 60 Hz": false
+    }
+   },
+   "module": 21,
+   "tolerance": 0.019056,
+   "answerName": "t statistic (largest |t| comparison)",
+   "answer": 3.8111445387226466
+  },
+  {
+   "id": "n21-tinnitus-sound-therapy",
+   "title": "Tinnitus present before and after sound therapy",
+   "topic": "s21mcnemar",
+   "context": "Researchers interested in sound therapy (daily listening to low-level broadband noise through ear-level devices) did a study to evaluate its effect on tinnitus (ringing in the ears with no external sound source). Each of 36 adults with hearing loss was asked whether bothersome tinnitus was present before therapy and again after 3 months of therapy. Of the 23 adults with tinnitus present before therapy, 9 still had it after therapy and 14 did not. Of the 13 adults with tinnitus absent before therapy, 3 had it after therapy and 10 did not.",
+   "unit": "adults",
+   "table": {
+    "headers": [
+     "Before (rows) by After (columns)",
+     "After: present",
+     "After: absent"
+    ],
+    "rows": [
+     [
+      "Before: present",
+      9,
+      14
+     ],
+     [
+      "Before: absent",
+      3,
+      10
+     ]
+    ]
+   },
+   "tasks": [
+    "Based on the recorded data, is there evidence that the presence of tinnitus is different before and after sound therapy?",
+    "Provide your result in a single complete sentence that would convey your conclusion in a way that could be understood by a non-expert in statistics or medicine (e.g., a typical reader of a local newspaper)."
+   ],
+   "hypotheses": {
+    "null": "H_0:P(\\text{present}\\to\\text{absent})=P(\\text{absent}\\to\\text{present})",
+    "alternative": "H_A:P(\\text{present}\\to\\text{absent})\\ne P(\\text{absent}\\to\\text{present})",
+    "nullWords": "Sound therapy has no effect on tinnitus status, so an adult whose status changes is equally likely to change from present to absent as from absent to present.",
+    "alternativeWords": "The two directions of change are not equally likely, so the presence of tinnitus differs before and after sound therapy."
+   },
+   "symbols": "\\(a,d\\) (subjects with the same result both times), \\(b,c\\) (subjects whose result changes), \\(E\\) (expected number in each change cell), \\(\\chi^2\\) (McNemar chi-square), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "State the procedure",
+     "general": [
+      "\\begin{array}{c|cc}&\\text{O1}&\\text{O2}\\\\\\hline \\text{O1}&a&b\\\\ \\text{O2}&c&d\\end{array}"
+     ],
+     "work": [
+      "a=9,\\ b=14,\\ c=3,\\ d=10"
+     ],
+     "words": "Each adult is classified twice, before and after therapy, so the two classifications are paired nominal data. This design is analogous to the paired t test, and McNemar's test is the procedure."
+    },
+    {
+     "title": "State the hypotheses",
+     "general": [
+      "H_0:P(\\text{O1}\\to\\text{O2})=P(\\text{O2}\\to\\text{O1})"
+     ],
+     "work": [
+      "H_0:P(\\text{present}\\to\\text{absent})=P(\\text{absent}\\to\\text{present})"
+     ],
+     "words": "Sound therapy has no effect on tinnitus status, so an adult whose status changes is equally likely to change from present to absent as from absent to present. The two directions of change are not equally likely, so the presence of tinnitus differs before and after sound therapy."
+    },
+    {
+     "title": "Show why the independent chi-square is wrong here",
+     "general": [
+      "E_{ij}=\\frac{R_iC_j}{N},\\quad \\chi^2=\\sum_i\\sum_j\\frac{(|O_{ij}-E_{ij}|-\\frac12)^2}{E_{ij}}"
+     ],
+     "work": [
+      "E_{11}=\\frac{23(12)}{36}=7.6667,\\ E_{12}=15.3333,\\ E_{21}=4.3333,\\ E_{22}=8.6667",
+      "\\chi^2=0.376<\\chi^2_{0.05}(1)=3.841"
+     ],
+     "words": "Treating the before and after results as independent samples gives chi-square = 0.376, which would wrongly suggest no change. The rows and columns describe the same adults, so they are not independent, and this test is not valid for the design."
+    },
+    {
+     "title": "Identify the subjects who change",
+     "general": [
+      "b=\\text{O1}\\to\\text{O2},\\quad c=\\text{O2}\\to\\text{O1}"
+     ],
+     "work": [
+      "b=14,\\quad c=3,\\quad b+c=17"
+     ],
+     "words": "Only discordant subjects carry information about a change. Here b counts adults with tinnitus present before and absent after and c counts adults with tinnitus absent before and present after. The concordant cells a = 9 and d = 10 do not enter the statistic."
+    },
+    {
+     "title": "Calculate the expected number in each change cell",
+     "general": [
+      "E=\\frac{b+c}{2}"
+     ],
+     "work": [
+      "E=\\frac{14+3}{2}=8.5"
+     ],
+     "words": "If the null hypothesis is true, the changes split evenly in the two directions."
+    },
+    {
+     "title": "Calculate the McNemar chi-square with Yates correction",
+     "general": [
+      "\\chi^2=\\frac{(|b-E|-\\frac12)^2}{E}+\\frac{(|c-E|-\\frac12)^2}{E}"
+     ],
+     "work": [
+      "\\chi^2=\\frac{(|14-8.5|-\\frac12)^2}{8.5}+\\frac{(|3-8.5|-\\frac12)^2}{8.5}=5.8824"
+     ],
+     "words": "Subtract one half from each absolute difference before squaring because the table is 2 x 2 (Yates correction)."
+    },
+    {
+     "title": "Find the critical value",
+     "general": [
+      "\\nu=1,\\quad \\chi^2_{crit}=\\chi^2_{\\alpha}(1)"
+     ],
+     "work": [
+      "\\chi^2_{0.05}(1)=3.841"
+     ],
+     "words": "Start with α = 0.05. Open Chi_Squared_Table2.pdf, PDF page 1. Row df = 1, column χ².050 gives 3.841. The same row gives 2.706 in the .100 column, 5.024 in the .025 column, 6.635 in the .010 column and 7.879 in the .005 column for a P range.",
+     "classTable": {
+      "path": "sources/tables/Chi_Squared_Table2.pdf",
+      "page": 1,
+      "row": "1",
+      "column": "0.050",
+      "value": 3.841,
+      "actualDf": 1,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision",
+     "general": [
+      "\\chi^2>\\chi^2_{crit}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "\\chi^2=5.8824>3.841,\\quad 0.01<P<0.025"
+     ],
+     "words": "Reject the null hypothesis. The statistic lies between two printed cutoffs, so 0.01 < P < 0.025."
+    }
+   ],
+   "conclusion": "McNemar chi-square = 5.8824 with 1 df exceeds chi-square_0.05(1) = 3.841 and chi-square_0.025(1) = 5.024 but not chi-square_0.01(1) = 6.635. Reject H0, 0.01 < P < 0.025. There is a difference in the presence of tinnitus before and after sound therapy. Of the 17 adults who changed, 14 went from present to absent. In plain words, adults in this study were less likely to report bothersome ringing in the ears after three months of sound therapy than before it.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/Chi_Squared_Table2.pdf",
+    "page": 1,
+    "row": "1",
+    "column": "0.050",
+    "value": 3.841,
+    "actualDf": 1,
+    "approximation": false
+   },
+   "values": {
+    "a": 9,
+    "b": 14,
+    "c": 3,
+    "d": 10,
+    "N": 36,
+    "E": 8.5,
+    "chi2": 5.882352941176471,
+    "df": 1,
+    "critical": 3.841,
+    "reject": true,
+    "pRange": "0.01<P<0.025",
+    "exactP": 0.015293371030198967,
+    "independentChi2": 0.3762541806020067,
+    "independentExpected": [
+     [
+      7.666666666666667,
+      15.333333333333334
+     ],
+     [
+      4.333333333333333,
+      8.666666666666666
+     ]
+    ]
+   },
+   "module": 21,
+   "tolerance": 0.029412,
+   "answerName": "Chi-square",
+   "answer": 5.882352941176471
+  },
+  {
+   "id": "n21-shift-nurses-daytime-sleep",
+   "title": "Disrupted daytime sleep in night-shift nurses before and after blue-light-blocking glasses",
+   "topic": "s21mcnemar",
+   "context": "In a study looking at morning light and the circadian clock (the internal 24-hour rhythm that times sleep), 28 night-shift nurses were classified as having disrupted daytime sleep (waking more than twice during the main sleep period on a wrist activity monitor) or not. Each nurse was evaluated before and again after 4 weeks of wearing blue-light-blocking glasses on the drive home. Of the 19 nurses with disrupted sleep before, 10 still had disrupted sleep after and 9 did not. Of the 9 nurses without disrupted sleep before, 3 had disrupted sleep after and 6 did not.",
+   "unit": "nurses",
+   "table": {
+    "headers": [
+     "Before (rows) by After (columns)",
+     "After: disrupted",
+     "After: not disrupted"
+    ],
+    "rows": [
+     [
+      "Before: disrupted",
+      10,
+      9
+     ],
+     [
+      "Before: not disrupted",
+      3,
+      6
+     ]
+    ]
+   },
+   "tasks": [
+    "Based on the recorded data, is there evidence that the proportion of nurses with disrupted daytime sleep is different before and after wearing the glasses?",
+    "Provide your result in a single complete sentence that would convey your conclusion in a way that could be understood by a non-expert in statistics or medicine (e.g., a typical reader of a local newspaper)."
+   ],
+   "hypotheses": {
+    "null": "H_0:P(\\text{disrupted}\\to\\text{not})=P(\\text{not}\\to\\text{disrupted})",
+    "alternative": "H_A:P(\\text{disrupted}\\to\\text{not})\\ne P(\\text{not}\\to\\text{disrupted})",
+    "nullWords": "Wearing the glasses has no effect on disrupted daytime sleep, so a nurse whose status changes is equally likely to change from disrupted to not disrupted as from not disrupted to disrupted.",
+    "alternativeWords": "The two directions of change are not equally likely, so the proportion of nurses with disrupted daytime sleep differs before and after wearing the glasses."
+   },
+   "symbols": "\\(a,d\\) (subjects with the same result both times), \\(b,c\\) (subjects whose result changes), \\(E\\) (expected number in each change cell), \\(\\chi^2\\) (McNemar chi-square), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "State the procedure",
+     "general": [
+      "\\begin{array}{c|cc}&\\text{O1}&\\text{O2}\\\\\\hline \\text{O1}&a&b\\\\ \\text{O2}&c&d\\end{array}"
+     ],
+     "work": [
+      "a=10,\\ b=9,\\ c=3,\\ d=6"
+     ],
+     "words": "Each nurse is classified twice, before and after wearing the glasses, so the two classifications are paired nominal data. This design is analogous to the paired t test, and McNemar's test is the procedure."
+    },
+    {
+     "title": "State the hypotheses",
+     "general": [
+      "H_0:P(\\text{O1}\\to\\text{O2})=P(\\text{O2}\\to\\text{O1})"
+     ],
+     "work": [
+      "H_0:P(\\text{disrupted}\\to\\text{not})=P(\\text{not}\\to\\text{disrupted})"
+     ],
+     "words": "Wearing the glasses has no effect on disrupted daytime sleep, so a nurse whose status changes is equally likely to change from disrupted to not disrupted as from not disrupted to disrupted. The two directions of change are not equally likely, so the proportion of nurses with disrupted daytime sleep differs before and after wearing the glasses."
+    },
+    {
+     "title": "Show why the independent chi-square is wrong here",
+     "general": [
+      "E_{ij}=\\frac{R_iC_j}{N},\\quad \\chi^2=\\sum_i\\sum_j\\frac{(|O_{ij}-E_{ij}|-\\frac12)^2}{E_{ij}}"
+     ],
+     "work": [
+      "E_{11}=\\frac{19(13)}{28}=8.8214,\\ E_{12}=10.1786,\\ E_{21}=4.1786,\\ E_{22}=4.8214",
+      "\\chi^2=0.303<\\chi^2_{0.05}(1)=3.841"
+     ],
+     "words": "Treating the before and after results as independent samples gives chi-square = 0.303. This value answers a different question (whether the after result is related to the before result) and it is not used. The rows and columns describe the same nurses, so they are not independent, and this test is not valid for the design."
+    },
+    {
+     "title": "Identify the subjects who change",
+     "general": [
+      "b=\\text{O1}\\to\\text{O2},\\quad c=\\text{O2}\\to\\text{O1}"
+     ],
+     "work": [
+      "b=9,\\quad c=3,\\quad b+c=12"
+     ],
+     "words": "Only discordant subjects carry information about a change. Here b counts nurses with disrupted sleep before and not after and c counts nurses without disrupted sleep before and with it after. The concordant cells a = 10 and d = 6 do not enter the statistic."
+    },
+    {
+     "title": "Calculate the expected number in each change cell",
+     "general": [
+      "E=\\frac{b+c}{2}"
+     ],
+     "work": [
+      "E=\\frac{9+3}{2}=6"
+     ],
+     "words": "If the null hypothesis is true, the changes split evenly in the two directions."
+    },
+    {
+     "title": "Calculate the McNemar chi-square with Yates correction",
+     "general": [
+      "\\chi^2=\\frac{(|b-E|-\\frac12)^2}{E}+\\frac{(|c-E|-\\frac12)^2}{E}"
+     ],
+     "work": [
+      "\\chi^2=\\frac{(|9-6|-\\frac12)^2}{6}+\\frac{(|3-6|-\\frac12)^2}{6}=2.0833"
+     ],
+     "words": "Subtract one half from each absolute difference before squaring because the table is 2 x 2 (Yates correction)."
+    },
+    {
+     "title": "Find the critical value",
+     "general": [
+      "\\nu=1,\\quad \\chi^2_{crit}=\\chi^2_{\\alpha}(1)"
+     ],
+     "work": [
+      "\\chi^2_{0.05}(1)=3.841"
+     ],
+     "words": "Start with α = 0.05. Open Chi_Squared_Table2.pdf, PDF page 1. Row df = 1, column χ².050 gives 3.841. The same row gives 2.706 in the .100 column, 5.024 in the .025 column, 6.635 in the .010 column and 7.879 in the .005 column for a P range.",
+     "classTable": {
+      "path": "sources/tables/Chi_Squared_Table2.pdf",
+      "page": 1,
+      "row": "1",
+      "column": "0.050",
+      "value": 3.841,
+      "actualDf": 1,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision",
+     "general": [
+      "\\chi^2>\\chi^2_{crit}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "\\chi^2=2.0833<3.841"
+     ],
+     "words": "Do not reject the null hypothesis because the statistic is below the 0.05 cutoff (P > 0.10)."
+    }
+   ],
+   "conclusion": "McNemar chi-square = 2.0833 with 1 df is below chi-square_0.05(1) = 3.841 and also below chi-square_0.10(1) = 2.706. Do not reject H0 (P > 0.10). There is no evidence of a difference in the proportion of nurses with disrupted daytime sleep before and after wearing the glasses, even though 9 nurses improved and 3 got worse. In plain words, this small study could not show that the glasses changed how often night-shift nurses had broken daytime sleep.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/Chi_Squared_Table2.pdf",
+    "page": 1,
+    "row": "1",
+    "column": "0.050",
+    "value": 3.841,
+    "actualDf": 1,
+    "approximation": false
+   },
+   "values": {
+    "a": 10,
+    "b": 9,
+    "c": 3,
+    "d": 6,
+    "N": 28,
+    "E": 6.0,
+    "chi2": 2.0833333333333335,
+    "df": 1,
+    "critical": 3.841,
+    "reject": false,
+    "pRange": "P>0.10",
+    "exactP": 0.14891467317876161,
+    "independentChi2": 0.3031339031339033,
+    "independentExpected": [
+     [
+      8.821428571428571,
+      10.178571428571429
+     ],
+     [
+      4.178571428571429,
+      4.821428571428571
+     ]
+    ]
+   },
+   "module": 21,
+   "tolerance": 0.010417,
+   "answerName": "Chi-square",
+   "answer": 2.0833333333333335
+  },
+  {
+   "id": "n21-hearing-app-audiologist",
+   "title": "Hearing loss by a smartphone screening app and by an audiologist",
+   "topic": "s21diagnostic",
+   "context": "A study was reported concerning a smartphone hearing screening application (app). Each of 40 older adults was screened for hearing loss with the app at home and was also tested by an audiologist with pure-tone audiometry (the listener signals each time a tone is heard through headphones) in a sound booth (hearing loss was defined as an average threshold above 25 decibels hearing level, dB HL). Of the 23 adults called positive for hearing loss by the app, 12 were positive and 11 were negative by the audiologist. Of the 17 adults called negative by the app, 2 were positive and 15 were negative by the audiologist.",
+   "unit": "adults",
+   "table": {
+    "headers": [
+     "App (rows) by Audiologist (columns)",
+     "Audiologist: positive",
+     "Audiologist: negative"
+    ],
+    "rows": [
+     [
+      "App: positive",
+      12,
+      11
+     ],
+     [
+      "App: negative",
+      2,
+      15
+     ]
+    ]
+   },
+   "tasks": [
+    "Is there a difference between the app and the audiologist in the proportion of adults classified as having hearing loss? Use a chi-square test.",
+    "Please state how you reached your conclusions."
+   ],
+   "hypotheses": {
+    "null": "H_0:P(\\text{app}+,\\ \\text{audiologist}-)=P(\\text{app}-,\\ \\text{audiologist}+)",
+    "alternative": "H_A:P(\\text{app}+,\\ \\text{audiologist}-)\\ne P(\\text{app}-,\\ \\text{audiologist}+)",
+    "nullWords": "The app and the audiologist have the same probability of classifying an adult as having hearing loss, so adults on whom they disagree are equally likely to be positive by the app only as by the audiologist only.",
+    "alternativeWords": "The two methods differ in how often they classify an adult as having hearing loss."
+   },
+   "symbols": "\\(a,d\\) (subjects with the same result both times), \\(b,c\\) (subjects whose result changes), \\(E\\) (expected number in each change cell), \\(\\chi^2\\) (McNemar chi-square), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "State the procedure",
+     "general": [
+      "\\begin{array}{c|cc}&\\text{O1}&\\text{O2}\\\\\\hline \\text{O1}&a&b\\\\ \\text{O2}&c&d\\end{array}"
+     ],
+     "work": [
+      "a=12,\\ b=11,\\ c=2,\\ d=15"
+     ],
+     "words": "Both methods classify the same 40 adults, so the results are paired nominal data. McNemar's test compares two diagnostic procedures applied to the same people."
+    },
+    {
+     "title": "State the hypotheses",
+     "general": [
+      "H_0:P(\\text{O1}\\to\\text{O2})=P(\\text{O2}\\to\\text{O1})"
+     ],
+     "work": [
+      "H_0:P(\\text{app}+,\\ \\text{audiologist}-)=P(\\text{app}-,\\ \\text{audiologist}+)"
+     ],
+     "words": "The app and the audiologist have the same probability of classifying an adult as having hearing loss, so adults on whom they disagree are equally likely to be positive by the app only as by the audiologist only. The two methods differ in how often they classify an adult as having hearing loss."
+    },
+    {
+     "title": "Identify the subjects who change",
+     "general": [
+      "b=\\text{O1}\\to\\text{O2},\\quad c=\\text{O2}\\to\\text{O1}"
+     ],
+     "work": [
+      "b=11,\\quad c=2,\\quad b+c=13"
+     ],
+     "words": "Only discordant subjects carry information about a difference. Here b counts adults called positive by the app but negative by the audiologist and c counts adults called negative by the app but positive by the audiologist. The concordant cells a = 12 and d = 15 do not enter the statistic."
+    },
+    {
+     "title": "Calculate the expected number in each change cell",
+     "general": [
+      "E=\\frac{b+c}{2}"
+     ],
+     "work": [
+      "E=\\frac{11+2}{2}=6.5"
+     ],
+     "words": "If the null hypothesis is true, the changes split evenly in the two directions."
+    },
+    {
+     "title": "Calculate the McNemar chi-square with Yates correction",
+     "general": [
+      "\\chi^2=\\frac{(|b-E|-\\frac12)^2}{E}+\\frac{(|c-E|-\\frac12)^2}{E}"
+     ],
+     "work": [
+      "\\chi^2=\\frac{(|11-6.5|-\\frac12)^2}{6.5}+\\frac{(|2-6.5|-\\frac12)^2}{6.5}=4.9231"
+     ],
+     "words": "Subtract one half from each absolute difference before squaring because the table is 2 x 2 (Yates correction)."
+    },
+    {
+     "title": "Find the critical value",
+     "general": [
+      "\\nu=1,\\quad \\chi^2_{crit}=\\chi^2_{\\alpha}(1)"
+     ],
+     "work": [
+      "\\chi^2_{0.05}(1)=3.841"
+     ],
+     "words": "Start with α = 0.05. Open Chi_Squared_Table2.pdf, PDF page 1. Row df = 1, column χ².050 gives 3.841. The same row gives 2.706 in the .100 column, 5.024 in the .025 column, 6.635 in the .010 column and 7.879 in the .005 column for a P range.",
+     "classTable": {
+      "path": "sources/tables/Chi_Squared_Table2.pdf",
+      "page": 1,
+      "row": "1",
+      "column": "0.050",
+      "value": 3.841,
+      "actualDf": 1,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision",
+     "general": [
+      "\\chi^2>\\chi^2_{crit}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "\\chi^2=4.9231>3.841,\\quad 0.025<P<0.05"
+     ],
+     "words": "Reject the null hypothesis. The statistic lies between two printed cutoffs, so 0.025 < P < 0.05."
+    }
+   ],
+   "conclusion": "McNemar chi-square = 4.9231 with 1 df exceeds chi-square_0.05(1) = 3.841 but not chi-square_0.025(1) = 5.024. Reject H0, 0.025 < P < 0.05. There is a difference between the two methods. The app classifies adults as having hearing loss more often than the audiologist does (11 adults positive by the app only against 2 positive by the audiologist only).",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/Chi_Squared_Table2.pdf",
+    "page": 1,
+    "row": "1",
+    "column": "0.050",
+    "value": 3.841,
+    "actualDf": 1,
+    "approximation": false
+   },
+   "values": {
+    "a": 12,
+    "b": 11,
+    "c": 2,
+    "d": 15,
+    "N": 40,
+    "E": 6.5,
+    "chi2": 4.923076923076923,
+    "df": 1,
+    "critical": 3.841,
+    "reject": true,
+    "pRange": "0.025<P<0.05",
+    "exactP": 0.026500280602491884
+   },
+   "module": 21,
+   "tolerance": 0.024615,
+   "answerName": "Chi-square",
+   "answer": 4.923076923076923
+  },
+  {
+   "id": "n21-eeg-spike-detector",
+   "title": "Epileptiform spikes by a detection program and by a neurologist",
+   "topic": "s21diagnostic",
+   "context": "In a study looking at automated reading of the electroencephalogram (EEG, a recording of brain electrical activity from scalp electrodes), 32 overnight recordings from children with suspected epilepsy were each classified as positive or negative for epileptiform spikes (brief sharp discharges) by a spike-detection program and by a neurologist who did not see the program's result. Of the 19 recordings called positive by the program, 10 were positive and 9 were negative by the neurologist. Of the 13 recordings called negative by the program, 2 were positive and 11 were negative by the neurologist.",
+   "unit": "recordings",
+   "table": {
+    "headers": [
+     "Program (rows) by Neurologist (columns)",
+     "Neurologist: positive",
+     "Neurologist: negative"
+    ],
+    "rows": [
+     [
+      "Program: positive",
+      10,
+      9
+     ],
+     [
+      "Program: negative",
+      2,
+      11
+     ]
+    ]
+   },
+   "tasks": [
+    "Is there a difference between the program and the neurologist in the proportion of recordings classified as positive for epileptiform spikes? Use a chi-square test.",
+    "Please state how you reached your conclusions."
+   ],
+   "hypotheses": {
+    "null": "H_0:P(\\text{program}+,\\ \\text{neurologist}-)=P(\\text{program}-,\\ \\text{neurologist}+)",
+    "alternative": "H_A:P(\\text{program}+,\\ \\text{neurologist}-)\\ne P(\\text{program}-,\\ \\text{neurologist}+)",
+    "nullWords": "The program and the neurologist have the same probability of classifying a recording as positive for spikes, so recordings on which they disagree are equally likely to be positive by the program only as by the neurologist only.",
+    "alternativeWords": "The two methods differ in how often they classify a recording as positive for spikes."
+   },
+   "symbols": "\\(a,d\\) (subjects with the same result both times), \\(b,c\\) (subjects whose result changes), \\(E\\) (expected number in each change cell), \\(\\chi^2\\) (McNemar chi-square), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "State the procedure",
+     "general": [
+      "\\begin{array}{c|cc}&\\text{O1}&\\text{O2}\\\\\\hline \\text{O1}&a&b\\\\ \\text{O2}&c&d\\end{array}"
+     ],
+     "work": [
+      "a=10,\\ b=9,\\ c=2,\\ d=11"
+     ],
+     "words": "Both methods classify the same 32 recordings, so the results are paired nominal data. McNemar's test compares two diagnostic procedures applied to the same subjects."
+    },
+    {
+     "title": "State the hypotheses",
+     "general": [
+      "H_0:P(\\text{O1}\\to\\text{O2})=P(\\text{O2}\\to\\text{O1})"
+     ],
+     "work": [
+      "H_0:P(\\text{program}+,\\ \\text{neurologist}-)=P(\\text{program}-,\\ \\text{neurologist}+)"
+     ],
+     "words": "The program and the neurologist have the same probability of classifying a recording as positive for spikes, so recordings on which they disagree are equally likely to be positive by the program only as by the neurologist only. The two methods differ in how often they classify a recording as positive for spikes."
+    },
+    {
+     "title": "Identify the subjects who change",
+     "general": [
+      "b=\\text{O1}\\to\\text{O2},\\quad c=\\text{O2}\\to\\text{O1}"
+     ],
+     "work": [
+      "b=9,\\quad c=2,\\quad b+c=11"
+     ],
+     "words": "Only discordant recordings carry information about a difference. Here b counts recordings called positive by the program but negative by the neurologist and c counts recordings called negative by the program but positive by the neurologist. The concordant cells a = 10 and d = 11 do not enter the statistic."
+    },
+    {
+     "title": "Calculate the expected number in each change cell",
+     "general": [
+      "E=\\frac{b+c}{2}"
+     ],
+     "work": [
+      "E=\\frac{9+2}{2}=5.5"
+     ],
+     "words": "If the null hypothesis is true, the changes split evenly in the two directions."
+    },
+    {
+     "title": "Calculate the McNemar chi-square with Yates correction",
+     "general": [
+      "\\chi^2=\\frac{(|b-E|-\\frac12)^2}{E}+\\frac{(|c-E|-\\frac12)^2}{E}"
+     ],
+     "work": [
+      "\\chi^2=\\frac{(|9-5.5|-\\frac12)^2}{5.5}+\\frac{(|2-5.5|-\\frac12)^2}{5.5}=3.2727"
+     ],
+     "words": "Subtract one half from each absolute difference before squaring because the table is 2 x 2 (Yates correction)."
+    },
+    {
+     "title": "Find the critical value",
+     "general": [
+      "\\nu=1,\\quad \\chi^2_{crit}=\\chi^2_{\\alpha}(1)"
+     ],
+     "work": [
+      "\\chi^2_{0.05}(1)=3.841"
+     ],
+     "words": "Start with α = 0.05. Open Chi_Squared_Table2.pdf, PDF page 1. Row df = 1, column χ².050 gives 3.841. The same row gives 2.706 in the .100 column, 5.024 in the .025 column, 6.635 in the .010 column and 7.879 in the .005 column for a P range.",
+     "classTable": {
+      "path": "sources/tables/Chi_Squared_Table2.pdf",
+      "page": 1,
+      "row": "1",
+      "column": "0.050",
+      "value": 3.841,
+      "actualDf": 1,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision",
+     "general": [
+      "\\chi^2>\\chi^2_{crit}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "\\chi^2=3.2727<3.841"
+     ],
+     "words": "Do not reject the null hypothesis because the statistic is below the 0.05 cutoff (0.05 < P < 0.10)."
+    }
+   ],
+   "conclusion": "McNemar chi-square = 3.2727 with 1 df is below chi-square_0.05(1) = 3.841 but above chi-square_0.10(1) = 2.706. Do not reject H0 (0.05 < P < 0.10). There is no evidence of a difference between the program and the neurologist in the proportion of recordings classified as positive for spikes, even though 9 recordings were positive by the program only and 2 by the neurologist only.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/Chi_Squared_Table2.pdf",
+    "page": 1,
+    "row": "1",
+    "column": "0.050",
+    "value": 3.841,
+    "actualDf": 1,
+    "approximation": false
+   },
+   "values": {
+    "a": 10,
+    "b": 9,
+    "c": 2,
+    "d": 11,
+    "N": 32,
+    "E": 5.5,
+    "chi2": 3.272727272727273,
+    "df": 1,
+    "critical": 3.841,
+    "reject": false,
+    "pRange": "0.05<P<0.10",
+    "exactP": 0.0704404292720881
+   },
+   "module": 21,
+   "tolerance": 0.016364,
+   "answerName": "Chi-square",
+   "answer": 3.272727272727273
+  }
+ ],
+ "questions": [
+  {
+   "id": "m2-n21-qa01",
+   "module": 21,
+   "topic": "s21rmAnova",
+   "stem": "In the mismatch negativity example (6 listeners, treatment means -3.4333, -3.5833 and -2.2833 μV, grand mean -3.1 μV), what is \\(SS_{treat}\\)?",
+   "options": [
+    "\\(1.0117\\)",
+    "\\(6.5533\\)",
+    "\\(6.07\\)",
+    "\\(0.4833\\)"
+   ],
+   "correct": 2,
+   "why": "Multiply the sum of squared deviations of the treatment means (1.0117) by n = 6 because each treatment mean involves 6 listeners. 6.5533 is the within-subjects sum of squares and 0.4833 is the residual.",
+   "case": "n21-mmn-deviant-type",
+   "equations": [
+    "SS_{treat}=n\\sum_t(\\bar T_t-\\bar X)^2",
+    "SS_{treat}=6(1.0117)=6.07"
+   ]
+  },
+  {
+   "id": "m2-n21-qa02",
+   "module": 21,
+   "topic": "s21rmAnova",
+   "stem": "In the sleep onset latency example (5 patients, 3 times), \\(SS_{treat}=1029.7333\\) and \\(SS_{res}=102.9333\\). What is the repeated-measures F statistic?",
+   "options": [
+    "\\(50.0194\\)",
+    "\\(40.0155\\)",
+    "\\(10.0039\\)",
+    "\\(0.025\\)"
+   ],
+   "correct": 1,
+   "why": "MS_treat = 1029.7333/2 = 514.8667 and MS_res = 102.9333/8 = 12.8667, so F = 40.0155. Dividing SS_res by 10 uses the within-subjects df, and 10.0039 is the ratio of the sums of squares without their df.",
+   "case": "n21-insomnia-sleep-latency",
+   "equations": [
+    "F=\\frac{SS_{treat}/(m-1)}{SS_{res}/[(n-1)(m-1)]}",
+    "F=\\frac{1029.7333/2}{102.9333/8}=40.0155"
+   ]
+  },
+  {
+   "id": "m2-n21-qa03",
+   "module": 21,
+   "topic": "s21rmAnova",
+   "stem": "Pupil diameter is measured in the same 6 students while each one holds 3, 5 and 7 digits in working memory. The question is whether mean pupil diameter differs among the three memory loads. Which procedure fits this design?",
+   "options": [
+    "One-way ANOVA with three independent groups",
+    "Three unpaired t tests at the 0.05 level each",
+    "McNemar's test",
+    "Repeated measures ANOVA"
+   ],
+   "correct": 3,
+   "why": "The same subjects are measured under all three conditions on an interval scale, so the observations are repeated measures. Repeated measures ANOVA removes the differences between students from the error term.",
+   "case": null,
+   "equations": [
+    "F=\\frac{MS_{treat}}{MS_{res}},\\quad DF_{res}=(n-1)(m-1)"
+   ]
+  },
+  {
+   "id": "m2-n21-qa04",
+   "module": 21,
+   "topic": "s21holm",
+   "stem": "For the Holm comparisons of the three deviant tones (\\(MS_{res}=0.048333\\), n = 6 listeners), what is the standard error of a difference between two treatment means?",
+   "options": [
+    "\\(0.126929\\)",
+    "\\(0.089752\\)",
+    "\\(0.016111\\)",
+    "\\(0.179505\\)"
+   ],
+   "correct": 0,
+   "why": "SE = sqrt(2 MS_res/n) = sqrt(2(0.048333)/6) = 0.126929. Leaving out the 2 gives 0.089752, and 0.016111 is the value before the square root.",
+   "case": "n21-mmn-deviant-holm",
+   "equations": [
+    "SE=\\sqrt{\\frac{2MS_{res}}{n}}",
+    "SE=\\sqrt{\\frac{2(0.048333)}{6}}=0.126929"
+   ]
+  },
+  {
+   "id": "m2-n21-qa05",
+   "module": 21,
+   "topic": "s21holm",
+   "stem": "In the deep brain stimulation example (n = 5 patients, \\(MS_{res}=7.05\\), \\(DF_{res}=8\\)), the mean tremor amplitude is 16.4 mm with stimulation off and 10 mm at 130 Hz. What is the t statistic for this pair?",
+   "options": [
+    "\\(5.39\\)",
+    "\\(2.41\\)",
+    "\\(2.27\\)",
+    "\\(3.811\\)"
+   ],
+   "correct": 3,
+   "why": "SE = sqrt(2(7.05)/5) = 1.679286, so t = (16.4 - 10)/1.679286 = 3.811. Leaving out the 2 gives 5.390, and dividing by sqrt(MS_res) alone gives 2.410.",
+   "case": "n21-dbs-tremor-holm",
+   "equations": [
+    "t=\\frac{\\bar T_i-\\bar T_j}{\\sqrt{2MS_{res}/n}}",
+    "t=\\frac{16.4-10}{1.679286}=3.811"
+   ]
+  },
+  {
+   "id": "m2-n21-qa06",
+   "module": 21,
+   "topic": "s21holm",
+   "stem": "After a repeated-measures ANOVA on reaction times under three levels of sleep deprivation rejects equal means, the three pairwise t statistics are ordered by |t|. The largest is significant at 0.05/3 and the second largest is not significant at 0.05/2. What happens to the third comparison?",
+   "options": [
+    "It is tested at 0.05 and can still be declared significant",
+    "It is not declared significant because Holm testing stops at the first comparison that is not significant",
+    "It is tested at 0.05/3 like the first comparison",
+    "It is tested with an unpaired t test using the pooled variance"
+   ],
+   "correct": 1,
+   "why": "The Holm procedure is a step-down procedure. Once a comparison fails at its level, that comparison and all comparisons with smaller |t| are not declared significant.",
+   "case": null,
+   "equations": [
+    "\\alpha_j=\\frac{\\alpha_T}{k-j+1},\\quad j=1,\\dots,k"
+   ]
+  },
+  {
+   "id": "m2-n21-qa07",
+   "module": 21,
+   "topic": "s21mcnemar",
+   "stem": "In the tinnitus example, 14 adults changed from present to absent and 3 changed from absent to present after sound therapy. What is the McNemar chi-square with the Yates correction?",
+   "options": [
+    "\\(7.1176\\)",
+    "\\(2.9412\\)",
+    "\\(5.8824\\)",
+    "\\(0.3763\\)"
+   ],
+   "correct": 2,
+   "why": "E = (14 + 3)/2 = 8.5, and each term is (|14 - 8.5| - 0.5)^2/8.5 = 2.9412, so the sum of the two terms is 5.8824. Leaving out the Yates correction gives 7.1176, and 0.3763 is the independent-samples chi-square that ignores the pairing.",
+   "case": "n21-tinnitus-sound-therapy",
+   "equations": [
+    "\\chi^2=\\frac{(|b-E|-\\frac12)^2}{E}+\\frac{(|c-E|-\\frac12)^2}{E}",
+    "\\chi^2=\\frac{(|14-8.5|-\\frac12)^2}{8.5}+\\frac{(|3-8.5|-\\frac12)^2}{8.5}=5.8824"
+   ]
+  },
+  {
+   "id": "m2-n21-qa08",
+   "module": 21,
+   "topic": "s21mcnemar",
+   "stem": "Thirty students are classified as recalling or not recalling a word list before a 90-minute nap and again after it. Which counts enter the McNemar chi-square?",
+   "options": [
+    "Only the students whose result changes between the two times",
+    "All four cells of the 2 x 2 table",
+    "Only the students with the same result both times",
+    "Only the row totals and column totals"
+   ],
+   "correct": 0,
+   "why": "McNemar's test uses only the discordant cells b and c. Students with the same result both times carry no information about a change.",
+   "case": null,
+   "equations": [
+    "E=\\frac{b+c}{2}",
+    "\\chi^2=\\frac{(|b-E|-\\frac12)^2}{E}+\\frac{(|c-E|-\\frac12)^2}{E}"
+   ]
+  },
+  {
+   "id": "m2-n21-qa09",
+   "module": 21,
+   "topic": "s21diagnostic",
+   "stem": "In the hearing screening example, the app and the audiologist agree on 12 positive and 15 negative adults. Eleven adults are positive by the app only and 2 are positive by the audiologist only. What is the expected number E in each disagreement cell under the null hypothesis?",
+   "options": [
+    "\\(13.5\\)",
+    "\\(6.5\\)",
+    "\\(13\\)",
+    "\\(10\\)"
+   ],
+   "correct": 1,
+   "why": "E = (b + c)/2 = (11 + 2)/2 = 6.5 because disagreements split evenly in the two directions under the null hypothesis. 13.5 uses the agreement cells, 13 is the undivided sum and 10 is N/4.",
+   "case": "n21-hearing-app-audiologist",
+   "equations": [
+    "E=\\frac{b+c}{2}",
+    "E=\\frac{11+2}{2}=6.5"
+   ]
+  },
+  {
+   "id": "m2-n21-qa10",
+   "module": 21,
+   "topic": "s21diagnostic",
+   "stem": "A bedside swallowing screen and a video X-ray swallowing study each classify the same 35 stroke patients as aspirating or not aspirating. The question is whether the two methods differ in how often they call a patient positive. Which procedure fits?",
+   "options": [
+    "A chi-square test of independence on the 2 x 2 table of counts",
+    "An unpaired t test on the two proportions",
+    "McNemar's test on the patients where the two methods disagree",
+    "Repeated measures ANOVA"
+   ],
+   "correct": 2,
+   "why": "Both methods are applied to the same patients, so the two nominal classifications are paired. McNemar's test compares the two directions of disagreement and the independent chi-square is not valid for paired data.",
+   "case": null,
+   "equations": [
+    "\\chi^2=\\frac{(|b-E|-\\frac12)^2}{E}+\\frac{(|c-E|-\\frac12)^2}{E},\\quad \\nu=1"
+   ]
+  }
+ ],
+ "notes": [
+  "All data are invented for practice. No real study is cited.",
+  "Critical values are the printed class tables. F table page 1 rows 6, 8 and 10 in column 2 (5.14/10.92, 4.46/8.65, 4.10/7.56). t table rows 8 and 10. Chi-square table 2 row 1.",
+  "Holm levels 0.0167 and 0.025 are not printed columns of the t table. As in the existing Holm cases, the stricter printed column is used (0.01 for 0.0167, 0.02 for 0.025). In n21-dbs-tremor-holm the second comparison is below even the 0.05 column, so it is not significant at 0.025 without bracketing doubt, and Holm testing stops there.",
+  "n21-mmn-deviant-holm and n21-insomnia-sleep-latency-holm continue n21-mmn-deviant-type and n21-insomnia-sleep-latency. They reuse the treatment means rounded to 4 decimals and MS_res rounded to 6 decimals, as the existing heart-rate Holm case does, so their t values can differ from full-precision values in the 4th significant figure.",
+  "n21-dbs-tremor-holm is a fourth data set given only as summary values in its context. The raw table behind it (5 patients by off, 60 Hz, 130 Hz, in mm) is [[19, 13, 12], [13, 16, 8], [21, 13, 13], [12, 14, 6], [17, 12, 11]], which gives F = 7.3002 and MS_res = 7.05. The check script recomputes the summary from this table.",
+  "n21-placebo-heat-pain does not reject, so it has no Holm follow-up. n21-shift-nurses-daytime-sleep and n21-eeg-spike-detector also do not reject. n21-hearing-app-audiologist (4.9231 against 3.841 and 5.024) and n21-eeg-spike-detector (3.2727 against 3.841) land close to a cutoff.",
+  "MMN amplitudes are negative, so work lines write negative numbers in parentheses. A more negative mean is a larger response, which the Holm conclusion states in words.",
+  "Repeated-measures and Holm table headers carry the unit, following the question-style rule. The existing cases use plain condition names. Holm values keys use the plain condition names.",
+  "Following the content rules, tasks, words, context and conclusion sentences contain no colons or semicolons, so some sentences copied from the existing cases were reworded (for example the Holm sign sentence and the McNemar decision sentence). The Holm comparison step titles keep the existing 'Comparison 1: A vs B' form.",
+  "The McNemar step 'Show why the independent chi-square is wrong here' is kept for the two s21mcnemar cases as in the existing p7 case. In the nurses case that step says the value is simply not used, because neither test rejects there.",
+  "Wording review. His own phrases are restored in context and tasks with his punctuation, for example '(Note: If a difference exists, do not identify which conditions are different.)', and the three Holm cases now ask in his Holm wording ('An analysis of variance was performed on the data, resulting in the conclusion that ...', 'Perform the appropriate form of multiple pairwise comparisons ... using the Holm correction', 'Present your final/overall conclusion ...'). The check script allows the '(Note: ' tag in context and tasks only. No number, table cell, step or answer was changed.",
+  "n21-dbs-tremor-holm keeps its deep brain stimulation setting. The overlapping case in file b (n21-b-tremor-dbs) was given a different story. The context of n21-dbs-tremor-holm now states n, the three means, MS_res, DF_res and the ANOVA result, and says that the individual measurements are not shown."
+ ]
+}

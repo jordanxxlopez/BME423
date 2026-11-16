@@ -1,0 +1,2369 @@
+{
+ "cases": [
+  {
+   "id": "n20-b-maze-lesion",
+   "title": "Radial maze errors before and after a hippocampal lesion",
+   "topic": "s20paired",
+   "context": "Researchers interested in spatial memory did a study to evaluate the effect of a hippocampal lesion (surgical damage to the hippocampus, a brain structure used for remembering places) on performance in an eight-arm radial maze. Each rat was evaluated in a test session before the lesion (measurement 1) and again in a test session two weeks after the lesion (measurement 2). The number of working memory errors (entries into an arm that was already visited in that session) was recorded.",
+   "unit": "errors",
+   "table": {
+    "headers": [
+     "Rat",
+     "Before lesion (errors)",
+     "After lesion (errors)"
+    ],
+    "rows": [
+     [
+      1,
+      6,
+      11
+     ],
+     [
+      2,
+      8,
+      12
+     ],
+     [
+      3,
+      5,
+      9
+     ],
+     [
+      4,
+      9,
+      10
+     ],
+     [
+      5,
+      7,
+      13
+     ],
+     [
+      6,
+      4,
+      3
+     ],
+     [
+      7,
+      8,
+      12
+     ],
+     [
+      8,
+      6,
+      11
+     ],
+     [
+      9,
+      7,
+      9
+     ],
+     [
+      10,
+      5,
+      10
+     ]
+    ]
+   },
+   "tasks": [
+    "Based on the recorded data, is there evidence that the number of working memory errors is different in these two states? Assume that any quantities of interest are Normally distributed. DO NOT use R.",
+    "Provide your result in a single complete sentence that would convey your conclusion in a way that could be understood by a non-expert in statistics or medicine (e.g., a typical reader of a local newspaper)."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\delta=0",
+    "alternative": "H_A:\\delta\\ne0",
+    "nullWords": "The hippocampal lesion produces no change in the mean number of working memory errors (the true mean after-minus-before difference is zero).",
+    "alternativeWords": "The hippocampal lesion changes the mean number of working memory errors (the true mean after-minus-before difference is not zero)."
+   },
+   "symbols": "\\(d_i\\) (difference in subject \\(i\\)), \\(\\bar d\\) (mean difference), \\(s_d\\) (SD of the differences), \\(s_{\\bar d}\\) (standard error of the mean difference), \\(\\delta\\) (true mean difference), \\(n\\) (number of subjects), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\delta=0",
+      "H_A:\\delta\\ne0"
+     ],
+     "work": [
+      "\\delta=\\mu_{\\mathrm{after}}-\\mu_{\\mathrm{before}}"
+     ],
+     "words": "Each rat is measured under both conditions, so the procedure is the paired t test on the within-rat differences. The hippocampal lesion produces no change in the mean number of working memory errors (the true mean after-minus-before difference is zero). The hippocampal lesion changes the mean number of working memory errors (the true mean after-minus-before difference is not zero)."
+    },
+    {
+     "title": "Form one difference per rat",
+     "general": [
+      "d_i=x1_i-x2_i,\\quad i=1,\\dots,n"
+     ],
+     "work": [
+      "d_i=(11-6,12-8,9-5,10-9,13-7,3-4,12-8,11-6,9-7,10-5)",
+      "d_i=(5,4,4,1,6,-1,4,5,2,5),\\quad n=10"
+     ],
+     "words": "Subtract in the same direction for every rat (after minus before). Rat 6 has a difference of the opposite sign and it keeps its minus sign. The analysis now uses only these 10 numbers."
+    },
+    {
+     "title": "Calculate the mean difference",
+     "general": [
+      "\\bar d=\\frac{1}{n}\\sum_{i=1}^{n}d_i"
+     ],
+     "work": [
+      "\\bar d=\\frac{35}{10}=3.5"
+     ],
+     "words": "The mean difference estimates the true mean change \\(\\delta\\) in errors."
+    },
+    {
+     "title": "Calculate the SD of the differences",
+     "general": [
+      "s_d^2=\\frac{1}{n-1}\\sum_{i=1}^{n}(d_i-\\bar d)^2",
+      "s_d=\\sqrt{s_d^2}"
+     ],
+     "work": [
+      "\\sum(d_i-\\bar d)^2=42.5",
+      "s_d^2=\\frac{42.5}{9}=4.72222",
+      "s_d=\\sqrt{4.72222}=2.17307"
+     ],
+     "words": "Square each deviation of a difference from the mean difference, add them, divide by \\(n-1\\), and take the root."
+    },
+    {
+     "title": "Calculate the standard error of the mean difference",
+     "general": [
+      "s_{\\bar d}=\\frac{s_d}{\\sqrt n}"
+     ],
+     "work": [
+      "s_{\\bar d}=\\frac{2.17307}{\\sqrt{10}}=0.687184"
+     ],
+     "words": "The standard error describes how much the mean difference varies from sample to sample."
+    },
+    {
+     "title": "Calculate the t statistic",
+     "general": [
+      "t=\\frac{\\bar d-\\delta}{s_{\\bar d}}=\\frac{\\bar d}{s_{\\bar d}}\\quad(\\delta=0\\text{ under }H_0)"
+     ],
+     "work": [
+      "t=\\frac{3.5}{0.687184}=5.09325"
+     ],
+     "words": "Under the null hypothesis the true mean difference is zero, so the numerator is the mean difference itself."
+    },
+    {
+     "title": "Find the degrees of freedom and the critical value",
+     "general": [
+      "\\nu=n-1",
+      "t_c=t_{0.05}(\\nu)"
+     ],
+     "work": [
+      "\\nu=10-1=9",
+      "t_{0.05}(9)=2.262"
+     ],
+     "words": "Start with \\(\\alpha=0.05\\). Open t_table.pdf, PDF page 1. Use row 9 and the two-tailed 0.05 column. The printed cutoff is 2.262.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "9",
+      "column": "0.05",
+      "value": 2.262,
+      "actualDf": 9,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "|t|>t_\\alpha(\\nu)\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "|t|=5.09325>t_{0.05}(9)=2.262",
+      "|t|=5.09325>t_{0.001}(9)=4.781",
+      "P<0.001"
+     ],
+     "words": "The statistic exceeds the 0.05 cutoff, so reject the null hypothesis. In row 9 it also passes the 0.001 column (4.781), which is the last printed column, so P < 0.001."
+    }
+   ],
+   "conclusion": "The mean after-minus-before difference is 3.5 errors, t = 5.09325 with 9 degrees of freedom, beyond the cutoff 2.262. Reject the null hypothesis. There is a difference in the number of working memory errors between the two states (P < 0.001). In plain words, the rats made about three and a half more maze errors per session after the lesion than before it, and this change is larger than chance alone would explain.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "9",
+    "column": "0.05",
+    "value": 2.262,
+    "actualDf": 9,
+    "approximation": false
+   },
+   "values": {
+    "n": 10,
+    "differences": [
+     5,
+     4,
+     4,
+     1,
+     6,
+     -1,
+     4,
+     5,
+     2,
+     5
+    ],
+    "dbar": 3.5,
+    "sumSqDev": 42.5,
+    "varianceD": 4.722222222222222,
+    "sd": 2.173067468400883,
+    "se": 0.6871842709362768,
+    "t": 5.093248125762992,
+    "df": 9,
+    "critical": 2.262,
+    "exactP": 0.0006510644456964673,
+    "reject": true
+   },
+   "module": 20,
+   "tolerance": 0.02546624062881496,
+   "answerName": "t statistic",
+   "answer": 5.093248125762992
+  },
+  {
+   "id": "n20-b-light-therapy-mood",
+   "title": "Mood rating before and after bright light therapy",
+   "topic": "s20paired",
+   "context": "Researchers interested in seasonal low mood did a study to evaluate the effect of bright light therapy (sitting in front of a 10,000 lux light box for 30 minutes each morning). Each subject was evaluated on the day before the first session (measurement 1) and again after 14 days of morning sessions (measurement 2). Mood was scored on a visual analog scale (VAS) from 0 points (worst possible mood) to 100 points (best possible mood).",
+   "unit": "points",
+   "table": {
+    "headers": [
+     "Subject",
+     "Before light therapy (points)",
+     "After light therapy (points)"
+    ],
+    "rows": [
+     [
+      1,
+      42,
+      50
+     ],
+     [
+      2,
+      35,
+      41
+     ],
+     [
+      3,
+      51,
+      49
+     ],
+     [
+      4,
+      38,
+      47
+     ],
+     [
+      5,
+      47,
+      52
+     ],
+     [
+      6,
+      29,
+      38
+     ],
+     [
+      7,
+      55,
+      58
+     ],
+     [
+      8,
+      40,
+      39
+     ],
+     [
+      9,
+      33,
+      45
+     ],
+     [
+      10,
+      46,
+      51
+     ],
+     [
+      11,
+      37,
+      44
+     ]
+    ]
+   },
+   "tasks": [
+    "Based on the recorded data, is there evidence that mood rating is different in these two states? Assume that any quantities of interest are Normally distributed. DO NOT use R.",
+    "Make sure to show your intermediate calculations."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\delta=0",
+    "alternative": "H_A:\\delta\\ne0",
+    "nullWords": "Two weeks of bright light therapy produces no change in the mean mood rating (the true mean after-minus-before difference is zero).",
+    "alternativeWords": "Two weeks of bright light therapy changes the mean mood rating (the true mean after-minus-before difference is not zero)."
+   },
+   "symbols": "\\(d_i\\) (difference in subject \\(i\\)), \\(\\bar d\\) (mean difference), \\(s_d\\) (SD of the differences), \\(s_{\\bar d}\\) (standard error of the mean difference), \\(\\delta\\) (true mean difference), \\(n\\) (number of subjects), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\delta=0",
+      "H_A:\\delta\\ne0"
+     ],
+     "work": [
+      "\\delta=\\mu_{\\mathrm{after}}-\\mu_{\\mathrm{before}}"
+     ],
+     "words": "Each subject is measured under both conditions, so the procedure is the paired t test on the within-subject differences. Two weeks of bright light therapy produces no change in the mean mood rating (the true mean after-minus-before difference is zero). Two weeks of bright light therapy changes the mean mood rating (the true mean after-minus-before difference is not zero)."
+    },
+    {
+     "title": "Form one difference per subject",
+     "general": [
+      "d_i=x1_i-x2_i,\\quad i=1,\\dots,n"
+     ],
+     "work": [
+      "d_i=(50-42,41-35,49-51,47-38,52-47,38-29,58-55,39-40,45-33,51-46,44-37)",
+      "d_i=(8,6,-2,9,5,9,3,-1,12,5,7),\\quad n=11"
+     ],
+     "words": "Subtract in the same direction for every subject (after minus before). Subjects 3 and 8 have differences of the opposite sign and they keep their minus signs. The analysis now uses only these 11 numbers."
+    },
+    {
+     "title": "Calculate the mean difference",
+     "general": [
+      "\\bar d=\\frac{1}{n}\\sum_{i=1}^{n}d_i"
+     ],
+     "work": [
+      "\\bar d=\\frac{61}{11}=5.54545"
+     ],
+     "words": "The mean difference estimates the true mean change \\(\\delta\\) in points."
+    },
+    {
+     "title": "Calculate the SD of the differences",
+     "general": [
+      "s_d^2=\\frac{1}{n-1}\\sum_{i=1}^{n}(d_i-\\bar d)^2",
+      "s_d=\\sqrt{s_d^2}"
+     ],
+     "work": [
+      "\\sum(d_i-\\bar d)^2=180.727",
+      "s_d^2=\\frac{180.727}{10}=18.0727",
+      "s_d=\\sqrt{18.0727}=4.2512"
+     ],
+     "words": "Square each deviation of a difference from the mean difference, add them, divide by \\(n-1\\), and take the root."
+    },
+    {
+     "title": "Calculate the standard error of the mean difference",
+     "general": [
+      "s_{\\bar d}=\\frac{s_d}{\\sqrt n}"
+     ],
+     "work": [
+      "s_{\\bar d}=\\frac{4.2512}{\\sqrt{11}}=1.28179"
+     ],
+     "words": "The standard error describes how much the mean difference varies from sample to sample."
+    },
+    {
+     "title": "Calculate the t statistic",
+     "general": [
+      "t=\\frac{\\bar d-\\delta}{s_{\\bar d}}=\\frac{\\bar d}{s_{\\bar d}}\\quad(\\delta=0\\text{ under }H_0)"
+     ],
+     "work": [
+      "t=\\frac{5.54545}{1.28179}=4.32635"
+     ],
+     "words": "Under the null hypothesis the true mean difference is zero, so the numerator is the mean difference itself."
+    },
+    {
+     "title": "Find the degrees of freedom and the critical value",
+     "general": [
+      "\\nu=n-1",
+      "t_c=t_{0.05}(\\nu)"
+     ],
+     "work": [
+      "\\nu=11-1=10",
+      "t_{0.05}(10)=2.228"
+     ],
+     "words": "Start with \\(\\alpha=0.05\\). Open t_table.pdf, PDF page 1. Use row 10 and the two-tailed 0.05 column. The printed cutoff is 2.228.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "10",
+      "column": "0.05",
+      "value": 2.228,
+      "actualDf": 10,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "|t|>t_\\alpha(\\nu)\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "|t|=4.32635>t_{0.05}(10)=2.228",
+      "t_{0.002}(10)=4.144<4.32635<t_{0.001}(10)=4.587",
+      "0.001<P<0.002"
+     ],
+     "words": "The statistic exceeds the 0.05 cutoff, so reject the null hypothesis. In row 10 it also passes the 0.002 column (4.144) but not the 0.001 column (4.587), so P < 0.002."
+    }
+   ],
+   "conclusion": "The mean after-minus-before difference is 5.54545 points, t = 4.32635 with 10 degrees of freedom, beyond the cutoff 2.228. Reject the null hypothesis. There is a difference in the mood rating between the two states (P < 0.002).",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "10",
+    "column": "0.05",
+    "value": 2.228,
+    "actualDf": 10,
+    "approximation": false
+   },
+   "values": {
+    "n": 11,
+    "differences": [
+     8,
+     6,
+     -2,
+     9,
+     5,
+     9,
+     3,
+     -1,
+     12,
+     5,
+     7
+    ],
+    "dbar": 5.545454545454546,
+    "sumSqDev": 180.72727272727272,
+    "varianceD": 18.07272727272727,
+    "sd": 4.25120303828543,
+    "se": 1.281785944146514,
+    "t": 4.3263499422651455,
+    "df": 10,
+    "critical": 2.228,
+    "exactP": 0.0014981096381004976,
+    "reject": true
+   },
+   "module": 20,
+   "tolerance": 0.021631749711325726,
+   "answerName": "t statistic",
+   "answer": 4.3263499422651455
+  },
+  {
+   "id": "n20-b-ear-tone-threshold",
+   "title": "Tone detection threshold in the left and right ear",
+   "topic": "s20paired",
+   "context": "Researchers interested in ear asymmetry did a study to evaluate tone detection in young adults with normal hearing. Each subject was evaluated with a 4 kHz pure tone presented to the left ear (measurement 1) and again with the same tone presented to the right ear (measurement 2). The detection threshold (the quietest level at which the tone was heard on half of the trials) was recorded in decibels hearing level (dB HL).",
+   "unit": "dB HL",
+   "table": {
+    "headers": [
+     "Subject",
+     "Left ear threshold (dB HL)",
+     "Right ear threshold (dB HL)"
+    ],
+    "rows": [
+     [
+      1,
+      12,
+      15
+     ],
+     [
+      2,
+      17,
+      14
+     ],
+     [
+      3,
+      6,
+      8
+     ],
+     [
+      4,
+      21,
+      24
+     ],
+     [
+      5,
+      9,
+      13
+     ],
+     [
+      6,
+      26,
+      23
+     ],
+     [
+      7,
+      14,
+      17
+     ],
+     [
+      8,
+      7,
+      6
+     ],
+     [
+      9,
+      11,
+      10
+     ],
+     [
+      10,
+      19,
+      22
+     ]
+    ]
+   },
+   "tasks": [
+    "Based on the recorded data, is there evidence that the detection threshold is different in the two ears? Assume that any quantities of interest are Normally distributed. DO NOT use R.",
+    "Please state how you reached your conclusions."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\delta=0",
+    "alternative": "H_A:\\delta\\ne0",
+    "nullWords": "The mean tone detection threshold is the same in the left ear and the right ear (the true mean right-minus-left difference is zero).",
+    "alternativeWords": "The mean tone detection threshold is different in the left ear and the right ear (the true mean right-minus-left difference is not zero)."
+   },
+   "symbols": "\\(d_i\\) (difference in subject \\(i\\)), \\(\\bar d\\) (mean difference), \\(s_d\\) (SD of the differences), \\(s_{\\bar d}\\) (standard error of the mean difference), \\(\\delta\\) (true mean difference), \\(n\\) (number of subjects), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\delta=0",
+      "H_A:\\delta\\ne0"
+     ],
+     "work": [
+      "\\delta=\\mu_{\\mathrm{right}}-\\mu_{\\mathrm{left}}"
+     ],
+     "words": "Each subject is measured under both conditions, so the procedure is the paired t test on the within-subject differences. The mean tone detection threshold is the same in the left ear and the right ear (the true mean right-minus-left difference is zero). The mean tone detection threshold is different in the left ear and the right ear (the true mean right-minus-left difference is not zero)."
+    },
+    {
+     "title": "Form one difference per subject",
+     "general": [
+      "d_i=x1_i-x2_i,\\quad i=1,\\dots,n"
+     ],
+     "work": [
+      "d_i=(15-12,14-17,8-6,24-21,13-9,23-26,17-14,6-7,10-11,22-19)",
+      "d_i=(3,-3,2,3,4,-3,3,-1,-1,3),\\quad n=10"
+     ],
+     "words": "Subtract in the same direction for every subject (right minus left). Subjects 2, 6, 8 and 9 have differences of the opposite sign and they keep their minus signs. The analysis now uses only these 10 numbers."
+    },
+    {
+     "title": "Calculate the mean difference",
+     "general": [
+      "\\bar d=\\frac{1}{n}\\sum_{i=1}^{n}d_i"
+     ],
+     "work": [
+      "\\bar d=\\frac{10}{10}=1"
+     ],
+     "words": "The mean difference estimates the true mean change \\(\\delta\\) in dB HL."
+    },
+    {
+     "title": "Calculate the SD of the differences",
+     "general": [
+      "s_d^2=\\frac{1}{n-1}\\sum_{i=1}^{n}(d_i-\\bar d)^2",
+      "s_d=\\sqrt{s_d^2}"
+     ],
+     "work": [
+      "\\sum(d_i-\\bar d)^2=66",
+      "s_d^2=\\frac{66}{9}=7.33333",
+      "s_d=\\sqrt{7.33333}=2.70801"
+     ],
+     "words": "Square each deviation of a difference from the mean difference, add them, divide by \\(n-1\\), and take the root."
+    },
+    {
+     "title": "Calculate the standard error of the mean difference",
+     "general": [
+      "s_{\\bar d}=\\frac{s_d}{\\sqrt n}"
+     ],
+     "work": [
+      "s_{\\bar d}=\\frac{2.70801}{\\sqrt{10}}=0.856349"
+     ],
+     "words": "The standard error describes how much the mean difference varies from sample to sample."
+    },
+    {
+     "title": "Calculate the t statistic",
+     "general": [
+      "t=\\frac{\\bar d-\\delta}{s_{\\bar d}}=\\frac{\\bar d}{s_{\\bar d}}\\quad(\\delta=0\\text{ under }H_0)"
+     ],
+     "work": [
+      "t=\\frac{1}{0.856349}=1.16775"
+     ],
+     "words": "Under the null hypothesis the true mean difference is zero, so the numerator is the mean difference itself."
+    },
+    {
+     "title": "Find the degrees of freedom and the critical value",
+     "general": [
+      "\\nu=n-1",
+      "t_c=t_{0.05}(\\nu)"
+     ],
+     "work": [
+      "\\nu=10-1=9",
+      "t_{0.05}(9)=2.262"
+     ],
+     "words": "Start with \\(\\alpha=0.05\\). Open t_table.pdf, PDF page 1. Use row 9 and the two-tailed 0.05 column. The printed cutoff is 2.262.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "9",
+      "column": "0.05",
+      "value": 2.262,
+      "actualDf": 9,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "|t|<t_\\alpha(\\nu)\\Rightarrow\\text{do not reject }H_0"
+     ],
+     "work": [
+      "|t|=1.16775<t_{0.05}(9)=2.262",
+      "t_{0.50}(9)=0.703<1.16775<t_{0.20}(9)=1.383",
+      "0.20<P<0.50"
+     ],
+     "words": "The statistic is below the 0.05 cutoff, so the null hypothesis is not rejected. Row 9 places P between 0.20 and 0.50, so P > 0.05."
+    }
+   ],
+   "conclusion": "The mean right-minus-left difference is 1 dB HL, t = 1.16775 with 9 degrees of freedom, below the cutoff 2.262. Do not reject the null hypothesis. These data give no evidence that the tone detection threshold is different in the two ears (P > 0.05).",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "9",
+    "column": "0.05",
+    "value": 2.262,
+    "actualDf": 9,
+    "approximation": false
+   },
+   "values": {
+    "n": 10,
+    "differences": [
+     3,
+     -3,
+     2,
+     3,
+     4,
+     -3,
+     3,
+     -1,
+     -1,
+     3
+    ],
+    "dbar": 1.0,
+    "sumSqDev": 66.0,
+    "varianceD": 7.333333333333333,
+    "sd": 2.70801280154532,
+    "se": 0.8563488385776752,
+    "t": 1.1677484162422846,
+    "df": 9,
+    "critical": 2.262,
+    "exactP": 0.27291221509403685,
+    "reject": false
+   },
+   "module": 20,
+   "tolerance": 0.005838742081211423,
+   "answerName": "t statistic",
+   "answer": 1.1677484162422846
+  },
+  {
+   "id": "n20-b-birdsong-deafening",
+   "title": "Birdsong syllables before and after deafening",
+   "topic": "s20paired",
+   "context": "Researchers interested in whether adult songbirds need hearing to keep their song stable did a study to evaluate singing in zebra finches. Each bird was evaluated in a recording session before deafening (measurement 1) and again in a recording session eight weeks after deafening (measurement 2). The number of song syllables (the short separate sound units of a song) produced per song bout was recorded.",
+   "unit": "syllables",
+   "table": {
+    "headers": [
+     "Bird",
+     "Before deafening (syllables)",
+     "After deafening (syllables)"
+    ],
+    "rows": [
+     [
+      1,
+      34,
+      32
+     ],
+     [
+      2,
+      41,
+      35
+     ],
+     [
+      3,
+      29,
+      33
+     ],
+     [
+      4,
+      38,
+      31
+     ],
+     [
+      5,
+      45,
+      41
+     ],
+     [
+      6,
+      31,
+      30
+     ],
+     [
+      7,
+      36,
+      37
+     ],
+     [
+      8,
+      40,
+      34
+     ],
+     [
+      9,
+      27,
+      25
+     ],
+     [
+      10,
+      33,
+      24
+     ],
+     [
+      11,
+      39,
+      38
+     ]
+    ]
+   },
+   "tasks": [
+    "Based on the recorded data, is there evidence that the number of syllables per song bout is different in these two states? Assume that any quantities of interest are Normally distributed. DO NOT use R.",
+    "Provide your result in a single complete sentence that would convey your conclusion in a way that could be understood by a non-expert in statistics or medicine (e.g., a typical reader of a local newspaper)."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\delta=0",
+    "alternative": "H_A:\\delta\\ne0",
+    "nullWords": "Deafening produces no change in the mean number of syllables per song bout (the true mean after-minus-before difference is zero).",
+    "alternativeWords": "Deafening changes the mean number of syllables per song bout (the true mean after-minus-before difference is not zero)."
+   },
+   "symbols": "\\(d_i\\) (difference in subject \\(i\\)), \\(\\bar d\\) (mean difference), \\(s_d\\) (SD of the differences), \\(s_{\\bar d}\\) (standard error of the mean difference), \\(\\delta\\) (true mean difference), \\(n\\) (number of subjects), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\delta=0",
+      "H_A:\\delta\\ne0"
+     ],
+     "work": [
+      "\\delta=\\mu_{\\mathrm{after}}-\\mu_{\\mathrm{before}}"
+     ],
+     "words": "Each bird is measured under both conditions, so the procedure is the paired t test on the within-bird differences. Deafening produces no change in the mean number of syllables per song bout (the true mean after-minus-before difference is zero). Deafening changes the mean number of syllables per song bout (the true mean after-minus-before difference is not zero)."
+    },
+    {
+     "title": "Form one difference per bird",
+     "general": [
+      "d_i=x1_i-x2_i,\\quad i=1,\\dots,n"
+     ],
+     "work": [
+      "d_i=(32-34,35-41,33-29,31-38,41-45,30-31,37-36,34-40,25-27,24-33,38-39)",
+      "d_i=(-2,-6,4,-7,-4,-1,1,-6,-2,-9,-1),\\quad n=11"
+     ],
+     "words": "Subtract in the same direction for every bird (after minus before). Birds 3 and 7 have differences of the opposite sign and they keep their plus signs while most differences are negative. The analysis now uses only these 11 numbers."
+    },
+    {
+     "title": "Calculate the mean difference",
+     "general": [
+      "\\bar d=\\frac{1}{n}\\sum_{i=1}^{n}d_i"
+     ],
+     "work": [
+      "\\bar d=\\frac{-33}{11}=-3"
+     ],
+     "words": "The mean difference estimates the true mean change \\(\\delta\\) in syllables."
+    },
+    {
+     "title": "Calculate the SD of the differences",
+     "general": [
+      "s_d^2=\\frac{1}{n-1}\\sum_{i=1}^{n}(d_i-\\bar d)^2",
+      "s_d=\\sqrt{s_d^2}"
+     ],
+     "work": [
+      "\\sum(d_i-\\bar d)^2=146",
+      "s_d^2=\\frac{146}{10}=14.6",
+      "s_d=\\sqrt{14.6}=3.82099"
+     ],
+     "words": "Square each deviation of a difference from the mean difference, add them, divide by \\(n-1\\), and take the root."
+    },
+    {
+     "title": "Calculate the standard error of the mean difference",
+     "general": [
+      "s_{\\bar d}=\\frac{s_d}{\\sqrt n}"
+     ],
+     "work": [
+      "s_{\\bar d}=\\frac{3.82099}{\\sqrt{11}}=1.15207"
+     ],
+     "words": "The standard error describes how much the mean difference varies from sample to sample."
+    },
+    {
+     "title": "Calculate the t statistic",
+     "general": [
+      "t=\\frac{\\bar d-\\delta}{s_{\\bar d}}=\\frac{\\bar d}{s_{\\bar d}}\\quad(\\delta=0\\text{ under }H_0)"
+     ],
+     "work": [
+      "t=\\frac{-3}{1.15207}=-2.604"
+     ],
+     "words": "Under the null hypothesis the true mean difference is zero, so the numerator is the mean difference itself."
+    },
+    {
+     "title": "Find the degrees of freedom and the critical value",
+     "general": [
+      "\\nu=n-1",
+      "t_c=t_{0.05}(\\nu)"
+     ],
+     "work": [
+      "\\nu=11-1=10",
+      "t_{0.05}(10)=2.228"
+     ],
+     "words": "Start with \\(\\alpha=0.05\\). Open t_table.pdf, PDF page 1. Use row 10 and the two-tailed 0.05 column. The printed cutoff is 2.228.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "10",
+      "column": "0.05",
+      "value": 2.228,
+      "actualDf": 10,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "|t|>t_\\alpha(\\nu)\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "|t|=2.604>t_{0.05}(10)=2.228",
+      "t_{0.05}(10)=2.228<2.604<t_{0.02}(10)=2.764",
+      "0.02<P<0.05"
+     ],
+     "words": "The statistic exceeds the 0.05 cutoff, so reject the null hypothesis. In row 10 it passes the 0.05 column but not the 0.02 column (2.764), so P < 0.05."
+    }
+   ],
+   "conclusion": "The mean after-minus-before difference is -3 syllables, t = -2.604 with 10 degrees of freedom (absolute value 2.604), beyond the cutoff 2.228. Reject the null hypothesis. There is a difference in the number of syllables per song bout between the two states (P < 0.05). In plain words, the birds sang about three fewer syllables per song bout after they lost their hearing, and this drop is a little larger than chance alone would explain.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "10",
+    "column": "0.05",
+    "value": 2.228,
+    "actualDf": 10,
+    "approximation": false
+   },
+   "values": {
+    "n": 11,
+    "differences": [
+     -2,
+     -6,
+     4,
+     -7,
+     -4,
+     -1,
+     1,
+     -6,
+     -2,
+     -9,
+     -1
+    ],
+    "dbar": -3.0,
+    "sumSqDev": 146.0,
+    "varianceD": 14.6,
+    "sd": 3.82099463490856,
+    "se": 1.152073229995701,
+    "t": -2.6040011362916524,
+    "df": 10,
+    "critical": 2.228,
+    "exactP": 0.026310240455379802,
+    "reject": true
+   },
+   "module": 20,
+   "tolerance": 0.013020005681458263,
+   "answerName": "t statistic",
+   "answer": -2.6040011362916524
+  },
+  {
+   "id": "n20-b-hearing-aid-unpaired",
+   "title": "Speech-in-noise scores with and without a hearing aid, treated as two groups",
+   "topic": "s20unpaired",
+   "context": "In a study looking at speech understanding in background noise, ten listeners with mild hearing loss repeated lists of 50 words that were played in cafeteria noise. Each listener was tested once without a hearing aid and once with a hearing aid, and the number of words repeated correctly was recorded. An analyst overlooked that the same ten listeners were measured in both conditions and treated the two sets of measurements as two independent groups of ten different people. The table gives the sample size, mean and standard deviation (SD) of each set of measurements.",
+   "unit": "words",
+   "table": {
+    "headers": [
+     "Group",
+     "Sample size",
+     "Mean (words)",
+     "SD (words)"
+    ],
+    "rows": [
+     [
+      "With hearing aid",
+      10,
+      30.3,
+      5.12185
+     ],
+     [
+      "Without hearing aid",
+      10,
+      26.5,
+      5.60258
+     ]
+    ]
+   },
+   "tasks": [
+    "Treat the two sets of measurements as independent groups. Based on these summary data, is there evidence that the mean speech-in-noise score is different with and without a hearing aid? Assume that any quantities of interest are Normally distributed. DO NOT use R.",
+    "A paired analysis of the same ten listeners gives t = 5.33854 with 9 degrees of freedom. Please state why the two analyses reach different conclusions and which one fits this design."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\mu_{\\mathrm{with}}=\\mu_{\\mathrm{without}}",
+    "alternative": "H_A:\\mu_{\\mathrm{with}}\\ne\\mu_{\\mathrm{without}}",
+    "nullWords": "Mean speech-in-noise score is the same with and without a hearing aid.",
+    "alternativeWords": "Mean speech-in-noise score differs with and without a hearing aid."
+   },
+   "symbols": "\\(\\bar x_i\\) (group sample mean), \\(s_i\\) (group sample SD), \\(n_i\\) (group size), \\(s^2\\) (pooled variance), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\mu_1=\\mu_2",
+      "H_A:\\mu_1\\ne\\mu_2"
+     ],
+     "work": [
+      "\\mu_1=\\mu_{\\mathrm{with}},\\ \\mu_2=\\mu_{\\mathrm{without}}"
+     ],
+     "words": "The unpaired t test compares two group means as if every number came from a different listener. The null hypothesis states that mean speech-in-noise score is the same with and without a hearing aid."
+    },
+    {
+     "title": "Calculate the group means and SDs",
+     "general": [
+      "\\bar x=\\frac{1}{n}\\sum x_i",
+      "s=\\sqrt{\\frac{\\sum(x_i-\\bar x)^2}{n-1}}"
+     ],
+     "work": [
+      "\\bar x_1=30.3,\\ s_1=5.12185",
+      "\\bar x_2=26.5,\\ s_2=5.60258"
+     ],
+     "words": "These are the values in the table. The SDs are large because the listeners differ a lot from one another in speech-in-noise score."
+    },
+    {
+     "title": "Pool the variances",
+     "general": [
+      "s^2=\\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}"
+     ],
+     "work": [
+      "s^2=\\frac{9(26.2333)+9(31.3889)}{18}=28.8111"
+     ],
+     "words": "Each group variance is weighted by its own degrees of freedom."
+    },
+    {
+     "title": "Calculate the standard error and t",
+     "general": [
+      "t=\\frac{\\bar x_1-\\bar x_2}{\\sqrt{s^2/n_1+s^2/n_2}}"
+     ],
+     "work": [
+      "\\sqrt{\\frac{28.8111}{10}+\\frac{28.8111}{10}}=2.40046",
+      "t=\\frac{30.3-26.5}{2.40046}=1.58303"
+     ],
+     "words": "The numerator is the same 3.8 words as in a paired analysis, but the denominator now carries the spread between listeners."
+    },
+    {
+     "title": "Find the degrees of freedom and the critical value",
+     "general": [
+      "\\nu=n_1+n_2-2",
+      "t_c=t_{0.05}(\\nu)"
+     ],
+     "work": [
+      "\\nu=10+10-2=18",
+      "t_{0.05}(18)=2.101"
+     ],
+     "words": "Start with \\(\\alpha=0.05\\). Open t_table.pdf, PDF page 1. Use row 18 and the two-tailed 0.05 column. The printed cutoff is 2.101.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "18",
+      "column": "0.05",
+      "value": 2.101,
+      "actualDf": 18,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision",
+     "general": [
+      "|t|<t_\\alpha(\\nu)\\Rightarrow\\text{do not reject }H_0"
+     ],
+     "work": [
+      "|t|=1.58303<t_{0.05}(18)=2.101",
+      "t_{0.20}(18)=1.330<1.58303<t_{0.10}(18)=1.734",
+      "0.10<P<0.20"
+     ],
+     "words": "The unpaired test does not reject the null hypothesis (P > 0.05). The paired test on the same numbers gives t = 5.33854 with 9 degrees of freedom and rejects it (P < 0.001). Pairing removes the large differences between listeners and leaves only the change within each listener, so its standard error is 0.711805 instead of 2.40046."
+    }
+   ],
+   "conclusion": "Analyzed as two independent groups, t = 1.58303 with 18 degrees of freedom is below 2.101, so the unpaired test finds no evidence of a difference in speech-in-noise score (P > 0.05). The paired test on the same data finds that there is a difference (P < 0.001). Ignoring the pairing hides the difference because the spread between listeners enters the standard error.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "18",
+    "column": "0.05",
+    "value": 2.101,
+    "actualDf": 18,
+    "approximation": false
+   },
+   "values": {
+    "n1": 10,
+    "n2": 10,
+    "x1": 30.3,
+    "x2": 26.5,
+    "s1": 5.121848624601603,
+    "s2": 5.602578771323871,
+    "pooledVariance": 28.811111111111114,
+    "se": 2.400462918318511,
+    "t": 1.5830279947260526,
+    "df": 18,
+    "critical": 2.101,
+    "exactP": 0.13082667502973871,
+    "reject": false,
+    "raw1": [
+     27,
+     34,
+     24,
+     30,
+     37,
+     23,
+     35,
+     26,
+     36,
+     31
+    ],
+    "raw2": [
+     22,
+     31,
+     18,
+     27,
+     35,
+     24,
+     29,
+     20,
+     33,
+     26
+    ],
+    "pairedT": 5.338539126015656
+   },
+   "module": 20,
+   "tolerance": 0.007915139973630263,
+   "answerName": "t statistic",
+   "answer": 1.5830279947260526
+  },
+  {
+   "id": "n20-b-lever-press-unpaired",
+   "title": "Rat lever presses before and after reward devaluation, treated as two groups",
+   "topic": "s20unpaired",
+   "context": "In a study looking at goal-directed behavior, eleven rats were trained to press a lever for sucrose pellets. Each rat had its lever pressing rate recorded in a 10 minute test before reward devaluation (the pellets were made less attractive by letting the rat eat them freely beforehand) and in a second test after reward devaluation. The rate was recorded in presses per minute (presses/min). An analyst overlooked that the same eleven rats were measured in both conditions and treated the two sets of measurements as two independent groups of eleven different rats. The table gives the sample size, mean and standard deviation (SD) of each set of measurements.",
+   "unit": "presses/min",
+   "table": {
+    "headers": [
+     "Group",
+     "Sample size",
+     "Mean (presses/min)",
+     "SD (presses/min)"
+    ],
+    "rows": [
+     [
+      "Before devaluation",
+      11,
+      51.8182,
+      11.557
+     ],
+     [
+      "After devaluation",
+      11,
+      46.4545,
+      9.12539
+     ]
+    ]
+   },
+   "tasks": [
+    "Treat the two sets of measurements as independent groups. Based on these summary data, is there evidence that the mean lever pressing rate is different before and after reward devaluation? Assume that any quantities of interest are Normally distributed. DO NOT use R.",
+    "A paired analysis of the same eleven rats gives t = 4.77925 with 10 degrees of freedom. Please state why the two analyses reach different conclusions and which one fits this design."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\mu_{\\mathrm{before}}=\\mu_{\\mathrm{after}}",
+    "alternative": "H_A:\\mu_{\\mathrm{before}}\\ne\\mu_{\\mathrm{after}}",
+    "nullWords": "Mean lever pressing rate is the same before and after reward devaluation.",
+    "alternativeWords": "Mean lever pressing rate differs before and after reward devaluation."
+   },
+   "symbols": "\\(\\bar x_i\\) (group sample mean), \\(s_i\\) (group sample SD), \\(n_i\\) (group size), \\(s^2\\) (pooled variance), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\mu_1=\\mu_2",
+      "H_A:\\mu_1\\ne\\mu_2"
+     ],
+     "work": [
+      "\\mu_1=\\mu_{\\mathrm{before}},\\ \\mu_2=\\mu_{\\mathrm{after}}"
+     ],
+     "words": "The unpaired t test compares two group means as if every number came from a different rat. The null hypothesis states that mean lever pressing rate is the same before and after reward devaluation."
+    },
+    {
+     "title": "Calculate the group means and SDs",
+     "general": [
+      "\\bar x=\\frac{1}{n}\\sum x_i",
+      "s=\\sqrt{\\frac{\\sum(x_i-\\bar x)^2}{n-1}}"
+     ],
+     "work": [
+      "\\bar x_1=51.8182,\\ s_1=11.557",
+      "\\bar x_2=46.4545,\\ s_2=9.12539"
+     ],
+     "words": "These are the values in the table. The SDs are large because the rats differ a lot from one another in lever pressing rate."
+    },
+    {
+     "title": "Pool the variances",
+     "general": [
+      "s^2=\\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}"
+     ],
+     "work": [
+      "s^2=\\frac{10(133.564)+10(83.2727)}{20}=108.418"
+     ],
+     "words": "Each group variance is weighted by its own degrees of freedom."
+    },
+    {
+     "title": "Calculate the standard error and t",
+     "general": [
+      "t=\\frac{\\bar x_1-\\bar x_2}{\\sqrt{s^2/n_1+s^2/n_2}}"
+     ],
+     "work": [
+      "\\sqrt{\\frac{108.418}{11}+\\frac{108.418}{11}}=4.43986",
+      "t=\\frac{51.8182-46.4545}{4.43986}=1.20806"
+     ],
+     "words": "The numerator is the same 5.36364 presses/min as in a paired analysis, but the denominator now carries the spread between rats."
+    },
+    {
+     "title": "Find the degrees of freedom and the critical value",
+     "general": [
+      "\\nu=n_1+n_2-2",
+      "t_c=t_{0.05}(\\nu)"
+     ],
+     "work": [
+      "\\nu=11+11-2=20",
+      "t_{0.05}(20)=2.086"
+     ],
+     "words": "Start with \\(\\alpha=0.05\\). Open t_table.pdf, PDF page 1. Use row 20 and the two-tailed 0.05 column. The printed cutoff is 2.086.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "20",
+      "column": "0.05",
+      "value": 2.086,
+      "actualDf": 20,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision",
+     "general": [
+      "|t|<t_\\alpha(\\nu)\\Rightarrow\\text{do not reject }H_0"
+     ],
+     "work": [
+      "|t|=1.20806<t_{0.05}(20)=2.086",
+      "t_{0.50}(20)=0.687<1.20806<t_{0.20}(20)=1.325",
+      "0.20<P<0.50"
+     ],
+     "words": "The unpaired test does not reject the null hypothesis (P > 0.05). The paired test on the same numbers gives t = 4.77925 with 10 degrees of freedom and rejects it (P < 0.001). Pairing removes the large differences between rats and leaves only the change within each rat, so its standard error is 1.12228 instead of 4.43986."
+    }
+   ],
+   "conclusion": "Analyzed as two independent groups, t = 1.20806 with 20 degrees of freedom is below 2.086, so the unpaired test finds no evidence of a difference in lever pressing rate (P > 0.05). The paired test on the same data finds that there is a difference (P < 0.001). Ignoring the pairing hides the difference because the spread between rats enters the standard error.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "20",
+    "column": "0.05",
+    "value": 2.086,
+    "actualDf": 20,
+    "approximation": false
+   },
+   "values": {
+    "n1": 11,
+    "n2": 11,
+    "x1": 51.81818181818182,
+    "x2": 46.45454545454545,
+    "s1": 11.556973494978534,
+    "s2": 9.125389157330622,
+    "pooledVariance": 108.41818181818181,
+    "se": 4.43986449052388,
+    "t": 1.2080630782953212,
+    "df": 20,
+    "critical": 2.086,
+    "exactP": 0.24111435139381907,
+    "reject": false,
+    "raw1": [
+     48,
+     62,
+     35,
+     55,
+     41,
+     70,
+     52,
+     38,
+     66,
+     45,
+     58
+    ],
+    "raw2": [
+     41,
+     57,
+     33,
+     46,
+     38,
+     61,
+     50,
+     40,
+     57,
+     39,
+     49
+    ],
+    "pairedT": 4.779247571436467
+   },
+   "module": 20,
+   "tolerance": 0.0060403153914766064,
+   "answerName": "t statistic",
+   "answer": 1.2080630782953212
+  },
+  {
+   "id": "n20-b-exercise-mood-r",
+   "title": "Positive mood before and after exercise, by hand and in R",
+   "topic": "s20pairedR",
+   "context": "Researchers interested in the short-term effect of exercise on mood did a study to evaluate positive affect (how strongly a person reports feelings such as interest, energy and enthusiasm). Each subject was evaluated with a positive affect questionnaire scored from 10 to 50 points while resting before exercise (measurement 1) and again 10 minutes after 30 minutes of moderate cycling (measurement 2).",
+   "unit": "points",
+   "table": {
+    "headers": [
+     "Subject",
+     "Before exercise (points)",
+     "After exercise (points)"
+    ],
+    "rows": [
+     [
+      1,
+      28,
+      33
+     ],
+     [
+      2,
+      31,
+      34
+     ],
+     [
+      3,
+      24,
+      23
+     ],
+     [
+      4,
+      35,
+      39
+     ],
+     [
+      5,
+      27,
+      31
+     ],
+     [
+      6,
+      30,
+      36
+     ],
+     [
+      7,
+      22,
+      27
+     ],
+     [
+      8,
+      33,
+      32
+     ],
+     [
+      9,
+      26,
+      30
+     ],
+     [
+      10,
+      29,
+      35
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) Based on the recorded data, is there evidence that the positive affect score is different in these two states? Assume that any quantities of interest are Normally distributed. DO NOT use R.",
+    "(ii) Answer the question in Part (i) using the R function for the test you did in Part (i). Show your R code and the output. Mark each of the lines of the output that correspond to sections of your \"by hand\" calculations and answers in Part (i)."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\delta=0",
+    "alternative": "H_A:\\delta\\ne0",
+    "nullWords": "A session of moderate cycling produces no change in the mean positive affect score (the true mean after-minus-before difference is zero).",
+    "alternativeWords": "A session of moderate cycling changes the mean positive affect score (the true mean after-minus-before difference is not zero)."
+   },
+   "symbols": "\\(d_i\\) (difference in subject \\(i\\)), \\(\\bar d\\) (mean difference), \\(s_d\\) (SD of the differences), \\(s_{\\bar d}\\) (standard error of the mean difference), \\(\\delta\\) (true mean difference), \\(n\\) (number of subjects), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\delta=0",
+      "H_A:\\delta\\ne0"
+     ],
+     "work": [
+      "\\delta=\\mu_{\\mathrm{after}}-\\mu_{\\mathrm{before}}"
+     ],
+     "words": "Each subject is measured under both conditions, so the procedure is the paired t test on the within-subject differences. A session of moderate cycling produces no change in the mean positive affect score (the true mean after-minus-before difference is zero). A session of moderate cycling changes the mean positive affect score (the true mean after-minus-before difference is not zero)."
+    },
+    {
+     "title": "Form one difference per subject",
+     "general": [
+      "d_i=x1_i-x2_i,\\quad i=1,\\dots,n"
+     ],
+     "work": [
+      "d_i=(33-28,34-31,23-24,39-35,31-27,36-30,27-22,32-33,30-26,35-29)",
+      "d_i=(5,3,-1,4,4,6,5,-1,4,6),\\quad n=10"
+     ],
+     "words": "Subtract in the same direction for every subject (after minus before). Subjects 3 and 8 have differences of the opposite sign and they keep their minus signs. The analysis now uses only these 10 numbers."
+    },
+    {
+     "title": "Calculate the mean difference",
+     "general": [
+      "\\bar d=\\frac{1}{n}\\sum_{i=1}^{n}d_i"
+     ],
+     "work": [
+      "\\bar d=\\frac{35}{10}=3.5"
+     ],
+     "words": "The mean difference estimates the true mean change \\(\\delta\\) in points."
+    },
+    {
+     "title": "Calculate the SD of the differences",
+     "general": [
+      "s_d^2=\\frac{1}{n-1}\\sum_{i=1}^{n}(d_i-\\bar d)^2",
+      "s_d=\\sqrt{s_d^2}"
+     ],
+     "work": [
+      "\\sum(d_i-\\bar d)^2=58.5",
+      "s_d^2=\\frac{58.5}{9}=6.5",
+      "s_d=\\sqrt{6.5}=2.54951"
+     ],
+     "words": "Square each deviation of a difference from the mean difference, add them, divide by \\(n-1\\), and take the root."
+    },
+    {
+     "title": "Calculate the standard error of the mean difference",
+     "general": [
+      "s_{\\bar d}=\\frac{s_d}{\\sqrt n}"
+     ],
+     "work": [
+      "s_{\\bar d}=\\frac{2.54951}{\\sqrt{10}}=0.806226"
+     ],
+     "words": "The standard error describes how much the mean difference varies from sample to sample."
+    },
+    {
+     "title": "Calculate the t statistic",
+     "general": [
+      "t=\\frac{\\bar d-\\delta}{s_{\\bar d}}=\\frac{\\bar d}{s_{\\bar d}}\\quad(\\delta=0\\text{ under }H_0)"
+     ],
+     "work": [
+      "t=\\frac{3.5}{0.806226}=4.34122"
+     ],
+     "words": "Under the null hypothesis the true mean difference is zero, so the numerator is the mean difference itself."
+    },
+    {
+     "title": "Find the degrees of freedom and the critical value",
+     "general": [
+      "\\nu=n-1",
+      "t_c=t_{0.05}(\\nu)"
+     ],
+     "work": [
+      "\\nu=10-1=9",
+      "t_{0.05}(9)=2.262"
+     ],
+     "words": "Start with \\(\\alpha=0.05\\). Open t_table.pdf, PDF page 1. Use row 9 and the two-tailed 0.05 column. The printed cutoff is 2.262.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "9",
+      "column": "0.05",
+      "value": 2.262,
+      "actualDf": 9,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "|t|>t_\\alpha(\\nu)\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "|t|=4.34122>t_{0.05}(9)=2.262",
+      "t_{0.002}(9)=4.297<4.34122<t_{0.001}(9)=4.781",
+      "0.001<P<0.002"
+     ],
+     "words": "The statistic exceeds the 0.05 cutoff, so reject the null hypothesis. In row 9 it also passes the 0.002 column (4.297) but not the 0.001 column (4.781), so P < 0.002."
+    },
+    {
+     "title": "Run the same test in R",
+     "general": [
+      "\\texttt{t.test(x1, x2, paired = TRUE)}"
+     ],
+     "work": [
+      "\\texttt{before <- c(28,31,24,35,27,30,22,33,26,29)}",
+      "\\texttt{after <- c(33,34,23,39,31,36,27,32,30,35)}",
+      "\\texttt{t.test(after, before, paired = TRUE)}"
+     ],
+     "words": "List after first and before second so R subtracts after minus before, the same direction as the hand calculation. The output (R 4.6.1) is headed Paired t-test and names the data as after and before. It reports t = 4.3412, df = 9 and p-value = 0.001874. It states the alternative hypothesis that the true mean difference is not equal to 0. It gives a 95 percent confidence interval from 1.676191 to 5.323809 and the sample estimate mean difference 3.5."
+    },
+    {
+     "title": "Mark each R line against the hand calculation",
+     "general": [
+      "t=\\bar d/s_{\\bar d},\\ \\nu=n-1",
+      "\\bar d\\pm t_{0.05}(\\nu)\\,s_{\\bar d}"
+     ],
+     "work": [
+      "\\text{Paired t-test}\\leftrightarrow\\text{procedure (paired t test)}",
+      "\\text{alternative: true mean difference}\\ne0\\leftrightarrow H_A:\\delta\\ne0",
+      "\\text{t = 4.3412}\\leftrightarrow t=4.34122",
+      "\\text{df = 9}\\leftrightarrow \\nu=n-1=9",
+      "\\text{p-value = 0.001874}\\leftrightarrow 0.001<P<0.002",
+      "\\text{mean difference 3.5}\\leftrightarrow\\bar d=3.5",
+      "\\text{95\\% CI 1.676191 to 5.323809}\\leftrightarrow 3.5\\pm2.262(0.806226)=[1.67632,5.32368]"
+     ],
+     "words": "R does not print \\(s_d\\) or \\(s_{\\bar d}\\) because they are inside t. R reports an exact P value instead of a table bracket, and the exact value lies inside the hand bracket. Its interval uses the exact quantile 2.262157 rather than the printed 2.262, so the hand interval differs only in the fourth decimal. The interval does not contain 0, which matches rejecting the null hypothesis."
+    }
+   ],
+   "conclusion": "The mean after-minus-before difference is 3.5 points, t = 4.34122 with 9 degrees of freedom, beyond the cutoff 2.262. Reject the null hypothesis. There is a difference in the positive affect score between the two states (P < 0.002 and R gives P = 0.001874).",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "9",
+    "column": "0.05",
+    "value": 2.262,
+    "actualDf": 9,
+    "approximation": false
+   },
+   "values": {
+    "n": 10,
+    "differences": [
+     5,
+     3,
+     -1,
+     4,
+     4,
+     6,
+     5,
+     -1,
+     4,
+     6
+    ],
+    "dbar": 3.5,
+    "sumSqDev": 58.5,
+    "varianceD": 6.5,
+    "sd": 2.5495097567963922,
+    "se": 0.8062257748298549,
+    "t": 4.341215710622296,
+    "df": 9,
+    "critical": 2.262,
+    "exactP": 0.0018741341638385308,
+    "reject": true,
+    "ciLowerPrinted": 1.6763172973348681,
+    "ciUpperPrinted": 5.323682702665132,
+    "ciLowerR": 1.676190588636111,
+    "ciUpperR": 5.323809411363889,
+    "rOutput": [
+     "Paired t-test",
+     "data:  after and before",
+     "t = 4.3412, df = 9, p-value = 0.001874",
+     "alternative hypothesis: true mean difference is not equal to 0",
+     "95 percent confidence interval:",
+     " 1.676191 5.323809",
+     "sample estimates:",
+     "mean difference ",
+     "            3.5 "
+    ],
+    "rCode": "t.test(after, before, paired = TRUE)"
+   },
+   "module": 20,
+   "tolerance": 0.02170607855311148,
+   "answerName": "t statistic",
+   "answer": 4.341215710622296
+  },
+  {
+   "id": "n20-b-pigeon-schedules-rmanova",
+   "title": "Pigeon key pecking under three reinforcement schedules",
+   "topic": "s20rmanova",
+   "context": "In a study looking at whether the rule for delivering food changes responding, five pigeons were each tested under three reinforcement schedules (rules that decide which key pecks are followed by grain). The schedules were fixed interval (FI), variable interval (VI) and variable ratio (VR), given in a random order on separate days. The key pecking rate was recorded in pecks per minute (pecks/min).",
+   "unit": "pecks/min",
+   "table": {
+    "headers": [
+     "Pigeon",
+     "Fixed interval (pecks/min)",
+     "Variable interval (pecks/min)",
+     "Variable ratio (pecks/min)"
+    ],
+    "rows": [
+     [
+      1,
+      42,
+      50,
+      71
+     ],
+     [
+      2,
+      55,
+      57,
+      70
+     ],
+     [
+      3,
+      38,
+      49,
+      58
+     ],
+     [
+      4,
+      61,
+      60,
+      82
+     ],
+     [
+      5,
+      47,
+      58,
+      66
+     ]
+    ]
+   },
+   "tasks": [
+    "Is there a difference in key pecking rate among the three reinforcement schedules? Use a significance level of \\(\\alpha = 0.05\\) for your inference. (Note: If a difference exists, do not identify which groups are different.)",
+    "Assume that any quantities of interest are Normally distributed. DO NOT use R."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\mu_1=\\dots=\\mu_m",
+    "alternative": "H_A:\\text{at least one treatment mean differs}",
+    "nullWords": "Mean key pecking rate is the same under all three reinforcement schedules.",
+    "alternativeWords": "At least one reinforcement schedule has a different mean key pecking rate."
+   },
+   "symbols": "\\(x_{ts}\\) (response to treatment \\(t\\) in subject \\(s\\)), \\(\\bar S_s\\) (subject mean), \\(\\bar T_t\\) (treatment mean), \\(\\bar X\\) (grand mean), \\(m\\) (number of treatments), \\(n\\) (number of subjects), \\(SS\\) (sum of squares), \\(MS\\) (mean square), \\(F\\) (F statistic).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\mu_1=\\mu_2=\\dots=\\mu_m",
+      "H_A:\\text{not all treatment means are equal}"
+     ],
+     "work": [
+      "\\mu_{\\mathrm{FI}}=\\mu_{\\mathrm{VI}}=\\mu_{\\mathrm{VR}}"
+     ],
+     "words": "Every pigeon receives every treatment, so the procedure is repeated measures ANOVA. The null hypothesis is that mean key pecking rate is the same under all three reinforcement schedules. The alternative is that at least one reinforcement schedule has a different mean."
+    },
+    {
+     "title": "Calculate the subject means",
+     "general": [
+      "\\bar S_s=\\frac{1}{m}\\sum_{t=1}^{m}x_{ts}"
+     ],
+     "work": [
+      "\\bar S=(54.3333,\\ 60.6667,\\ 48.3333,\\ 67.6667,\\ 57)"
+     ],
+     "words": "Average across the 3 treatments within each pigeon."
+    },
+    {
+     "title": "Calculate the treatment means and the grand mean",
+     "general": [
+      "\\bar T_t=\\frac{1}{n}\\sum_{s=1}^{n}x_{ts}",
+      "\\bar X=\\frac{1}{mn}\\sum_t\\sum_s x_{ts}"
+     ],
+     "work": [
+      "\\bar T=(48.6,\\ 54.8,\\ 69.4)",
+      "\\bar X=\\frac{864}{15}=57.6"
+     ],
+     "words": "Average down each treatment column across the 5 pigeons, then average all 15 observations."
+    },
+    {
+     "title": "Calculate the sum of squares within subjects",
+     "general": [
+      "SS_{wit\\,subjs}=\\sum_{s=1}^{n}\\sum_{t=1}^{m}(x_{ts}-\\bar S_s)^2=\\sum_s SS_s",
+      "DF_{wit\\,subjs}=n(m-1)"
+     ],
+     "work": [
+      "SS_s=(448.667,\\ 132.667,\\ 200.667,\\ 308.667,\\ 182)",
+      "SS_{wit\\,subjs}=1272.67",
+      "DF_{wit\\,subjs}=5(3-1)=10"
+     ],
+     "words": "The spread of each pigeon around its own mean is added up. Differences between pigeons (SS between subjects = 622.933) are set aside."
+    },
+    {
+     "title": "Calculate the treatment sum of squares",
+     "general": [
+      "SS_{treat}=n\\sum_{t=1}^{m}(\\bar T_t-\\bar X)^2",
+      "DF_{treat}=m-1"
+     ],
+     "work": [
+      "SS_{treat}=5[(48.6-57.6)^2+(54.8-57.6)^2+(69.4-57.6)^2]=1140.4",
+      "DF_{treat}=3-1=2"
+     ],
+     "words": "The factor n appears because each treatment mean is based on n pigeons."
+    },
+    {
+     "title": "Calculate the residual sum of squares",
+     "general": [
+      "SS_{res}=SS_{wit\\,subjs}-SS_{treat}",
+      "DF_{res}=(n-1)(m-1)"
+     ],
+     "work": [
+      "SS_{res}=1272.67-1140.4=132.267",
+      "DF_{res}=(5-1)(3-1)=8"
+     ],
+     "words": "What remains of the within-subject variation after the treatment effect is removed is the residual."
+    },
+    {
+     "title": "Calculate the mean squares and F",
+     "general": [
+      "F=\\frac{SS_{treat}/DF_{treat}}{SS_{res}/DF_{res}}=\\frac{MS_{treat}}{MS_{res}}"
+     ],
+     "work": [
+      "MS_{treat}=\\frac{1140.4}{2}=570.2",
+      "MS_{res}=\\frac{132.267}{8}=16.5333",
+      "F=\\frac{570.2}{16.5333}=34.4879"
+     ],
+     "words": "A large F means the treatment means differ more than the leftover within-subject noise would explain."
+    },
+    {
+     "title": "Find the critical F",
+     "general": [
+      "F_{crit}=F_\\alpha(DF_{treat},DF_{res})=F_\\alpha(\\nu_n,\\nu_d)"
+     ],
+     "work": [
+      "F_{0.05}(2,8)=4.46"
+     ],
+     "words": "Open F_table.pdf, PDF page 1. Use numerator column \\(\\nu_n=2\\) and denominator row \\(\\nu_d=8\\). The lightface (P < .05) value is 4.46. The boldface (P < .01) value is 8.65.",
+     "classTable": {
+      "path": "sources/tables/F_table.pdf",
+      "page": 1,
+      "row": "8",
+      "column": "2 (lightface, P<.05)",
+      "value": 4.46,
+      "actualDf": [
+       2,
+       8
+      ],
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "F>F_{crit}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "F=34.4879>4.46",
+      "F=34.4879>8.65\\ (P<0.01)"
+     ],
+     "words": "F exceeds the lightface 0.05 value, so reject the null hypothesis. It also exceeds the boldface 0.01 value, so P < 0.01."
+    }
+   ],
+   "conclusion": "F = 34.4879 with 2 and 8 degrees of freedom exceeds 4.46 and also the boldface 8.65. Reject the null hypothesis. There is a difference in mean key pecking rate among the three reinforcement schedules (P < 0.01).",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/F_table.pdf",
+    "page": 1,
+    "row": "8",
+    "column": "2 (lightface, P<.05)",
+    "value": 4.46,
+    "actualDf": [
+     2,
+     8
+    ],
+    "approximation": false
+   },
+   "values": {
+    "n": 5,
+    "m": 3,
+    "subjectMeans": [
+     54.333333333333336,
+     60.666666666666664,
+     48.333333333333336,
+     67.66666666666667,
+     57.0
+    ],
+    "treatmentMeans": [
+     48.6,
+     54.8,
+     69.4
+    ],
+    "grandMean": 57.6,
+    "SStotal": 1895.6,
+    "SSbetweenSubjects": 622.9333333333334,
+    "SSwithinSubjects": 1272.6666666666667,
+    "SStreat": 1140.4000000000005,
+    "SSres": 132.2666666666662,
+    "DFtreat": 2,
+    "DFres": 8,
+    "MStreat": 570.2000000000003,
+    "MSres": 16.533333333333275,
+    "F": 34.48790322580659,
+    "critical05": 4.46,
+    "critical01": 8.65,
+    "exactP": 0.00011666563728025905,
+    "reject": true
+   },
+   "module": 20,
+   "tolerance": 0.17243951612903297,
+   "answerName": "F statistic",
+   "answer": 34.48790322580659
+  },
+  {
+   "id": "n20-b-vot-speaking-rate-rmanova",
+   "title": "Voice onset time at three speaking rates",
+   "topic": "s20rmanova",
+   "context": "In a study looking at speech timing, six adult speakers each read the same list of words beginning with the sound p at three speaking rates set by a metronome. Voice onset time (VOT, the delay between the release of the lips and the start of vocal fold vibration) was measured from the recordings in milliseconds (ms) and averaged over the list. The order of the three rates was randomized for each speaker.",
+   "unit": "ms",
+   "table": {
+    "headers": [
+     "Speaker",
+     "Slow rate VOT (ms)",
+     "Normal rate VOT (ms)",
+     "Fast rate VOT (ms)"
+    ],
+    "rows": [
+     [
+      1,
+      68,
+      61,
+      63
+     ],
+     [
+      2,
+      55,
+      58,
+      49
+     ],
+     [
+      3,
+      72,
+      66,
+      70
+     ],
+     [
+      4,
+      60,
+      52,
+      57
+     ],
+     [
+      5,
+      49,
+      55,
+      51
+     ],
+     [
+      6,
+      64,
+      60,
+      58
+     ]
+    ]
+   },
+   "tasks": [
+    "Is there a difference in voice onset time among the three speaking rates? Use a significance level of \\(\\alpha = 0.05\\) for your inference. (Note: If a difference exists, do not identify which groups are different.)",
+    "Assume that any quantities of interest are Normally distributed. DO NOT use R."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\mu_1=\\dots=\\mu_m",
+    "alternative": "H_A:\\text{at least one treatment mean differs}",
+    "nullWords": "Mean voice onset time is the same at all three speaking rates.",
+    "alternativeWords": "At least one speaking rate has a different mean voice onset time."
+   },
+   "symbols": "\\(x_{ts}\\) (response to treatment \\(t\\) in subject \\(s\\)), \\(\\bar S_s\\) (subject mean), \\(\\bar T_t\\) (treatment mean), \\(\\bar X\\) (grand mean), \\(m\\) (number of treatments), \\(n\\) (number of subjects), \\(SS\\) (sum of squares), \\(MS\\) (mean square), \\(F\\) (F statistic).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\mu_1=\\mu_2=\\dots=\\mu_m",
+      "H_A:\\text{not all treatment means are equal}"
+     ],
+     "work": [
+      "\\mu_{\\mathrm{slow}}=\\mu_{\\mathrm{normal}}=\\mu_{\\mathrm{fast}}"
+     ],
+     "words": "Every speaker receives every treatment, so the procedure is repeated measures ANOVA. The null hypothesis is that mean voice onset time is the same at all three speaking rates. The alternative is that at least one speaking rate has a different mean."
+    },
+    {
+     "title": "Calculate the subject means",
+     "general": [
+      "\\bar S_s=\\frac{1}{m}\\sum_{t=1}^{m}x_{ts}"
+     ],
+     "work": [
+      "\\bar S=(64,\\ 54,\\ 69.3333,\\ 56.3333,\\ 51.6667,\\ 60.6667)"
+     ],
+     "words": "Average across the 3 treatments within each speaker."
+    },
+    {
+     "title": "Calculate the treatment means and the grand mean",
+     "general": [
+      "\\bar T_t=\\frac{1}{n}\\sum_{s=1}^{n}x_{ts}",
+      "\\bar X=\\frac{1}{mn}\\sum_t\\sum_s x_{ts}"
+     ],
+     "work": [
+      "\\bar T=(61.3333,\\ 58.6667,\\ 58)",
+      "\\bar X=\\frac{1068}{18}=59.3333"
+     ],
+     "words": "Average down each treatment column across the 6 speakers, then average all 18 observations."
+    },
+    {
+     "title": "Calculate the sum of squares within subjects",
+     "general": [
+      "SS_{wit\\,subjs}=\\sum_{s=1}^{n}\\sum_{t=1}^{m}(x_{ts}-\\bar S_s)^2=\\sum_s SS_s",
+      "DF_{wit\\,subjs}=n(m-1)"
+     ],
+     "work": [
+      "SS_s=(26,\\ 42,\\ 18.6667,\\ 32.6667,\\ 18.6667,\\ 18.6667)",
+      "SS_{wit\\,subjs}=156.667",
+      "DF_{wit\\,subjs}=6(3-1)=12"
+     ],
+     "words": "The spread of each speaker around its own mean is added up. Differences between speakers (SS between subjects = 659.333) are set aside."
+    },
+    {
+     "title": "Calculate the treatment sum of squares",
+     "general": [
+      "SS_{treat}=n\\sum_{t=1}^{m}(\\bar T_t-\\bar X)^2",
+      "DF_{treat}=m-1"
+     ],
+     "work": [
+      "SS_{treat}=6[(61.3333-59.3333)^2+(58.6667-59.3333)^2+(58-59.3333)^2]=37.3333",
+      "DF_{treat}=3-1=2"
+     ],
+     "words": "The factor n appears because each treatment mean is based on n speakers."
+    },
+    {
+     "title": "Calculate the residual sum of squares",
+     "general": [
+      "SS_{res}=SS_{wit\\,subjs}-SS_{treat}",
+      "DF_{res}=(n-1)(m-1)"
+     ],
+     "work": [
+      "SS_{res}=156.667-37.3333=119.333",
+      "DF_{res}=(6-1)(3-1)=10"
+     ],
+     "words": "What remains of the within-subject variation after the treatment effect is removed is the residual."
+    },
+    {
+     "title": "Calculate the mean squares and F",
+     "general": [
+      "F=\\frac{SS_{treat}/DF_{treat}}{SS_{res}/DF_{res}}=\\frac{MS_{treat}}{MS_{res}}"
+     ],
+     "work": [
+      "MS_{treat}=\\frac{37.3333}{2}=18.6667",
+      "MS_{res}=\\frac{119.333}{10}=11.9333",
+      "F=\\frac{18.6667}{11.9333}=1.56425"
+     ],
+     "words": "A large F means the treatment means differ more than the leftover within-subject noise would explain."
+    },
+    {
+     "title": "Find the critical F",
+     "general": [
+      "F_{crit}=F_\\alpha(DF_{treat},DF_{res})=F_\\alpha(\\nu_n,\\nu_d)"
+     ],
+     "work": [
+      "F_{0.05}(2,10)=4.10"
+     ],
+     "words": "Open F_table.pdf, PDF page 1. Use numerator column \\(\\nu_n=2\\) and denominator row \\(\\nu_d=10\\). The lightface (P < .05) value is 4.10. The boldface (P < .01) value is 7.56.",
+     "classTable": {
+      "path": "sources/tables/F_table.pdf",
+      "page": 1,
+      "row": "10",
+      "column": "2 (lightface, P<.05)",
+      "value": 4.1,
+      "actualDf": [
+       2,
+       10
+      ],
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "F<F_{crit}\\Rightarrow\\text{do not reject }H_0"
+     ],
+     "work": [
+      "F=1.56425<4.10",
+      "P>0.05"
+     ],
+     "words": "F is below the lightface 0.05 value, so the null hypothesis is not rejected (P > 0.05). No P range beyond this is needed for a non-rejection."
+    }
+   ],
+   "conclusion": "F = 1.56425 with 2 and 10 degrees of freedom is below 4.10. Do not reject the null hypothesis. These data give no evidence of a difference in mean voice onset time among the three speaking rates (P > 0.05).",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/F_table.pdf",
+    "page": 1,
+    "row": "10",
+    "column": "2 (lightface, P<.05)",
+    "value": 4.1,
+    "actualDf": [
+     2,
+     10
+    ],
+    "approximation": false
+   },
+   "values": {
+    "n": 6,
+    "m": 3,
+    "subjectMeans": [
+     64.0,
+     54.0,
+     69.33333333333333,
+     56.333333333333336,
+     51.666666666666664,
+     60.666666666666664
+    ],
+    "treatmentMeans": [
+     61.333333333333336,
+     58.666666666666664,
+     58.0
+    ],
+    "grandMean": 59.333333333333336,
+    "SStotal": 816.0,
+    "SSbetweenSubjects": 659.3333333333331,
+    "SSwithinSubjects": 156.66666666666669,
+    "SStreat": 37.33333333333341,
+    "SSres": 119.33333333333329,
+    "DFtreat": 2,
+    "DFres": 10,
+    "MStreat": 18.666666666666703,
+    "MSres": 11.933333333333328,
+    "F": 1.5642458100558696,
+    "critical05": 4.1,
+    "critical01": 7.56,
+    "exactP": 0.25640461842572326,
+    "reject": false
+   },
+   "module": 20,
+   "tolerance": 0.007821229050279347,
+   "answerName": "F statistic",
+   "answer": 1.5642458100558696
+  },
+  {
+   "id": "n20-b-stroop-sleep-loss-rmanova",
+   "title": "Stroop interference over 24 hours without sleep",
+   "topic": "s20rmanova",
+   "context": "In a study looking at attention during sleep loss, four volunteers stayed awake in the laboratory and completed a Stroop task (naming the ink color of a color word) after 0, 12 and 24 hours awake. Stroop interference (mean reaction time on trials where the word and the ink color conflict minus mean reaction time on trials where they match) was recorded in milliseconds (ms).",
+   "unit": "ms",
+   "table": {
+    "headers": [
+     "Subject",
+     "0 hours awake (ms)",
+     "12 hours awake (ms)",
+     "24 hours awake (ms)"
+    ],
+    "rows": [
+     [
+      1,
+      85,
+      97,
+      104
+     ],
+     [
+      2,
+      110,
+      104,
+      125
+     ],
+     [
+      3,
+      70,
+      88,
+      84
+     ],
+     [
+      4,
+      96,
+      91,
+      112
+     ]
+    ]
+   },
+   "tasks": [
+    "Is there a difference in Stroop interference over time? Use a significance level of \\(\\alpha = 0.05\\) for your inference. (Note: If a difference exists, do not identify which groups are different.)",
+    "Assume that any quantities of interest are Normally distributed. DO NOT use R."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\mu_1=\\dots=\\mu_m",
+    "alternative": "H_A:\\text{at least one treatment mean differs}",
+    "nullWords": "Mean Stroop interference is the same at all three times awake.",
+    "alternativeWords": "At least one time awake has a different mean Stroop interference."
+   },
+   "symbols": "\\(x_{ts}\\) (response to treatment \\(t\\) in subject \\(s\\)), \\(\\bar S_s\\) (subject mean), \\(\\bar T_t\\) (treatment mean), \\(\\bar X\\) (grand mean), \\(m\\) (number of treatments), \\(n\\) (number of subjects), \\(SS\\) (sum of squares), \\(MS\\) (mean square), \\(F\\) (F statistic).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\mu_1=\\mu_2=\\dots=\\mu_m",
+      "H_A:\\text{not all treatment means are equal}"
+     ],
+     "work": [
+      "\\mu_{\\mathrm{0\\,h}}=\\mu_{\\mathrm{12\\,h}}=\\mu_{\\mathrm{24\\,h}}"
+     ],
+     "words": "Every subject receives every treatment, so the procedure is repeated measures ANOVA. The null hypothesis is that mean Stroop interference is the same at all three times awake. The alternative is that at least one time awake has a different mean."
+    },
+    {
+     "title": "Calculate the subject means",
+     "general": [
+      "\\bar S_s=\\frac{1}{m}\\sum_{t=1}^{m}x_{ts}"
+     ],
+     "work": [
+      "\\bar S=(95.3333,\\ 113,\\ 80.6667,\\ 99.6667)"
+     ],
+     "words": "Average across the 3 treatments within each subject."
+    },
+    {
+     "title": "Calculate the treatment means and the grand mean",
+     "general": [
+      "\\bar T_t=\\frac{1}{n}\\sum_{s=1}^{n}x_{ts}",
+      "\\bar X=\\frac{1}{mn}\\sum_t\\sum_s x_{ts}"
+     ],
+     "work": [
+      "\\bar T=(90.25,\\ 95,\\ 106.25)",
+      "\\bar X=\\frac{1166}{12}=97.1667"
+     ],
+     "words": "Average down each treatment column across the 4 subjects, then average all 12 observations."
+    },
+    {
+     "title": "Calculate the sum of squares within subjects",
+     "general": [
+      "SS_{wit\\,subjs}=\\sum_{s=1}^{n}\\sum_{t=1}^{m}(x_{ts}-\\bar S_s)^2=\\sum_s SS_s",
+      "DF_{wit\\,subjs}=n(m-1)"
+     ],
+     "work": [
+      "SS_s=(184.667,\\ 234,\\ 178.667,\\ 240.667)",
+      "SS_{wit\\,subjs}=838",
+      "DF_{wit\\,subjs}=4(3-1)=8"
+     ],
+     "words": "The spread of each subject around its own mean is added up. Differences between subjects (SS between subjects = 1597.67) are set aside."
+    },
+    {
+     "title": "Calculate the treatment sum of squares",
+     "general": [
+      "SS_{treat}=n\\sum_{t=1}^{m}(\\bar T_t-\\bar X)^2",
+      "DF_{treat}=m-1"
+     ],
+     "work": [
+      "SS_{treat}=4[(90.25-97.1667)^2+(95-97.1667)^2+(106.25-97.1667)^2]=540.167",
+      "DF_{treat}=3-1=2"
+     ],
+     "words": "The factor n appears because each treatment mean is based on n subjects."
+    },
+    {
+     "title": "Calculate the residual sum of squares",
+     "general": [
+      "SS_{res}=SS_{wit\\,subjs}-SS_{treat}",
+      "DF_{res}=(n-1)(m-1)"
+     ],
+     "work": [
+      "SS_{res}=838-540.167=297.833",
+      "DF_{res}=(4-1)(3-1)=6"
+     ],
+     "words": "What remains of the within-subject variation after the treatment effect is removed is the residual."
+    },
+    {
+     "title": "Calculate the mean squares and F",
+     "general": [
+      "F=\\frac{SS_{treat}/DF_{treat}}{SS_{res}/DF_{res}}=\\frac{MS_{treat}}{MS_{res}}"
+     ],
+     "work": [
+      "MS_{treat}=\\frac{540.167}{2}=270.083",
+      "MS_{res}=\\frac{297.833}{6}=49.6389",
+      "F=\\frac{270.083}{49.6389}=5.44096"
+     ],
+     "words": "A large F means the treatment means differ more than the leftover within-subject noise would explain."
+    },
+    {
+     "title": "Find the critical F",
+     "general": [
+      "F_{crit}=F_\\alpha(DF_{treat},DF_{res})=F_\\alpha(\\nu_n,\\nu_d)"
+     ],
+     "work": [
+      "F_{0.05}(2,6)=5.14"
+     ],
+     "words": "Open F_table.pdf, PDF page 1. Use numerator column \\(\\nu_n=2\\) and denominator row \\(\\nu_d=6\\). The lightface (P < .05) value is 5.14. The boldface (P < .01) value is 10.92.",
+     "classTable": {
+      "path": "sources/tables/F_table.pdf",
+      "page": 1,
+      "row": "6",
+      "column": "2 (lightface, P<.05)",
+      "value": 5.14,
+      "actualDf": [
+       2,
+       6
+      ],
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "F>F_{crit}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "F=5.44096>5.14",
+      "F=5.44096<10.92\\ (0.01<P<0.05)"
+     ],
+     "words": "F exceeds the lightface 0.05 value, so reject the null hypothesis. It does not reach the boldface 0.01 value, so P < 0.05 but not P < 0.01. The result is close to the cutoff."
+    }
+   ],
+   "conclusion": "F = 5.44096 with 2 and 6 degrees of freedom exceeds 5.14 but not the boldface 10.92. Reject the null hypothesis. There is a difference in mean Stroop interference among the three times awake (P < 0.05).",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/F_table.pdf",
+    "page": 1,
+    "row": "6",
+    "column": "2 (lightface, P<.05)",
+    "value": 5.14,
+    "actualDf": [
+     2,
+     6
+    ],
+    "approximation": false
+   },
+   "values": {
+    "n": 4,
+    "m": 3,
+    "subjectMeans": [
+     95.33333333333333,
+     113.0,
+     80.66666666666667,
+     99.66666666666667
+    ],
+    "treatmentMeans": [
+     90.25,
+     95.0,
+     106.25
+    ],
+    "grandMean": 97.16666666666667,
+    "SStotal": 2435.6666666666665,
+    "SSbetweenSubjects": 1597.6666666666663,
+    "SSwithinSubjects": 838.0,
+    "SStreat": 540.1666666666666,
+    "SSres": 297.83333333333337,
+    "DFtreat": 2,
+    "DFres": 6,
+    "MStreat": 270.0833333333333,
+    "MSres": 49.63888888888889,
+    "F": 5.440962506994963,
+    "critical05": 5.14,
+    "critical01": 10.92,
+    "exactP": 0.04489395330131481,
+    "reject": true
+   },
+   "module": 20,
+   "tolerance": 0.027204812534974816,
+   "answerName": "F statistic",
+   "answer": 5.440962506994963
+  }
+ ],
+ "questions": [
+  {
+   "id": "m2-n20-qb01",
+   "module": 20,
+   "topic": "s20paired",
+   "stem": "For the radial maze errors of ten rats before and after a hippocampal lesion, what is the SD of the after-minus-before differences \\(s_d\\)?",
+   "options": [
+    "\\(2.06155\\) errors",
+    "\\(4.72222\\) errors",
+    "\\(2.17307\\) errors",
+    "\\(0.687184\\) errors"
+   ],
+   "correct": 2,
+   "why": "The squared deviations sum to 42.5. Dividing by n − 1 = 9 gives 4.72222 and its root is 2.17307. Dividing by n, skipping the root, or dividing again by the root of n gives the other values.",
+   "case": "n20-b-maze-lesion",
+   "equations": [
+    "s_d=\\sqrt{\\frac{\\sum(d_i-\\bar d)^2}{n-1}}",
+    "s_d=\\sqrt{\\frac{42.5}{9}}=2.17307"
+   ]
+  },
+  {
+   "id": "m2-n20-qb02",
+   "module": 20,
+   "topic": "s20paired",
+   "stem": "For the mood ratings of eleven subjects before and after two weeks of bright light therapy, what is the paired t statistic?",
+   "options": [
+    "\\(4.32635\\)",
+    "\\(1.84308\\)",
+    "\\(1.30444\\)",
+    "\\(4.53751\\)"
+   ],
+   "correct": 0,
+   "why": "t is the mean difference 5.54545 divided by its standard error 1.28179. The value 1.84308 is what an unpaired test gives on the same columns, and 1.30444 forgets to divide the SD by the root of n.",
+   "case": "n20-b-light-therapy-mood",
+   "equations": [
+    "t=\\frac{\\bar d}{s_{\\bar d}}",
+    "t=\\frac{5.54545}{1.28179}=4.32635"
+   ]
+  },
+  {
+   "id": "m2-n20-qb03",
+   "module": 20,
+   "topic": "s20paired",
+   "stem": "For the left ear and right ear tone detection thresholds of ten subjects, the paired statistic is \\(t=1.16775\\). Which printed critical value is it compared with at \\(\\alpha=0.05\\), and what is the decision?",
+   "options": [
+    "\\(t_{0.05}(9)=2.262\\), reject the null hypothesis",
+    "\\(t_{0.05}(18)=2.101\\), do not reject the null hypothesis",
+    "\\(t_{0.05}(10)=2.228\\), reject the null hypothesis",
+    "\\(t_{0.05}(9)=2.262\\), do not reject the null hypothesis"
+   ],
+   "correct": 3,
+   "why": "There are ten differences, so ν = n − 1 = 9 and the printed cutoff is 2.262. The statistic 1.16775 is below it, so the null hypothesis is not rejected.",
+   "case": "n20-b-ear-tone-threshold",
+   "equations": [
+    "\\nu=n-1=9",
+    "|t|=1.16775<t_{0.05}(9)=2.262"
+   ]
+  },
+  {
+   "id": "m2-n20-qb04",
+   "module": 20,
+   "topic": "s20paired",
+   "stem": "For the syllable counts of eleven zebra finches before and after deafening, what is the mean after-minus-before difference \\(\\bar d\\)?",
+   "options": [
+    "\\(3\\) syllables",
+    "\\(-3\\) syllables",
+    "\\(-3.3\\) syllables",
+    "\\(3.90909\\) syllables"
+   ],
+   "correct": 1,
+   "why": "The eleven differences sum to -33 and dividing by n = 11 gives -3. The two positive differences keep their signs in the sum, and the divisor is n, not n − 1.",
+   "case": "n20-b-birdsong-deafening",
+   "equations": [
+    "\\bar d=\\frac{1}{n}\\sum d_i",
+    "\\bar d=\\frac{-33}{11}=-3"
+   ]
+  },
+  {
+   "id": "m2-n20-qb05",
+   "module": 20,
+   "topic": "s20unpaired",
+   "stem": "For the speech-in-noise scores treated as two independent groups of ten listeners (with hearing aid mean 30.3, SD 5.12185, without hearing aid mean 26.5, SD 5.60258), what is the unpaired t statistic?",
+   "options": [
+    "\\(5.33854\\)",
+    "\\(2.23874\\)",
+    "\\(1.58303\\)",
+    "\\(0.707952\\)"
+   ],
+   "correct": 2,
+   "why": "The pooled variance is 28.8111, the standard error is 2.40046 and t = 3.8/2.40046 = 1.58303. The value 5.33854 is the paired t on the same data, and the other values leave one or both sample sizes out of the standard error.",
+   "case": "n20-b-hearing-aid-unpaired",
+   "equations": [
+    "t=\\frac{\\bar x_1-\\bar x_2}{\\sqrt{s^2/n_1+s^2/n_2}}",
+    "t=\\frac{30.3-26.5}{2.40046}=1.58303"
+   ]
+  },
+  {
+   "id": "m2-n20-qb06",
+   "module": 20,
+   "topic": "s20rmanova",
+   "stem": "For the key pecking rates of five pigeons under three reinforcement schedules, \\(SS_{wit\\,subjs}=1272.67\\) and \\(SS_{treat}=1140.4\\). What is F?",
+   "options": [
+    "\\(4.48036\\)",
+    "\\(34.4879\\)",
+    "\\(8.62198\\)",
+    "\\(51.7319\\)"
+   ],
+   "correct": 1,
+   "why": "The residual is 1272.67 − 1140.4 = 132.267 with (5 − 1)(3 − 1) = 8 degrees of freedom, so F = 570.2/16.5333 = 34.4879. The wrong values use the within-subjects sum of squares as the denominator, skip the degrees of freedom, or use the wrong residual degrees of freedom.",
+   "case": "n20-b-pigeon-schedules-rmanova",
+   "equations": [
+    "SS_{res}=SS_{wit\\,subjs}-SS_{treat}",
+    "F=\\frac{1140.4/2}{132.267/8}=34.4879"
+   ]
+  },
+  {
+   "id": "m2-n20-qb07",
+   "module": 20,
+   "topic": "s20paired",
+   "stem": "Twelve listeners each have a speech reception threshold (the quietest level at which half of the sentences are understood) measured with noise coming from the front and again with noise coming from the side. Which analysis fits this design?",
+   "options": [
+    "An unpaired t test on the two columns, with 22 degrees of freedom",
+    "A one-way ANOVA with two groups of twelve different people",
+    "A z test for two proportions",
+    "A paired t test on the twelve within-listener differences, with 11 degrees of freedom"
+   ],
+   "correct": 3,
+   "why": "The same listeners give both measurements, so the two columns are not independent. The paired t test works on one difference per listener and has n − 1 = 11 degrees of freedom.",
+   "case": null,
+   "equations": [
+    "d_i=x1_i-x2_i",
+    "t=\\frac{\\bar d}{s_{\\bar d}},\\quad\\nu=n-1"
+   ]
+  },
+  {
+   "id": "m2-n20-qb08",
+   "module": 20,
+   "topic": "s20unpaired",
+   "stem": "Rats differ a lot from one another in baseline lever pressing rate, but each rat changes by a similar small amount after reward devaluation. Why can an unpaired t test on the before and after columns fail to find the change?",
+   "options": [
+    "Its standard error includes the large spread between rats, so the same mean change is divided by a larger number",
+    "It uses fewer degrees of freedom than the paired test, so its cutoff is much larger",
+    "It compares medians instead of means",
+    "It changes the mean difference between the two columns"
+   ],
+   "correct": 0,
+   "why": "Both tests have the same numerator, the difference between the two column means. The unpaired denominator is built from the spread between animals, while the paired denominator uses only the spread of the within-animal changes.",
+   "case": null,
+   "equations": [
+    "t=\\frac{\\bar x_1-\\bar x_2}{\\sqrt{s^2/n_1+s^2/n_2}}",
+    "t=\\frac{\\bar d}{s_d/\\sqrt n}"
+   ]
+  },
+  {
+   "id": "m2-n20-qb09",
+   "module": 20,
+   "topic": "s20pairedR",
+   "stem": "R prints the line \"t = 4.3412, df = 9, p-value = 0.001874\" for t.test(after, before, paired = TRUE) on the positive affect scores of ten subjects. Which hand calculation does the t in this line correspond to?",
+   "options": [
+    "\\(\\bar d/s_d=3.5/2.54951\\)",
+    "\\(\\bar d/s_{\\bar d}=3.5/0.806226\\)",
+    "\\(s_d/\\sqrt n=2.54951/\\sqrt{10}\\)",
+    "\\(\\bar d\\pm t_{0.05}(9)\\,s_{\\bar d}\\)"
+   ],
+   "correct": 1,
+   "why": "R's t is the mean difference divided by its standard error, 3.5/0.806226 = 4.34122. R does not print the SD of the differences or the standard error, and the last option is the confidence interval line.",
+   "case": "n20-b-exercise-mood-r",
+   "equations": [
+    "t=\\frac{\\bar d}{s_{\\bar d}}",
+    "t=\\frac{3.5}{0.806226}=4.34122"
+   ]
+  },
+  {
+   "id": "m2-n20-qb10",
+   "module": 20,
+   "topic": "s20rmanova",
+   "stem": "Six speakers each produce the same words at a slow, a normal and a fast speaking rate, and voice onset time is measured each time. For the repeated measures ANOVA, which degrees of freedom are used to find the critical F?",
+   "options": [
+    "\\(\\nu_n=2\\) and \\(\\nu_d=15\\)",
+    "\\(\\nu_n=3\\) and \\(\\nu_d=12\\)",
+    "\\(\\nu_n=2\\) and \\(\\nu_d=10\\)",
+    "\\(\\nu_n=5\\) and \\(\\nu_d=10\\)"
+   ],
+   "correct": 2,
+   "why": "The numerator has m − 1 = 2 degrees of freedom and the residual has (n − 1)(m − 1) = 5 × 2 = 10. The value 15 would be right only if the eighteen measurements came from eighteen different people.",
+   "case": "n20-b-vot-speaking-rate-rmanova",
+   "equations": [
+    "DF_{treat}=m-1=2",
+    "DF_{res}=(n-1)(m-1)=10"
+   ]
+  }
+ ],
+ "notes": [
+  "All data are invented for practice. Printed critical values were read from sources/tables/t_table.pdf page 1 (rows 9, 10, 18, 20) and sources/tables/F_table.pdf page 1 (columns 2, rows 6, 8, 10). No df row had to be bracketed.",
+  "Outcomes. Reject: maze lesion (P < 0.001), light therapy (P < 0.002), birdsong (P < 0.05, close to the 0.05 cutoff), exercise mood in R, pigeon schedules (P < 0.01), Stroop sleep loss (F just above the 0.05 value, not above the 0.01 value). Do not reject: ear tone threshold (paired), voice onset time (repeated measures), and both unpaired analyses by design.",
+  "Every paired table has at least one difference of the opposite sign.",
+  "The two s20unpaired cases keep the ref layout (summary table of the two columns). Three keys were added to their values beyond the ref key set so the check script can recompute from raw scores and the paired comparison can be shown. raw1 and raw2 are the raw scores of group 1 and group 2 in subject order, and pairedT is the paired t (group 1 minus group 2) quoted in the second task.",
+  "The s20pairedR output in values.rOutput was produced by running Rscript (R 4.6.1) on the case data. The solution words describe the output in sentences because colons are not allowed in words.",
+  "Colons and semicolons are avoided in words and conclusion, and the t table step adds Start with alpha = 0.05. After the style review the tag about not identifying groups is written in his exact form with its Note label, and the R task uses his wording, so the check script allows colons and semicolons in context and tasks only.",
+  "values.exactP is stored as in the ref cases but exact P values are not quoted in the solutions, except the R p-value in the s20pairedR case."
+ ]
+}

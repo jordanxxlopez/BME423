@@ -1,0 +1,2206 @@
+{
+ "cases": [
+  {
+   "id": "n21-b-recall-three-delays",
+   "title": "Word-list recall in older adults at three delays",
+   "topic": "s21rmAnova",
+   "context": "Researchers interested in how memory fades in older adults did a study to evaluate delayed recall (the number of words a person can repeat back from a list heard earlier). Five adults aged 70 to 79 years heard a list of 15 unrelated words. Each subject was asked to recall the list immediately, again after 20 minutes and again after 24 hours. The table below shows the number of words recalled (words) at each delay. Assume that any quantities of interest are Normally distributed.",
+   "unit": "words",
+   "table": {
+    "headers": [
+     "Subject",
+     "Immediate (words)",
+     "20 minutes (words)",
+     "24 hours (words)"
+    ],
+    "rows": [
+     [
+      "1",
+      11,
+      9,
+      6
+     ],
+     [
+      "2",
+      9,
+      8,
+      5
+     ],
+     [
+      "3",
+      12,
+      9,
+      8
+     ],
+     [
+      "4",
+      8,
+      7,
+      3
+     ],
+     [
+      "5",
+      10,
+      7,
+      6
+     ]
+    ]
+   },
+   "tasks": [
+    "Is there a difference in the number of words recalled over time? DO NOT use R. Make sure to show your intermediate calculations.",
+    "Use a significance level of \\(\\alpha=0.05\\) for your inference. (Note: If a difference exists, do not identify which delays are different.)"
+   ],
+   "hypotheses": {
+    "null": "H_0:\\mu_{0}=\\mu_{20min}=\\mu_{24h}",
+    "alternative": "H_A:\\text{not all three population means are equal}",
+    "nullWords": "The mean number of words recalled by older adults is the same immediately, after 20 minutes and after 24 hours.",
+    "alternativeWords": "The mean number of words recalled differs for at least one of the three delays."
+   },
+   "symbols": "\\(x_{ts}\\) (observation for treatment \\(t\\), subject \\(s\\)), \\(m\\) (number of treatments), \\(n\\) (number of subjects), \\(\\bar S_s\\) (subject mean), \\(\\bar T_t\\) (treatment mean), \\(\\bar X\\) (grand mean), \\(SS\\) (sum of squares), \\(DF\\) (degrees of freedom), \\(MS\\) (mean square), \\(F\\) (F statistic).",
+   "steps": [
+    {
+     "title": "State the procedure and design",
+     "general": [
+      "x_{ts},\\quad t=1,\\dots,m,\\quad s=1,\\dots,n"
+     ],
+     "work": [
+      "m=3\\ \\text{treatments},\\quad n=5\\ \\text{subjects}"
+     ],
+     "words": "The same 5 adults are tested at all 3 delays, so the observations are repeated measures on the same subjects. The procedure is repeated measures ANOVA. It removes the large differences between people from the error term before comparing the delays."
+    },
+    {
+     "title": "State the hypotheses",
+     "general": [
+      "H_0:\\mu_1=\\mu_2=\\dots=\\mu_m"
+     ],
+     "work": [
+      "H_0:\\mu_{0}=\\mu_{20min}=\\mu_{24h}"
+     ],
+     "words": "The mean number of words recalled by older adults is the same immediately, after 20 minutes and after 24 hours. The mean number of words recalled differs for at least one of the three delays."
+    },
+    {
+     "title": "Calculate each subject mean",
+     "general": [
+      "\\bar S_s=\\frac{1}{m}\\sum_{t=1}^{m}x_{ts}"
+     ],
+     "work": [
+      "\\bar S_1=\\frac{11+9+6}{3}=8.6667",
+      "\\bar S_2=\\frac{9+8+5}{3}=7.3333",
+      "\\bar S_3=\\frac{12+9+8}{3}=9.6667",
+      "\\bar S_4=\\frac{8+7+3}{3}=6",
+      "\\bar S_5=\\frac{10+7+6}{3}=7.6667"
+     ],
+     "words": "Average each subject across all 3 treatments. Each row of the table gives one subject mean."
+    },
+    {
+     "title": "Calculate the treatment means and the grand mean",
+     "general": [
+      "\\bar T_t=\\frac{1}{n}\\sum_{s=1}^{n}x_{ts}",
+      "\\bar X=\\frac{1}{m}\\sum_{t=1}^{m}\\bar T_t"
+     ],
+     "work": [
+      "\\bar T_1=\\frac{11+9+12+8+10}{5}=10",
+      "\\bar T_2=\\frac{9+8+9+7+7}{5}=8",
+      "\\bar T_3=\\frac{6+5+8+3+6}{5}=5.6",
+      "\\bar X=\\frac{10+8+5.6}{3}=7.8667"
+     ],
+     "words": "Average each column over the 5 subjects. The grand mean is the mean of all 15 observations, which equals the mean of the treatment means."
+    },
+    {
+     "title": "Calculate the within-subjects sum of squares",
+     "general": [
+      "SS_{wit\\,subjs}=\\sum_{s=1}^{n}\\sum_{t=1}^{m}(x_{ts}-\\bar S_s)^2=\\sum_{s=1}^{n}SS_s"
+     ],
+     "work": [
+      "SS_1=(11-8.6667)^2+(9-8.6667)^2+(6-8.6667)^2=12.6667",
+      "SS_2=(9-7.3333)^2+(8-7.3333)^2+(5-7.3333)^2=8.6667",
+      "SS_3=(12-9.6667)^2+(9-9.6667)^2+(8-9.6667)^2=8.6667",
+      "SS_4=(8-6)^2+(7-6)^2+(3-6)^2=14",
+      "SS_5=(10-7.6667)^2+(7-7.6667)^2+(6-7.6667)^2=8.6667",
+      "SS_{wit\\,subjs}=12.6667+8.6667+8.6667+14+8.6667=52.6667"
+     ],
+     "words": "Each subject is compared only with its own mean, so differences between subjects never enter this sum. It holds the treatment effect plus residual scatter."
+    },
+    {
+     "title": "Calculate the treatment sum of squares",
+     "general": [
+      "SS_{treat}=n\\sum_{t=1}^{m}(\\bar T_t-\\bar X)^2"
+     ],
+     "work": [
+      "SS_{treat}=5\\left[(10-7.8667)^2+(8-7.8667)^2+(5.6-7.8667)^2\\right]=48.5333"
+     ],
+     "words": "Multiply by n because each treatment mean involves n subjects."
+    },
+    {
+     "title": "Calculate the residual sum of squares",
+     "general": [
+      "SS_{res}=SS_{wit\\,subjs}-SS_{treat}"
+     ],
+     "work": [
+      "SS_{res}=52.6667-48.5333=4.1333"
+     ],
+     "words": "The residual is the within-subject variation that the treatment means do not explain."
+    },
+    {
+     "title": "Find the degrees of freedom and mean squares",
+     "general": [
+      "DF_{treat}=m-1,\\quad DF_{res}=(n-1)(m-1)",
+      "MS_{treat}=\\frac{SS_{treat}}{DF_{treat}},\\quad MS_{res}=\\frac{SS_{res}}{DF_{res}}"
+     ],
+     "work": [
+      "DF_{treat}=3-1=2,\\quad DF_{res}=(5-1)(3-1)=8",
+      "MS_{treat}=\\frac{48.5333}{2}=24.2667,\\quad MS_{res}=\\frac{4.1333}{8}=0.516667"
+     ],
+     "words": "Each sum of squares is divided by its own degrees of freedom to give a variance estimate."
+    },
+    {
+     "title": "Calculate the F statistic",
+     "general": [
+      "F=\\frac{MS_{treat}}{MS_{res}}"
+     ],
+     "work": [
+      "F=\\frac{24.2667}{0.516667}=46.9677"
+     ],
+     "words": "Treatment variance is compared with residual variance. Values near 1 or below are what equal treatment means produce."
+    },
+    {
+     "title": "Find the critical value",
+     "general": [
+      "F_{crit}=F_{\\alpha}(DF_{treat},DF_{res})=F_{\\alpha}(\\nu_n,\\nu_d)"
+     ],
+     "work": [
+      "F_{0.05}(2,8)=4.46",
+      "F_{0.01}(2,8)=8.65"
+     ],
+     "words": "Start with α = 0.05. Open F_table.pdf, PDF page 1. Use numerator column ν_n=2 and denominator row ν_d=8. The lightface entry 4.46 is the 0.05 cutoff and the boldface entry 8.65 is the 0.01 cutoff. Swapping the two df selects a different, wrong cell.",
+     "classTable": {
+      "path": "sources/tables/F_table.pdf",
+      "page": 1,
+      "row": "8",
+      "column": "2 (0.05 lightface)",
+      "value": 4.46,
+      "actualDf": [
+       2,
+       8
+      ],
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision",
+     "general": [
+      "F>F_{crit}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "F=46.9677>4.46,\\quad F>8.65\\Rightarrow P<0.01"
+     ],
+     "words": "F is above both the 0.05 and the 0.01 cutoffs, so reject the null hypothesis with P < 0.01."
+    }
+   ],
+   "conclusion": "F = 46.968 with 2 and 8 degrees of freedom exceeds F_0.01(2,8) = 8.65. Reject H0, P < 0.01. There is a difference in the mean number of words recalled over time. Holm-corrected pairwise t tests are then needed to locate which delays differ.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/F_table.pdf",
+    "page": 1,
+    "row": "8",
+    "column": "2 (0.05 lightface)",
+    "value": 4.46,
+    "actualDf": [
+     2,
+     8
+    ],
+    "approximation": false
+   },
+   "values": {
+    "n": 5,
+    "m": 3,
+    "subjectMeans": [
+     8.666666666666666,
+     7.333333333333333,
+     9.666666666666666,
+     6.0,
+     7.666666666666667
+    ],
+    "treatmentMeans": [
+     10.0,
+     8.0,
+     5.6
+    ],
+    "grandMean": 7.866666666666666,
+    "subjectSS": [
+     12.666666666666668,
+     8.666666666666666,
+     8.666666666666668,
+     14.0,
+     8.666666666666666
+    ],
+    "ssWithin": 52.666666666666664,
+    "ssTreat": 48.53333333333333,
+    "ssRes": 4.133333333333333,
+    "ssBetween": 23.06666666666666,
+    "ssTotal": 75.73333333333335,
+    "dfTreat": 2,
+    "dfRes": 8,
+    "msTreat": 24.266666666666666,
+    "msRes": 0.5166666666666666,
+    "F": 46.96774193548387,
+    "exactP": 3.793659889949908e-05,
+    "critical": 4.46,
+    "critical01": 8.65,
+    "reject": true,
+    "pRange": "P<0.01"
+   },
+   "module": 21,
+   "tolerance": 0.234839,
+   "answerName": "F statistic",
+   "answer": 46.96774193548387
+  },
+  {
+   "id": "n21-b-recall-holm",
+   "title": "Holm comparisons of the three recall delays",
+   "topic": "s21holm",
+   "context": "In a study of word-list recall, 5 older adults were each asked to recall a list of 15 words immediately, again after 20 minutes and again after 24 hours. A repeated-measures analysis of variance (ANOVA) was performed on the data, resulting in the conclusion that there is a difference in the number of words recalled among the three delays (F = 46.968 with 2 and 8 degrees of freedom, P < 0.01). From the ANOVA, the mean number of words recalled was 10 immediately, 8 after 20 minutes and 5.6 after 24 hours. The residual mean square was \\(MS_{res}=0.516667\\) with \\(DF_{res}=8\\) and n = 5 subjects.",
+   "unit": "words",
+   "table": {
+    "headers": [
+     "Condition",
+     "Treatment mean (words)"
+    ],
+    "rows": [
+     [
+      "Immediate",
+      10.0
+     ],
+     [
+      "20 minutes",
+      8.0
+     ],
+     [
+      "24 hours",
+      5.6
+     ]
+    ]
+   },
+   "tasks": [
+    "Perform the appropriate form of multiple pairwise comparisons, testing every delay against every other delay, using the Holm correction to determine which of the three delays differ from one another. Use the relevant information from the ANOVA results given above to do your calculations.",
+    "Present your final/overall conclusion on which delays are different from one another (and which delays are not different) using an overall level of significance of 0.05. Please state how you reached your conclusions."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\mu_i=\\mu_j\\ \\text{for the pair being compared}",
+    "alternative": "H_A:\\mu_i\\ne\\mu_j",
+    "nullWords": "For the pair being compared, mean number of words recalled is the same at the two delays.",
+    "alternativeWords": "For that pair, mean number of words recalled differs between the two delays."
+   },
+   "symbols": "\\(\\bar T_i\\) (treatment mean), \\(MS_{res}\\) (residual mean square), \\(n\\) (number of subjects), \\(DF_{res}\\) (residual degrees of freedom), \\(k\\) (number of pairwise comparisons), \\(\\alpha_j\\) (Holm level for the \\(j\\)th comparison), \\(\\alpha_T\\) (overall level).",
+   "steps": [
+    {
+     "title": "State the procedure",
+     "general": [
+      "t=\\frac{\\bar T_i-\\bar T_j}{\\sqrt{2MS_{res}/n}},\\quad \\nu=DF_{res}=(n-1)(m-1)"
+     ],
+     "work": [
+      "MS_{res}=0.516667,\\quad n=5,\\quad \\nu=8"
+     ],
+     "words": "The overall F test rejected, so pairwise t tests locate the differences. The repeated-measures version uses MS_res in the standard error and DF_res for the t table."
+    },
+    {
+     "title": "State the hypotheses for each pair",
+     "general": [
+      "H_0:\\mu_i=\\mu_j"
+     ],
+     "work": [
+      "H_0:\\mu_i=\\mu_j\\ \\text{for the pair being compared}"
+     ],
+     "words": "For the pair being compared, mean number of words recalled is the same at the two delays. For that pair, mean number of words recalled differs between the two delays."
+    },
+    {
+     "title": "Calculate the standard error of a difference",
+     "general": [
+      "SE=\\sqrt{\\frac{2MS_{res}}{n}}"
+     ],
+     "work": [
+      "SE=\\sqrt{\\frac{2(0.516667)}{5}}=0.454606"
+     ],
+     "words": "The same standard error serves every pair because every treatment mean is based on the same n subjects."
+    },
+    {
+     "title": "Calculate every pairwise t statistic",
+     "general": [
+      "t=\\frac{\\bar T_i-\\bar T_j}{SE}"
+     ],
+     "work": [
+      "t_{\\text{Immediate vs 24 hours}}=\\frac{10-5.6}{0.454606}=9.679",
+      "t_{\\text{20 minutes vs 24 hours}}=\\frac{8-5.6}{0.454606}=5.279",
+      "t_{\\text{Immediate vs 20 minutes}}=\\frac{10-8}{0.454606}=4.399"
+     ],
+     "words": "Keep the subtraction order. The sign only gives the direction, and the ranking uses |t|."
+    },
+    {
+     "title": "Order by |t| and set the Holm levels",
+     "general": [
+      "\\alpha_j=\\frac{\\alpha_T}{k-j+1},\\quad j=1,\\dots,k"
+     ],
+     "work": [
+      "k=3,\\quad \\alpha_1=\\frac{0.05}{3}=0.0167,\\quad \\alpha_2=\\frac{0.05}{2}=0.025,\\quad \\alpha_3=\\frac{0.05}{1}=0.05",
+      "|t|:\\ 9.679>5.279>4.399"
+     ],
+     "words": "The largest |t| is tested at the strictest level. Testing stops at the first comparison that is not significant."
+    },
+    {
+     "title": "Comparison 1: Immediate vs 24 hours",
+     "general": [
+      "|t|>t_{\\alpha_1}(\\nu)\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "\\alpha_1=0.0167,\\quad t_{0.01}(8)=3.355\\ \\text{(stricter printed column)}",
+      "|t|=9.679>3.355"
+     ],
+     "words": "The 0.0167 column is not printed. In t_table.pdf, PDF page 1, row 8, the printed neighbors are the 0.02 column (2.896) and the 0.01 column (3.355). Use the stricter 0.01 column, 3.355, because a statistic beyond it is significant at 0.0167 as well. |t| = 9.679 > 3.355, so the Immediate and 24 hours means differ (P < 0.001 before adjustment).",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "8",
+      "column": "0.01",
+      "value": 3.355,
+      "actualDf": 8,
+      "approximation": true,
+      "bracket": [
+       "0.02",
+       "0.01"
+      ],
+      "bracketValues": [
+       2.896,
+       3.355
+      ]
+     }
+    },
+    {
+     "title": "Comparison 2: 20 minutes vs 24 hours",
+     "general": [
+      "|t|>t_{\\alpha_2}(\\nu)\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "\\alpha_2=0.025,\\quad t_{0.02}(8)=2.896\\ \\text{(stricter printed column)}",
+      "|t|=5.279>2.896"
+     ],
+     "words": "The 0.025 column is not printed. In t_table.pdf, PDF page 1, row 8, the printed neighbors are the 0.05 column (2.306) and the 0.02 column (2.896). Use the stricter 0.02 column, 2.896, because a statistic beyond it is significant at 0.025 as well. |t| = 5.279 > 2.896, so the 20 minutes and 24 hours means differ (P < 0.001 before adjustment).",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "8",
+      "column": "0.02",
+      "value": 2.896,
+      "actualDf": 8,
+      "approximation": true,
+      "bracket": [
+       "0.05",
+       "0.02"
+      ],
+      "bracketValues": [
+       2.306,
+       2.896
+      ]
+     }
+    },
+    {
+     "title": "Comparison 3: Immediate vs 20 minutes",
+     "general": [
+      "|t|>t_{\\alpha_3}(\\nu)\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "\\alpha_3=0.05,\\quad t_{0.05}(8)=2.306",
+      "|t|=4.399>2.306"
+     ],
+     "words": "Open t_table.pdf, PDF page 1, row 8, combined two-tail 0.05 column, which gives 2.306. |t| = 4.399 > 2.306, so the Immediate and 20 minutes means differ (0.002 < P < 0.005 before adjustment).",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "8",
+      "column": "0.05",
+      "value": 2.306,
+      "actualDf": 8,
+      "approximation": false
+     }
+    }
+   ],
+   "conclusion": "All three pairs of delays differ at the Holm-corrected levels. Fewer words are recalled after 20 minutes than immediately, and fewer again after 24 hours. For Immediate vs 24 hours, t = 9.679. For 20 minutes vs 24 hours, t = 5.279. For Immediate vs 20 minutes, t = 4.399.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "8",
+    "column": "0.01",
+    "value": 3.355,
+    "actualDf": 8,
+    "approximation": true,
+    "bracket": [
+     "0.02",
+     "0.01"
+    ],
+    "bracketValues": [
+     2.896,
+     3.355
+    ]
+   },
+   "values": {
+    "n": 5,
+    "dfRes": 8,
+    "msRes": 0.5166666666666666,
+    "means": {
+     "Immediate": 10.0,
+     "20 minutes": 8.0,
+     "24 hours": 5.6
+    },
+    "se": 0.4546060565661952,
+    "tValues": {
+     "Immediate vs 24 hours": 9.678709591409318,
+     "20 minutes vs 24 hours": 5.27929614076872,
+     "Immediate vs 20 minutes": 4.399413450640599
+    },
+    "holmAlphas": [
+     0.016666666666666666,
+     0.025,
+     0.05
+    ],
+    "outcomes": {
+     "Immediate vs 24 hours": true,
+     "20 minutes vs 24 hours": true,
+     "Immediate vs 20 minutes": true
+    }
+   },
+   "module": 21,
+   "tolerance": 0.048394,
+   "answerName": "t statistic (largest |t| comparison)",
+   "answer": 9.678709591409318
+  },
+  {
+   "id": "n21-b-reach-error-blocks",
+   "title": "Reach error across three practice blocks with a rotated cursor",
+   "topic": "s21rmAnova",
+   "context": "In a study looking at motor learning, six right-handed volunteers reached to a target on a screen while the cursor (the dot showing the hand position) was rotated 30 degrees away from the true path of the hand. Reach error (the distance between the end of the cursor path and the centre of the target) was recorded in millimeters (mm) and averaged within each of three practice blocks of 40 reaches. Each subject completed all three blocks in order. Assume that any quantities of interest are Normally distributed.",
+   "unit": "mm",
+   "table": {
+    "headers": [
+     "Subject",
+     "Block 1 Reach Error (mm)",
+     "Block 2 Reach Error (mm)",
+     "Block 3 Reach Error (mm)"
+    ],
+    "rows": [
+     [
+      "1",
+      42,
+      30,
+      27
+     ],
+     [
+      "2",
+      38,
+      29,
+      31
+     ],
+     [
+      "3",
+      51,
+      36,
+      33
+     ],
+     [
+      "4",
+      35,
+      28,
+      24
+     ],
+     [
+      "5",
+      46,
+      31,
+      32
+     ],
+     [
+      "6",
+      40,
+      33,
+      29
+     ]
+    ]
+   },
+   "tasks": [
+    "Is there a difference in reach error over time? DO NOT use R. Make sure to show your intermediate calculations.",
+    "Use a significance level of \\(\\alpha=0.05\\) for your inference. (Note: If a difference exists, do not identify which blocks are different.)"
+   ],
+   "hypotheses": {
+    "null": "H_0:\\mu_{1}=\\mu_{2}=\\mu_{3}",
+    "alternative": "H_A:\\text{not all three population means are equal}",
+    "nullWords": "Mean reach error is the same in practice blocks 1, 2 and 3.",
+    "alternativeWords": "Mean reach error differs for at least one of the three practice blocks."
+   },
+   "symbols": "\\(x_{ts}\\) (observation for treatment \\(t\\), subject \\(s\\)), \\(m\\) (number of treatments), \\(n\\) (number of subjects), \\(\\bar S_s\\) (subject mean), \\(\\bar T_t\\) (treatment mean), \\(\\bar X\\) (grand mean), \\(SS\\) (sum of squares), \\(DF\\) (degrees of freedom), \\(MS\\) (mean square), \\(F\\) (F statistic).",
+   "steps": [
+    {
+     "title": "State the procedure and design",
+     "general": [
+      "x_{ts},\\quad t=1,\\dots,m,\\quad s=1,\\dots,n"
+     ],
+     "work": [
+      "m=3\\ \\text{treatments},\\quad n=6\\ \\text{subjects}"
+     ],
+     "words": "The same 6 volunteers are measured in all 3 practice blocks, so the observations are repeated measures on the same subjects. The procedure is repeated measures ANOVA. It removes the differences between volunteers from the error term before comparing the blocks."
+    },
+    {
+     "title": "State the hypotheses",
+     "general": [
+      "H_0:\\mu_1=\\mu_2=\\dots=\\mu_m"
+     ],
+     "work": [
+      "H_0:\\mu_{1}=\\mu_{2}=\\mu_{3}"
+     ],
+     "words": "Mean reach error is the same in practice blocks 1, 2 and 3. Mean reach error differs for at least one of the three practice blocks."
+    },
+    {
+     "title": "Calculate each subject mean",
+     "general": [
+      "\\bar S_s=\\frac{1}{m}\\sum_{t=1}^{m}x_{ts}"
+     ],
+     "work": [
+      "\\bar S_1=\\frac{42+30+27}{3}=33",
+      "\\bar S_2=\\frac{38+29+31}{3}=32.6667",
+      "\\bar S_3=\\frac{51+36+33}{3}=40",
+      "\\bar S_4=\\frac{35+28+24}{3}=29",
+      "\\bar S_5=\\frac{46+31+32}{3}=36.3333",
+      "\\bar S_6=\\frac{40+33+29}{3}=34"
+     ],
+     "words": "Average each subject across all 3 treatments. Each row of the table gives one subject mean."
+    },
+    {
+     "title": "Calculate the treatment means and the grand mean",
+     "general": [
+      "\\bar T_t=\\frac{1}{n}\\sum_{s=1}^{n}x_{ts}",
+      "\\bar X=\\frac{1}{m}\\sum_{t=1}^{m}\\bar T_t"
+     ],
+     "work": [
+      "\\bar T_1=\\frac{42+38+51+35+46+40}{6}=42",
+      "\\bar T_2=\\frac{30+29+36+28+31+33}{6}=31.1667",
+      "\\bar T_3=\\frac{27+31+33+24+32+29}{6}=29.3333",
+      "\\bar X=\\frac{42+31.1667+29.3333}{3}=34.1667"
+     ],
+     "words": "Average each column over the 6 subjects. The grand mean is the mean of all 18 observations, which equals the mean of the treatment means."
+    },
+    {
+     "title": "Calculate the within-subjects sum of squares",
+     "general": [
+      "SS_{wit\\,subjs}=\\sum_{s=1}^{n}\\sum_{t=1}^{m}(x_{ts}-\\bar S_s)^2=\\sum_{s=1}^{n}SS_s"
+     ],
+     "work": [
+      "SS_1=(42-33)^2+(30-33)^2+(27-33)^2=126",
+      "SS_2=(38-32.6667)^2+(29-32.6667)^2+(31-32.6667)^2=44.6667",
+      "SS_3=(51-40)^2+(36-40)^2+(33-40)^2=186",
+      "SS_4=(35-29)^2+(28-29)^2+(24-29)^2=62",
+      "SS_5=(46-36.3333)^2+(31-36.3333)^2+(32-36.3333)^2=140.6667",
+      "SS_6=(40-34)^2+(33-34)^2+(29-34)^2=62",
+      "SS_{wit\\,subjs}=126+44.6667+186+62+140.6667+62=621.3333"
+     ],
+     "words": "Each subject is compared only with its own mean, so differences between subjects never enter this sum. It holds the treatment effect plus residual scatter."
+    },
+    {
+     "title": "Calculate the treatment sum of squares",
+     "general": [
+      "SS_{treat}=n\\sum_{t=1}^{m}(\\bar T_t-\\bar X)^2"
+     ],
+     "work": [
+      "SS_{treat}=6\\left[(42-34.1667)^2+(31.1667-34.1667)^2+(29.3333-34.1667)^2\\right]=562.3333"
+     ],
+     "words": "Multiply by n because each treatment mean involves n subjects."
+    },
+    {
+     "title": "Calculate the residual sum of squares",
+     "general": [
+      "SS_{res}=SS_{wit\\,subjs}-SS_{treat}"
+     ],
+     "work": [
+      "SS_{res}=621.3333-562.3333=59"
+     ],
+     "words": "The residual is the within-subject variation that the treatment means do not explain."
+    },
+    {
+     "title": "Find the degrees of freedom and mean squares",
+     "general": [
+      "DF_{treat}=m-1,\\quad DF_{res}=(n-1)(m-1)",
+      "MS_{treat}=\\frac{SS_{treat}}{DF_{treat}},\\quad MS_{res}=\\frac{SS_{res}}{DF_{res}}"
+     ],
+     "work": [
+      "DF_{treat}=3-1=2,\\quad DF_{res}=(6-1)(3-1)=10",
+      "MS_{treat}=\\frac{562.3333}{2}=281.167,\\quad MS_{res}=\\frac{59}{10}=5.9"
+     ],
+     "words": "Each sum of squares is divided by its own degrees of freedom to give a variance estimate."
+    },
+    {
+     "title": "Calculate the F statistic",
+     "general": [
+      "F=\\frac{MS_{treat}}{MS_{res}}"
+     ],
+     "work": [
+      "F=\\frac{281.167}{5.9}=47.6554"
+     ],
+     "words": "Treatment variance is compared with residual variance. Values near 1 or below are what equal treatment means produce."
+    },
+    {
+     "title": "Find the critical value",
+     "general": [
+      "F_{crit}=F_{\\alpha}(DF_{treat},DF_{res})=F_{\\alpha}(\\nu_n,\\nu_d)"
+     ],
+     "work": [
+      "F_{0.05}(2,10)=4.10",
+      "F_{0.01}(2,10)=7.56"
+     ],
+     "words": "Start with α = 0.05. Open F_table.pdf, PDF page 1. Use numerator column ν_n=2 and denominator row ν_d=10. The lightface entry 4.10 is the 0.05 cutoff and the boldface entry 7.56 is the 0.01 cutoff. Swapping the two df selects a different, wrong cell.",
+     "classTable": {
+      "path": "sources/tables/F_table.pdf",
+      "page": 1,
+      "row": "10",
+      "column": "2 (0.05 lightface)",
+      "value": 4.1,
+      "actualDf": [
+       2,
+       10
+      ],
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision",
+     "general": [
+      "F>F_{crit}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "F=47.6554>4.10,\\quad F>7.56\\Rightarrow P<0.01"
+     ],
+     "words": "F is above both the 0.05 and the 0.01 cutoffs, so reject the null hypothesis with P < 0.01."
+    }
+   ],
+   "conclusion": "F = 47.655 with 2 and 10 degrees of freedom exceeds F_0.01(2,10) = 7.56. Reject H0, P < 0.01. There is a difference in mean reach error over the three practice blocks. Holm-corrected pairwise t tests locate which blocks differ.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/F_table.pdf",
+    "page": 1,
+    "row": "10",
+    "column": "2 (0.05 lightface)",
+    "value": 4.1,
+    "actualDf": [
+     2,
+     10
+    ],
+    "approximation": false
+   },
+   "values": {
+    "n": 6,
+    "m": 3,
+    "subjectMeans": [
+     33.0,
+     32.666666666666664,
+     40.0,
+     29.0,
+     36.333333333333336,
+     34.0
+    ],
+    "treatmentMeans": [
+     42.0,
+     31.166666666666668,
+     29.333333333333332
+    ],
+    "grandMean": 34.166666666666664,
+    "subjectSS": [
+     126.0,
+     44.66666666666667,
+     186.0,
+     62.0,
+     140.66666666666669,
+     62.0
+    ],
+    "ssWithin": 621.3333333333334,
+    "ssTreat": 562.3333333333334,
+    "ssRes": 59.0,
+    "ssBetween": 207.16666666666674,
+    "ssTotal": 828.5000000000001,
+    "dfTreat": 2,
+    "dfRes": 10,
+    "msTreat": 281.1666666666667,
+    "msRes": 5.9,
+    "F": 47.655367231638415,
+    "exactP": 7.720346485768268e-06,
+    "critical": 4.1,
+    "critical01": 7.56,
+    "reject": true,
+    "pRange": "P<0.01"
+   },
+   "module": 21,
+   "tolerance": 0.238277,
+   "answerName": "F statistic",
+   "answer": 47.655367231638415
+  },
+  {
+   "id": "n21-b-reach-holm",
+   "title": "Holm comparisons of the three reach practice blocks",
+   "topic": "s21holm",
+   "context": "In a study of motor learning, six volunteers reached to a target with a rotated cursor in three practice blocks, and reach error (the distance between the end of the cursor path and the centre of the target) was recorded in millimeters (mm). A repeated-measures analysis of variance (ANOVA) was performed on the data, resulting in the conclusion that there is a difference in reach error among the three practice blocks (F = 47.655 with 2 and 10 degrees of freedom, P < 0.01). From the ANOVA, mean reach error was 42 mm in block 1, 31.1667 mm in block 2 and 29.3333 mm in block 3. The residual mean square was \\(MS_{res}=5.9\\) with \\(DF_{res}=10\\) and n = 6 subjects.",
+   "unit": "mm",
+   "table": {
+    "headers": [
+     "Condition",
+     "Treatment mean (mm)"
+    ],
+    "rows": [
+     [
+      "Block 1",
+      42.0
+     ],
+     [
+      "Block 2",
+      31.1667
+     ],
+     [
+      "Block 3",
+      29.3333
+     ]
+    ]
+   },
+   "tasks": [
+    "Perform the appropriate form of multiple pairwise comparisons, testing every practice block against every other practice block, using the Holm correction to determine which of the three practice blocks differ from one another. Use the relevant information from the ANOVA results given above to do your calculations.",
+    "Present your final/overall conclusion on which practice blocks are different from one another (and which practice blocks are not different) using an overall level of significance of 0.05. Please state how you reached your conclusions."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\mu_i=\\mu_j\\ \\text{for the pair being compared}",
+    "alternative": "H_A:\\mu_i\\ne\\mu_j",
+    "nullWords": "For the pair being compared, mean reach error is the same in the two practice blocks.",
+    "alternativeWords": "For that pair, mean reach error differs between the two practice blocks."
+   },
+   "symbols": "\\(\\bar T_i\\) (treatment mean), \\(MS_{res}\\) (residual mean square), \\(n\\) (number of subjects), \\(DF_{res}\\) (residual degrees of freedom), \\(k\\) (number of pairwise comparisons), \\(\\alpha_j\\) (Holm level for the \\(j\\)th comparison), \\(\\alpha_T\\) (overall level).",
+   "steps": [
+    {
+     "title": "State the procedure",
+     "general": [
+      "t=\\frac{\\bar T_i-\\bar T_j}{\\sqrt{2MS_{res}/n}},\\quad \\nu=DF_{res}=(n-1)(m-1)"
+     ],
+     "work": [
+      "MS_{res}=5.9,\\quad n=6,\\quad \\nu=10"
+     ],
+     "words": "The overall F test rejected, so pairwise t tests locate the differences. The repeated-measures version uses MS_res in the standard error and DF_res for the t table."
+    },
+    {
+     "title": "State the hypotheses for each pair",
+     "general": [
+      "H_0:\\mu_i=\\mu_j"
+     ],
+     "work": [
+      "H_0:\\mu_i=\\mu_j\\ \\text{for the pair being compared}"
+     ],
+     "words": "For the pair being compared, mean reach error is the same in the two practice blocks. For that pair, mean reach error differs between the two practice blocks."
+    },
+    {
+     "title": "Calculate the standard error of a difference",
+     "general": [
+      "SE=\\sqrt{\\frac{2MS_{res}}{n}}"
+     ],
+     "work": [
+      "SE=\\sqrt{\\frac{2(5.9)}{6}}=1.40238"
+     ],
+     "words": "The same standard error serves every pair because every treatment mean is based on the same n subjects."
+    },
+    {
+     "title": "Calculate every pairwise t statistic",
+     "general": [
+      "t=\\frac{\\bar T_i-\\bar T_j}{SE}"
+     ],
+     "work": [
+      "t_{\\text{Block 1 vs Block 3}}=\\frac{42-29.3333}{1.40238}=9.032",
+      "t_{\\text{Block 1 vs Block 2}}=\\frac{42-31.1667}{1.40238}=7.725",
+      "t_{\\text{Block 2 vs Block 3}}=\\frac{31.1667-29.3333}{1.40238}=1.307"
+     ],
+     "words": "Keep the subtraction order. The sign only gives the direction, and the ranking uses |t|."
+    },
+    {
+     "title": "Order by |t| and set the Holm levels",
+     "general": [
+      "\\alpha_j=\\frac{\\alpha_T}{k-j+1},\\quad j=1,\\dots,k"
+     ],
+     "work": [
+      "k=3,\\quad \\alpha_1=\\frac{0.05}{3}=0.0167,\\quad \\alpha_2=\\frac{0.05}{2}=0.025,\\quad \\alpha_3=\\frac{0.05}{1}=0.05",
+      "|t|:\\ 9.032>7.725>1.307"
+     ],
+     "words": "The largest |t| is tested at the strictest level. Testing stops at the first comparison that is not significant."
+    },
+    {
+     "title": "Comparison 1: Block 1 vs Block 3",
+     "general": [
+      "|t|>t_{\\alpha_1}(\\nu)\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "\\alpha_1=0.0167,\\quad t_{0.01}(10)=3.169\\ \\text{(stricter printed column)}",
+      "|t|=9.032>3.169"
+     ],
+     "words": "The 0.0167 column is not printed. In t_table.pdf, PDF page 1, row 10, the printed neighbors are the 0.02 column (2.764) and the 0.01 column (3.169). Use the stricter 0.01 column, 3.169, because a statistic beyond it is significant at 0.0167 as well. |t| = 9.032 > 3.169, so the Block 1 and Block 3 means differ (P < 0.001 before adjustment).",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "10",
+      "column": "0.01",
+      "value": 3.169,
+      "actualDf": 10,
+      "approximation": true,
+      "bracket": [
+       "0.02",
+       "0.01"
+      ],
+      "bracketValues": [
+       2.764,
+       3.169
+      ]
+     }
+    },
+    {
+     "title": "Comparison 2: Block 1 vs Block 2",
+     "general": [
+      "|t|>t_{\\alpha_2}(\\nu)\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "\\alpha_2=0.025,\\quad t_{0.02}(10)=2.764\\ \\text{(stricter printed column)}",
+      "|t|=7.725>2.764"
+     ],
+     "words": "The 0.025 column is not printed. In t_table.pdf, PDF page 1, row 10, the printed neighbors are the 0.05 column (2.228) and the 0.02 column (2.764). Use the stricter 0.02 column, 2.764, because a statistic beyond it is significant at 0.025 as well. |t| = 7.725 > 2.764, so the Block 1 and Block 2 means differ (P < 0.001 before adjustment).",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "10",
+      "column": "0.02",
+      "value": 2.764,
+      "actualDf": 10,
+      "approximation": true,
+      "bracket": [
+       "0.05",
+       "0.02"
+      ],
+      "bracketValues": [
+       2.228,
+       2.764
+      ]
+     }
+    },
+    {
+     "title": "Comparison 3: Block 2 vs Block 3",
+     "general": [
+      "|t|>t_{\\alpha_3}(\\nu)\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "\\alpha_3=0.05,\\quad t_{0.05}(10)=2.228",
+      "|t|=1.307<2.228"
+     ],
+     "words": "Open t_table.pdf, PDF page 1, row 10, combined two-tail 0.05 column, which gives 2.228. |t| = 1.307 < 2.228, so the Block 2 and Block 3 means are not shown to differ (0.20 < P < 0.50 before adjustment), and Holm testing stops here.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "10",
+      "column": "0.05",
+      "value": 2.228,
+      "actualDf": 10,
+      "approximation": false
+     }
+    }
+   ],
+   "conclusion": "Reach error in block 1 is different from reach error in block 2 (t = 7.725) and in block 3 (t = 9.032). The block 2 and block 3 means are not shown to differ (|t| = 1.307 < 2.228). The drop in error happens between the first and second blocks.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "10",
+    "column": "0.01",
+    "value": 3.169,
+    "actualDf": 10,
+    "approximation": true,
+    "bracket": [
+     "0.02",
+     "0.01"
+    ],
+    "bracketValues": [
+     2.764,
+     3.169
+    ]
+   },
+   "values": {
+    "n": 6,
+    "dfRes": 10,
+    "msRes": 5.9,
+    "means": {
+     "Block 1": 42.0,
+     "Block 2": 31.166666666666668,
+     "Block 3": 29.333333333333332
+    },
+    "se": 1.4023789311975088,
+    "tValues": {
+     "Block 1 vs Block 3": 9.03227108228904,
+     "Block 1 vs Block 2": 7.724968688799834,
+     "Block 2 vs Block 3": 1.3073023934892045
+    },
+    "holmAlphas": [
+     0.016666666666666666,
+     0.025,
+     0.05
+    ],
+    "outcomes": {
+     "Block 1 vs Block 3": true,
+     "Block 1 vs Block 2": true,
+     "Block 2 vs Block 3": false
+    }
+   },
+   "module": 21,
+   "tolerance": 0.045161,
+   "answerName": "t statistic (largest |t| comparison)",
+   "answer": 9.03227108228904
+  },
+  {
+   "id": "n21-b-motion-coherence-colour",
+   "title": "Motion coherence threshold with white, red and green dots",
+   "topic": "s21rmAnova",
+   "context": "A study was reported concerning motion perception. Four subjects with normal vision viewed a field of moving dots and judged whether the dots drifted to the left or to the right. The motion coherence threshold (the smallest percentage of dots that must move in the same direction for the subject to be correct on 75% of trials) was measured in percent (%) for each subject with white dots, with red dots and with green dots, in random order. Assume that any quantities of interest are Normally distributed.",
+   "unit": "%",
+   "table": {
+    "headers": [
+     "Subject",
+     "White dots Threshold (%)",
+     "Red dots Threshold (%)",
+     "Green dots Threshold (%)"
+    ],
+    "rows": [
+     [
+      "1",
+      12.4,
+      13.6,
+      11.8
+     ],
+     [
+      "2",
+      9.6,
+      9.4,
+      10.3
+     ],
+     [
+      "3",
+      15.2,
+      16.1,
+      14.6
+     ],
+     [
+      "4",
+      11,
+      12.2,
+      11.5
+     ]
+    ]
+   },
+   "tasks": [
+    "Is there a difference in motion coherence threshold under the three conditions? DO NOT use R. Make sure to show your intermediate calculations.",
+    "Use a significance level of \\(\\alpha=0.05\\) for your inference. Provide your result in a single complete sentence that would convey your conclusion in a way that could be understood by a non-expert in statistics or medicine (e.g., a typical reader of a local newspaper)."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\mu_{white}=\\mu_{red}=\\mu_{green}",
+    "alternative": "H_A:\\text{not all three population means are equal}",
+    "nullWords": "The mean motion coherence threshold is the same with white, red and green dots.",
+    "alternativeWords": "The mean motion coherence threshold differs for at least one of the three dot colours."
+   },
+   "symbols": "\\(x_{ts}\\) (observation for treatment \\(t\\), subject \\(s\\)), \\(m\\) (number of treatments), \\(n\\) (number of subjects), \\(\\bar S_s\\) (subject mean), \\(\\bar T_t\\) (treatment mean), \\(\\bar X\\) (grand mean), \\(SS\\) (sum of squares), \\(DF\\) (degrees of freedom), \\(MS\\) (mean square), \\(F\\) (F statistic).",
+   "steps": [
+    {
+     "title": "State the procedure and design",
+     "general": [
+      "x_{ts},\\quad t=1,\\dots,m,\\quad s=1,\\dots,n"
+     ],
+     "work": [
+      "m=3\\ \\text{treatments},\\quad n=4\\ \\text{subjects}"
+     ],
+     "words": "The same 4 subjects are measured under all 3 dot colours, so the observations are repeated measures on the same subjects. The procedure is repeated measures ANOVA. It removes the differences between subjects from the error term before comparing the colours."
+    },
+    {
+     "title": "State the hypotheses",
+     "general": [
+      "H_0:\\mu_1=\\mu_2=\\dots=\\mu_m"
+     ],
+     "work": [
+      "H_0:\\mu_{white}=\\mu_{red}=\\mu_{green}"
+     ],
+     "words": "The mean motion coherence threshold is the same with white, red and green dots. The mean motion coherence threshold differs for at least one of the three dot colours."
+    },
+    {
+     "title": "Calculate each subject mean",
+     "general": [
+      "\\bar S_s=\\frac{1}{m}\\sum_{t=1}^{m}x_{ts}"
+     ],
+     "work": [
+      "\\bar S_1=\\frac{12.4+13.6+11.8}{3}=12.6",
+      "\\bar S_2=\\frac{9.6+9.4+10.3}{3}=9.7667",
+      "\\bar S_3=\\frac{15.2+16.1+14.6}{3}=15.3",
+      "\\bar S_4=\\frac{11+12.2+11.5}{3}=11.5667"
+     ],
+     "words": "Average each subject across all 3 treatments. Each row of the table gives one subject mean."
+    },
+    {
+     "title": "Calculate the treatment means and the grand mean",
+     "general": [
+      "\\bar T_t=\\frac{1}{n}\\sum_{s=1}^{n}x_{ts}",
+      "\\bar X=\\frac{1}{m}\\sum_{t=1}^{m}\\bar T_t"
+     ],
+     "work": [
+      "\\bar T_1=\\frac{12.4+9.6+15.2+11}{4}=12.05",
+      "\\bar T_2=\\frac{13.6+9.4+16.1+12.2}{4}=12.825",
+      "\\bar T_3=\\frac{11.8+10.3+14.6+11.5}{4}=12.05",
+      "\\bar X=\\frac{12.05+12.825+12.05}{3}=12.3083"
+     ],
+     "words": "Average each column over the 4 subjects. The grand mean is the mean of all 12 observations, which equals the mean of the treatment means."
+    },
+    {
+     "title": "Calculate the within-subjects sum of squares",
+     "general": [
+      "SS_{wit\\,subjs}=\\sum_{s=1}^{n}\\sum_{t=1}^{m}(x_{ts}-\\bar S_s)^2=\\sum_{s=1}^{n}SS_s"
+     ],
+     "work": [
+      "SS_1=(12.4-12.6)^2+(13.6-12.6)^2+(11.8-12.6)^2=1.68",
+      "SS_2=(9.6-9.7667)^2+(9.4-9.7667)^2+(10.3-9.7667)^2=0.4467",
+      "SS_3=(15.2-15.3)^2+(16.1-15.3)^2+(14.6-15.3)^2=1.14",
+      "SS_4=(11-11.5667)^2+(12.2-11.5667)^2+(11.5-11.5667)^2=0.7267",
+      "SS_{wit\\,subjs}=1.68+0.4467+1.14+0.7267=3.9933"
+     ],
+     "words": "Each subject is compared only with its own mean, so differences between subjects never enter this sum. It holds the treatment effect plus residual scatter."
+    },
+    {
+     "title": "Calculate the treatment sum of squares",
+     "general": [
+      "SS_{treat}=n\\sum_{t=1}^{m}(\\bar T_t-\\bar X)^2"
+     ],
+     "work": [
+      "SS_{treat}=4\\left[(12.05-12.3083)^2+(12.825-12.3083)^2+(12.05-12.3083)^2\\right]=1.6017"
+     ],
+     "words": "Multiply by n because each treatment mean involves n subjects."
+    },
+    {
+     "title": "Calculate the residual sum of squares",
+     "general": [
+      "SS_{res}=SS_{wit\\,subjs}-SS_{treat}"
+     ],
+     "work": [
+      "SS_{res}=3.9933-1.6017=2.3917"
+     ],
+     "words": "The residual is the within-subject variation that the treatment means do not explain."
+    },
+    {
+     "title": "Find the degrees of freedom and mean squares",
+     "general": [
+      "DF_{treat}=m-1,\\quad DF_{res}=(n-1)(m-1)",
+      "MS_{treat}=\\frac{SS_{treat}}{DF_{treat}},\\quad MS_{res}=\\frac{SS_{res}}{DF_{res}}"
+     ],
+     "work": [
+      "DF_{treat}=3-1=2,\\quad DF_{res}=(4-1)(3-1)=6",
+      "MS_{treat}=\\frac{1.6017}{2}=0.800833,\\quad MS_{res}=\\frac{2.3917}{6}=0.398611"
+     ],
+     "words": "Each sum of squares is divided by its own degrees of freedom to give a variance estimate."
+    },
+    {
+     "title": "Calculate the F statistic",
+     "general": [
+      "F=\\frac{MS_{treat}}{MS_{res}}"
+     ],
+     "work": [
+      "F=\\frac{0.800833}{0.398611}=2.0091"
+     ],
+     "words": "Treatment variance is compared with residual variance. Values near 1 or below are what equal treatment means produce."
+    },
+    {
+     "title": "Find the critical value",
+     "general": [
+      "F_{crit}=F_{\\alpha}(DF_{treat},DF_{res})=F_{\\alpha}(\\nu_n,\\nu_d)"
+     ],
+     "work": [
+      "F_{0.05}(2,6)=5.14",
+      "F_{0.01}(2,6)=10.92"
+     ],
+     "words": "Start with α = 0.05. Open F_table.pdf, PDF page 1. Use numerator column ν_n=2 and denominator row ν_d=6. The lightface entry 5.14 is the 0.05 cutoff and the boldface entry 10.92 is the 0.01 cutoff. Swapping the two df selects a different, wrong cell.",
+     "classTable": {
+      "path": "sources/tables/F_table.pdf",
+      "page": 1,
+      "row": "6",
+      "column": "2 (0.05 lightface)",
+      "value": 5.14,
+      "actualDf": [
+       2,
+       6
+      ],
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision",
+     "general": [
+      "F>F_{crit}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "F=2.0091<5.14"
+     ],
+     "words": "The F statistic is below the 0.05 cutoff, so do not reject the null hypothesis (P > 0.05)."
+    }
+   ],
+   "conclusion": "F = 2.009 with 2 and 6 degrees of freedom is below F_0.05(2,6) = 5.14. Do not reject H0 (P > 0.05). There is no evidence of a difference in mean motion coherence threshold under the three dot colours. In plain words, this study does not show that the colour of the dots changes how well people see which way they move. No pairwise comparisons are made because the overall test does not reject.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/F_table.pdf",
+    "page": 1,
+    "row": "6",
+    "column": "2 (0.05 lightface)",
+    "value": 5.14,
+    "actualDf": [
+     2,
+     6
+    ],
+    "approximation": false
+   },
+   "values": {
+    "n": 4,
+    "m": 3,
+    "subjectMeans": [
+     12.6,
+     9.766666666666667,
+     15.299999999999999,
+     11.566666666666668
+    ],
+    "treatmentMeans": [
+     12.05,
+     12.825,
+     12.05
+    ],
+    "grandMean": 12.308333333333332,
+    "subjectSS": [
+     1.6799999999999982,
+     0.4466666666666673,
+     1.1400000000000028,
+     0.7266666666666658
+    ],
+    "ssWithin": 3.993333333333334,
+    "ssTreat": 1.6016666666666608,
+    "ssRes": 2.3916666666666733,
+    "ssBetween": 48.13583333333329,
+    "ssTotal": 52.12916666666667,
+    "dfTreat": 2,
+    "dfRes": 6,
+    "msTreat": 0.8008333333333304,
+    "msRes": 0.3986111111111122,
+    "F": 2.0090592334494644,
+    "exactP": 0.21483016502609573,
+    "critical": 5.14,
+    "critical01": 10.92,
+    "reject": false,
+    "pRange": "P>0.05"
+   },
+   "module": 21,
+   "tolerance": 0.010045,
+   "answerName": "F statistic",
+   "answer": 2.0090592334494644
+  },
+  {
+   "id": "n21-b-tremor-dbs",
+   "title": "Stuttering before and after fluency shaping therapy",
+   "topic": "s21mcnemar",
+   "context": "In a clinical trial, 38 adults referred to a speech clinic for stuttering (speech broken by repeated sounds, stretched sounds and blocks) were examined before and again three months after starting fluency shaping therapy (practice in slow speech with a gentle start to each phrase). At each visit a speech-language pathologist (a clinician who assesses and treats speech disorders) recorded whether stuttering was present or absent while the patient read a passage aloud. The table below shows the number of patients with each pair of results.",
+   "unit": "patients",
+   "table": {
+    "headers": [
+     "Before (rows) by After (columns)",
+     "After therapy: stuttering present",
+     "After therapy: stuttering absent"
+    ],
+    "rows": [
+     [
+      "Before therapy: stuttering present",
+      12,
+      15
+     ],
+     [
+      "Before therapy: stuttering absent",
+      3,
+      8
+     ]
+    ]
+   },
+   "tasks": [
+    "Based on the recorded data, is there evidence that the presence of stuttering is different before and after fluency shaping therapy? DO NOT use R.",
+    "Use a significance level of \\(\\alpha=0.05\\) for your inference and apply the Yates correction (the continuity correction for a 2 x 2 table). Please state how you reached your conclusions."
+   ],
+   "hypotheses": {
+    "null": "H_0:P(\\text{present}\\to\\text{absent})=P(\\text{absent}\\to\\text{present})",
+    "alternative": "H_A:P(\\text{present}\\to\\text{absent})\\ne P(\\text{absent}\\to\\text{present})",
+    "nullWords": "Fluency shaping therapy has no effect on the presence of stuttering, so a patient whose result changes is equally likely to change from present to absent as from absent to present.",
+    "alternativeWords": "The two directions of change are not equally likely, so the presence of stuttering differs before and after the therapy."
+   },
+   "symbols": "\\(a,d\\) (subjects with the same result both times), \\(b,c\\) (subjects whose result changes), \\(E\\) (expected number in each change cell), \\(\\chi^2\\) (McNemar chi-square), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "State the procedure",
+     "general": [
+      "\\begin{array}{c|cc}&\\text{O1}&\\text{O2}\\\\\\hline \\text{O1}&a&b\\\\ \\text{O2}&c&d\\end{array}"
+     ],
+     "work": [
+      "a=12,\\ b=15,\\ c=3,\\ d=8"
+     ],
+     "words": "Each patient is classified twice, before and after the therapy, so the two classifications are paired nominal data. This design is the nominal version of the paired t test, and the procedure is McNemar's test."
+    },
+    {
+     "title": "State the hypotheses",
+     "general": [
+      "H_0:P(\\text{O1}\\to\\text{O2})=P(\\text{O2}\\to\\text{O1})"
+     ],
+     "work": [
+      "H_0:P(\\text{present}\\to\\text{absent})=P(\\text{absent}\\to\\text{present})"
+     ],
+     "words": "Fluency shaping therapy has no effect on the presence of stuttering, so a patient whose result changes is equally likely to change from present to absent as from absent to present. The two directions of change are not equally likely, so the presence of stuttering differs before and after the therapy."
+    },
+    {
+     "title": "Show why the independent chi-square is wrong here",
+     "general": [
+      "E_{ij}=\\frac{R_iC_j}{N},\\quad \\chi^2=\\sum_i\\sum_j\\frac{(|O_{ij}-E_{ij}|-\\frac12)^2}{E_{ij}}"
+     ],
+     "work": [
+      "E_{11}=\\frac{27(15)}{38}=10.6579,\\ E_{12}=16.3421,\\ E_{21}=4.3421,\\ E_{22}=6.6579",
+      "\\chi^2=0.38<\\chi^2_{0.05}(1)=3.841"
+     ],
+     "words": "Treating the before and after results as two independent samples gives chi-square = 0.38, which would wrongly suggest no change. The rows and columns describe the same patients, so they are not independent and this test is not valid for the design."
+    },
+    {
+     "title": "Identify the subjects who change",
+     "general": [
+      "b=\\text{O1}\\to\\text{O2},\\quad c=\\text{O2}\\to\\text{O1}"
+     ],
+     "work": [
+      "b=15,\\quad c=3,\\quad b+c=18"
+     ],
+     "words": "Only discordant subjects carry information about a change. Here b counts patients with stuttering present before and absent after and c counts patients with stuttering absent before and present after. The concordant cells a = 12 and d = 8 do not enter the statistic."
+    },
+    {
+     "title": "Calculate the expected number in each change cell",
+     "general": [
+      "E=\\frac{b+c}{2}"
+     ],
+     "work": [
+      "E=\\frac{15+3}{2}=9"
+     ],
+     "words": "If the null hypothesis is true, the changes split evenly in the two directions."
+    },
+    {
+     "title": "Calculate the McNemar chi-square with Yates correction",
+     "general": [
+      "\\chi^2=\\frac{(|b-E|-\\frac12)^2}{E}+\\frac{(|c-E|-\\frac12)^2}{E}"
+     ],
+     "work": [
+      "\\chi^2=\\frac{(|15-9|-\\frac12)^2}{9}+\\frac{(|3-9|-\\frac12)^2}{9}=6.7222"
+     ],
+     "words": "Subtract one half from each absolute difference before squaring because the table is 2 x 2 (Yates correction)."
+    },
+    {
+     "title": "Find the critical value",
+     "general": [
+      "\\nu=1,\\quad \\chi^2_{crit}=\\chi^2_{\\alpha}(1)"
+     ],
+     "work": [
+      "\\chi^2_{0.05}(1)=3.841"
+     ],
+     "words": "Start with α = 0.05. Open Chi_Squared_Table2.pdf, PDF page 1. Row df = 1, column χ².050 gives 3.841. The same row gives 2.706 in the .100 column, 5.024 in the .025 column, 6.635 in the .010 column and 7.879 in the .005 column for a P range.",
+     "classTable": {
+      "path": "sources/tables/Chi_Squared_Table2.pdf",
+      "page": 1,
+      "row": "1",
+      "column": "0.050",
+      "value": 3.841,
+      "actualDf": 1,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision",
+     "general": [
+      "\\chi^2>\\chi^2_{crit}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "\\chi^2=6.7222>3.841,\\quad 0.005<P<0.01"
+     ],
+     "words": "Reject the null hypothesis because the statistic is above the cutoff. The P range is 0.005<P<0.01."
+    }
+   ],
+   "conclusion": "McNemar chi-square = 6.722 with 1 df exceeds chi-square_0.05(1) = 3.841 and chi-square_0.01(1) = 6.635 but not chi-square_0.005(1) = 7.879. Reject H0, 0.005 < P < 0.01. There is a difference in the presence of stuttering before and after fluency shaping therapy. Of the 18 patients who changed, 15 went from present to absent and 3 went from absent to present.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/Chi_Squared_Table2.pdf",
+    "page": 1,
+    "row": "1",
+    "column": "0.050",
+    "value": 3.841,
+    "actualDf": 1,
+    "approximation": false
+   },
+   "values": {
+    "a": 12,
+    "b": 15,
+    "c": 3,
+    "d": 8,
+    "N": 38,
+    "E": 9,
+    "chi2": 6.722222222222222,
+    "df": 1,
+    "critical": 3.841,
+    "reject": true,
+    "pRange": "0.005<P<0.01",
+    "exactP": 0.009521891184098834,
+    "independentChi2": 0.3797589420777827,
+    "independentExpected": [
+     [
+      10.657894736842104,
+      16.342105263157894
+     ],
+     [
+      4.342105263157895,
+      6.657894736842105
+     ]
+    ]
+   },
+   "module": 21,
+   "tolerance": 0.033611,
+   "answerName": "Chi-square",
+   "answer": 6.722222222222222
+  },
+  {
+   "id": "n21-b-phantom-pain-mirror",
+   "title": "Phantom limb pain before and after mirror therapy",
+   "topic": "s21mcnemar",
+   "context": "A study was reported concerning phantom limb pain (pain felt in a limb that has been amputated). Twenty-eight amputees were asked whether they had felt phantom limb pain in the past week. Each subject was asked before and again after four weeks of mirror therapy (watching the reflection of the intact limb move in a mirror placed where the missing limb would be). The table below shows the number of subjects with each pair of answers.",
+   "unit": "subjects",
+   "table": {
+    "headers": [
+     "Before (rows) by After (columns)",
+     "After therapy: pain",
+     "After therapy: no pain"
+    ],
+    "rows": [
+     [
+      "Before therapy: pain",
+      6,
+      15
+     ],
+     [
+      "Before therapy: no pain",
+      5,
+      2
+     ]
+    ]
+   },
+   "tasks": [
+    "Based on the recorded data, is there evidence that the presence of phantom limb pain is different before and after mirror therapy? DO NOT use R.",
+    "Use a significance level of \\(\\alpha=0.05\\) for your inference and apply the Yates correction (the continuity correction for a 2 x 2 table). Please state how you reached your conclusions."
+   ],
+   "hypotheses": {
+    "null": "H_0:P(\\text{pain}\\to\\text{no pain})=P(\\text{no pain}\\to\\text{pain})",
+    "alternative": "H_A:P(\\text{pain}\\to\\text{no pain})\\ne P(\\text{no pain}\\to\\text{pain})",
+    "nullWords": "Mirror therapy has no effect on phantom limb pain, so a subject whose answer changes is equally likely to change from pain to no pain as from no pain to pain.",
+    "alternativeWords": "The two directions of change are not equally likely, so the presence of phantom limb pain differs before and after mirror therapy."
+   },
+   "symbols": "\\(a,d\\) (subjects with the same result both times), \\(b,c\\) (subjects whose result changes), \\(E\\) (expected number in each change cell), \\(\\chi^2\\) (McNemar chi-square), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "State the procedure",
+     "general": [
+      "\\begin{array}{c|cc}&\\text{O1}&\\text{O2}\\\\\\hline \\text{O1}&a&b\\\\ \\text{O2}&c&d\\end{array}"
+     ],
+     "work": [
+      "a=6,\\ b=15,\\ c=5,\\ d=2"
+     ],
+     "words": "Each amputee answers twice, before and after the therapy, so the two answers are paired nominal data. This design is the nominal version of the paired t test, and the procedure is McNemar's test."
+    },
+    {
+     "title": "State the hypotheses",
+     "general": [
+      "H_0:P(\\text{O1}\\to\\text{O2})=P(\\text{O2}\\to\\text{O1})"
+     ],
+     "work": [
+      "H_0:P(\\text{pain}\\to\\text{no pain})=P(\\text{no pain}\\to\\text{pain})"
+     ],
+     "words": "Mirror therapy has no effect on phantom limb pain, so a subject whose answer changes is equally likely to change from pain to no pain as from no pain to pain. The two directions of change are not equally likely, so the presence of phantom limb pain differs before and after mirror therapy."
+    },
+    {
+     "title": "Show why the independent chi-square is wrong here",
+     "general": [
+      "E_{ij}=\\frac{R_iC_j}{N},\\quad \\chi^2=\\sum_i\\sum_j\\frac{(|O_{ij}-E_{ij}|-\\frac12)^2}{E_{ij}}"
+     ],
+     "work": [
+      "E_{11}=\\frac{21(11)}{28}=8.25,\\ E_{12}=12.75,\\ E_{21}=2.75,\\ E_{22}=4.25",
+      "\\chi^2=2.446<\\chi^2_{0.05}(1)=3.841"
+     ],
+     "words": "Treating the before and after answers as two independent samples gives chi-square = 2.446, which would wrongly suggest no change. The rows and columns describe the same subjects, so they are not independent and this test is not valid for the design."
+    },
+    {
+     "title": "Identify the subjects who change",
+     "general": [
+      "b=\\text{O1}\\to\\text{O2},\\quad c=\\text{O2}\\to\\text{O1}"
+     ],
+     "work": [
+      "b=15,\\quad c=5,\\quad b+c=20"
+     ],
+     "words": "Only discordant subjects carry information about a change. Here b counts subjects with pain before and no pain after and c counts subjects with no pain before and pain after. The concordant cells a = 6 and d = 2 do not enter the statistic."
+    },
+    {
+     "title": "Calculate the expected number in each change cell",
+     "general": [
+      "E=\\frac{b+c}{2}"
+     ],
+     "work": [
+      "E=\\frac{15+5}{2}=10"
+     ],
+     "words": "If the null hypothesis is true, the changes split evenly in the two directions."
+    },
+    {
+     "title": "Calculate the McNemar chi-square with Yates correction",
+     "general": [
+      "\\chi^2=\\frac{(|b-E|-\\frac12)^2}{E}+\\frac{(|c-E|-\\frac12)^2}{E}"
+     ],
+     "work": [
+      "\\chi^2=\\frac{(|15-10|-\\frac12)^2}{10}+\\frac{(|5-10|-\\frac12)^2}{10}=4.05"
+     ],
+     "words": "Subtract one half from each absolute difference before squaring because the table is 2 x 2 (Yates correction)."
+    },
+    {
+     "title": "Find the critical value",
+     "general": [
+      "\\nu=1,\\quad \\chi^2_{crit}=\\chi^2_{\\alpha}(1)"
+     ],
+     "work": [
+      "\\chi^2_{0.05}(1)=3.841"
+     ],
+     "words": "Start with α = 0.05. Open Chi_Squared_Table2.pdf, PDF page 1. Row df = 1, column χ².050 gives 3.841. The same row gives 2.706 in the .100 column, 5.024 in the .025 column, 6.635 in the .010 column and 7.879 in the .005 column for a P range.",
+     "classTable": {
+      "path": "sources/tables/Chi_Squared_Table2.pdf",
+      "page": 1,
+      "row": "1",
+      "column": "0.050",
+      "value": 3.841,
+      "actualDf": 1,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision",
+     "general": [
+      "\\chi^2>\\chi^2_{crit}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "\\chi^2=4.05>3.841,\\quad 0.025<P<0.05"
+     ],
+     "words": "Reject the null hypothesis because the statistic is above the cutoff. The P range is 0.025<P<0.05."
+    }
+   ],
+   "conclusion": "McNemar chi-square = 4.05 with 1 df exceeds chi-square_0.05(1) = 3.841 but not chi-square_0.025(1) = 5.024. Reject H0, 0.025 < P < 0.05. There is a difference in the presence of phantom limb pain before and after mirror therapy. Of the 20 subjects who changed, 15 lost the pain and 5 gained it. The statistic is only a little above the cutoff, so the evidence is modest.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/Chi_Squared_Table2.pdf",
+    "page": 1,
+    "row": "1",
+    "column": "0.050",
+    "value": 3.841,
+    "actualDf": 1,
+    "approximation": false
+   },
+   "values": {
+    "a": 6,
+    "b": 15,
+    "c": 5,
+    "d": 2,
+    "N": 28,
+    "E": 10,
+    "chi2": 4.05,
+    "df": 1,
+    "critical": 3.841,
+    "reject": true,
+    "pRange": "0.025<P<0.05",
+    "exactP": 0.0441713449084427,
+    "independentChi2": 2.445632798573975,
+    "independentExpected": [
+     [
+      8.25,
+      12.75
+     ],
+     [
+      2.75,
+      4.25
+     ]
+    ]
+   },
+   "module": 21,
+   "tolerance": 0.02025,
+   "answerName": "Chi-square",
+   "answer": 4.05
+  },
+  {
+   "id": "n21-b-neglect-prism",
+   "title": "Spatial neglect before and after prism adaptation",
+   "topic": "s21mcnemar",
+   "context": "Researchers interested in spatial neglect (failure to notice objects on one side of space after a stroke) did a study to evaluate prism adaptation (pointing practice while wearing glasses that shift the visual scene to one side). Thirty stroke patients took a line bisection test (marking the middle of a printed line) before and again after one session of prism adaptation. At each test the patient was classified as showing neglect or not showing neglect. The table below shows the number of patients with each pair of results.",
+   "unit": "patients",
+   "table": {
+    "headers": [
+     "Before (rows) by After (columns)",
+     "After session: neglect",
+     "After session: no neglect"
+    ],
+    "rows": [
+     [
+      "Before session: neglect",
+      9,
+      8
+     ],
+     [
+      "Before session: no neglect",
+      4,
+      9
+     ]
+    ]
+   },
+   "tasks": [
+    "Based on the recorded data, is there evidence that the presence of neglect is different before and after the prism adaptation session? DO NOT use R.",
+    "Use a significance level of \\(\\alpha=0.05\\) for your inference and apply the Yates correction (the continuity correction for a 2 x 2 table). Provide your result in a single complete sentence that would convey your conclusion in a way that could be understood by a non-expert in statistics or medicine (e.g., a typical reader of a local newspaper)."
+   ],
+   "hypotheses": {
+    "null": "H_0:P(\\text{neglect}\\to\\text{no neglect})=P(\\text{no neglect}\\to\\text{neglect})",
+    "alternative": "H_A:P(\\text{neglect}\\to\\text{no neglect})\\ne P(\\text{no neglect}\\to\\text{neglect})",
+    "nullWords": "One session of prism adaptation has no effect on neglect, so a patient whose result changes is equally likely to change from neglect to no neglect as from no neglect to neglect.",
+    "alternativeWords": "The two directions of change are not equally likely, so the presence of neglect differs before and after the session."
+   },
+   "symbols": "\\(a,d\\) (subjects with the same result both times), \\(b,c\\) (subjects whose result changes), \\(E\\) (expected number in each change cell), \\(\\chi^2\\) (McNemar chi-square), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "State the procedure",
+     "general": [
+      "\\begin{array}{c|cc}&\\text{O1}&\\text{O2}\\\\\\hline \\text{O1}&a&b\\\\ \\text{O2}&c&d\\end{array}"
+     ],
+     "work": [
+      "a=9,\\ b=8,\\ c=4,\\ d=9"
+     ],
+     "words": "Each patient is classified twice, before and after the session, so the two classifications are paired nominal data. This design is the nominal version of the paired t test, and the procedure is McNemar's test."
+    },
+    {
+     "title": "State the hypotheses",
+     "general": [
+      "H_0:P(\\text{O1}\\to\\text{O2})=P(\\text{O2}\\to\\text{O1})"
+     ],
+     "work": [
+      "H_0:P(\\text{neglect}\\to\\text{no neglect})=P(\\text{no neglect}\\to\\text{neglect})"
+     ],
+     "words": "One session of prism adaptation has no effect on neglect, so a patient whose result changes is equally likely to change from neglect to no neglect as from no neglect to neglect. The two directions of change are not equally likely, so the presence of neglect differs before and after the session."
+    },
+    {
+     "title": "Show why the independent chi-square is wrong here",
+     "general": [
+      "E_{ij}=\\frac{R_iC_j}{N},\\quad \\chi^2=\\sum_i\\sum_j\\frac{(|O_{ij}-E_{ij}|-\\frac12)^2}{E_{ij}}"
+     ],
+     "work": [
+      "E_{11}=\\frac{17(13)}{30}=7.3667,\\ E_{12}=9.6333,\\ E_{21}=5.6333,\\ E_{22}=7.3667",
+      "\\chi^2=0.71<\\chi^2_{0.05}(1)=3.841"
+     ],
+     "words": "Treating the before and after results as two independent samples gives chi-square = 0.71. That number also falls below the cutoff here, but it comes from the wrong test. The rows and columns describe the same patients, so they are not independent and this test is not valid for the design."
+    },
+    {
+     "title": "Identify the subjects who change",
+     "general": [
+      "b=\\text{O1}\\to\\text{O2},\\quad c=\\text{O2}\\to\\text{O1}"
+     ],
+     "work": [
+      "b=8,\\quad c=4,\\quad b+c=12"
+     ],
+     "words": "Only discordant subjects carry information about a change. Here b counts patients with neglect before and no neglect after and c counts patients with no neglect before and neglect after. The concordant cells a = 9 and d = 9 do not enter the statistic."
+    },
+    {
+     "title": "Calculate the expected number in each change cell",
+     "general": [
+      "E=\\frac{b+c}{2}"
+     ],
+     "work": [
+      "E=\\frac{8+4}{2}=6"
+     ],
+     "words": "If the null hypothesis is true, the changes split evenly in the two directions."
+    },
+    {
+     "title": "Calculate the McNemar chi-square with Yates correction",
+     "general": [
+      "\\chi^2=\\frac{(|b-E|-\\frac12)^2}{E}+\\frac{(|c-E|-\\frac12)^2}{E}"
+     ],
+     "work": [
+      "\\chi^2=\\frac{(|8-6|-\\frac12)^2}{6}+\\frac{(|4-6|-\\frac12)^2}{6}=0.75"
+     ],
+     "words": "Subtract one half from each absolute difference before squaring because the table is 2 x 2 (Yates correction)."
+    },
+    {
+     "title": "Find the critical value",
+     "general": [
+      "\\nu=1,\\quad \\chi^2_{crit}=\\chi^2_{\\alpha}(1)"
+     ],
+     "work": [
+      "\\chi^2_{0.05}(1)=3.841"
+     ],
+     "words": "Start with α = 0.05. Open Chi_Squared_Table2.pdf, PDF page 1. Row df = 1, column χ².050 gives 3.841. The same row gives 2.706 in the .100 column, 5.024 in the .025 column, 6.635 in the .010 column and 7.879 in the .005 column for a P range.",
+     "classTable": {
+      "path": "sources/tables/Chi_Squared_Table2.pdf",
+      "page": 1,
+      "row": "1",
+      "column": "0.050",
+      "value": 3.841,
+      "actualDf": 1,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision",
+     "general": [
+      "\\chi^2>\\chi^2_{crit}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "\\chi^2=0.75<3.841,\\quad P>0.10"
+     ],
+     "words": "Do not reject the null hypothesis because the statistic is below the cutoff. The P range is P>0.10."
+    }
+   ],
+   "conclusion": "McNemar chi-square = 0.75 with 1 df is below chi-square_0.05(1) = 3.841 and also below chi-square_0.10(1) = 2.706. Do not reject H0 (P > 0.10). There is no evidence that the presence of neglect is different before and after one prism adaptation session. In plain words, this study does not show that one session of prism practice changes how many stroke patients show neglect on the line test.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/Chi_Squared_Table2.pdf",
+    "page": 1,
+    "row": "1",
+    "column": "0.050",
+    "value": 3.841,
+    "actualDf": 1,
+    "approximation": false
+   },
+   "values": {
+    "a": 9,
+    "b": 8,
+    "c": 4,
+    "d": 9,
+    "N": 30,
+    "E": 6,
+    "chi2": 0.75,
+    "df": 1,
+    "critical": 3.841,
+    "reject": false,
+    "pRange": "P>0.10",
+    "exactP": 0.3864762307712325,
+    "independentChi2": 0.7100591715976334,
+    "independentExpected": [
+     [
+      7.366666666666666,
+      9.633333333333333
+     ],
+     [
+      5.633333333333334,
+      7.366666666666666
+     ]
+    ]
+   },
+   "module": 21,
+   "tolerance": 0.00375,
+   "answerName": "Chi-square",
+   "answer": 0.75
+  },
+  {
+   "id": "n21-b-memory-screen-neuropsych",
+   "title": "Computerized memory screening test against a neuropsychologist",
+   "topic": "s21diagnostic",
+   "context": "In a study looking at screening for dementia, 36 patients referred to a memory clinic were each assessed by two methods. A five-minute computerized screening test classified each patient as impaired or not impaired. A neuropsychologist (a clinician who gives a full set of memory and thinking tests) made the same classification without seeing the screening result. The table below shows the number of patients with each pair of classifications.",
+   "unit": "patients",
+   "table": {
+    "headers": [
+     "Screening test (rows) by Neuropsychologist (columns)",
+     "Neuropsychologist: impaired",
+     "Neuropsychologist: not impaired"
+    ],
+    "rows": [
+     [
+      "Screening test: impaired",
+      11,
+      13
+     ],
+     [
+      "Screening test: not impaired",
+      4,
+      8
+     ]
+    ]
+   },
+   "tasks": [
+    "Based on the recorded data, is there evidence that the proportion of patients classified as impaired is different for the two methods? Use a chi-square test. DO NOT use R.",
+    "Use a significance level of \\(\\alpha=0.05\\) for your inference and apply the Yates correction (the continuity correction for a 2 x 2 table). Please state how you reached your conclusions."
+   ],
+   "hypotheses": {
+    "null": "H_0:P(\\text{screen}+,\\ \\text{neuropsychologist}-)=P(\\text{screen}-,\\ \\text{neuropsychologist}+)",
+    "alternative": "H_A:P(\\text{screen}+,\\ \\text{neuropsychologist}-)\\ne P(\\text{screen}-,\\ \\text{neuropsychologist}+)",
+    "nullWords": "There is no difference between the screening test and the neuropsychologist in how often a patient is classified as impaired, so disagreements are equally likely in either direction.",
+    "alternativeWords": "The two methods differ in how often they classify a patient as impaired."
+   },
+   "symbols": "\\(a,d\\) (subjects with the same result both times), \\(b,c\\) (subjects whose result changes), \\(E\\) (expected number in each change cell), \\(\\chi^2\\) (McNemar chi-square), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "State the procedure",
+     "general": [
+      "\\begin{array}{c|cc}&\\text{O1}&\\text{O2}\\\\\\hline \\text{O1}&a&b\\\\ \\text{O2}&c&d\\end{array}"
+     ],
+     "work": [
+      "a=11,\\ b=13,\\ c=4,\\ d=8"
+     ],
+     "words": "Both methods classify the same 36 patients, so the results are paired nominal data. The procedure is McNemar's test, which compares two diagnostic procedures applied to the same people."
+    },
+    {
+     "title": "State the hypotheses",
+     "general": [
+      "H_0:P(\\text{O1}\\to\\text{O2})=P(\\text{O2}\\to\\text{O1})"
+     ],
+     "work": [
+      "H_0:P(\\text{screen}+,\\ \\text{neuropsychologist}-)=P(\\text{screen}-,\\ \\text{neuropsychologist}+)"
+     ],
+     "words": "There is no difference between the screening test and the neuropsychologist in how often a patient is classified as impaired, so disagreements are equally likely in either direction. The two methods differ in how often they classify a patient as impaired."
+    },
+    {
+     "title": "Identify the subjects who change",
+     "general": [
+      "b=\\text{O1}\\to\\text{O2},\\quad c=\\text{O2}\\to\\text{O1}"
+     ],
+     "work": [
+      "b=13,\\quad c=4,\\quad b+c=17"
+     ],
+     "words": "Only discordant subjects carry information about a change. Here b counts patients called impaired by the screening test but not by the neuropsychologist and c counts patients called impaired by the neuropsychologist but not by the screening test. The concordant cells a = 11 and d = 8 do not enter the statistic."
+    },
+    {
+     "title": "Calculate the expected number in each change cell",
+     "general": [
+      "E=\\frac{b+c}{2}"
+     ],
+     "work": [
+      "E=\\frac{13+4}{2}=8.5"
+     ],
+     "words": "If the null hypothesis is true, the changes split evenly in the two directions."
+    },
+    {
+     "title": "Calculate the McNemar chi-square with Yates correction",
+     "general": [
+      "\\chi^2=\\frac{(|b-E|-\\frac12)^2}{E}+\\frac{(|c-E|-\\frac12)^2}{E}"
+     ],
+     "work": [
+      "\\chi^2=\\frac{(|13-8.5|-\\frac12)^2}{8.5}+\\frac{(|4-8.5|-\\frac12)^2}{8.5}=3.7647"
+     ],
+     "words": "Subtract one half from each absolute difference before squaring because the table is 2 x 2 (Yates correction)."
+    },
+    {
+     "title": "Find the critical value",
+     "general": [
+      "\\nu=1,\\quad \\chi^2_{crit}=\\chi^2_{\\alpha}(1)"
+     ],
+     "work": [
+      "\\chi^2_{0.05}(1)=3.841"
+     ],
+     "words": "Start with α = 0.05. Open Chi_Squared_Table2.pdf, PDF page 1. Row df = 1, column χ².050 gives 3.841. The same row gives 2.706 in the .100 column, 5.024 in the .025 column, 6.635 in the .010 column and 7.879 in the .005 column for a P range.",
+     "classTable": {
+      "path": "sources/tables/Chi_Squared_Table2.pdf",
+      "page": 1,
+      "row": "1",
+      "column": "0.050",
+      "value": 3.841,
+      "actualDf": 1,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision",
+     "general": [
+      "\\chi^2>\\chi^2_{crit}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "\\chi^2=3.7647<3.841,\\quad 0.05<P<0.10"
+     ],
+     "words": "Do not reject the null hypothesis because the statistic is below the cutoff. The P range is 0.05<P<0.10."
+    }
+   ],
+   "conclusion": "McNemar chi-square = 3.765 with 1 df is slightly below chi-square_0.05(1) = 3.841 and above chi-square_0.10(1) = 2.706. Do not reject H0 (0.05 < P < 0.10). There is no evidence of a difference between the screening test and the neuropsychologist in the proportion of patients classified as impaired, even though the screening test alone calls 13 patients impaired and the neuropsychologist alone calls 4. The result is close to the cutoff, so a larger study could settle the question.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/Chi_Squared_Table2.pdf",
+    "page": 1,
+    "row": "1",
+    "column": "0.050",
+    "value": 3.841,
+    "actualDf": 1,
+    "approximation": false
+   },
+   "values": {
+    "a": 11,
+    "b": 13,
+    "c": 4,
+    "d": 8,
+    "N": 36,
+    "E": 8.5,
+    "chi2": 3.764705882352941,
+    "df": 1,
+    "critical": 3.841,
+    "reject": false,
+    "pRange": "0.05<P<0.10",
+    "exactP": 0.05234506327316321
+   },
+   "module": 21,
+   "tolerance": 0.018824,
+   "answerName": "Chi-square",
+   "answer": 3.764705882352941
+  },
+  {
+   "id": "n21-b-eeg-seizure-detector",
+   "title": "Acoustic voice analysis program against a speech-language pathologist",
+   "topic": "s21diagnostic",
+   "context": "The table below shows data on 40 voice recordings from a voice clinic. In each recording a patient held the vowel \"ah\" for 5 seconds. Each recording was classified as hoarse or not hoarse by an acoustic analysis program (software that measures how irregular the vibration of the vocal folds is from one cycle to the next). The same recordings were classified by a clinician (a speech-language pathologist, who assesses and treats voice and speech disorders) who listened to each recording and did not see the output of the program.",
+   "unit": "recordings",
+   "table": {
+    "headers": [
+     "Program (rows) by Clinician (columns)",
+     "Clinician: hoarse",
+     "Clinician: not hoarse"
+    ],
+    "rows": [
+     [
+      "Program: hoarse",
+      12,
+      1
+     ],
+     [
+      "Program: not hoarse",
+      14,
+      13
+     ]
+    ]
+   },
+   "tasks": [
+    "Based on the recorded data, is there evidence that the proportion of recordings classified as hoarse is different for the two methods? Use a chi-square test. DO NOT use R.",
+    "Use a significance level of \\(\\alpha=0.05\\) for your inference and apply the Yates correction (the continuity correction for a 2 x 2 table). Please state how you reached your conclusions."
+   ],
+   "hypotheses": {
+    "null": "H_0:P(\\text{program}+,\\ \\text{clinician}-)=P(\\text{program}-,\\ \\text{clinician}+)",
+    "alternative": "H_A:P(\\text{program}+,\\ \\text{clinician}-)\\ne P(\\text{program}-,\\ \\text{clinician}+)",
+    "nullWords": "There is no difference between the program and the clinician in how often a recording is classified as hoarse, so disagreements are equally likely in either direction.",
+    "alternativeWords": "The two methods differ in how often they classify a recording as hoarse."
+   },
+   "symbols": "\\(a,d\\) (subjects with the same result both times), \\(b,c\\) (subjects whose result changes), \\(E\\) (expected number in each change cell), \\(\\chi^2\\) (McNemar chi-square), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "State the procedure",
+     "general": [
+      "\\begin{array}{c|cc}&\\text{O1}&\\text{O2}\\\\\\hline \\text{O1}&a&b\\\\ \\text{O2}&c&d\\end{array}"
+     ],
+     "work": [
+      "a=12,\\ b=1,\\ c=14,\\ d=13"
+     ],
+     "words": "Both methods classify the same 40 recordings, so the results are paired nominal data. The procedure is McNemar's test, which compares two diagnostic procedures applied to the same subjects."
+    },
+    {
+     "title": "State the hypotheses",
+     "general": [
+      "H_0:P(\\text{O1}\\to\\text{O2})=P(\\text{O2}\\to\\text{O1})"
+     ],
+     "work": [
+      "H_0:P(\\text{program}+,\\ \\text{clinician}-)=P(\\text{program}-,\\ \\text{clinician}+)"
+     ],
+     "words": "There is no difference between the program and the clinician in how often a recording is classified as hoarse, so disagreements are equally likely in either direction. The two methods differ in how often they classify a recording as hoarse."
+    },
+    {
+     "title": "Identify the subjects who change",
+     "general": [
+      "b=\\text{O1}\\to\\text{O2},\\quad c=\\text{O2}\\to\\text{O1}"
+     ],
+     "work": [
+      "b=1,\\quad c=14,\\quad b+c=15"
+     ],
+     "words": "Only discordant subjects carry information about a change. Here b counts recordings called hoarse by the program but not by the clinician and c counts recordings called hoarse by the clinician but not by the program. The concordant cells a = 12 and d = 13 do not enter the statistic."
+    },
+    {
+     "title": "Calculate the expected number in each change cell",
+     "general": [
+      "E=\\frac{b+c}{2}"
+     ],
+     "work": [
+      "E=\\frac{1+14}{2}=7.5"
+     ],
+     "words": "If the null hypothesis is true, the changes split evenly in the two directions."
+    },
+    {
+     "title": "Calculate the McNemar chi-square with Yates correction",
+     "general": [
+      "\\chi^2=\\frac{(|b-E|-\\frac12)^2}{E}+\\frac{(|c-E|-\\frac12)^2}{E}"
+     ],
+     "work": [
+      "\\chi^2=\\frac{(|1-7.5|-\\frac12)^2}{7.5}+\\frac{(|14-7.5|-\\frac12)^2}{7.5}=9.6"
+     ],
+     "words": "Subtract one half from each absolute difference before squaring because the table is 2 x 2 (Yates correction)."
+    },
+    {
+     "title": "Find the critical value",
+     "general": [
+      "\\nu=1,\\quad \\chi^2_{crit}=\\chi^2_{\\alpha}(1)"
+     ],
+     "work": [
+      "\\chi^2_{0.05}(1)=3.841"
+     ],
+     "words": "Start with α = 0.05. Open Chi_Squared_Table2.pdf, PDF page 1. Row df = 1, column χ².050 gives 3.841. The same row gives 2.706 in the .100 column, 5.024 in the .025 column, 6.635 in the .010 column and 7.879 in the .005 column for a P range.",
+     "classTable": {
+      "path": "sources/tables/Chi_Squared_Table2.pdf",
+      "page": 1,
+      "row": "1",
+      "column": "0.050",
+      "value": 3.841,
+      "actualDf": 1,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision",
+     "general": [
+      "\\chi^2>\\chi^2_{crit}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "\\chi^2=9.6>3.841,\\quad P<0.005"
+     ],
+     "words": "Reject the null hypothesis because the statistic is above the cutoff. The P range is P<0.005."
+    }
+   ],
+   "conclusion": "McNemar chi-square = 9.6 with 1 df exceeds chi-square_0.005(1) = 7.879. Reject H0, P < 0.005. There is a difference between the two methods. The clinician classifies a recording as hoarse more often than the program does, with 14 recordings called hoarse by the clinician alone and 1 by the program alone.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/Chi_Squared_Table2.pdf",
+    "page": 1,
+    "row": "1",
+    "column": "0.050",
+    "value": 3.841,
+    "actualDf": 1,
+    "approximation": false
+   },
+   "values": {
+    "a": 12,
+    "b": 1,
+    "c": 14,
+    "d": 13,
+    "N": 40,
+    "E": 7.5,
+    "chi2": 9.6,
+    "df": 1,
+    "critical": 3.841,
+    "reject": true,
+    "pRange": "P<0.005",
+    "exactP": 0.001945773693739154
+   },
+   "module": 21,
+   "tolerance": 0.048,
+   "answerName": "Chi-square",
+   "answer": 9.6
+  }
+ ],
+ "questions": [
+  {
+   "id": "m2-n21-qb01",
+   "module": 21,
+   "topic": "s21rmAnova",
+   "stem": "In the study of word-list recall in 5 older adults, the treatment means are 10, 8 and 5.6 words (immediate, 20 minutes, 24 hours) and the grand mean is 7.8667 words. What is \\(SS_{treat}\\)?",
+   "options": [
+    "\\(9.7067\\)",
+    "\\(52.6667\\)",
+    "\\(48.5333\\)",
+    "\\(24.2667\\)"
+   ],
+   "correct": 2,
+   "why": "Multiply the sum of squared deviations of the treatment means (9.7067) by n = 5. Leaving out n gives 9.7067, 52.6667 is the within-subjects sum of squares and 24.2667 is the mean square.",
+   "case": "n21-b-recall-three-delays",
+   "equations": [
+    "SS_{treat}=n\\sum_t(\\bar T_t-\\bar X)^2",
+    "SS_{treat}=5(9.7067)=48.5333"
+   ]
+  },
+  {
+   "id": "m2-n21-qb02",
+   "module": 21,
+   "topic": "s21rmAnova",
+   "stem": "In the reach error study (6 volunteers, 3 practice blocks), \\(SS_{treat}=562.3333\\) and \\(SS_{res}=59\\). What is the repeated-measures F statistic?",
+   "options": [
+    "\\(47.655\\)",
+    "\\(0.021\\)",
+    "\\(57.186\\)",
+    "\\(9.531\\)"
+   ],
+   "correct": 0,
+   "why": "MS_treat = 562.3333/2 and MS_res = 59/10, so F = 47.655. Dividing SS_res by 12 uses the within-subjects df, and 9.531 is the ratio of the sums of squares without their df.",
+   "case": "n21-b-reach-error-blocks",
+   "equations": [
+    "F=\\frac{SS_{treat}/(m-1)}{SS_{res}/[(n-1)(m-1)]}",
+    "F=\\frac{281.167}{5.9}=47.655"
+   ]
+  },
+  {
+   "id": "m2-n21-qb03",
+   "module": 21,
+   "topic": "s21rmAnova",
+   "stem": "Contrast sensitivity is measured in the same 5 subjects under dim, medium and bright room lighting. Why is a repeated-measures ANOVA used here and not a one-way ANOVA?",
+   "options": [
+    "Because there are only 5 subjects, and a one-way ANOVA needs at least 10 per group",
+    "Because the same subjects are measured under all three conditions, so differences between subjects can be removed from the error term",
+    "Because contrast sensitivity is a nominal variable",
+    "Because three conditions always require a Holm correction before any F test"
+   ],
+   "correct": 1,
+   "why": "A one-way ANOVA assumes three independent groups. Here every subject gives three values, so the test uses the residual left after the subject differences are taken out.",
+   "case": null,
+   "equations": [
+    "SS_{res}=SS_{wit\\,subjs}-SS_{treat}"
+   ]
+  },
+  {
+   "id": "m2-n21-qb04",
+   "module": 21,
+   "topic": "s21holm",
+   "stem": "After the reach error ANOVA (n = 6, \\(MS_{res}=5.9\\), \\(DF_{res}=10\\)), what is the standard error of a difference between two block means?",
+   "options": [
+    "\\(0.99163\\)",
+    "\\(1.9667\\)",
+    "\\(1.0863\\)",
+    "\\(1.4024\\)"
+   ],
+   "correct": 3,
+   "why": "SE = sqrt(2 MS_res/n) with n = 6 subjects. Leaving out the 2 gives 0.99163, forgetting the square root gives 1.9667, and dividing by DF_res instead of n gives 1.0863.",
+   "case": "n21-b-reach-holm",
+   "equations": [
+    "SE=\\sqrt{\\frac{2MS_{res}}{n}}",
+    "SE=\\sqrt{\\frac{2(5.9)}{6}}=1.4024"
+   ]
+  },
+  {
+   "id": "m2-n21-qb05",
+   "module": 21,
+   "topic": "s21holm",
+   "stem": "A repeated-measures ANOVA on pupil diameter under three levels of mental load rejects equal means. Three pairwise t tests follow with the Holm correction and \\(\\alpha_T=0.05\\). At what level is the comparison with the largest \\(|t|\\) tested?",
+   "options": [
+    "\\(0.05/2=0.025\\)",
+    "\\(0.05/3=0.0167\\)",
+    "\\(0.05\\)",
+    "\\(0.05\\times 3=0.15\\)"
+   ],
+   "correct": 1,
+   "why": "With k = 3 comparisons the first Holm level is 0.05/(3 - 1 + 1) = 0.0167. The next two comparisons are tested at 0.025 and 0.05, and testing stops at the first one that is not significant.",
+   "case": null,
+   "equations": [
+    "\\alpha_j=\\frac{\\alpha_T}{k-j+1}",
+    "\\alpha_1=\\frac{0.05}{3}=0.0167"
+   ]
+  },
+  {
+   "id": "m2-n21-qb06",
+   "module": 21,
+   "topic": "s21mcnemar",
+   "stem": "In the stuttering study, 15 patients changed from stuttering present to stuttering absent after the therapy and 3 changed from absent to present (12 stayed present, 8 stayed absent). What is the McNemar chi-square with the Yates correction?",
+   "options": [
+    "\\(8\\)",
+    "\\(0.38\\)",
+    "\\(6.722\\)",
+    "\\(3.361\\)"
+   ],
+   "correct": 2,
+   "why": "E = (15 + 3)/2 = 9 and each term is (6 - 0.5)^2/9 = 3.361, so chi-square = 6.722. Leaving out the one half gives 8, and 0.38 is the independent-samples chi-square, which ignores the pairing.",
+   "case": "n21-b-tremor-dbs",
+   "equations": [
+    "\\chi^2=\\frac{(|b-E|-\\frac12)^2}{E}+\\frac{(|c-E|-\\frac12)^2}{E}",
+    "\\chi^2=\\frac{(|15-9|-\\frac12)^2}{9}+\\frac{(|3-9|-\\frac12)^2}{9}=6.722"
+   ]
+  },
+  {
+   "id": "m2-n21-qb07",
+   "module": 21,
+   "topic": "s21mcnemar",
+   "stem": "In the phantom limb pain study of 28 amputees, 6 had pain both times, 15 changed from pain to no pain, 5 changed from no pain to pain and 2 had no pain both times. What is the expected number E in each change cell?",
+   "options": [
+    "\\(10\\)",
+    "\\(7\\)",
+    "\\(14\\)",
+    "\\(20\\)"
+   ],
+   "correct": 0,
+   "why": "Only the 20 subjects who changed are used, and under the null hypothesis they split evenly, so E = (15 + 5)/2 = 10. Dividing all 28 subjects by 4 gives 7 and by 2 gives 14, and both wrongly include the subjects who did not change.",
+   "case": "n21-b-phantom-pain-mirror",
+   "equations": [
+    "E=\\frac{b+c}{2}",
+    "E=\\frac{15+5}{2}=10"
+   ]
+  },
+  {
+   "id": "m2-n21-qb08",
+   "module": 21,
+   "topic": "s21mcnemar",
+   "stem": "Thirty patients are classified as having a migraine aura or not in the month before and the month after starting a preventive drug. Which patients enter the McNemar chi-square?",
+   "options": [
+    "Only the patients with an aura in both months",
+    "All 30 patients, through the row and column totals",
+    "Only the patients with an aura in the first month",
+    "Only the patients whose classification changes between the two months"
+   ],
+   "correct": 3,
+   "why": "The statistic uses the two discordant cells b and c. Patients with the same result both times say nothing about the direction of change.",
+   "case": null,
+   "equations": [
+    "E=\\frac{b+c}{2}"
+   ]
+  },
+  {
+   "id": "m2-n21-qb09",
+   "module": 21,
+   "topic": "s21diagnostic",
+   "stem": "In the memory clinic study, 13 patients were called impaired by the screening test only and 4 by the neuropsychologist only. What is the McNemar chi-square with the Yates correction, and what is the decision at \\(\\alpha=0.05\\)?",
+   "options": [
+    "\\(\\chi^2=4.765\\), reject",
+    "\\(\\chi^2=3.765\\), do not reject",
+    "\\(\\chi^2=3.765\\), reject",
+    "\\(\\chi^2=1.882\\), do not reject"
+   ],
+   "correct": 1,
+   "why": "E = 8.5 and each term is (4.5 - 0.5)^2/8.5 = 1.882, so chi-square = 3.765, which is below 3.841. Leaving out the Yates correction gives 4.765 and a wrong rejection.",
+   "case": "n21-b-memory-screen-neuropsych",
+   "equations": [
+    "\\chi^2=\\frac{(|b-E|-\\frac12)^2}{E}+\\frac{(|c-E|-\\frac12)^2}{E}",
+    "\\chi^2=\\frac{(|13-8.5|-\\frac12)^2}{8.5}+\\frac{(|4-8.5|-\\frac12)^2}{8.5}=3.765<3.841"
+   ]
+  },
+  {
+   "id": "m2-n21-qb10",
+   "module": 21,
+   "topic": "s21diagnostic",
+   "stem": "Two radiologists each read the same 35 brain magnetic resonance imaging (MRI) scans and classify each scan as lesion or no lesion. Which procedure tests whether the two readers differ in how often they report a lesion?",
+   "options": [
+    "A chi-square test of independence on the 2 x 2 table of all 35 scans",
+    "An unpaired t test on the two readers",
+    "McNemar's test on the scans where the two readers disagree",
+    "A repeated-measures ANOVA with two conditions"
+   ],
+   "correct": 2,
+   "why": "Both readers classify the same scans, so the two sets of nominal results are paired. The ordinary chi-square test assumes independent samples and is not valid for this design.",
+   "case": null,
+   "equations": [
+    "\\chi^2=\\frac{(|b-E|-\\frac12)^2}{E}+\\frac{(|c-E|-\\frac12)^2}{E},\\quad \\nu=1"
+   ]
+  }
+ ],
+ "notes": [
+  "All data are invented for practice. Sources of printed critical values are F_table.pdf (rows 6, 8, 10, column 2), t_table.pdf page 1 (rows 8 and 10) and Chi_Squared_Table2.pdf (row df = 1).",
+  "Holm levels 0.0167 and 0.025 are not printed columns of the t table, so each is replaced by the next stricter printed column (0.01 and 0.02), as in the reference cases. No t statistic falls between the bracketing columns, so the decisions do not depend on this choice.",
+  "n21-b-motion-coherence-colour (repeated measures) and n21-b-neglect-prism and n21-b-memory-screen-neuropsych (McNemar) do not reject. n21-b-memory-screen-neuropsych (3.765) and n21-b-phantom-pain-mirror (4.05) are close to the 3.841 cutoff on either side.",
+  "The spec forbids colons and semicolons in tasks, words, context and conclusion, so the reference wording that used them was rephrased. Step titles of the form 'Comparison 1: A vs B' are kept exactly as in the reference Holm cases.",
+  "values.exactP is stored (same key as the reference cases) but no exact P is quoted in any solution text. Only printed-table P ranges are used.",
+  "The three s21mcnemar cases carry the extra step 'Show why the independent chi-square is wrong here' and the values keys independentChi2 and independentExpected, as in the reference p7 case. The two s21diagnostic cases follow the 7-step reference diagnostic case.",
+  "The two Holm cases reuse the unrounded treatment means and MS_res of their parent ANOVA case in values. The work lines show them rounded.",
+  "Wording review. His own phrases are restored in context and tasks with his punctuation, for example '(Note: If a difference exists, do not identify which delays are different.)' and 'Use a significance level of α = 0.05 for your inference.', and the two Holm cases now ask in his Holm wording. The check script allows the '(Note: ' tag in context and tasks only. No number, table cell, step or answer was changed.",
+  "Two settings overlapped with file a, so two stories were changed with every number kept. n21-b-tremor-dbs is now stuttering present or absent before and after fluency shaping therapy (file a keeps deep brain stimulation and tremor in n21-dbs-tremor-holm). n21-b-eeg-seizure-detector is now voice recordings classified as hoarse by an acoustic analysis program and by a speech-language pathologist (file a keeps the EEG spike detector). The two case ids are unchanged so that existing links keep working."
+ ]
+}
