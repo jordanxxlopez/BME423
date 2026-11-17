@@ -1,0 +1,1563 @@
+{
+ "cases": [
+  {
+   "id": "p22-hydrogel-scaffold-distance",
+   "title": "Three distances between two hydrogel scaffolds",
+   "topic": "s22distance",
+   "context": "In a tissue engineering lab, hydrogel scaffolds (water-swollen polymer networks on which cells are grown) were described by two features, stiffness in kilopascals (kPa) and mean pore size in micrometers (μm). The table below shows the two features for scaffold A and scaffold B. A small distance between the two scaffolds means that they are similar.",
+   "unit": "kPa and μm (unscaled)",
+   "table": {
+    "headers": [
+     "Scaffold",
+     "Stiffness (kPa)",
+     "Pore size (μm)"
+    ],
+    "rows": [
+     [
+      "Scaffold A",
+      12,
+      85
+     ],
+     [
+      "Scaffold B",
+      18,
+      77
+     ]
+    ]
+   },
+   "tasks": [
+    "Calculate the Euclidean distance and the Manhattan distance between scaffold A and scaffold B. Make sure to show your intermediate calculations.",
+    "Calculate the Minkowski distance with p = 3 and compare all three values."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(q,r\\) (two points or feature vectors), \\(q_i,r_i\\) (their \\(i\\)th coordinates), \\(m\\) (number of dimensions), \\(p\\) (Minkowski order), \\(d(q,r)\\) (distance).",
+   "steps": [
+    {
+     "title": "Coordinate differences",
+     "general": [
+      "\\Delta_i=|q_i-r_i|"
+     ],
+     "work": [
+      "\\Delta_1=|12-18|=6",
+      "\\Delta_2=|85-77|=8"
+     ],
+     "words": "Find the absolute difference for each feature first, then reuse them in every formula."
+    },
+    {
+     "title": "Euclidean distance",
+     "general": [
+      "d_2=\\sqrt{\\sum_i(q_i-r_i)^2}"
+     ],
+     "work": [
+      "d_2=\\sqrt{6^2+8^2}=\\sqrt{100}=10"
+     ],
+     "words": "Square, add and take the square root."
+    },
+    {
+     "title": "Manhattan distance",
+     "general": [
+      "d_1=\\sum_i|q_i-r_i|"
+     ],
+     "work": [
+      "d_1=6+8=14"
+     ],
+     "words": "Add the absolute differences."
+    },
+    {
+     "title": "Minkowski distance, p = 3",
+     "general": [
+      "d_p=\\left(\\sum_i|q_i-r_i|^p\\right)^{1/p}"
+     ],
+     "work": [
+      "d_3=(6^3+8^3)^{1/3}=728^{1/3}=8.99588"
+     ],
+     "words": "Cube, add and take the cube root."
+    },
+    {
+     "title": "Compare",
+     "general": [
+      "d_1\\ge d_2\\ge d_3"
+     ],
+     "work": [
+      "14\\ge 10\\ge 8.99588"
+     ],
+     "words": "Larger p puts more weight on the largest single difference, so the distance shrinks toward the largest difference, 8. The two features have different units, so in practice they would be scaled before the distance is used."
+    }
+   ],
+   "conclusion": "The Euclidean distance is 10, the Manhattan distance is 14, and the Minkowski distance with p = 3 is 8.99588. The features were used in their own units here, so a feature with larger numbers would count for more.",
+   "source": "Original practice example in the course style",
+   "lookup": null,
+   "values": {
+    "q": [
+     12,
+     85
+    ],
+    "r": [
+     18,
+     77
+    ],
+    "euclidean": 10.0,
+    "manhattan": 14.0,
+    "minkowski3": 8.995882890550828
+   },
+   "module": 22,
+   "tolerance": 0.05,
+   "answerName": "Distance (Euclidean)",
+   "answer": 10.0
+  },
+  {
+   "id": "p22-cardiometabolic-profile-distance",
+   "title": "Three distances between two cardiometabolic profiles",
+   "topic": "s22distance",
+   "context": "Systolic blood pressure (SBP; mmHg), low-density lipoprotein cholesterol (LDL; mg/dL) and fasting glucose (FG; mg/dL) were measured in 2 adult patients. The data were then standardized to avoid any issues associated with differences in scale; the scaled data are unitless. The table below shows the scaled values. A small distance between the two profiles means that the two patients are similar.",
+   "unit": "unitless (scaled)",
+   "table": {
+    "headers": [
+     "Patient",
+     "SBP",
+     "LDL",
+     "FG"
+    ],
+    "rows": [
+     [
+      1,
+      2,
+      5,
+      3
+     ],
+     [
+      2,
+      6,
+      2,
+      4
+     ]
+    ]
+   },
+   "tasks": [
+    "Calculate the Euclidean distance and the Manhattan distance between patient 1 and patient 2. Make sure to show your intermediate calculations.",
+    "Calculate the Minkowski distance with p = 3 and compare all three values."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(q,r\\) (two points or feature vectors), \\(q_i,r_i\\) (their \\(i\\)th coordinates), \\(m\\) (number of dimensions), \\(p\\) (Minkowski order), \\(d(q,r)\\) (distance).",
+   "steps": [
+    {
+     "title": "Coordinate differences",
+     "general": [
+      "\\Delta_i=|q_i-r_i|"
+     ],
+     "work": [
+      "\\Delta_1=|2-6|=4",
+      "\\Delta_2=|5-2|=3",
+      "\\Delta_3=|3-4|=1"
+     ],
+     "words": "Find the absolute difference for each feature first, then reuse them in every formula."
+    },
+    {
+     "title": "Euclidean distance",
+     "general": [
+      "d_2=\\sqrt{\\sum_i(q_i-r_i)^2}"
+     ],
+     "work": [
+      "d_2=\\sqrt{4^2+3^2+1^2}=\\sqrt{26}=5.09902"
+     ],
+     "words": "Square, add and take the square root."
+    },
+    {
+     "title": "Manhattan distance",
+     "general": [
+      "d_1=\\sum_i|q_i-r_i|"
+     ],
+     "work": [
+      "d_1=4+3+1=8"
+     ],
+     "words": "Add the absolute differences."
+    },
+    {
+     "title": "Minkowski distance, p = 3",
+     "general": [
+      "d_p=\\left(\\sum_i|q_i-r_i|^p\\right)^{1/p}"
+     ],
+     "work": [
+      "d_3=(4^3+3^3+1^3)^{1/3}=92^{1/3}=4.51436"
+     ],
+     "words": "Cube, add and take the cube root."
+    },
+    {
+     "title": "Compare",
+     "general": [
+      "d_1\\ge d_2\\ge d_3"
+     ],
+     "work": [
+      "8\\ge 5.09902\\ge 4.51436"
+     ],
+     "words": "There are three features here, so each sum has three terms. Larger p puts more weight on the largest single difference, so the distance shrinks toward the largest difference, 4."
+    }
+   ],
+   "conclusion": "The Euclidean distance is 5.09902, the Manhattan distance is 8, and the Minkowski distance with p = 3 is 4.51436.",
+   "source": "Original practice example in the course style",
+   "lookup": null,
+   "values": {
+    "q": [
+     2,
+     5,
+     3
+    ],
+    "r": [
+     6,
+     2,
+     4
+    ],
+    "euclidean": 5.0990195135927845,
+    "manhattan": 8.0,
+    "minkowski3": 4.514357435474001
+   },
+   "module": 22,
+   "tolerance": 0.022571787177370007,
+   "answerName": "Distance (Minkowski, p = 3)",
+   "answer": 4.514357435474001
+  },
+  {
+   "id": "p22-hba1c-bmi-kmeans",
+   "title": "Single k-Means iteration on four patients (HbA1c and BMI)",
+   "topic": "s22kmeans",
+   "context": "Glycated hemoglobin (HbA1c; %, a measure of average blood glucose over about three months) and body mass index (BMI; kg/m²) were measured in 4 adult patients. The data were then standardized to avoid any issues associated with differences in scale; the scaled data are unitless.",
+   "unit": "unitless (scaled)",
+   "table": {
+    "headers": [
+     "Patient",
+     "HbA1c",
+     "BMI"
+    ],
+    "rows": [
+     [
+      1,
+      2,
+      2
+     ],
+     [
+      2,
+      3,
+      1
+     ],
+     [
+      3,
+      6,
+      7
+     ],
+     [
+      4,
+      8,
+      6
+     ]
+    ]
+   },
+   "tasks": [
+    "Based on the resulting data listed in the table below, perform a single iteration of the k-Means algorithm with k = 2. Use the Euclidian distance formula for your calculations. Use the following two initial centroids for your calculations: C1: HbA1c = 1, BMI = 3. C2: HbA1c = 4, BMI = 4.",
+    "As part of your final answer, provide the cluster labels for each of the four data points AND the new centroids of the two updated clusters after this single iteration. Make sure to show your intermediate calculations."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(x_i\\) (feature vector of entry \\(i\\)), \\(c_j\\) (centroid of cluster \\(j\\)), \\(d_{ij}\\) (distance from entry \\(i\\) to centroid \\(j\\)), \\(y_i\\) (cluster label of entry \\(i\\)), \\(n_j\\) (number of entries in cluster \\(j\\)), \\(k\\) (number of clusters).",
+   "steps": [
+    {
+     "title": "Distances for patient 1",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d_{11}=\\sqrt{(2-1)^2+(2-3)^2}=\\sqrt{2}=1.41421",
+      "d_{12}=\\sqrt{(2-4)^2+(2-4)^2}=\\sqrt{8}=2.82843"
+     ],
+     "words": "Patient 1 is (2, 2)."
+    },
+    {
+     "title": "Distances for patient 2",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d_{21}=\\sqrt{(3-1)^2+(1-3)^2}=\\sqrt{8}=2.82843",
+      "d_{22}=\\sqrt{(3-4)^2+(1-4)^2}=\\sqrt{10}=3.16228"
+     ],
+     "words": "Patient 2 is (3, 1)."
+    },
+    {
+     "title": "Distances for patient 3",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d_{31}=\\sqrt{(6-1)^2+(7-3)^2}=\\sqrt{41}=6.40312",
+      "d_{32}=\\sqrt{(6-4)^2+(7-4)^2}=\\sqrt{13}=3.60555"
+     ],
+     "words": "Patient 3 is (6, 7)."
+    },
+    {
+     "title": "Distances for patient 4",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d_{41}=\\sqrt{(8-1)^2+(6-3)^2}=\\sqrt{58}=7.61577",
+      "d_{42}=\\sqrt{(8-4)^2+(6-4)^2}=\\sqrt{20}=4.47214"
+     ],
+     "words": "Patient 4 is (8, 6)."
+    },
+    {
+     "title": "Assign labels",
+     "general": [
+      "y_i=\\arg\\min_{j}\\lVert x_i-c_j\\rVert_2,\\quad i=1,\\dots,n,\\ j=1,\\dots,k"
+     ],
+     "work": [
+      "y_1=1\\ (1.41421<2.82843)",
+      "y_2=1\\ (2.82843<3.16228)",
+      "y_3=2\\ (3.60555<6.40312)",
+      "y_4=2\\ (4.47214<7.61577)"
+     ],
+     "words": "Each patient goes to the centroid with the smaller distance."
+    },
+    {
+     "title": "New centroids",
+     "general": [
+      "c_j=\\frac{1}{n_j}\\sum_{i:y_i=j}x_i,\\quad j=1,\\dots,k"
+     ],
+     "work": [
+      "C_1=\\left(\\frac{2+3}{2},\\frac{2+1}{2}\\right)=(2.5,1.5)",
+      "C_2=\\left(\\frac{6+8}{2},\\frac{7+6}{2}\\right)=(7,6.5)"
+     ],
+     "words": "Cluster 1 averages patients 1 and 2. Cluster 2 averages patients 3 and 4. Each feature is averaged separately."
+    }
+   ],
+   "conclusion": "The labels are patients 1 and 2 in cluster 1 and patients 3 and 4 in cluster 2. After one iteration the new centroids are C1 = (2.5, 1.5) and C2 = (7, 6.5).",
+   "source": "Original practice example in the course style",
+   "lookup": null,
+   "values": {
+    "points": [
+     [
+      2,
+      2
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      6,
+      7
+     ],
+     [
+      8,
+      6
+     ]
+    ],
+    "initial": [
+     [
+      1,
+      3
+     ],
+     [
+      4,
+      4
+     ]
+    ],
+    "distC1": [
+     1.4142135623730951,
+     2.8284271247461903,
+     6.4031242374328485,
+     7.615773105863909
+    ],
+    "distC2": [
+     2.8284271247461903,
+     3.1622776601683795,
+     3.605551275463989,
+     4.47213595499958
+    ],
+    "labels": [
+     1,
+     1,
+     2,
+     2
+    ],
+    "newC1": [
+     2.5,
+     1.5
+    ],
+    "newC2": [
+     7.0,
+     6.5
+    ]
+   },
+   "module": 22,
+   "tolerance": 0.035,
+   "answerName": "New centroid C2 HbA1c coordinate",
+   "answer": 7.0
+  },
+  {
+   "id": "p22-heart-rate-vo2max-kmeans",
+   "title": "Single k-Means iteration on five adults (resting heart rate and VO2max)",
+   "topic": "s22kmeans",
+   "context": "Resting heart rate (RHR; beats/min) and maximal oxygen uptake (VO2max; mL/kg/min, the highest rate of oxygen use during hard exercise) were measured in 5 adults at a sports medicine clinic. The data were then standardized to avoid any issues associated with differences in scale; the scaled data are unitless.",
+   "unit": "unitless (scaled)",
+   "table": {
+    "headers": [
+     "Adult",
+     "RHR",
+     "VO2max"
+    ],
+    "rows": [
+     [
+      1,
+      1,
+      6
+     ],
+     [
+      2,
+      2,
+      8
+     ],
+     [
+      3,
+      4,
+      4
+     ],
+     [
+      4,
+      7,
+      2
+     ],
+     [
+      5,
+      8,
+      3
+     ]
+    ]
+   },
+   "tasks": [
+    "Based on the resulting data listed in the table below, perform a single iteration of the k-Means algorithm with k = 2. Use the Euclidian distance formula for your calculations. Use the following two initial centroids for your calculations: C1: RHR = 3, VO2max = 7. C2: RHR = 6, VO2max = 4.",
+    "As part of your final answer, provide the cluster labels for each of the five data points AND the new centroids of the two updated clusters after this single iteration. Make sure to show your intermediate calculations."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(x_i\\) (feature vector of entry \\(i\\)), \\(c_j\\) (centroid of cluster \\(j\\)), \\(d_{ij}\\) (distance from entry \\(i\\) to centroid \\(j\\)), \\(y_i\\) (cluster label of entry \\(i\\)), \\(n_j\\) (number of entries in cluster \\(j\\)), \\(k\\) (number of clusters).",
+   "steps": [
+    {
+     "title": "Distances for adult 1",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d_{11}=\\sqrt{(1-3)^2+(6-7)^2}=\\sqrt{5}=2.23607",
+      "d_{12}=\\sqrt{(1-6)^2+(6-4)^2}=\\sqrt{29}=5.38516"
+     ],
+     "words": "Adult 1 is (1, 6)."
+    },
+    {
+     "title": "Distances for adult 2",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d_{21}=\\sqrt{(2-3)^2+(8-7)^2}=\\sqrt{2}=1.41421",
+      "d_{22}=\\sqrt{(2-6)^2+(8-4)^2}=\\sqrt{32}=5.65685"
+     ],
+     "words": "Adult 2 is (2, 8)."
+    },
+    {
+     "title": "Distances for adult 3",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d_{31}=\\sqrt{(4-3)^2+(4-7)^2}=\\sqrt{10}=3.16228",
+      "d_{32}=\\sqrt{(4-6)^2+(4-4)^2}=\\sqrt{4}=2"
+     ],
+     "words": "Adult 3 is (4, 4)."
+    },
+    {
+     "title": "Distances for adult 4",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d_{41}=\\sqrt{(7-3)^2+(2-7)^2}=\\sqrt{41}=6.40312",
+      "d_{42}=\\sqrt{(7-6)^2+(2-4)^2}=\\sqrt{5}=2.23607"
+     ],
+     "words": "Adult 4 is (7, 2)."
+    },
+    {
+     "title": "Distances for adult 5",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d_{51}=\\sqrt{(8-3)^2+(3-7)^2}=\\sqrt{41}=6.40312",
+      "d_{52}=\\sqrt{(8-6)^2+(3-4)^2}=\\sqrt{5}=2.23607"
+     ],
+     "words": "Adult 5 is (8, 3)."
+    },
+    {
+     "title": "Assign labels",
+     "general": [
+      "y_i=\\arg\\min_{j}\\lVert x_i-c_j\\rVert_2,\\quad i=1,\\dots,n,\\ j=1,\\dots,k"
+     ],
+     "work": [
+      "y_1=1\\ (2.23607<5.38516)",
+      "y_2=1\\ (1.41421<5.65685)",
+      "y_3=2\\ (2<3.16228)",
+      "y_4=2\\ (2.23607<6.40312)",
+      "y_5=2\\ (2.23607<6.40312)"
+     ],
+     "words": "Each adult goes to the centroid with the smaller distance."
+    },
+    {
+     "title": "New centroids",
+     "general": [
+      "c_j=\\frac{1}{n_j}\\sum_{i:y_i=j}x_i,\\quad j=1,\\dots,k"
+     ],
+     "work": [
+      "C_1=\\left(\\frac{1+2}{2},\\frac{6+8}{2}\\right)=(1.5,7)",
+      "C_2=\\left(\\frac{4+7+8}{3},\\frac{4+2+3}{3}\\right)=(6.33333,3)"
+     ],
+     "words": "Cluster 1 averages adults 1 and 2. Cluster 2 averages adults 3, 4 and 5. Each feature is averaged separately. The centroid of cluster 2 is not one of the data points."
+    }
+   ],
+   "conclusion": "The labels are adults 1 and 2 in cluster 1 and adults 3, 4 and 5 in cluster 2. After one iteration the new centroids are C1 = (1.5, 7) and C2 = (6.33333, 3).",
+   "source": "Original practice example in the course style",
+   "lookup": null,
+   "values": {
+    "points": [
+     [
+      1,
+      6
+     ],
+     [
+      2,
+      8
+     ],
+     [
+      4,
+      4
+     ],
+     [
+      7,
+      2
+     ],
+     [
+      8,
+      3
+     ]
+    ],
+    "initial": [
+     [
+      3,
+      7
+     ],
+     [
+      6,
+      4
+     ]
+    ],
+    "distC1": [
+     2.23606797749979,
+     1.4142135623730951,
+     3.1622776601683795,
+     6.4031242374328485,
+     6.4031242374328485
+    ],
+    "distC2": [
+     5.385164807134504,
+     5.656854249492381,
+     2.0,
+     2.23606797749979,
+     2.23606797749979
+    ],
+    "labels": [
+     1,
+     1,
+     2,
+     2,
+     2
+    ],
+    "newC1": [
+     1.5,
+     7.0
+    ],
+    "newC2": [
+     6.333333333333333,
+     3.0
+    ]
+   },
+   "module": 22,
+   "tolerance": 0.03166666666666666,
+   "answerName": "New centroid C2 RHR coordinate",
+   "answer": 6.333333333333333
+  },
+  {
+   "id": "p22-platelet-mpv-kmeans",
+   "title": "Single k-Means iteration on six patients (platelet count and MPV)",
+   "topic": "s22kmeans",
+   "context": "Platelet count (PLT; ×10³/μL) and mean platelet volume (MPV; fL, the average size of the platelets) were measured in 6 patients in a hematology clinic. The data were then standardized to avoid any issues associated with differences in scale; the scaled data are unitless.",
+   "unit": "unitless (scaled)",
+   "table": {
+    "headers": [
+     "Patient",
+     "PLT",
+     "MPV"
+    ],
+    "rows": [
+     [
+      1,
+      2,
+      7
+     ],
+     [
+      2,
+      3,
+      8
+     ],
+     [
+      3,
+      5,
+      6
+     ],
+     [
+      4,
+      6,
+      2
+     ],
+     [
+      5,
+      7,
+      3
+     ],
+     [
+      6,
+      9,
+      1
+     ]
+    ]
+   },
+   "tasks": [
+    "Based on the resulting data listed in the table below, perform a single iteration of the k-Means algorithm with k = 2. Use the Euclidian distance formula for your calculations. Use the following two initial centroids for your calculations: C1: PLT = 4, MPV = 8. C2: PLT = 5, MPV = 4.",
+    "As part of your final answer, provide the cluster labels for each of the six data points AND the new centroids of the two updated clusters after this single iteration. Make sure to show your intermediate calculations."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(x_i\\) (feature vector of entry \\(i\\)), \\(c_j\\) (centroid of cluster \\(j\\)), \\(d_{ij}\\) (distance from entry \\(i\\) to centroid \\(j\\)), \\(y_i\\) (cluster label of entry \\(i\\)), \\(n_j\\) (number of entries in cluster \\(j\\)), \\(k\\) (number of clusters).",
+   "steps": [
+    {
+     "title": "Distances for patient 1",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d_{11}=\\sqrt{(2-4)^2+(7-8)^2}=\\sqrt{5}=2.23607",
+      "d_{12}=\\sqrt{(2-5)^2+(7-4)^2}=\\sqrt{18}=4.24264"
+     ],
+     "words": "Patient 1 is (2, 7)."
+    },
+    {
+     "title": "Distances for patient 2",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d_{21}=\\sqrt{(3-4)^2+(8-8)^2}=\\sqrt{1}=1",
+      "d_{22}=\\sqrt{(3-5)^2+(8-4)^2}=\\sqrt{20}=4.47214"
+     ],
+     "words": "Patient 2 is (3, 8)."
+    },
+    {
+     "title": "Distances for patient 3",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d_{31}=\\sqrt{(5-4)^2+(6-8)^2}=\\sqrt{5}=2.23607",
+      "d_{32}=\\sqrt{(5-5)^2+(6-4)^2}=\\sqrt{4}=2"
+     ],
+     "words": "Patient 3 is (5, 6)."
+    },
+    {
+     "title": "Distances for patient 4",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d_{41}=\\sqrt{(6-4)^2+(2-8)^2}=\\sqrt{40}=6.32456",
+      "d_{42}=\\sqrt{(6-5)^2+(2-4)^2}=\\sqrt{5}=2.23607"
+     ],
+     "words": "Patient 4 is (6, 2)."
+    },
+    {
+     "title": "Distances for patient 5",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d_{51}=\\sqrt{(7-4)^2+(3-8)^2}=\\sqrt{34}=5.83095",
+      "d_{52}=\\sqrt{(7-5)^2+(3-4)^2}=\\sqrt{5}=2.23607"
+     ],
+     "words": "Patient 5 is (7, 3)."
+    },
+    {
+     "title": "Distances for patient 6",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d_{61}=\\sqrt{(9-4)^2+(1-8)^2}=\\sqrt{74}=8.60233",
+      "d_{62}=\\sqrt{(9-5)^2+(1-4)^2}=\\sqrt{25}=5"
+     ],
+     "words": "Patient 6 is (9, 1)."
+    },
+    {
+     "title": "Assign labels",
+     "general": [
+      "y_i=\\arg\\min_{j}\\lVert x_i-c_j\\rVert_2,\\quad i=1,\\dots,n,\\ j=1,\\dots,k"
+     ],
+     "work": [
+      "y_1=1\\ (2.23607<4.24264)",
+      "y_2=1\\ (1<4.47214)",
+      "y_3=2\\ (2<2.23607)",
+      "y_4=2\\ (2.23607<6.32456)",
+      "y_5=2\\ (2.23607<5.83095)",
+      "y_6=2\\ (5<8.60233)"
+     ],
+     "words": "Each patient goes to the centroid with the smaller distance."
+    },
+    {
+     "title": "New centroids",
+     "general": [
+      "c_j=\\frac{1}{n_j}\\sum_{i:y_i=j}x_i,\\quad j=1,\\dots,k"
+     ],
+     "work": [
+      "C_1=\\left(\\frac{2+3}{2},\\frac{7+8}{2}\\right)=(2.5,7.5)",
+      "C_2=\\left(\\frac{5+6+7+9}{4},\\frac{6+2+3+1}{4}\\right)=(6.75,3)"
+     ],
+     "words": "Cluster 1 averages patients 1 and 2. Cluster 2 averages patients 3, 4, 5 and 6. Each feature is averaged separately."
+    }
+   ],
+   "conclusion": "The labels are patients 1 and 2 in cluster 1 and patients 3, 4, 5 and 6 in cluster 2. After one iteration the new centroids are C1 = (2.5, 7.5) and C2 = (6.75, 3). Patient 3 is only slightly closer to C2 (2 against 2.23607), so its label is the closest call of this iteration.",
+   "source": "Original practice example in the course style",
+   "lookup": null,
+   "values": {
+    "points": [
+     [
+      2,
+      7
+     ],
+     [
+      3,
+      8
+     ],
+     [
+      5,
+      6
+     ],
+     [
+      6,
+      2
+     ],
+     [
+      7,
+      3
+     ],
+     [
+      9,
+      1
+     ]
+    ],
+    "initial": [
+     [
+      4,
+      8
+     ],
+     [
+      5,
+      4
+     ]
+    ],
+    "distC1": [
+     2.23606797749979,
+     1.0,
+     2.23606797749979,
+     6.324555320336759,
+     5.830951894845301,
+     8.602325267042627
+    ],
+    "distC2": [
+     4.242640687119285,
+     4.47213595499958,
+     2.0,
+     2.23606797749979,
+     2.23606797749979,
+     5.0
+    ],
+    "labels": [
+     1,
+     1,
+     2,
+     2,
+     2,
+     2
+    ],
+    "newC1": [
+     2.5,
+     7.5
+    ],
+    "newC2": [
+     6.75,
+     3.0
+    ]
+   },
+   "module": 22,
+   "tolerance": 0.015,
+   "answerName": "New centroid C2 MPV coordinate",
+   "answer": 3.0
+  },
+  {
+   "id": "p22-wound-closure-withinss",
+   "title": "Within-cluster sums of squares for ten wound closure times",
+   "topic": "s22withinss",
+   "context": "In a study of burn care, time to wound closure (the number of days until a skin graft donor site was fully covered by new skin) was recorded for 10 patients. The 10 recorded times were 9, 10, 12, 13, 25, 27, 28, 30, 31 and 33 days. The times were clustered in R with kmeans(days, c(10, 20)). The final clusters were 9, 10, 12, 13 (centroid 11) and 25, 27, 28, 30, 31, 33 (centroid 29). The clustering was then repeated with k = 3 and k = 4. The table below shows the size (number of points in each cluster), withinss (within-cluster sum of squares) and tot.withinss (total within-cluster sum of squares) fields of the R output for each k, with k = 1 (all 10 values in one cluster) for comparison.",
+   "unit": "days²",
+   "table": {
+    "headers": [
+     "k",
+     "size",
+     "withinss",
+     "tot.withinss"
+    ],
+    "rows": [
+     [
+      1,
+      "10",
+      "829.6",
+      829.6
+     ],
+     [
+      2,
+      "4 6",
+      "10 42",
+      52
+     ],
+     [
+      3,
+      "3 4 3",
+      "4.666667 10.000000  4.666667",
+      19.33333
+     ],
+     [
+      4,
+      "3 2 3 2",
+      "4.666667 0.500000 4.666667 0.500000",
+      10.33333
+     ]
+    ]
+   },
+   "tasks": [
+    "Calculate the within-cluster sum of squares for each of the two clusters and tot.withinss for k = 2. Calculate betweenss (between-cluster sum of squares) from the total sum of squares. Make sure to show your intermediate calculations.",
+    "Using tot.withinss for k = 1 to 4, how many clusters should be used for these times? Please state how you reached your conclusions."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(SS_j\\) (within-cluster sum of squares of cluster \\(j\\)), \\(x_i\\) (entry value), \\(c_j\\) (centroid of cluster \\(j\\)), \\(y_i\\) (cluster label), \\(k\\) (number of clusters).",
+   "steps": [
+    {
+     "title": "Cluster 1 sum of squares",
+     "general": [
+      "SS_1=\\sum_{i:y_i=1}(x_i-c_1)^2"
+     ],
+     "work": [
+      "c_1=44/4=11",
+      "SS_1=(9-11)^2+(10-11)^2+(12-11)^2+(13-11)^2",
+      "SS_1=4+1+1+4=10"
+     ],
+     "words": "Square each deviation from the cluster 1 centroid and add."
+    },
+    {
+     "title": "Cluster 2 sum of squares",
+     "general": [
+      "SS_2=\\sum_{i:y_i=2}(x_i-c_2)^2"
+     ],
+     "work": [
+      "c_2=174/6=29",
+      "SS_2=(25-29)^2+(27-29)^2+(28-29)^2+(30-29)^2+(31-29)^2+(33-29)^2",
+      "SS_2=16+4+1+1+4+16=42"
+     ],
+     "words": "Square each deviation from the cluster 2 centroid and add."
+    },
+    {
+     "title": "Total within-cluster sum of squares",
+     "general": [
+      "SS_{\\text{within total}}=\\sum_{j=1}^{k}SS_j"
+     ],
+     "work": [
+      "SS_{\\text{within total}}=10+42=52"
+     ],
+     "words": "This is tot.withinss in the R output."
+    },
+    {
+     "title": "Between-cluster sum of squares",
+     "general": [
+      "SS_{\\text{total}}=\\sum_i(x_i-\\bar x)^2",
+      "SS_{\\text{between}}=SS_{\\text{total}}-SS_{\\text{within total}}"
+     ],
+     "work": [
+      "\\bar x=218/10=21.8,\\ SS_{\\text{total}}=829.6",
+      "SS_{\\text{between}}=829.6-52=777.6"
+     ],
+     "words": "R reports this as betweenss, 777.6. At k = 1 the whole total is within-cluster."
+    },
+    {
+     "title": "Compare k = 1 to 4",
+     "general": [
+      "SS_{\\text{within total}}(k)"
+     ],
+     "work": [
+      "829.6\\to52\\to19.33333\\to10.33333"
+     ],
+     "words": "The drop from k = 1 to k = 2 is about 778. The later drops are only about 33 and 9."
+    },
+    {
+     "title": "Choose k",
+     "general": [
+      "\\text{choose }k\\text{ where further gains are modest}"
+     ],
+     "work": [
+      "k=2"
+     ],
+     "words": "Beyond k = 2 there is only modest improvement, so two clusters are chosen."
+    }
+   ],
+   "conclusion": "withinss is 10 and 42, tot.withinss is 52, and betweenss is 777.6. tot.withinss improves only modestly for k > 2, so k = 2 is chosen. The two clusters match a group of wounds that closed in about 11 days and a group that closed in about 29 days.",
+   "source": "Original practice example in the course style",
+   "lookup": null,
+   "values": {
+    "ages": [
+     9,
+     10,
+     12,
+     13,
+     25,
+     27,
+     28,
+     30,
+     31,
+     33
+    ],
+    "ss1": 10.0,
+    "ss2": 42.0,
+    "totWithin": 52.0,
+    "totalSS": 829.5999999999999,
+    "between": 777.5999999999999,
+    "totWithinK3": 19.33333,
+    "totWithinK4": 10.33333,
+    "chosenK": 2
+   },
+   "module": 22,
+   "tolerance": 0.26,
+   "answerName": "tot.withinss",
+   "answer": 52.0
+  },
+  {
+   "id": "p22-rescue-inhaler-withinss",
+   "title": "Within-cluster sums of squares for weekly rescue inhaler use",
+   "topic": "s22withinss",
+   "context": "In a study of asthma control, the number of rescue inhaler puffs (doses of a quick-relief medicine taken during breathing trouble) used in one week was read from an electronic dose counter for 10 patients. The 10 recorded counts were 1, 2, 2, 3, 8, 9, 10, 16, 17 and 19 puffs. The counts were clustered in R with kmeans(puffs, c(5, 17)). The final clusters were 1, 2, 2, 3, 8, 9, 10 (centroid 5) and 16, 17, 19 (centroid 17.33333). The clustering was then repeated with k = 3 and k = 4. The table below shows the size (number of points in each cluster), withinss (within-cluster sum of squares) and tot.withinss (total within-cluster sum of squares) fields of the R output for each k, with k = 1 (all 10 values in one cluster) for comparison.",
+   "unit": "puffs²",
+   "table": {
+    "headers": [
+     "k",
+     "size",
+     "withinss",
+     "tot.withinss"
+    ],
+    "rows": [
+     [
+      1,
+      "10",
+      "412.1",
+      412.1
+     ],
+     [
+      2,
+      "7 3",
+      "88.000000  4.666667",
+      92.66667
+     ],
+     [
+      3,
+      "3 4 3",
+      "4.666667 2.000000 2.000000",
+      8.666667
+     ],
+     [
+      4,
+      "1 3 2 4",
+      "0.0 2.0 0.5 2.0",
+      4.5
+     ]
+    ]
+   },
+   "tasks": [
+    "Calculate the within-cluster sum of squares for each of the two clusters and tot.withinss for k = 2. Calculate betweenss (between-cluster sum of squares) from the total sum of squares. Make sure to show your intermediate calculations.",
+    "Using tot.withinss for k = 1 to 4, how many clusters should be used for these counts? Please state how you reached your conclusions."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(SS_j\\) (within-cluster sum of squares of cluster \\(j\\)), \\(x_i\\) (entry value), \\(c_j\\) (centroid of cluster \\(j\\)), \\(y_i\\) (cluster label), \\(k\\) (number of clusters).",
+   "steps": [
+    {
+     "title": "Cluster 1 sum of squares",
+     "general": [
+      "SS_1=\\sum_{i:y_i=1}(x_i-c_1)^2"
+     ],
+     "work": [
+      "c_1=35/7=5",
+      "SS_1=(1-5)^2+(2-5)^2+(2-5)^2+(3-5)^2+(8-5)^2+(9-5)^2+(10-5)^2",
+      "SS_1=16+9+9+4+9+16+25=88"
+     ],
+     "words": "Square each deviation from the cluster 1 centroid and add."
+    },
+    {
+     "title": "Cluster 2 sum of squares",
+     "general": [
+      "SS_2=\\sum_{i:y_i=2}(x_i-c_2)^2"
+     ],
+     "work": [
+      "c_2=52/3=17.33333",
+      "SS_2=(16-17.33333)^2+(17-17.33333)^2+(19-17.33333)^2",
+      "SS_2=1.77778+0.11111+2.77778=4.66667"
+     ],
+     "words": "Square each deviation from the cluster 2 centroid and add. Use the unrounded centroid 52/3 to avoid rounding drift."
+    },
+    {
+     "title": "Total within-cluster sum of squares",
+     "general": [
+      "SS_{\\text{within total}}=\\sum_{j=1}^{k}SS_j"
+     ],
+     "work": [
+      "SS_{\\text{within total}}=88+4.66667=92.66667"
+     ],
+     "words": "This is tot.withinss in the R output."
+    },
+    {
+     "title": "Between-cluster sum of squares",
+     "general": [
+      "SS_{\\text{total}}=\\sum_i(x_i-\\bar x)^2",
+      "SS_{\\text{between}}=SS_{\\text{total}}-SS_{\\text{within total}}"
+     ],
+     "work": [
+      "\\bar x=87/10=8.7,\\ SS_{\\text{total}}=412.1",
+      "SS_{\\text{between}}=412.1-92.66667=319.43333"
+     ],
+     "words": "R reports this as betweenss, 319.4333. At k = 1 the whole total is within-cluster."
+    },
+    {
+     "title": "Compare k = 1 to 4",
+     "general": [
+      "SS_{\\text{within total}}(k)"
+     ],
+     "work": [
+      "412.1\\to92.66667\\to8.66667\\to4.5"
+     ],
+     "words": "The drop from k = 1 to k = 2 is about 319, and the drop from k = 2 to k = 3 is still about 84. The drop from k = 3 to k = 4 is only about 4."
+    },
+    {
+     "title": "Choose k",
+     "general": [
+      "\\text{choose }k\\text{ where further gains are modest}"
+     ],
+     "work": [
+      "k=3"
+     ],
+     "words": "The large gain stops after k = 3, so three clusters are chosen. The k = 2 solution leaves the counts 8, 9 and 10 in the same cluster as 1 to 3, and that cluster carries most of the k = 2 sum of squares (88)."
+    }
+   ],
+   "conclusion": "withinss is 88 and 4.66667, tot.withinss is 92.66667, and betweenss is 319.43333. tot.withinss still falls sharply from k = 2 to k = 3 and only slightly after that, so k = 3 is chosen. The three clusters match low use (1 to 3 puffs), moderate use (8 to 10 puffs) and high use (16 to 19 puffs).",
+   "source": "Original practice example in the course style",
+   "lookup": null,
+   "values": {
+    "ages": [
+     1,
+     2,
+     2,
+     3,
+     8,
+     9,
+     10,
+     16,
+     17,
+     19
+    ],
+    "ss1": 88.0,
+    "ss2": 4.666666666666666,
+    "totWithin": 92.66666666666667,
+    "totalSS": 412.1,
+    "between": 319.43333333333334,
+    "totWithinK3": 8.666667,
+    "totWithinK4": 4.5,
+    "chosenK": 3
+   },
+   "module": 22,
+   "tolerance": 0.4633333333333334,
+   "answerName": "tot.withinss",
+   "answer": 92.66666666666667
+  },
+  {
+   "id": "p22-breast-lesion-knn",
+   "title": "Classifying a breast lesion as benign or malignant with K = 3",
+   "topic": "s22knn",
+   "context": "Breast lesions (lumps seen on an ultrasound scan) were described by two features, lesion size (LS) and margin irregularity (MI, how jagged the edge of the lesion looks). The data were standardized to avoid any issues associated with differences in scale; the scaled data are unitless. A new lesion that has not been biopsied has scaled values LS = 5 and MI = 4. Five lesions were scanned and then biopsied (a small tissue sample was examined under a microscope) with the following results (training set):",
+   "unit": "probability",
+   "table": {
+    "headers": [
+     "Lesion",
+     "x1: LS",
+     "x2: MI",
+     "y: biopsy result"
+    ],
+    "rows": [
+     [
+      "A",
+      2,
+      2,
+      "Benign"
+     ],
+     [
+      "B",
+      3,
+      4,
+      "Benign"
+     ],
+     [
+      "C",
+      4,
+      7,
+      "Malignant"
+     ],
+     [
+      "D",
+      7,
+      6,
+      "Malignant"
+     ],
+     [
+      "E",
+      6,
+      3,
+      "Benign"
+     ]
+    ]
+   },
+   "tasks": [
+    "Without waiting for the biopsy result, classify the new lesion as Benign or Malignant. Use a K-NN classification with K = 3. Use the Euclidian distance formula for your calculations.",
+    "Make sure to show your intermediate calculations. As part of your final answer, provide the probability for the class that you chose."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(x_i\\) (feature vector of training entry \\(i\\)), \\(y_i\\) (its class label), \\(L\\) (number of classes), \\(K\\) (number of nearest neighbors), \\(d\\) (Euclidean distance).",
+   "steps": [
+    {
+     "title": "Set up",
+     "general": [
+      "q=(5,4),\\ K=3"
+     ],
+     "work": [
+      "A=(2,2),\\ B=(3,4),\\ C=(4,7),\\ D=(7,6),\\ E=(6,3)"
+     ],
+     "words": "The training set has five biopsied lesions."
+    },
+    {
+     "title": "Distances",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d_A=\\sqrt{(2-5)^2+(2-4)^2}=\\sqrt{13}=3.60555",
+      "d_B=\\sqrt{(3-5)^2+(4-4)^2}=2",
+      "d_C=\\sqrt{(4-5)^2+(7-4)^2}=\\sqrt{10}=3.16228",
+      "d_D=\\sqrt{(7-5)^2+(6-4)^2}=\\sqrt{8}=2.82843",
+      "d_E=\\sqrt{(6-5)^2+(3-4)^2}=\\sqrt{2}=1.41421"
+     ],
+     "words": "Compute the distance from the new lesion to every labeled lesion."
+    },
+    {
+     "title": "Rank the distances",
+     "general": [
+      "\\text{rank }d\\text{ from smallest}"
+     ],
+     "work": [
+      "E\\ (1.41421)<B\\ (2)<D\\ (2.82843)<C\\ (3.16228)<A\\ (3.60555)"
+     ],
+     "words": "Ranks are E 1, B 2, D 3, C 4, A 5, so the K = 3 nearest neighbors are E, B and D."
+    },
+    {
+     "title": "Read the neighbor classes",
+     "general": [
+      "y_E,\\ y_B,\\ y_D"
+     ],
+     "work": [
+      "\\text{Benign},\\ \\text{Benign},\\ \\text{Malignant}"
+     ],
+     "words": "Lesions C and A are not neighbors, so their classes are not used."
+    },
+    {
+     "title": "Classify and give the probability",
+     "general": [
+      "P(\\text{Benign})=\\frac{\\#\\text{Benign among neighbors}}{K}"
+     ],
+     "work": [
+      "P(\\text{Benign})=\\frac{2}{3}=0.66667"
+     ],
+     "words": "Benign is the plurality class, so the new lesion is classified as Benign."
+    }
+   ],
+   "conclusion": "The three nearest neighbors are E (Benign), B (Benign) and D (Malignant). The new lesion is classified as Benign. The probability that the new lesion is benign is 2/3.",
+   "source": "Original practice example in the course style",
+   "lookup": null,
+   "values": {
+    "newMesh": [
+     5,
+     4
+    ],
+    "distances": {
+     "A": 3.605551275463989,
+     "B": 2.0,
+     "C": 3.1622776601683795,
+     "D": 2.8284271247461903,
+     "E": 1.4142135623730951
+    },
+    "ranks": {
+     "E": 1,
+     "B": 2,
+     "D": 3,
+     "C": 4,
+     "A": 5
+    },
+    "neighbors": [
+     "E",
+     "B",
+     "D"
+    ],
+    "K": 3,
+    "pFail": 0.6666666666666666
+   },
+   "module": 22,
+   "tolerance": 0.003333333333333333,
+   "answerName": "Probability",
+   "answer": 0.6666666666666666
+  },
+  {
+   "id": "p22-sepsis-lactate-wbc-knn",
+   "title": "Classifying an emergency patient as sepsis or no sepsis with K = 3",
+   "topic": "s22knn",
+   "context": "Blood lactate (a marker of poor oxygen delivery to tissues; mmol/L) and white blood cell count (WBC; ×10³/μL) were measured in emergency department patients with a fever. The data were standardized to avoid any issues associated with differences in scale; the scaled data are unitless. A new patient has scaled values lactate = 7 and WBC = 6. Six earlier patients were measured and later given a final diagnosis by the treating team with the following results (training set):",
+   "unit": "probability",
+   "table": {
+    "headers": [
+     "Patient",
+     "x1: lactate",
+     "x2: WBC",
+     "y: final diagnosis"
+    ],
+    "rows": [
+     [
+      "A",
+      8,
+      7,
+      "Sepsis"
+     ],
+     [
+      "B",
+      7,
+      9,
+      "Sepsis"
+     ],
+     [
+      "C",
+      6,
+      6,
+      "Sepsis"
+     ],
+     [
+      "D",
+      2,
+      3,
+      "No sepsis"
+     ],
+     [
+      "E",
+      3,
+      1,
+      "No sepsis"
+     ],
+     [
+      "F",
+      4,
+      4,
+      "No sepsis"
+     ]
+    ]
+   },
+   "tasks": [
+    "Without waiting for the final diagnosis, classify the new patient as Sepsis or No sepsis. Use a K-NN classification with K = 3. Use the Euclidian distance formula for your calculations.",
+    "Make sure to show your intermediate calculations. As part of your final answer, provide the probability for the class that you chose."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(x_i\\) (feature vector of training entry \\(i\\)), \\(y_i\\) (its class label), \\(L\\) (number of classes), \\(K\\) (number of nearest neighbors), \\(d\\) (Euclidean distance).",
+   "steps": [
+    {
+     "title": "Set up",
+     "general": [
+      "q=(7,6),\\ K=3"
+     ],
+     "work": [
+      "A=(8,7),\\ B=(7,9),\\ C=(6,6),\\ D=(2,3),\\ E=(3,1),\\ F=(4,4)"
+     ],
+     "words": "The training set has six labeled patients."
+    },
+    {
+     "title": "Distances",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d_A=\\sqrt{(8-7)^2+(7-6)^2}=\\sqrt{2}=1.41421",
+      "d_B=\\sqrt{(7-7)^2+(9-6)^2}=3",
+      "d_C=\\sqrt{(6-7)^2+(6-6)^2}=1",
+      "d_D=\\sqrt{(2-7)^2+(3-6)^2}=\\sqrt{34}=5.83095",
+      "d_E=\\sqrt{(3-7)^2+(1-6)^2}=\\sqrt{41}=6.40312",
+      "d_F=\\sqrt{(4-7)^2+(4-6)^2}=\\sqrt{13}=3.60555"
+     ],
+     "words": "Compute the distance from the new patient to every labeled patient."
+    },
+    {
+     "title": "Rank the distances",
+     "general": [
+      "\\text{rank }d\\text{ from smallest}"
+     ],
+     "work": [
+      "C\\ (1)<A\\ (1.41421)<B\\ (3)<F\\ (3.60555)<D\\ (5.83095)<E\\ (6.40312)"
+     ],
+     "words": "Ranks are C 1, A 2, B 3, F 4, D 5, E 6, so the K = 3 nearest neighbors are C, A and B."
+    },
+    {
+     "title": "Read the neighbor classes",
+     "general": [
+      "y_C,\\ y_A,\\ y_B"
+     ],
+     "work": [
+      "\\text{Sepsis},\\ \\text{Sepsis},\\ \\text{Sepsis}"
+     ],
+     "words": "All three neighbors have the same class. The other patients are not neighbors, so their classes are not used."
+    },
+    {
+     "title": "Classify and give the probability",
+     "general": [
+      "P(\\text{Sepsis})=\\frac{\\#\\text{Sepsis among neighbors}}{K}"
+     ],
+     "work": [
+      "P(\\text{Sepsis})=\\frac{3}{3}=1"
+     ],
+     "words": "Sepsis is the plurality class, so the new patient is classified as Sepsis."
+    }
+   ],
+   "conclusion": "The three nearest neighbors are C, A and B, and all three had sepsis. The new patient is classified as Sepsis, with probability 3/3 = 1 for that class.",
+   "source": "Original practice example in the course style",
+   "lookup": null,
+   "values": {
+    "newMesh": [
+     7,
+     6
+    ],
+    "distances": {
+     "A": 1.4142135623730951,
+     "B": 3.0,
+     "C": 1.0,
+     "D": 5.830951894845301,
+     "E": 6.4031242374328485,
+     "F": 3.605551275463989
+    },
+    "ranks": {
+     "C": 1,
+     "A": 2,
+     "B": 3,
+     "F": 4,
+     "D": 5,
+     "E": 6
+    },
+    "neighbors": [
+     "C",
+     "A",
+     "B"
+    ],
+    "K": 3,
+    "pFail": 1.0
+   },
+   "module": 22,
+   "tolerance": 0.005,
+   "answerName": "Probability",
+   "answer": 1.0
+  },
+  {
+   "id": "p22-kidney-stone-knn",
+   "title": "Classifying a kidney stone as uric acid or calcium oxalate with K = 3",
+   "topic": "s22knn",
+   "context": "Kidney stones are treated differently depending on what they are made of. Computed tomography (CT) attenuation (how strongly the stone blocks X-rays, x1, in hundreds of Hounsfield units, HU) and urine pH (x2, rounded to a whole number) were recorded for patients with a stone. Stones from six patients were later removed and analyzed in the laboratory with the following results (training set):",
+   "unit": "probability",
+   "table": {
+    "headers": [
+     "Stone",
+     "x1: attenuation (100 HU)",
+     "x2: urine pH",
+     "y: laboratory analysis"
+    ],
+    "rows": [
+     [
+      "A",
+      4,
+      5,
+      "Uric acid"
+     ],
+     [
+      "B",
+      5,
+      5,
+      "Uric acid"
+     ],
+     [
+      "C",
+      3,
+      6,
+      "Uric acid"
+     ],
+     [
+      "D",
+      7,
+      6,
+      "Calcium oxalate"
+     ],
+     [
+      "E",
+      9,
+      7,
+      "Calcium oxalate"
+     ],
+     [
+      "F",
+      10,
+      6,
+      "Calcium oxalate"
+     ]
+    ]
+   },
+   "tasks": [
+    "A new patient has a stone with x1 = 6 (600 HU) and x2 = 6. Without waiting for the stone to be removed, classify the new stone as Uric acid or Calcium oxalate. Use a K-NN classification with K = 3. Use the Euclidian distance formula for your calculations.",
+    "Make sure to show your intermediate calculations. As part of your final answer, provide the probability for the class that you chose."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(x_i\\) (feature vector of training entry \\(i\\)), \\(y_i\\) (its class label), \\(L\\) (number of classes), \\(K\\) (number of nearest neighbors), \\(d\\) (Euclidean distance).",
+   "steps": [
+    {
+     "title": "Set up",
+     "general": [
+      "q=(6,6),\\ K=3"
+     ],
+     "work": [
+      "A=(4,5),\\ B=(5,5),\\ C=(3,6),\\ D=(7,6),\\ E=(9,7),\\ F=(10,6)"
+     ],
+     "words": "The training set has six analyzed stones. The features are used in their raw units."
+    },
+    {
+     "title": "Distances",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d_A=\\sqrt{(4-6)^2+(5-6)^2}=\\sqrt{5}=2.23607",
+      "d_B=\\sqrt{(5-6)^2+(5-6)^2}=\\sqrt{2}=1.41421",
+      "d_C=\\sqrt{(3-6)^2+(6-6)^2}=3",
+      "d_D=\\sqrt{(7-6)^2+(6-6)^2}=1",
+      "d_E=\\sqrt{(9-6)^2+(7-6)^2}=\\sqrt{10}=3.16228",
+      "d_F=\\sqrt{(10-6)^2+(6-6)^2}=4"
+     ],
+     "words": "Compute the distance from the new stone to every labeled stone."
+    },
+    {
+     "title": "Rank the distances",
+     "general": [
+      "\\text{rank }d\\text{ from smallest}"
+     ],
+     "work": [
+      "D\\ (1)<B\\ (1.41421)<A\\ (2.23607)<C\\ (3)<E\\ (3.16228)<F\\ (4)"
+     ],
+     "words": "Ranks are D 1, B 2, A 3, C 4, E 5, F 6, so the K = 3 nearest neighbors are D, B and A."
+    },
+    {
+     "title": "Read the neighbor classes",
+     "general": [
+      "y_D,\\ y_B,\\ y_A"
+     ],
+     "work": [
+      "\\text{Calcium oxalate},\\ \\text{Uric acid},\\ \\text{Uric acid}"
+     ],
+     "words": "The single nearest stone, D, is calcium oxalate, but the next two, B and A, are uric acid. The other stones are not neighbors, so their classes are not used."
+    },
+    {
+     "title": "Classify and give the probability",
+     "general": [
+      "P(\\text{Uric acid})=\\frac{\\#\\text{Uric acid among neighbors}}{K}"
+     ],
+     "work": [
+      "P(\\text{Uric acid})=\\frac{2}{3}=0.66667"
+     ],
+     "words": "Uric acid is the plurality class, so the new stone is classified as Uric acid."
+    }
+   ],
+   "conclusion": "The three nearest neighbors are D (Calcium oxalate), B (Uric acid) and A (Uric acid). The new stone is classified as Uric acid even though its single nearest neighbor is calcium oxalate. The probability that the new stone is uric acid is 2/3.",
+   "source": "Original practice example in the course style",
+   "lookup": null,
+   "values": {
+    "newMesh": [
+     6,
+     6
+    ],
+    "distances": {
+     "A": 2.23606797749979,
+     "B": 1.4142135623730951,
+     "C": 3.0,
+     "D": 1.0,
+     "E": 3.1622776601683795,
+     "F": 4.0
+    },
+    "ranks": {
+     "D": 1,
+     "B": 2,
+     "A": 3,
+     "C": 4,
+     "E": 5,
+     "F": 6
+    },
+    "neighbors": [
+     "D",
+     "B",
+     "A"
+    ],
+    "K": 3,
+    "pFail": 0.6666666666666666
+   },
+   "module": 22,
+   "tolerance": 0.003333333333333333,
+   "answerName": "Probability",
+   "answer": 0.6666666666666666
+  }
+ ],
+ "questions": [],
+ "notes": [
+  "All data are invented for practice. No real study, author or year is cited. No lookup is used because Session 22 has no printed critical values, so every lookup is null.",
+  "Every k-Means case is a single iteration, as in the lecture exercise. Every point is strictly closer to one initial centroid than to the other (no ties), and the check script asserts this.",
+  "No K-NN case has two equal distances. In p22-kidney-stone-knn the single nearest neighbor (D, Calcium oxalate) is outvoted by the next two (Uric acid). p22-sepsis-lactate-wbc-knn gives 3/3.",
+  "withinss tables are real R output from kmeans(). k = 2 used the starting centres named in the context. k = 1, 3 and 4 used set.seed(1) and kmeans(x, k, nstart = 50). size, withinss and tot.withinss strings are as R printed them. betweenss from R is 777.6 (wound times) and 319.4333 (inhaler puffs). The check script confirms that each table row equals the best partition for that k and that the hand algorithm run from the stated starting centres reaches the k = 2 clusters given in the context.",
+  "p22-rescue-inhaler-withinss has its elbow at k = 3, not k = 2. The hand calculation is still done for the k = 2 output, as in the lecture age example. Its starting centres c(5, 17) were chosen so that the hand algorithm (assign to the nearest centre, recompute the means) and R reach the same 7 / 3 split with no tie. From c(2, 12) the hand algorithm stops at a worse 4 / 6 split while R's default algorithm moves on to the 7 / 3 split, so that start was not used.",
+  "values keep the reference key names of each method so existing tools can read them. In the withinss cases 'ages' holds the clustered data (days or puffs). In the K-NN cases 'newMesh' holds the new object and 'pFail' holds the probability of the chosen class.",
+  "p22-hydrogel-scaffold-distance uses raw units (kPa and μm) like the lecture medicine and mesh examples. Its solution says that unscaled features let the larger-number feature count for more.",
+  "His exercise wording keeps its punctuation in context and tasks (the semicolon in 'differences in scale; the scaled data are unitless', the colons after 'initial centroids for your calculations' and 'C1', and after '(training set)'). Words, conclusions and step text have no colons or semicolons."
+ ]
+}

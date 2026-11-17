@@ -1,0 +1,1283 @@
+{
+ "cases": [
+  {
+   "id": "p23-anemia-indices-knn",
+   "title": "Iron deficiency or thalassemia trait from red cell indices (K = 3)",
+   "topic": "s23knn",
+   "context": "In a study looking at microcytic anemia (anemia with red blood cells that are smaller than normal), six patients from a hematology clinic had a known diagnosis of either Iron deficiency or Thalassemia trait (an inherited change in hemoglobin production). Two features from each patient's complete blood count (CBC), the mean corpuscular volume (MCV, the average size of the red cells) and the red blood cell (RBC) count, were converted to dimensionless scores in the table below. A new patient had an MCV score of 4 and an RBC count score of 4.",
+   "unit": "probability",
+   "table": {
+    "headers": [
+     "Patient",
+     "MCV score",
+     "RBC count score",
+     "Known diagnosis"
+    ],
+    "rows": [
+     [
+      "A",
+      2,
+      6,
+      "Thalassemia trait"
+     ],
+     [
+      "B",
+      3,
+      5,
+      "Thalassemia trait"
+     ],
+     [
+      "C",
+      5,
+      2,
+      "Iron deficiency"
+     ],
+     [
+      "D",
+      6,
+      4,
+      "Iron deficiency"
+     ],
+     [
+      "E",
+      1,
+      5,
+      "Thalassemia trait"
+     ],
+     [
+      "F",
+      4,
+      1,
+      "Iron deficiency"
+     ]
+    ]
+   },
+   "tasks": [
+    "Using the K-NN classifier (Euclidean distance), classify the new patient as Iron deficiency or Thalassemia trait with K = 3. Include the associated probability of your classification.",
+    "Make sure to show your intermediate calculations."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(q\\) (new sample), \\(r\\) (a training sample), \\(d(q,r)\\) (Euclidean distance), \\(K\\) (number of nearest neighbors).",
+   "steps": [
+    {
+     "title": "Set up the new sample and the training set",
+     "general": [
+      "q=(q_1,q_2)"
+     ],
+     "work": [
+      "q=(4,4)",
+      "A=(2,6),\\ B=(3,5),\\ C=(5,2),\\ D=(6,4),\\ E=(1,5),\\ F=(4,1)"
+     ],
+     "words": "The six patients with a known diagnosis are the training set. The new patient with scores 4 and 4 is the test sample. The scores are already dimensionless, so no further scaling is needed."
+    },
+    {
+     "title": "Distances to A, B and C",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d_A=\\sqrt{(4-2)^2+(4-6)^2}=\\sqrt{8}=2.82843",
+      "d_B=\\sqrt{(4-3)^2+(4-5)^2}=\\sqrt{2}=1.41421",
+      "d_C=\\sqrt{(4-5)^2+(4-2)^2}=\\sqrt{5}=2.23607"
+     ],
+     "words": "Subtract matching scores, square the differences, add them and take the square root."
+    },
+    {
+     "title": "Distances to D, E and F",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d_D=\\sqrt{(4-6)^2+(4-4)^2}=\\sqrt{4}=2",
+      "d_E=\\sqrt{(4-1)^2+(4-5)^2}=\\sqrt{10}=3.16228",
+      "d_F=\\sqrt{(4-4)^2+(4-1)^2}=\\sqrt{9}=3"
+     ],
+     "words": "The same formula is applied to every patient of the training set."
+    },
+    {
+     "title": "Rank the distances",
+     "general": [
+      "\\text{rank }d(q,r)\\text{ from smallest}"
+     ],
+     "work": [
+      "B\\ (1.41421)<D\\ (2)<C\\ (2.23607)<A\\ (2.82843)<F\\ (3)<E\\ (3.16228)"
+     ],
+     "words": "There are no ties. The 3 nearest neighbors are B, D and C."
+    },
+    {
+     "title": "Read the classes of the 3 nearest neighbors",
+     "general": [
+      "y_{(1)},\\ y_{(2)},\\ y_{(3)}"
+     ],
+     "work": [
+      "B=\\text{Thalassemia trait},\\ D=\\text{Iron deficiency},\\ C=\\text{Iron deficiency}"
+     ],
+     "words": "Only the three closest patients vote. A, F and E are too far away to be neighbors when K is 3."
+    },
+    {
+     "title": "Classify and give the probability",
+     "general": [
+      "P(\\text{Iron deficiency})=\\frac{\\#\\text{ Iron deficiency among the }K\\text{ neighbors}}{K}"
+     ],
+     "work": [
+      "P(\\text{Iron deficiency})=\\frac{2}{3}=0.66667"
+     ],
+     "words": "Iron deficiency has 2 of the 3 votes, so it is the plurality class. The new patient is classified as Iron deficiency with probability 2/3. The nearest patient, B, has thalassemia trait, but it is outvoted by C and D."
+    }
+   ],
+   "conclusion": "With K = 3 the nearest neighbors are B (Thalassemia trait), D (Iron deficiency) and C (Iron deficiency). The new patient is classified as Iron deficiency with probability 2/3, or 0.66667. The single closest patient does not decide the class when K is 3.",
+   "source": "Original practice example in the course style",
+   "lookup": null,
+   "values": {
+    "newSample": [
+     4,
+     4
+    ],
+    "distances": {
+     "A": 2.8284271247461903,
+     "B": 1.4142135623730951,
+     "C": 2.23606797749979,
+     "D": 2.0,
+     "E": 3.1622776601683795,
+     "F": 3.0
+    },
+    "neighbors": [
+     "B",
+     "D",
+     "C"
+    ],
+    "K": 3,
+    "class": "Iron deficiency",
+    "pIronDeficiency": 0.6666666666666666
+   },
+   "module": 23,
+   "tolerance": 0.003333333333333333,
+   "answerName": "Probability",
+   "answer": 0.6666666666666666
+  },
+  {
+   "id": "p23-ecg-beat-knn",
+   "title": "Normal or ectopic heartbeat from two ECG features (K = 5)",
+   "topic": "s23knn",
+   "context": "In a study of automatic beat labeling for ambulatory electrocardiogram (ECG, the electrical activity of the heart recorded from the skin) monitors, seven heartbeats were labeled by a cardiologist as Normal or Ectopic (a beat that starts outside the normal pacemaker of the heart). Two features of each beat, the QRS width (the duration of the main spike of the beat) and the RR irregularity (how much the time since the previous beat differs from the usual beat-to-beat interval), were converted to dimensionless scores in the table below. A new beat that was not labeled by the cardiologist had a QRS width score of 4 and an RR irregularity score of 3.",
+   "unit": "probability",
+   "table": {
+    "headers": [
+     "Beat",
+     "QRS width score",
+     "RR irregularity score",
+     "Label"
+    ],
+    "rows": [
+     [
+      "A",
+      3,
+      4,
+      "Normal"
+     ],
+     [
+      "B",
+      6,
+      3,
+      "Ectopic"
+     ],
+     [
+      "C",
+      2,
+      4,
+      "Normal"
+     ],
+     [
+      "D",
+      6,
+      5,
+      "Ectopic"
+     ],
+     [
+      "E",
+      5,
+      6,
+      "Ectopic"
+     ],
+     [
+      "F",
+      7,
+      6,
+      "Ectopic"
+     ],
+     [
+      "G",
+      1,
+      1,
+      "Normal"
+     ]
+    ]
+   },
+   "tasks": [
+    "Using the K-NN classifier (Euclidean distance), classify the new beat as Normal or Ectopic with K = 5. Include the associated probability of your classification.",
+    "Make sure to show your intermediate calculations.",
+    "Compare your result with the classification for K = 3."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(q\\) (new sample), \\(r\\) (a training sample), \\(d(q,r)\\) (Euclidean distance), \\(K\\) (number of nearest neighbors).",
+   "steps": [
+    {
+     "title": "Set up the new sample and the training set",
+     "general": [
+      "q=(q_1,q_2)"
+     ],
+     "work": [
+      "q=(4,3)",
+      "A=(3,4),\\ B=(6,3),\\ C=(2,4),\\ D=(6,5),\\ E=(5,6),\\ F=(7,6),\\ G=(1,1)"
+     ],
+     "words": "The seven beats labeled by the cardiologist are the training set. The new beat with scores 4 and 3 is the test sample. The scores are already dimensionless, so no further scaling is needed."
+    },
+    {
+     "title": "Distances to A, B, C and D",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d_A=\\sqrt{(4-3)^2+(3-4)^2}=\\sqrt{2}=1.41421",
+      "d_B=\\sqrt{(4-6)^2+(3-3)^2}=\\sqrt{4}=2",
+      "d_C=\\sqrt{(4-2)^2+(3-4)^2}=\\sqrt{5}=2.23607",
+      "d_D=\\sqrt{(4-6)^2+(3-5)^2}=\\sqrt{8}=2.82843"
+     ],
+     "words": "Subtract matching scores, square the differences, add them and take the square root."
+    },
+    {
+     "title": "Distances to E, F and G",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d_E=\\sqrt{(4-5)^2+(3-6)^2}=\\sqrt{10}=3.16228",
+      "d_F=\\sqrt{(4-7)^2+(3-6)^2}=\\sqrt{18}=4.24264",
+      "d_G=\\sqrt{(4-1)^2+(3-1)^2}=\\sqrt{13}=3.60555"
+     ],
+     "words": "The same formula is applied to every beat of the training set."
+    },
+    {
+     "title": "Rank the distances",
+     "general": [
+      "\\text{rank }d(q,r)\\text{ from smallest}"
+     ],
+     "work": [
+      "A\\ (1.41421)<B\\ (2)<C\\ (2.23607)<D\\ (2.82843)<E\\ (3.16228)<G\\ (3.60555)<F\\ (4.24264)"
+     ],
+     "words": "There are no ties. The 5 nearest neighbors are A, B, C, D and E."
+    },
+    {
+     "title": "Read the classes of the 5 nearest neighbors",
+     "general": [
+      "y_{(1)},\\dots,y_{(5)}"
+     ],
+     "work": [
+      "A=\\text{Normal},\\ B=\\text{Ectopic},\\ C=\\text{Normal},\\ D=\\text{Ectopic},\\ E=\\text{Ectopic}"
+     ],
+     "words": "Only the five closest beats vote. G and F are too far away to be neighbors when K is 5."
+    },
+    {
+     "title": "Classify and give the probability",
+     "general": [
+      "P(\\text{Ectopic})=\\frac{\\#\\text{ Ectopic among the }K\\text{ neighbors}}{K}"
+     ],
+     "work": [
+      "P(\\text{Ectopic})=\\frac{3}{5}=0.6"
+     ],
+     "words": "Ectopic has 3 of the 5 votes, so it is the plurality class. The new beat is classified as Ectopic with probability 3/5. With K = 3 only A, B and C would vote, and Normal would win with probability 2/3. The class changes with K, so the choice of K matters."
+    }
+   ],
+   "conclusion": "With K = 5 the nearest neighbors are A (Normal), B (Ectopic), C (Normal), D (Ectopic) and E (Ectopic). The new beat is classified as Ectopic with probability 3/5, or 0.6. With K = 3 the same beat would be classified as Normal with probability 2/3.",
+   "source": "Original practice example in the course style",
+   "lookup": null,
+   "values": {
+    "newSample": [
+     4,
+     3
+    ],
+    "distances": {
+     "A": 1.4142135623730951,
+     "B": 2.0,
+     "C": 2.23606797749979,
+     "D": 2.8284271247461903,
+     "E": 3.1622776601683795,
+     "F": 4.242640687119285,
+     "G": 3.605551275463989
+    },
+    "neighbors": [
+     "A",
+     "B",
+     "C",
+     "D",
+     "E"
+    ],
+    "K": 5,
+    "class": "Ectopic",
+    "pEctopic": 0.6
+   },
+   "module": 23,
+   "tolerance": 0.003,
+   "answerName": "Probability",
+   "answer": 0.6
+  },
+  {
+   "id": "p23-cholesterol-minmax",
+   "title": "Min-max normalization of total cholesterol before K-NN",
+   "topic": "s23scaling",
+   "context": "In a study looking at coronary artery disease, a K-NN classifier was built from the blood tests of 240 patients who had a coronary angiogram (an X-ray movie of the heart arteries after dye injection). One feature was total serum cholesterol, measured in milligrams per deciliter (mg/dL). Before K-NN, every feature was rescaled with the normalize() function (min-max normalization). The R summary() output for total cholesterol is shown below. A new patient had a total cholesterol of 241 mg/dL.",
+   "unit": "scaled units (0 to 1)",
+   "table": {
+    "headers": [
+     "Statistic",
+     "Total cholesterol (mg/dL)"
+    ],
+    "rows": [
+     [
+      "Min.",
+      128.0
+     ],
+     [
+      "1st Qu.",
+      171.5
+     ],
+     [
+      "Median",
+      196.0
+     ],
+     [
+      "Mean",
+      199.4
+     ],
+     [
+      "3rd Qu.",
+      224.0
+     ],
+     [
+      "Max.",
+      312.0
+     ]
+    ]
+   },
+   "tasks": [
+    "Find the range of total cholesterol.",
+    "Compute the min-max normalized values of the mean (199.4 mg/dL) and the median (196.0 mg/dL).",
+    "Compute the normalized value of the new patient (241 mg/dL)."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(x\\) (feature value), \\(\\min(x),\\max(x)\\) (smallest and largest value), \\(x_{\\text{scaled}}\\) (normalized value).",
+   "steps": [
+    {
+     "title": "Read the minimum and maximum",
+     "general": [
+      "\\min(x),\\ \\max(x)"
+     ],
+     "work": [
+      "\\min(x)=128.0,\\quad \\max(x)=312.0"
+     ],
+     "words": "The summary() output gives both values for total cholesterol."
+    },
+    {
+     "title": "Find the range",
+     "general": [
+      "R=\\max(x)-\\min(x)"
+     ],
+     "work": [
+      "R=312.0-128.0=184.0"
+     ],
+     "words": "The range is the denominator of every normalized value of this feature."
+    },
+    {
+     "title": "Normalize the mean cholesterol",
+     "general": [
+      "x_{\\text{scaled}}=\\frac{x-\\min(x)}{\\max(x)-\\min(x)}"
+     ],
+     "work": [
+      "x_{\\text{scaled}}=\\frac{199.4-128.0}{184.0}=\\frac{71.4}{184.0}=0.38804"
+     ],
+     "words": "Subtract the minimum first, then divide by the range."
+    },
+    {
+     "title": "Normalize the median",
+     "general": [
+      "x_{\\text{scaled}}=\\frac{x-\\min(x)}{\\max(x)-\\min(x)}"
+     ],
+     "work": [
+      "x_{\\text{scaled}}=\\frac{196.0-128.0}{184.0}=\\frac{68.0}{184.0}=0.36957"
+     ],
+     "words": "The mean is a little above the median, so its normalized value is a little larger too."
+    },
+    {
+     "title": "Normalize the new patient",
+     "general": [
+      "x_{\\text{scaled}}=\\frac{x-\\min(x)}{\\max(x)-\\min(x)}"
+     ],
+     "work": [
+      "x_{\\text{scaled}}=\\frac{241.0-128.0}{184.0}=\\frac{113.0}{184.0}=0.61413"
+     ],
+     "words": "The new patient is scaled with the minimum and maximum of the training data, not with its own value. The milligrams per deciliter cancel, so the scaled value has no unit."
+    }
+   ],
+   "conclusion": "The range of total cholesterol is 184.0 mg/dL. The mean of 199.4 mg/dL normalizes to 0.38804, the median of 196.0 mg/dL to 0.36957, and the new patient at 241 mg/dL to 0.61413.",
+   "source": "Original practice example in the course style",
+   "lookup": null,
+   "values": {
+    "min": 128.0,
+    "max": 312.0,
+    "mean": 199.4,
+    "median": 196.0,
+    "range": 184.0,
+    "scaledMean": 0.3880434782608696,
+    "scaledMedian": 0.3695652173913043,
+    "newValue": 241.0,
+    "scaledNew": 0.6141304347826086
+   },
+   "module": 23,
+   "tolerance": 0.0030706521739130434,
+   "answerName": "Normalized value",
+   "answer": 0.6141304347826086
+  },
+  {
+   "id": "p23-knee-body-mass-zscore",
+   "title": "z-score standardization of body mass",
+   "topic": "s23scaling",
+   "context": "In a study looking at knee osteoarthritis (wear of the cartilage in the knee joint), body mass in kilograms (kg) was one of the features used with K-NN to classify adults with knee pain as Osteoarthritis or No osteoarthritis on a knee X-ray. Before K-NN, the body masses of six training subjects were standardized with the scale() function (z-scores), which uses the sample mean and the sample standard deviation (SD) of the training subjects. A new subject had a body mass of 91 kg.",
+   "unit": "standardized units (z)",
+   "table": {
+    "headers": [
+     "Subject",
+     "Body mass (kg)"
+    ],
+    "rows": [
+     [
+      1,
+      58
+     ],
+     [
+      2,
+      64
+     ],
+     [
+      3,
+      70
+     ],
+     [
+      4,
+      72
+     ],
+     [
+      5,
+      81
+     ],
+     [
+      6,
+      93
+     ]
+    ]
+   },
+   "tasks": [
+    "Compute the mean and the SD of the six body masses.",
+    "Compute the z-score of the new subject (91 kg) and of the subject with the lowest body mass (58 kg)."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(x\\) (feature value), \\(\\bar x\\) (sample mean), \\(s_x\\) (sample standard deviation), \\(z\\) (standardized value).",
+   "steps": [
+    {
+     "title": "Compute the mean",
+     "general": [
+      "\\bar x=\\frac{\\sum x_i}{n}"
+     ],
+     "work": [
+      "\\bar x=\\frac{58+64+70+72+81+93}{6}=\\frac{438}{6}=73"
+     ],
+     "words": "Add the six body masses and divide by 6."
+    },
+    {
+     "title": "Sum of squared deviations",
+     "general": [
+      "\\sum(x_i-\\bar x)^2"
+     ],
+     "work": [
+      "\\sum(x_i-\\bar x)^2=(-15)^2+(-9)^2+(-3)^2+(-1)^2+8^2+20^2=780"
+     ],
+     "words": "Each deviation is a body mass minus the mean. The deviations are squared so that values below and above the mean both count."
+    },
+    {
+     "title": "Compute the SD",
+     "general": [
+      "s_x=\\sqrt{\\frac{\\sum(x_i-\\bar x)^2}{n-1}}"
+     ],
+     "work": [
+      "s_x=\\sqrt{\\frac{780}{5}}=\\sqrt{156}=12.49"
+     ],
+     "words": "The sample SD divides by n minus 1, which is 5 here. This is the SD that scale() uses."
+    },
+    {
+     "title": "Standardize the new subject",
+     "general": [
+      "z=\\frac{x-\\bar x}{s_x}"
+     ],
+     "work": [
+      "z=\\frac{91-73}{12.49}=\\frac{18}{12.49}=1.44115"
+     ],
+     "words": "The new subject is scaled with the mean and SD of the training subjects. The body mass of 91 kg is about 1.4 SD above the training mean."
+    },
+    {
+     "title": "Standardize the lowest body mass",
+     "general": [
+      "z=\\frac{x-\\bar x}{s_x}"
+     ],
+     "work": [
+      "z=\\frac{58-73}{12.49}=\\frac{-15}{12.49}=-1.20096"
+     ],
+     "words": "A value below the mean gives a negative z-score. Unlike min-max values, z-scores are not limited to the range 0 to 1."
+    }
+   ],
+   "conclusion": "The six body masses have mean 73 kg and SD 12.49 kg. The new subject at 91 kg has a z-score of 1.44115, and the subject at 58 kg has a z-score of -1.20096.",
+   "source": "Original practice example in the course style",
+   "lookup": null,
+   "values": {
+    "data": [
+     58,
+     64,
+     70,
+     72,
+     81,
+     93
+    ],
+    "mean": 73.0,
+    "sumSq": 780.0,
+    "sd": 12.489995996796797,
+    "newValue": 91,
+    "zNew": 1.4411533842457842,
+    "zMin": -1.2009611535381535
+   },
+   "module": 23,
+   "tolerance": 0.007205766921228921,
+   "answerName": "z-score",
+   "answer": 1.4411533842457842
+  },
+  {
+   "id": "p23-retinopathy-photo-confusion",
+   "title": "Retinal photographs classified for diabetic retinopathy",
+   "topic": "s23confusion",
+   "context": "In a study looking at diabetic retinopathy (damage to the blood vessels of the retina caused by diabetes), 250 retinal photographs (photographs of the back of the eye taken with a fundus camera) from adults with diabetes were classified with K-NN as No retinopathy or Referable retinopathy (retinopathy severe enough to need an eye specialist). Each photograph was also graded by two ophthalmologists (eye doctors), whose grade was taken as the actual result. The cross table of the actual result (rows) against the predicted result (columns) is shown below. Referable retinopathy was the positive class.",
+   "unit": "proportion",
+   "table": {
+    "headers": [
+     "Actual \\ Predicted",
+     "No retinopathy",
+     "Referable retinopathy",
+     "Row total"
+    ],
+    "rows": [
+     [
+      "No retinopathy",
+      168,
+      12,
+      180
+     ],
+     [
+      "Referable retinopathy",
+      9,
+      61,
+      70
+     ],
+     [
+      "Column total",
+      177,
+      73,
+      250
+     ]
+    ]
+   },
+   "tasks": [
+    "Identify TP, TN, FP and FN.",
+    "Compute the accuracy and the error rate.",
+    "Compute the sensitivity and the specificity."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(TP\\) (true positives), \\(TN\\) (true negatives), \\(FP\\) (false positives), \\(FN\\) (false negatives), \\(n\\) (number of test cases).",
+   "steps": [
+    {
+     "title": "Name the four cells",
+     "general": [
+      "\\text{positive}=\\text{Referable retinopathy},\\ \\text{negative}=\\text{No retinopathy}"
+     ],
+     "work": [
+      "TN=168,\\ FP=12,\\ FN=9,\\ TP=61"
+     ],
+     "words": "Rows are the actual grades and columns are the predicted grades. A photograph with referable retinopathy that is predicted as no retinopathy is a false negative."
+    },
+    {
+     "title": "Compute the accuracy",
+     "general": [
+      "\\text{accuracy}=\\frac{TP+TN}{TP+TN+FP+FN}"
+     ],
+     "work": [
+      "\\text{accuracy}=\\frac{61+168}{61+168+12+9}=\\frac{229}{250}=0.916"
+     ],
+     "words": "The two diagonal cells are the correct predictions."
+    },
+    {
+     "title": "Compute the error rate",
+     "general": [
+      "\\text{error rate}=\\frac{FP+FN}{TP+TN+FP+FN}"
+     ],
+     "work": [
+      "\\text{error rate}=\\frac{12+9}{250}=\\frac{21}{250}=0.084=1-0.916"
+     ],
+     "words": "The two off-diagonal cells are the wrong predictions. Accuracy and error rate add to 1."
+    },
+    {
+     "title": "Compute sensitivity and specificity",
+     "general": [
+      "\\text{sensitivity}=\\frac{TP}{TP+FN}",
+      "\\text{specificity}=\\frac{TN}{TN+FP}"
+     ],
+     "work": [
+      "\\text{sensitivity}=\\frac{61}{61+9}=\\frac{61}{70}=0.87143",
+      "\\text{specificity}=\\frac{168}{168+12}=\\frac{168}{180}=0.93333"
+     ],
+     "words": "Sensitivity uses only the actual referable retinopathy row and specificity uses only the actual no retinopathy row. The classifier misses 9 of the 70 photographs with referable retinopathy."
+    }
+   ],
+   "conclusion": "The classifier labels 229 of the 250 photographs correctly, an accuracy of 0.916 and an error rate of 0.084. Its sensitivity is 0.87143 and its specificity is 0.93333.",
+   "source": "Original practice example in the course style",
+   "lookup": null,
+   "values": {
+    "TN": 168,
+    "FP": 12,
+    "FN": 9,
+    "TP": 61,
+    "n": 250,
+    "accuracy": 0.916,
+    "errorRate": 0.084,
+    "sensitivity": 0.8714285714285714,
+    "specificity": 0.9333333333333333
+   },
+   "module": 23,
+   "tolerance": 0.00458,
+   "answerName": "Accuracy",
+   "answer": 0.916
+  },
+  {
+   "id": "p23-platelet-contamination-rare",
+   "title": "Bacterial contamination of platelet units, a rare condition",
+   "topic": "s23confusion",
+   "context": "In a study looking at blood bank safety, 6,000 platelet units (bags of platelets, the blood cells that help clotting, collected from donors for transfusion) were checked with an automated light-scattering sensor. A K-NN classifier based on the sensor readings predicted each unit as Clean or Contaminated. Every unit was also cultured (grown in a nutrient broth to detect bacteria), and culture showed that 9 of the 6,000 units were contaminated with bacteria. Contaminated was the positive class.",
+   "unit": "proportion",
+   "table": {
+    "headers": [
+     "Actual \\ Predicted",
+     "Clean",
+     "Contaminated",
+     "Row total"
+    ],
+    "rows": [
+     [
+      "Clean",
+      5952,
+      39,
+      5991
+     ],
+     [
+      "Contaminated",
+      5,
+      4,
+      9
+     ],
+     [
+      "Column total",
+      5957,
+      43,
+      6000
+     ]
+    ]
+   },
+   "tasks": [
+    "Identify TP, TN, FP and FN.",
+    "Compute the accuracy and the error rate.",
+    "Compute the sensitivity and the specificity.",
+    "Compute the accuracy and the sensitivity of a check that predicts Clean for every unit. Explain the limitation of accuracy."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(TP\\) (true positives), \\(TN\\) (true negatives), \\(FP\\) (false positives), \\(FN\\) (false negatives), \\(n\\) (number of test cases).",
+   "steps": [
+    {
+     "title": "Name the four cells",
+     "general": [
+      "\\text{positive}=\\text{Contaminated},\\ \\text{negative}=\\text{Clean}"
+     ],
+     "work": [
+      "TN=5952,\\ FP=39,\\ FN=5,\\ TP=4"
+     ],
+     "words": "Rows are the culture results and columns are the predicted classes. A contaminated unit that is predicted clean is a false negative."
+    },
+    {
+     "title": "Compute the accuracy",
+     "general": [
+      "\\text{accuracy}=\\frac{TP+TN}{TP+TN+FP+FN}"
+     ],
+     "work": [
+      "\\text{accuracy}=\\frac{4+5952}{4+5952+39+5}=\\frac{5956}{6000}=0.99267"
+     ],
+     "words": "Over 99% of the units are classified correctly."
+    },
+    {
+     "title": "Compute the error rate",
+     "general": [
+      "\\text{error rate}=\\frac{FP+FN}{TP+TN+FP+FN}"
+     ],
+     "work": [
+      "\\text{error rate}=\\frac{39+5}{6000}=\\frac{44}{6000}=0.00733=1-0.99267"
+     ],
+     "words": "Most of the 44 errors are false positives, clean units that are flagged."
+    },
+    {
+     "title": "Compute sensitivity and specificity",
+     "general": [
+      "\\text{sensitivity}=\\frac{TP}{TP+FN}",
+      "\\text{specificity}=\\frac{TN}{TN+FP}"
+     ],
+     "work": [
+      "\\text{sensitivity}=\\frac{4}{4+5}=\\frac{4}{9}=0.44444",
+      "\\text{specificity}=\\frac{5952}{5952+39}=\\frac{5952}{5991}=0.99349"
+     ],
+     "words": "The sensor finds only 4 of the 9 contaminated units. The high accuracy comes from the very large number of clean units."
+    },
+    {
+     "title": "Compare with a check that always predicts Clean",
+     "general": [
+      "\\text{accuracy}=\\frac{TP+TN}{TP+TN+FP+FN}",
+      "\\text{sensitivity}=\\frac{TP}{TP+FN}"
+     ],
+     "work": [
+      "\\text{accuracy}=\\frac{0+5991}{6000}=0.9985",
+      "\\text{sensitivity}=\\frac{0}{0+9}=0"
+     ],
+     "words": "A check that flags nothing is right for all 5991 clean units, so its accuracy is even higher. It misses every contaminated unit, so accuracy alone cannot judge a test for a rare condition."
+    }
+   ],
+   "conclusion": "The sensor classifier has an accuracy of 0.99267 and an error rate of 0.00733, but its sensitivity is only 0.44444 and its specificity is 0.99349. A check that calls every unit clean has an even higher accuracy of 0.9985 with a sensitivity of 0, so accuracy hides the missed units when contamination is rare.",
+   "source": "Original practice example in the course style",
+   "lookup": null,
+   "values": {
+    "TN": 5952,
+    "FP": 39,
+    "FN": 5,
+    "TP": 4,
+    "n": 6000,
+    "accuracy": 0.9926666666666667,
+    "errorRate": 0.007333333333333333,
+    "sensitivity": 0.4444444444444444,
+    "specificity": 0.9934902353530295,
+    "accuracyAlwaysNegative": 0.9985
+   },
+   "module": 23,
+   "tolerance": 0.0049633333333333335,
+   "answerName": "Accuracy",
+   "answer": 0.9926666666666667
+  },
+  {
+   "id": "p23-pulmonary-embolism-sensspec",
+   "title": "Pulmonary embolism alert in the emergency department",
+   "topic": "s23sensspec",
+   "context": "In a study looking at pulmonary embolism (PE, a blood clot that blocks an artery in the lungs), a K-NN classifier used four min-max normalized measurements taken at triage (heart rate, respiratory rate, oxygen saturation and D-dimer, a blood marker of clot breakdown) to predict PE or No PE for 400 adults arriving at an emergency department with shortness of breath. The actual diagnosis was decided later from a computed tomography (CT) scan of the lung arteries. The cross table of the actual diagnosis (rows) against the predicted diagnosis (columns) is shown below. PE was the positive class.",
+   "unit": "proportion",
+   "table": {
+    "headers": [
+     "Actual \\ Predicted",
+     "No PE",
+     "PE",
+     "Row total"
+    ],
+    "rows": [
+     [
+      "No PE",
+      293,
+      41,
+      334
+     ],
+     [
+      "PE",
+      14,
+      52,
+      66
+     ],
+     [
+      "Column total",
+      307,
+      93,
+      400
+     ]
+    ]
+   },
+   "tasks": [
+    "Identify TP, TN, FP and FN.",
+    "Compute the accuracy, the sensitivity and the specificity.",
+    "Which of the two errors matters more for this alert, and which of sensitivity or specificity measures it?"
+   ],
+   "hypotheses": null,
+   "symbols": "\\(TP\\) (true positives), \\(TN\\) (true negatives), \\(FP\\) (false positives), \\(FN\\) (false negatives), \\(n\\) (number of test cases).",
+   "steps": [
+    {
+     "title": "Name the four cells",
+     "general": [
+      "\\text{positive}=\\text{PE},\\ \\text{negative}=\\text{No PE}"
+     ],
+     "work": [
+      "TN=293,\\ FP=41,\\ FN=14,\\ TP=52"
+     ],
+     "words": "Rows are the actual diagnoses and columns are the predictions. A patient with PE who is predicted No PE is a false negative."
+    },
+    {
+     "title": "Compute the accuracy",
+     "general": [
+      "\\text{accuracy}=\\frac{TP+TN}{TP+TN+FP+FN}"
+     ],
+     "work": [
+      "\\text{accuracy}=\\frac{52+293}{400}=\\frac{345}{400}=0.8625"
+     ],
+     "words": "The two diagonal cells are the correct predictions."
+    },
+    {
+     "title": "Compute the sensitivity",
+     "general": [
+      "\\text{sensitivity}=\\frac{TP}{TP+FN}"
+     ],
+     "work": [
+      "\\text{sensitivity}=\\frac{52}{52+14}=\\frac{52}{66}=0.78788"
+     ],
+     "words": "Only the actual PE row is used. 14 of the 66 patients with PE are missed."
+    },
+    {
+     "title": "Compute the specificity",
+     "general": [
+      "\\text{specificity}=\\frac{TN}{TN+FP}"
+     ],
+     "work": [
+      "\\text{specificity}=\\frac{293}{293+41}=\\frac{293}{334}=0.87725"
+     ],
+     "words": "Only the actual no-PE row is used. 41 patients without PE set off the alert."
+    },
+    {
+     "title": "Judge the two kinds of error",
+     "general": [
+      "FN\\to\\text{sensitivity},\\quad FP\\to\\text{specificity}"
+     ],
+     "work": [
+      "1-0.78788=0.21212",
+      "1-0.87725=0.12275"
+     ],
+     "words": "A missed patient with PE may not get blood-thinning treatment in time, so a false negative is the more serious error. It is measured by sensitivity, and about 21% of the patients with PE are missed. A false alarm costs an extra CT scan and is measured by specificity."
+    }
+   ],
+   "conclusion": "The alert has an accuracy of 0.8625, a sensitivity of 52/66 = 0.78788 and a specificity of 293/334 = 0.87725. It misses 14 of the 66 patients with PE, and sensitivity is the measure that shows this more serious error.",
+   "source": "Original practice example in the course style",
+   "lookup": null,
+   "values": {
+    "TN": 293,
+    "FP": 41,
+    "FN": 14,
+    "TP": 52,
+    "n": 400,
+    "accuracy": 0.8625,
+    "sensitivity": 0.7878787878787878,
+    "specificity": 0.8772455089820359
+   },
+   "module": 23,
+   "tolerance": 0.00393939393939394,
+   "answerName": "Sensitivity",
+   "answer": 0.7878787878787878
+  },
+  {
+   "id": "p23-crp-procalcitonin-sensspec",
+   "title": "Bacterial or viral infection from CRP and procalcitonin",
+   "topic": "s23sensspec",
+   "context": "In a study looking at fever in children, 180 children seen in a pediatric clinic had two blood markers measured, C-reactive protein (CRP, a protein made by the liver during inflammation) in milligrams per liter (mg/L) and procalcitonin (a protein that rises mainly in bacterial infection) in nanograms per milliliter (ng/mL). Both markers were standardized with z-scores, and K-NN predicted each child's infection as Bacterial or Viral. The actual cause was decided from cultures and viral tests. The cross table of the actual cause (rows) against the predicted cause (columns) is shown below. Bacterial was the positive class.",
+   "unit": "proportion",
+   "table": {
+    "headers": [
+     "Actual \\ Predicted",
+     "Viral",
+     "Bacterial",
+     "Row total"
+    ],
+    "rows": [
+     [
+      "Viral",
+      108,
+      19,
+      127
+     ],
+     [
+      "Bacterial",
+      6,
+      47,
+      53
+     ],
+     [
+      "Column total",
+      114,
+      66,
+      180
+     ]
+    ]
+   },
+   "tasks": [
+    "Identify TP, TN, FP and FN.",
+    "Compute the accuracy, the sensitivity and the specificity."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(TP\\) (true positives), \\(TN\\) (true negatives), \\(FP\\) (false positives), \\(FN\\) (false negatives), \\(n\\) (number of test cases).",
+   "steps": [
+    {
+     "title": "Name the four cells",
+     "general": [
+      "\\text{positive}=\\text{Bacterial},\\ \\text{negative}=\\text{Viral}"
+     ],
+     "work": [
+      "TN=108,\\ FP=19,\\ FN=6,\\ TP=47"
+     ],
+     "words": "Rows are the actual causes and columns are the predictions. A child with a viral infection who is predicted Bacterial is a false positive."
+    },
+    {
+     "title": "Compute the accuracy",
+     "general": [
+      "\\text{accuracy}=\\frac{TP+TN}{TP+TN+FP+FN}"
+     ],
+     "work": [
+      "\\text{accuracy}=\\frac{47+108}{180}=\\frac{155}{180}=0.86111"
+     ],
+     "words": "The two diagonal cells are the correct predictions."
+    },
+    {
+     "title": "Compute the sensitivity",
+     "general": [
+      "\\text{sensitivity}=\\frac{TP}{TP+FN}"
+     ],
+     "work": [
+      "\\text{sensitivity}=\\frac{47}{47+6}=\\frac{47}{53}=0.88679"
+     ],
+     "words": "Only the actual bacterial row is used. Six children with a bacterial infection are called viral."
+    },
+    {
+     "title": "Compute the specificity",
+     "general": [
+      "\\text{specificity}=\\frac{TN}{TN+FP}"
+     ],
+     "work": [
+      "\\text{specificity}=\\frac{108}{108+19}=\\frac{108}{127}=0.85039"
+     ],
+     "words": "Only the actual viral row is used. 19 of the 127 children with a viral infection are called bacterial, so they could receive antibiotics they do not need."
+    }
+   ],
+   "conclusion": "The classifier has an accuracy of 0.86111, a sensitivity of 47/53 = 0.88679 and a specificity of 108/127 = 0.85039. It finds most bacterial infections, but 19 of the 127 viral infections are called bacterial.",
+   "source": "Original practice example in the course style",
+   "lookup": null,
+   "values": {
+    "TN": 108,
+    "FP": 19,
+    "FN": 6,
+    "TP": 47,
+    "n": 180,
+    "accuracy": 0.8611111111111112,
+    "sensitivity": 0.8867924528301887,
+    "specificity": 0.8503937007874016
+   },
+   "module": 23,
+   "tolerance": 0.0042519685039370085,
+   "answerName": "Specificity",
+   "answer": 0.8503937007874016
+  },
+  {
+   "id": "p23-fev1-hidden-neuron",
+   "title": "Predicted FEV1 from a one-hidden-neuron network",
+   "topic": "s23neuron",
+   "context": "In a study looking at lung function, a neuralnet() model was trained to predict forced expiratory volume in one second (FEV1, the volume of air that can be blown out in the first second of a forced breath). FEV1 is measured with a spirometer in liters (L). The model has one hidden neuron with a sigmoid (logistic) activation and a linear output node, and all inputs and the output are min-max normalized. A new patient had normalized inputs height 0.7, age 0.4, pack-years of smoking 0.25 and male sex 1 (1 = male, 0 = female). The bias node 1 had weight -0.51280 into the hidden neuron and 0.08460 into the output, and the hidden-to-output weight was 0.82130. The input weights are shown in the table below.",
+   "unit": "normalized FEV1",
+   "table": {
+    "headers": [
+     "Input",
+     "Weight w_j",
+     "Normalized input x_j",
+     "Product w_j x_j"
+    ],
+    "rows": [
+     [
+      "height",
+      3.1824,
+      0.7,
+      2.22768
+     ],
+     [
+      "age",
+      -2.4417,
+      0.4,
+      -0.97668
+     ],
+     [
+      "packyears",
+      -1.9653,
+      0.25,
+      -0.491325
+     ],
+     [
+      "male",
+      0.8736,
+      1.0,
+      0.8736
+     ]
+    ]
+   },
+   "tasks": [
+    "Compute the weighted sum of the inputs and add the bias weight.",
+    "Apply the sigmoid activation to get the hidden-neuron output.",
+    "Compute the predicted normalized FEV1 at the output node."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(x_j\\) (normalized input), \\(w_j\\) (input weight), \\(w_0\\) (bias weight into the hidden neuron), \\(s\\) (net input), \\(h\\) (hidden-neuron output), \\(v_0,v_1\\) (output bias and hidden-to-output weight), \\(\\hat y\\) (predicted normalized FEV1).",
+   "steps": [
+    {
+     "title": "Weighted sum of the four inputs",
+     "general": [
+      "\\sum_{j=1}^{4}w_jx_j"
+     ],
+     "work": [
+      "3.18240(0.7)-2.44170(0.4)-1.96530(0.25)+0.87360(1)",
+      "=2.22768-0.97668-0.49133+0.87360=1.63327"
+     ],
+     "words": "Multiply each input by the weight on its arrow and add the products. Age and pack-years have negative weights, so they lower the sum."
+    },
+    {
+     "title": "Add the bias weight",
+     "general": [
+      "s=w_0+\\sum_{j=1}^{4}w_jx_j"
+     ],
+     "work": [
+      "s=-0.51280+1.63327=1.12047"
+     ],
+     "words": "The bias node 1 is a constant input, so its weight is added to the sum."
+    },
+    {
+     "title": "Apply the sigmoid activation",
+     "general": [
+      "h=f(s)=\\frac{1}{1+e^{-s}}"
+     ],
+     "work": [
+      "h=\\frac{1}{1+e^{-1.12047}}=0.75408"
+     ],
+     "words": "The net input is positive, so the hidden output is above 0.5."
+    },
+    {
+     "title": "Compute the output node",
+     "general": [
+      "\\hat y=v_0+v_1h"
+     ],
+     "work": [
+      "\\hat y=0.08460+0.82130(0.75408)=0.70392"
+     ],
+     "words": "The output node of this model is linear, so it adds its bias to the weighted hidden output without another sigmoid. The prediction is on the normalized 0 to 1 FEV1 scale."
+    }
+   ],
+   "conclusion": "The net input to the hidden neuron is 1.12047 and its sigmoid output is 0.75408. The predicted normalized FEV1 is 0.70392 on the 0 to 1 scale.",
+   "source": "Original practice example in the course style",
+   "lookup": null,
+   "values": {
+    "weights": {
+     "height": 3.1824,
+     "age": -2.4417,
+     "packyears": -1.9653,
+     "male": 0.8736
+    },
+    "inputs": {
+     "height": 0.7,
+     "age": 0.4,
+     "packyears": 0.25,
+     "male": 1.0
+    },
+    "biasHidden": -0.5128,
+    "biasOutput": 0.0846,
+    "hiddenToOutput": 0.8213,
+    "weightedSum": 1.6332749999999998,
+    "netInput": 1.1204749999999999,
+    "hidden": 0.7540768134415221,
+    "prediction": 0.7039232868795221
+   },
+   "module": 23,
+   "tolerance": 0.0035196164343976105,
+   "answerName": "Predicted normalized FEV1",
+   "answer": 0.7039232868795221
+  },
+  {
+   "id": "p23-glucose-tolerance-sse",
+   "title": "Sum of squared errors for a neuron predicting an abnormal glucose test",
+   "topic": "s23neuron",
+   "context": "In a study looking at type 2 diabetes screening, a single artificial neuron was used to predict whether an oral glucose tolerance test (OGTT, blood glucose measured 2 hours after drinking a standard glucose solution) would be abnormal (y = 1) or normal (y = 0). The three inputs were 1 or 0 for a family history of diabetes (x1), a body mass index (BMI) of 30 or more (x2) and an age of 45 years or more (x3). The weights were w1 = 1.4, w2 = 0.9 and w3 = 1.1, the bias weight was w0 = -1.6, and the activation function was the sigmoid (logistic) function. Four patients with known OGTT results are shown below.",
+   "unit": "squared output units",
+   "table": {
+    "headers": [
+     "Patient",
+     "x1",
+     "x2",
+     "x3",
+     "Known OGTT result y"
+    ],
+    "rows": [
+     [
+      1,
+      1,
+      0,
+      1,
+      1
+     ],
+     [
+      2,
+      0,
+      1,
+      0,
+      0
+     ],
+     [
+      3,
+      1,
+      1,
+      0,
+      1
+     ],
+     [
+      4,
+      0,
+      0,
+      1,
+      0
+     ]
+    ]
+   },
+   "tasks": [
+    "Compute the net input for each patient.",
+    "Apply the sigmoid to get each prediction.",
+    "Compute each error and the sum of squared errors.",
+    "If the threshold (step) activation were used instead of the sigmoid, what would the sum of squared errors be?"
+   ],
+   "hypotheses": null,
+   "symbols": "\\(x_{ij}\\) (input \\(j\\) of patient \\(i\\)), \\(w_j\\) (weight), \\(w_0\\) (bias weight), \\(s_i\\) (net input), \\(\\hat y_i\\) (prediction), \\(e_i\\) (error), \\(SS\\) (sum of squared errors).",
+   "steps": [
+    {
+     "title": "Net input for each patient",
+     "general": [
+      "s_i=w_0+\\sum_{j=1}^{3}w_jx_{ij}"
+     ],
+     "work": [
+      "s_1=-1.6+1.4(1)+0.9(0)+1.1(1)=0.9",
+      "s_2=-1.6+1.4(0)+0.9(1)+1.1(0)=-0.7",
+      "s_3=-1.6+1.4(1)+0.9(1)+1.1(0)=0.7",
+      "s_4=-1.6+1.4(0)+0.9(0)+1.1(1)=-0.5"
+     ],
+     "words": "The bias of -1.6 is added for every patient. The same weights are used for every patient."
+    },
+    {
+     "title": "Sigmoid predictions",
+     "general": [
+      "\\hat y_i=\\frac{1}{1+e^{-s_i}}"
+     ],
+     "work": [
+      "\\hat y_1=\\frac{1}{1+e^{-0.9}}=0.71095",
+      "\\hat y_2=\\frac{1}{1+e^{0.7}}=0.33181",
+      "\\hat y_3=\\frac{1}{1+e^{-0.7}}=0.66819",
+      "\\hat y_4=\\frac{1}{1+e^{0.5}}=0.37754"
+     ],
+     "words": "A positive net input gives a prediction above 0.5 and a negative one gives a prediction below 0.5."
+    },
+    {
+     "title": "Errors",
+     "general": [
+      "e_i=y_i-\\hat y_i"
+     ],
+     "work": [
+      "e_1=1-0.71095=0.28905",
+      "e_2=0-0.33181=-0.33181",
+      "e_3=1-0.66819=0.33181",
+      "e_4=0-0.37754=-0.37754"
+     ],
+     "words": "Each error is the known result minus the prediction."
+    },
+    {
+     "title": "Sum of squared errors",
+     "general": [
+      "SS=\\sum_{i=1}^{n}e_i^2=\\sum_{i=1}^{n}(y_i-\\hat y_i)^2"
+     ],
+     "work": [
+      "SS=0.28905^2+(-0.33181)^2+0.33181^2+(-0.37754)^2",
+      "=0.08355+0.1101+0.1101+0.14254=0.44629"
+     ],
+     "words": "Patient 4 contributes the most, because its prediction of 0.37754 is the farthest from its known result of 0. Training would change the weights to make this total smaller."
+    },
+    {
+     "title": "Threshold activation instead",
+     "general": [
+      "f(x)=\\begin{cases}0 & x<0\\\\ 1 & x\\ge0\\end{cases}"
+     ],
+     "work": [
+      "\\hat y_1=f(0.9)=1,\\ \\hat y_2=f(-0.7)=0,\\ \\hat y_3=f(0.7)=1,\\ \\hat y_4=f(-0.5)=0",
+      "SS=0^2+0^2+0^2+0^2=0"
+     ],
+     "words": "With a threshold the predictions are only 0 or 1. Every patient is classified correctly here, so the sum of squared errors is 0. The sigmoid outputs still have errors because they are never exactly 0 or 1."
+    }
+   ],
+   "conclusion": "The net inputs are 0.9, -0.7, 0.7, -0.5 and the sigmoid predictions are 0.71095, 0.33181, 0.66819, 0.37754. The sum of squared errors is 0.44629. With a threshold activation all four patients are classified correctly and the sum of squared errors is 0.",
+   "source": "Original practice example in the course style",
+   "lookup": null,
+   "values": {
+    "weights": [
+     1.4,
+     0.9,
+     1.1
+    ],
+    "bias": -1.6,
+    "sums": [
+     0.8999999999999999,
+     -0.7000000000000001,
+     0.6999999999999997,
+     -0.5
+    ],
+    "predictions": [
+     0.7109495026250039,
+     0.3318122278318339,
+     0.668187772168166,
+     0.3775406687981454
+    ],
+    "errors": [
+     0.2890504973749961,
+     -0.3318122278318339,
+     0.33181222783183395,
+     -0.3775406687981454
+    ],
+    "SSE": 0.4462858557067333,
+    "thresholdPredictions": [
+     1,
+     0,
+     1,
+     0
+    ],
+    "thresholdSSE": 0
+   },
+   "module": 23,
+   "tolerance": 0.0022314292785336667,
+   "answerName": "Sum of squared errors",
+   "answer": 0.4462858557067333
+  }
+ ],
+ "questions": [],
+ "notes": [
+  "All data are invented for practice. No real study, author or device result is cited, and no classifier described here reports the performance of a real test.",
+  "Session 23 has no printed critical values, so every lookup is null.",
+  "K-NN cases follow the lecture exercise in Session 23 page 35 (dimensionless integer scores, Euclidean distance, a probability for the chosen class). The ask copies its wording 'Using the K-NN classifier (Euclidean distance), classify the new ... with K = ... Include the associated probability of your classification.' No case has tied distances.",
+  "p23-ecg-beat-knn changes class with K (K = 3 gives Normal 2/3, K = 5 gives Ectopic 3/5), like the lecture exercise, and the last step and the conclusion say so.",
+  "p23-platelet-contamination-rare is the rare-condition case (9 of 6,000 units). Accuracy is 0.99267 while sensitivity is 0.44444, and a check that calls every unit clean reaches 0.9985. values.accuracyAlwaysNegative holds that last number.",
+  "Values keys follow the reference cases of the same method. Extra keys where a case goes further than its reference: newValue and scaledNew (min-max), data, sumSq, sd, newValue, zNew, zMin (z-score, which has no reference case), accuracyAlwaysNegative (rare case), bias, thresholdPredictions and thresholdSSE (sum of squared errors case).",
+  "The z-score case uses the sample SD with n - 1, which is what R's scale() uses.",
+  "p23-fev1-hidden-neuron copies the structure of the reference concrete-strength model (sigmoid hidden neuron, linear output node) with invented weights."
+ ]
+}

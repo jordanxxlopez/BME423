@@ -1,0 +1,2611 @@
+{
+ "cases": [
+  {
+   "id": "p24-birth-weight-normality",
+   "title": "Birth weight with and without maternal preeclampsia",
+   "topic": "s24normal",
+   "context": "In a study looking at birth weight, the records of ten infants born to mothers with normal blood pressure (sample 1) and ten different infants born to mothers with preeclampsia (a disorder of pregnancy with high blood pressure and protein in the urine) (sample 2) were reviewed at one hospital. Birth weight was recorded in grams (g). Before choosing a test to compare the two groups, the researchers checked whether each sample was Normally distributed. The sorted values are shown in the table below.",
+   "unit": "g",
+   "table": {
+    "headers": [
+     "Order i",
+     "Normal blood pressure, birth weight (g)",
+     "Preeclampsia, birth weight (g)",
+     "Plotting probability (i - 3/8)/(n + 1/4)",
+     "Theoretical quantile z_i"
+    ],
+    "rows": [
+     [
+      1,
+      2870,
+      1480,
+      0.06098,
+      -1.54664
+     ],
+     [
+      2,
+      3050,
+      2210,
+      0.15854,
+      -1.00049
+     ],
+     [
+      3,
+      3190,
+      3050,
+      0.2561,
+      -0.65542
+     ],
+     [
+      4,
+      3240,
+      3180,
+      0.35366,
+      -0.37546
+     ],
+     [
+      5,
+      3330,
+      3260,
+      0.45122,
+      -0.12258
+     ],
+     [
+      6,
+      3360,
+      3320,
+      0.54878,
+      0.12258
+     ],
+     [
+      7,
+      3510,
+      3390,
+      0.64634,
+      0.37546
+     ],
+     [
+      8,
+      3560,
+      3440,
+      0.7439,
+      0.65542
+     ],
+     [
+      9,
+      3720,
+      3510,
+      0.84146,
+      1.00049
+     ],
+     [
+      10,
+      3890,
+      3560,
+      0.93902,
+      1.54664
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) For each sample, calculate the mean, the SD, and the percentage of values within one SD and within two SDs of the mean, and compare them with the percentages for Normally distributed data.",
+    "(ii) Give the theoretical quantiles that qqnorm() uses for ten points, and describe how each sample lies against them on a Normal Q-Q plot.",
+    "(iii) The R output below was obtained with shapiro.test(control) and shapiro.test(preeclampsia). State the hypotheses, the decision at the 0.05 level, and what it says about using a parametric test.\n\n\tShapiro-Wilk normality test\n\ndata:  control\nW = 0.99189, p-value = 0.9986\n\n\n\tShapiro-Wilk normality test\n\ndata:  preeclampsia\nW = 0.74268, p-value = 0.002907"
+   ],
+   "hypotheses": {
+    "null": "H_0:\\text{the data come from a Normal distribution}",
+    "alternative": "H_A:\\text{the data do not come from a Normal distribution}",
+    "nullWords": "There is no difference between the distribution of the data and a Normal distribution.",
+    "alternativeWords": "The distribution of the data differs from a Normal distribution."
+   },
+   "symbols": "\\(\\bar x\\) (sample mean), \\(s\\) (sample SD), \\(p_i\\) (plotting probability), \\(z_i\\) (theoretical Normal quantile), \\(W\\) (Shapiro-Wilk statistic), \\(P\\) (P value).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\text{the data come from a Normal distribution}",
+      "H_A:\\text{the data do not come from a Normal distribution}"
+     ],
+     "work": [
+      "\\alpha=0.05"
+     ],
+     "words": "Normality is checked with the percentage of data in a range, the Normal Q-Q plot, and the Shapiro-Wilk test. The null hypothesis is that there is no difference between the distribution of the data and a Normal distribution."
+    },
+    {
+     "title": "Mean and SD of sample 1",
+     "general": [
+      "\\bar x=\\frac{1}{n}\\sum x_i",
+      "s=\\sqrt{\\frac{\\sum(x_i-\\bar x)^2}{n-1}}"
+     ],
+     "work": [
+      "\\bar x=\\frac{33720}{10}=3372",
+      "\\sum(x_i-\\bar x)^2=851960",
+      "s=\\sqrt{\\frac{851960}{9}}=307.672"
+     ],
+     "words": "Add the ten values and divide by 10, then square each deviation, add them, divide by n - 1 = 9 and take the root."
+    },
+    {
+     "title": "Percentage of sample 1 within one and two SDs",
+     "general": [
+      "\\bar x-s<x<\\bar x+s",
+      "P(\\mu-\\sigma<X<\\mu+\\sigma)=0.6826"
+     ],
+     "work": [
+      "3372-307.672<x<3372+307.672",
+      "3064.33<x<3679.67",
+      "\\frac{6}{10}=60\\%\\ \\text{vs}\\ 68.26\\%",
+      "\\frac{10}{10}=100\\%\\ \\text{within two SDs vs}\\ 95.44\\%"
+     ],
+     "words": "Six of the ten birth weights (3190, 3240, 3330, 3360, 3510, 3560) lie within one SD of the mean. This 60% is a little below the Normal 68.26%, which is expected with only ten values, and all ten values lie within two SDs, close to the Normal 95.44%."
+    },
+    {
+     "title": "Theoretical quantiles for qqnorm()",
+     "general": [
+      "p_i=\\frac{i-3/8}{n+1/4}",
+      "z_i=\\Phi^{-1}(p_i)"
+     ],
+     "work": [
+      "p_1=\\frac{1-0.375}{10.25}=0.0609756",
+      "z_1=\\Phi^{-1}(0.0609756)=-1.54664",
+      "z_{10}=+1.54664"
+     ],
+     "words": "For ten or fewer points R uses these plotting probabilities. The ten theoretical quantiles run from -1.54664 to +1.54664 and are the horizontal axis of the Q-Q plot. The birth weights of sample 1 lie close to a straight line. For the preeclampsia sample the top eight points lie on a fairly straight line, but 1480 g and 2210 g fall far below it at the left end. This is the pattern of negative skew (a long left tail)."
+    },
+    {
+     "title": "Shapiro-Wilk result for sample 1",
+     "general": [
+      "P>\\alpha\\Rightarrow\\text{do not reject }H_0"
+     ],
+     "work": [
+      "W=0.99189,\\quad P=0.9986>0.05"
+     ],
+     "words": "The P value is far above 0.05, so Normality is not rejected. The birth weights of sample 1 are consistent with a Normal distribution."
+    },
+    {
+     "title": "Mean, SD and range percentages of sample 2",
+     "general": [
+      "\\bar x=\\frac{1}{n}\\sum x_i",
+      "s=\\sqrt{\\frac{\\sum(x_i-\\bar x)^2}{n-1}}"
+     ],
+     "work": [
+      "\\bar x=\\frac{30400}{10}=3040",
+      "s=\\sqrt{\\frac{4042800}{9}}=670.224",
+      "2369.78<x<3710.22",
+      "\\frac{8}{10}=80\\%\\ \\text{within one SD}",
+      "\\frac{9}{10}=90\\%\\ \\text{within two SDs}"
+     ],
+     "words": "The two very low birth weights of 1480 g and 2210 g pull the mean down and inflate the SD, so eight of the ten values crowd inside one SD (80% against 68.26%). The value 1480 g lies beyond two SDs, so only 90% lie within two SDs against 95.44%. Both counts depart from the Normal percentages."
+    },
+    {
+     "title": "Shapiro-Wilk result for sample 2",
+     "general": [
+      "P<\\alpha\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "W=0.74268,\\quad P=0.002907<0.05"
+     ],
+     "words": "The P value is below 0.05 (and below 0.01), so Normality is rejected. The preeclampsia birth weights are skewed to the left, so a comparison of the two groups should use a rank-based test such as the Mann-Whitney rank-sum test rather than a t test."
+    }
+   ],
+   "conclusion": "Sample 1 gives W = 0.99189 with P = 0.9986, so Normality is not rejected. The preeclampsia sample gives W = 0.74268 with P = 0.002907, so Normality is rejected. Birth weight in the preeclampsia group is skewed to the left, and a rank-based test is the safer choice for comparing the groups.",
+   "source": "Original practice example in the course style",
+   "lookup": null,
+   "values": {
+    "n": 10,
+    "mean1": 3372.0,
+    "sd1": 307.6722643044417,
+    "within1SD_1": 6,
+    "mean2": 3040.0,
+    "sd2": 670.2238432046416,
+    "within1SD_2": 8,
+    "within2SD_2": 9,
+    "W1": 0.99189,
+    "P1": 0.9986,
+    "W2": 0.74268,
+    "P2": 0.002907,
+    "reject2": true,
+    "rOutput": [
+     "\tShapiro-Wilk normality test",
+     "",
+     "data:  control",
+     "W = 0.99189, p-value = 0.9986",
+     "",
+     "",
+     "\tShapiro-Wilk normality test",
+     "",
+     "data:  preeclampsia",
+     "W = 0.74268, p-value = 0.002907"
+    ],
+    "rCode": "control <- c(2870, 3050, 3190, 3240, 3330, 3360, 3510, 3560, 3720, 3890)\npreeclampsia <- c(1480, 2210, 3050, 3180, 3260, 3320, 3390, 3440, 3510, 3560)\nshapiro.test(control)\nshapiro.test(preeclampsia)"
+   },
+   "module": 24,
+   "tolerance": 0.0037134,
+   "answerName": "Shapiro-Wilk W (sample 2)",
+   "answer": 0.74268
+  },
+  {
+   "id": "p24-phosphate-parathyroid-normality",
+   "title": "Serum phosphate in healthy adults and in hyperparathyroidism",
+   "topic": "s24normal",
+   "context": "In a study looking at primary hyperparathyroidism (an overactive parathyroid gland that raises blood calcium and lowers blood phosphate), serum phosphate was measured in ten healthy adults (sample 1) and ten different patients with primary hyperparathyroidism (sample 2) of the same age range. Serum phosphate was recorded in milligrams per deciliter (mg/dL). Before choosing a test to compare the two groups, the researchers checked whether each sample was Normally distributed. The sorted values are shown in the table below.",
+   "unit": "mg/dL",
+   "table": {
+    "headers": [
+     "Order i",
+     "Healthy, serum phosphate (mg/dL)",
+     "Hyperparathyroidism, serum phosphate (mg/dL)",
+     "Plotting probability (i - 3/8)/(n + 1/4)",
+     "Theoretical quantile z_i"
+    ],
+    "rows": [
+     [
+      1,
+      2.9,
+      2.2,
+      0.06098,
+      -1.54664
+     ],
+     [
+      2,
+      3.1,
+      2.4,
+      0.15854,
+      -1.00049
+     ],
+     [
+      3,
+      3.4,
+      2.5,
+      0.2561,
+      -0.65542
+     ],
+     [
+      4,
+      3.4,
+      2.5,
+      0.35366,
+      -0.37546
+     ],
+     [
+      5,
+      3.6,
+      2.6,
+      0.45122,
+      -0.12258
+     ],
+     [
+      6,
+      3.7,
+      2.7,
+      0.54878,
+      0.12258
+     ],
+     [
+      7,
+      3.9,
+      2.8,
+      0.64634,
+      0.37546
+     ],
+     [
+      8,
+      4,
+      3,
+      0.7439,
+      0.65542
+     ],
+     [
+      9,
+      4.1,
+      3.6,
+      0.84146,
+      1.00049
+     ],
+     [
+      10,
+      4.5,
+      4,
+      0.93902,
+      1.54664
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) For each sample, calculate the mean, the SD, and the percentage of values within one SD and within two SDs of the mean, and compare them with the percentages for Normally distributed data.",
+    "(ii) Give the theoretical quantiles that qqnorm() uses for ten points, and describe how each sample lies against them on a Normal Q-Q plot.",
+    "(iii) The R output below was obtained with shapiro.test(healthy) and shapiro.test(hpt). State the hypotheses, the decision at the 0.05 level, and what it says about using a parametric test.\n\n\tShapiro-Wilk normality test\n\ndata:  healthy\nW = 0.98682, p-value = 0.9912\n\n\n\tShapiro-Wilk normality test\n\ndata:  hpt\nW = 0.86757, p-value = 0.09364"
+   ],
+   "hypotheses": {
+    "null": "H_0:\\text{the data come from a Normal distribution}",
+    "alternative": "H_A:\\text{the data do not come from a Normal distribution}",
+    "nullWords": "There is no difference between the distribution of the data and a Normal distribution.",
+    "alternativeWords": "The distribution of the data differs from a Normal distribution."
+   },
+   "symbols": "\\(\\bar x\\) (sample mean), \\(s\\) (sample SD), \\(p_i\\) (plotting probability), \\(z_i\\) (theoretical Normal quantile), \\(W\\) (Shapiro-Wilk statistic), \\(P\\) (P value).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\text{the data come from a Normal distribution}",
+      "H_A:\\text{the data do not come from a Normal distribution}"
+     ],
+     "work": [
+      "\\alpha=0.05"
+     ],
+     "words": "Normality is checked with the percentage of data in a range, the Normal Q-Q plot, and the Shapiro-Wilk test. The null hypothesis is that there is no difference between the distribution of the data and a Normal distribution."
+    },
+    {
+     "title": "Mean and SD of sample 1",
+     "general": [
+      "\\bar x=\\frac{1}{n}\\sum x_i",
+      "s=\\sqrt{\\frac{\\sum(x_i-\\bar x)^2}{n-1}}"
+     ],
+     "work": [
+      "\\bar x=\\frac{36.6}{10}=3.66",
+      "\\sum(x_i-\\bar x)^2=2.104",
+      "s=\\sqrt{\\frac{2.104}{9}}=0.483506"
+     ],
+     "words": "Add the ten values and divide by 10, then square each deviation, add them, divide by n - 1 = 9 and take the root."
+    },
+    {
+     "title": "Percentage of sample 1 within one and two SDs",
+     "general": [
+      "\\bar x-s<x<\\bar x+s",
+      "P(\\mu-\\sigma<X<\\mu+\\sigma)=0.6826"
+     ],
+     "work": [
+      "3.66-0.483506<x<3.66+0.483506",
+      "3.17649<x<4.14351",
+      "\\frac{7}{10}=70\\%\\ \\text{vs}\\ 68.26\\%",
+      "\\frac{10}{10}=100\\%\\ \\text{within two SDs vs}\\ 95.44\\%"
+     ],
+     "words": "Seven of the ten phosphate values of the healthy adults (3.4, 3.4, 3.6, 3.7, 3.9, 4.0, 4.1) lie within one SD of the mean. This 70% is close to the Normal 68.26%, and all ten values lie within two SDs, close to the Normal 95.44%."
+    },
+    {
+     "title": "Theoretical quantiles for qqnorm()",
+     "general": [
+      "p_i=\\frac{i-3/8}{n+1/4}",
+      "z_i=\\Phi^{-1}(p_i)"
+     ],
+     "work": [
+      "p_1=\\frac{1-0.375}{10.25}=0.0609756",
+      "z_1=\\Phi^{-1}(0.0609756)=-1.54664",
+      "z_{10}=+1.54664"
+     ],
+     "words": "For ten or fewer points R uses these plotting probabilities. The ten theoretical quantiles run from -1.54664 to +1.54664 and are the horizontal axis of the Q-Q plot. The healthy adults lie close to a straight line. For the patients with hyperparathyroidism the first eight points rise slowly, and then 3.6 mg/dL and 4.0 mg/dL bend upward above the line at the right end. This is a mild version of positive skew (a long right tail)."
+    },
+    {
+     "title": "Shapiro-Wilk result for sample 1",
+     "general": [
+      "P>\\alpha\\Rightarrow\\text{do not reject }H_0"
+     ],
+     "work": [
+      "W=0.98682,\\quad P=0.9912>0.05"
+     ],
+     "words": "The P value is far above 0.05, so Normality is not rejected. The phosphate values of the healthy adults are consistent with a Normal distribution."
+    },
+    {
+     "title": "Mean, SD and range percentages of sample 2",
+     "general": [
+      "\\bar x=\\frac{1}{n}\\sum x_i",
+      "s=\\sqrt{\\frac{\\sum(x_i-\\bar x)^2}{n-1}}"
+     ],
+     "work": [
+      "\\bar x=\\frac{28.3}{10}=2.83",
+      "s=\\sqrt{\\frac{2.861}{9}}=0.563816",
+      "2.26618<x<3.39382",
+      "\\frac{7}{10}=70\\%\\ \\text{within one SD}",
+      "\\frac{9}{10}=90\\%\\ \\text{within two SDs}"
+     ],
+     "words": "Seven of the ten patients lie within one SD (70% against 68.26%), close to the Normal percentage. The value 4.0 mg/dL lies beyond two SDs, so only 90% lie within two SDs against 95.44%, which is one value out of ten."
+    },
+    {
+     "title": "Shapiro-Wilk result for sample 2",
+     "general": [
+      "P>\\alpha\\Rightarrow\\text{do not reject }H_0"
+     ],
+     "work": [
+      "W=0.86757,\\quad P=0.09364>0.05"
+     ],
+     "words": "The P value is above 0.05, so Normality is not rejected, although the result is close to the cutoff. The Q-Q plot shows a mild upper tail, so the data are consistent with a Normal distribution at the 0.05 level and a parametric test can still be used, with some caution."
+    }
+   ],
+   "conclusion": "The healthy adults give W = 0.98682 with P = 0.9912, so Normality is not rejected. The patients with hyperparathyroidism give W = 0.86757 with P = 0.09364, which is above 0.05, so Normality is not rejected for either sample. A t test can be used to compare the groups, keeping in mind that the patients have a mild upper tail.",
+   "source": "Original practice example in the course style",
+   "lookup": null,
+   "values": {
+    "n": 10,
+    "mean1": 3.66,
+    "sd1": 0.48350571638583323,
+    "within1SD_1": 7,
+    "mean2": 2.8300000000000005,
+    "sd2": 0.563816360962405,
+    "within1SD_2": 7,
+    "within2SD_2": 9,
+    "W1": 0.98682,
+    "P1": 0.9912,
+    "W2": 0.86757,
+    "P2": 0.09364,
+    "reject2": false,
+    "rOutput": [
+     "\tShapiro-Wilk normality test",
+     "",
+     "data:  healthy",
+     "W = 0.98682, p-value = 0.9912",
+     "",
+     "",
+     "\tShapiro-Wilk normality test",
+     "",
+     "data:  hpt",
+     "W = 0.86757, p-value = 0.09364"
+    ],
+    "rCode": "healthy <- c(2.9, 3.1, 3.4, 3.4, 3.6, 3.7, 3.9, 4, 4.1, 4.5)\nhpt <- c(2.2, 2.4, 2.5, 2.5, 2.6, 2.7, 2.8, 3, 3.6, 4)\nshapiro.test(healthy)\nshapiro.test(hpt)"
+   },
+   "module": 24,
+   "tolerance": 0.00433785,
+   "answerName": "Shapiro-Wilk W (sample 2)",
+   "answer": 0.86757
+  },
+  {
+   "id": "p24-appendectomy-stay-ranksum",
+   "title": "Hospital stay after laparoscopic or open appendectomy",
+   "topic": "s24mwtable",
+   "context": "In a study looking at recovery after appendectomy (surgical removal of the appendix), the length of hospital stay was recorded in days for four patients who had a laparoscopic operation (done through small cuts with a camera) and eight different patients who had an open operation (done through one larger cut). Length of stay counts whole days and is skewed, so it is not assumed to be Normally distributed.",
+   "unit": "days",
+   "table": {
+    "headers": [
+     "Group",
+     "Length of stay (days)",
+     "Rank (all 12 together)"
+    ],
+    "rows": [
+     [
+      "Laparoscopic",
+      1,
+      1
+     ],
+     [
+      "Laparoscopic",
+      2,
+      3
+     ],
+     [
+      "Laparoscopic",
+      2,
+      3
+     ],
+     [
+      "Laparoscopic",
+      3,
+      5.5
+     ],
+     [
+      "Open",
+      2,
+      3
+     ],
+     [
+      "Open",
+      3,
+      5.5
+     ],
+     [
+      "Open",
+      4,
+      7.5
+     ],
+     [
+      "Open",
+      4,
+      7.5
+     ],
+     [
+      "Open",
+      5,
+      9.5
+     ],
+     [
+      "Open",
+      5,
+      9.5
+     ],
+     [
+      "Open",
+      6,
+      11
+     ],
+     [
+      "Open",
+      7,
+      12
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) Rank all twelve lengths of stay together, using average ranks for ties, and compute T for the smaller group.",
+    "(ii) Based on the recorded data, is there evidence that the length of hospital stay is different in these two groups? Use the printed critical values of T. State the hypotheses in words, the decision and a P range."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\text{same distribution of length of stay after laparoscopic and open appendectomy}",
+    "alternative": "H_A:\\text{the distributions differ}",
+    "nullWords": "There is no difference in the distributions of length of hospital stay between the laparoscopic and open appendectomy groups.",
+    "alternativeWords": "The distributions of length of hospital stay differ between the laparoscopic and open appendectomy groups."
+   },
+   "symbols": "\\(T\\) (sum of ranks in the smaller group), \\(n_S\\) (size of the smaller group), \\(n_B\\) (size of the bigger group), \\(\\mu_T\\) (mean of \\(T\\) under the null hypothesis), \\(\\sigma_T\\) (standard deviation of \\(T\\) under the null hypothesis), \\(z_T\\) (standardized rank sum).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\text{the two population distributions are the same}"
+     ],
+     "work": [
+      "n_S=4\\ (\\text{laparoscopic}),\\quad n_B=8\\ (\\text{open})\\le8"
+     ],
+     "words": "The groups contain different patients and the bigger group has 8, so the procedure is the Mann-Whitney rank-sum test with the T table. The null hypothesis is that there is no difference in the distributions of length of hospital stay between the laparoscopic and open appendectomy groups."
+    },
+    {
+     "title": "Rank all observations with ties",
+     "general": [
+      "\\text{tied rank}=\\text{average of the ranks the tied values occupy}"
+     ],
+     "work": [
+      "1\\to1,\\ 2,2,2\\to\\frac{2+3+4}{3}=3,\\ 3,3\\to\\frac{5+6}{2}=5.5,\\ 4,4\\to\\frac{7+8}{2}=7.5,\\ 5,5\\to\\frac{9+10}{2}=9.5,\\ 6\\to11",
+      "7\\to12"
+     ],
+     "words": "Three stays of 2 days would occupy ranks 2, 3 and 4, so each receives 3. The two stays of 3 days share ranks 5 and 6, the two of 4 days share ranks 7 and 8, and the two of 5 days share ranks 9 and 10."
+    },
+    {
+     "title": "Compute T",
+     "general": [
+      "T=\\sum(\\text{ranks in the smaller group})"
+     ],
+     "work": [
+      "T=1+3+3+5.5=12.5",
+      "\\text{check}\\ 12.5+65.5=78=\\frac{12(13)}{2}"
+     ],
+     "words": "The laparoscopic group is the smaller group, so T is the sum of its 4 ranks. The open ranks add to 65.5, and the two sums together give the total of all ranks."
+    },
+    {
+     "title": "Describe the null distribution of T",
+     "general": [
+      "\\binom{N}{n_S}",
+      "\\mu_T=\\frac{n_S(n_S+n_B+1)}{2}"
+     ],
+     "work": [
+      "\\binom{12}{4}=495",
+      "\\mu_T=\\frac{4(4+8+1)}{2}=26"
+     ],
+     "words": "Under the null hypothesis each of the 495 sets of 4 ranks is equally likely, and the rank sums are centered at 26. The observed T = 12.5 is below this center."
+    },
+    {
+     "title": "Read the critical values",
+     "general": [
+      "T_{\\text{lower}},\\ T_{\\text{upper}}\\ \\text{for}\\ (n_S,n_B)"
+     ],
+     "work": [
+      "(4,8)\\Rightarrow14,\\ 38\\ (P=.048)",
+      "(4,8)\\Rightarrow11,\\ 41\\ (P=.008)"
+     ],
+     "words": "Open MannWhitney_RankSumT_Table.pdf, PDF page 1, row n_S = 4, n_B = 8. Near .05 the printed critical values are 14 and 38 with P = .048, and near .01 they are 11 and 41 with P = .008.",
+     "tableLookup": {
+      "path": "sources/tables/MannWhitney_RankSumT_Table.pdf",
+      "page": 1,
+      "row": "n_S = 4, n_B = 8",
+      "column": "Probability near .05, critical values (P = .048)",
+      "value": "14, 38",
+      "actualDf": null,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "T\\le T_{\\text{lower}}\\ \\text{or}\\ T\\ge T_{\\text{upper}}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "T=12.5\\le14",
+      "11<12.5",
+      "0.008<P<0.048"
+     ],
+     "words": "T = 12.5 is at or below the lower value 14, so the null hypothesis is rejected. It does not reach the .01 lower value of 11, so 0.008 < P < 0.048."
+    }
+   ],
+   "conclusion": "T = 12.5 is at or below the lower critical value of 14, so the null hypothesis is rejected (0.008 < P < 0.048). Patients who have a laparoscopic operation tend to have a shorter hospital stay than patients who have an open operation.",
+   "source": "Original practice example in the course style",
+   "lookup": {
+    "path": "sources/tables/MannWhitney_RankSumT_Table.pdf",
+    "page": 1,
+    "row": "n_S = 4, n_B = 8",
+    "column": "Probability near .05, critical values (P = .048)",
+    "value": "14, 38",
+    "actualDf": null,
+    "approximation": false
+   },
+   "values": {
+    "laparoscopic": [
+     1,
+     2,
+     2,
+     3
+    ],
+    "open": [
+     2,
+     3,
+     4,
+     4,
+     5,
+     5,
+     6,
+     7
+    ],
+    "nS": 4,
+    "nB": 8,
+    "T": 12.5,
+    "muT": 26.0,
+    "combinations": 495,
+    "critical": [
+     14,
+     38
+    ],
+    "critical01": [
+     11,
+     41
+    ],
+    "tableP": 0.048,
+    "exactP": 0.024242424242424242,
+    "reject": true
+   },
+   "module": 24,
+   "tolerance": 0.0625,
+   "answerName": "Rank sum T",
+   "answer": 12.5
+  },
+  {
+   "id": "p24-hepb-antibody-ranksum",
+   "title": "Hepatitis B antibody after two or three vaccine doses",
+   "topic": "s24mwtable",
+   "context": "In a clinical trial, twelve adults who had never been vaccinated against hepatitis B (a liver infection caused by a virus) were randomly assigned to a two-dose or a three-dose vaccine schedule. One month after the last dose, the hepatitis B surface antibody (anti-HBs, the antibody that shows protection) was measured in milli-international units per milliliter (mIU/mL). Six adults received two doses and six different adults received three doses. Antibody levels are skewed toward high values, so they are not assumed to be Normally distributed.",
+   "unit": "mIU/mL",
+   "table": {
+    "headers": [
+     "Group",
+     "Anti-HBs (mIU/mL)",
+     "Rank (all 12 together)"
+    ],
+    "rows": [
+     [
+      "Two doses",
+      38,
+      1
+     ],
+     [
+      "Two doses",
+      52,
+      3
+     ],
+     [
+      "Two doses",
+      61,
+      5
+     ],
+     [
+      "Two doses",
+      74,
+      6
+     ],
+     [
+      "Two doses",
+      96,
+      8
+     ],
+     [
+      "Two doses",
+      140,
+      10
+     ],
+     [
+      "Three doses",
+      45,
+      2
+     ],
+     [
+      "Three doses",
+      58,
+      4
+     ],
+     [
+      "Three doses",
+      83,
+      7
+     ],
+     [
+      "Three doses",
+      110,
+      9
+     ],
+     [
+      "Three doses",
+      152,
+      11
+     ],
+     [
+      "Three doses",
+      205,
+      12
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) Rank all twelve antibody levels together and compute T.",
+    "(ii) Based on the recorded data, is there evidence that the anti-HBs level is different in these two groups? Use the printed critical values of T. State the hypotheses in words, the decision and a P range."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\text{same distribution of anti-HBs after two and three doses}",
+    "alternative": "H_A:\\text{the distributions differ}",
+    "nullWords": "There is no difference in the distributions of anti-HBs one month after the last dose between the two-dose and three-dose groups.",
+    "alternativeWords": "The distributions of anti-HBs one month after the last dose differ between the two-dose and three-dose groups."
+   },
+   "symbols": "\\(T\\) (sum of ranks in the smaller group), \\(n_S\\) (size of the smaller group), \\(n_B\\) (size of the bigger group), \\(\\mu_T\\) (mean of \\(T\\) under the null hypothesis), \\(\\sigma_T\\) (standard deviation of \\(T\\) under the null hypothesis), \\(z_T\\) (standardized rank sum).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\text{the two population distributions are the same}"
+     ],
+     "work": [
+      "n_S=6\\ (\\text{two doses}),\\quad n_B=6\\ (\\text{three doses})\\le8"
+     ],
+     "words": "The groups contain different adults and each group has 6, so the procedure is the Mann-Whitney rank-sum test with the T table. The null hypothesis is that there is no difference in the distributions of anti-HBs one month after the last dose between the two-dose and three-dose groups."
+    },
+    {
+     "title": "Rank all observations",
+     "general": [
+      "\\text{tied rank}=\\text{average of the ranks the tied values occupy}"
+     ],
+     "work": [
+      "38\\to1,\\ 45\\to2,\\ 52\\to3,\\ 58\\to4,\\ 61\\to5,\\ 74\\to6",
+      "83\\to7,\\ 96\\to8,\\ 110\\to9,\\ 140\\to10,\\ 152\\to11,\\ 205\\to12"
+     ],
+     "words": "No two antibody levels are equal, so every rank is a whole number from 1 to 12."
+    },
+    {
+     "title": "Compute T",
+     "general": [
+      "T=\\sum(\\text{ranks in the smaller group})"
+     ],
+     "work": [
+      "T=1+3+5+6+8+10=33",
+      "\\text{check}\\ 33+45=78=\\frac{12(13)}{2}"
+     ],
+     "words": "The two groups have the same size, so either group can give T. The two-dose group is used, and the three-dose ranks add to 45."
+    },
+    {
+     "title": "Describe the null distribution of T",
+     "general": [
+      "\\binom{N}{n_S}",
+      "\\mu_T=\\frac{n_S(n_S+n_B+1)}{2}"
+     ],
+     "work": [
+      "\\binom{12}{6}=924",
+      "\\mu_T=\\frac{6(6+6+1)}{2}=39"
+     ],
+     "words": "Under the null hypothesis each of the 924 sets of 6 ranks is equally likely, and the rank sums are centered at 39. The observed T = 33 is below this center."
+    },
+    {
+     "title": "Read the critical values",
+     "general": [
+      "T_{\\text{lower}},\\ T_{\\text{upper}}\\ \\text{for}\\ (n_S,n_B)"
+     ],
+     "work": [
+      "(6,6)\\Rightarrow26,\\ 52\\ (P=.041)",
+      "(6,6)\\Rightarrow23,\\ 55\\ (P=.009)"
+     ],
+     "words": "Open MannWhitney_RankSumT_Table.pdf, PDF page 1, row n_S = 6, n_B = 6. Near .05 the printed critical values are 26 and 52 with P = .041, and near .01 they are 23 and 55 with P = .009.",
+     "tableLookup": {
+      "path": "sources/tables/MannWhitney_RankSumT_Table.pdf",
+      "page": 1,
+      "row": "n_S = 6, n_B = 6",
+      "column": "Probability near .05, critical values (P = .041)",
+      "value": "26, 52",
+      "actualDf": null,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "T\\le T_{\\text{lower}}\\ \\text{or}\\ T\\ge T_{\\text{upper}}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "26<33<52",
+      "P>0.041"
+     ],
+     "words": "T = 33 lies strictly between 26 and 52, so the null hypothesis is not rejected. The P value is larger than the printed .041, so P > 0.041."
+    }
+   ],
+   "conclusion": "T = 33 is between the critical values of 26 and 52, so the null hypothesis is not rejected (P > 0.041). The data do not show a difference in anti-HBs one month after the last dose between the two-dose and three-dose schedules.",
+   "source": "Original practice example in the course style",
+   "lookup": {
+    "path": "sources/tables/MannWhitney_RankSumT_Table.pdf",
+    "page": 1,
+    "row": "n_S = 6, n_B = 6",
+    "column": "Probability near .05, critical values (P = .041)",
+    "value": "26, 52",
+    "actualDf": null,
+    "approximation": false
+   },
+   "values": {
+    "twoDoses": [
+     38,
+     52,
+     61,
+     74,
+     96,
+     140
+    ],
+    "threeDoses": [
+     45,
+     58,
+     83,
+     110,
+     152,
+     205
+    ],
+    "nS": 6,
+    "nB": 6,
+    "T": 33.0,
+    "muT": 39.0,
+    "combinations": 924,
+    "critical": [
+     26,
+     52
+    ],
+    "critical01": [
+     23,
+     55
+    ],
+    "tableP": 0.041,
+    "exactP": 0.3939393939393939,
+    "reject": false
+   },
+   "module": 24,
+   "tolerance": 0.165,
+   "answerName": "Rank sum T",
+   "answer": 33.0
+  },
+  {
+   "id": "p24-insulin-pump-hypoglycemia-ranksum",
+   "title": "Hypoglycemic episodes with an insulin pump or daily injections",
+   "topic": "s24mwnormal",
+   "context": "In a study looking at type 1 diabetes, the number of hypoglycemic episodes (blood glucose below 70 milligrams per deciliter, mg/dL, on a home glucose meter) in one month was counted for ten patients who used an insulin pump (a small device that delivers insulin continuously through a tube under the skin) and for twelve different patients who used multiple daily injections. The counts are small whole numbers with many ties, so they are not assumed to be Normally distributed.",
+   "unit": "episodes per month",
+   "table": {
+    "headers": [
+     "Group",
+     "Hypoglycemic episodes in one month",
+     "Rank (all 22 together)"
+    ],
+    "rows": [
+     [
+      "Insulin pump",
+      0,
+      1
+     ],
+     [
+      "Insulin pump",
+      1,
+      3.5
+     ],
+     [
+      "Insulin pump",
+      1,
+      3.5
+     ],
+     [
+      "Insulin pump",
+      1,
+      3.5
+     ],
+     [
+      "Insulin pump",
+      2,
+      7.5
+     ],
+     [
+      "Insulin pump",
+      2,
+      7.5
+     ],
+     [
+      "Insulin pump",
+      2,
+      7.5
+     ],
+     [
+      "Insulin pump",
+      3,
+      11.5
+     ],
+     [
+      "Insulin pump",
+      3,
+      11.5
+     ],
+     [
+      "Insulin pump",
+      4,
+      15
+     ],
+     [
+      "Injections",
+      1,
+      3.5
+     ],
+     [
+      "Injections",
+      2,
+      7.5
+     ],
+     [
+      "Injections",
+      3,
+      11.5
+     ],
+     [
+      "Injections",
+      3,
+      11.5
+     ],
+     [
+      "Injections",
+      4,
+      15
+     ],
+     [
+      "Injections",
+      4,
+      15
+     ],
+     [
+      "Injections",
+      5,
+      18
+     ],
+     [
+      "Injections",
+      5,
+      18
+     ],
+     [
+      "Injections",
+      5,
+      18
+     ],
+     [
+      "Injections",
+      6,
+      20
+     ],
+     [
+      "Injections",
+      7,
+      21
+     ],
+     [
+      "Injections",
+      9,
+      22
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) Rank all 22 counts together, using average ranks for ties, and compute T.",
+    "(ii) Based on the recorded data, is there evidence that the number of hypoglycemic episodes is different in these two groups? Make sure to show your intermediate calculations. Give the mean and SD of T, z_T, the printed critical value, the decision and a P range."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\text{same distribution of monthly hypoglycemic episodes with a pump and with injections}",
+    "alternative": "H_A:\\text{the distributions differ}",
+    "nullWords": "There is no difference in the distributions of the number of hypoglycemic episodes in one month between the insulin pump and injection groups.",
+    "alternativeWords": "The distributions of the number of hypoglycemic episodes in one month differ between the insulin pump and injection groups."
+   },
+   "symbols": "\\(T\\) (sum of ranks in the smaller group), \\(n_S\\) (size of the smaller group), \\(n_B\\) (size of the bigger group), \\(\\mu_T\\) (mean of \\(T\\) under the null hypothesis), \\(\\sigma_T\\) (standard deviation of \\(T\\) under the null hypothesis), \\(z_T\\) (standardized rank sum). \\(N\\) (total number of observations, \\(n_S+n_B\\)), \\(\\tau_i\\) (number of tied ranks in the \\(i\\)th set of ties).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\text{the two population distributions are the same}"
+     ],
+     "work": [
+      "n_S=10\\ (\\text{insulin pump}),\\quad n_B=12\\ (\\text{injections})"
+     ],
+     "words": "The two groups contain different patients and the data are small counts with many ties, so the procedure is the Mann-Whitney rank-sum test. The null hypothesis is that there is no difference in the distributions of the number of hypoglycemic episodes in one month between the insulin pump and injection groups."
+    },
+    {
+     "title": "Rank all 22 values and compute T",
+     "general": [
+      "T=\\sum(\\text{ranks in the smaller group})"
+     ],
+     "work": [
+      "0\\to1,\\ 1,1,1,1\\to\\frac{2+3+4+5}{4}=3.5,\\ 2,2,2,2\\to\\frac{6+7+8+9}{4}=7.5,\\ 3,3,3,3\\to\\frac{10+11+12+13}{4}=11.5,\\ 4,4,4\\to\\frac{14+15+16}{3}=15",
+      "5,5,5\\to\\frac{17+18+19}{3}=18,\\ 6\\to20,\\ 7\\to21,\\ 9\\to22",
+      "T=1+3.5+3.5+3.5+7.5+7.5+7.5+11.5+11.5+15=72",
+      "\\text{injections sum}=253-72=181"
+     ],
+     "words": "Only 9 different counts occur among 22 patients, so most ranks are averages. For example the four counts of 2 occupy ranks 6 to 9 and each receives 7.5, and the four counts of 3 occupy ranks 10 to 13 and each receives 11.5. The insulin pump group is the smaller group."
+    },
+    {
+     "title": "Choose the Normal approximation",
+     "general": [
+      "n_B>8\\Rightarrow T\\sim N(\\mu_T,\\sigma_T^2)"
+     ],
+     "work": [
+      "n_B=12>8"
+     ],
+     "words": "The bigger group has more than 8 observations, so the T table does not apply and T is treated as Normal."
+    },
+    {
+     "title": "Mean of T",
+     "general": [
+      "\\mu_T=\\frac{n_S(n_S+n_B+1)}{2}"
+     ],
+     "work": [
+      "\\mu_T=\\frac{10(10+12+1)}{2}=115"
+     ],
+     "words": "This is the rank sum expected for the insulin pump group if there is no difference between the groups."
+    },
+    {
+     "title": "Tie sum",
+     "general": [
+      "\\sum(\\tau_i-1)\\tau_i(\\tau_i+1)"
+     ],
+     "work": [
+      "(3\\cdot4\\cdot5)+(3\\cdot4\\cdot5)+(3\\cdot4\\cdot5)+(2\\cdot3\\cdot4)+(2\\cdot3\\cdot4)=228"
+     ],
+     "words": "Counts of 1, 2 and 3 each occur 4 times (3 sets of size 4), counts of 4 and 5 each occur 3 times (2 sets of size 3), and the counts of 0, 6, 7 and 9 occur once and add nothing."
+    },
+    {
+     "title": "Tie-corrected standard deviation of T",
+     "general": [
+      "\\sigma_T=\\sqrt{\\frac{n_Sn_B(N+1)}{12}-\\frac{n_Sn_B}{12N(N-1)}\\sum(\\tau_i-1)\\tau_i(\\tau_i+1)}",
+      "N=n_S+n_B"
+     ],
+     "work": [
+      "N=10+12=22",
+      "\\frac{10(12)(23)}{12}=230",
+      "\\frac{10(12)}{12(22)(21)}(228)=4.93506",
+      "\\sigma_T=\\sqrt{230-4.93506}=\\sqrt{225.065}=15.0022"
+     ],
+     "words": "There are ties, so the tie-corrected form is used, with N - 1 = 21 in the denominator of the tie term. The ties lower the variance from 230 to 225.065."
+    },
+    {
+     "title": "Compute z_T",
+     "general": [
+      "z_T=\\frac{|T-\\mu_T|-\\frac12}{\\sigma_T}"
+     ],
+     "work": [
+      "z_T=\\frac{|72-115|-0.5}{15.0022}=\\frac{42.5}{15.0022}=2.83292"
+     ],
+     "words": "The continuity correction subtracts one half from the distance between T and its mean before dividing by the standard deviation."
+    },
+    {
+     "title": "Read the critical value",
+     "general": [
+      "z_{\\text{critical}}=t_{0.05}(\\infty)"
+     ],
+     "work": [
+      "z_{0.05}=1.9600"
+     ],
+     "words": "Open t_table.pdf, PDF page 2. In the infinity row and the two-tailed 0.05 column, the printed value is 1.9600.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 2,
+      "row": "∞",
+      "column": "0.05",
+      "value": 1.96,
+      "actualDf": null,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "|z_T|>z_{\\text{critical}}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "|z_T|=2.83292>1.9600",
+      "t_{0.005}(\\infty)=2.8070<2.83292<t_{0.002}(\\infty)=3.0902",
+      "0.002<P<0.005"
+     ],
+     "words": "The statistic exceeds 1.96, so the null hypothesis is rejected. In the infinity row it passes the 0.005 column (2.8070) but not the 0.002 column (3.0902), so 0.002 < P < 0.005. Without the tie correction the SD would be 15.1658 and z_T = 2.80237. The decision at 0.05 is the same either way, but the P range would be 0.005 < P < 0.01."
+    }
+   ],
+   "conclusion": "T = 72 gives z_T = 2.83292, which is greater than 1.9600, so the null hypothesis is rejected (0.002 < P < 0.005). Patients who use an insulin pump tend to have fewer hypoglycemic episodes in a month than patients who use multiple daily injections.",
+   "source": "Original practice example in the course style",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 2,
+    "row": "∞",
+    "column": "0.05",
+    "value": 1.96,
+    "actualDf": null,
+    "approximation": false
+   },
+   "values": {
+    "insulinPump": [
+     0,
+     1,
+     1,
+     1,
+     2,
+     2,
+     2,
+     3,
+     3,
+     4
+    ],
+    "injections": [
+     1,
+     2,
+     3,
+     3,
+     4,
+     4,
+     5,
+     5,
+     5,
+     6,
+     7,
+     9
+    ],
+    "nS": 10,
+    "nB": 12,
+    "T": 72.0,
+    "muT": 115.0,
+    "tieSum": 228,
+    "varianceNoTies": 230.0,
+    "sigmaT": 15.002164346018047,
+    "zT": 2.8329245713989644,
+    "critical": 1.96,
+    "exactP": 0.0032212369673669983,
+    "reject": true
+   },
+   "module": 24,
+   "tolerance": 0.014164622856994822,
+   "answerName": "z_T statistic",
+   "answer": 2.8329245713989644
+  },
+  {
+   "id": "p24-albuminuria-drug-ranksum",
+   "title": "Urine albumin after a new kidney-protective drug or placebo",
+   "topic": "s24mwnormal",
+   "context": "In a clinical trial, adults with type 2 diabetes and early kidney damage were randomly assigned to a new drug or to placebo. After six months the urine albumin-to-creatinine ratio (UACR, the amount of the protein albumin leaking into the urine, scaled by urine creatinine) was measured in milligrams per gram (mg/g). Eleven patients completed the drug arm and fourteen different patients completed the placebo arm. UACR values are strongly skewed toward high values, so they are not assumed to be Normally distributed.",
+   "unit": "mg/g",
+   "table": {
+    "headers": [
+     "Group",
+     "UACR (mg/g)",
+     "Rank (all 25 together)"
+    ],
+    "rows": [
+     [
+      "Drug",
+      8,
+      1
+     ],
+     [
+      "Drug",
+      11,
+      3
+     ],
+     [
+      "Drug",
+      12,
+      4
+     ],
+     [
+      "Drug",
+      15,
+      7
+     ],
+     [
+      "Drug",
+      15,
+      7
+     ],
+     [
+      "Drug",
+      19,
+      9.5
+     ],
+     [
+      "Drug",
+      22,
+      11
+     ],
+     [
+      "Drug",
+      24,
+      12.5
+     ],
+     [
+      "Drug",
+      26,
+      14.5
+     ],
+     [
+      "Drug",
+      34,
+      18
+     ],
+     [
+      "Drug",
+      40,
+      20
+     ],
+     [
+      "Placebo",
+      10,
+      2
+     ],
+     [
+      "Placebo",
+      14,
+      5
+     ],
+     [
+      "Placebo",
+      15,
+      7
+     ],
+     [
+      "Placebo",
+      19,
+      9.5
+     ],
+     [
+      "Placebo",
+      24,
+      12.5
+     ],
+     [
+      "Placebo",
+      26,
+      14.5
+     ],
+     [
+      "Placebo",
+      29,
+      16
+     ],
+     [
+      "Placebo",
+      33,
+      17
+     ],
+     [
+      "Placebo",
+      38,
+      19
+     ],
+     [
+      "Placebo",
+      45,
+      21
+     ],
+     [
+      "Placebo",
+      52,
+      22
+     ],
+     [
+      "Placebo",
+      66,
+      23
+     ],
+     [
+      "Placebo",
+      85,
+      24
+     ],
+     [
+      "Placebo",
+      120,
+      25
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) Rank all 25 UACR values together, using average ranks for ties, and compute T.",
+    "(ii) Based on the recorded data, is there evidence that UACR is different in these two groups? Make sure to show your intermediate calculations. Give the mean and SD of T, z_T, the printed critical value, the decision and a P range."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\text{same distribution of UACR with the drug and with placebo}",
+    "alternative": "H_A:\\text{the distributions differ}",
+    "nullWords": "There is no difference in the distributions of the urine albumin-to-creatinine ratio after six months between the drug and placebo groups.",
+    "alternativeWords": "The distributions of the urine albumin-to-creatinine ratio after six months differ between the drug and placebo groups."
+   },
+   "symbols": "\\(T\\) (sum of ranks in the smaller group), \\(n_S\\) (size of the smaller group), \\(n_B\\) (size of the bigger group), \\(\\mu_T\\) (mean of \\(T\\) under the null hypothesis), \\(\\sigma_T\\) (standard deviation of \\(T\\) under the null hypothesis), \\(z_T\\) (standardized rank sum). \\(N\\) (total number of observations, \\(n_S+n_B\\)), \\(\\tau_i\\) (number of tied ranks in the \\(i\\)th set of ties).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\text{the two population distributions are the same}"
+     ],
+     "work": [
+      "n_S=11\\ (\\text{drug}),\\quad n_B=14\\ (\\text{placebo})"
+     ],
+     "words": "The two groups contain different patients and UACR is strongly skewed, so the procedure is the Mann-Whitney rank-sum test. The null hypothesis is that there is no difference in the distributions of the urine albumin-to-creatinine ratio after six months between the drug and placebo groups."
+    },
+    {
+     "title": "Rank all 25 values and compute T",
+     "general": [
+      "T=\\sum(\\text{ranks in the smaller group})"
+     ],
+     "work": [
+      "8\\to1,\\ 10\\to2,\\ 11\\to3,\\ 12\\to4,\\ 14\\to5",
+      "15,15,15\\to\\frac{6+7+8}{3}=7,\\ 19,19\\to\\frac{9+10}{2}=9.5,\\ 22\\to11,\\ 24,24\\to\\frac{12+13}{2}=12.5,\\ 26,26\\to\\frac{14+15}{2}=14.5",
+      "29\\to16,\\ 33\\to17,\\ 34\\to18,\\ 38\\to19,\\ 40\\to20",
+      "45\\to21,\\ 52\\to22,\\ 66\\to23,\\ 85\\to24,\\ 120\\to25",
+      "T=1+3+4+7+7+9.5+11+12.5+14.5+18+20=107.5",
+      "\\text{placebo sum}=325-107.5=217.5"
+     ],
+     "words": "Most values occur once, but the three values of 15 occupy ranks 6 to 8 and each receives 7, and the pairs 19, 24 and 26 each share two ranks. The drug group is the smaller group."
+    },
+    {
+     "title": "Choose the Normal approximation",
+     "general": [
+      "n_B>8\\Rightarrow T\\sim N(\\mu_T,\\sigma_T^2)"
+     ],
+     "work": [
+      "n_B=14>8"
+     ],
+     "words": "The bigger group has more than 8 observations, so the T table does not apply and T is treated as Normal."
+    },
+    {
+     "title": "Mean of T",
+     "general": [
+      "\\mu_T=\\frac{n_S(n_S+n_B+1)}{2}"
+     ],
+     "work": [
+      "\\mu_T=\\frac{11(11+14+1)}{2}=143"
+     ],
+     "words": "This is the rank sum expected for the drug group if there is no difference between the groups."
+    },
+    {
+     "title": "Tie sum",
+     "general": [
+      "\\sum(\\tau_i-1)\\tau_i(\\tau_i+1)"
+     ],
+     "work": [
+      "(2\\cdot3\\cdot4)+(1\\cdot2\\cdot3)+(1\\cdot2\\cdot3)+(1\\cdot2\\cdot3)=42"
+     ],
+     "words": "The value 15 occurs 3 times (1 set of size 3), and the values 19, 24 and 26 each occur twice (3 sets of size 2). All other values occur once and add nothing."
+    },
+    {
+     "title": "Tie-corrected standard deviation of T",
+     "general": [
+      "\\sigma_T=\\sqrt{\\frac{n_Sn_B(N+1)}{12}-\\frac{n_Sn_B}{12N(N-1)}\\sum(\\tau_i-1)\\tau_i(\\tau_i+1)}",
+      "N=n_S+n_B"
+     ],
+     "work": [
+      "N=11+14=25",
+      "\\frac{11(14)(26)}{12}=333.667",
+      "\\frac{11(14)}{12(25)(24)}(42)=0.898333",
+      "\\sigma_T=\\sqrt{333.667-0.898333}=\\sqrt{332.768}=18.2419"
+     ],
+     "words": "There are ties, so the tie-corrected form is used, with N - 1 = 24 in the denominator of the tie term. The ties lower the variance from 333.667 to 332.768."
+    },
+    {
+     "title": "Compute z_T",
+     "general": [
+      "z_T=\\frac{|T-\\mu_T|-\\frac12}{\\sigma_T}"
+     ],
+     "work": [
+      "z_T=\\frac{|107.5-143|-0.5}{18.2419}=\\frac{35}{18.2419}=1.91866"
+     ],
+     "words": "The continuity correction subtracts one half from the distance between T and its mean before dividing by the standard deviation."
+    },
+    {
+     "title": "Read the critical value",
+     "general": [
+      "z_{\\text{critical}}=t_{0.05}(\\infty)"
+     ],
+     "work": [
+      "z_{0.05}=1.9600"
+     ],
+     "words": "Open t_table.pdf, PDF page 2. In the infinity row and the two-tailed 0.05 column, the printed value is 1.9600.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 2,
+      "row": "∞",
+      "column": "0.05",
+      "value": 1.96,
+      "actualDf": null,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "|z_T|>z_{\\text{critical}}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "|z_T|=1.91866<1.9600",
+      "t_{0.10}(\\infty)=1.6449<1.91866<t_{0.05}(\\infty)=1.9600",
+      "0.05<P<0.10"
+     ],
+     "words": "The statistic is below 1.96, so the null hypothesis is not rejected. In the infinity row it passes the 0.10 column (1.6449) but not the 0.05 column (1.9600), so 0.05 < P < 0.10. The result is close to the cutoff but does not reach it. Without the tie correction the SD would be 18.2665 and z_T = 1.91607, so the decision is the same either way."
+    }
+   ],
+   "conclusion": "T = 107.5 gives z_T = 1.91866, which is less than 1.9600, so the null hypothesis is not rejected (0.05 < P < 0.10). The data do not show a difference in urine albumin after six months between the drug and placebo groups.",
+   "source": "Original practice example in the course style",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 2,
+    "row": "∞",
+    "column": "0.05",
+    "value": 1.96,
+    "actualDf": null,
+    "approximation": false
+   },
+   "values": {
+    "drug": [
+     8,
+     11,
+     12,
+     15,
+     15,
+     19,
+     22,
+     24,
+     26,
+     34,
+     40
+    ],
+    "placebo": [
+     10,
+     14,
+     15,
+     19,
+     24,
+     26,
+     29,
+     33,
+     38,
+     45,
+     52,
+     66,
+     85,
+     120
+    ],
+    "nS": 11,
+    "nB": 14,
+    "T": 107.5,
+    "muT": 143.0,
+    "tieSum": 42,
+    "varianceNoTies": 333.6666666666667,
+    "sigmaT": 18.241938858940774,
+    "zT": 1.918655701602998,
+    "critical": 1.96,
+    "exactP": 0.052140485484811774,
+    "reject": false
+   },
+   "module": 24,
+   "tolerance": 0.00959327850801499,
+   "answerName": "z_T statistic",
+   "answer": 1.918655701602998
+  },
+  {
+   "id": "p24-angina-attacks-signedrank",
+   "title": "Weekly angina attacks before and after a new drug",
+   "topic": "s24wtable",
+   "context": "In a study looking at stable angina (chest pain that comes on with exertion because the heart muscle gets too little blood), nine patients kept a diary of the number of angina attacks in one week. Each patient was evaluated during a week before starting a new antianginal drug and again during the fourth week of treatment. The weekly counts are small whole numbers, so the differences are not assumed to be Normally distributed.",
+   "unit": "attacks per week",
+   "table": {
+    "headers": [
+     "Patient",
+     "Before drug (attacks/week)",
+     "Week 4 on drug (attacks/week)",
+     "Difference (after - before)",
+     "Rank of |difference|",
+     "Signed rank"
+    ],
+    "rows": [
+     [
+      1,
+      6,
+      2,
+      -4,
+      5,
+      -5
+     ],
+     [
+      2,
+      4,
+      4,
+      0,
+      "dropped",
+      "dropped"
+     ],
+     [
+      3,
+      9,
+      5,
+      -4,
+      5,
+      -5
+     ],
+     [
+      4,
+      5,
+      3,
+      -2,
+      2.5,
+      -2.5
+     ],
+     [
+      5,
+      7,
+      2,
+      -5,
+      7.5,
+      -7.5
+     ],
+     [
+      6,
+      3,
+      4,
+      1,
+      1,
+      1
+     ],
+     [
+      7,
+      8,
+      3,
+      -5,
+      7.5,
+      -7.5
+     ],
+     [
+      8,
+      5,
+      1,
+      -4,
+      5,
+      -5
+     ],
+     [
+      9,
+      6,
+      4,
+      -2,
+      2.5,
+      -2.5
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) Compute the differences (after - before), drop any zero difference, rank the magnitudes with average ranks for ties, attach the signs and compute W.",
+    "(ii) Based on the recorded data, is there evidence that the number of angina attacks is different before and after starting the drug? Use the printed critical values of W. State the hypotheses in words, the decision and a P range."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\text{no difference in weekly angina attacks before and after starting the drug}",
+    "alternative": "H_A:\\text{weekly angina attacks differ before and after starting the drug}",
+    "nullWords": "There is no difference in the distributions of the weekly number of angina attacks before and after starting the drug.",
+    "alternativeWords": "The distributions of the weekly number of angina attacks differ before and after starting the drug."
+   },
+   "symbols": "\\(W\\) (sum of the signed ranks), \\(n\\) (number of nonzero differences), \\(\\mu_W\\) (mean of \\(W\\) under the null hypothesis), \\(\\sigma_W\\) (standard deviation of \\(W\\) under the null hypothesis), \\(z_W\\) (standardized signed-rank sum).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\text{signed differences centered on zero}"
+     ],
+     "work": [
+      "9\\ \\text{patients}"
+     ],
+     "words": "Each patient is measured before and after, so the procedure is the Wilcoxon signed-rank test. The null hypothesis is that there is no difference in the distributions of the weekly number of angina attacks before and after starting the drug."
+    },
+    {
+     "title": "Compute the differences and drop zeros",
+     "general": [
+      "d_i=\\text{after}_i-\\text{before}_i",
+      "n=\\text{number of nonzero differences}"
+     ],
+     "work": [
+      "d=(-4,0,-4,-2,-5,1,-5,-4,-2)",
+      "n=9-1=8\\le8"
+     ],
+     "words": "Patient 2 has 4 attacks in both weeks, so that difference of zero is dropped and n becomes 8. The W table applies."
+    },
+    {
+     "title": "Rank the magnitudes and attach signs",
+     "general": [
+      "\\operatorname{sign}(d_i)\\operatorname{rank}|d_i|"
+     ],
+     "work": [
+      "|d|\\ \\text{sorted}=1,2,2,4,4,4,5,5",
+      "2,2\\to\\frac{2+3}{2}=2.5,\\quad 4,4,4\\to\\frac{4+5+6}{3}=5,\\quad 5,5\\to\\frac{7+8}{2}=7.5",
+      "\\text{signed ranks}=(-5,-5,-2.5,-7.5,+1,-7.5,-5,-2.5)"
+     ],
+     "words": "Three sets of magnitudes are tied. The two magnitudes of 2 share ranks 2 and 3 and each receives 2.5, the three of 4 share ranks 4 to 6 and each receives 5, and the two of 5 share ranks 7 and 8 and each receives 7.5. Only patient 6, whose count rose by 1, has a positive signed rank."
+    },
+    {
+     "title": "Compute W",
+     "general": [
+      "W=\\sum\\operatorname{sign}(d_i)\\operatorname{rank}|d_i|"
+     ],
+     "work": [
+      "W=1-35=-34",
+      "\\text{check}\\ \\frac{8(9)}{2}-2(35)=-34"
+     ],
+     "words": "The positive ranks add to 1 and the negative ranks add to 35."
+    },
+    {
+     "title": "Read the critical value",
+     "general": [
+      "W_{\\text{critical}}\\ \\text{for}\\ n"
+     ],
+     "work": [
+      "n=8\\Rightarrow32\\ (P=.024),\\quad28\\ (P=.054)"
+     ],
+     "words": "Open WilcoxonW_Table.pdf, PDF page 1, row n = 8. The printed critical values are 32 with P = .024 and 28 with P = .054. The 0.05 cutoff is 32, the smallest printed value whose P does not exceed 0.05.",
+     "tableLookup": {
+      "path": "sources/tables/WilcoxonW_Table.pdf",
+      "page": 1,
+      "row": "n = 8",
+      "column": "Critical value (P = .024)",
+      "value": 32,
+      "actualDf": null,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "|W|\\ge W_{\\text{critical}}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "|W|=34\\ge32",
+      "P<0.024"
+     ],
+     "words": "The magnitude 34 reaches the critical value of 32, so the null hypothesis is rejected. It is beyond the largest printed critical value for n = 8, so P < 0.024."
+    }
+   ],
+   "conclusion": "W = -34 with n = 8, and |W| = 34 reaches the critical value of 32, so the null hypothesis is rejected (P < 0.024). In these data the weekly number of angina attacks is lower in the fourth week on the drug than before it.",
+   "source": "Original practice example in the course style",
+   "lookup": {
+    "path": "sources/tables/WilcoxonW_Table.pdf",
+    "page": 1,
+    "row": "n = 8",
+    "column": "Critical value (P = .024)",
+    "value": 32,
+    "actualDf": null,
+    "approximation": false
+   },
+   "values": {
+    "before": [
+     6.0,
+     4.0,
+     9.0,
+     5.0,
+     7.0,
+     3.0,
+     8.0,
+     5.0,
+     6.0
+    ],
+    "after": [
+     2.0,
+     4.0,
+     5.0,
+     3.0,
+     2.0,
+     4.0,
+     3.0,
+     1.0,
+     4.0
+    ],
+    "differences": [
+     -4.0,
+     0.0,
+     -4.0,
+     -2.0,
+     -5.0,
+     1.0,
+     -5.0,
+     -4.0,
+     -2.0
+    ],
+    "n": 8,
+    "W": -34.0,
+    "patterns": 256,
+    "critical": 32,
+    "exactP": 0.015625,
+    "reject": true
+   },
+   "module": 24,
+   "tolerance": 0.17,
+   "answerName": "Signed-rank sum W",
+   "answer": -34.0
+  },
+  {
+   "id": "p24-reflux-antacid-signedrank",
+   "title": "Antacid use before and after reflux diet counseling",
+   "topic": "s24wtable",
+   "context": "In a study looking at gastroesophageal reflux disease (GERD, stomach acid flowing back up into the esophagus and causing heartburn), eight patients recorded how many antacid tablets they took per day, averaged over one week and reported to the nearest half tablet. Each patient was evaluated in the week before a two-visit diet counseling program (training in meal timing and in avoiding foods that trigger heartburn) and again one month after it. The averages are coarse and skewed, so the differences are not assumed to be Normally distributed.",
+   "unit": "tablets per day",
+   "table": {
+    "headers": [
+     "Patient",
+     "Before program (tablets/day)",
+     "After program (tablets/day)",
+     "Difference (after - before)",
+     "Rank of |difference|",
+     "Signed rank"
+    ],
+    "rows": [
+     [
+      1,
+      4,
+      3,
+      -1,
+      3.5,
+      -3.5
+     ],
+     [
+      2,
+      3,
+      4,
+      1,
+      3.5,
+      3.5
+     ],
+     [
+      3,
+      6,
+      4,
+      -2,
+      6.5,
+      -6.5
+     ],
+     [
+      4,
+      2,
+      2,
+      0,
+      "dropped",
+      "dropped"
+     ],
+     [
+      5,
+      5,
+      5.5,
+      0.5,
+      1.5,
+      1.5
+     ],
+     [
+      6,
+      3,
+      1,
+      -2,
+      6.5,
+      -6.5
+     ],
+     [
+      7,
+      4,
+      4.5,
+      0.5,
+      1.5,
+      1.5
+     ],
+     [
+      8,
+      5,
+      3.5,
+      -1.5,
+      5,
+      -5
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) Compute the differences (after - before), drop any zero difference, rank the magnitudes with average ranks for ties, attach the signs and compute W.",
+    "(ii) Based on the recorded data, is there evidence that antacid use is different before and after the program? Use the printed critical values of W. State the hypotheses in words, the decision and a P range."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\text{no difference in antacid use before and after the program}",
+    "alternative": "H_A:\\text{antacid use differs before and after the program}",
+    "nullWords": "There is no difference in the distributions of daily antacid tablets before and after the diet counseling program.",
+    "alternativeWords": "The distributions of daily antacid tablets differ before and after the diet counseling program."
+   },
+   "symbols": "\\(W\\) (sum of the signed ranks), \\(n\\) (number of nonzero differences), \\(\\mu_W\\) (mean of \\(W\\) under the null hypothesis), \\(\\sigma_W\\) (standard deviation of \\(W\\) under the null hypothesis), \\(z_W\\) (standardized signed-rank sum).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\text{signed differences centered on zero}"
+     ],
+     "work": [
+      "8\\ \\text{patients}"
+     ],
+     "words": "Each patient is measured before and after, so the procedure is the Wilcoxon signed-rank test. The null hypothesis is that there is no difference in the distributions of daily antacid tablets before and after the diet counseling program."
+    },
+    {
+     "title": "Compute the differences and drop zeros",
+     "general": [
+      "d_i=\\text{after}_i-\\text{before}_i",
+      "n=\\text{number of nonzero differences}"
+     ],
+     "work": [
+      "d=(-1,1,-2,0,0.5,-2,0.5,-1.5)",
+      "n=8-1=7\\le8"
+     ],
+     "words": "Patient 4 takes 2 tablets per day in both weeks, so that difference of zero is dropped and n becomes 7. The W table applies."
+    },
+    {
+     "title": "Rank the magnitudes and attach signs",
+     "general": [
+      "\\operatorname{sign}(d_i)\\operatorname{rank}|d_i|"
+     ],
+     "work": [
+      "|d|\\ \\text{sorted}=0.5,0.5,1,1,1.5,2,2",
+      "0.5,0.5\\to\\frac{1+2}{2}=1.5,\\quad 1,1\\to\\frac{3+4}{2}=3.5,\\quad 2,2\\to\\frac{6+7}{2}=6.5",
+      "\\text{signed ranks}=(-3.5,+3.5,-6.5,+1.5,-6.5,+1.5,-5)"
+     ],
+     "words": "Three pairs of magnitudes are tied. The two magnitudes of 0.5 share ranks 1 and 2, the two of 1 share ranks 3 and 4, and the two of 2 share ranks 6 and 7. Three patients take more tablets after the program, so three signed ranks are positive."
+    },
+    {
+     "title": "Compute W",
+     "general": [
+      "W=\\sum\\operatorname{sign}(d_i)\\operatorname{rank}|d_i|"
+     ],
+     "work": [
+      "W=6.5-21.5=-15",
+      "\\text{check}\\ \\frac{7(8)}{2}-2(21.5)=-15"
+     ],
+     "words": "The positive ranks add to 6.5 and the negative ranks add to 21.5."
+    },
+    {
+     "title": "Read the critical value",
+     "general": [
+      "W_{\\text{critical}}\\ \\text{for}\\ n"
+     ],
+     "work": [
+      "n=7\\Rightarrow28\\ (P=.016),\\quad24\\ (P=.046)"
+     ],
+     "words": "Open WilcoxonW_Table.pdf, PDF page 1, row n = 7. The printed critical values are 28 with P = .016 and 24 with P = .046. The 0.05 cutoff is 24, the smallest printed value whose P does not exceed 0.05.",
+     "tableLookup": {
+      "path": "sources/tables/WilcoxonW_Table.pdf",
+      "page": 1,
+      "row": "n = 7",
+      "column": "Critical value (P = .046)",
+      "value": 24,
+      "actualDf": null,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "|W|\\ge W_{\\text{critical}}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "|W|=15<24",
+      "P>0.046"
+     ],
+     "words": "The magnitude 15 is below the critical value of 24, so the null hypothesis is not rejected. It does not reach the smallest printed critical value for n = 7, so P > 0.046."
+    }
+   ],
+   "conclusion": "W = -15 with n = 7, and |W| = 15 is below the critical value of 24, so the null hypothesis is not rejected (P > 0.046). The data do not show a difference in antacid use before and after the diet counseling program.",
+   "source": "Original practice example in the course style",
+   "lookup": {
+    "path": "sources/tables/WilcoxonW_Table.pdf",
+    "page": 1,
+    "row": "n = 7",
+    "column": "Critical value (P = .046)",
+    "value": 24,
+    "actualDf": null,
+    "approximation": false
+   },
+   "values": {
+    "before": [
+     4.0,
+     3.0,
+     6.0,
+     2.0,
+     5.0,
+     3.0,
+     4.0,
+     5.0
+    ],
+    "after": [
+     3.0,
+     4.0,
+     4.0,
+     2.0,
+     5.5,
+     1.0,
+     4.5,
+     3.5
+    ],
+    "differences": [
+     -1.0,
+     1.0,
+     -2.0,
+     0.0,
+     0.5,
+     -2.0,
+     0.5,
+     -1.5
+    ],
+    "n": 7,
+    "W": -15.0,
+    "patterns": 128,
+    "critical": 24,
+    "exactP": 0.265625,
+    "reject": false
+   },
+   "module": 24,
+   "tolerance": 0.075,
+   "answerName": "Signed-rank sum W",
+   "answer": -15.0
+  },
+  {
+   "id": "p24-fish-oil-triglyceride-signedrank",
+   "title": "Serum triglycerides before and after fish oil capsules",
+   "topic": "s24wnormal",
+   "context": "In a study looking at blood fats, fourteen adults with borderline or mildly raised triglycerides (a type of fat carried in the blood) had fasting serum triglycerides measured in milligrams per deciliter (mg/dL). Each subject was evaluated before and again after eight weeks of taking fish oil capsules (capsules of omega-3 fatty acids from fish oil). One subject had a very large drop, so the differences were skewed and were not assumed to be Normally distributed.",
+   "unit": "mg/dL",
+   "table": {
+    "headers": [
+     "Subject",
+     "Before (mg/dL)",
+     "After 8 weeks (mg/dL)",
+     "Difference (after - before)",
+     "Rank of |difference|",
+     "Signed rank"
+    ],
+    "rows": [
+     [
+      1,
+      142,
+      128,
+      -14,
+      11,
+      -11
+     ],
+     [
+      2,
+      158,
+      151,
+      -7,
+      3.5,
+      -3.5
+     ],
+     [
+      3,
+      131,
+      131,
+      0,
+      "dropped",
+      "dropped"
+     ],
+     [
+      4,
+      175,
+      162,
+      -13,
+      10,
+      -10
+     ],
+     [
+      5,
+      149,
+      140,
+      -9,
+      6.5,
+      -6.5
+     ],
+     [
+      6,
+      163,
+      155,
+      -8,
+      5,
+      -5
+     ],
+     [
+      7,
+      137,
+      139,
+      2,
+      1.5,
+      1.5
+     ],
+     [
+      8,
+      188,
+      160,
+      -28,
+      12,
+      -12
+     ],
+     [
+      9,
+      152,
+      141,
+      -11,
+      8,
+      -8
+     ],
+     [
+      10,
+      146,
+      137,
+      -9,
+      6.5,
+      -6.5
+     ],
+     [
+      11,
+      171,
+      159,
+      -12,
+      9,
+      -9
+     ],
+     [
+      12,
+      160,
+      153,
+      -7,
+      3.5,
+      -3.5
+     ],
+     [
+      13,
+      155,
+      155,
+      0,
+      "dropped",
+      "dropped"
+     ],
+     [
+      14,
+      168,
+      166,
+      -2,
+      1.5,
+      -1.5
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) Compute the differences (after - before), drop any zero difference, rank the magnitudes with average ranks for ties, attach the signs and compute W.",
+    "(ii) Based on the recorded data, is there evidence that serum triglycerides are different before and after eight weeks of the capsules? Make sure to show your intermediate calculations. Give sigma_W, z_W, the printed critical value, the decision and a P range."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\text{no difference in triglycerides before and after eight weeks of the capsules}",
+    "alternative": "H_A:\\text{triglycerides differ before and after eight weeks of the capsules}",
+    "nullWords": "There is no difference in the distributions of serum triglycerides before and after eight weeks of the fish oil capsules.",
+    "alternativeWords": "The distributions of serum triglycerides differ before and after eight weeks of the fish oil capsules."
+   },
+   "symbols": "\\(W\\) (sum of the signed ranks), \\(n\\) (number of nonzero differences), \\(\\mu_W\\) (mean of \\(W\\) under the null hypothesis), \\(\\sigma_W\\) (standard deviation of \\(W\\) under the null hypothesis), \\(z_W\\) (standardized signed-rank sum). \\(\\tau_i\\) (number of tied ranks in the \\(i\\)th set of ties).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\text{signed differences centered on zero}"
+     ],
+     "work": [
+      "n=12>8"
+     ],
+     "words": "The same subjects are measured before and after, so the procedure is the Wilcoxon signed-rank test. With 12 nonzero differences the Normal approximation is used. The null hypothesis is that there is no difference in the distributions of serum triglycerides before and after eight weeks of the fish oil capsules."
+    },
+    {
+     "title": "Compute the differences and drop zeros",
+     "general": [
+      "d_i=\\text{after}_i-\\text{before}_i"
+     ],
+     "work": [
+      "d=(-14,-7,0,-13,-9,-8,2,-28,-11,-9,-12,-7,0,-2)",
+      "n=14-2=12"
+     ],
+     "words": "Subjects 3 and 13 have the same triglyceride level before and after, so those two differences of zero are dropped and n becomes 12. With more than 8 nonzero differences the Normal approximation is used."
+    },
+    {
+     "title": "Rank the magnitudes with ties",
+     "general": [
+      "\\text{tied rank}=\\text{average of the ranks the tied values occupy}"
+     ],
+     "work": [
+      "|d|\\ \\text{sorted}=2,2,7,7,8,9,9,11,12,13,14,28",
+      "2,2\\to\\frac{1+2}{2}=1.5",
+      "7,7\\to\\frac{3+4}{2}=3.5",
+      "9,9\\to\\frac{6+7}{2}=6.5",
+      "\\text{signed ranks}=(-11,-3.5,-10,-6.5,-5,+1.5,-12,-8,-6.5,-9,-3.5,-1.5)"
+     ],
+     "words": "The two magnitudes of 2 occupy ranks 1 and 2 and each receives 1.5, the two of 7 occupy ranks 3 and 4 and each receives 3.5, and the two of 9 occupy ranks 6 and 7 and each receives 6.5. Subject 7 has a higher triglyceride level after, so only one rank is positive."
+    },
+    {
+     "title": "Compute W",
+     "general": [
+      "W=\\sum\\operatorname{sign}(d_i)\\operatorname{rank}|d_i|"
+     ],
+     "work": [
+      "W=1.5-76.5=-75",
+      "\\text{check}\\ \\frac{12(13)}{2}-2(76.5)=-75"
+     ],
+     "words": "The positive ranks add to 1.5 and the negative ranks add to 76.5, so W is negative because most values are lower after."
+    },
+    {
+     "title": "Tie sum",
+     "general": [
+      "\\sum(\\tau_i-1)\\tau_i(\\tau_i+1)"
+     ],
+     "work": [
+      "(1\\cdot2\\cdot3)+(1\\cdot2\\cdot3)+(1\\cdot2\\cdot3)=18"
+     ],
+     "words": "There are three sets of ties, each of size 2."
+    },
+    {
+     "title": "Tie-corrected standard deviation of W",
+     "general": [
+      "\\sigma_W=\\sqrt{\\frac{n(n+1)(2n+1)}{6}-\\sum\\frac{(\\tau_i-1)\\tau_i(\\tau_i+1)}{12}}"
+     ],
+     "work": [
+      "\\frac{12(13)(25)}{6}=650",
+      "\\sigma_W=\\sqrt{650-\\frac{18}{12}}=\\sqrt{648.5}=25.4657"
+     ],
+     "words": "The ties reduce the variance by 1.5, from 650 to 648.5."
+    },
+    {
+     "title": "Compute z_W",
+     "general": [
+      "z_W=\\frac{|W|-1/2}{\\sigma_W}"
+     ],
+     "work": [
+      "z_W=\\frac{75-0.5}{25.4657}=2.92551"
+     ],
+     "words": "The mean of W under the null hypothesis is zero, so only the continuity correction is subtracted from |W|."
+    },
+    {
+     "title": "Read the critical value",
+     "general": [
+      "z_{\\text{critical}}=t_{0.05}(\\infty)"
+     ],
+     "work": [
+      "z_{0.05}=1.9600"
+     ],
+     "words": "Open t_table.pdf, PDF page 2. In the infinity row and the two-tailed 0.05 column, the printed value is 1.9600.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 2,
+      "row": "∞",
+      "column": "0.05",
+      "value": 1.96,
+      "actualDf": null,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "|z_W|>z_{\\text{critical}}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "|z_W|=2.92551>1.9600",
+      "t_{0.005}(\\infty)=2.8070<2.92551<t_{0.002}(\\infty)=3.0902",
+      "0.002<P<0.005"
+     ],
+     "words": "The statistic exceeds 1.96, so the null hypothesis is rejected. In the infinity row it passes the 0.005 column (2.8070) but not the 0.002 column (3.0902), so 0.002 < P < 0.005. For comparison, a paired t test on the same differences gives t = -4.14807."
+    }
+   ],
+   "conclusion": "W = -75 and z_W = 2.92551 exceeds 1.9600, so the null hypothesis is rejected (0.002 < P < 0.005). In these data serum triglycerides are lower after eight weeks of the fish oil capsules than before them.",
+   "source": "Original practice example in the course style",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 2,
+    "row": "∞",
+    "column": "0.05",
+    "value": 1.96,
+    "actualDf": null,
+    "approximation": false
+   },
+   "values": {
+    "before": [
+     142.0,
+     158.0,
+     131.0,
+     175.0,
+     149.0,
+     163.0,
+     137.0,
+     188.0,
+     152.0,
+     146.0,
+     171.0,
+     160.0,
+     155.0,
+     168.0
+    ],
+    "after": [
+     128.0,
+     151.0,
+     131.0,
+     162.0,
+     140.0,
+     155.0,
+     139.0,
+     160.0,
+     141.0,
+     137.0,
+     159.0,
+     153.0,
+     155.0,
+     166.0
+    ],
+    "differences": [
+     -14.0,
+     -7.0,
+     0.0,
+     -13.0,
+     -9.0,
+     -8.0,
+     2.0,
+     -28.0,
+     -11.0,
+     -9.0,
+     -12.0,
+     -7.0,
+     0.0,
+     -2.0
+    ],
+    "n": 12,
+    "W": -75.0,
+    "tieSum": 18,
+    "varianceNoTies": 650.0,
+    "sigmaW": 25.465663156493687,
+    "zW": 2.9255079493581797,
+    "critical": 1.96,
+    "exactNormalP": 0.0034389438983211257,
+    "pairedT": -4.148067487195332,
+    "reject": true
+   },
+   "module": 24,
+   "tolerance": 0.014627539746790898,
+   "answerName": "z_W statistic",
+   "answer": 2.9255079493581797
+  },
+  {
+   "id": "p24-cgm-fasting-glucose-signedrank",
+   "title": "Fasting glucose before and after three months of CGM use",
+   "topic": "s24wnormal",
+   "context": "In a study looking at type 2 diabetes, thirteen patients had fasting plasma glucose (the blood sugar level after at least 8 hours without food) measured in milligrams per deciliter (mg/dL). Each patient was evaluated before starting to wear a continuous glucose monitor (CGM, a small skin sensor that reads glucose every few minutes and sends it to a phone) and again after three months of use. The differences were not assumed to be Normally distributed.",
+   "unit": "mg/dL",
+   "table": {
+    "headers": [
+     "Patient",
+     "Before CGM (mg/dL)",
+     "After 3 months (mg/dL)",
+     "Difference (after - before)",
+     "Rank of |difference|",
+     "Signed rank"
+    ],
+    "rows": [
+     [
+      1,
+      112,
+      104,
+      -8,
+      7.5,
+      -7.5
+     ],
+     [
+      2,
+      98,
+      101,
+      3,
+      2,
+      2
+     ],
+     [
+      3,
+      126,
+      118,
+      -8,
+      7.5,
+      -7.5
+     ],
+     [
+      4,
+      104,
+      104,
+      0,
+      "dropped",
+      "dropped"
+     ],
+     [
+      5,
+      131,
+      122,
+      -9,
+      10,
+      -10
+     ],
+     [
+      6,
+      118,
+      121,
+      3,
+      2,
+      2
+     ],
+     [
+      7,
+      109,
+      103,
+      -6,
+      4,
+      -4
+     ],
+     [
+      8,
+      122,
+      110,
+      -12,
+      11,
+      -11
+     ],
+     [
+      9,
+      101,
+      104,
+      3,
+      2,
+      2
+     ],
+     [
+      10,
+      115,
+      107,
+      -8,
+      7.5,
+      -7.5
+     ],
+     [
+      11,
+      127,
+      119,
+      -8,
+      7.5,
+      -7.5
+     ],
+     [
+      12,
+      108,
+      108,
+      0,
+      "dropped",
+      "dropped"
+     ],
+     [
+      13,
+      119,
+      112,
+      -7,
+      5,
+      -5
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) Compute the differences (after - before), drop any zero difference, rank the magnitudes with average ranks for ties, attach the signs and compute W.",
+    "(ii) Based on the recorded data, is there evidence that fasting plasma glucose is different before and after three months of CGM use? Make sure to show your intermediate calculations. Give sigma_W, z_W, the printed critical value, the decision and a P range."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\text{no difference in fasting glucose before and after three months of CGM use}",
+    "alternative": "H_A:\\text{fasting glucose differs before and after three months of CGM use}",
+    "nullWords": "There is no difference in the distributions of fasting plasma glucose before and after three months of CGM use.",
+    "alternativeWords": "The distributions of fasting plasma glucose differ before and after three months of CGM use."
+   },
+   "symbols": "\\(W\\) (sum of the signed ranks), \\(n\\) (number of nonzero differences), \\(\\mu_W\\) (mean of \\(W\\) under the null hypothesis), \\(\\sigma_W\\) (standard deviation of \\(W\\) under the null hypothesis), \\(z_W\\) (standardized signed-rank sum). \\(\\tau_i\\) (number of tied ranks in the \\(i\\)th set of ties).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\text{signed differences centered on zero}"
+     ],
+     "work": [
+      "n=11>8"
+     ],
+     "words": "The same patients are measured before and after, so the procedure is the Wilcoxon signed-rank test. With 11 nonzero differences the Normal approximation is used. The null hypothesis is that there is no difference in the distributions of fasting plasma glucose before and after three months of CGM use."
+    },
+    {
+     "title": "Compute the differences and drop zeros",
+     "general": [
+      "d_i=\\text{after}_i-\\text{before}_i"
+     ],
+     "work": [
+      "d=(-8,3,-8,0,-9,3,-6,-12,3,-8,-8,0,-7)",
+      "n=13-2=11"
+     ],
+     "words": "Patients 4 and 12 have the same fasting glucose before and after, so those two differences of zero are dropped and n becomes 11. With more than 8 nonzero differences the Normal approximation is used."
+    },
+    {
+     "title": "Rank the magnitudes with ties",
+     "general": [
+      "\\text{tied rank}=\\text{average of the ranks the tied values occupy}"
+     ],
+     "work": [
+      "|d|\\ \\text{sorted}=3,3,3,6,7,8,8,8,8,9,12",
+      "3,3,3\\to\\frac{1+2+3}{3}=2",
+      "8,8,8,8\\to\\frac{6+7+8+9}{4}=7.5",
+      "\\text{signed ranks}=(-7.5,+2,-7.5,-10,+2,-4,-11,+2,-7.5,-7.5,-5)"
+     ],
+     "words": "The three magnitudes of 3 occupy ranks 1 to 3 and each receives 2, and the four magnitudes of 8 occupy ranks 6 to 9 and each receives 7.5. Patients 2, 6 and 9 have a higher glucose after, so their ranks are positive."
+    },
+    {
+     "title": "Compute W",
+     "general": [
+      "W=\\sum\\operatorname{sign}(d_i)\\operatorname{rank}|d_i|"
+     ],
+     "work": [
+      "W=6-60=-54",
+      "\\text{check}\\ \\frac{11(12)}{2}-2(60)=-54"
+     ],
+     "words": "The positive ranks add to 6 and the negative ranks add to 60, so W is negative because most values are lower after."
+    },
+    {
+     "title": "Tie sum",
+     "general": [
+      "\\sum(\\tau_i-1)\\tau_i(\\tau_i+1)"
+     ],
+     "work": [
+      "(3\\cdot4\\cdot5)+(2\\cdot3\\cdot4)=84"
+     ],
+     "words": "There are two sets of ties, of sizes 4 and 3."
+    },
+    {
+     "title": "Tie-corrected standard deviation of W",
+     "general": [
+      "\\sigma_W=\\sqrt{\\frac{n(n+1)(2n+1)}{6}-\\sum\\frac{(\\tau_i-1)\\tau_i(\\tau_i+1)}{12}}"
+     ],
+     "work": [
+      "\\frac{11(12)(23)}{6}=506",
+      "\\sigma_W=\\sqrt{506-\\frac{84}{12}}=\\sqrt{499}=22.3383"
+     ],
+     "words": "The ties reduce the variance by 7, from 506 to 499."
+    },
+    {
+     "title": "Compute z_W",
+     "general": [
+      "z_W=\\frac{|W|-1/2}{\\sigma_W}"
+     ],
+     "work": [
+      "z_W=\\frac{54-0.5}{22.3383}=2.39499"
+     ],
+     "words": "The mean of W under the null hypothesis is zero, so only the continuity correction is subtracted from |W|."
+    },
+    {
+     "title": "Read the critical value",
+     "general": [
+      "z_{\\text{critical}}=t_{0.05}(\\infty)"
+     ],
+     "work": [
+      "z_{0.05}=1.9600"
+     ],
+     "words": "Open t_table.pdf, PDF page 2. In the infinity row and the two-tailed 0.05 column, the printed value is 1.9600.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 2,
+      "row": "∞",
+      "column": "0.05",
+      "value": 1.96,
+      "actualDf": null,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "|z_W|>z_{\\text{critical}}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "|z_W|=2.39499>1.9600",
+      "t_{0.02}(\\infty)=2.3263<2.39499<t_{0.01}(\\infty)=2.5758",
+      "0.01<P<0.02"
+     ],
+     "words": "The statistic exceeds 1.96, so the null hypothesis is rejected. In the infinity row it passes the 0.02 column (2.3263) but not the 0.01 column (2.5758), so 0.01 < P < 0.02. For comparison, a paired t test on the same differences gives t = -2.95664."
+    }
+   ],
+   "conclusion": "W = -54 and z_W = 2.39499 exceeds 1.9600, so the null hypothesis is rejected (0.01 < P < 0.02). In these data fasting plasma glucose is lower after three months of CGM use than before it.",
+   "source": "Original practice example in the course style",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 2,
+    "row": "∞",
+    "column": "0.05",
+    "value": 1.96,
+    "actualDf": null,
+    "approximation": false
+   },
+   "values": {
+    "before": [
+     112.0,
+     98.0,
+     126.0,
+     104.0,
+     131.0,
+     118.0,
+     109.0,
+     122.0,
+     101.0,
+     115.0,
+     127.0,
+     108.0,
+     119.0
+    ],
+    "after": [
+     104.0,
+     101.0,
+     118.0,
+     104.0,
+     122.0,
+     121.0,
+     103.0,
+     110.0,
+     104.0,
+     107.0,
+     119.0,
+     108.0,
+     112.0
+    ],
+    "differences": [
+     -8.0,
+     3.0,
+     -8.0,
+     0.0,
+     -9.0,
+     3.0,
+     -6.0,
+     -12.0,
+     3.0,
+     -8.0,
+     -8.0,
+     0.0,
+     -7.0
+    ],
+    "n": 11,
+    "W": -54.0,
+    "tieSum": 84,
+    "varianceNoTies": 506.0,
+    "sigmaW": 22.338307903688676,
+    "zW": 2.394988923541772,
+    "critical": 1.96,
+    "exactNormalP": 0.01662086736692323,
+    "pairedT": -2.9566372851390548,
+    "reject": true
+   },
+   "module": 24,
+   "tolerance": 0.011974944617708861,
+   "answerName": "z_W statistic",
+   "answer": 2.394988923541772
+  }
+ ],
+ "questions": [],
+ "notes": [
+  "All data are invented for practice. No real study is cited and no drug or device effect is stated as fact. Critical values are the printed ones. MannWhitney_RankSumT_Table.pdf page 1 rows n_S = 4, n_B = 8 (14,38 P = .048 and 11,41 P = .008) and n_S = 6, n_B = 6 (26,52 P = .041 and 23,55 P = .009). WilcoxonW_Table.pdf page 1 rows n = 8 (32 P = .024, 28 P = .054) and n = 7 (28 P = .016, 24 P = .046). t_table.pdf page 2 infinity row (0.6745 to 3.2905) for every z cutoff and P bracket. No row had to be bracketed.",
+  "The misprinted T table row n_S = 4, n_B = 7 (near .01, printed 10,38 with P = .012, exact P about .006) is not used by any case.",
+  "Tie-corrected sigma_T uses 12N(N-1) in the tie term, which is correct. The slides print 12N(N+1), a misprint. The worked solutions use the correct form and do not mention the misprint. In both s24mwnormal cases the decision is the same with or without the tie correction, and the last step says so.",
+  "The two s24mwnormal cases carry two extra values keys, tieSum and varianceNoTies (named as in the ref s24wnormal case), because the ref s24mwnormal case has no ties. The two s24normal cases carry rOutput and rCode with the exact shapiro.test output from Rscript, printed inside task (iii) with its line breaks and tab.",
+  "s24mwtable and s24wtable cases with ties use the printed tables, which assume no ties. values.exactP is the exact permutation P over average ranks (all C(N, n_S) splits or all 2^n sign patterns). values.exactNormalP of the s24wnormal cases is 2(1 - Phi(z_W)) as in the ref platelet case.",
+  "Outcome mix. Do not reject: p24-hepb-antibody-ranksum (T = 33 between 26 and 52), p24-albuminuria-drug-ranksum (z_T = 1.91866, close to the cutoff), p24-reflux-antacid-signedrank (|W| = 15 < 24), and Normality is kept for both samples in p24-phosphate-parathyroid-normality (hyperparathyroidism sample P = 0.09364, near 0.05). Zero differences are dropped in all four Wilcoxon cases. Close to a cutoff: p24-albuminuria-drug-ranksum, p24-phosphate-parathyroid-normality and p24-angina-attacks-signedrank (|W| = 34 against 32). Shapiro-Wilk failure: p24-birth-weight-normality (preeclampsia sample, P = 0.002907).",
+  "As in the ref cases, the rank tables show the ranks and the Wilcoxon tables show the signed ranks, because the cases are worked solutions. A quiz or exam version would hide those columns.",
+  "Wording. context and tasks keep the course phrases with their punctuation (for example the R output lines 'data:  control'). words, conclusion and the hypotheses in words contain no colons or semicolons, and the check script scans only those fields for them."
+ ]
+}

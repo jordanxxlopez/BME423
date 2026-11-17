@@ -1,0 +1,2599 @@
+{
+ "cases": [
+  {
+   "id": "p18-creatinine-clearance-age",
+   "title": "Age and creatinine clearance",
+   "topic": "s18line",
+   "context": "In a study looking at kidney function and aging, data were collected regarding each subject's creatinine clearance (the volume of blood plasma cleared of creatinine each minute, a measure of how well the kidneys filter, from a 24-hour urine collection) and the subject's age. Creatinine-clearance values were reported in milliliters per minute (mL/min) and age values were reported in years (yr); there were 10 participants, none with known kidney disease. The data are listed in the table below. Note: some useful summations have already been calculated for you below, which you can use. The summations are \\(\\sum x_i=537\\), \\(\\sum x_i^2=30937\\), \\(\\sum(x_i-\\bar x)=0\\), \\(\\sum(x_i-\\bar x)^2=2100.1\\), \\(\\sum y_i=932\\), \\(\\sum y_i^2=89416\\), \\(\\sum(y_i-\\bar y)=0\\), \\(\\sum(y_i-\\bar y)^2=2553.6\\), \\(\\sum x_iy_i=47820\\) and \\(\\sum(x_i-\\bar x)(y_i-\\bar y)=-2228.4\\). In answering the questions below, DO NOT use R.",
+   "unit": "mL/min per yr",
+   "table": {
+    "headers": [
+     "Subject",
+     "Age (yr)",
+     "Creatinine Clearance (mL/min)"
+    ],
+    "rows": [
+     [
+      1,
+      31,
+      118
+     ],
+     [
+      2,
+      36,
+      116
+     ],
+     [
+      3,
+      42,
+      106
+     ],
+     [
+      4,
+      47,
+      90
+     ],
+     [
+      5,
+      51,
+      101
+     ],
+     [
+      6,
+      55,
+      93
+     ],
+     [
+      7,
+      60,
+      81
+     ],
+     [
+      8,
+      66,
+      83
+     ],
+     [
+      9,
+      71,
+      76
+     ],
+     [
+      10,
+      78,
+      68
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) Find the linear regression relationship between the subject's age (independent variable) and the subject's creatinine clearance (dependent variable). Note: leave the variables in the units given (yr and mL/min, respectively)",
+    "(ii) Based on your regression line, by how much does the mean creatinine clearance change for each additional 10 years of age?"
+   ],
+   "hypotheses": null,
+   "symbols": "\\(n\\) (number of pairs), \\(x\\) (independent variable), \\(y\\) (dependent variable), \\(b\\) (least-squares slope), \\(a\\) (least-squares intercept), \\(\\bar x,\\bar y\\) (sample means), \\(D\\) (shared denominator).",
+   "steps": [
+    {
+     "title": "Collect the sums",
+     "general": [
+      "n,\\ \\sum x_i,\\ \\sum y_i,\\ \\sum x_i^2,\\ \\sum x_iy_i"
+     ],
+     "work": [
+      "n=10,\\ \\sum x_i=537,\\ \\sum y_i=932,\\ \\sum x_i^2=30937,\\ \\sum x_iy_i=47820"
+     ],
+     "words": "The procedure is a least-squares simple linear regression. The formulas need only these five numbers, which are given with the data."
+    },
+    {
+     "title": "Calculate the shared denominator",
+     "general": [
+      "D=n\\sum x_i^2-\\Big(\\sum x_i\\Big)^2"
+     ],
+     "work": [
+      "D=10(30937)-537^2=309370-288369=21001"
+     ],
+     "words": "Both the slope and the intercept formulas divide by this quantity."
+    },
+    {
+     "title": "Calculate the slope",
+     "general": [
+      "b=\\frac{n\\sum x_iy_i-\\sum x_i\\sum y_i}{D}"
+     ],
+     "work": [
+      "b=\\frac{10(47820)-537(932)}{21001}=\\frac{478200-500484}{21001}=\\frac{-22284}{21001}=-1.061092"
+     ],
+     "words": "The slope is the estimated change in the mean of the dependent variable for each 1 yr increase, in mL/min per yr."
+    },
+    {
+     "title": "Calculate both sample means",
+     "general": [
+      "\\bar x=\\frac{\\sum x_i}{n}",
+      "\\bar y=\\frac{\\sum y_i}{n}"
+     ],
+     "work": [
+      "\\bar x=\\frac{537}{10}=53.7",
+      "\\bar y=\\frac{932}{10}=93.2"
+     ],
+     "words": "The least-squares line passes through the point of means."
+    },
+    {
+     "title": "Calculate the intercept from the means",
+     "general": [
+      "a=\\bar y-b\\bar x"
+     ],
+     "work": [
+      "a=93.2+1.061092(53.7)=93.2+56.98066=150.1807"
+     ],
+     "words": "Carry the unrounded slope into this step, because rounding b first moves a."
+    },
+    {
+     "title": "Check the intercept with the full formula",
+     "general": [
+      "a=\\frac{\\sum y_i\\sum x_i^2-\\sum x_i\\sum x_iy_i}{D}"
+     ],
+     "work": [
+      "a=\\frac{932(30937)-537(47820)}{21001}=\\frac{3153944}{21001}=150.1807"
+     ],
+     "words": "Both routes give the same intercept."
+    },
+    {
+     "title": "Write the regression line",
+     "general": [
+      "\\hat y=a+bx"
+     ],
+     "work": [
+      "\\hat y=150.1807-1.061092x"
+     ],
+     "words": "The line gives the estimated mean mL/min at each value of x."
+    },
+    {
+     "title": "Interpret the slope over 10 years",
+     "general": [
+      "\\Delta\\hat y=b\\,\\Delta x"
+     ],
+     "work": [
+      "\\Delta\\hat y=-1.061092(10)=-10.61092"
+     ],
+     "words": "The slope is negative, so the estimated mean clearance falls as age rises. Over 10 years the fall is ten times the slope."
+    }
+   ],
+   "conclusion": "The least-squares line is \\(\\hat y=150.1807-1.061092x\\), with x in yr and y in mL/min. The mean creatinine clearance is estimated to fall by about 10.61092 mL/min for each additional 10 years of age.",
+   "source": "Original practice example in the course style",
+   "lookup": null,
+   "values": {
+    "n": 10,
+    "sumX": 537.0,
+    "sumY": 932.0,
+    "sumX2": 30937.0,
+    "sumXY": 47820.0,
+    "denominator": 21001.0,
+    "xbar": 53.7,
+    "ybar": 93.2,
+    "slope": -1.0610923289367173,
+    "intercept": 150.18065806390172,
+    "change10": -10.610923289367173
+   },
+   "module": 18,
+   "tolerance": 0.005305,
+   "answerName": "Slope b",
+   "answer": -1.0610923289367173
+  },
+  {
+   "id": "p18-glucose-sensor-calibration",
+   "title": "Calibration of a glucose sensor",
+   "topic": "s18line",
+   "context": "A biomedical engineering group did a study to calibrate a new enzyme-based continuous glucose monitor (CGM, a small sensor under the skin that tracks glucose in the fluid between cells). For 12 paired readings, data were collected regarding the sensor current and the reference glucose concentration measured with a laboratory glucose analyzer at the same time. Sensor-current values were reported in nanoamperes (nA) and glucose values were reported in milligrams per deciliter (mg/dL). The data are listed in the table below. Note: some useful summations have already been calculated for you below, which you can use. The summations are \\(\\sum x_i=1995\\), \\(\\sum x_i^2=418529\\), \\(\\sum(x_i-\\bar x)=0\\), \\(\\sum(x_i-\\bar x)^2=86860.25\\), \\(\\sum y_i=145.65\\), \\(\\sum y_i^2=2118.166\\), \\(\\sum(y_i-\\bar y)=0\\), \\(\\sum(y_i-\\bar y)^2=350.3394\\), \\(\\sum x_iy_i=29694.21\\) and \\(\\sum(x_i-\\bar x)(y_i-\\bar y)=5479.897\\). In answering the questions below, DO NOT use R.",
+   "unit": "nA per mg/dL",
+   "table": {
+    "headers": [
+     "Reading",
+     "Reference Glucose (mg/dL)",
+     "Sensor Current (nA)"
+    ],
+    "rows": [
+     [
+      1,
+      52,
+      5.14
+     ],
+     [
+      2,
+      68,
+      5.7
+     ],
+     [
+      3,
+      85,
+      6.82
+     ],
+     [
+      4,
+      103,
+      6.72
+     ],
+     [
+      5,
+      121,
+      10.38
+     ],
+     [
+      6,
+      140,
+      11.17
+     ],
+     [
+      7,
+      162,
+      11.65
+     ],
+     [
+      8,
+      185,
+      13.73
+     ],
+     [
+      9,
+      214,
+      15.24
+     ],
+     [
+      10,
+      248,
+      16.84
+     ],
+     [
+      11,
+      286,
+      20.12
+     ],
+     [
+      12,
+      331,
+      22.14
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) Find the linear regression relationship between the reference glucose concentration (independent variable) and the sensor current (dependent variable). Note: leave the variables in the units given (mg/dL and nA, respectively)",
+    "(ii) What sensor current does your regression line predict at a glucose concentration of 100 mg/dL?"
+   ],
+   "hypotheses": null,
+   "symbols": "\\(n\\) (number of pairs), \\(x\\) (independent variable), \\(y\\) (dependent variable), \\(b\\) (least-squares slope), \\(a\\) (least-squares intercept), \\(\\bar x,\\bar y\\) (sample means), \\(D\\) (shared denominator).",
+   "steps": [
+    {
+     "title": "Collect the sums",
+     "general": [
+      "n,\\ \\sum x_i,\\ \\sum y_i,\\ \\sum x_i^2,\\ \\sum x_iy_i"
+     ],
+     "work": [
+      "n=12,\\ \\sum x_i=1995,\\ \\sum y_i=145.65,\\ \\sum x_i^2=418529,\\ \\sum x_iy_i=29694.21"
+     ],
+     "words": "The procedure is a least-squares simple linear regression. The formulas need only these five numbers, which are given with the data."
+    },
+    {
+     "title": "Calculate the shared denominator",
+     "general": [
+      "D=n\\sum x_i^2-\\Big(\\sum x_i\\Big)^2"
+     ],
+     "work": [
+      "D=12(418529)-1995^2=5022348-3980025=1042323"
+     ],
+     "words": "Both the slope and the intercept formulas divide by this quantity."
+    },
+    {
+     "title": "Calculate the slope",
+     "general": [
+      "b=\\frac{n\\sum x_iy_i-\\sum x_i\\sum y_i}{D}"
+     ],
+     "work": [
+      "b=\\frac{12(29694.21)-1995(145.65)}{1042323}=\\frac{356330.5-290571.8}{1042323}=\\frac{65758.77}{1042323}=0.06308867"
+     ],
+     "words": "The slope is the estimated change in the mean of the dependent variable for each 1 mg/dL increase, in nA per mg/dL."
+    },
+    {
+     "title": "Calculate both sample means",
+     "general": [
+      "\\bar x=\\frac{\\sum x_i}{n}",
+      "\\bar y=\\frac{\\sum y_i}{n}"
+     ],
+     "work": [
+      "\\bar x=\\frac{1995}{12}=166.25",
+      "\\bar y=\\frac{145.65}{12}=12.1375"
+     ],
+     "words": "The least-squares line passes through the point of means."
+    },
+    {
+     "title": "Calculate the intercept from the means",
+     "general": [
+      "a=\\bar y-b\\bar x"
+     ],
+     "work": [
+      "a=12.1375-0.06308867(166.25)=12.1375-10.48849=1.649009"
+     ],
+     "words": "Carry the unrounded slope into this step, because rounding b first moves a."
+    },
+    {
+     "title": "Check the intercept with the full formula",
+     "general": [
+      "a=\\frac{\\sum y_i\\sum x_i^2-\\sum x_i\\sum x_iy_i}{D}"
+     ],
+     "work": [
+      "a=\\frac{145.65(418529)-1995(29694.21)}{1042323}=\\frac{1718799.9}{1042323}=1.649009"
+     ],
+     "words": "Both routes give the same intercept."
+    },
+    {
+     "title": "Write the regression line",
+     "general": [
+      "\\hat y=a+bx"
+     ],
+     "work": [
+      "\\hat y=1.649009+0.06308867x"
+     ],
+     "words": "The line gives the estimated mean nA at each value of x."
+    },
+    {
+     "title": "Predict the current at 100 mg/dL",
+     "general": [
+      "\\hat y=a+bx"
+     ],
+     "work": [
+      "\\hat y=1.649009+0.06308867(100)=7.957876"
+     ],
+     "words": "Put x = 100 mg/dL into the line. The value lies inside the range of the calibration data, so no extrapolation is needed."
+    }
+   ],
+   "conclusion": "The calibration line is \\(\\hat y=1.649009+0.06308867x\\), with x in mg/dL and y in nA. The sensor current rises by about 0.06308867 nA for each 1 mg/dL of glucose, and the predicted current at 100 mg/dL is 7.957876 nA.",
+   "source": "Original practice example in the course style",
+   "lookup": null,
+   "values": {
+    "n": 12,
+    "sumX": 1995.0,
+    "sumY": 145.65,
+    "sumX2": 418529.0,
+    "sumXY": 29694.21,
+    "denominator": 1042323.0,
+    "xbar": 166.25,
+    "ybar": 12.137500000000001,
+    "slope": 0.06308866829188267,
+    "intercept": 1.6490088964745073,
+    "x": 100,
+    "yhat": 7.957875725662775
+   },
+   "module": 18,
+   "tolerance": 0.001,
+   "answerName": "Slope b",
+   "answer": 0.06308866829188267
+  },
+  {
+   "id": "p18-arm-circumference-systolic",
+   "title": "Upper-arm circumference and systolic blood pressure",
+   "topic": "s18syx",
+   "context": "In a study looking at cuff fit in blood-pressure measurement, data were collected regarding each subject's systolic blood pressure (the pressure in the arteries while the heart contracts, the mean of three readings on an automated monitor with one standard adult-size cuff) and mid-upper arm circumference (the distance around the upper arm halfway between the shoulder and the elbow, measured with a tape). Systolic-pressure values were reported in millimeters of mercury (mmHg) and arm-circumference values were reported in centimeters (cm); there were 12 participants. The data are listed in the table below. Note: some useful summations have already been calculated for you below, which you can use. The summations are \\(\\sum x_i=343.5\\), \\(\\sum x_i^2=10077.17\\), \\(\\sum(x_i-\\bar x)=0\\), \\(\\sum(x_i-\\bar x)^2=244.4825\\), \\(\\sum y_i=1525\\), \\(\\sum y_i^2=195731\\), \\(\\sum(y_i-\\bar y)=0\\), \\(\\sum(y_i-\\bar y)^2=1928.917\\), \\(\\sum x_iy_i=44032.7\\) and \\(\\sum(x_i-\\bar x)(y_i-\\bar y)=379.575\\). In answering the questions below, DO NOT use R.",
+   "unit": "mmHg",
+   "table": {
+    "headers": [
+     "Subject",
+     "Arm Circumference (cm)",
+     "Systolic Pressure (mmHg)"
+    ],
+    "rows": [
+     [
+      1,
+      21.4,
+      133
+     ],
+     [
+      2,
+      23,
+      103
+     ],
+     [
+      3,
+      24.6,
+      126
+     ],
+     [
+      4,
+      25.3,
+      120
+     ],
+     [
+      5,
+      26.8,
+      122
+     ],
+     [
+      6,
+      27.5,
+      125
+     ],
+     [
+      7,
+      28.9,
+      114
+     ],
+     [
+      8,
+      30.2,
+      128
+     ],
+     [
+      9,
+      31.6,
+      125
+     ],
+     [
+      10,
+      33.1,
+      157
+     ],
+     [
+      11,
+      34.7,
+      137
+     ],
+     [
+      12,
+      36.4,
+      135
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) Find the linear regression relationship between the subject's arm circumference (independent variable) and the subject's systolic blood pressure (dependent variable). Note: leave the variables in the units given (cm and mmHg, respectively)",
+    "(ii) Calculate the standard errors of the regression coefficients a and b (in \\(\\hat y=a+bx\\)) as well as the estimate of the variance of the line of means."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(x\\) (independent variable), \\(y\\) (dependent variable), \\(b,a\\) (slope and intercept), \\(s_x,s_y\\) (sample SDs), \\(s_{y|x}\\) (scatter about the line), \\(s_a,s_b\\) (SEs of the coefficients), \\(\\beta\\) (population slope), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "Calculate both sample means",
+     "general": [
+      "\\bar x=\\frac{\\sum x_i}{n}",
+      "\\bar y=\\frac{\\sum y_i}{n}"
+     ],
+     "work": [
+      "\\bar x=\\frac{343.5}{12}=28.625",
+      "\\bar y=\\frac{1525}{12}=127.0833"
+     ],
+     "words": "The procedure is a least-squares simple linear regression. The line passes through the point of means."
+    },
+    {
+     "title": "Calculate the regression line",
+     "general": [
+      "b=\\frac{\\sum(x_i-\\bar x)(y_i-\\bar y)}{\\sum(x_i-\\bar x)^2}",
+      "a=\\bar y-b\\bar x",
+      "\\hat y=a+bx"
+     ],
+     "work": [
+      "b=\\frac{379.575}{244.4825}=1.552565",
+      "a=127.0833-1.552565(28.625)=82.64116",
+      "\\hat y=82.64116+1.552565x"
+     ],
+     "words": "The deviation form of the slope gives the same b as the n times the sum of xy form. The slope is in mmHg per cm."
+    },
+    {
+     "title": "Calculate both sample variances",
+     "general": [
+      "s_x^2=\\frac{\\sum(x_i-\\bar x)^2}{n-1}",
+      "s_y^2=\\frac{\\sum(y_i-\\bar y)^2}{n-1}"
+     ],
+     "work": [
+      "s_x^2=\\frac{244.4825}{11}=22.22568,\\quad s_x=4.714412",
+      "s_y^2=\\frac{1928.917}{11}=175.3561"
+     ],
+     "words": "These feed the shortcut formula for the scatter about the line."
+    },
+    {
+     "title": "Square the pieces inside the shortcut",
+     "general": [
+      "b^2s_x^2"
+     ],
+     "work": [
+      "b^2s_x^2=1.552565^2(22.22568)=53.57408"
+     ],
+     "words": "The first term is the total variance of y, and this term is the part of it explained by the line."
+    },
+    {
+     "title": "Estimate the variance of the line of means",
+     "general": [
+      "s_{y|x}^2=\\frac{n-1}{n-2}\\left(s_y^2-b^2s_x^2\\right)"
+     ],
+     "work": [
+      "s_{y|x}^2=\\frac{11}{10}\\left(175.3561-53.57408\\right)=133.9602",
+      "s_{y|x}=\\sqrt{133.9602}=11.57412"
+     ],
+     "words": "The factor (n − 1)/(n − 2) changes the n − 1 denominators into the n − 2 needed for regression, because two coefficients were estimated. The points scatter about the line with an SD of about 11.6 mmHg."
+    },
+    {
+     "title": "Calculate the standard error of the slope",
+     "general": [
+      "s_b=\\frac{1}{\\sqrt{n-1}}\\frac{s_{y|x}}{s_x}"
+     ],
+     "work": [
+      "s_b=\\frac{1}{\\sqrt{11}}\\cdot\\frac{11.57412}{4.714412}=0.7402254"
+     ],
+     "words": "A larger spread of x values makes the slope more precise."
+    },
+    {
+     "title": "Calculate the standard error of the intercept",
+     "general": [
+      "s_a=s_{y|x}\\sqrt{\\frac1n+\\frac{\\bar x^2}{(n-1)s_x^2}}"
+     ],
+     "work": [
+      "\\frac{1}{12}+\\frac{28.625^2}{244.4825}=3.434864",
+      "s_a=11.57412\\sqrt{3.434864}=21.45076"
+     ],
+     "words": "The quantity (n − 1)s_x² equals the sum of squared deviations of x. The intercept is less precise when the mean of x lies far from x = 0."
+    }
+   ],
+   "conclusion": "The line is \\(\\hat y=82.64116+1.552565x\\). The estimate of the variance of the line of means is \\(s_{y|x}^2=133.9602\\) mmHg², so \\(s_{y|x}=11.57412\\) mmHg. The standard errors are \\(s_b=0.7402254\\) mmHg per cm and \\(s_a=21.45076\\) mmHg.",
+   "source": "Original practice example in the course style",
+   "lookup": null,
+   "values": {
+    "n": 12,
+    "sx": 4.714412139194221,
+    "sy": 13.242207542780006,
+    "b": 1.5525651120222967,
+    "xbar": 28.625,
+    "syx": 11.574116658608583,
+    "sb": 0.7402253712662094,
+    "sa": 21.450757637347216,
+    "syxRaw": 11.574116658608583,
+    "sbRaw": 0.7402253712662094,
+    "saRaw": 21.450757637347216,
+    "a": 82.64115700169509,
+    "varianceAboutLine": 133.9601764270807
+   },
+   "module": 18,
+   "tolerance": 0.057871,
+   "answerName": "Standard error of the estimate s_y|x",
+   "answer": 11.574116658608583
+  },
+  {
+   "id": "p18-daily-steps-hdl",
+   "title": "Daily step count and HDL cholesterol",
+   "topic": "s18slope",
+   "context": "In a study looking at physical activity and blood lipids, data were collected regarding each subject's high-density lipoprotein (HDL, the so-called good cholesterol) level from a fasting blood sample and the subject's mean daily step count over two weeks, recorded with a wrist-worn accelerometer (a motion sensor). HDL values were reported in milligrams per deciliter (mg/dL) and step-count values were reported in thousands of steps per day (k steps/day); there were 14 participants. The data are listed in the table below. Note: some useful summations have already been calculated for you below, which you can use. The summations are \\(\\sum x_i=111.3\\), \\(\\sum x_i^2=1007.61\\), \\(\\sum(x_i-\\bar x)=0\\), \\(\\sum(x_i-\\bar x)^2=122.775\\), \\(\\sum y_i=713\\), \\(\\sum y_i^2=37007\\), \\(\\sum(y_i-\\bar y)=0\\), \\(\\sum(y_i-\\bar y)^2=694.9286\\), \\(\\sum x_iy_i=5905.2\\) and \\(\\sum(x_i-\\bar x)(y_i-\\bar y)=236.85\\). In answering the questions below, DO NOT use R.",
+   "unit": "",
+   "table": {
+    "headers": [
+     "Subject",
+     "Steps (k steps/day)",
+     "HDL (mg/dL)"
+    ],
+    "rows": [
+     [
+      1,
+      3.2,
+      40
+     ],
+     [
+      2,
+      4.1,
+      44
+     ],
+     [
+      3,
+      4.8,
+      53
+     ],
+     [
+      4,
+      5.5,
+      50
+     ],
+     [
+      5,
+      6,
+      40
+     ],
+     [
+      6,
+      6.9,
+      49
+     ],
+     [
+      7,
+      7.4,
+      47
+     ],
+     [
+      8,
+      8.2,
+      52
+     ],
+     [
+      9,
+      8.8,
+      45
+     ],
+     [
+      10,
+      9.6,
+      54
+     ],
+     [
+      11,
+      10.3,
+      56
+     ],
+     [
+      12,
+      11.1,
+      63
+     ],
+     [
+      13,
+      12.4,
+      59
+     ],
+     [
+      14,
+      13,
+      61
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) Find the linear regression relationship between the daily step count (independent variable) and the HDL cholesterol (dependent variable). Note: leave the variables in the units given (k steps/day and mg/dL, respectively)",
+    "(ii) Calculate the standard errors of the regression coefficients a and b (in \\(\\hat y=a+bx\\)) as well as the estimate of the variance of the line of means.",
+    "(iii) Based on your calculations for b, is the trend between HDL cholesterol and daily step count statistically significant?",
+    "(iv) What are the 95% confidence intervals for the slope and for the intercept of the line of means?",
+    "(v) Provide your result in a single complete sentence that would convey your conclusion in a way that could be understood by a non-expert in statistics or medicine (e.g., a typical reader of a local newspaper)."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\beta=0",
+    "alternative": "H_A:\\beta\\ne0",
+    "nullWords": "Mean HDL cholesterol does not change linearly with daily step count (the slope of the line of means is zero).",
+    "alternativeWords": "Mean HDL cholesterol changes linearly with daily step count (the slope of the line of means is not zero)."
+   },
+   "symbols": "\\(x\\) (independent variable), \\(y\\) (dependent variable), \\(b,a\\) (slope and intercept), \\(s_x,s_y\\) (sample SDs), \\(s_{y|x}\\) (scatter about the line), \\(s_a,s_b\\) (SEs of the coefficients), \\(\\beta\\) (population slope), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "Calculate both sample means",
+     "general": [
+      "\\bar x=\\frac{\\sum x_i}{n}",
+      "\\bar y=\\frac{\\sum y_i}{n}"
+     ],
+     "work": [
+      "\\bar x=\\frac{111.3}{14}=7.95",
+      "\\bar y=\\frac{713}{14}=50.92857"
+     ],
+     "words": "The procedure is a least-squares simple linear regression. The line passes through the point of means."
+    },
+    {
+     "title": "Calculate the regression line",
+     "general": [
+      "b=\\frac{\\sum(x_i-\\bar x)(y_i-\\bar y)}{\\sum(x_i-\\bar x)^2}",
+      "a=\\bar y-b\\bar x",
+      "\\hat y=a+bx"
+     ],
+     "work": [
+      "b=\\frac{236.85}{122.775}=1.929139",
+      "a=50.92857-1.929139(7.95)=35.59192",
+      "\\hat y=35.59192+1.929139x"
+     ],
+     "words": "The deviation form of the slope gives the same b as the n times the sum of xy form. The slope is in mg/dL per k steps/day."
+    },
+    {
+     "title": "Calculate both sample variances",
+     "general": [
+      "s_x^2=\\frac{\\sum(x_i-\\bar x)^2}{n-1}",
+      "s_y^2=\\frac{\\sum(y_i-\\bar y)^2}{n-1}"
+     ],
+     "work": [
+      "s_x^2=\\frac{122.775}{13}=9.444231,\\quad s_x=3.073147",
+      "s_y^2=\\frac{694.9286}{13}=53.45604"
+     ],
+     "words": "These feed the shortcut formula for the scatter about the line."
+    },
+    {
+     "title": "Square the pieces inside the shortcut",
+     "general": [
+      "b^2s_x^2"
+     ],
+     "work": [
+      "b^2s_x^2=1.929139^2(9.444231)=35.14742"
+     ],
+     "words": "The first term is the total variance of y, and this term is the part of it explained by the line."
+    },
+    {
+     "title": "Estimate the variance of the line of means",
+     "general": [
+      "s_{y|x}^2=\\frac{n-1}{n-2}\\left(s_y^2-b^2s_x^2\\right)"
+     ],
+     "work": [
+      "s_{y|x}^2=\\frac{13}{12}\\left(53.45604-35.14742\\right)=19.83434",
+      "s_{y|x}=\\sqrt{19.83434}=4.453576"
+     ],
+     "words": "The factor (n − 1)/(n − 2) changes the n − 1 denominators into the n − 2 needed for regression, because two coefficients were estimated. The points scatter about the line with an SD of about 4.45 mg/dL."
+    },
+    {
+     "title": "Calculate the standard error of the slope",
+     "general": [
+      "s_b=\\frac{1}{\\sqrt{n-1}}\\frac{s_{y|x}}{s_x}"
+     ],
+     "work": [
+      "s_b=\\frac{1}{\\sqrt{13}}\\cdot\\frac{4.453576}{3.073147}=0.4019332"
+     ],
+     "words": "A larger spread of x values makes the slope more precise."
+    },
+    {
+     "title": "Calculate the standard error of the intercept",
+     "general": [
+      "s_a=s_{y|x}\\sqrt{\\frac1n+\\frac{\\bar x^2}{(n-1)s_x^2}}"
+     ],
+     "work": [
+      "\\frac{1}{14}+\\frac{7.95^2}{122.775}=0.5862117",
+      "s_a=4.453576\\sqrt{0.5862117}=3.409857"
+     ],
+     "words": "The quantity (n − 1)s_x² equals the sum of squared deviations of x. The intercept is less precise when the mean of x lies far from x = 0."
+    },
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\beta=0",
+      "H_A:\\beta\\ne0"
+     ],
+     "work": [
+      "H_0:\\beta=0"
+     ],
+     "words": "Use the t test for the slope of a regression line. The null states that mean HDL cholesterol does not change with daily step count."
+    },
+    {
+     "title": "Calculate the t statistic",
+     "general": [
+      "t=\\frac{b-\\beta}{s_b}=\\frac{b}{s_b}"
+     ],
+     "work": [
+      "t=\\frac{1.929139}{0.4019332}=4.79965"
+     ],
+     "words": "Under the null the population slope is 0, so the statistic is the slope divided by its standard error."
+    },
+    {
+     "title": "Find the degrees of freedom",
+     "general": [
+      "\\nu=n-2"
+     ],
+     "work": [
+      "\\nu=14-2=12"
+     ],
+     "words": "Two coefficients were estimated from the data."
+    },
+    {
+     "title": "Find the 0.05 critical value",
+     "general": [
+      "t_c=t_{0.05}(\\nu)"
+     ],
+     "work": [
+      "t_{0.05}(12)=2.179"
+     ],
+     "words": "Start with α = 0.05. Open t_table.pdf, PDF page 1, row 12, two-tailed column 0.05. The printed cutoff is 2.179.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "12",
+      "column": "0.05",
+      "value": 2.179,
+      "actualDf": 12,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision",
+     "general": [
+      "|t|>t_{0.05}(\\nu)\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "4.79965>2.179"
+     ],
+     "words": "The size of the statistic exceeds the cutoff, so the null hypothesis of no trend is rejected."
+    },
+    {
+     "title": "Find the P range",
+     "general": [
+      "|t|>t_{0.001}(\\nu)\\Rightarrow P<0.001"
+     ],
+     "work": [
+      "t_{0.001}(12)=4.318"
+     ],
+     "words": "The statistic exceeds the 0.001 column of row 12, the largest printed cutoff, so P < 0.001.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "12",
+      "column": "0.001",
+      "value": 4.318,
+      "actualDf": 12,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Construct the 95% interval for the slope",
+     "general": [
+      "b-t_{0.05}(\\nu)s_b<\\beta<b+t_{0.05}(\\nu)s_b"
+     ],
+     "work": [
+      "M=2.179(0.4019332)=0.8758125",
+      "1.053326<\\beta<2.804951"
+     ],
+     "words": "The slope interval does not contain 0, which agrees with the test."
+    },
+    {
+     "title": "Construct the 95% interval for the intercept",
+     "general": [
+      "a-t_{0.05}(\\nu)s_a<\\alpha_{LOM}<a+t_{0.05}(\\nu)s_a"
+     ],
+     "work": [
+      "M=2.179(3.409857)=7.430078",
+      "28.16184<\\alpha_{LOM}<43.022"
+     ],
+     "words": "The intercept is the mean of y at x = 0, which lies outside the range of the data, so it is an extrapolation."
+    }
+   ],
+   "conclusion": "The line is \\(\\hat y=35.59192+1.929139x\\). The trend is statistically significant, because t = 4.79965 with ν = 12 exceeds \\(t_{0.05}(12)=2.179\\) (P < 0.001). The 95% confidence interval for the slope is 1.053326 to 2.804951 mg/dL per k steps/day and for the intercept it is 28.16184 to 43.022 mg/dL. For a newspaper reader, people in this study who walked more each day tended to have higher levels of good cholesterol.",
+   "source": "Original practice example in the course style",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "12",
+    "column": "0.05",
+    "value": 2.179,
+    "actualDf": 12,
+    "approximation": false
+   },
+   "values": {
+    "n": 14,
+    "b": 1.9291386682956655,
+    "sb": 0.40193322101285145,
+    "a": 35.59191901562089,
+    "sa": 3.4098566375862682,
+    "df": 12,
+    "t": 4.799649711547439,
+    "critical": 2.179,
+    "critical001": 4.318,
+    "slopeLower": 1.0533261797086624,
+    "slopeUpper": 2.8049511568826686,
+    "interceptLower": 28.161841402320412,
+    "interceptUpper": 43.021996628921364,
+    "reject": true,
+    "tRaw": 4.799649711547439,
+    "syx": 4.453576071005029,
+    "varianceAboutLine": 19.834339820228593,
+    "criticalP001": 4.318
+   },
+   "module": 18,
+   "tolerance": 0.023998,
+   "answerName": "t statistic",
+   "answer": 4.799649711547439
+  },
+  {
+   "id": "p18-coffee-resting-heart-rate",
+   "title": "Coffee intake and resting heart rate",
+   "topic": "s18slope",
+   "context": "In a study looking at caffeine intake and the heart, data were collected regarding each subject's resting heart rate (from a 5-minute electrocardiogram, ECG, recorded lying down in the morning) and the subject's usual number of cups of coffee per day from a food diary. Heart-rate values were reported in beats per minute (beats/min) and coffee intake was reported in cups per day (cups/day); there were 12 participants. The data are listed in the table below. Note: some useful summations have already been calculated for you below, which you can use. The summations are \\(\\sum x_i=31\\), \\(\\sum x_i^2=121\\), \\(\\sum(x_i-\\bar x)=0\\), \\(\\sum(x_i-\\bar x)^2=40.91667\\), \\(\\sum y_i=805\\), \\(\\sum y_i^2=54453\\), \\(\\sum(y_i-\\bar y)=0\\), \\(\\sum(y_i-\\bar y)^2=450.9167\\), \\(\\sum x_iy_i=2128\\) and \\(\\sum(x_i-\\bar x)(y_i-\\bar y)=48.41667\\). In answering the questions below, DO NOT use R.",
+   "unit": "",
+   "table": {
+    "headers": [
+     "Subject",
+     "Coffee (cups/day)",
+     "Resting Heart Rate (beats/min)"
+    ],
+    "rows": [
+     [
+      1,
+      0,
+      61
+     ],
+     [
+      2,
+      0,
+      57
+     ],
+     [
+      3,
+      1,
+      65
+     ],
+     [
+      4,
+      1,
+      69
+     ],
+     [
+      5,
+      2,
+      74
+     ],
+     [
+      6,
+      2,
+      68
+     ],
+     [
+      7,
+      3,
+      64
+     ],
+     [
+      8,
+      3,
+      63
+     ],
+     [
+      9,
+      4,
+      73
+     ],
+     [
+      10,
+      4,
+      79
+     ],
+     [
+      11,
+      5,
+      71
+     ],
+     [
+      12,
+      6,
+      61
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) Find the linear regression relationship between the coffee intake (independent variable) and the resting heart rate (dependent variable). Note: leave the variables in the units given (cups/day and beats/min, respectively)",
+    "(ii) Calculate the standard errors of the regression coefficients a and b (in \\(\\hat y=a+bx\\)) as well as the estimate of the variance of the line of means.",
+    "(iii) Based on your calculations for b, is the trend between resting heart rate and coffee intake statistically significant?",
+    "(iv) What are the 95% confidence intervals for the slope and for the intercept of the line of means?"
+   ],
+   "hypotheses": {
+    "null": "H_0:\\beta=0",
+    "alternative": "H_A:\\beta\\ne0",
+    "nullWords": "Mean resting heart rate does not change linearly with coffee intake (the slope of the line of means is zero).",
+    "alternativeWords": "Mean resting heart rate changes linearly with coffee intake (the slope of the line of means is not zero)."
+   },
+   "symbols": "\\(x\\) (independent variable), \\(y\\) (dependent variable), \\(b,a\\) (slope and intercept), \\(s_x,s_y\\) (sample SDs), \\(s_{y|x}\\) (scatter about the line), \\(s_a,s_b\\) (SEs of the coefficients), \\(\\beta\\) (population slope), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "Calculate both sample means",
+     "general": [
+      "\\bar x=\\frac{\\sum x_i}{n}",
+      "\\bar y=\\frac{\\sum y_i}{n}"
+     ],
+     "work": [
+      "\\bar x=\\frac{31}{12}=2.583333",
+      "\\bar y=\\frac{805}{12}=67.08333"
+     ],
+     "words": "The procedure is a least-squares simple linear regression. The line passes through the point of means."
+    },
+    {
+     "title": "Calculate the regression line",
+     "general": [
+      "b=\\frac{\\sum(x_i-\\bar x)(y_i-\\bar y)}{\\sum(x_i-\\bar x)^2}",
+      "a=\\bar y-b\\bar x",
+      "\\hat y=a+bx"
+     ],
+     "work": [
+      "b=\\frac{48.41667}{40.91667}=1.183299",
+      "a=67.08333-1.183299(2.583333)=64.02648",
+      "\\hat y=64.02648+1.183299x"
+     ],
+     "words": "The deviation form of the slope gives the same b as the n times the sum of xy form. The slope is in beats/min per cups/day."
+    },
+    {
+     "title": "Calculate both sample variances",
+     "general": [
+      "s_x^2=\\frac{\\sum(x_i-\\bar x)^2}{n-1}",
+      "s_y^2=\\frac{\\sum(y_i-\\bar y)^2}{n-1}"
+     ],
+     "work": [
+      "s_x^2=\\frac{40.91667}{11}=3.719697,\\quad s_x=1.928652",
+      "s_y^2=\\frac{450.9167}{11}=40.99242"
+     ],
+     "words": "These feed the shortcut formula for the scatter about the line."
+    },
+    {
+     "title": "Square the pieces inside the shortcut",
+     "general": [
+      "b^2s_x^2"
+     ],
+     "work": [
+      "b^2s_x^2=1.183299^2(3.719697)=5.20831"
+     ],
+     "words": "The first term is the total variance of y, and this term is the part of it explained by the line."
+    },
+    {
+     "title": "Estimate the variance of the line of means",
+     "general": [
+      "s_{y|x}^2=\\frac{n-1}{n-2}\\left(s_y^2-b^2s_x^2\\right)"
+     ],
+     "work": [
+      "s_{y|x}^2=\\frac{11}{10}\\left(40.99242-5.20831\\right)=39.36253",
+      "s_{y|x}=\\sqrt{39.36253}=6.273956"
+     ],
+     "words": "The factor (n − 1)/(n − 2) changes the n − 1 denominators into the n − 2 needed for regression, because two coefficients were estimated. The points scatter about the line with an SD of about 6.27 beats/min."
+    },
+    {
+     "title": "Calculate the standard error of the slope",
+     "general": [
+      "s_b=\\frac{1}{\\sqrt{n-1}}\\frac{s_{y|x}}{s_x}"
+     ],
+     "work": [
+      "s_b=\\frac{1}{\\sqrt{11}}\\cdot\\frac{6.273956}{1.928652}=0.9808246"
+     ],
+     "words": "A larger spread of x values makes the slope more precise."
+    },
+    {
+     "title": "Calculate the standard error of the intercept",
+     "general": [
+      "s_a=s_{y|x}\\sqrt{\\frac1n+\\frac{\\bar x^2}{(n-1)s_x^2}}"
+     ],
+     "work": [
+      "\\frac{1}{12}+\\frac{2.583333^2}{40.91667}=0.2464358",
+      "s_a=6.273956\\sqrt{0.2464358}=3.114536"
+     ],
+     "words": "The quantity (n − 1)s_x² equals the sum of squared deviations of x. The intercept is less precise when the mean of x lies far from x = 0."
+    },
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\beta=0",
+      "H_A:\\beta\\ne0"
+     ],
+     "work": [
+      "H_0:\\beta=0"
+     ],
+     "words": "Use the t test for the slope of a regression line. The null states that mean resting heart rate does not change with coffee intake."
+    },
+    {
+     "title": "Calculate the t statistic",
+     "general": [
+      "t=\\frac{b-\\beta}{s_b}=\\frac{b}{s_b}"
+     ],
+     "work": [
+      "t=\\frac{1.183299}{0.9808246}=1.206433"
+     ],
+     "words": "Under the null the population slope is 0, so the statistic is the slope divided by its standard error."
+    },
+    {
+     "title": "Find the degrees of freedom",
+     "general": [
+      "\\nu=n-2"
+     ],
+     "work": [
+      "\\nu=12-2=10"
+     ],
+     "words": "Two coefficients were estimated from the data."
+    },
+    {
+     "title": "Find the 0.05 critical value",
+     "general": [
+      "t_c=t_{0.05}(\\nu)"
+     ],
+     "work": [
+      "t_{0.05}(10)=2.228"
+     ],
+     "words": "Start with α = 0.05. Open t_table.pdf, PDF page 1, row 10, two-tailed column 0.05. The printed cutoff is 2.228.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "10",
+      "column": "0.05",
+      "value": 2.228,
+      "actualDf": 10,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision",
+     "general": [
+      "|t|<t_{0.05}(\\nu)\\Rightarrow\\text{do not reject }H_0"
+     ],
+     "work": [
+      "1.206433<2.228"
+     ],
+     "words": "The size of the statistic is below the cutoff, so the null hypothesis of no trend is not rejected."
+    },
+    {
+     "title": "Find the P range",
+     "general": [
+      "t_{P_1}(\\nu)<|t|<t_{P_2}(\\nu)"
+     ],
+     "work": [
+      "t_{0.50}(10)=0.7,\\quad t_{0.20}(10)=1.372"
+     ],
+     "words": "The statistic lies between the 0.50 and 0.20 columns of row 10, so 0.20 < P < 0.50.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "10",
+      "column": "0.20",
+      "value": 1.372,
+      "actualDf": 10,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Construct the 95% interval for the slope",
+     "general": [
+      "b-t_{0.05}(\\nu)s_b<\\beta<b+t_{0.05}(\\nu)s_b"
+     ],
+     "work": [
+      "M=2.228(0.9808246)=2.185277",
+      "-1.001978<\\beta<3.368577"
+     ],
+     "words": "The slope interval contains 0, which agrees with the test."
+    },
+    {
+     "title": "Construct the 95% interval for the intercept",
+     "general": [
+      "a-t_{0.05}(\\nu)s_a<\\alpha_{LOM}<a+t_{0.05}(\\nu)s_a"
+     ],
+     "work": [
+      "M=2.228(3.114536)=6.939187",
+      "57.08729<\\alpha_{LOM}<70.96566"
+     ],
+     "words": "The intercept is the mean of y at x = 0, which lies outside the range of the data, so it is an extrapolation."
+    }
+   ],
+   "conclusion": "The line is \\(\\hat y=64.02648+1.183299x\\). The trend is not statistically significant, because t = 1.206433 with ν = 10 is below \\(t_{0.05}(10)=2.228\\) (0.20 < P < 0.50). The 95% confidence interval for the slope is −1.001978 to 3.368577 beats/min per cup/day, which contains 0, and for the intercept it is 57.08729 to 70.96566 beats/min. These data give no evidence that resting heart rate changes with coffee intake.",
+   "source": "Original practice example in the course style",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "10",
+    "column": "0.05",
+    "value": 2.228,
+    "actualDf": 10,
+    "approximation": false
+   },
+   "values": {
+    "n": 12,
+    "b": 1.1832993890020367,
+    "sb": 0.980824609946414,
+    "a": 64.0264765784114,
+    "sa": 3.1145364391920447,
+    "df": 10,
+    "t": 1.2064332165020661,
+    "critical": 2.228,
+    "critical001": 4.587,
+    "slopeLower": -1.0019778419585736,
+    "slopeUpper": 3.368576619962647,
+    "interceptLower": 57.08728939189153,
+    "interceptUpper": 70.96566376493128,
+    "reject": false,
+    "tRaw": 1.2064332165020661,
+    "syx": 6.2739561249859115,
+    "varianceAboutLine": 39.362525458248236,
+    "criticalP50": 0.7,
+    "criticalP20": 1.372
+   },
+   "module": 18,
+   "tolerance": 0.006032,
+   "answerName": "t statistic",
+   "answer": 1.2064332165020661
+  },
+  {
+   "id": "p18-child-blood-volume-weight",
+   "title": "Body weight and blood volume in children (full problem)",
+   "topic": "s18predict",
+   "context": "In a study looking at circulating blood volume in healthy children aged 10 to 13 years, data were collected regarding each child's total blood volume (the volume of blood in the whole circulation, measured by carbon monoxide rebreathing, in which a small, safe dose of carbon monoxide is breathed and its dilution in blood samples is measured) and the child's body weight. Blood-volume values were reported in milliliters (mL) and body-weight values were reported in kilograms (kg), rounded to the nearest kilogram; there were 45 participants. The data are listed in the table below. Note: some useful summations have already been calculated for you below, which you can use. The summations are \\(\\sum x_i=1750\\), \\(\\sum x_i^2=68214\\), \\(\\sum(x_i-\\bar x)=0\\), \\(\\sum(x_i-\\bar x)^2=158.4444\\), \\(\\sum y_i=150483\\), \\(\\sum y_i^2=512256739\\), \\(\\sum(y_i-\\bar y)=0\\), \\(\\sum(y_i-\\bar y)^2=9031554.8\\), \\(\\sum x_iy_i=5878253\\) and \\(\\sum(x_i-\\bar x)(y_i-\\bar y)=26136.33\\). In answering the questions below, DO NOT use R.",
+   "unit": "mL",
+   "table": {
+    "headers": [
+     "Body Weight (kg)",
+     "Blood Volume (mL)",
+     "Body Weight (kg)",
+     "Blood Volume (mL)",
+     "Body Weight (kg)",
+     "Blood Volume (mL)"
+    ],
+    "rows": [
+     [
+      35,
+      2908,
+      39,
+      3724,
+      41,
+      3777
+     ],
+     [
+      35,
+      3146,
+      39,
+      3730,
+      41,
+      3745
+     ],
+     [
+      36,
+      1903,
+      39,
+      3898,
+      41,
+      3972
+     ],
+     [
+      36,
+      2700,
+      39,
+      3295,
+      41,
+      3625
+     ],
+     [
+      36,
+      3081,
+      39,
+      3761,
+      41,
+      4034
+     ],
+     [
+      37,
+      3378,
+      39,
+      3005,
+      41,
+      3502
+     ],
+     [
+      37,
+      3148,
+      39,
+      3035,
+      42,
+      3788
+     ],
+     [
+      37,
+      3426,
+      40,
+      3517,
+      42,
+      3637
+     ],
+     [
+      37,
+      3028,
+      40,
+      3583,
+      42,
+      4059
+     ],
+     [
+      38,
+      3300,
+      40,
+      2962,
+      36,
+      2758
+     ],
+     [
+      38,
+      3177,
+      40,
+      2919,
+      37,
+      2647
+     ],
+     [
+      38,
+      2764,
+      40,
+      3607,
+      39,
+      3965
+     ],
+     [
+      38,
+      2839,
+      40,
+      3205,
+      40,
+      3370
+     ],
+     [
+      38,
+      3243,
+      40,
+      3889,
+      41,
+      3638
+     ],
+     [
+      38,
+      2927,
+      40,
+      3620,
+      38,
+      3248
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) Find the linear regression relationship between the child's body weight (independent variable) and the child's total blood volume (dependent variable). Note: leave the variables in the units given (kg and mL, respectively)",
+    "(ii) Calculate the standard errors of the regression coefficients a and b (in \\(\\hat y=a+bx\\)) as well as the estimate of the variance of the line of means.",
+    "(iii) Based on your calculations for b, is the trend between blood volume and body weight statistically significant?",
+    "(iv) What is the 95% Confidence Interval for the mean blood volume at a body weight of 38.5 kg?",
+    "(v) What is the 95% Confidence Interval for an observation of blood volume at a body weight of 38.5 kg?",
+    "(vi) Calculate the correlation (Pearson coefficient) between blood volume and body weight."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\beta=0",
+    "alternative": "H_A:\\beta\\ne0",
+    "nullWords": "Mean blood volume does not change linearly with body weight (the slope of the line of means is zero).",
+    "alternativeWords": "Mean blood volume changes linearly with body weight (the slope of the line of means is not zero)."
+   },
+   "symbols": "\\(x\\) (independent variable), \\(y\\) (dependent variable), \\(b,a\\) (slope and intercept), \\(s_x,s_y\\) (sample SDs), \\(s_{y|x}\\) (scatter about the line), \\(s_a,s_b\\) (SEs of the coefficients), \\(\\beta\\) (population slope), \\(\\nu\\) (degrees of freedom), \\(\\hat y\\) (predicted mean), \\(s_{\\hat y}\\) (SE of the predicted mean), \\(s_{Y_{new}}\\) (SE for one new observation), \\(r\\) (correlation).",
+   "steps": [
+    {
+     "title": "Calculate both sample means",
+     "general": [
+      "\\bar x=\\frac{\\sum x_i}{n}",
+      "\\bar y=\\frac{\\sum y_i}{n}"
+     ],
+     "work": [
+      "\\bar x=\\frac{1750}{45}=38.88889",
+      "\\bar y=\\frac{150483}{45}=3344.067"
+     ],
+     "words": "The procedure is a least-squares simple linear regression. The line passes through the point of means."
+    },
+    {
+     "title": "Calculate the regression line",
+     "general": [
+      "b=\\frac{\\sum(x_i-\\bar x)(y_i-\\bar y)}{\\sum(x_i-\\bar x)^2}",
+      "a=\\bar y-b\\bar x",
+      "\\hat y=a+bx"
+     ],
+     "work": [
+      "b=\\frac{26136.33}{158.4444}=164.9558",
+      "a=3344.067-164.9558(38.88889)=-3070.882",
+      "\\hat y=-3070.882+164.9558x"
+     ],
+     "words": "The deviation form of the slope gives the same b as the n times the sum of xy form. The slope is in mL per kg."
+    },
+    {
+     "title": "Calculate both sample variances",
+     "general": [
+      "s_x^2=\\frac{\\sum(x_i-\\bar x)^2}{n-1}",
+      "s_y^2=\\frac{\\sum(y_i-\\bar y)^2}{n-1}"
+     ],
+     "work": [
+      "s_x^2=\\frac{158.4444}{44}=3.60101,\\quad s_x=1.897633",
+      "s_y^2=\\frac{9031554.8}{44}=205262.6"
+     ],
+     "words": "These feed the shortcut formula for the scatter about the line."
+    },
+    {
+     "title": "Square the pieces inside the shortcut",
+     "general": [
+      "b^2s_x^2"
+     ],
+     "work": [
+      "b^2s_x^2=164.9558^2(3.60101)=97985.01"
+     ],
+     "words": "The first term is the total variance of y, and this term is the part of it explained by the line."
+    },
+    {
+     "title": "Estimate the variance of the line of means",
+     "general": [
+      "s_{y|x}^2=\\frac{n-1}{n-2}\\left(s_y^2-b^2s_x^2\\right)"
+     ],
+     "work": [
+      "s_{y|x}^2=\\frac{44}{43}\\left(205262.6-97985.01\\right)=109772.4",
+      "s_{y|x}=\\sqrt{109772.4}=331.3192"
+     ],
+     "words": "The factor (n − 1)/(n − 2) changes the n − 1 denominators into the n − 2 needed for regression, because two coefficients were estimated. The points scatter about the line with an SD of about 331 mL."
+    },
+    {
+     "title": "Calculate the standard error of the slope",
+     "general": [
+      "s_b=\\frac{1}{\\sqrt{n-1}}\\frac{s_{y|x}}{s_x}"
+     ],
+     "work": [
+      "s_b=\\frac{1}{\\sqrt{44}}\\cdot\\frac{331.3192}{1.897633}=26.32135"
+     ],
+     "words": "A larger spread of x values makes the slope more precise."
+    },
+    {
+     "title": "Calculate the standard error of the intercept",
+     "general": [
+      "s_a=s_{y|x}\\sqrt{\\frac1n+\\frac{\\bar x^2}{(n-1)s_x^2}}"
+     ],
+     "work": [
+      "\\frac{1}{45}+\\frac{38.88889^2}{158.4444}=9.567181",
+      "s_a=331.3192\\sqrt{9.567181}=1024.799"
+     ],
+     "words": "The quantity (n − 1)s_x² equals the sum of squared deviations of x. The intercept is less precise when the mean of x lies far from x = 0."
+    },
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\beta=0",
+      "H_A:\\beta\\ne0"
+     ],
+     "work": [
+      "H_0:\\beta=0"
+     ],
+     "words": "Use the t test for the slope of a regression line. The null states that mean blood volume does not change with body weight."
+    },
+    {
+     "title": "Calculate the t statistic",
+     "general": [
+      "t=\\frac{b-\\beta}{s_b}=\\frac{b}{s_b}"
+     ],
+     "work": [
+      "t=\\frac{164.9558}{26.32135}=6.266997"
+     ],
+     "words": "Under the null the population slope is 0, so the statistic is the slope divided by its standard error."
+    },
+    {
+     "title": "Find the degrees of freedom",
+     "general": [
+      "\\nu=n-2"
+     ],
+     "work": [
+      "\\nu=45-2=43"
+     ],
+     "words": "Two coefficients were estimated from the data."
+    },
+    {
+     "title": "Find the 0.05 critical value",
+     "general": [
+      "t_c=t_{0.05}(\\nu)"
+     ],
+     "work": [
+      "t_{0.05}(43)\\approx t_{0.05}(42)=2.018"
+     ],
+     "words": "Start with α = 0.05. Open t_table.pdf, PDF page 1, row 42, two-tailed column 0.05. The printed cutoff is 2.018. Row 43 is not printed. Use the smaller printed row 42, which gives the larger and so conservative cutoff.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "42",
+      "column": "0.05",
+      "value": 2.018,
+      "actualDf": 43,
+      "approximation": true
+     }
+    },
+    {
+     "title": "Make the decision",
+     "general": [
+      "|t|>t_{0.05}(\\nu)\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "6.266997>2.018"
+     ],
+     "words": "The size of the statistic exceeds the cutoff, so the null hypothesis of no trend is rejected."
+    },
+    {
+     "title": "Find the P range",
+     "general": [
+      "|t|>t_{0.001}(\\nu)\\Rightarrow P<0.001"
+     ],
+     "work": [
+      "t_{0.001}(42)=3.538"
+     ],
+     "words": "The statistic exceeds the 0.001 column of row 42, the largest printed cutoff, so P < 0.001.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "42",
+      "column": "0.001",
+      "value": 3.538,
+      "actualDf": 43,
+      "approximation": true
+     }
+    },
+    {
+     "title": "Calculate the predicted value",
+     "general": [
+      "\\hat y=a+bx"
+     ],
+     "work": [
+      "\\hat y=-3070.882+164.9558(38.5)=3279.917"
+     ],
+     "words": "This is the estimated mean blood volume at x = 38.5 kg."
+    },
+    {
+     "title": "Evaluate the distance term",
+     "general": [
+      "\\frac{1}{n}+\\frac{(x-\\bar x)^2}{(n-1)s_x^2}"
+     ],
+     "work": [
+      "\\frac{1}{45}+\\frac{(38.5-38.88889)^2}{158.4444}=0.02317672"
+     ],
+     "words": "The second term grows with the distance between 38.5 kg and the mean of x."
+    },
+    {
+     "title": "Calculate the standard error of the mean prediction",
+     "general": [
+      "s_{\\hat y}=s_{y|x}\\sqrt{\\frac{1}{n}+\\frac{(x-\\bar x)^2}{(n-1)s_x^2}}"
+     ],
+     "work": [
+      "s_{\\hat y}=331.3192\\sqrt{0.02317672}=50.43971"
+     ],
+     "words": "This standard error describes the uncertainty in the height of the line at x = 38.5."
+    },
+    {
+     "title": "Construct the interval for the mean",
+     "general": [
+      "\\hat y\\pm t_{0.05}(\\nu)s_{\\hat y}"
+     ],
+     "work": [
+      "M=2.018(50.43971)=101.7873",
+      "3279.917\\pm101.7873\\Rightarrow 3178.13<\\mu_{y|38.5}<3381.705"
+     ],
+     "words": "With 95% confidence, the mean blood volume of all children who weigh 38.5 kg lies in this interval."
+    },
+    {
+     "title": "Calculate the standard error for one new observation",
+     "general": [
+      "s_{Y_{new}}=\\sqrt{s_{y|x}^2+s_{\\hat y}^2}"
+     ],
+     "work": [
+      "s_{Y_{new}}=\\sqrt{109772.4+2544.165}=\\sqrt{112316.6}=335.1367"
+     ],
+     "words": "The scatter of single values about the line is added to the uncertainty in the line itself."
+    },
+    {
+     "title": "Construct the interval for one observation",
+     "general": [
+      "\\hat y\\pm t_{0.05}(\\nu)s_{Y_{new}}"
+     ],
+     "work": [
+      "M=2.018(335.1367)=676.3058",
+      "3279.917\\pm676.3058\\Rightarrow 2603.611<y<3956.223"
+     ],
+     "words": "This interval should contain the blood volume of a single randomly chosen child who weighs 38.5 kg with 95% confidence."
+    },
+    {
+     "title": "Compare the two widths",
+     "general": [
+      "s_{Y_{new}}>s_{\\hat y}"
+     ],
+     "work": [
+      "335.1367>50.43971"
+     ],
+     "words": "The observation interval is about 6.6 times as wide, because single values scatter about the mean even if the line were known exactly."
+    },
+    {
+     "title": "Calculate r from the deviation sums",
+     "general": [
+      "r=\\frac{\\sum(x_i-\\bar x)(y_i-\\bar y)}{\\sqrt{\\sum(x_i-\\bar x)^2\\sum(y_i-\\bar y)^2}}"
+     ],
+     "work": [
+      "r=\\frac{26136.33}{\\sqrt{(158.4444)(9031554.8)}}=\\frac{26136.33}{37828.56}=0.6909154"
+     ],
+     "words": "The procedure is the Pearson correlation coefficient. The units cancel, so r has no units."
+    },
+    {
+     "title": "Square r",
+     "general": [
+      "r^2"
+     ],
+     "work": [
+      "r^2=0.6909154^2=0.4773641"
+     ],
+     "words": "About 48% of the variation in y goes with the straight-line relationship with x."
+    },
+    {
+     "title": "Check the bracketing row",
+     "general": [
+      "t_{0.05}(42)\\ge t_{0.05}(43)\\ge t_{0.05}(44)"
+     ],
+     "work": [
+      "t_{0.05}(44)=2.015",
+      "3279.917-2.015(50.43971)=3178.281"
+     ],
+     "words": "Row 44 gives a slightly smaller cutoff. The mean interval changes by less than 1 mL, and every decision is the same with either row.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "44",
+      "column": "0.05",
+      "value": 2.015,
+      "actualDf": 43,
+      "approximation": true
+     }
+    }
+   ],
+   "conclusion": "The line is \\(\\hat y=-3070.882+164.9558x\\), with \\(s_{y|x}^2=109772.4\\) mL², \\(s_b=26.32135\\) mL per kg and \\(s_a=1024.799\\) mL. The trend is statistically significant, because t = 6.266997 with ν = 43 exceeds the conservative cutoff \\(t_{0.05}(42)=2.018\\) (P < 0.001). The 95% Confidence Interval for the mean blood volume at 38.5 kg is 3178.13 to 3381.705 mL, and for an observation of blood volume at 38.5 kg it is 2603.611 to 3956.223 mL. The correlation is r = 0.6909154.",
+   "source": "Original practice example in the course style",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "42",
+    "column": "0.05",
+    "value": 2.018,
+    "actualDf": 43,
+    "approximation": true
+   },
+   "values": {
+    "n": 45,
+    "sumX": 1750.0,
+    "sumY": 150483.0,
+    "sumX2": 68214.0,
+    "sumY2": 512256739.0,
+    "sumXY": 5878253.0,
+    "b": 164.95582047685835,
+    "a": -3070.8819074333796,
+    "varianceAboutLine": 109772.43001729129,
+    "syx": 331.31922675463807,
+    "sb": 26.321348240177375,
+    "sa": 1024.7988576425619,
+    "t": 6.266997380668625,
+    "df": 43,
+    "critical": 2.018,
+    "x": 38.5,
+    "yhat": 3279.917180925667,
+    "seMean": 50.43971317173365,
+    "meanLower": 3178.1298397451083,
+    "meanUpper": 3381.7045221062253,
+    "seNew": 335.13668059783913,
+    "obsLower": 2603.6113594792278,
+    "obsUpper": 3956.223002372106,
+    "r": 0.6909154297479251,
+    "confidence": 0.95,
+    "critical001": 3.538,
+    "alternativeCritical": 2.015
+   },
+   "module": 18,
+   "tolerance": 15.890649,
+   "answerName": "Lower endpoint of the mean CI at 38.5 kg",
+   "answer": 3178.1298397451083
+  },
+  {
+   "id": "p18-treadmill-oxygen-uptake",
+   "title": "Treadmill speed and oxygen uptake",
+   "topic": "s18predict",
+   "context": "In a study looking at the energy cost of running, data were collected regarding each subject's steady-state oxygen uptake (VO2, the rate at which the body uses oxygen, measured breath by breath with a metabolic cart in the last 2 minutes of a 6-minute stage) and the treadmill speed of that stage. Oxygen-uptake values were reported in milliliters of oxygen per kilogram of body weight per minute (mL/kg/min) and speed values were reported in kilometers per hour (km/h). Each of 11 recreational runners ran one stage at an assigned speed. The data are listed in the table below. Note: some useful summations have already been calculated for you below, which you can use. The summations are \\(\\sum x_i=96\\), \\(\\sum x_i^2=876\\), \\(\\sum(x_i-\\bar x)=0\\), \\(\\sum(x_i-\\bar x)^2=38.18182\\), \\(\\sum y_i=361.3\\), \\(\\sum y_i^2=12324.97\\), \\(\\sum(y_i-\\bar y)=0\\), \\(\\sum(y_i-\\bar y)^2=457.9073\\), \\(\\sum x_iy_i=3283.75\\) and \\(\\sum(x_i-\\bar x)(y_i-\\bar y)=130.5864\\). In answering the questions below, DO NOT use R.",
+   "unit": "mL/kg/min",
+   "table": {
+    "headers": [
+     "Runner",
+     "Speed (km/h)",
+     "VO2 (mL/kg/min)"
+    ],
+    "rows": [
+     [
+      1,
+      6,
+      24
+     ],
+     [
+      2,
+      6.5,
+      26.2
+     ],
+     [
+      3,
+      7,
+      26.9
+     ],
+     [
+      4,
+      7.5,
+      27.6
+     ],
+     [
+      5,
+      8,
+      29.9
+     ],
+     [
+      6,
+      8.5,
+      30.7
+     ],
+     [
+      7,
+      9,
+      34.1
+     ],
+     [
+      8,
+      10,
+      39.4
+     ],
+     [
+      9,
+      10.5,
+      38.2
+     ],
+     [
+      10,
+      11,
+      39.6
+     ],
+     [
+      11,
+      12,
+      44.7
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) Find the linear regression relationship between the treadmill speed (independent variable) and the oxygen uptake (dependent variable). Note: leave the variables in the units given (km/h and mL/kg/min, respectively)",
+    "(ii) Calculate the estimate of the variance of the line of means.",
+    "(iii) What is the 95% Confidence Interval for the mean oxygen uptake at a speed of 9.5 km/h?",
+    "(iv) What is the 95% Confidence Interval for an observation of oxygen uptake at a speed of 9.5 km/h?"
+   ],
+   "hypotheses": null,
+   "symbols": "\\(\\hat y\\) (predicted mean), \\(s_{\\hat y}\\) (SE of the predicted mean), \\(s_{Y_{new}}\\) (SE for one new observation), \\(s_{y|x}\\) (scatter about the line), \\(\\bar x\\) (mean of x), \\(s_x\\) (SD of x), \\(\\nu\\) (degrees of freedom), \\(r\\) (correlation).",
+   "steps": [
+    {
+     "title": "Calculate both sample means",
+     "general": [
+      "\\bar x=\\frac{\\sum x_i}{n}",
+      "\\bar y=\\frac{\\sum y_i}{n}"
+     ],
+     "work": [
+      "\\bar x=\\frac{96}{11}=8.727273",
+      "\\bar y=\\frac{361.3}{11}=32.84545"
+     ],
+     "words": "The procedure is a least-squares simple linear regression. The line passes through the point of means."
+    },
+    {
+     "title": "Calculate the regression line",
+     "general": [
+      "b=\\frac{\\sum(x_i-\\bar x)(y_i-\\bar y)}{\\sum(x_i-\\bar x)^2}",
+      "a=\\bar y-b\\bar x",
+      "\\hat y=a+bx"
+     ],
+     "work": [
+      "b=\\frac{130.5864}{38.18182}=3.420119",
+      "a=32.84545-3.420119(8.727273)=2.997143",
+      "\\hat y=2.997143+3.420119x"
+     ],
+     "words": "The deviation form of the slope gives the same b as the n times the sum of xy form. The slope is in mL/kg/min per km/h."
+    },
+    {
+     "title": "Calculate both sample variances",
+     "general": [
+      "s_x^2=\\frac{\\sum(x_i-\\bar x)^2}{n-1}",
+      "s_y^2=\\frac{\\sum(y_i-\\bar y)^2}{n-1}"
+     ],
+     "work": [
+      "s_x^2=\\frac{38.18182}{10}=3.818182,\\quad s_x=1.954017",
+      "s_y^2=\\frac{457.9073}{10}=45.79073"
+     ],
+     "words": "These feed the shortcut formula for the scatter about the line."
+    },
+    {
+     "title": "Square the pieces inside the shortcut",
+     "general": [
+      "b^2s_x^2"
+     ],
+     "work": [
+      "b^2s_x^2=3.420119^2(3.818182)=44.66209"
+     ],
+     "words": "The first term is the total variance of y, and this term is the part of it explained by the line."
+    },
+    {
+     "title": "Estimate the variance of the line of means",
+     "general": [
+      "s_{y|x}^2=\\frac{n-1}{n-2}\\left(s_y^2-b^2s_x^2\\right)"
+     ],
+     "work": [
+      "s_{y|x}^2=\\frac{10}{9}\\left(45.79073-44.66209\\right)=1.25404",
+      "s_{y|x}=\\sqrt{1.25404}=1.119839"
+     ],
+     "words": "The factor (n − 1)/(n − 2) changes the n − 1 denominators into the n − 2 needed for regression, because two coefficients were estimated. The points scatter about the line with an SD of about 1.12 mL/kg/min."
+    },
+    {
+     "title": "Find the degrees of freedom and cutoff",
+     "general": [
+      "\\nu=n-2",
+      "t_c=t_{0.05}(\\nu)"
+     ],
+     "work": [
+      "\\nu=11-2=9",
+      "t_{0.05}(9)=2.262"
+     ],
+     "words": "Open t_table.pdf, PDF page 1, row 9, two-tailed column 0.05. The printed cutoff is 2.262.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "9",
+      "column": "0.05",
+      "value": 2.262,
+      "actualDf": 9,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Calculate the predicted value",
+     "general": [
+      "\\hat y=a+bx"
+     ],
+     "work": [
+      "\\hat y=2.997143+3.420119(9.5)=35.48827"
+     ],
+     "words": "This is the estimated mean oxygen uptake at x = 9.5 km/h."
+    },
+    {
+     "title": "Evaluate the distance term",
+     "general": [
+      "\\frac{1}{n}+\\frac{(x-\\bar x)^2}{(n-1)s_x^2}"
+     ],
+     "work": [
+      "\\frac{1}{11}+\\frac{(9.5-8.727273)^2}{38.18182}=0.1065476"
+     ],
+     "words": "The second term grows with the distance between 9.5 km/h and the mean of x."
+    },
+    {
+     "title": "Calculate the standard error of the mean prediction",
+     "general": [
+      "s_{\\hat y}=s_{y|x}\\sqrt{\\frac{1}{n}+\\frac{(x-\\bar x)^2}{(n-1)s_x^2}}"
+     ],
+     "work": [
+      "s_{\\hat y}=1.119839\\sqrt{0.1065476}=0.3655339"
+     ],
+     "words": "This standard error describes the uncertainty in the height of the line at x = 9.5."
+    },
+    {
+     "title": "Construct the interval for the mean",
+     "general": [
+      "\\hat y\\pm t_{0.05}(\\nu)s_{\\hat y}"
+     ],
+     "work": [
+      "M=2.262(0.3655339)=0.8268376",
+      "35.48827\\pm0.8268376\\Rightarrow 34.66144<\\mu_{y|9.5}<36.31511"
+     ],
+     "words": "With 95% confidence, the mean oxygen uptake of all runners tested at 9.5 km/h lies in this interval."
+    },
+    {
+     "title": "Calculate the standard error for one new observation",
+     "general": [
+      "s_{Y_{new}}=\\sqrt{s_{y|x}^2+s_{\\hat y}^2}"
+     ],
+     "work": [
+      "s_{Y_{new}}=\\sqrt{1.25404+0.133615}=\\sqrt{1.387655}=1.177988"
+     ],
+     "words": "The scatter of single values about the line is added to the uncertainty in the line itself."
+    },
+    {
+     "title": "Construct the interval for one observation",
+     "general": [
+      "\\hat y\\pm t_{0.05}(\\nu)s_{Y_{new}}"
+     ],
+     "work": [
+      "M=2.262(1.177988)=2.664608",
+      "35.48827\\pm2.664608\\Rightarrow 32.82367<y<38.15288"
+     ],
+     "words": "This interval should contain the value of a single randomly chosen one of the runners tested at 9.5 km/h with 95% confidence."
+    },
+    {
+     "title": "Compare the two widths",
+     "general": [
+      "s_{Y_{new}}>s_{\\hat y}"
+     ],
+     "work": [
+      "1.177988>0.3655339"
+     ],
+     "words": "The observation interval is about 3.2 times as wide, because single values scatter about the mean even if the line were known exactly."
+    }
+   ],
+   "conclusion": "The line is \\(\\hat y=2.997143+3.420119x\\). The estimate of the variance of the line of means is \\(s_{y|x}^2=1.25404\\) (mL/kg/min)², so \\(s_{y|x}=1.119839\\) mL/kg/min. The predicted oxygen uptake at 9.5 km/h is 35.48827 mL/kg/min. The 95% Confidence Interval for the mean at 9.5 km/h is 34.66144 to 36.31511 mL/kg/min. The 95% Confidence Interval for an observation at 9.5 km/h is 32.82367 to 38.15288 mL/kg/min, which is much wider.",
+   "source": "Original practice example in the course style",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "9",
+    "column": "0.05",
+    "value": 2.262,
+    "actualDf": 9,
+    "approximation": false
+   },
+   "values": {
+    "a": 2.9971428571429186,
+    "b": 3.420119047619041,
+    "syx": 1.1198394277375525,
+    "n": 11,
+    "xbar": 8.727272727272727,
+    "sx": 1.9540168418367876,
+    "x": 9.5,
+    "yhat": 35.488273809523804,
+    "seMean": 0.3655338737160502,
+    "seNew": 1.1779878423606205,
+    "critical": 2.262,
+    "meanLower": 34.6614361871781,
+    "meanUpper": 36.31511143186951,
+    "obsLower": 32.82366531010408,
+    "obsUpper": 38.152882308943525,
+    "confidence": 0.95
+   },
+   "module": 18,
+   "tolerance": 0.164118,
+   "answerName": "Lower endpoint of the observation CI at 9.5 km/h",
+   "answer": 32.82366531010408
+  },
+  {
+   "id": "p18-bone-density-age-sex",
+   "title": "Bone mineral density and age in men and women",
+   "topic": "s18compare",
+   "context": "In a study looking at bone loss with age, bone mineral density (BMD, the mineral content of bone per unit area) at the femoral neck (the top of the thigh bone) was measured in milligrams per square centimeter (mg/cm²) by dual-energy X-ray absorptiometry (DXA, a low-dose X-ray scan) in 20 men and 20 women aged 50 to 80 years (yr). Separate regressions of BMD on age were fitted to the two groups with lm() in R, and the output is summarized in the table below. In each group the ages total 1296 yr with \\(\\sum x_i^2=85556\\), giving a mean of 64.8 yr and an SD of 9.105233 yr. Assume that any quantities of interest are Normally distributed.",
+   "unit": "",
+   "table": {
+    "headers": [
+     "Group",
+     "n",
+     "Intercept a",
+     "s_a",
+     "Slope b",
+     "s_b",
+     "s_y|x",
+     "R²"
+    ],
+    "rows": [
+     [
+      "Men",
+      20,
+      1171.0,
+      47.71,
+      -4.188,
+      0.7295,
+      28.95,
+      0.6468
+     ],
+     [
+      "Women",
+      20,
+      1247.0,
+      57.67,
+      -6.31,
+      0.8818,
+      35.0,
+      0.7399
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) Using the R output, is there evidence that the slope of BMD on age is different in men and women? Please state how you reached your conclusions.",
+    "(ii) Is there evidence that the intercepts are different in the two groups?"
+   ],
+   "hypotheses": {
+    "null": "H_0:\\beta_M=\\beta_F",
+    "alternative": "H_A:\\beta_M\\ne\\beta_F",
+    "nullWords": "Bone mineral density falls with age at the same rate in men and women (equal slopes of the two lines of means).",
+    "alternativeWords": "The rate at which bone mineral density falls with age is different in men and women."
+   },
+   "symbols": "\\(b_M,b_F\\) (slopes for men and women), \\(s_{b_M},s_{b_F}\\) (their SEs), \\(s_{b_M-b_F}\\) (SE of the slope difference), \\(a_M,a_F\\) (intercepts), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\beta_1=\\beta_2",
+      "t=\\frac{b_1-b_2}{s_{b_1-b_2}}"
+     ],
+     "work": [
+      "H_0:\\beta_M=\\beta_F"
+     ],
+     "words": "Use the two-regression-line t test. Both slopes are significant on their own (t = −5.74 and −7.16), so the comparison is meaningful."
+    },
+    {
+     "title": "Calculate the slope difference",
+     "general": [
+      "b_1-b_2"
+     ],
+     "work": [
+      "-4.188-(-6.31)=2.122"
+     ],
+     "words": "Keep the order men minus women throughout. The women's slope is more negative, so the difference is positive."
+    },
+    {
+     "title": "Calculate the standard error of the difference",
+     "general": [
+      "s_{b_1-b_2}=\\sqrt{s_{b_1}^2+s_{b_2}^2}"
+     ],
+     "work": [
+      "s_{b_M-b_F}=\\sqrt{0.7295^2+0.8818^2}=\\sqrt{0.5321703+0.7775712}=\\sqrt{1.309741}=1.144439"
+     ],
+     "words": "The equal-n formula applies because both groups have 20 subjects. The two standard errors are read from the s_b column."
+    },
+    {
+     "title": "Calculate the t statistic",
+     "general": [
+      "t=\\frac{b_1-b_2}{s_{b_1-b_2}}"
+     ],
+     "work": [
+      "t=\\frac{2.122}{1.144439}=1.854183"
+     ],
+     "words": "The difference is about 1.9 standard errors."
+    },
+    {
+     "title": "Find the degrees of freedom",
+     "general": [
+      "\\nu=n_1+n_2-4"
+     ],
+     "work": [
+      "\\nu=20+20-4=36"
+     ],
+     "words": "Each line uses up two degrees of freedom for its intercept and slope."
+    },
+    {
+     "title": "Compare with the 0.05 cutoff",
+     "general": [
+      "|t|<t_{0.05}(\\nu)\\Rightarrow\\text{do not reject }H_0"
+     ],
+     "work": [
+      "t_{0.05}(36)=2.028",
+      "1.854183<2.028"
+     ],
+     "words": "Start with α = 0.05. Open t_table.pdf, PDF page 1, row 36, two-tailed column 0.05. The statistic is below the cutoff, so equal slopes are not rejected.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "36",
+      "column": "0.05",
+      "value": 2.028,
+      "actualDf": 36,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Find the P range",
+     "general": [
+      "t_{0.10}(\\nu)<|t|<t_{0.05}(\\nu)\\Rightarrow 0.05<P<0.10"
+     ],
+     "work": [
+      "t_{0.10}(36)=1.688",
+      "1.688<1.854183<2.028"
+     ],
+     "words": "The statistic lies between the 0.10 and 0.05 columns of row 36, so 0.05 < P < 0.10. The result is close to the 0.05 cutoff but does not reach it.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "36",
+      "column": "0.10",
+      "value": 1.688,
+      "actualDf": 36,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Check with the pooled standard error",
+     "general": [
+      "s_{y|x_p}^2=\\frac{(n_1-2)s_{y|x_1}^2+(n_2-2)s_{y|x_2}^2}{n_1+n_2-4}",
+      "s_{b_1-b_2}=\\sqrt{\\frac{s_{y|x_p}^2}{(n_1-1)s_{x_1}^2}+\\frac{s_{y|x_p}^2}{(n_2-1)s_{x_2}^2}}"
+     ],
+     "work": [
+      "s_{y|x_p}^2=\\frac{18(28.95)^2+18(35)^2}{36}=1031.551",
+      "s_{b_1-b_2}=\\sqrt{\\frac{2(1031.551)}{19(9.105233)^2}}=1.144439,\\quad t=\\frac{2.122}{1.144439}=1.854184"
+     ],
+     "words": "Both groups have the same ages, so the pooled formula gives almost the same statistic, and the decision does not change."
+    },
+    {
+     "title": "Apply the corresponding intercept test",
+     "general": [
+      "t=\\frac{a_1-a_2}{\\sqrt{s_{a_1}^2+s_{a_2}^2}}"
+     ],
+     "work": [
+      "t=\\frac{1171-1247}{\\sqrt{47.71^2+57.67^2}}=-1.015405"
+     ],
+     "words": "The size of this statistic is 1.02, which is below 2.028. The intercepts are the means at age 0, far outside the data, so they are extrapolations."
+    }
+   ],
+   "conclusion": "There is no evidence of a difference between the slopes, because |t| = 1.854183 with ν = 36 is below \\(t_{0.05}(36)=2.028\\) (0.05 < P < 0.10). In these data BMD falls by 4.188 mg/cm² per yr in men and 6.31 mg/cm² per yr in women, but the difference could be due to chance at the 0.05 level. The intercept test gives t = −1.015405, so the intercepts do not differ significantly.",
+   "source": "Original practice example in the course style",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "36",
+    "column": "0.05",
+    "value": 2.028,
+    "actualDf": 36,
+    "approximation": false
+   },
+   "values": {
+    "nM": 20,
+    "nF": 20,
+    "bM": -4.188,
+    "sbM": 0.7295,
+    "bF": -6.31,
+    "sbF": 0.8818,
+    "difference": 2.122,
+    "se": 1.1444393780362505,
+    "t": 1.8541829656728088,
+    "df": 36,
+    "critical": 2.028,
+    "critical002": 2.434,
+    "critical010": 1.688,
+    "reject": false,
+    "interceptT": -1.0154047961084625,
+    "femaleXbar": 64.8,
+    "femaleSx": 9.105232734965906,
+    "pooledVariance": 1031.55125,
+    "pooledSE": 1.144438741484961,
+    "pooledT": 1.8541839969928045
+   },
+   "module": 18,
+   "tolerance": 0.009271,
+   "answerName": "t statistic",
+   "answer": 1.8541829656728088
+  },
+  {
+   "id": "p18-hba1c-fasting-glucose",
+   "title": "Fasting glucose and HbA1c",
+   "topic": "s18corr",
+   "context": "In a study looking at blood-sugar control in adults referred to a diabetes clinic, data were collected regarding each subject's glycated hemoglobin (HbA1c, the share of hemoglobin with glucose attached, which reflects mean blood glucose over about three months) and fasting plasma glucose (FPG, the glucose level after at least 8 hours without food). HbA1c values were reported in percent (%) and FPG values were reported in milligrams per deciliter (mg/dL); there were 15 participants. The data are listed in the table below. Note: some useful summations have already been calculated for you below, which you can use. The summations are \\(\\sum x_i=2123\\), \\(\\sum x_i^2=325445\\), \\(\\sum(x_i-\\bar x)=0\\), \\(\\sum(x_i-\\bar x)^2=24969.73\\), \\(\\sum y_i=98.2\\), \\(\\sum y_i^2=663.08\\), \\(\\sum(y_i-\\bar y)=0\\), \\(\\sum(y_i-\\bar y)^2=20.19733\\), \\(\\sum x_iy_i=14594.9\\) and \\(\\sum(x_i-\\bar x)(y_i-\\bar y)=696.3267\\). In answering the questions below, DO NOT use R.",
+   "unit": "",
+   "table": {
+    "headers": [
+     "Subject",
+     "FPG (mg/dL)",
+     "HbA1c (%)"
+    ],
+    "rows": [
+     [
+      1,
+      88,
+      4.7
+     ],
+     [
+      2,
+      94,
+      5
+     ],
+     [
+      3,
+      99,
+      5.1
+     ],
+     [
+      4,
+      104,
+      5.7
+     ],
+     [
+      5,
+      112,
+      5.7
+     ],
+     [
+      6,
+      118,
+      6
+     ],
+     [
+      7,
+      126,
+      6.5
+     ],
+     [
+      8,
+      133,
+      6.7
+     ],
+     [
+      9,
+      141,
+      6.8
+     ],
+     [
+      10,
+      152,
+      6.8
+     ],
+     [
+      11,
+      163,
+      7
+     ],
+     [
+      12,
+      175,
+      7.3
+     ],
+     [
+      13,
+      188,
+      7.8
+     ],
+     [
+      14,
+      204,
+      8.4
+     ],
+     [
+      15,
+      226,
+      8.7
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) Calculate the correlation (Pearson coefficient) between HbA1c and fasting plasma glucose.",
+    "(ii) Based on your calculation for r, is the correlation between HbA1c and fasting plasma glucose statistically significant? Please state how you reached your conclusions."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\rho=0",
+    "alternative": "H_A:\\rho\\ne0",
+    "nullWords": "There is no linear relationship between HbA1c and fasting plasma glucose in the population (the population correlation is zero).",
+    "alternativeWords": "HbA1c and fasting plasma glucose are linearly related in the population (the population correlation is not zero)."
+   },
+   "symbols": "\\(r\\) (sample correlation coefficient), \\(\\rho\\) (population correlation), \\(b\\) (slope), \\(n\\) (number of pairs), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "Calculate r from the deviation sums",
+     "general": [
+      "r=\\frac{\\sum(x_i-\\bar x)(y_i-\\bar y)}{\\sqrt{\\sum(x_i-\\bar x)^2\\sum(y_i-\\bar y)^2}}"
+     ],
+     "work": [
+      "r=\\frac{696.3267}{\\sqrt{(24969.73)(20.19733)}}=\\frac{696.3267}{710.1563}=0.9805259"
+     ],
+     "words": "The procedure is the Pearson correlation coefficient with its t test. The units cancel, so r has no units."
+    },
+    {
+     "title": "Check with the slope relation",
+     "general": [
+      "b=\\frac{\\sum(x_i-\\bar x)(y_i-\\bar y)}{\\sum(x_i-\\bar x)^2}",
+      "r=\\frac{\\sqrt{\\sum(x_i-\\bar x)^2}}{\\sqrt{\\sum(y_i-\\bar y)^2}}\\cdot b"
+     ],
+     "work": [
+      "b=\\frac{696.3267}{24969.73}=0.02788683",
+      "r=\\sqrt{\\frac{24969.73}{20.19733}}(0.02788683)=35.1609(0.02788683)=0.9805259"
+     ],
+     "words": "Both routes give the same r, and r has the same sign as the slope."
+    },
+    {
+     "title": "Square r",
+     "general": [
+      "r^2"
+     ],
+     "work": [
+      "r^2=0.9805259^2=0.961431"
+     ],
+     "words": "About 96% of the variation in y goes with the straight-line relationship with x."
+    },
+    {
+     "title": "Calculate the t statistic",
+     "general": [
+      "t=r\\sqrt{\\frac{n-2}{1-r^2}}"
+     ],
+     "work": [
+      "t=0.9805259\\sqrt{\\frac{13}{0.03856901}}=18.00162"
+     ],
+     "words": "This statistic equals b divided by s_b for the same data, so the correlation test and the slope test agree."
+    },
+    {
+     "title": "Find the degrees of freedom and the 0.05 cutoff",
+     "general": [
+      "\\nu=n-2",
+      "t_c=t_{0.05}(\\nu)"
+     ],
+     "work": [
+      "\\nu=15-2=13",
+      "t_{0.05}(13)=2.16"
+     ],
+     "words": "Start with α = 0.05. Open t_table.pdf, PDF page 1, row 13, two-tailed column 0.05.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "13",
+      "column": "0.05",
+      "value": 2.16,
+      "actualDf": 13,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Decide and give the P range",
+     "general": [
+      "|t|>t_{0.05}(\\nu)\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "18.00162>2.16",
+      "t_{0.001}(13)=4.221"
+     ],
+     "words": "Reject the null hypothesis of zero correlation. The statistic exceeds the 0.001 column of row 13, the largest printed cutoff, so P < 0.001.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "13",
+      "column": "0.001",
+      "value": 4.221,
+      "actualDf": 13,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Interpret r",
+     "general": [
+      "-1\\le r\\le 1"
+     ],
+     "work": [
+      "r=0.9805259"
+     ],
+     "words": "A value this close to +1 shows a strong positive linear relationship. Subjects with higher fasting glucose tend to have higher HbA1c."
+    }
+   ],
+   "conclusion": "The correlation (Pearson coefficient) between HbA1c and fasting plasma glucose is r = 0.9805259. It is statistically significant, because t = 18.00162 with ν = 13 exceeds \\(t_{0.05}(13)=2.160\\) (P < 0.001). There is a strong positive linear relationship between the two measures.",
+   "source": "Original practice example in the course style",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "13",
+    "column": "0.05",
+    "value": 2.16,
+    "actualDf": 13,
+    "approximation": false
+   },
+   "values": {
+    "n": 15,
+    "sxy": 696.3266666666659,
+    "sxx": 24969.733333333337,
+    "syy": 20.197333333333404,
+    "r": 0.9805258748701227,
+    "r2": 0.9614309912898195,
+    "t": 18.00161612479911,
+    "df": 13,
+    "critical": 2.16,
+    "reject": true,
+    "b": 0.027886828320152917,
+    "critical001": 4.221
+   },
+   "module": 18,
+   "tolerance": 0.004903,
+   "answerName": "Correlation coefficient r",
+   "answer": 0.9805258748701227
+  },
+  {
+   "id": "p18-albumin-grip-strength",
+   "title": "Serum albumin and grip strength in older inpatients",
+   "topic": "s18corr",
+   "context": "In a study looking at nutrition and muscle function in older adults admitted to a hospital medical ward, data were collected regarding each subject's handgrip strength (the best of three squeezes of the dominant hand on a hydraulic dynamometer) and serum albumin (a blood protein often used as a marker of nutritional state). Grip-strength values were reported in kilograms of force (kg) and albumin values were reported in grams per deciliter (g/dL); there were 18 participants. The data are listed in the table below. Note: some useful summations have already been calculated for you below, which you can use. The summations are \\(\\sum x_i=65.9\\), \\(\\sum x_i^2=246.49\\), \\(\\sum(x_i-\\bar x)=0\\), \\(\\sum(x_i-\\bar x)^2=5.222778\\), \\(\\sum y_i=427.9\\), \\(\\sum y_i^2=10499.45\\), \\(\\sum(y_i-\\bar y)=0\\), \\(\\sum(y_i-\\bar y)^2=327.3161\\), \\(\\sum x_iy_i=1575.57\\) and \\(\\sum(x_i-\\bar x)(y_i-\\bar y)=8.980556\\). In answering the questions below, DO NOT use R.",
+   "unit": "",
+   "table": {
+    "headers": [
+     "Subject",
+     "Albumin (g/dL)",
+     "Grip Strength (kg)"
+    ],
+    "rows": [
+     [
+      1,
+      2.6,
+      20.4
+     ],
+     [
+      2,
+      2.9,
+      28
+     ],
+     [
+      3,
+      3,
+      27.6
+     ],
+     [
+      4,
+      3.1,
+      18.8
+     ],
+     [
+      5,
+      3.3,
+      20.4
+     ],
+     [
+      6,
+      3.4,
+      19.4
+     ],
+     [
+      7,
+      3.5,
+      25.4
+     ],
+     [
+      8,
+      3.5,
+      22.1
+     ],
+     [
+      9,
+      3.6,
+      26.5
+     ],
+     [
+      10,
+      3.7,
+      13.3
+     ],
+     [
+      11,
+      3.8,
+      31.3
+     ],
+     [
+      12,
+      3.9,
+      22.9
+     ],
+     [
+      13,
+      4,
+      27.1
+     ],
+     [
+      14,
+      4.1,
+      23.1
+     ],
+     [
+      15,
+      4.2,
+      22.1
+     ],
+     [
+      16,
+      4.3,
+      26.7
+     ],
+     [
+      17,
+      4.4,
+      28.8
+     ],
+     [
+      18,
+      4.6,
+      24
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) Calculate the correlation (Pearson coefficient) between grip strength and serum albumin.",
+    "(ii) Based on your calculation for r, is the correlation between grip strength and serum albumin statistically significant? Please state how you reached your conclusions."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\rho=0",
+    "alternative": "H_A:\\rho\\ne0",
+    "nullWords": "There is no linear relationship between grip strength and serum albumin in the population (the population correlation is zero).",
+    "alternativeWords": "Grip strength and serum albumin are linearly related in the population (the population correlation is not zero)."
+   },
+   "symbols": "\\(r\\) (sample correlation coefficient), \\(\\rho\\) (population correlation), \\(b\\) (slope), \\(n\\) (number of pairs), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "Calculate r from the deviation sums",
+     "general": [
+      "r=\\frac{\\sum(x_i-\\bar x)(y_i-\\bar y)}{\\sqrt{\\sum(x_i-\\bar x)^2\\sum(y_i-\\bar y)^2}}"
+     ],
+     "work": [
+      "r=\\frac{8.980556}{\\sqrt{(5.222778)(327.3161)}}=\\frac{8.980556}{41.34609}=0.2172045"
+     ],
+     "words": "The procedure is the Pearson correlation coefficient with its t test. The units cancel, so r has no units."
+    },
+    {
+     "title": "Check with the slope relation",
+     "general": [
+      "b=\\frac{\\sum(x_i-\\bar x)(y_i-\\bar y)}{\\sum(x_i-\\bar x)^2}",
+      "r=\\frac{\\sqrt{\\sum(x_i-\\bar x)^2}}{\\sqrt{\\sum(y_i-\\bar y)^2}}\\cdot b"
+     ],
+     "work": [
+      "b=\\frac{8.980556}{5.222778}=1.719498",
+      "r=\\sqrt{\\frac{5.222778}{327.3161}}(1.719498)=0.1263185(1.719498)=0.2172045"
+     ],
+     "words": "Both routes give the same r, and r has the same sign as the slope."
+    },
+    {
+     "title": "Square r",
+     "general": [
+      "r^2"
+     ],
+     "work": [
+      "r^2=0.2172045^2=0.04717778"
+     ],
+     "words": "About 5% of the variation in y goes with the straight-line relationship with x."
+    },
+    {
+     "title": "Calculate the t statistic",
+     "general": [
+      "t=r\\sqrt{\\frac{n-2}{1-r^2}}"
+     ],
+     "work": [
+      "t=0.2172045\\sqrt{\\frac{16}{0.9528222}}=0.8900672"
+     ],
+     "words": "This statistic equals b divided by s_b for the same data, so the correlation test and the slope test agree."
+    },
+    {
+     "title": "Find the degrees of freedom and the 0.05 cutoff",
+     "general": [
+      "\\nu=n-2",
+      "t_c=t_{0.05}(\\nu)"
+     ],
+     "work": [
+      "\\nu=18-2=16",
+      "t_{0.05}(16)=2.12"
+     ],
+     "words": "Start with α = 0.05. Open t_table.pdf, PDF page 1, row 16, two-tailed column 0.05.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "16",
+      "column": "0.05",
+      "value": 2.12,
+      "actualDf": 16,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Decide and give the P range",
+     "general": [
+      "|t|<t_{0.05}(\\nu)\\Rightarrow\\text{do not reject }H_0"
+     ],
+     "work": [
+      "0.8900672<2.12",
+      "t_{0.50}(16)=0.69,\\quad t_{0.20}(16)=1.337"
+     ],
+     "words": "Do not reject the null hypothesis of zero correlation. The statistic lies between the 0.50 and 0.20 columns of row 16, so 0.20 < P < 0.50.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "16",
+      "column": "0.20",
+      "value": 1.337,
+      "actualDf": 16,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Interpret r",
+     "general": [
+      "-1\\le r\\le 1"
+     ],
+     "work": [
+      "r=0.2172045"
+     ],
+     "words": "A value this close to 0 shows at most a weak linear relationship, and with 18 subjects it cannot be told apart from no relationship."
+    }
+   ],
+   "conclusion": "The correlation (Pearson coefficient) between grip strength and serum albumin is r = 0.2172045. It is not statistically significant, because t = 0.8900672 with ν = 16 is below \\(t_{0.05}(16)=2.120\\) (0.20 < P < 0.50). These data give no evidence of a linear relationship between grip strength and serum albumin.",
+   "source": "Original practice example in the course style",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "16",
+    "column": "0.05",
+    "value": 2.12,
+    "actualDf": 16,
+    "approximation": false
+   },
+   "values": {
+    "n": 18,
+    "sxy": 8.980555555555384,
+    "sxx": 5.222777777777765,
+    "syy": 327.31611111111306,
+    "r": 0.21720446004278,
+    "r2": 0.04717777746247561,
+    "t": 0.8900671881153741,
+    "df": 16,
+    "critical": 2.12,
+    "reject": false,
+    "b": 1.7194979257525689,
+    "critical001": 4.015
+   },
+   "module": 18,
+   "tolerance": 0.001086,
+   "answerName": "Correlation coefficient r",
+   "answer": 0.21720446004278
+  }
+ ],
+ "questions": [],
+ "notes": [
+  "All data are invented for practice. No real study, author or drug effect is cited. The raw data behind every case, including the two lm() fits of p18-bone-density-age-sex, are rebuilt in check_session18.py, which refits them with NumPy and SciPy.",
+  "The hand cases follow the layout of Homework 3 Problem 2. The context lists the raw data, then the sentence \"Note: some useful summations have already been calculated for you below, which you can use.\" with the ten summations (sums of x, x², deviations, squared deviations, y, y², xy and cross deviations), then \"In answering the questions below, DO NOT use R.\" The summations are written with lowercase x and y to match the formula notation. p18-child-blood-volume-weight copies the three side-by-side column pairs of the homework table and asks all six homework parts.",
+  "p18-child-blood-volume-weight has 43 degrees of freedom, which is not a printed row (the table prints 42 and 44). The solution uses row 42 (2.018) as the conservative bracket and stores approximation true with actualDf 43. A last step shows that row 44 (2.015) moves the mean interval by less than 1 mL, and alternativeCritical holds 2.015. All other degrees of freedom (8, 9, 10, 12, 13, 16, 36) are printed rows.",
+  "Cases that do not reject are p18-coffee-resting-heart-rate (slope t below 2.228), p18-bone-density-age-sex (slope difference with 0.05 < P < 0.10, close to the cutoff) and p18-albumin-grip-strength (r near 0.2).",
+  "p18-bone-density-age-sex stores the two summary(lm()) results in `table`, as the reference case s18-plutonian-slopes does, rounded to 4 significant figures, and calculates from the rounded printed values. It keeps the reference value keys (nM, bM, sbM for men and nF, bF, sbF, femaleXbar, femaleSx for women) and adds critical010 for the P range. Both groups have the same ages, so femaleXbar and femaleSx also describe the men.",
+  "Value keys follow the reference case of each method. Added keys are change10 (p18-creatinine-clearance-age), x and yhat (p18-glucose-sensor-calibration), a and varianceAboutLine (s18syx), syx, varianceAboutLine and criticalP keys for the printed columns used in the P range (s18slope), critical001 and alternativeCritical (p18-child-blood-volume-weight), and b and critical001 (s18corr). p18-child-blood-volume-weight uses the key set of s18-original-caffeine and p18-treadmill-oxygen-uptake uses the key set of s18-martians-at40.",
+  "Step-level table lookups use the key classTable, as the reference session 18 cases do. The case-level key is lookup, which is null for the two s18line cases as in the reference line case and for p18-arm-circumference-systolic as in the reference s18syx case.",
+  "Work lines show 7 significant figures and carry full precision between steps, so a last printed digit can differ by one unit from arithmetic done with the printed values.",
+  "p18-child-blood-volume-weight follows the six-part layout of Homework 3 Problem 2 with new invented data (45 children, not the 48 dose and reaction-time pairs of the homework). It and p18-arm-circumference-systolic were re-storied with unchanged numbers, because birth weight on gestational age and systolic pressure on BMI at a workplace screening already appear in the session 19 practice pack. The hand-regression contexts keep the homework sentence with its semicolon, \"...; there were N participants.\""
+ ]
+}

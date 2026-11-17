@@ -1,0 +1,2017 @@
+{
+ "cases": [
+  {
+   "id": "p21-walking-glucose-rmanova",
+   "title": "Fasting glucose at baseline, 6 weeks and 12 weeks of a walking program",
+   "topic": "s21rmAnova",
+   "context": "In a clinical trial, fasting plasma glucose (the concentration of glucose in the blood after an overnight fast) was measured in milligrams per deciliter (mg/dL) in 5 patients with prediabetes (blood glucose above the normal range but below the range for diabetes). Each patient was measured at baseline, after 6 weeks and after 12 weeks of a supervised walking program. The data are listed in the table below.",
+   "unit": "mg/dL",
+   "table": {
+    "headers": [
+     "Patient",
+     "Baseline (mg/dL)",
+     "6 weeks (mg/dL)",
+     "12 weeks (mg/dL)"
+    ],
+    "rows": [
+     [
+      "1",
+      118,
+      112,
+      106
+     ],
+     [
+      "2",
+      124,
+      121,
+      113
+     ],
+     [
+      "3",
+      110,
+      104,
+      101
+     ],
+     [
+      "4",
+      131,
+      122,
+      117
+     ],
+     [
+      "5",
+      115,
+      113,
+      104
+     ]
+    ]
+   },
+   "tasks": [
+    "Is there a difference in fasting plasma glucose over time? Assume that any quantities of interest are Normally distributed. (Note: If a difference exists, do not identify which times are different.)",
+    "Make sure to show your intermediate calculations. DO NOT use R."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\mu_{base}=\\mu_{6wk}=\\mu_{12wk}",
+    "alternative": "H_A:\\text{not all three population means are equal}",
+    "nullWords": "There is no difference in mean fasting plasma glucose at baseline, after 6 weeks and after 12 weeks of the walking program.",
+    "alternativeWords": "Mean fasting plasma glucose differs at one or more of the three times."
+   },
+   "symbols": "\\(x_{ts}\\) (observation for treatment \\(t\\), subject \\(s\\)), \\(m\\) (number of treatments), \\(n\\) (number of subjects), \\(\\bar S_s\\) (subject mean), \\(\\bar T_t\\) (treatment mean), \\(\\bar X\\) (grand mean), \\(SS\\) (sum of squares), \\(DF\\) (degrees of freedom), \\(MS\\) (mean square), \\(F\\) (F statistic).",
+   "steps": [
+    {
+     "title": "State the procedure and design",
+     "general": [
+      "x_{ts},\\quad t=1,\\dots,m,\\quad s=1,\\dots,n"
+     ],
+     "work": [
+      "m=3\\ \\text{treatments},\\quad n=5\\ \\text{subjects}"
+     ],
+     "words": "The same 5 patients are measured at all 3 times, so the observations are repeated measures on the same subjects. Repeated measures ANOVA is the procedure. It removes the large differences in glucose between patients from the error term before comparing the times."
+    },
+    {
+     "title": "State the hypotheses",
+     "general": [
+      "H_0:\\mu_1=\\mu_2=\\dots=\\mu_m"
+     ],
+     "work": [
+      "H_0:\\mu_{base}=\\mu_{6wk}=\\mu_{12wk}"
+     ],
+     "words": "There is no difference in mean fasting plasma glucose at baseline, after 6 weeks and after 12 weeks of the walking program. Mean fasting plasma glucose differs at one or more of the three times."
+    },
+    {
+     "title": "Calculate each subject mean",
+     "general": [
+      "\\bar S_s=\\frac{1}{m}\\sum_{t=1}^{m}x_{ts}"
+     ],
+     "work": [
+      "\\bar S_1=\\frac{118+112+106}{3}=112",
+      "\\bar S_2=\\frac{124+121+113}{3}=119.3333",
+      "\\bar S_3=\\frac{110+104+101}{3}=105",
+      "\\bar S_4=\\frac{131+122+117}{3}=123.3333",
+      "\\bar S_5=\\frac{115+113+104}{3}=110.6667"
+     ],
+     "words": "Average each patient across all 3 times. Each row of the table gives one subject mean."
+    },
+    {
+     "title": "Calculate the treatment means and the grand mean",
+     "general": [
+      "\\bar T_t=\\frac{1}{n}\\sum_{s=1}^{n}x_{ts}",
+      "\\bar X=\\frac{1}{m}\\sum_{t=1}^{m}\\bar T_t"
+     ],
+     "work": [
+      "\\bar T_1=\\frac{118+124+110+131+115}{5}=119.6",
+      "\\bar T_2=\\frac{112+121+104+122+113}{5}=114.4",
+      "\\bar T_3=\\frac{106+113+101+117+104}{5}=108.2",
+      "\\bar X=\\frac{119.6+114.4+108.2}{3}=114.0667"
+     ],
+     "words": "Average each column over the 5 patients. The grand mean is the mean of all 15 observations, which equals the mean of the treatment means."
+    },
+    {
+     "title": "Calculate the within-subjects sum of squares",
+     "general": [
+      "SS_{wit\\,subjs}=\\sum_{s=1}^{n}\\sum_{t=1}^{m}(x_{ts}-\\bar S_s)^2=\\sum_{s=1}^{n}SS_s"
+     ],
+     "work": [
+      "SS_1=(118-112)^2+(112-112)^2+(106-112)^2=72",
+      "SS_2=(124-119.3333)^2+(121-119.3333)^2+(113-119.3333)^2=64.6667",
+      "SS_3=(110-105)^2+(104-105)^2+(101-105)^2=42",
+      "SS_4=(131-123.3333)^2+(122-123.3333)^2+(117-123.3333)^2=100.6667",
+      "SS_5=(115-110.6667)^2+(113-110.6667)^2+(104-110.6667)^2=68.6667",
+      "SS_{wit\\,subjs}=72+64.6667+42+100.6667+68.6667=348"
+     ],
+     "words": "Each patient is compared only with its own mean, so differences between patients never enter this sum. It holds the treatment effect plus residual scatter."
+    },
+    {
+     "title": "Calculate the treatment sum of squares",
+     "general": [
+      "SS_{treat}=n\\sum_{t=1}^{m}(\\bar T_t-\\bar X)^2"
+     ],
+     "work": [
+      "SS_{treat}=5\\left[(119.6-114.0667)^2+(114.4-114.0667)^2+(108.2-114.0667)^2\\right]=325.7333"
+     ],
+     "words": "Multiply by n because each treatment mean involves n subjects."
+    },
+    {
+     "title": "Calculate the residual sum of squares",
+     "general": [
+      "SS_{res}=SS_{wit\\,subjs}-SS_{treat}"
+     ],
+     "work": [
+      "SS_{res}=348-325.7333=22.2667"
+     ],
+     "words": "The residual is the within-subject variation that the treatment means do not explain."
+    },
+    {
+     "title": "Find the degrees of freedom and mean squares",
+     "general": [
+      "DF_{treat}=m-1,\\quad DF_{res}=(n-1)(m-1)",
+      "MS_{treat}=\\frac{SS_{treat}}{DF_{treat}},\\quad MS_{res}=\\frac{SS_{res}}{DF_{res}}"
+     ],
+     "work": [
+      "DF_{treat}=3-1=2,\\quad DF_{res}=(5-1)(3-1)=8",
+      "MS_{treat}=\\frac{325.7333}{2}=162.866667,\\quad MS_{res}=\\frac{22.2667}{8}=2.783333"
+     ],
+     "words": "Each sum of squares is divided by its own degrees of freedom to give a variance estimate."
+    },
+    {
+     "title": "Calculate the F statistic",
+     "general": [
+      "F=\\frac{MS_{treat}}{MS_{res}}"
+     ],
+     "work": [
+      "F=\\frac{162.866667}{2.783333}=58.515"
+     ],
+     "words": "Treatment variance is compared with residual variance. Values near 1 or below are what equal treatment means produce."
+    },
+    {
+     "title": "Find the critical value",
+     "general": [
+      "F_{crit}=F_{\\alpha}(DF_{treat},DF_{res})=F_{\\alpha}(\\nu_n,\\nu_d)"
+     ],
+     "work": [
+      "F_{0.05}(2,8)=4.46",
+      "F_{0.01}(2,8)=8.65"
+     ],
+     "words": "Start with α = 0.05. Open F_table.pdf, PDF page 1. Use numerator column ν_n=2 and denominator row ν_d=8. The lightface entry 4.46 is the 0.05 cutoff and the boldface entry 8.65 is the 0.01 cutoff. Swapping the two df selects a different, wrong cell.",
+     "classTable": {
+      "path": "sources/tables/F_table.pdf",
+      "page": 1,
+      "row": "8",
+      "column": "2 (0.05 lightface)",
+      "value": 4.46,
+      "actualDf": [
+       2,
+       8
+      ],
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision",
+     "general": [
+      "F>F_{crit}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "F=58.515>4.46,\\quad F>8.65\\Rightarrow P<0.01"
+     ],
+     "words": "F is above both the 0.05 and the 0.01 cutoffs, so reject the null hypothesis with P < 0.01."
+    }
+   ],
+   "conclusion": "F = 58.515 with 2 and 8 degrees of freedom exceeds F_0.01(2,8) = 8.65. Reject H0, P < 0.01. There is a difference in mean fasting plasma glucose among baseline, 6 weeks and 12 weeks of the walking program. Holm-corrected pairwise t tests are then needed to locate the difference.",
+   "source": "Original practice example in the course style",
+   "lookup": {
+    "path": "sources/tables/F_table.pdf",
+    "page": 1,
+    "row": "8",
+    "column": "2 (0.05 lightface)",
+    "value": 4.46,
+    "actualDf": [
+     2,
+     8
+    ],
+    "approximation": false
+   },
+   "values": {
+    "n": 5,
+    "m": 3,
+    "subjectMeans": [
+     112.0,
+     119.33333333333333,
+     105.0,
+     123.33333333333333,
+     110.66666666666667
+    ],
+    "treatmentMeans": [
+     119.6,
+     114.4,
+     108.2
+    ],
+    "grandMean": 114.06666666666666,
+    "subjectSS": [
+     72.0,
+     64.66666666666666,
+     42.0,
+     100.66666666666666,
+     68.66666666666666
+    ],
+    "ssWithin": 348.0,
+    "ssTreat": 325.7333333333329,
+    "ssRes": 22.266666666667106,
+    "ssBetween": 634.9333333333328,
+    "ssTotal": 982.9333333333332,
+    "dfTreat": 2,
+    "dfRes": 8,
+    "msTreat": 162.86666666666645,
+    "msRes": 2.7833333333333883,
+    "F": 58.514970059879005,
+    "exactP": 1.676115164112858e-05,
+    "critical": 4.46,
+    "critical01": 8.65,
+    "reject": true,
+    "pRange": "P<0.01"
+   },
+   "module": 21,
+   "tolerance": 0.292574850299395,
+   "answerName": "F statistic",
+   "answer": 58.514970059879005
+  },
+  {
+   "id": "p21-walking-glucose-holm",
+   "title": "Holm-corrected comparisons of fasting glucose times",
+   "topic": "s21holm",
+   "context": "In a clinical trial, fasting plasma glucose (the concentration of glucose in the blood after an overnight fast) was measured in the same 5 patients with prediabetes at baseline, after 6 weeks and after 12 weeks of a supervised walking program. A repeated-measures analysis of variance (ANOVA) was performed on the data, resulting in the conclusion that there is a difference in fasting plasma glucose among the three times (F = 58.515, P < 0.01). From the ANOVA, the treatment means were 119.6, 114.4 and 108.2 milligrams per deciliter (mg/dL) at baseline, 6 weeks and 12 weeks (each mean is based on n = 5 patients), and the residual mean square was MS_res = 2.783333 with DF_res = 8 residual degrees of freedom.",
+   "unit": "mg/dL",
+   "table": {
+    "headers": [
+     "Condition",
+     "Treatment mean (mg/dL)"
+    ],
+    "rows": [
+     [
+      "Baseline",
+      119.6
+     ],
+     [
+      "6 weeks",
+      114.4
+     ],
+     [
+      "12 weeks",
+      108.2
+     ]
+    ]
+   },
+   "tasks": [
+    "Perform the appropriate form of multiple pairwise comparisons, testing every time against every other time, using the Holm correction to determine which of the three times differ from one another. Use the relevant information from the ANOVA results to do your calculations.",
+    "Present your final/overall conclusion on which times are different from one another (and which times are not different) using an overall level of significance of 0.05. Please state how you reached your conclusions."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\mu_i=\\mu_j\\ \\text{for the pair being compared}",
+    "alternative": "H_A:\\mu_i\\ne\\mu_j",
+    "nullWords": "For the pair being compared, there is no difference in mean fasting plasma glucose between the two times.",
+    "alternativeWords": "For that pair, mean fasting plasma glucose differs between the two times."
+   },
+   "symbols": "\\(\\bar T_i\\) (treatment mean), \\(MS_{res}\\) (residual mean square), \\(n\\) (number of subjects), \\(DF_{res}\\) (residual degrees of freedom), \\(k\\) (number of pairwise comparisons), \\(\\alpha_j\\) (Holm level for the \\(j\\)th comparison), \\(\\alpha_T\\) (overall level).",
+   "steps": [
+    {
+     "title": "State the procedure",
+     "general": [
+      "t=\\frac{\\bar T_i-\\bar T_j}{\\sqrt{2MS_{res}/n}},\\quad \\nu=DF_{res}=(n-1)(m-1)"
+     ],
+     "work": [
+      "MS_{res}=2.783333,\\quad n=5,\\quad \\nu=8"
+     ],
+     "words": "The overall F test rejected, so pairwise t tests with the Holm correction locate the differences. The repeated-measures version uses MS_res in the standard error and DF_res for the t table."
+    },
+    {
+     "title": "State the hypotheses for each pair",
+     "general": [
+      "H_0:\\mu_i=\\mu_j"
+     ],
+     "work": [
+      "H_0:\\mu_i=\\mu_j\\ \\text{for the pair being compared}"
+     ],
+     "words": "For the pair being compared, there is no difference in mean fasting plasma glucose between the two times. For that pair, mean fasting plasma glucose differs between the two times."
+    },
+    {
+     "title": "Calculate the standard error of a difference",
+     "general": [
+      "SE=\\sqrt{\\frac{2MS_{res}}{n}}"
+     ],
+     "work": [
+      "SE=\\sqrt{\\frac{2(2.783333)}{5}}=1.055146"
+     ],
+     "words": "The same standard error serves every pair because every treatment mean is based on the same n subjects."
+    },
+    {
+     "title": "Calculate every pairwise t statistic",
+     "general": [
+      "t=\\frac{\\bar T_i-\\bar T_j}{SE}"
+     ],
+     "work": [
+      "t_{\\text{Baseline vs 12 weeks}}=\\frac{119.6-108.2}{1.055146}=10.804",
+      "t_{\\text{6 weeks vs 12 weeks}}=\\frac{114.4-108.2}{1.055146}=5.876",
+      "t_{\\text{Baseline vs 6 weeks}}=\\frac{119.6-114.4}{1.055146}=4.928"
+     ],
+     "words": "Keep the subtraction order. The sign only gives the direction, and the ranking uses |t|."
+    },
+    {
+     "title": "Order by |t| and set the Holm levels",
+     "general": [
+      "\\alpha_j=\\frac{\\alpha_T}{k-j+1},\\quad j=1,\\dots,k"
+     ],
+     "work": [
+      "k=3,\\quad \\alpha_1=\\frac{0.05}{3}=0.0167,\\quad \\alpha_2=\\frac{0.05}{2}=0.025,\\quad \\alpha_3=\\frac{0.05}{1}=0.05",
+      "|t|:\\ 10.804>5.876>4.928"
+     ],
+     "words": "The largest |t| is tested at the strictest level. Testing stops at the first comparison that is not significant."
+    },
+    {
+     "title": "Comparison 1: Baseline vs 12 weeks",
+     "general": [
+      "|t|>t_{\\alpha_1}(\\nu)\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "\\alpha_1=0.0167,\\quad t_{0.01}(8)=3.355\\ \\text{(stricter printed column)}",
+      "|t|=10.804>3.355"
+     ],
+     "words": "The 0.0167 column is not printed. In t_table.pdf, PDF page 1, row 8, the printed neighbors are the 0.02 column (2.896) and the 0.01 column (3.355). Use the stricter 0.01 column, 3.355, because a statistic beyond it is significant at 0.0167 as well. |t| = 10.804 > 3.355, so the Baseline and 12 weeks means differ (P<0.001 before adjustment).",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "8",
+      "column": "0.01",
+      "value": 3.355,
+      "actualDf": 8,
+      "approximation": true,
+      "bracket": [
+       "0.02",
+       "0.01"
+      ],
+      "bracketValues": [
+       2.896,
+       3.355
+      ]
+     }
+    },
+    {
+     "title": "Comparison 2: 6 weeks vs 12 weeks",
+     "general": [
+      "|t|>t_{\\alpha_2}(\\nu)\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "\\alpha_2=0.025,\\quad t_{0.02}(8)=2.896\\ \\text{(stricter printed column)}",
+      "|t|=5.876>2.896"
+     ],
+     "words": "The 0.025 column is not printed. In t_table.pdf, PDF page 1, row 8, the printed neighbors are the 0.05 column (2.306) and the 0.02 column (2.896). Use the stricter 0.02 column, 2.896, because a statistic beyond it is significant at 0.025 as well. |t| = 5.876 > 2.896, so the 6 weeks and 12 weeks means differ (P<0.001 before adjustment).",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "8",
+      "column": "0.02",
+      "value": 2.896,
+      "actualDf": 8,
+      "approximation": true,
+      "bracket": [
+       "0.05",
+       "0.02"
+      ],
+      "bracketValues": [
+       2.306,
+       2.896
+      ]
+     }
+    },
+    {
+     "title": "Comparison 3: Baseline vs 6 weeks",
+     "general": [
+      "|t|>t_{\\alpha_3}(\\nu)\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "\\alpha_3=0.05,\\quad t_{0.05}(8)=2.306",
+      "|t|=4.928>2.306"
+     ],
+     "words": "Open t_table.pdf, PDF page 1, row 8, combined two-tail 0.05 column. The entry is 2.306. |t| = 4.928 > 2.306, so the Baseline and 6 weeks means differ (0.001<P<0.002 before adjustment).",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "8",
+      "column": "0.05",
+      "value": 2.306,
+      "actualDf": 8,
+      "approximation": false
+     }
+    }
+   ],
+   "conclusion": "All three pairs differ at the Holm-corrected levels. Mean fasting plasma glucose is lower at 12 weeks than at baseline (t = 10.804), lower at 12 weeks than at 6 weeks (t = 5.876) and lower at 6 weeks than at baseline (t = 4.928).",
+   "source": "Original practice example in the course style",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "8",
+    "column": "0.01",
+    "value": 3.355,
+    "actualDf": 8,
+    "approximation": true,
+    "bracket": [
+     "0.02",
+     "0.01"
+    ],
+    "bracketValues": [
+     2.896,
+     3.355
+    ]
+   },
+   "values": {
+    "n": 5,
+    "dfRes": 8,
+    "msRes": 2.783333,
+    "means": {
+     "Baseline": 119.6,
+     "6 weeks": 114.4,
+     "12 weeks": 108.2
+    },
+    "se": 1.0551460562405568,
+    "tValues": {
+     "Baseline vs 12 weeks": 10.804191450629817,
+     "6 weeks vs 12 weeks": 5.8759637713951705,
+     "Baseline vs 6 weeks": 4.928227679234646
+    },
+    "holmAlphas": [
+     0.016666666666666666,
+     0.025,
+     0.05
+    ],
+    "outcomes": {
+     "Baseline vs 12 weeks": true,
+     "6 weeks vs 12 weeks": true,
+     "Baseline vs 6 weeks": true
+    }
+   },
+   "module": 21,
+   "tolerance": 0.054020957253149086,
+   "answerName": "t statistic (largest |t| comparison)",
+   "answer": 10.804191450629817
+  },
+  {
+   "id": "p21-carpal-grip-rmanova",
+   "title": "Grip strength at 1, 3 and 6 months after carpal tunnel surgery",
+   "topic": "s21rmAnova",
+   "context": "A study was reported concerning recovery of hand function after carpal tunnel release (surgery that relieves pressure on the median nerve at the wrist). Grip strength (the largest squeezing force of the hand) was measured in kilograms (kg) with a hand dynamometer (a handheld force gauge) in 6 patients. Each patient was measured 1 month, 3 months and 6 months after surgery. The data are listed in the table below.",
+   "unit": "kg",
+   "table": {
+    "headers": [
+     "Patient",
+     "1 month (kg)",
+     "3 months (kg)",
+     "6 months (kg)"
+    ],
+    "rows": [
+     [
+      "1",
+      21,
+      23,
+      27
+     ],
+     [
+      "2",
+      30,
+      31,
+      36
+     ],
+     [
+      "3",
+      18,
+      20,
+      23
+     ],
+     [
+      "4",
+      26,
+      25,
+      31
+     ],
+     [
+      "5",
+      23,
+      26,
+      28
+     ],
+     [
+      "6",
+      29,
+      28,
+      35
+     ]
+    ]
+   },
+   "tasks": [
+    "Is there a difference in grip strength over time? Assume that any quantities of interest are Normally distributed. (Note: If a difference exists, do not identify which times are different.)",
+    "Make sure to show your intermediate calculations. DO NOT use R."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\mu_{1mo}=\\mu_{3mo}=\\mu_{6mo}",
+    "alternative": "H_A:\\text{not all three population means are equal}",
+    "nullWords": "There is no difference in mean grip strength at 1 month, 3 months and 6 months after surgery.",
+    "alternativeWords": "Mean grip strength differs at one or more of the three times."
+   },
+   "symbols": "\\(x_{ts}\\) (observation for treatment \\(t\\), subject \\(s\\)), \\(m\\) (number of treatments), \\(n\\) (number of subjects), \\(\\bar S_s\\) (subject mean), \\(\\bar T_t\\) (treatment mean), \\(\\bar X\\) (grand mean), \\(SS\\) (sum of squares), \\(DF\\) (degrees of freedom), \\(MS\\) (mean square), \\(F\\) (F statistic).",
+   "steps": [
+    {
+     "title": "State the procedure and design",
+     "general": [
+      "x_{ts},\\quad t=1,\\dots,m,\\quad s=1,\\dots,n"
+     ],
+     "work": [
+      "m=3\\ \\text{treatments},\\quad n=6\\ \\text{subjects}"
+     ],
+     "words": "The same 6 patients are measured at all 3 times, so the observations are repeated measures on the same subjects. Repeated measures ANOVA is the procedure. It removes the differences in hand size and strength between patients from the error term before comparing the times."
+    },
+    {
+     "title": "State the hypotheses",
+     "general": [
+      "H_0:\\mu_1=\\mu_2=\\dots=\\mu_m"
+     ],
+     "work": [
+      "H_0:\\mu_{1mo}=\\mu_{3mo}=\\mu_{6mo}"
+     ],
+     "words": "There is no difference in mean grip strength at 1 month, 3 months and 6 months after surgery. Mean grip strength differs at one or more of the three times."
+    },
+    {
+     "title": "Calculate each subject mean",
+     "general": [
+      "\\bar S_s=\\frac{1}{m}\\sum_{t=1}^{m}x_{ts}"
+     ],
+     "work": [
+      "\\bar S_1=\\frac{21+23+27}{3}=23.6667",
+      "\\bar S_2=\\frac{30+31+36}{3}=32.3333",
+      "\\bar S_3=\\frac{18+20+23}{3}=20.3333",
+      "\\bar S_4=\\frac{26+25+31}{3}=27.3333",
+      "\\bar S_5=\\frac{23+26+28}{3}=25.6667",
+      "\\bar S_6=\\frac{29+28+35}{3}=30.6667"
+     ],
+     "words": "Average each patient across all 3 times. Each row of the table gives one subject mean."
+    },
+    {
+     "title": "Calculate the treatment means and the grand mean",
+     "general": [
+      "\\bar T_t=\\frac{1}{n}\\sum_{s=1}^{n}x_{ts}",
+      "\\bar X=\\frac{1}{m}\\sum_{t=1}^{m}\\bar T_t"
+     ],
+     "work": [
+      "\\bar T_1=\\frac{21+30+18+26+23+29}{6}=24.5",
+      "\\bar T_2=\\frac{23+31+20+25+26+28}{6}=25.5",
+      "\\bar T_3=\\frac{27+36+23+31+28+35}{6}=30",
+      "\\bar X=\\frac{24.5+25.5+30}{3}=26.6667"
+     ],
+     "words": "Average each column over the 6 patients. The grand mean is the mean of all 18 observations, which equals the mean of the treatment means."
+    },
+    {
+     "title": "Calculate the within-subjects sum of squares",
+     "general": [
+      "SS_{wit\\,subjs}=\\sum_{s=1}^{n}\\sum_{t=1}^{m}(x_{ts}-\\bar S_s)^2=\\sum_{s=1}^{n}SS_s"
+     ],
+     "work": [
+      "SS_1=(21-23.6667)^2+(23-23.6667)^2+(27-23.6667)^2=18.6667",
+      "SS_2=(30-32.3333)^2+(31-32.3333)^2+(36-32.3333)^2=20.6667",
+      "SS_3=(18-20.3333)^2+(20-20.3333)^2+(23-20.3333)^2=12.6667",
+      "SS_4=(26-27.3333)^2+(25-27.3333)^2+(31-27.3333)^2=20.6667",
+      "SS_5=(23-25.6667)^2+(26-25.6667)^2+(28-25.6667)^2=12.6667",
+      "SS_6=(29-30.6667)^2+(28-30.6667)^2+(35-30.6667)^2=28.6667",
+      "SS_{wit\\,subjs}=18.6667+20.6667+12.6667+20.6667+12.6667+28.6667=114"
+     ],
+     "words": "Each patient is compared only with its own mean, so differences between patients never enter this sum. It holds the treatment effect plus residual scatter."
+    },
+    {
+     "title": "Calculate the treatment sum of squares",
+     "general": [
+      "SS_{treat}=n\\sum_{t=1}^{m}(\\bar T_t-\\bar X)^2"
+     ],
+     "work": [
+      "SS_{treat}=6\\left[(24.5-26.6667)^2+(25.5-26.6667)^2+(30-26.6667)^2\\right]=103"
+     ],
+     "words": "Multiply by n because each treatment mean involves n subjects."
+    },
+    {
+     "title": "Calculate the residual sum of squares",
+     "general": [
+      "SS_{res}=SS_{wit\\,subjs}-SS_{treat}"
+     ],
+     "work": [
+      "SS_{res}=114-103=11"
+     ],
+     "words": "The residual is the within-subject variation that the treatment means do not explain."
+    },
+    {
+     "title": "Find the degrees of freedom and mean squares",
+     "general": [
+      "DF_{treat}=m-1,\\quad DF_{res}=(n-1)(m-1)",
+      "MS_{treat}=\\frac{SS_{treat}}{DF_{treat}},\\quad MS_{res}=\\frac{SS_{res}}{DF_{res}}"
+     ],
+     "work": [
+      "DF_{treat}=3-1=2,\\quad DF_{res}=(6-1)(3-1)=10",
+      "MS_{treat}=\\frac{103}{2}=51.5,\\quad MS_{res}=\\frac{11}{10}=1.1"
+     ],
+     "words": "Each sum of squares is divided by its own degrees of freedom to give a variance estimate."
+    },
+    {
+     "title": "Calculate the F statistic",
+     "general": [
+      "F=\\frac{MS_{treat}}{MS_{res}}"
+     ],
+     "work": [
+      "F=\\frac{51.5}{1.1}=46.8182"
+     ],
+     "words": "Treatment variance is compared with residual variance. Values near 1 or below are what equal treatment means produce."
+    },
+    {
+     "title": "Find the critical value",
+     "general": [
+      "F_{crit}=F_{\\alpha}(DF_{treat},DF_{res})=F_{\\alpha}(\\nu_n,\\nu_d)"
+     ],
+     "work": [
+      "F_{0.05}(2,10)=4.10",
+      "F_{0.01}(2,10)=7.56"
+     ],
+     "words": "Start with α = 0.05. Open F_table.pdf, PDF page 1. Use numerator column ν_n=2 and denominator row ν_d=10. The lightface entry 4.10 is the 0.05 cutoff and the boldface entry 7.56 is the 0.01 cutoff. Swapping the two df selects a different, wrong cell.",
+     "classTable": {
+      "path": "sources/tables/F_table.pdf",
+      "page": 1,
+      "row": "10",
+      "column": "2 (0.05 lightface)",
+      "value": 4.1,
+      "actualDf": [
+       2,
+       10
+      ],
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision",
+     "general": [
+      "F>F_{crit}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "F=46.8182>4.10,\\quad F>7.56\\Rightarrow P<0.01"
+     ],
+     "words": "F is above both the 0.05 and the 0.01 cutoffs, so reject the null hypothesis with P < 0.01."
+    }
+   ],
+   "conclusion": "F = 46.818 with 2 and 10 degrees of freedom exceeds F_0.01(2,10) = 7.56. Reject H0, P < 0.01. There is a difference in mean grip strength among 1 month, 3 months and 6 months after surgery. Holm-corrected pairwise t tests are then needed to locate the difference.",
+   "source": "Original practice example in the course style",
+   "lookup": {
+    "path": "sources/tables/F_table.pdf",
+    "page": 1,
+    "row": "10",
+    "column": "2 (0.05 lightface)",
+    "value": 4.1,
+    "actualDf": [
+     2,
+     10
+    ],
+    "approximation": false
+   },
+   "values": {
+    "n": 6,
+    "m": 3,
+    "subjectMeans": [
+     23.666666666666668,
+     32.333333333333336,
+     20.333333333333332,
+     27.333333333333332,
+     25.666666666666668,
+     30.666666666666668
+    ],
+    "treatmentMeans": [
+     24.5,
+     25.5,
+     30.0
+    ],
+    "grandMean": 26.666666666666668,
+    "subjectSS": [
+     18.666666666666668,
+     20.666666666666664,
+     12.666666666666668,
+     20.666666666666668,
+     12.666666666666668,
+     28.666666666666668
+    ],
+    "ssWithin": 114.00000000000001,
+    "ssTreat": 103.0,
+    "ssRes": 11.000000000000014,
+    "ssBetween": 296.0000000000001,
+    "ssTotal": 410.0,
+    "dfTreat": 2,
+    "dfRes": 10,
+    "msTreat": 51.5,
+    "msRes": 1.1000000000000014,
+    "F": 46.818181818181756,
+    "exactP": 8.364484276381317e-06,
+    "critical": 4.1,
+    "critical01": 7.56,
+    "reject": true,
+    "pRange": "P<0.01"
+   },
+   "module": 21,
+   "tolerance": 0.2340909090909088,
+   "answerName": "F statistic",
+   "answer": 46.818181818181756
+  },
+  {
+   "id": "p21-carpal-grip-holm",
+   "title": "Holm-corrected comparisons of grip strength times",
+   "topic": "s21holm",
+   "context": "A study was reported concerning recovery of hand function after carpal tunnel release (surgery that relieves pressure on the median nerve at the wrist). Grip strength was measured with a hand dynamometer in the same 6 patients 1 month, 3 months and 6 months after surgery. A repeated-measures analysis of variance (ANOVA) was performed on the data, resulting in the conclusion that there is a difference in grip strength among the three times (F = 46.818, P < 0.01). From the ANOVA, the treatment means were 24.5, 25.5 and 30 kilograms (kg) at 1 month, 3 months and 6 months (each mean is based on n = 6 patients), and the residual mean square was MS_res = 1.1 with DF_res = 10 residual degrees of freedom.",
+   "unit": "kg",
+   "table": {
+    "headers": [
+     "Condition",
+     "Treatment mean (kg)"
+    ],
+    "rows": [
+     [
+      "1 month",
+      24.5
+     ],
+     [
+      "3 months",
+      25.5
+     ],
+     [
+      "6 months",
+      30.0
+     ]
+    ]
+   },
+   "tasks": [
+    "Perform the appropriate form of multiple pairwise comparisons, testing every time against every other time, using the Holm correction to determine which of the three times differ from one another. Use the relevant information from the ANOVA results to do your calculations.",
+    "Present your final/overall conclusion on which times are different from one another (and which times are not different) using an overall level of significance of 0.05. Please state how you reached your conclusions."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\mu_i=\\mu_j\\ \\text{for the pair being compared}",
+    "alternative": "H_A:\\mu_i\\ne\\mu_j",
+    "nullWords": "For the pair being compared, there is no difference in mean grip strength between the two times.",
+    "alternativeWords": "For that pair, mean grip strength differs between the two times."
+   },
+   "symbols": "\\(\\bar T_i\\) (treatment mean), \\(MS_{res}\\) (residual mean square), \\(n\\) (number of subjects), \\(DF_{res}\\) (residual degrees of freedom), \\(k\\) (number of pairwise comparisons), \\(\\alpha_j\\) (Holm level for the \\(j\\)th comparison), \\(\\alpha_T\\) (overall level).",
+   "steps": [
+    {
+     "title": "State the procedure",
+     "general": [
+      "t=\\frac{\\bar T_i-\\bar T_j}{\\sqrt{2MS_{res}/n}},\\quad \\nu=DF_{res}=(n-1)(m-1)"
+     ],
+     "work": [
+      "MS_{res}=1.1,\\quad n=6,\\quad \\nu=10"
+     ],
+     "words": "The overall F test rejected, so pairwise t tests with the Holm correction locate the differences. The repeated-measures version uses MS_res in the standard error and DF_res for the t table."
+    },
+    {
+     "title": "State the hypotheses for each pair",
+     "general": [
+      "H_0:\\mu_i=\\mu_j"
+     ],
+     "work": [
+      "H_0:\\mu_i=\\mu_j\\ \\text{for the pair being compared}"
+     ],
+     "words": "For the pair being compared, there is no difference in mean grip strength between the two times. For that pair, mean grip strength differs between the two times."
+    },
+    {
+     "title": "Calculate the standard error of a difference",
+     "general": [
+      "SE=\\sqrt{\\frac{2MS_{res}}{n}}"
+     ],
+     "work": [
+      "SE=\\sqrt{\\frac{2(1.1)}{6}}=0.60553"
+     ],
+     "words": "The same standard error serves every pair because every treatment mean is based on the same n subjects."
+    },
+    {
+     "title": "Calculate every pairwise t statistic",
+     "general": [
+      "t=\\frac{\\bar T_i-\\bar T_j}{SE}"
+     ],
+     "work": [
+      "t_{\\text{1 month vs 6 months}}=\\frac{24.5-30}{0.60553}=-9.083",
+      "t_{\\text{3 months vs 6 months}}=\\frac{25.5-30}{0.60553}=-7.432",
+      "t_{\\text{1 month vs 3 months}}=\\frac{24.5-25.5}{0.60553}=-1.651"
+     ],
+     "words": "Keep the subtraction order. The sign only gives the direction, and the ranking uses |t|."
+    },
+    {
+     "title": "Order by |t| and set the Holm levels",
+     "general": [
+      "\\alpha_j=\\frac{\\alpha_T}{k-j+1},\\quad j=1,\\dots,k"
+     ],
+     "work": [
+      "k=3,\\quad \\alpha_1=\\frac{0.05}{3}=0.0167,\\quad \\alpha_2=\\frac{0.05}{2}=0.025,\\quad \\alpha_3=\\frac{0.05}{1}=0.05",
+      "|t|:\\ 9.083>7.432>1.651"
+     ],
+     "words": "The largest |t| is tested at the strictest level. Testing stops at the first comparison that is not significant."
+    },
+    {
+     "title": "Comparison 1: 1 month vs 6 months",
+     "general": [
+      "|t|>t_{\\alpha_1}(\\nu)\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "\\alpha_1=0.0167,\\quad t_{0.01}(10)=3.169\\ \\text{(stricter printed column)}",
+      "|t|=9.083>3.169"
+     ],
+     "words": "The 0.0167 column is not printed. In t_table.pdf, PDF page 1, row 10, the printed neighbors are the 0.02 column (2.764) and the 0.01 column (3.169). Use the stricter 0.01 column, 3.169, because a statistic beyond it is significant at 0.0167 as well. |t| = 9.083 > 3.169, so the 1 month and 6 months means differ (P<0.001 before adjustment).",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "10",
+      "column": "0.01",
+      "value": 3.169,
+      "actualDf": 10,
+      "approximation": true,
+      "bracket": [
+       "0.02",
+       "0.01"
+      ],
+      "bracketValues": [
+       2.764,
+       3.169
+      ]
+     }
+    },
+    {
+     "title": "Comparison 2: 3 months vs 6 months",
+     "general": [
+      "|t|>t_{\\alpha_2}(\\nu)\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "\\alpha_2=0.025,\\quad t_{0.02}(10)=2.764\\ \\text{(stricter printed column)}",
+      "|t|=7.432>2.764"
+     ],
+     "words": "The 0.025 column is not printed. In t_table.pdf, PDF page 1, row 10, the printed neighbors are the 0.05 column (2.228) and the 0.02 column (2.764). Use the stricter 0.02 column, 2.764, because a statistic beyond it is significant at 0.025 as well. |t| = 7.432 > 2.764, so the 3 months and 6 months means differ (P<0.001 before adjustment).",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "10",
+      "column": "0.02",
+      "value": 2.764,
+      "actualDf": 10,
+      "approximation": true,
+      "bracket": [
+       "0.05",
+       "0.02"
+      ],
+      "bracketValues": [
+       2.228,
+       2.764
+      ]
+     }
+    },
+    {
+     "title": "Comparison 3: 1 month vs 3 months",
+     "general": [
+      "|t|>t_{\\alpha_3}(\\nu)\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "\\alpha_3=0.05,\\quad t_{0.05}(10)=2.228",
+      "|t|=1.651<2.228"
+     ],
+     "words": "Open t_table.pdf, PDF page 1, row 10, combined two-tail 0.05 column. The entry is 2.228. |t| = 1.651 < 2.228, so the 1 month and 3 months means are not shown to differ (0.10<P<0.20 before adjustment). This is the last comparison, so Holm testing ends here.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "10",
+      "column": "0.05",
+      "value": 2.228,
+      "actualDf": 10,
+      "approximation": false
+     }
+    }
+   ],
+   "conclusion": "Two pairs differ at the Holm-corrected levels. Mean grip strength is higher at 6 months than at 1 month (t = -9.083) and higher at 6 months than at 3 months (t = -7.432). The 1 month and 3 months means are not shown to differ (|t| = 1.651 < 2.228).",
+   "source": "Original practice example in the course style",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "10",
+    "column": "0.01",
+    "value": 3.169,
+    "actualDf": 10,
+    "approximation": true,
+    "bracket": [
+     "0.02",
+     "0.01"
+    ],
+    "bracketValues": [
+     2.764,
+     3.169
+    ]
+   },
+   "values": {
+    "n": 6,
+    "dfRes": 10,
+    "msRes": 1.1,
+    "means": {
+     "1 month": 24.5,
+     "3 months": 25.5,
+     "6 months": 30.0
+    },
+    "se": 0.6055300708194984,
+    "tValues": {
+     "1 month vs 6 months": -9.082951062292475,
+     "3 months vs 6 months": -7.431505414602934,
+     "1 month vs 3 months": -1.6514456476895407
+    },
+    "holmAlphas": [
+     0.016666666666666666,
+     0.025,
+     0.05
+    ],
+    "outcomes": {
+     "1 month vs 6 months": true,
+     "3 months vs 6 months": true,
+     "1 month vs 3 months": false
+    }
+   },
+   "module": 21,
+   "tolerance": 0.04541475531146238,
+   "answerName": "t statistic (largest |t| comparison)",
+   "answer": -9.082951062292475
+  },
+  {
+   "id": "p21-hemoglobin-meters-rmanova",
+   "title": "Hemoglobin read by three point-of-care meters",
+   "topic": "s21rmAnova",
+   "context": "A study was reported concerning point-of-care hemoglobin meters (small handheld devices that read hemoglobin from one drop of blood in under a minute). Hemoglobin concentration was measured in grams per deciliter (g/dL) in 4 blood donors. A finger-prick sample from each donor was read on each of three meters (Meter A, Meter B and Meter C). The data are listed in the table below.",
+   "unit": "g/dL",
+   "table": {
+    "headers": [
+     "Donor",
+     "Meter A (g/dL)",
+     "Meter B (g/dL)",
+     "Meter C (g/dL)"
+    ],
+    "rows": [
+     [
+      "1",
+      13.8,
+      14.3,
+      13.5
+     ],
+     [
+      "2",
+      12.2,
+      12.4,
+      12.6
+     ],
+     [
+      "3",
+      15.1,
+      15.4,
+      14.7
+     ],
+     [
+      "4",
+      11.6,
+      12.3,
+      11.8
+     ]
+    ]
+   },
+   "tasks": [
+    "Is there a difference in measured hemoglobin among the three meters? Assume that any quantities of interest are Normally distributed. (Note: If a difference exists, do not identify which meters are different.)",
+    "Make sure to show your intermediate calculations. DO NOT use R."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\mu_A=\\mu_B=\\mu_C",
+    "alternative": "H_A:\\text{not all three population means are equal}",
+    "nullWords": "There is no difference in the mean hemoglobin reading of the three meters.",
+    "alternativeWords": "The mean hemoglobin reading differs for one or more of the three meters."
+   },
+   "symbols": "\\(x_{ts}\\) (observation for treatment \\(t\\), subject \\(s\\)), \\(m\\) (number of treatments), \\(n\\) (number of subjects), \\(\\bar S_s\\) (subject mean), \\(\\bar T_t\\) (treatment mean), \\(\\bar X\\) (grand mean), \\(SS\\) (sum of squares), \\(DF\\) (degrees of freedom), \\(MS\\) (mean square), \\(F\\) (F statistic).",
+   "steps": [
+    {
+     "title": "State the procedure and design",
+     "general": [
+      "x_{ts},\\quad t=1,\\dots,m,\\quad s=1,\\dots,n"
+     ],
+     "work": [
+      "m=3\\ \\text{treatments},\\quad n=4\\ \\text{subjects}"
+     ],
+     "words": "Each of the 4 donors is read on all 3 meters, so the observations are repeated measures on the same subjects. Repeated measures ANOVA is the procedure. It removes the large differences in hemoglobin between donors from the error term before comparing the meters."
+    },
+    {
+     "title": "State the hypotheses",
+     "general": [
+      "H_0:\\mu_1=\\mu_2=\\dots=\\mu_m"
+     ],
+     "work": [
+      "H_0:\\mu_A=\\mu_B=\\mu_C"
+     ],
+     "words": "There is no difference in the mean hemoglobin reading of the three meters. The mean hemoglobin reading differs for one or more of the three meters."
+    },
+    {
+     "title": "Calculate each subject mean",
+     "general": [
+      "\\bar S_s=\\frac{1}{m}\\sum_{t=1}^{m}x_{ts}"
+     ],
+     "work": [
+      "\\bar S_1=\\frac{13.8+14.3+13.5}{3}=13.8667",
+      "\\bar S_2=\\frac{12.2+12.4+12.6}{3}=12.4",
+      "\\bar S_3=\\frac{15.1+15.4+14.7}{3}=15.0667",
+      "\\bar S_4=\\frac{11.6+12.3+11.8}{3}=11.9"
+     ],
+     "words": "Average each donor across all 3 meters. Each row of the table gives one subject mean."
+    },
+    {
+     "title": "Calculate the treatment means and the grand mean",
+     "general": [
+      "\\bar T_t=\\frac{1}{n}\\sum_{s=1}^{n}x_{ts}",
+      "\\bar X=\\frac{1}{m}\\sum_{t=1}^{m}\\bar T_t"
+     ],
+     "work": [
+      "\\bar T_1=\\frac{13.8+12.2+15.1+11.6}{4}=13.175",
+      "\\bar T_2=\\frac{14.3+12.4+15.4+12.3}{4}=13.6",
+      "\\bar T_3=\\frac{13.5+12.6+14.7+11.8}{4}=13.15",
+      "\\bar X=\\frac{13.175+13.6+13.15}{3}=13.3083"
+     ],
+     "words": "Average each column over the 4 donors. The grand mean is the mean of all 12 observations, which equals the mean of the treatment means."
+    },
+    {
+     "title": "Calculate the within-subjects sum of squares",
+     "general": [
+      "SS_{wit\\,subjs}=\\sum_{s=1}^{n}\\sum_{t=1}^{m}(x_{ts}-\\bar S_s)^2=\\sum_{s=1}^{n}SS_s"
+     ],
+     "work": [
+      "SS_1=(13.8-13.8667)^2+(14.3-13.8667)^2+(13.5-13.8667)^2=0.3267",
+      "SS_2=(12.2-12.4)^2+(12.4-12.4)^2+(12.6-12.4)^2=0.08",
+      "SS_3=(15.1-15.0667)^2+(15.4-15.0667)^2+(14.7-15.0667)^2=0.2467",
+      "SS_4=(11.6-11.9)^2+(12.3-11.9)^2+(11.8-11.9)^2=0.26",
+      "SS_{wit\\,subjs}=0.3267+0.08+0.2467+0.26=0.9133"
+     ],
+     "words": "Each donor is compared only with its own mean, so differences between donors never enter this sum. It holds the treatment effect plus residual scatter."
+    },
+    {
+     "title": "Calculate the treatment sum of squares",
+     "general": [
+      "SS_{treat}=n\\sum_{t=1}^{m}(\\bar T_t-\\bar X)^2"
+     ],
+     "work": [
+      "SS_{treat}=4\\left[(13.175-13.3083)^2+(13.6-13.3083)^2+(13.15-13.3083)^2\\right]=0.5117"
+     ],
+     "words": "Multiply by n because each treatment mean involves n subjects."
+    },
+    {
+     "title": "Calculate the residual sum of squares",
+     "general": [
+      "SS_{res}=SS_{wit\\,subjs}-SS_{treat}"
+     ],
+     "work": [
+      "SS_{res}=0.9133-0.5117=0.4017"
+     ],
+     "words": "The residual is the within-subject variation that the treatment means do not explain."
+    },
+    {
+     "title": "Find the degrees of freedom and mean squares",
+     "general": [
+      "DF_{treat}=m-1,\\quad DF_{res}=(n-1)(m-1)",
+      "MS_{treat}=\\frac{SS_{treat}}{DF_{treat}},\\quad MS_{res}=\\frac{SS_{res}}{DF_{res}}"
+     ],
+     "work": [
+      "DF_{treat}=3-1=2,\\quad DF_{res}=(4-1)(3-1)=6",
+      "MS_{treat}=\\frac{0.5117}{2}=0.255833,\\quad MS_{res}=\\frac{0.4017}{6}=0.066944"
+     ],
+     "words": "Each sum of squares is divided by its own degrees of freedom to give a variance estimate."
+    },
+    {
+     "title": "Calculate the F statistic",
+     "general": [
+      "F=\\frac{MS_{treat}}{MS_{res}}"
+     ],
+     "work": [
+      "F=\\frac{0.255833}{0.066944}=3.8216"
+     ],
+     "words": "Treatment variance is compared with residual variance. Values near 1 or below are what equal treatment means produce."
+    },
+    {
+     "title": "Find the critical value",
+     "general": [
+      "F_{crit}=F_{\\alpha}(DF_{treat},DF_{res})=F_{\\alpha}(\\nu_n,\\nu_d)"
+     ],
+     "work": [
+      "F_{0.05}(2,6)=5.14",
+      "F_{0.01}(2,6)=10.92"
+     ],
+     "words": "Start with α = 0.05. Open F_table.pdf, PDF page 1. Use numerator column ν_n=2 and denominator row ν_d=6. The lightface entry 5.14 is the 0.05 cutoff and the boldface entry 10.92 is the 0.01 cutoff. Swapping the two df selects a different, wrong cell.",
+     "classTable": {
+      "path": "sources/tables/F_table.pdf",
+      "page": 1,
+      "row": "6",
+      "column": "2 (0.05 lightface)",
+      "value": 5.14,
+      "actualDf": [
+       2,
+       6
+      ],
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision",
+     "general": [
+      "F>F_{crit}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "F=3.8216<5.14"
+     ],
+     "words": "F is below the 0.05 cutoff, so do not reject the null hypothesis (P > 0.05)."
+    }
+   ],
+   "conclusion": "F = 3.822 with 2 and 6 degrees of freedom is below F_0.05(2,6) = 5.14. Do not reject H0 (P > 0.05). There is no evidence of a difference in mean hemoglobin reading among the three meters. No pairwise comparisons are needed because the overall test does not reject.",
+   "source": "Original practice example in the course style",
+   "lookup": {
+    "path": "sources/tables/F_table.pdf",
+    "page": 1,
+    "row": "6",
+    "column": "2 (0.05 lightface)",
+    "value": 5.14,
+    "actualDf": [
+     2,
+     6
+    ],
+    "approximation": false
+   },
+   "values": {
+    "n": 4,
+    "m": 3,
+    "subjectMeans": [
+     13.866666666666667,
+     12.4,
+     15.066666666666668,
+     11.9
+    ],
+    "treatmentMeans": [
+     13.175,
+     13.600000000000001,
+     13.149999999999999
+    ],
+    "grandMean": 13.308333333333335,
+    "subjectSS": [
+     0.3266666666666672,
+     0.08000000000000014,
+     0.2466666666666674,
+     0.2600000000000007
+    ],
+    "ssWithin": 0.9133333333333354,
+    "ssTreat": 0.511666666666671,
+    "ssRes": 0.4016666666666644,
+    "ssBetween": 18.635833333333345,
+    "ssTotal": 19.549166666666665,
+    "dfTreat": 2,
+    "dfRes": 6,
+    "msTreat": 0.2558333333333355,
+    "msRes": 0.06694444444444407,
+    "F": 3.821576763485531,
+    "exactP": 0.08505688080360606,
+    "critical": 5.14,
+    "critical01": 10.92,
+    "reject": false,
+    "pRange": "P>0.05"
+   },
+   "module": 21,
+   "tolerance": 0.019107883817427656,
+   "answerName": "F statistic",
+   "answer": 3.821576763485531
+  },
+  {
+   "id": "p21-iron-anemia-mcnemar",
+   "title": "Anemia before and after iron supplementation",
+   "topic": "s21mcnemar",
+   "context": "Researchers interested in iron supplements did a study to evaluate anemia (a hemoglobin concentration below 12 grams per deciliter, g/dL) in young women. Each of 34 women was tested for anemia before and again after 3 months of taking an oral iron tablet every day. Of the 21 women with anemia before supplementation, 8 still had anemia after and 13 did not. Of the 13 women without anemia before, 2 had anemia after and 11 did not.",
+   "unit": "women",
+   "table": {
+    "headers": [
+     "Before (rows) by After (columns)",
+     "After: anemia",
+     "After: no anemia"
+    ],
+    "rows": [
+     [
+      "Before: anemia",
+      8,
+      13
+     ],
+     [
+      "Before: no anemia",
+      2,
+      11
+     ]
+    ]
+   },
+   "tasks": [
+    "Based on the recorded data, is there evidence that the proportion of women with anemia is different before and after iron supplementation?",
+    "Provide your result in a single complete sentence that would convey your conclusion in a way that could be understood by a non-expert in statistics or medicine (e.g., a typical reader of a local newspaper)."
+   ],
+   "hypotheses": {
+    "null": "H_0:P(\\text{anemia}\\to\\text{none})=P(\\text{none}\\to\\text{anemia})",
+    "alternative": "H_A:P(\\text{anemia}\\to\\text{none})\\ne P(\\text{none}\\to\\text{anemia})",
+    "nullWords": "Iron supplementation has no effect on anemia status, so a woman whose status changes is equally likely to change from anemia to no anemia as from no anemia to anemia.",
+    "alternativeWords": "The two directions of change are not equally likely, so the proportion of women with anemia differs before and after supplementation."
+   },
+   "symbols": "\\(a,d\\) (subjects with the same result both times), \\(b,c\\) (subjects whose result changes), \\(E\\) (expected number in each change cell), \\(\\chi^2\\) (McNemar chi-square), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "State the procedure",
+     "general": [
+      "\\begin{array}{c|cc}&\\text{O1}&\\text{O2}\\\\\\hline \\text{O1}&a&b\\\\ \\text{O2}&c&d\\end{array}"
+     ],
+     "work": [
+      "a=8,\\ b=13,\\ c=2,\\ d=11"
+     ],
+     "words": "Each woman is classified twice, before and after supplementation, so the two classifications are paired nominal data. This design is analogous to the paired t test, and McNemar's test is the procedure."
+    },
+    {
+     "title": "State the hypotheses",
+     "general": [
+      "H_0:P(\\text{O1}\\to\\text{O2})=P(\\text{O2}\\to\\text{O1})"
+     ],
+     "work": [
+      "H_0:P(\\text{anemia}\\to\\text{none})=P(\\text{none}\\to\\text{anemia})"
+     ],
+     "words": "Iron supplementation has no effect on anemia status, so a woman whose status changes is equally likely to change from anemia to no anemia as from no anemia to anemia. The two directions of change are not equally likely, so the proportion of women with anemia differs before and after supplementation."
+    },
+    {
+     "title": "Show why the independent chi-square is wrong here",
+     "general": [
+      "E_{ij}=\\frac{R_iC_j}{N},\\quad \\chi^2=\\sum_i\\sum_j\\frac{(|O_{ij}-E_{ij}|-\\frac12)^2}{E_{ij}}"
+     ],
+     "work": [
+      "E_{11}=\\frac{21(10)}{34}=6.1765,\\ E_{12}=14.8235,\\ E_{21}=3.8235,\\ E_{22}=9.1765",
+      "\\chi^2=1.051<\\chi^2_{0.05}(1)=3.841"
+     ],
+     "words": "Treating the before and after results as independent samples gives chi-square = 1.051, which would wrongly suggest no change. The rows and columns describe the same women, so they are not independent, and this test is not valid for the design."
+    },
+    {
+     "title": "Identify the subjects who change",
+     "general": [
+      "b=\\text{O1}\\to\\text{O2},\\quad c=\\text{O2}\\to\\text{O1}"
+     ],
+     "work": [
+      "b=13,\\quad c=2,\\quad b+c=15"
+     ],
+     "words": "Only discordant subjects carry information about a change. Here b counts women with anemia before and none after and c counts women without anemia before and with anemia after. The concordant cells a = 8 and d = 11 do not enter the statistic."
+    },
+    {
+     "title": "Calculate the expected number in each change cell",
+     "general": [
+      "E=\\frac{b+c}{2}"
+     ],
+     "work": [
+      "E=\\frac{13+2}{2}=7.5"
+     ],
+     "words": "If the null hypothesis is true, the changes split evenly in the two directions."
+    },
+    {
+     "title": "Calculate the McNemar chi-square with Yates correction",
+     "general": [
+      "\\chi^2=\\frac{(|b-E|-\\frac12)^2}{E}+\\frac{(|c-E|-\\frac12)^2}{E}"
+     ],
+     "work": [
+      "\\chi^2=\\frac{(|13-7.5|-\\frac12)^2}{7.5}+\\frac{(|2-7.5|-\\frac12)^2}{7.5}=6.6667"
+     ],
+     "words": "Subtract one half from each absolute difference before squaring because the table is 2 x 2 (Yates correction)."
+    },
+    {
+     "title": "Find the critical value",
+     "general": [
+      "\\nu=1,\\quad \\chi^2_{crit}=\\chi^2_{\\alpha}(1)"
+     ],
+     "work": [
+      "\\chi^2_{0.05}(1)=3.841"
+     ],
+     "words": "Start with α = 0.05. Open Chi_Squared_Table2.pdf, PDF page 1. Row df = 1, column χ².050 gives 3.841. The same row gives 2.706 in the .100 column, 5.024 in the .025 column, 6.635 in the .010 column and 7.879 in the .005 column for a P range.",
+     "classTable": {
+      "path": "sources/tables/Chi_Squared_Table2.pdf",
+      "page": 1,
+      "row": "1",
+      "column": "0.050",
+      "value": 3.841,
+      "actualDf": 1,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision",
+     "general": [
+      "\\chi^2>\\chi^2_{crit}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "6.635<\\chi^2=6.6667<7.879,\\quad 0.005<P<0.01"
+     ],
+     "words": "Reject the null hypothesis. The statistic lies between two printed cutoffs, so 0.005 < P < 0.01."
+    }
+   ],
+   "conclusion": "McNemar chi-square = 6.6667 with 1 df exceeds chi-square_0.01(1) = 6.635 but not chi-square_0.005(1) = 7.879. Reject H0, 0.005 < P < 0.01. There is a difference in the proportion of women with anemia before and after iron supplementation. Of the 15 women who changed, 13 went from anemia to no anemia. In plain words, fewer of the young women in this study were anemic after three months of daily iron tablets than before.",
+   "source": "Original practice example in the course style",
+   "lookup": {
+    "path": "sources/tables/Chi_Squared_Table2.pdf",
+    "page": 1,
+    "row": "1",
+    "column": "0.050",
+    "value": 3.841,
+    "actualDf": 1,
+    "approximation": false
+   },
+   "values": {
+    "a": 8,
+    "b": 13,
+    "c": 2,
+    "d": 11,
+    "N": 34,
+    "E": 7.5,
+    "chi2": 6.666666666666667,
+    "df": 1,
+    "critical": 3.841,
+    "reject": true,
+    "pRange": "0.005<P<0.01",
+    "exactP": 0.009823274507519249,
+    "independentChi2": 1.050824175824176,
+    "independentExpected": [
+     [
+      6.176470588235294,
+      14.823529411764707
+     ],
+     [
+      3.823529411764706,
+      9.176470588235293
+     ]
+    ]
+   },
+   "module": 21,
+   "tolerance": 0.03333333333333333,
+   "answerName": "Chi-square",
+   "answer": 6.666666666666667
+  },
+  {
+   "id": "p21-low-salt-hypertension-mcnemar",
+   "title": "Hypertension before and after a low-sodium diet",
+   "topic": "s21mcnemar",
+   "context": "In a study looking at dietary salt and blood pressure, 26 adults were classified as hypertensive (systolic blood pressure of 140 millimeters of mercury, mmHg, or higher) or not hypertensive. Each adult was evaluated before and again after 8 weeks of a low-sodium diet. Of the 16 adults who were hypertensive before the diet, 9 were still hypertensive after and 7 were not. Of the 10 adults who were not hypertensive before, 3 were hypertensive after and 7 were not.",
+   "unit": "adults",
+   "table": {
+    "headers": [
+     "Before (rows) by After (columns)",
+     "After: hypertensive",
+     "After: not hypertensive"
+    ],
+    "rows": [
+     [
+      "Before: hypertensive",
+      9,
+      7
+     ],
+     [
+      "Before: not hypertensive",
+      3,
+      7
+     ]
+    ]
+   },
+   "tasks": [
+    "Based on the recorded data, is there evidence that the proportion of adults with hypertension is different before and after the low-sodium diet?",
+    "Provide your result in a single complete sentence that would convey your conclusion in a way that could be understood by a non-expert in statistics or medicine (e.g., a typical reader of a local newspaper)."
+   ],
+   "hypotheses": {
+    "null": "H_0:P(\\text{hyper}\\to\\text{not})=P(\\text{not}\\to\\text{hyper})",
+    "alternative": "H_A:P(\\text{hyper}\\to\\text{not})\\ne P(\\text{not}\\to\\text{hyper})",
+    "nullWords": "The diet has no effect on hypertension status, so an adult whose status changes is equally likely to change from hypertensive to not hypertensive as the other way.",
+    "alternativeWords": "The two directions of change are not equally likely, so the proportion of adults with hypertension differs before and after the diet."
+   },
+   "symbols": "\\(a,d\\) (subjects with the same result both times), \\(b,c\\) (subjects whose result changes), \\(E\\) (expected number in each change cell), \\(\\chi^2\\) (McNemar chi-square), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "State the procedure",
+     "general": [
+      "\\begin{array}{c|cc}&\\text{O1}&\\text{O2}\\\\\\hline \\text{O1}&a&b\\\\ \\text{O2}&c&d\\end{array}"
+     ],
+     "work": [
+      "a=9,\\ b=7,\\ c=3,\\ d=7"
+     ],
+     "words": "Each adult is classified twice, before and after the diet, so the two classifications are paired nominal data. This design is analogous to the paired t test, and McNemar's test is the procedure."
+    },
+    {
+     "title": "State the hypotheses",
+     "general": [
+      "H_0:P(\\text{O1}\\to\\text{O2})=P(\\text{O2}\\to\\text{O1})"
+     ],
+     "work": [
+      "H_0:P(\\text{hyper}\\to\\text{not})=P(\\text{not}\\to\\text{hyper})"
+     ],
+     "words": "The diet has no effect on hypertension status, so an adult whose status changes is equally likely to change from hypertensive to not hypertensive as the other way. The two directions of change are not equally likely, so the proportion of adults with hypertension differs before and after the diet."
+    },
+    {
+     "title": "Show why the independent chi-square is wrong here",
+     "general": [
+      "E_{ij}=\\frac{R_iC_j}{N},\\quad \\chi^2=\\sum_i\\sum_j\\frac{(|O_{ij}-E_{ij}|-\\frac12)^2}{E_{ij}}"
+     ],
+     "work": [
+      "E_{11}=\\frac{16(12)}{26}=7.3846,\\ E_{12}=8.6154,\\ E_{21}=4.6154,\\ E_{22}=5.3846",
+      "\\chi^2=0.813<\\chi^2_{0.05}(1)=3.841"
+     ],
+     "words": "Treating the before and after results as independent samples gives chi-square = 0.813. This value answers a different question (whether the after result is related to the before result) and it is not used. The rows and columns describe the same adults, so they are not independent, and this test is not valid for the design."
+    },
+    {
+     "title": "Identify the subjects who change",
+     "general": [
+      "b=\\text{O1}\\to\\text{O2},\\quad c=\\text{O2}\\to\\text{O1}"
+     ],
+     "work": [
+      "b=7,\\quad c=3,\\quad b+c=10"
+     ],
+     "words": "Only discordant subjects carry information about a change. Here b counts adults hypertensive before and not after and c counts adults not hypertensive before and hypertensive after. The concordant cells a = 9 and d = 7 do not enter the statistic."
+    },
+    {
+     "title": "Calculate the expected number in each change cell",
+     "general": [
+      "E=\\frac{b+c}{2}"
+     ],
+     "work": [
+      "E=\\frac{7+3}{2}=5"
+     ],
+     "words": "If the null hypothesis is true, the changes split evenly in the two directions."
+    },
+    {
+     "title": "Calculate the McNemar chi-square with Yates correction",
+     "general": [
+      "\\chi^2=\\frac{(|b-E|-\\frac12)^2}{E}+\\frac{(|c-E|-\\frac12)^2}{E}"
+     ],
+     "work": [
+      "\\chi^2=\\frac{(|7-5|-\\frac12)^2}{5}+\\frac{(|3-5|-\\frac12)^2}{5}=0.9"
+     ],
+     "words": "Subtract one half from each absolute difference before squaring because the table is 2 x 2 (Yates correction)."
+    },
+    {
+     "title": "Find the critical value",
+     "general": [
+      "\\nu=1,\\quad \\chi^2_{crit}=\\chi^2_{\\alpha}(1)"
+     ],
+     "work": [
+      "\\chi^2_{0.05}(1)=3.841"
+     ],
+     "words": "Start with α = 0.05. Open Chi_Squared_Table2.pdf, PDF page 1. Row df = 1, column χ².050 gives 3.841. The same row gives 2.706 in the .100 column, 5.024 in the .025 column, 6.635 in the .010 column and 7.879 in the .005 column for a P range.",
+     "classTable": {
+      "path": "sources/tables/Chi_Squared_Table2.pdf",
+      "page": 1,
+      "row": "1",
+      "column": "0.050",
+      "value": 3.841,
+      "actualDf": 1,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision",
+     "general": [
+      "\\chi^2>\\chi^2_{crit}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "\\chi^2=0.9<2.706<3.841"
+     ],
+     "words": "Do not reject the null hypothesis because the statistic is below the 0.05 cutoff and even below the .100 cutoff (P > 0.10)."
+    }
+   ],
+   "conclusion": "McNemar chi-square = 0.9 with 1 df is below chi-square_0.05(1) = 3.841 and also below chi-square_0.10(1) = 2.706. Do not reject H0 (P > 0.10). There is no evidence of a difference in the proportion of adults with hypertension before and after the low-sodium diet, even though 7 adults improved and 3 got worse. In plain words, this small study could not show that the diet changed how many adults had high blood pressure.",
+   "source": "Original practice example in the course style",
+   "lookup": {
+    "path": "sources/tables/Chi_Squared_Table2.pdf",
+    "page": 1,
+    "row": "1",
+    "column": "0.050",
+    "value": 3.841,
+    "actualDf": 1,
+    "approximation": false
+   },
+   "values": {
+    "a": 9,
+    "b": 7,
+    "c": 3,
+    "d": 7,
+    "N": 26,
+    "E": 5.0,
+    "chi2": 0.9,
+    "df": 1,
+    "critical": 3.841,
+    "reject": false,
+    "pRange": "P>0.10",
+    "exactP": 0.34278171114790873,
+    "independentChi2": 0.8134672619047614,
+    "independentExpected": [
+     [
+      7.384615384615385,
+      8.615384615384615
+     ],
+     [
+      4.615384615384615,
+      5.384615384615385
+     ]
+    ]
+   },
+   "module": 21,
+   "tolerance": 0.0045000000000000005,
+   "answerName": "Chi-square",
+   "answer": 0.9
+  },
+  {
+   "id": "p21-cardiac-rehab-ischemia-mcnemar",
+   "title": "Exercise-test ischemia before and after cardiac rehabilitation",
+   "topic": "s21mcnemar",
+   "context": "A study was reported concerning cardiac rehabilitation (a supervised exercise and education program for people with heart disease). Each of 38 patients had a treadmill exercise test before and again after a 12-week program. Each test was classified as showing ischemia (reduced blood flow to the heart muscle, seen as a drop of the ST segment on the electrocardiogram, ECG) or not. Of the 21 patients with ischemia before the program, 6 still showed ischemia after and 15 did not. Of the 17 patients without ischemia before, 4 showed ischemia after and 13 did not.",
+   "unit": "patients",
+   "table": {
+    "headers": [
+     "Before (rows) by After (columns)",
+     "After: ischemia",
+     "After: no ischemia"
+    ],
+    "rows": [
+     [
+      "Before: ischemia",
+      6,
+      15
+     ],
+     [
+      "Before: no ischemia",
+      4,
+      13
+     ]
+    ]
+   },
+   "tasks": [
+    "Based on the recorded data, is there evidence that the proportion of patients with exercise-test ischemia is different before and after the program?",
+    "Provide your result in a single complete sentence that would convey your conclusion in a way that could be understood by a non-expert in statistics or medicine (e.g., a typical reader of a local newspaper)."
+   ],
+   "hypotheses": {
+    "null": "H_0:P(\\text{isch}\\to\\text{none})=P(\\text{none}\\to\\text{isch})",
+    "alternative": "H_A:P(\\text{isch}\\to\\text{none})\\ne P(\\text{none}\\to\\text{isch})",
+    "nullWords": "The program has no effect on exercise-test ischemia, so a patient whose result changes is equally likely to change from ischemia to no ischemia as the other way.",
+    "alternativeWords": "The two directions of change are not equally likely, so the proportion of patients with ischemia differs before and after the program."
+   },
+   "symbols": "\\(a,d\\) (subjects with the same result both times), \\(b,c\\) (subjects whose result changes), \\(E\\) (expected number in each change cell), \\(\\chi^2\\) (McNemar chi-square), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "State the procedure",
+     "general": [
+      "\\begin{array}{c|cc}&\\text{O1}&\\text{O2}\\\\\\hline \\text{O1}&a&b\\\\ \\text{O2}&c&d\\end{array}"
+     ],
+     "work": [
+      "a=6,\\ b=15,\\ c=4,\\ d=13"
+     ],
+     "words": "Each patient is classified twice, before and after the program, so the two classifications are paired nominal data. This design is analogous to the paired t test, and McNemar's test is the procedure."
+    },
+    {
+     "title": "State the hypotheses",
+     "general": [
+      "H_0:P(\\text{O1}\\to\\text{O2})=P(\\text{O2}\\to\\text{O1})"
+     ],
+     "work": [
+      "H_0:P(\\text{isch}\\to\\text{none})=P(\\text{none}\\to\\text{isch})"
+     ],
+     "words": "The program has no effect on exercise-test ischemia, so a patient whose result changes is equally likely to change from ischemia to no ischemia as the other way. The two directions of change are not equally likely, so the proportion of patients with ischemia differs before and after the program."
+    },
+    {
+     "title": "Show why the independent chi-square is wrong here",
+     "general": [
+      "E_{ij}=\\frac{R_iC_j}{N},\\quad \\chi^2=\\sum_i\\sum_j\\frac{(|O_{ij}-E_{ij}|-\\frac12)^2}{E_{ij}}"
+     ],
+     "work": [
+      "E_{11}=\\frac{21(10)}{38}=5.5263,\\ E_{12}=15.4737,\\ E_{21}=4.4737,\\ E_{22}=12.5263",
+      "\\chi^2=0.0004<\\chi^2_{0.05}(1)=3.841"
+     ],
+     "words": "Treating the before and after results as independent samples gives chi-square = 0.0004, which would wrongly suggest no change. The rows and columns describe the same patients, so they are not independent, and this test is not valid for the design."
+    },
+    {
+     "title": "Identify the subjects who change",
+     "general": [
+      "b=\\text{O1}\\to\\text{O2},\\quad c=\\text{O2}\\to\\text{O1}"
+     ],
+     "work": [
+      "b=15,\\quad c=4,\\quad b+c=19"
+     ],
+     "words": "Only discordant subjects carry information about a change. Here b counts patients with ischemia before and none after and c counts patients without ischemia before and with ischemia after. The concordant cells a = 6 and d = 13 do not enter the statistic."
+    },
+    {
+     "title": "Calculate the expected number in each change cell",
+     "general": [
+      "E=\\frac{b+c}{2}"
+     ],
+     "work": [
+      "E=\\frac{15+4}{2}=9.5"
+     ],
+     "words": "If the null hypothesis is true, the changes split evenly in the two directions."
+    },
+    {
+     "title": "Calculate the McNemar chi-square with Yates correction",
+     "general": [
+      "\\chi^2=\\frac{(|b-E|-\\frac12)^2}{E}+\\frac{(|c-E|-\\frac12)^2}{E}"
+     ],
+     "work": [
+      "\\chi^2=\\frac{(|15-9.5|-\\frac12)^2}{9.5}+\\frac{(|4-9.5|-\\frac12)^2}{9.5}=5.2632"
+     ],
+     "words": "Subtract one half from each absolute difference before squaring because the table is 2 x 2 (Yates correction)."
+    },
+    {
+     "title": "Find the critical value",
+     "general": [
+      "\\nu=1,\\quad \\chi^2_{crit}=\\chi^2_{\\alpha}(1)"
+     ],
+     "work": [
+      "\\chi^2_{0.05}(1)=3.841"
+     ],
+     "words": "Start with α = 0.05. Open Chi_Squared_Table2.pdf, PDF page 1. Row df = 1, column χ².050 gives 3.841. The same row gives 2.706 in the .100 column, 5.024 in the .025 column, 6.635 in the .010 column and 7.879 in the .005 column for a P range.",
+     "classTable": {
+      "path": "sources/tables/Chi_Squared_Table2.pdf",
+      "page": 1,
+      "row": "1",
+      "column": "0.050",
+      "value": 3.841,
+      "actualDf": 1,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision",
+     "general": [
+      "\\chi^2>\\chi^2_{crit}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "5.024<\\chi^2=5.2632<6.635,\\quad 0.01<P<0.025"
+     ],
+     "words": "Reject the null hypothesis. The statistic lies between two printed cutoffs, so 0.01 < P < 0.025."
+    }
+   ],
+   "conclusion": "McNemar chi-square = 5.2632 with 1 df exceeds chi-square_0.025(1) = 5.024 but not chi-square_0.01(1) = 6.635. Reject H0, 0.01 < P < 0.025. There is a difference in the proportion of patients with exercise-test ischemia before and after the program. Of the 19 patients who changed, 15 went from ischemia to no ischemia. In plain words, fewer patients in this study showed signs of poor blood flow to the heart on the treadmill test after the program than before it.",
+   "source": "Original practice example in the course style",
+   "lookup": {
+    "path": "sources/tables/Chi_Squared_Table2.pdf",
+    "page": 1,
+    "row": "1",
+    "column": "0.050",
+    "value": 3.841,
+    "actualDf": 1,
+    "approximation": false
+   },
+   "values": {
+    "a": 6,
+    "b": 15,
+    "c": 4,
+    "d": 13,
+    "N": 38,
+    "E": 9.5,
+    "chi2": 5.2631578947368425,
+    "df": 1,
+    "critical": 3.841,
+    "reject": true,
+    "pRange": "0.01<P<0.025",
+    "exactP": 0.02178146279111951,
+    "independentChi2": 0.00038015206082433247,
+    "independentExpected": [
+     [
+      5.526315789473684,
+      15.473684210526315
+     ],
+     [
+      4.473684210526316,
+      12.526315789473685
+     ]
+    ]
+   },
+   "module": 21,
+   "tolerance": 0.026315789473684213,
+   "answerName": "Chi-square",
+   "answer": 5.2631578947368425
+  },
+  {
+   "id": "p21-troponin-poc-diagnostic",
+   "title": "Heart muscle injury by a point-of-care troponin test and a laboratory assay",
+   "topic": "s21diagnostic",
+   "context": "A study was reported concerning a point-of-care troponin test (a bedside blood test for heart muscle injury that gives a result in about 15 minutes). Each of 40 patients with chest pain in an emergency department was classified as positive or negative for heart muscle injury by the point-of-care test and by a high-sensitivity troponin assay run in the central laboratory. Of the 10 patients called positive by the point-of-care test, 9 were positive and 1 was negative by the laboratory assay. Of the 30 patients called negative by the point-of-care test, 13 were positive and 17 were negative by the laboratory assay.",
+   "unit": "patients",
+   "table": {
+    "headers": [
+     "Point-of-care test (rows) by Laboratory assay (columns)",
+     "Laboratory: positive",
+     "Laboratory: negative"
+    ],
+    "rows": [
+     [
+      "Point-of-care: positive",
+      9,
+      1
+     ],
+     [
+      "Point-of-care: negative",
+      13,
+      17
+     ]
+    ]
+   },
+   "tasks": [
+    "Is there a difference between the point-of-care test and the laboratory assay in the proportion of patients classified as positive? Use a chi-square test.",
+    "Please state how you reached your conclusions."
+   ],
+   "hypotheses": {
+    "null": "H_0:P(\\text{POC}+,\\ \\text{lab}-)=P(\\text{POC}-,\\ \\text{lab}+)",
+    "alternative": "H_A:P(\\text{POC}+,\\ \\text{lab}-)\\ne P(\\text{POC}-,\\ \\text{lab}+)",
+    "nullWords": "The point-of-care test and the laboratory assay have the same probability of calling a patient positive, so patients on whom they disagree are equally likely to be positive by the point-of-care test only as by the laboratory assay only.",
+    "alternativeWords": "The two methods differ in how often they call a patient positive for heart muscle injury."
+   },
+   "symbols": "\\(a,d\\) (subjects with the same result both times), \\(b,c\\) (subjects whose result changes), \\(E\\) (expected number in each change cell), \\(\\chi^2\\) (McNemar chi-square), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "State the procedure",
+     "general": [
+      "\\begin{array}{c|cc}&\\text{O1}&\\text{O2}\\\\\\hline \\text{O1}&a&b\\\\ \\text{O2}&c&d\\end{array}"
+     ],
+     "work": [
+      "a=9,\\ b=1,\\ c=13,\\ d=17"
+     ],
+     "words": "Both methods classify the same 40 patients, so the results are paired nominal data. McNemar's test compares two diagnostic procedures applied to the same people."
+    },
+    {
+     "title": "State the hypotheses",
+     "general": [
+      "H_0:P(\\text{O1}\\to\\text{O2})=P(\\text{O2}\\to\\text{O1})"
+     ],
+     "work": [
+      "H_0:P(\\text{POC}+,\\ \\text{lab}-)=P(\\text{POC}-,\\ \\text{lab}+)"
+     ],
+     "words": "The point-of-care test and the laboratory assay have the same probability of calling a patient positive, so patients on whom they disagree are equally likely to be positive by the point-of-care test only as by the laboratory assay only. The two methods differ in how often they call a patient positive for heart muscle injury."
+    },
+    {
+     "title": "Identify the subjects who change",
+     "general": [
+      "b=\\text{O1}\\to\\text{O2},\\quad c=\\text{O2}\\to\\text{O1}"
+     ],
+     "work": [
+      "b=1,\\quad c=13,\\quad b+c=14"
+     ],
+     "words": "Only discordant subjects carry information about a difference. Here b counts patients called positive by the point-of-care test but negative by the laboratory assay and c counts patients called negative by the point-of-care test but positive by the laboratory assay. The concordant cells a = 9 and d = 17 do not enter the statistic."
+    },
+    {
+     "title": "Calculate the expected number in each change cell",
+     "general": [
+      "E=\\frac{b+c}{2}"
+     ],
+     "work": [
+      "E=\\frac{1+13}{2}=7"
+     ],
+     "words": "If the null hypothesis is true, the changes split evenly in the two directions."
+    },
+    {
+     "title": "Calculate the McNemar chi-square with Yates correction",
+     "general": [
+      "\\chi^2=\\frac{(|b-E|-\\frac12)^2}{E}+\\frac{(|c-E|-\\frac12)^2}{E}"
+     ],
+     "work": [
+      "\\chi^2=\\frac{(|1-7|-\\frac12)^2}{7}+\\frac{(|13-7|-\\frac12)^2}{7}=8.6429"
+     ],
+     "words": "Subtract one half from each absolute difference before squaring because the table is 2 x 2 (Yates correction)."
+    },
+    {
+     "title": "Find the critical value",
+     "general": [
+      "\\nu=1,\\quad \\chi^2_{crit}=\\chi^2_{\\alpha}(1)"
+     ],
+     "work": [
+      "\\chi^2_{0.05}(1)=3.841"
+     ],
+     "words": "Start with α = 0.05. Open Chi_Squared_Table2.pdf, PDF page 1. Row df = 1, column χ².050 gives 3.841. The same row gives 2.706 in the .100 column, 5.024 in the .025 column, 6.635 in the .010 column and 7.879 in the .005 column for a P range.",
+     "classTable": {
+      "path": "sources/tables/Chi_Squared_Table2.pdf",
+      "page": 1,
+      "row": "1",
+      "column": "0.050",
+      "value": 3.841,
+      "actualDf": 1,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision",
+     "general": [
+      "\\chi^2>\\chi^2_{crit}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "\\chi^2=8.6429>7.879,\\quad P<0.005"
+     ],
+     "words": "Reject the null hypothesis. The statistic is above even the .005 cutoff, so P < 0.005."
+    }
+   ],
+   "conclusion": "McNemar chi-square = 8.6429 with 1 df exceeds chi-square_0.005(1) = 7.879. Reject H0, P < 0.005. There is a difference between the two methods. The laboratory assay calls patients positive more often than the point-of-care test does (13 patients positive by the laboratory assay only against 1 positive by the point-of-care test only).",
+   "source": "Original practice example in the course style",
+   "lookup": {
+    "path": "sources/tables/Chi_Squared_Table2.pdf",
+    "page": 1,
+    "row": "1",
+    "column": "0.050",
+    "value": 3.841,
+    "actualDf": 1,
+    "approximation": false
+   },
+   "values": {
+    "a": 9,
+    "b": 1,
+    "c": 13,
+    "d": 17,
+    "N": 40,
+    "E": 7.0,
+    "chi2": 8.642857142857142,
+    "df": 1,
+    "critical": 3.841,
+    "reject": true,
+    "pRange": "P<0.005",
+    "exactP": 0.003283460986069039
+   },
+   "module": 21,
+   "tolerance": 0.04321428571428571,
+   "answerName": "Chi-square",
+   "answer": 8.642857142857142
+  },
+  {
+   "id": "p21-smartwatch-af-diagnostic",
+   "title": "Atrial fibrillation by a smartwatch and by a cardiologist",
+   "topic": "s21diagnostic",
+   "context": "In a study looking at wearable heart rhythm monitoring, 30 adults wore a smartwatch with a single-lead electrocardiogram (ECG) sensor and a Holter monitor (a portable recorder of the full ECG) for 24 hours. Each adult was classified as positive or negative for atrial fibrillation (AF, an irregular and often fast heart rhythm) by the smartwatch algorithm and by a cardiologist reading the Holter recording. Of the 16 adults called positive by the smartwatch, 6 were positive and 10 were negative by the cardiologist. Of the 14 adults called negative by the smartwatch, 3 were positive and 11 were negative by the cardiologist.",
+   "unit": "adults",
+   "table": {
+    "headers": [
+     "Smartwatch (rows) by Cardiologist (columns)",
+     "Cardiologist: positive",
+     "Cardiologist: negative"
+    ],
+    "rows": [
+     [
+      "Smartwatch: positive",
+      6,
+      10
+     ],
+     [
+      "Smartwatch: negative",
+      3,
+      11
+     ]
+    ]
+   },
+   "tasks": [
+    "Is there a difference between the smartwatch and the cardiologist in the proportion of adults classified as having AF? Use a chi-square test.",
+    "Please state how you reached your conclusions."
+   ],
+   "hypotheses": {
+    "null": "H_0:P(\\text{watch}+,\\ \\text{cardiologist}-)=P(\\text{watch}-,\\ \\text{cardiologist}+)",
+    "alternative": "H_A:P(\\text{watch}+,\\ \\text{cardiologist}-)\\ne P(\\text{watch}-,\\ \\text{cardiologist}+)",
+    "nullWords": "The smartwatch and the cardiologist have the same probability of classifying an adult as having AF, so adults on whom they disagree are equally likely to be positive by the smartwatch only as by the cardiologist only.",
+    "alternativeWords": "The two methods differ in how often they classify an adult as having AF."
+   },
+   "symbols": "\\(a,d\\) (subjects with the same result both times), \\(b,c\\) (subjects whose result changes), \\(E\\) (expected number in each change cell), \\(\\chi^2\\) (McNemar chi-square), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "State the procedure",
+     "general": [
+      "\\begin{array}{c|cc}&\\text{O1}&\\text{O2}\\\\\\hline \\text{O1}&a&b\\\\ \\text{O2}&c&d\\end{array}"
+     ],
+     "work": [
+      "a=6,\\ b=10,\\ c=3,\\ d=11"
+     ],
+     "words": "Both methods classify the same 30 adults, so the results are paired nominal data. McNemar's test compares two diagnostic procedures applied to the same people."
+    },
+    {
+     "title": "State the hypotheses",
+     "general": [
+      "H_0:P(\\text{O1}\\to\\text{O2})=P(\\text{O2}\\to\\text{O1})"
+     ],
+     "work": [
+      "H_0:P(\\text{watch}+,\\ \\text{cardiologist}-)=P(\\text{watch}-,\\ \\text{cardiologist}+)"
+     ],
+     "words": "The smartwatch and the cardiologist have the same probability of classifying an adult as having AF, so adults on whom they disagree are equally likely to be positive by the smartwatch only as by the cardiologist only. The two methods differ in how often they classify an adult as having AF."
+    },
+    {
+     "title": "Identify the subjects who change",
+     "general": [
+      "b=\\text{O1}\\to\\text{O2},\\quad c=\\text{O2}\\to\\text{O1}"
+     ],
+     "work": [
+      "b=10,\\quad c=3,\\quad b+c=13"
+     ],
+     "words": "Only discordant subjects carry information about a difference. Here b counts adults called positive by the smartwatch but negative by the cardiologist and c counts adults called negative by the smartwatch but positive by the cardiologist. The concordant cells a = 6 and d = 11 do not enter the statistic."
+    },
+    {
+     "title": "Calculate the expected number in each change cell",
+     "general": [
+      "E=\\frac{b+c}{2}"
+     ],
+     "work": [
+      "E=\\frac{10+3}{2}=6.5"
+     ],
+     "words": "If the null hypothesis is true, the changes split evenly in the two directions."
+    },
+    {
+     "title": "Calculate the McNemar chi-square with Yates correction",
+     "general": [
+      "\\chi^2=\\frac{(|b-E|-\\frac12)^2}{E}+\\frac{(|c-E|-\\frac12)^2}{E}"
+     ],
+     "work": [
+      "\\chi^2=\\frac{(|10-6.5|-\\frac12)^2}{6.5}+\\frac{(|3-6.5|-\\frac12)^2}{6.5}=2.7692"
+     ],
+     "words": "Subtract one half from each absolute difference before squaring because the table is 2 x 2 (Yates correction)."
+    },
+    {
+     "title": "Find the critical value",
+     "general": [
+      "\\nu=1,\\quad \\chi^2_{crit}=\\chi^2_{\\alpha}(1)"
+     ],
+     "work": [
+      "\\chi^2_{0.05}(1)=3.841"
+     ],
+     "words": "Start with α = 0.05. Open Chi_Squared_Table2.pdf, PDF page 1. Row df = 1, column χ².050 gives 3.841. The same row gives 2.706 in the .100 column, 5.024 in the .025 column, 6.635 in the .010 column and 7.879 in the .005 column for a P range.",
+     "classTable": {
+      "path": "sources/tables/Chi_Squared_Table2.pdf",
+      "page": 1,
+      "row": "1",
+      "column": "0.050",
+      "value": 3.841,
+      "actualDf": 1,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision",
+     "general": [
+      "\\chi^2>\\chi^2_{crit}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "2.706<\\chi^2=2.7692<3.841"
+     ],
+     "words": "Do not reject the null hypothesis because the statistic is below the 0.05 cutoff. It lies between the .100 and .050 cutoffs, so 0.05 < P < 0.10."
+    }
+   ],
+   "conclusion": "McNemar chi-square = 2.7692 with 1 df is below chi-square_0.05(1) = 3.841, though above chi-square_0.10(1) = 2.706. Do not reject H0 (0.05 < P < 0.10). There is no evidence of a difference between the smartwatch and the cardiologist in how often adults are classified as having AF, even though the smartwatch alone called 10 adults positive and the cardiologist alone called 3. The statistic comes close to the 0.05 cutoff but does not reach it.",
+   "source": "Original practice example in the course style",
+   "lookup": {
+    "path": "sources/tables/Chi_Squared_Table2.pdf",
+    "page": 1,
+    "row": "1",
+    "column": "0.050",
+    "value": 3.841,
+    "actualDf": 1,
+    "approximation": false
+   },
+   "values": {
+    "a": 6,
+    "b": 10,
+    "c": 3,
+    "d": 11,
+    "N": 30,
+    "E": 6.5,
+    "chi2": 2.769230769230769,
+    "df": 1,
+    "critical": 3.841,
+    "reject": false,
+    "pRange": "0.05<P<0.10",
+    "exactP": 0.09609232945567359
+   },
+   "module": 21,
+   "tolerance": 0.013846153846153847,
+   "answerName": "Chi-square",
+   "answer": 2.769230769230769
+  }
+ ],
+ "questions": [],
+ "notes": [
+  "All data are invented for practice. No real study, author or year is cited, and no treatment effect is stated as fact.",
+  "Printed critical values. F_table.pdf page 1, numerator column 2, rows 8 (4.46 and 8.65), 10 (4.10 and 7.56) and 6 (5.14 and 10.92). t_table.pdf page 1, rows 8 and 10. Chi_Squared_Table2.pdf, row df = 1 (2.706, 3.841, 5.024, 6.635, 7.879).",
+  "Holm levels 0.0167 and 0.025 are not printed columns of the t table. As in the lecture Holm case, the next stricter printed column is used (0.01 for 0.0167 and 0.02 for 0.025). No |t| falls between the bracketing columns, so no decision depends on this choice.",
+  "p21-walking-glucose-holm continues p21-walking-glucose-rmanova and p21-carpal-grip-holm continues p21-carpal-grip-rmanova. Their treatment means are exact (the data give means with at most one decimal) and MS_res is rounded to 6 decimals (2.783333) in the glucose case and exact (1.1) in the grip case.",
+  "Outcomes. p21-hemoglobin-meters-rmanova (F = 3.822 against 5.14), p21-low-salt-hypertension-mcnemar (0.9) and p21-smartwatch-af-diagnostic (2.769, between the .100 and .050 cutoffs) do not reject. In p21-carpal-grip-holm the third comparison (|t| = 1.651) does not reject. p21-iron-anemia-mcnemar (6.667 against the .010 cutoff 6.635) lands close to a cutoff.",
+  "The rmAnova work lines chain values rounded to 4 decimals (mean squares to 6) as a student would. values keep full precision.",
+  "Following the content rules, words, conclusions and the hypotheses in words have no colons or semicolons. His own phrases keep their punctuation in context and tasks, for example '(Note: If a difference exists, do not identify which times are different.)'. Step titles keep the reference forms such as 'Comparison 1: A vs B'.",
+  "The rmAnova tasks follow the course pattern ('Is there a difference in ... over time?', 'Assume that any quantities of interest are Normally distributed.', 'DO NOT use R.'). The Holm tasks follow the Exam 1 Holm wording with the ANOVA results stated in the context."
+ ]
+}

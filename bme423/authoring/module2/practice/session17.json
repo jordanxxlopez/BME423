@@ -1,0 +1,1790 @@
+{
+ "cases": [
+  {
+   "id": "p17-vitd-night-shift",
+   "title": "Vitamin D in night-shift nurses",
+   "topic": "oneMean",
+   "context": "A study was reported concerning vitamin D status in hospital nurses who work permanent night shifts. Serum 25-hydroxyvitamin D (25(OH)D, the main circulating form of vitamin D) was measured in nanograms per milliliter (ng/mL) with a chemiluminescence immunoassay in a random sample of 16 night-shift nurses at the end of winter. A level of 30 ng/mL is often used as the lower limit of sufficiency. The results are summarized in the table below. Assume that any quantities of interest are Normally distributed.",
+   "unit": "ng/mL",
+   "table": {
+    "headers": [
+     "Number of nurses",
+     "Mean 25(OH)D (ng/mL)",
+     "SD (ng/mL)"
+    ],
+    "rows": [
+     [
+      16,
+      21.4,
+      6.8
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) What is the 95% confidence interval for the mean serum 25(OH)D of night-shift nurses? DO NOT use R. Make sure to show your intermediate calculations.",
+    "(ii) Based on your calculations for Part (i), is there evidence that the mean serum 25(OH)D of night-shift nurses is different from 30 ng/mL? Answer this question without doing a t test."
+   ],
+   "symbols": "\\(\\bar x\\) (sample mean), \\(s\\) (sample SD), \\(n\\) (number sampled), \\(s_{\\bar x}\\) (standard error of the mean), \\(\\mu\\) (population mean), \\(M\\) (margin).",
+   "steps": [
+    {
+     "title": "Identify the population quantity",
+     "general": [
+      "\\text{estimate of }\\mu=\\bar x"
+     ],
+     "work": [
+      "\\bar x=21.4,\\quad s=6.8,\\quad n=16"
+     ],
+     "words": "The procedure is a one-sample t confidence interval for a population mean. The sample mean estimates the population mean. The SD describes single measurements, and the standard error describes the uncertainty in their mean."
+    },
+    {
+     "title": "Calculate the standard error",
+     "general": [
+      "s_{\\bar x}=\\frac{s}{\\sqrt n}"
+     ],
+     "work": [
+      "s_{\\bar x}=\\frac{6.8}{\\sqrt{16}}=\\frac{6.8}{4}=1.7"
+     ],
+     "words": "Divide the sample SD by the square root of the sample size. Keep the standard error for the margin."
+    },
+    {
+     "title": "Choose degrees of freedom and the cutoff",
+     "general": [
+      "\\nu=n-1",
+      "t_c=t_\\alpha(\\nu)"
+     ],
+     "work": [
+      "\\nu=16-1=15",
+      "\\alpha=1-0.95=0.05",
+      "t_{0.05}(15)=2.131"
+     ],
+     "words": "Open t_table.pdf, PDF page 1. Use row 15 and the combined two-tail 0.05 column. The printed cutoff is 2.131. Do not halve the column probability again.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "15",
+      "column": "0.05",
+      "value": 2.131,
+      "actualDf": 15,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Calculate the margin of error",
+     "general": [
+      "M=t_c s_{\\bar x}"
+     ],
+     "work": [
+      "M=2.131(1.7)=3.6227"
+     ],
+     "words": "The margin has the same units as the sample mean, ng/mL."
+    },
+    {
+     "title": "Calculate the lower endpoint",
+     "general": [
+      "L=\\bar x-M"
+     ],
+     "work": [
+      "L=21.4-3.6227=17.7773"
+     ],
+     "words": "Subtract the margin from the sample mean."
+    },
+    {
+     "title": "Calculate the upper endpoint",
+     "general": [
+      "U=\\bar x+M"
+     ],
+     "work": [
+      "U=21.4+3.6227=25.0227"
+     ],
+     "words": "Add the same margin to the sample mean."
+    },
+    {
+     "title": "State the population interval",
+     "general": [
+      "L<\\mu<U"
+     ],
+     "work": [
+      "17.7773<\\mu<25.0227"
+     ],
+     "words": "The 95% interval estimates the population mean in ng/mL. It is not a range that holds 95% of single measurements."
+    },
+    {
+     "title": "Compare the interval with the stated value",
+     "general": [
+      "\\mu_0\\notin[L,U]\\Rightarrow\\text{reject }H_0",
+      "\\mu_0\\in[L,U]\\Rightarrow\\text{do not reject }H_0"
+     ],
+     "work": [
+      "17.7773<\\mu<25.0227,\\quad \\mu_0=30"
+     ],
+     "words": "The value 30 ng/mL is outside the interval, so the null is rejected at the matching two-sided 0.05 level and P < 0.05."
+    }
+   ],
+   "conclusion": "The 95% confidence interval for the mean serum 25(OH)D of night-shift nurses is 17.7773 to 25.0227 ng/mL. The interval does not contain 30 ng/mL, so the mean is different from 30 ng/mL (P < 0.05) and it lies below the sufficiency limit.",
+   "source": "Original practice example in the course style",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "15",
+    "column": "0.05",
+    "value": 2.131,
+    "actualDf": 15,
+    "approximation": false
+   },
+   "values": {
+    "n": 16,
+    "x": 21.4,
+    "sd": 6.8,
+    "confidence": 0.95,
+    "df": 15,
+    "se": 1.7,
+    "critical": 2.131,
+    "margin": 3.6226999999999996,
+    "lower": 17.7773,
+    "upper": 25.022699999999997,
+    "reference": 30,
+    "reject": true
+   },
+   "module": 17,
+   "tolerance": 0.088887,
+   "answerName": "Lower endpoint",
+   "answer": 17.7773,
+   "hypotheses": {
+    "null": "H_0:\\mu=30",
+    "alternative": "H_A:\\mu\\ne 30",
+    "nullWords": "The mean serum 25(OH)D of night-shift nurses equals 30 ng/mL.",
+    "alternativeWords": "The mean serum 25(OH)D of night-shift nurses is different from 30 ng/mL."
+   }
+  },
+  {
+   "id": "p17-infusion-pump-accuracy",
+   "title": "Flow accuracy of a volumetric infusion pump",
+   "topic": "oneMean",
+   "context": "A biomedical engineering group tested the delivery accuracy of a new volumetric infusion pump (a device that pushes intravenous fluid into a patient at a set rate). Each of 23 pumps was programmed to deliver saline at 100 milliliters per hour (mL/h), and the delivered flow rate was measured gravimetrically (by weighing the fluid collected over one hour on a precision balance). The results are summarized in the table below. Assume that any quantities of interest are Normally distributed.",
+   "unit": "mL/h",
+   "table": {
+    "headers": [
+     "Number of pumps",
+     "Mean flow rate (mL/h)",
+     "SD (mL/h)"
+    ],
+    "rows": [
+     [
+      23,
+      98.6,
+      2.9
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) What is the 99% confidence interval for the mean delivered flow rate of these pumps? DO NOT use R.",
+    "(ii) Using only your calculation for Part (i), is there evidence that the mean delivered flow rate is different from the programmed 100 mL/h? Please state how you reached your conclusions."
+   ],
+   "symbols": "\\(\\bar x\\) (sample mean), \\(s\\) (sample SD), \\(n\\) (number sampled), \\(s_{\\bar x}\\) (standard error of the mean), \\(\\mu\\) (population mean), \\(M\\) (margin).",
+   "steps": [
+    {
+     "title": "Identify the population quantity",
+     "general": [
+      "\\text{estimate of }\\mu=\\bar x"
+     ],
+     "work": [
+      "\\bar x=98.6,\\quad s=2.9,\\quad n=23"
+     ],
+     "words": "The procedure is a one-sample t confidence interval for a population mean. The sample mean estimates the population mean. The SD describes single measurements, and the standard error describes the uncertainty in their mean."
+    },
+    {
+     "title": "Calculate the standard error",
+     "general": [
+      "s_{\\bar x}=\\frac{s}{\\sqrt n}"
+     ],
+     "work": [
+      "s_{\\bar x}=\\frac{2.9}{\\sqrt{23}}=\\frac{2.9}{4.795832}=0.6046918"
+     ],
+     "words": "Divide the sample SD by the square root of the sample size. Keep the standard error for the margin."
+    },
+    {
+     "title": "Choose degrees of freedom and the cutoff",
+     "general": [
+      "\\nu=n-1",
+      "t_c=t_\\alpha(\\nu)"
+     ],
+     "work": [
+      "\\nu=23-1=22",
+      "\\alpha=1-0.99=0.01",
+      "t_{0.01}(22)=2.819"
+     ],
+     "words": "Open t_table.pdf, PDF page 1. Use row 22 and the combined two-tail 0.01 column. The printed cutoff is 2.819. Do not halve the column probability again.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "22",
+      "column": "0.01",
+      "value": 2.819,
+      "actualDf": 22,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Calculate the margin of error",
+     "general": [
+      "M=t_c s_{\\bar x}"
+     ],
+     "work": [
+      "M=2.819(0.6046918)=1.704626"
+     ],
+     "words": "The margin has the same units as the sample mean, mL/h."
+    },
+    {
+     "title": "Calculate the lower endpoint",
+     "general": [
+      "L=\\bar x-M"
+     ],
+     "work": [
+      "L=98.6-1.704626=96.89537"
+     ],
+     "words": "Subtract the margin from the sample mean."
+    },
+    {
+     "title": "Calculate the upper endpoint",
+     "general": [
+      "U=\\bar x+M"
+     ],
+     "work": [
+      "U=98.6+1.704626=100.3046"
+     ],
+     "words": "Add the same margin to the sample mean."
+    },
+    {
+     "title": "State the population interval",
+     "general": [
+      "L<\\mu<U"
+     ],
+     "work": [
+      "96.89537<\\mu<100.3046"
+     ],
+     "words": "The 99% interval estimates the population mean in mL/h. It is not a range that holds 99% of single measurements."
+    },
+    {
+     "title": "Compare the interval with the stated value",
+     "general": [
+      "\\mu_0\\notin[L,U]\\Rightarrow\\text{reject }H_0",
+      "\\mu_0\\in[L,U]\\Rightarrow\\text{do not reject }H_0"
+     ],
+     "work": [
+      "96.89537<\\mu<100.3046,\\quad \\mu_0=100"
+     ],
+     "words": "The value 100 mL/h is inside the interval, so the null is not rejected at the matching two-sided 0.01 level and P > 0.01."
+    }
+   ],
+   "conclusion": "The 99% confidence interval for the mean delivered flow rate is 96.89537 to 100.3046 mL/h. The interval contains 100 mL/h, so there is no evidence at the 0.01 level that the mean flow rate is different from the programmed rate (P > 0.01).",
+   "source": "Original practice example in the course style",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "22",
+    "column": "0.01",
+    "value": 2.819,
+    "actualDf": 22,
+    "approximation": false
+   },
+   "values": {
+    "n": 23,
+    "x": 98.6,
+    "sd": 2.9,
+    "confidence": 0.99,
+    "df": 22,
+    "se": 0.6046918007655169,
+    "critical": 2.819,
+    "margin": 1.7046261863579921,
+    "lower": 96.895373813642,
+    "upper": 100.30462618635799,
+    "reference": 100,
+    "reject": false
+   },
+   "module": 17,
+   "tolerance": 0.484477,
+   "answerName": "Lower endpoint",
+   "answer": 96.895373813642,
+   "hypotheses": {
+    "null": "H_0:\\mu=100",
+    "alternative": "H_A:\\mu\\ne 100",
+    "nullWords": "The mean delivered flow rate of the pumps equals the programmed 100 mL/h.",
+    "alternativeWords": "The mean delivered flow rate of the pumps is different from 100 mL/h."
+   }
+  },
+  {
+   "id": "p17-statin-ldl-two-groups",
+   "title": "LDL cholesterol after a statin or placebo",
+   "topic": "twoMeans",
+   "context": "In a clinical trial, adults with raised cholesterol were randomly assigned to a statin (a drug from the class prescribed for raised cholesterol) or to a placebo. After 12 weeks, low-density lipoprotein (LDL) cholesterol was measured in milligrams per deciliter (mg/dL) from a fasting blood sample. The results are summarized in the table below. Assume that any quantities of interest are Normally distributed.",
+   "unit": "mg/dL",
+   "table": {
+    "headers": [
+     "Group",
+     "Number of patients",
+     "Mean LDL (mg/dL)",
+     "SD (mg/dL)"
+    ],
+    "rows": [
+     [
+      "Statin",
+      14,
+      98.2,
+      22.4
+     ],
+     [
+      "Placebo",
+      13,
+      131.5,
+      26.9
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) What is the 95% confidence interval for the difference in the mean LDL cholesterol between the two treatment groups? DO NOT use R. Make sure to show your intermediate calculations.",
+    "(ii) Based on the recorded data, is there evidence that the mean LDL cholesterol is different in these two groups? Answer this question without doing a t test."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\mu_1-\\mu_2=0",
+    "alternative": "H_A:\\mu_1-\\mu_2\\ne0",
+    "nullWords": "The mean LDL cholesterol after 12 weeks is the same in the statin and placebo populations.",
+    "alternativeWords": "The mean LDL cholesterol after 12 weeks is different in the statin and placebo populations."
+   },
+   "symbols": "\\(\\bar x_i\\) (group sample mean), \\(s_i\\) (group sample SD), \\(n_i\\) (group sample size), \\(s^2\\) (pooled variance), \\(s_d\\) (SE of the difference), \\(d\\) (sample difference), \\(\\Delta\\) (population difference).",
+   "steps": [
+    {
+     "title": "Define the contrast and hypotheses",
+     "general": [
+      "\\Delta=\\mu_1-\\mu_2"
+     ],
+     "work": [
+      "\\Delta=\\mu_{\\mathrm{statin}}-\\mu_{\\mathrm{placebo}}"
+     ],
+     "words": "The procedure is a pooled t confidence interval for the difference between two independent means. Keep the direction statin minus placebo throughout. The null states that the two population means are equal. The two-sided alternative states that they are different."
+    },
+    {
+     "title": "Calculate the observed difference",
+     "general": [
+      "d=\\bar x_1-\\bar x_2"
+     ],
+     "work": [
+      "d=98.2-131.5=-33.3"
+     ],
+     "words": "This is the sample estimate of the population difference in mg/dL."
+    },
+    {
+     "title": "Square both group SDs",
+     "general": [
+      "v_1=s_1^2",
+      "v_2=s_2^2"
+     ],
+     "work": [
+      "v_1=22.4^2=501.76",
+      "v_2=26.9^2=723.61"
+     ],
+     "words": "Each SD is squared before pooling, which gives variances in squared units."
+    },
+    {
+     "title": "Pool both variance contributions",
+     "general": [
+      "s^2=\\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}"
+     ],
+     "work": [
+      "(n_1-1)s_1^2=(14-1)(501.76)=6522.88",
+      "(n_2-1)s_2^2=(13-1)(723.61)=8683.32",
+      "s^2=\\frac{6522.88+8683.32}{14+13-2}=\\frac{15206.2}{25}=608.248"
+     ],
+     "words": "Weight each group variance by its own degrees of freedom, add the two parts, and divide by the combined degrees of freedom."
+    },
+    {
+     "title": "Calculate the SE of the difference",
+     "general": [
+      "s_d=\\sqrt{\\frac{s^2}{n_1}+\\frac{s^2}{n_2}}"
+     ],
+     "work": [
+      "s_d=\\sqrt{\\frac{608.248}{14}+\\frac{608.248}{13}}=\\sqrt{90.23459}=9.499189"
+     ],
+     "words": "Add the two parts inside the root, then take the root. This returns to the original units."
+    },
+    {
+     "title": "Find degrees of freedom and the t cutoff",
+     "general": [
+      "\\nu=n_1+n_2-2",
+      "t_c=t_\\alpha(\\nu)"
+     ],
+     "work": [
+      "\\nu=14+13-2=25",
+      "\\alpha=1-0.95=0.05",
+      "t_{0.05}(25)=2.06"
+     ],
+     "words": "Open t_table.pdf, PDF page 1. Use row 25 and the combined two-tail 0.05 column. The printed cutoff is 2.06. Do not halve the column probability again.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "25",
+      "column": "0.05",
+      "value": 2.06,
+      "actualDf": 25,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Calculate the margin",
+     "general": [
+      "M=t_c s_d"
+     ],
+     "work": [
+      "M=2.06(9.499189)=19.56833"
+     ],
+     "words": "Multiply the positive cutoff by the standard error of the difference."
+    },
+    {
+     "title": "Calculate both bounds",
+     "general": [
+      "L=d-M",
+      "U=d+M"
+     ],
+     "work": [
+      "L=-33.3-19.56833=-52.86833",
+      "U=-33.3+19.56833=-13.73167"
+     ],
+     "words": "The bounds keep the statin minus placebo order."
+    },
+    {
+     "title": "Make the decision using the interval",
+     "general": [
+      "0\\notin[L,U]\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "[-52.86833,-13.73167]"
+     ],
+     "words": "Zero is outside the interval, so the interval does not contain 0. The null of equal means is rejected at the matching two-sided 0.05 level, so P < 0.05. No separate t statistic is needed."
+    }
+   ],
+   "conclusion": "The 95% confidence interval for statin minus placebo is −52.86833 to −13.73167 mg/dL. The interval does not contain 0, so there is a difference in mean LDL cholesterol between the two groups (P < 0.05), with the statin group lower.",
+   "source": "Original practice example in the course style",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "25",
+    "column": "0.05",
+    "value": 2.06,
+    "actualDf": 25,
+    "approximation": false
+   },
+   "values": {
+    "n1": 14,
+    "n2": 13,
+    "x1": 98.2,
+    "x2": 131.5,
+    "s1": 22.4,
+    "s2": 26.9,
+    "confidence": 0.95,
+    "df": 25,
+    "variance": 608.2479999999999,
+    "se": 9.499189092053774,
+    "critical": 2.06,
+    "difference": -33.3,
+    "margin": 19.568329529630773,
+    "lower": -52.86832952963077,
+    "upper": -13.731670470369224,
+    "reject": true
+   },
+   "module": 17,
+   "tolerance": 0.264342,
+   "answerName": "Lower endpoint",
+   "answer": -52.86832952963077
+  },
+  {
+   "id": "p17-fev1-two-inhalers",
+   "title": "FEV1 with two inhaler devices",
+   "topic": "twoMeans",
+   "context": "Researchers interested in inhaler design did a study to compare two devices that deliver the same asthma medicine, a dry-powder inhaler and a metered-dose inhaler with a spacer (a tube that holds the spray before it is breathed in). Adults with mild asthma were randomly assigned to one of the two devices. After 4 weeks, the forced expiratory volume in one second (FEV1, the volume of air blown out in the first second of a forced breath) was measured in liters (L) with a spirometer. The results are summarized in the table below. Assume that any quantities of interest are Normally distributed.",
+   "unit": "L",
+   "table": {
+    "headers": [
+     "Group",
+     "Number of patients",
+     "Mean FEV1 (L)",
+     "SD (L)"
+    ],
+    "rows": [
+     [
+      "Dry powder",
+      22,
+      2.84,
+      0.41
+     ],
+     [
+      "Spacer",
+      21,
+      2.71,
+      0.38
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) What is the 95% confidence interval for the difference in the mean FEV1 between the two device groups? DO NOT use R.",
+    "(ii) Based on the recorded data, is there evidence that the mean FEV1 is different in these two groups? Answer this question without doing a t test."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\mu_1-\\mu_2=0",
+    "alternative": "H_A:\\mu_1-\\mu_2\\ne0",
+    "nullWords": "The mean FEV1 after 4 weeks is the same with the dry-powder inhaler and with the spacer.",
+    "alternativeWords": "The mean FEV1 after 4 weeks is different with the dry-powder inhaler and with the spacer."
+   },
+   "symbols": "\\(\\bar x_i\\) (group sample mean), \\(s_i\\) (group sample SD), \\(n_i\\) (group sample size), \\(s^2\\) (pooled variance), \\(s_d\\) (SE of the difference), \\(d\\) (sample difference), \\(\\Delta\\) (population difference).",
+   "steps": [
+    {
+     "title": "Define the contrast and hypotheses",
+     "general": [
+      "\\Delta=\\mu_1-\\mu_2"
+     ],
+     "work": [
+      "\\Delta=\\mu_{\\mathrm{dry}}-\\mu_{\\mathrm{spacer}}"
+     ],
+     "words": "The procedure is a pooled t confidence interval for the difference between two independent means. Keep the direction dry powder minus spacer throughout. The null states that the two population means are equal. The two-sided alternative states that they are different."
+    },
+    {
+     "title": "Calculate the observed difference",
+     "general": [
+      "d=\\bar x_1-\\bar x_2"
+     ],
+     "work": [
+      "d=2.84-2.71=0.13"
+     ],
+     "words": "This is the sample estimate of the population difference in L."
+    },
+    {
+     "title": "Square both group SDs",
+     "general": [
+      "v_1=s_1^2",
+      "v_2=s_2^2"
+     ],
+     "work": [
+      "v_1=0.41^2=0.1681",
+      "v_2=0.38^2=0.1444"
+     ],
+     "words": "Each SD is squared before pooling, which gives variances in squared units."
+    },
+    {
+     "title": "Pool both variance contributions",
+     "general": [
+      "s^2=\\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}"
+     ],
+     "work": [
+      "(n_1-1)s_1^2=(22-1)(0.1681)=3.5301",
+      "(n_2-1)s_2^2=(21-1)(0.1444)=2.888",
+      "s^2=\\frac{3.5301+2.888}{22+21-2}=\\frac{6.4181}{41}=0.156539"
+     ],
+     "words": "Weight each group variance by its own degrees of freedom, add the two parts, and divide by the combined degrees of freedom."
+    },
+    {
+     "title": "Calculate the SE of the difference",
+     "general": [
+      "s_d=\\sqrt{\\frac{s^2}{n_1}+\\frac{s^2}{n_2}}"
+     ],
+     "work": [
+      "s_d=\\sqrt{\\frac{0.156539}{22}+\\frac{0.156539}{21}}=\\sqrt{0.01456965}=0.1207048"
+     ],
+     "words": "Add the two parts inside the root, then take the root. This returns to the original units."
+    },
+    {
+     "title": "Find degrees of freedom and the t cutoff",
+     "general": [
+      "\\nu=n_1+n_2-2",
+      "t_c=t_\\alpha(\\nu)"
+     ],
+     "work": [
+      "\\nu=22+21-2=41",
+      "\\alpha=1-0.95=0.05",
+      "t_{0.05}(41)\\approx t_{0.05}(40)=2.021"
+     ],
+     "words": "The printed t table has no row for 41 degrees of freedom. It prints rows 40 and 42. Use the smaller row 40, combined two-tail 0.05 column, on PDF page 1, which gives 2.021. The smaller row gives the larger cutoff, so the interval is conservative.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "40",
+      "column": "0.05",
+      "value": 2.021,
+      "actualDf": 41,
+      "approximation": true
+     }
+    },
+    {
+     "title": "Calculate the margin",
+     "general": [
+      "M=t_c s_d"
+     ],
+     "work": [
+      "M=2.021(0.1207048)=0.2439444"
+     ],
+     "words": "Multiply the positive cutoff by the standard error of the difference."
+    },
+    {
+     "title": "Calculate both bounds",
+     "general": [
+      "L=d-M",
+      "U=d+M"
+     ],
+     "work": [
+      "L=0.13-0.2439444=-0.1139444",
+      "U=0.13+0.2439444=0.3739444"
+     ],
+     "words": "The bounds keep the dry powder minus spacer order."
+    },
+    {
+     "title": "Make the decision using the interval",
+     "general": [
+      "0\\in[L,U]\\Rightarrow\\text{do not reject }H_0"
+     ],
+     "work": [
+      "[-0.1139444,0.3739444]"
+     ],
+     "words": "Zero is inside the interval, so the interval contains 0. The null of equal means is not rejected at the matching two-sided 0.05 level, so P > 0.05. No separate t statistic is needed."
+    }
+   ],
+   "conclusion": "The 95% confidence interval for dry powder minus spacer is −0.1139444 to 0.3739444 L. The interval contains 0, so there is no evidence of a difference in mean FEV1 between the two devices (P > 0.05).",
+   "source": "Original practice example in the course style",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "40",
+    "column": "0.05",
+    "value": 2.021,
+    "actualDf": 41,
+    "approximation": true
+   },
+   "values": {
+    "n1": 22,
+    "n2": 21,
+    "x1": 2.84,
+    "x2": 2.71,
+    "s1": 0.41,
+    "s2": 0.38,
+    "confidence": 0.95,
+    "df": 41,
+    "variance": 0.1565390243902439,
+    "se": 0.1207048029542935,
+    "critical": 2.021,
+    "difference": 0.1299999999999999,
+    "margin": 0.24394440677062718,
+    "lower": -0.11394440677062728,
+    "upper": 0.37394440677062707,
+    "reject": false
+   },
+   "module": 17,
+   "tolerance": 0.001,
+   "answerName": "Lower endpoint",
+   "answer": -0.11394440677062728,
+   "alternativeTableAnswer": {
+    "row": "42",
+    "critical": 2.018,
+    "lower": -0.11358229236176437
+   }
+  },
+  {
+   "id": "p17-mrsa-staff-carriage",
+   "title": "MRSA nasal carriage in hospital staff",
+   "topic": "oneProportion",
+   "context": "A study was reported concerning nasal carriage of methicillin-resistant Staphylococcus aureus (MRSA, a bacterium that resists many common antibiotics) among staff of a large teaching hospital. Nasal swabs from 380 randomly chosen staff members were cultured on selective agar plates, and 49 swabs grew MRSA. An infection-control guideline uses a carriage rate of 10% as its action level. The results are summarized in the table below.",
+   "unit": "proportion",
+   "table": {
+    "headers": [
+     "MRSA-positive staff",
+     "Staff swabbed",
+     "Action level"
+    ],
+    "rows": [
+     [
+      49,
+      380,
+      0.1
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) What is the 95% confidence interval for the proportion of hospital staff who carry MRSA? DO NOT use R.",
+    "(ii) Using only your calculation for Part (i), is there evidence that the proportion of staff who carry MRSA is different from 0.10? Please state how you reached your conclusions."
+   ],
+   "hypotheses": {
+    "null": "H_0:p=0.1",
+    "alternative": "H_A:p\\ne 0.1",
+    "nullWords": "The proportion of hospital staff who carry MRSA equals 0.10.",
+    "alternativeWords": "The proportion of hospital staff who carry MRSA is different from 0.10."
+   },
+   "symbols": "\\(m\\) (event count), \\(n\\) (sample size), \\(\\hat p\\) (sample event proportion), \\(p\\) (population event proportion), \\(p_0\\) (null reference), \\(s_{\\hat p}\\) (estimated SE).",
+   "steps": [
+    {
+     "title": "State the proportion and hypotheses",
+     "general": [
+      "H_0:p=p_0,\\qquad H_A:p\\ne p_0"
+     ],
+     "work": [
+      "p_0=0.1"
+     ],
+     "words": "The procedure is a Normal (z) confidence interval for one population proportion. The null states that the population proportion is 0.1. The two-sided alternative states that it is different from 0.1."
+    },
+    {
+     "title": "Calculate the sample proportion",
+     "general": [
+      "\\hat p=\\frac{m}{n}"
+     ],
+     "work": [
+      "\\hat p=\\frac{49}{380}=0.1289474"
+     ],
+     "words": "Divide the event count by the total number of observations."
+    },
+    {
+     "title": "Calculate the proportion SE",
+     "general": [
+      "s_{\\hat p}=\\sqrt{\\frac{\\hat p(1-\\hat p)}{n}}"
+     ],
+     "work": [
+      "\\hat p(1-\\hat p)=0.1289474(1-0.1289474)=0.1123199",
+      "s_{\\hat p}=\\sqrt{\\frac{0.1123199}{380}}=\\sqrt{0.0002955788}=0.01719241"
+     ],
+     "words": "Subtract the proportion from one, multiply, divide by the sample size, then take the square root."
+    },
+    {
+     "title": "Select the Normal cutoff",
+     "general": [
+      "z_c=z_\\alpha"
+     ],
+     "work": [
+      "\\alpha=1-0.95=0.05,\\quad z_c=1.96"
+     ],
+     "words": "Use the infinity row of the printed two-tail t table on PDF page 2. For 95% confidence the positive cutoff is 1.96.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 2,
+      "row": "infinity",
+      "column": "0.05",
+      "value": 1.96,
+      "approximation": false,
+      "normalReference": true
+     }
+    },
+    {
+     "title": "Calculate the margin",
+     "general": [
+      "M=z_c s_{\\hat p}"
+     ],
+     "work": [
+      "M=1.96(0.01719241)=0.03369711"
+     ],
+     "words": "The margin is in proportion units. Multiply by 100 only to give the answer in percentage points."
+    },
+    {
+     "title": "Calculate the lower bound",
+     "general": [
+      "L=\\hat p-M"
+     ],
+     "work": [
+      "L=0.1289474-0.03369711=0.09525025"
+     ],
+     "words": "Subtract the margin from the observed proportion."
+    },
+    {
+     "title": "Calculate the upper bound",
+     "general": [
+      "U=\\hat p+M"
+     ],
+     "work": [
+      "U=0.1289474+0.03369711=0.1626445"
+     ],
+     "words": "Add the same margin to the observed proportion."
+    },
+    {
+     "title": "Compare with the null reference",
+     "general": [
+      "p_0\\in[L,U]\\Rightarrow\\text{do not reject }H_0"
+     ],
+     "work": [
+      "0.09525025<p<0.1626445,\\quad p_0=0.1"
+     ],
+     "words": "The value 0.1 is inside the interval, so the null is not rejected at the matching two-sided 0.05 level and P > 0.05. The comparison is with the stated value, not with zero."
+    }
+   ],
+   "conclusion": "The 95% confidence interval for the proportion of staff who carry MRSA is 0.09525025 to 0.1626445, or about 9.53% to 16.26%. The interval contains 0.10, so there is no evidence that the carriage rate is different from the 10% action level (P > 0.05).",
+   "source": "Original practice example in the course style",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 2,
+    "row": "infinity",
+    "column": "0.05",
+    "value": 1.96,
+    "approximation": false,
+    "normalReference": true
+   },
+   "values": {
+    "m": 49,
+    "n": 380,
+    "p": 0.12894736842105264,
+    "reference": 0.1,
+    "confidence": 0.95,
+    "variance": 0.11231994459833795,
+    "se": 0.017192405345808175,
+    "critical": 1.96,
+    "margin": 0.03369711447778402,
+    "lower": 0.09525025394326862,
+    "upper": 0.16264448289883665,
+    "reject": false
+   },
+   "module": 17,
+   "tolerance": 0.001,
+   "answerName": "Lower endpoint",
+   "answer": 0.09525025394326862
+  },
+  {
+   "id": "p17-anemia-pregnancy-screen",
+   "title": "Anemia at the first prenatal visit",
+   "topic": "oneProportion",
+   "context": "In a study looking at anemia (a low level of hemoglobin, the oxygen-carrying protein in red blood cells) in pregnancy, hemoglobin was measured in grams per deciliter (g/dL) with a point-of-care hemoglobinometer at the first prenatal visit of 212 women at a community clinic. A hemoglobin below 11 g/dL counted as anemia, and 71 women met this definition. A regional health report had given 25% as the expected proportion. The results are summarized in the table below.",
+   "unit": "proportion",
+   "table": {
+    "headers": [
+     "Women with anemia",
+     "Women screened",
+     "Expected proportion"
+    ],
+    "rows": [
+     [
+      71,
+      212,
+      0.25
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) What is the 95% confidence interval for the proportion of women at this clinic with anemia at the first prenatal visit? DO NOT use R.",
+    "(ii) Using only your calculation for Part (i), is there evidence that the proportion with anemia is different from 0.25? Please state how you reached your conclusions.",
+    "(iii) Provide your result in a single complete sentence that would convey your conclusion in a way that could be understood by a non-expert in statistics or medicine (e.g., a typical reader of a local newspaper)."
+   ],
+   "hypotheses": {
+    "null": "H_0:p=0.25",
+    "alternative": "H_A:p\\ne 0.25",
+    "nullWords": "The proportion of women at this clinic with anemia at the first prenatal visit equals 0.25.",
+    "alternativeWords": "The proportion of women at this clinic with anemia at the first prenatal visit is different from 0.25."
+   },
+   "symbols": "\\(m\\) (event count), \\(n\\) (sample size), \\(\\hat p\\) (sample event proportion), \\(p\\) (population event proportion), \\(p_0\\) (null reference), \\(s_{\\hat p}\\) (estimated SE).",
+   "steps": [
+    {
+     "title": "State the proportion and hypotheses",
+     "general": [
+      "H_0:p=p_0,\\qquad H_A:p\\ne p_0"
+     ],
+     "work": [
+      "p_0=0.25"
+     ],
+     "words": "The procedure is a Normal (z) confidence interval for one population proportion. The null states that the population proportion is 0.25. The two-sided alternative states that it is different from 0.25."
+    },
+    {
+     "title": "Calculate the sample proportion",
+     "general": [
+      "\\hat p=\\frac{m}{n}"
+     ],
+     "work": [
+      "\\hat p=\\frac{71}{212}=0.3349057"
+     ],
+     "words": "Divide the event count by the total number of observations."
+    },
+    {
+     "title": "Calculate the proportion SE",
+     "general": [
+      "s_{\\hat p}=\\sqrt{\\frac{\\hat p(1-\\hat p)}{n}}"
+     ],
+     "work": [
+      "\\hat p(1-\\hat p)=0.3349057(1-0.3349057)=0.2227439",
+      "s_{\\hat p}=\\sqrt{\\frac{0.2227439}{212}}=\\sqrt{0.001050679}=0.03241417"
+     ],
+     "words": "Subtract the proportion from one, multiply, divide by the sample size, then take the square root."
+    },
+    {
+     "title": "Select the Normal cutoff",
+     "general": [
+      "z_c=z_\\alpha"
+     ],
+     "work": [
+      "\\alpha=1-0.95=0.05,\\quad z_c=1.96"
+     ],
+     "words": "Use the infinity row of the printed two-tail t table on PDF page 2. For 95% confidence the positive cutoff is 1.96.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 2,
+      "row": "infinity",
+      "column": "0.05",
+      "value": 1.96,
+      "approximation": false,
+      "normalReference": true
+     }
+    },
+    {
+     "title": "Calculate the margin",
+     "general": [
+      "M=z_c s_{\\hat p}"
+     ],
+     "work": [
+      "M=1.96(0.03241417)=0.06353178"
+     ],
+     "words": "The margin is in proportion units. Multiply by 100 only to give the answer in percentage points."
+    },
+    {
+     "title": "Calculate the lower bound",
+     "general": [
+      "L=\\hat p-M"
+     ],
+     "work": [
+      "L=0.3349057-0.06353178=0.2713739"
+     ],
+     "words": "Subtract the margin from the observed proportion."
+    },
+    {
+     "title": "Calculate the upper bound",
+     "general": [
+      "U=\\hat p+M"
+     ],
+     "work": [
+      "U=0.3349057+0.06353178=0.3984374"
+     ],
+     "words": "Add the same margin to the observed proportion."
+    },
+    {
+     "title": "Compare with the null reference",
+     "general": [
+      "p_0\\notin[L,U]\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "0.2713739<p<0.3984374,\\quad p_0=0.25"
+     ],
+     "words": "The value 0.25 is outside the interval, so the null is rejected at the matching two-sided 0.05 level and P < 0.05. The comparison is with the stated value, not with zero."
+    }
+   ],
+   "conclusion": "The 95% confidence interval for the proportion with anemia is 0.2713739 to 0.3984374, or about 27.14% to 39.84%. The interval does not contain 0.25, so the proportion is different from 0.25 (P < 0.05). For a newspaper reader, about one in three pregnant women at this clinic had anemia at the first visit, which is more than the one in four the regional report expected.",
+   "source": "Original practice example in the course style",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 2,
+    "row": "infinity",
+    "column": "0.05",
+    "value": 1.96,
+    "approximation": false,
+    "normalReference": true
+   },
+   "values": {
+    "m": 71,
+    "n": 212,
+    "p": 0.33490566037735847,
+    "reference": 0.25,
+    "confidence": 0.95,
+    "variance": 0.2227438590245639,
+    "se": 0.0324141725222864,
+    "critical": 1.96,
+    "margin": 0.06353177814368134,
+    "lower": 0.27137388223367714,
+    "upper": 0.3984374385210398,
+    "reject": true
+   },
+   "module": 17,
+   "tolerance": 0.001357,
+   "answerName": "Lower endpoint",
+   "answer": 0.27137388223367714
+  },
+  {
+   "id": "p17-wound-dressing-infection",
+   "title": "Surgical site infection with two wound dressings",
+   "topic": "twoProportions",
+   "context": "The table below shows data on surgical site infection (infection of the incision) within 30 days after elective abdominal surgery when the wound was covered using either a standard gauze dressing or a silver-coated dressing (a dressing that releases silver ions into the wound). Patients were randomly assigned to one of the two dressings at the end of surgery.",
+   "unit": "proportion difference",
+   "table": {
+    "headers": [
+     "Group",
+     "Infection within 30 days",
+     "No infection within 30 days"
+    ],
+    "rows": [
+     [
+      "Standard gauze",
+      28,
+      172
+     ],
+     [
+      "Silver-coated",
+      14,
+      186
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) What is the 95% confidence interval for the difference in the proportion of patients with an infection within 30 days between the two dressing groups? DO NOT use R.",
+    "(ii) What is the 99% confidence interval for the difference in the proportion of patients with an infection within 30 days between the two dressing groups?",
+    "(iii) Using only your calculations for Parts (i) and (ii), is the difference in the proportion of patients with an infection within 30 days between these two groups statistically significant with P < 0.05? With P < 0.01? Please state how you reached your conclusions."
+   ],
+   "hypotheses": {
+    "null": "H_0:p_1-p_2=0",
+    "alternative": "H_A:p_1-p_2\\ne0",
+    "nullWords": "The proportion of patients with an infection within 30 days is the same with the standard gauze and the silver-coated dressing.",
+    "alternativeWords": "The proportion of patients with an infection within 30 days is different with the standard gauze and the silver-coated dressing."
+   },
+   "symbols": "\\(m_i\\) (group event count), \\(n_i\\) (group size), \\(\\hat p_i\\) (group sample proportion), \\(\\hat p\\) (pooled estimate), \\(s_d\\) (SE of the difference), \\(d\\) (observed difference).",
+   "steps": [
+    {
+     "title": "Define the population difference",
+     "general": [
+      "\\Delta=p_1-p_2"
+     ],
+     "work": [
+      "\\Delta=p_{\\mathrm{gauze}}-p_{\\mathrm{silver}}"
+     ],
+     "words": "The procedure is a Normal (z) confidence interval for the difference between two independent proportions, with the pooled standard error. Use standard gauze minus silver-coated. The null states that the proportion with an infection within 30 days is the same in the two populations, which is a difference of zero."
+    },
+    {
+     "title": "Find each group total",
+     "general": [
+      "n_i=m_i+(\\text{non-events})_i"
+     ],
+     "work": [
+      "n_1=28+172=200",
+      "n_2=14+186=200"
+     ],
+     "words": "The table gives the patients with and without the outcome. Add the two counts in each row to get the group size."
+    },
+    {
+     "title": "Calculate both sample proportions",
+     "general": [
+      "\\hat p_i=\\frac{m_i}{n_i}"
+     ],
+     "work": [
+      "\\hat p_1=\\frac{28}{200}=0.14",
+      "\\hat p_2=\\frac{14}{200}=0.07"
+     ],
+     "words": "Each event count is divided by its own group size."
+    },
+    {
+     "title": "Calculate the course pooled proportion",
+     "general": [
+      "\\hat p=\\frac{m_1+m_2}{n_1+n_2}"
+     ],
+     "work": [
+      "\\hat p=\\frac{28+14}{200+200}=\\frac{42}{400}=0.105"
+     ],
+     "words": "Combine the event counts and the group sizes before taking the fraction. This is the pooled convention used in this course."
+    },
+    {
+     "title": "Calculate the pooled binary variance",
+     "general": [
+      "s^2=\\hat p(1-\\hat p)"
+     ],
+     "work": [
+      "s^2=0.105(1-0.105)=0.093975"
+     ],
+     "words": "The pooled binary variance is used in both group parts of the SE."
+    },
+    {
+     "title": "Calculate the difference SE",
+     "general": [
+      "s_d=\\sqrt{\\frac{s^2}{n_1}+\\frac{s^2}{n_2}}"
+     ],
+     "work": [
+      "s_d=\\sqrt{\\frac{0.093975}{200}+\\frac{0.093975}{200}}=\\sqrt{0.00093975}=0.03065534"
+     ],
+     "words": "Keep the two group sizes separate inside the square root."
+    },
+    {
+     "title": "Calculate the difference and margin",
+     "general": [
+      "d=\\hat p_1-\\hat p_2",
+      "M=z_{0.05}s_d"
+     ],
+     "work": [
+      "d=0.14-0.07=0.07",
+      "M=1.96(0.03065534)=0.06008447"
+     ],
+     "words": "Use the Normal cutoff 1.96 from the infinity row, combined two-tail 0.05 column, on PDF page 2 of the printed t table.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 2,
+      "row": "infinity",
+      "column": "0.05",
+      "value": 1.96,
+      "approximation": false,
+      "normalReference": true
+     }
+    },
+    {
+     "title": "Calculate both endpoints",
+     "general": [
+      "L=d-M",
+      "U=d+M"
+     ],
+     "work": [
+      "L=0.07-0.06008447=0.009915529",
+      "U=0.07+0.06008447=0.1300845"
+     ],
+     "words": "These are differences of proportions. Multiply by 100 to give them in percentage points."
+    },
+    {
+     "title": "Calculate the 99% margin",
+     "general": [
+      "M_{99}=z_{0.01}s_d"
+     ],
+     "work": [
+      "\\alpha=1-0.99=0.01,\\quad z_{0.01}=2.5758",
+      "M_{99}=2.5758(0.03065534)=0.07896203"
+     ],
+     "words": "The estimate and the standard error do not change. Only the cutoff changes. Use 2.5758 from the infinity row, combined two-tail 0.01 column.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 2,
+      "row": "infinity",
+      "column": "0.01",
+      "value": 2.5758,
+      "approximation": false,
+      "normalReference": true
+     }
+    },
+    {
+     "title": "Calculate both 99% endpoints",
+     "general": [
+      "L_{99}=d-M_{99}",
+      "U_{99}=d+M_{99}"
+     ],
+     "work": [
+      "L_{99}=0.07-0.07896203=-0.00896203",
+      "U_{99}=0.07+0.07896203=0.148962"
+     ],
+     "words": "The 99% interval is wider than the 95% interval because the cutoff is larger."
+    },
+    {
+     "title": "Compare the 95% interval with zero",
+     "general": [
+      "0\\notin[L,U]\\Rightarrow\\text{reject equal proportions}"
+     ],
+     "work": [
+      "0.009915529<p_1-p_2<0.1300845"
+     ],
+     "words": "The 95% interval does not contain 0. The difference is statistically significant with P < 0.05."
+    },
+    {
+     "title": "Compare the 99% interval with zero",
+     "general": [
+      "0\\in[L_{99},U_{99}]\\Rightarrow\\text{do not reject equal proportions}"
+     ],
+     "work": [
+      "-0.00896203<p_1-p_2<0.148962"
+     ],
+     "words": "The 99% interval contains 0. The difference is not statistically significant with P < 0.01. Together the two intervals place the P value between 0.01 and 0.05."
+    }
+   ],
+   "conclusion": "The 95% confidence interval for standard gauze minus silver-coated is 0.009915529 to 0.1300845 and the 99% confidence interval is −0.00896203 to 0.148962. The 95% interval does not contain 0 and the 99% interval contains 0. There is a difference in the proportion of patients with an infection between the two dressings with P < 0.05 but not with P < 0.01, so 0.01 < P < 0.05. The infection proportion is higher with standard gauze.",
+   "source": "Original practice example in the course style",
+   "rounded": false,
+   "values": {
+    "m1": 28,
+    "n1": 200,
+    "m2": 14,
+    "n2": 200,
+    "p1": 0.14,
+    "p2": 0.07,
+    "pooled": 0.105,
+    "variance": 0.093975,
+    "se": 0.030655342111938665,
+    "rawSE": 0.030655342111938665,
+    "difference": 0.07,
+    "critical": 1.96,
+    "confidence": 0.95,
+    "margin": 0.06008447053939978,
+    "lower": 0.009915529460600224,
+    "upper": 0.13008447053939978,
+    "reject": true,
+    "critical99": 2.5758,
+    "margin99": 0.07896203021193161,
+    "lower99": -0.008962030211931607,
+    "upper99": 0.1489620302119316,
+    "reject99": false
+   },
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 2,
+    "row": "infinity",
+    "column": "0.05",
+    "value": 1.96,
+    "approximation": false,
+    "normalReference": true
+   },
+   "module": 17,
+   "tolerance": 0.001,
+   "answerName": "Lower endpoint",
+   "answer": 0.009915529460600224
+  },
+  {
+   "id": "p17-dialysis-catheter-lock",
+   "title": "Dialysis catheter patency with two lock solutions",
+   "topic": "twoProportions",
+   "context": "In a clinical trial looking at tunneled hemodialysis catheters (soft tubes placed in a large neck vein for kidney dialysis), patients were randomly assigned to have the catheter filled between sessions with either a heparin lock (an anticoagulant solution) or a citrate lock (a solution that binds calcium in the blood). The table below shows whether the catheter was still patent (open, with blood flow good enough for dialysis) 90 days after insertion.",
+   "unit": "proportion difference",
+   "table": {
+    "headers": [
+     "Group",
+     "Patent at 90 days",
+     "Not patent at 90 days"
+    ],
+    "rows": [
+     [
+      "Heparin lock",
+      58,
+      22
+     ],
+     [
+      "Citrate lock",
+      63,
+      19
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) What is the 95% confidence interval for the difference in the proportion of patients with a patent catheter at 90 days between the two lock-solution groups? DO NOT use R.",
+    "(ii) What is the 99% confidence interval for the difference in the proportion of patients with a patent catheter at 90 days between the two lock-solution groups?",
+    "(iii) Using only your calculations for Parts (i) and (ii), is the difference in the proportion of patients with a patent catheter at 90 days between these two groups statistically significant with P < 0.05? With P < 0.01? Please state how you reached your conclusions.",
+    "(iv) Provide your result in a single complete sentence that would convey your conclusion in a way that could be understood by a non-expert in statistics or medicine (e.g., a typical reader of a local newspaper)."
+   ],
+   "hypotheses": {
+    "null": "H_0:p_1-p_2=0",
+    "alternative": "H_A:p_1-p_2\\ne0",
+    "nullWords": "The proportion of patients with a patent catheter at 90 days is the same with the heparin lock and the citrate lock.",
+    "alternativeWords": "The proportion of patients with a patent catheter at 90 days is different with the heparin lock and the citrate lock."
+   },
+   "symbols": "\\(m_i\\) (group event count), \\(n_i\\) (group size), \\(\\hat p_i\\) (group sample proportion), \\(\\hat p\\) (pooled estimate), \\(s_d\\) (SE of the difference), \\(d\\) (observed difference).",
+   "steps": [
+    {
+     "title": "Define the population difference",
+     "general": [
+      "\\Delta=p_1-p_2"
+     ],
+     "work": [
+      "\\Delta=p_{\\mathrm{heparin}}-p_{\\mathrm{citrate}}"
+     ],
+     "words": "The procedure is a Normal (z) confidence interval for the difference between two independent proportions, with the pooled standard error. Use heparin lock minus citrate lock. The null states that the proportion with a patent catheter at 90 days is the same in the two populations, which is a difference of zero."
+    },
+    {
+     "title": "Find each group total",
+     "general": [
+      "n_i=m_i+(\\text{non-events})_i"
+     ],
+     "work": [
+      "n_1=58+22=80",
+      "n_2=63+19=82"
+     ],
+     "words": "The table gives the patients with and without the outcome. Add the two counts in each row to get the group size."
+    },
+    {
+     "title": "Calculate both sample proportions",
+     "general": [
+      "\\hat p_i=\\frac{m_i}{n_i}"
+     ],
+     "work": [
+      "\\hat p_1=\\frac{58}{80}=0.725",
+      "\\hat p_2=\\frac{63}{82}=0.7682927"
+     ],
+     "words": "Each event count is divided by its own group size."
+    },
+    {
+     "title": "Calculate the course pooled proportion",
+     "general": [
+      "\\hat p=\\frac{m_1+m_2}{n_1+n_2}"
+     ],
+     "work": [
+      "\\hat p=\\frac{58+63}{80+82}=\\frac{121}{162}=0.7469136"
+     ],
+     "words": "Combine the event counts and the group sizes before taking the fraction. This is the pooled convention used in this course."
+    },
+    {
+     "title": "Calculate the pooled binary variance",
+     "general": [
+      "s^2=\\hat p(1-\\hat p)"
+     ],
+     "work": [
+      "s^2=0.7469136(1-0.7469136)=0.1890337"
+     ],
+     "words": "The pooled binary variance is used in both group parts of the SE."
+    },
+    {
+     "title": "Calculate the difference SE",
+     "general": [
+      "s_d=\\sqrt{\\frac{s^2}{n_1}+\\frac{s^2}{n_2}}"
+     ],
+     "work": [
+      "s_d=\\sqrt{\\frac{0.1890337}{80}+\\frac{0.1890337}{82}}=\\sqrt{0.00466821}=0.0683243"
+     ],
+     "words": "Keep the two group sizes separate inside the square root."
+    },
+    {
+     "title": "Calculate the difference and margin",
+     "general": [
+      "d=\\hat p_1-\\hat p_2",
+      "M=z_{0.05}s_d"
+     ],
+     "work": [
+      "d=0.725-0.7682927=-0.04329268",
+      "M=1.96(0.0683243)=0.1339156"
+     ],
+     "words": "Use the Normal cutoff 1.96 from the infinity row, combined two-tail 0.05 column, on PDF page 2 of the printed t table.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 2,
+      "row": "infinity",
+      "column": "0.05",
+      "value": 1.96,
+      "approximation": false,
+      "normalReference": true
+     }
+    },
+    {
+     "title": "Calculate both endpoints",
+     "general": [
+      "L=d-M",
+      "U=d+M"
+     ],
+     "work": [
+      "L=-0.04329268-0.1339156=-0.1772083",
+      "U=-0.04329268+0.1339156=0.09062294"
+     ],
+     "words": "These are differences of proportions. Multiply by 100 to give them in percentage points."
+    },
+    {
+     "title": "Calculate the 99% margin",
+     "general": [
+      "M_{99}=z_{0.01}s_d"
+     ],
+     "work": [
+      "\\alpha=1-0.99=0.01,\\quad z_{0.01}=2.5758",
+      "M_{99}=2.5758(0.0683243)=0.1759897"
+     ],
+     "words": "The estimate and the standard error do not change. Only the cutoff changes. Use 2.5758 from the infinity row, combined two-tail 0.01 column.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 2,
+      "row": "infinity",
+      "column": "0.01",
+      "value": 2.5758,
+      "approximation": false,
+      "normalReference": true
+     }
+    },
+    {
+     "title": "Calculate both 99% endpoints",
+     "general": [
+      "L_{99}=d-M_{99}",
+      "U_{99}=d+M_{99}"
+     ],
+     "work": [
+      "L_{99}=-0.04329268-0.1759897=-0.2192824",
+      "U_{99}=-0.04329268+0.1759897=0.132697"
+     ],
+     "words": "The 99% interval is wider than the 95% interval because the cutoff is larger."
+    },
+    {
+     "title": "Compare the 95% interval with zero",
+     "general": [
+      "0\\in[L,U]\\Rightarrow\\text{do not reject equal proportions}"
+     ],
+     "work": [
+      "-0.1772083<p_1-p_2<0.09062294"
+     ],
+     "words": "The 95% interval contains 0. The difference is not statistically significant with P < 0.05."
+    },
+    {
+     "title": "Compare the 99% interval with zero",
+     "general": [
+      "0\\in[L_{99},U_{99}]\\Rightarrow\\text{do not reject equal proportions}"
+     ],
+     "work": [
+      "-0.2192824<p_1-p_2<0.132697"
+     ],
+     "words": "The 99% interval contains 0. The difference is not statistically significant with P < 0.01. Both intervals contain 0, so P > 0.05."
+    }
+   ],
+   "conclusion": "The 95% confidence interval for heparin minus citrate is −0.1772083 to 0.09062294 and the 99% confidence interval is −0.2192824 to 0.132697. Both intervals contain 0, so the difference in the proportion of patients with a patent catheter is not statistically significant with P < 0.05 or with P < 0.01 (P > 0.05). For a newspaper reader, the two lock solutions kept about the same share of dialysis catheters working for three months.",
+   "source": "Original practice example in the course style",
+   "rounded": false,
+   "values": {
+    "m1": 58,
+    "n1": 80,
+    "m2": 63,
+    "n2": 82,
+    "p1": 0.725,
+    "p2": 0.7682926829268293,
+    "pooled": 0.7469135802469136,
+    "variance": 0.18903368388965097,
+    "se": 0.06832429931249358,
+    "rawSE": 0.06832429931249358,
+    "difference": -0.04329268292682931,
+    "critical": 1.96,
+    "confidence": 0.95,
+    "margin": 0.1339156266524874,
+    "lower": -0.17720830957931671,
+    "upper": 0.0906229437256581,
+    "reject": false,
+    "critical99": 2.5758,
+    "margin99": 0.17598973016912095,
+    "lower99": -0.21928241309595026,
+    "upper99": 0.13269704724229164,
+    "reject99": false
+   },
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 2,
+    "row": "infinity",
+    "column": "0.05",
+    "value": 1.96,
+    "approximation": false,
+    "normalReference": true
+   },
+   "module": 17,
+   "tolerance": 0.001,
+   "answerName": "Lower endpoint",
+   "answer": -0.17720830957931671
+  },
+  {
+   "id": "p17-bp-trial-reported-interval",
+   "title": "Deciding from a reported blood-pressure interval",
+   "topic": "decision",
+   "context": "A large clinical trial compared a new once-daily antihypertensive tablet (a candidate drug for high blood pressure) with a placebo in adults with stage 1 hypertension. Systolic blood pressure (the pressure in the arteries while the heart contracts) was measured in millimeters of mercury (mmHg) with an automated office cuff at the start and after 8 weeks, and the change was recorded for each patient. There were 420 patients in each group. The trial report gives only the interval below, which was calculated with the Normal cutoff 1.96 for the difference in mean change (tablet minus placebo).",
+   "unit": "mmHg",
+   "table": {
+    "headers": [
+     "Reported quantity",
+     "Lower endpoint (mmHg)",
+     "Upper endpoint (mmHg)"
+    ],
+    "rows": [
+     [
+      "95% confidence interval, tablet minus placebo",
+      -9.8,
+      -1.4
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) Using only the reported interval, what are the observed difference in mean change and its standard error?",
+    "(ii) What is the 99% confidence interval for the difference in mean change in systolic blood pressure between the two groups?",
+    "(iii) Using only your calculations for Parts (i) and (ii), is the difference in mean change in systolic blood pressure between these two groups statistically significant with P < 0.05? With P < 0.01? Please state how you reached your conclusions."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\mu_1-\\mu_2=0",
+    "alternative": "H_A:\\mu_1-\\mu_2\\ne0",
+    "nullWords": "The mean change in systolic blood pressure is the same with the tablet and with the placebo.",
+    "alternativeWords": "The mean change in systolic blood pressure is different with the tablet and with the placebo."
+   },
+   "symbols": "\\(L,U\\) (reported 95% endpoints), \\(d\\) (observed difference), \\(M\\) (95% margin), \\(s_d\\) (SE of the difference), \\(M_{99}\\) (99% margin), \\(L_{99},U_{99}\\) (99% endpoints), \\(\\theta_0\\) (null value).",
+   "steps": [
+    {
+     "title": "State the procedure and the null value",
+     "general": [
+      "H_0:\\mu_1-\\mu_2=\\theta_0",
+      "\\theta_0=0"
+     ],
+     "work": [
+      "\\theta_0=0"
+     ],
+     "words": "The procedure is to decide with a confidence interval. A two-sided test at level alpha rejects the null exactly when the matching 100(1 − alpha)% interval does not contain the null value. Here the null value is a difference of 0 mmHg."
+    },
+    {
+     "title": "Recover the observed difference",
+     "general": [
+      "d=\\frac{L+U}{2}"
+     ],
+     "work": [
+      "d=\\frac{-9.8+(-1.4)}{2}=-5.6"
+     ],
+     "words": "A Normal interval is symmetric, so its center is the observed difference."
+    },
+    {
+     "title": "Recover the margin and the standard error",
+     "general": [
+      "M=\\frac{U-L}{2}",
+      "s_d=\\frac{M}{z_{0.05}}"
+     ],
+     "work": [
+      "M=\\frac{-1.4-(-9.8)}{2}=4.2",
+      "s_d=\\frac{4.2}{1.96}=2.142857"
+     ],
+     "words": "Half the width is the margin. The margin is 1.96 standard errors, so dividing by 1.96 gives the standard error.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 2,
+      "row": "infinity",
+      "column": "0.05",
+      "value": 1.96,
+      "approximation": false,
+      "normalReference": true
+     }
+    },
+    {
+     "title": "Find the 99% cutoff",
+     "general": [
+      "z_c=z_{0.01}"
+     ],
+     "work": [
+      "\\alpha=1-0.99=0.01,\\quad z_{0.01}=2.5758"
+     ],
+     "words": "With 420 patients per group the degrees of freedom are far beyond the last printed row. Use the infinity row, combined two-tail 0.01 column, on PDF page 2. The cutoff is 2.5758.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 2,
+      "row": "infinity",
+      "column": "0.01",
+      "value": 2.5758,
+      "approximation": false,
+      "normalReference": true
+     }
+    },
+    {
+     "title": "Calculate the 99% margin",
+     "general": [
+      "M_{99}=z_{0.01}s_d"
+     ],
+     "work": [
+      "M_{99}=2.5758(2.142857)=5.519571"
+     ],
+     "words": "Only the cutoff changes. The estimate and the standard error stay the same."
+    },
+    {
+     "title": "Calculate both 99% endpoints",
+     "general": [
+      "L_{99}=d-M_{99}",
+      "U_{99}=d+M_{99}"
+     ],
+     "work": [
+      "L_{99}=-5.6-5.519571=-11.11957",
+      "U_{99}=-5.6+5.519571=-0.08042857"
+     ],
+     "words": "The 99% interval is wider than the 95% interval because the cutoff is larger."
+    },
+    {
+     "title": "Decide at the 0.05 level",
+     "general": [
+      "\\theta_0\\notin[L,U]\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "0\\notin[-9.8,-1.4]"
+     ],
+     "words": "The reported 95% interval lies entirely below 0. It does not contain 0, so the difference is statistically significant with P < 0.05."
+    },
+    {
+     "title": "Decide at the 0.01 level",
+     "general": [
+      "\\theta_0\\notin[L_{99},U_{99}]\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "0\\notin[-11.11957,-0.08042857]"
+     ],
+     "words": "The upper 99% endpoint is slightly below 0, so the 99% interval also does not contain 0. The difference is statistically significant with P < 0.01, but only barely because the endpoint is very close to 0."
+    }
+   ],
+   "conclusion": "The observed difference is −5.6 mmHg with a standard error of 2.142857 mmHg. The 99% confidence interval for tablet minus placebo is −11.11957 to −0.08042857 mmHg. Neither the 95% nor the 99% interval contains 0, so there is a difference in mean change in systolic blood pressure between the two groups with P < 0.01, with a larger fall on the tablet. The upper 99% endpoint is very close to 0, so the P value is only a little below 0.01.",
+   "source": "Original practice example in the course style",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 2,
+    "row": "infinity",
+    "column": "0.01",
+    "value": 2.5758,
+    "approximation": false,
+    "normalReference": true
+   },
+   "values": {
+    "reportedLower": -9.8,
+    "reportedUpper": -1.4,
+    "reference": 0,
+    "confidence": 0.95,
+    "difference": -5.6000000000000005,
+    "margin": 4.2,
+    "se": 2.142857142857143,
+    "critical": 1.96,
+    "critical99": 2.5758,
+    "margin99": 5.519571428571429,
+    "lower99": -11.11957142857143,
+    "upper99": -0.08042857142857152,
+    "reject": true,
+    "reject99": true,
+    "n1": 420,
+    "n2": 420
+   },
+   "module": 17,
+   "tolerance": 0.055598,
+   "answerName": "Lower endpoint of the 99% CI",
+   "answer": -11.11957142857143
+  },
+  {
+   "id": "p17-serum-sodium-meaning",
+   "title": "Meaning of an interval for serum sodium",
+   "topic": "meaning",
+   "context": "In a study looking at electrolyte balance in healthy adults, serum sodium was measured in millimoles per liter (mmol/L) with an ion-selective electrode analyzer in 40 randomly chosen blood donors. The results are summarized in the table below. Assume that any quantities of interest are Normally distributed.",
+   "unit": "mmol/L",
+   "table": {
+    "headers": [
+     "Number of donors",
+     "Mean sodium (mmol/L)",
+     "SD (mmol/L)"
+    ],
+    "rows": [
+     [
+      40,
+      139.6,
+      2.4
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) What is the 95% confidence interval for the mean serum sodium of healthy adults? DO NOT use R.",
+    "(ii) A newspaper article states that 95% of healthy adults have a serum sodium inside the interval from Part (i). Is this statement correct? Please state how you reached your conclusions.",
+    "(iii) Explain in one or two sentences what the 95% in a 95% confidence interval refers to."
+   ],
+   "symbols": "\\(\\bar x\\) (sample mean), \\(s\\) (sample SD), \\(n\\) (number sampled), \\(s_{\\bar x}\\) (standard error of the mean), \\(\\mu\\) (population mean), \\(M\\) (margin).",
+   "steps": [
+    {
+     "title": "Identify the population quantity",
+     "general": [
+      "\\text{estimate of }\\mu=\\bar x"
+     ],
+     "work": [
+      "\\bar x=139.6,\\quad s=2.4,\\quad n=40"
+     ],
+     "words": "The procedure is a one-sample t confidence interval for a population mean. The sample mean estimates the population mean. The SD describes single measurements, and the standard error describes the uncertainty in their mean."
+    },
+    {
+     "title": "Calculate the standard error",
+     "general": [
+      "s_{\\bar x}=\\frac{s}{\\sqrt n}"
+     ],
+     "work": [
+      "s_{\\bar x}=\\frac{2.4}{\\sqrt{40}}=\\frac{2.4}{6.324555}=0.3794733"
+     ],
+     "words": "Divide the sample SD by the square root of the sample size. Keep the standard error for the margin."
+    },
+    {
+     "title": "Choose degrees of freedom and the cutoff",
+     "general": [
+      "\\nu=n-1",
+      "t_c=t_\\alpha(\\nu)"
+     ],
+     "work": [
+      "\\nu=40-1=39",
+      "\\alpha=1-0.95=0.05",
+      "t_{0.05}(39)=2.023"
+     ],
+     "words": "Open t_table.pdf, PDF page 1. Use row 39 and the combined two-tail 0.05 column. The printed cutoff is 2.023. Do not halve the column probability again.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "39",
+      "column": "0.05",
+      "value": 2.023,
+      "actualDf": 39,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Calculate the margin of error",
+     "general": [
+      "M=t_c s_{\\bar x}"
+     ],
+     "work": [
+      "M=2.023(0.3794733)=0.7676745"
+     ],
+     "words": "The margin has the same units as the sample mean, mmol/L."
+    },
+    {
+     "title": "Calculate the lower endpoint",
+     "general": [
+      "L=\\bar x-M"
+     ],
+     "work": [
+      "L=139.6-0.7676745=138.8323"
+     ],
+     "words": "Subtract the margin from the sample mean."
+    },
+    {
+     "title": "Calculate the upper endpoint",
+     "general": [
+      "U=\\bar x+M"
+     ],
+     "work": [
+      "U=139.6+0.7676745=140.3677"
+     ],
+     "words": "Add the same margin to the sample mean."
+    },
+    {
+     "title": "State the population interval",
+     "general": [
+      "L<\\mu<U"
+     ],
+     "work": [
+      "138.8323<\\mu<140.3677"
+     ],
+     "words": "The 95% interval estimates the population mean in mmol/L. It is not a range that holds 95% of single measurements."
+    },
+    {
+     "title": "Compare the SD with the standard error",
+     "general": [
+      "s_{\\bar x}=\\frac{s}{\\sqrt n}<s"
+     ],
+     "work": [
+      "s=2.4>s_{\\bar x}=0.3794733",
+      "U-L=140.3677-138.8323=1.535349"
+     ],
+     "words": "The interval is narrow because it describes the uncertainty in the mean. Single adults scatter around the mean with the SD, which is about six times larger than the standard error. So most single sodium values fall outside this narrow interval."
+    },
+    {
+     "title": "Interpret the confidence level",
+     "general": [
+      "\\text{confidence}=100(1-\\alpha)\\%"
+     ],
+     "work": [
+      "100(1-0.05)\\%=95\\%"
+     ],
+     "words": "If many samples of 40 adults were drawn and an interval were built from each one in the same way, about 95% of those intervals would contain the true population mean. This interval either contains the true mean or it does not. The 95% describes the method, not one person."
+    }
+   ],
+   "conclusion": "The 95% confidence interval for the mean serum sodium of healthy adults is 138.8323 to 140.3677 mmol/L. The statement in the newspaper is not correct, because the interval estimates the population mean and single adults spread much more widely, with an SD of 2.4 mmol/L. The 95% means that the method gives intervals that contain the true mean in about 95% of repeated samples.",
+   "source": "Original practice example in the course style",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "39",
+    "column": "0.05",
+    "value": 2.023,
+    "actualDf": 39,
+    "approximation": false
+   },
+   "values": {
+    "n": 40,
+    "x": 139.6,
+    "sd": 2.4,
+    "confidence": 0.95,
+    "df": 39,
+    "se": 0.3794733192202055,
+    "critical": 2.023,
+    "margin": 0.7676745247824758,
+    "lower": 138.83232547521752,
+    "upper": 140.36767452478247
+   },
+   "module": 17,
+   "tolerance": 0.694162,
+   "answerName": "Lower endpoint",
+   "answer": 138.83232547521752
+  }
+ ],
+ "questions": [],
+ "notes": [
+  "All data are invented for practice. No real study, author or drug effect is cited.",
+  "The decision case p17-bp-trial-reported-interval and the meaning case p17-serum-sodium-meaning use the two session methods that have no worked example in the reference file. The meaning case reuses the oneMean key set and adds two interpretation steps. The decision case has its own value keys (reportedLower, reportedUpper, reference, difference, margin, se, critical, critical99, margin99, lower99, upper99, reject, reject99, n1, n2), and its graded answer is the lower endpoint of the 99% interval.",
+  "p17-fev1-two-inhalers has 41 degrees of freedom, which is not a printed row (the table prints 40 and 42). The solution uses row 40 (2.021) as the conservative bracket and stores approximation true with actualDf 41. alternativeTableAnswer gives the lower endpoint with row 42 (2.018). The decision is the same with either row.",
+  "Intervals that contain the null value (do not reject) are p17-infusion-pump-accuracy (99%, contains 100 mL/h), p17-fev1-two-inhalers (contains 0), p17-mrsa-staff-carriage (contains 0.10) and p17-dialysis-catheter-lock (95% and 99% both contain 0). p17-wound-dressing-infection rejects at 0.05 but not at 0.01 (0.01 < P < 0.05).",
+  "Cases close to a cutoff are p17-bp-trial-reported-interval (upper 99% endpoint just below 0), p17-anemia-pregnancy-screen (lower endpoint a little above 0.25) and p17-mrsa-staff-carriage (lower endpoint a little below 0.10).",
+  "The two-proportion cases follow the table layout of Homework 3 Problem 1 (event and non-event counts per group), so they add a step that finds each group total. They use the course pooled standard error, as the reference cases do, and store the 99% results in the extra keys critical99, margin99, lower99, upper99 and reject99.",
+  "p17-infusion-pump-accuracy is a 99% interval (row 22, 0.01 column, 2.819). The one-mean cases that compare with a stated value add the keys reference and reject and one comparison step to the reference oneMean key set, and carry hypotheses.",
+  "Step table lookups use the key tableLookup, as the reference cases do. Work lines show 7 significant figures and carry full precision between steps."
+ ]
+}

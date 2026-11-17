@@ -1,0 +1,2272 @@
+{
+ "cases": [
+  {
+   "id": "p20-vegan-diet-b12",
+   "title": "Vitamin B12 before and after 8 weeks of a vegan diet",
+   "topic": "s20paired",
+   "context": "In a study looking at a plant-based diet, 11 adults switched from their usual diet to a vegan diet (a diet with no meat, fish, eggs or dairy foods) for 8 weeks and took no supplements. Serum vitamin B12 (a vitamin found mainly in animal foods) was measured in picomoles per liter (pmol/L) in a fasting blood sample before the change (measurement 1) and again after 8 weeks (measurement 2).",
+   "unit": "pmol/L",
+   "table": {
+    "headers": [
+     "Subject",
+     "B12 before (pmol/L)",
+     "B12 after 8 weeks (pmol/L)"
+    ],
+    "rows": [
+     [
+      1,
+      137,
+      128
+     ],
+     [
+      2,
+      144,
+      141
+     ],
+     [
+      3,
+      144,
+      146
+     ],
+     [
+      4,
+      162,
+      148
+     ],
+     [
+      5,
+      126,
+      121
+     ],
+     [
+      6,
+      165,
+      156
+     ],
+     [
+      7,
+      151,
+      152
+     ],
+     [
+      8,
+      184,
+      169
+     ],
+     [
+      9,
+      185,
+      174
+     ],
+     [
+      10,
+      193,
+      187
+     ],
+     [
+      11,
+      182,
+      175
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) Based on the recorded data, is there evidence that serum vitamin B12 is different before and after the 8 weeks? Assume that any quantities of interest are Normally distributed. DO NOT use R."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\delta=0",
+    "alternative": "H_A:\\delta\\ne0",
+    "nullWords": "Mean serum vitamin B12 is the same before and after the 8 weeks (the true mean after minus before difference is zero).",
+    "alternativeWords": "Mean serum vitamin B12 is different before and after the 8 weeks (the true mean after minus before difference is not zero)."
+   },
+   "symbols": "\\(d_i\\) (difference in subject \\(i\\)), \\(\\bar d\\) (mean difference), \\(s_d\\) (SD of the differences), \\(s_{\\bar d}\\) (standard error of the mean difference), \\(\\delta\\) (true mean difference), \\(n\\) (number of subjects), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\delta=0",
+      "H_A:\\delta\\ne0"
+     ],
+     "work": [
+      "\\delta=\\mu_{\\mathrm{after}}-\\mu_{\\mathrm{before}}"
+     ],
+     "words": "Each subject is measured under both conditions, so the procedure is the paired t test on the within-subject differences. Mean serum vitamin B12 is the same before and after the 8 weeks (the true mean after minus before difference is zero). Mean serum vitamin B12 is different before and after the 8 weeks (the true mean after minus before difference is not zero)."
+    },
+    {
+     "title": "Form one difference per subject",
+     "general": [
+      "d_i=x1_i-x2_i,\\quad i=1,\\dots,n"
+     ],
+     "work": [
+      "d_i=(128-137,141-144,146-144,148-162,121-126,156-165,152-151,169-184,174-185,187-193,175-182)",
+      "d_i=(-9,-3,2,-14,-5,-9,1,-15,-11,-6,-7),\\quad n=11"
+     ],
+     "words": "Subtract in the same direction for every subject (after minus before). The analysis now uses only these 11 numbers."
+    },
+    {
+     "title": "Calculate the mean difference",
+     "general": [
+      "\\bar d=\\frac{1}{n}\\sum_{i=1}^{n}d_i"
+     ],
+     "work": [
+      "\\bar d=\\frac{-76}{11}=-6.9091"
+     ],
+     "words": "The mean difference estimates the true mean change \\(\\delta\\) in pmol/L."
+    },
+    {
+     "title": "Calculate the SD of the differences",
+     "general": [
+      "s_d^2=\\frac{1}{n-1}\\sum_{i=1}^{n}(d_i-\\bar d)^2",
+      "s_d=\\sqrt{s_d^2}"
+     ],
+     "work": [
+      "\\sum(d_i-\\bar d)^2=302.909",
+      "s_d^2=\\frac{302.909}{10}=30.2909",
+      "s_d=5.50372"
+     ],
+     "words": "Square each deviation of a difference from the mean difference, add them, divide by \\(n-1\\), and take the square root."
+    },
+    {
+     "title": "Calculate the standard error of the mean difference",
+     "general": [
+      "s_{\\bar d}=\\frac{s_d}{\\sqrt n}"
+     ],
+     "work": [
+      "s_{\\bar d}=\\frac{5.50372}{\\sqrt{11}}=1.65943"
+     ],
+     "words": "The standard error describes how much the mean difference varies from sample to sample."
+    },
+    {
+     "title": "Calculate the t statistic",
+     "general": [
+      "t=\\frac{\\bar d-\\delta}{s_{\\bar d}}=\\frac{\\bar d}{s_{\\bar d}}\\quad(\\delta=0\\text{ under }H_0)"
+     ],
+     "work": [
+      "t=\\frac{-6.90909}{1.65943}=-4.16352"
+     ],
+     "words": "Under the null hypothesis the true mean difference is zero, so the numerator is the mean difference itself."
+    },
+    {
+     "title": "Find the degrees of freedom and the critical value",
+     "general": [
+      "\\nu=n-1",
+      "t_c=t_{0.05}(\\nu)"
+     ],
+     "work": [
+      "\\nu=11-1=10",
+      "t_{0.05}(10)=2.228"
+     ],
+     "words": "Open t_table.pdf, PDF page 1. Use row 10 and the two-tailed 0.05 column. The printed cutoff is 2.228.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "10",
+      "column": "0.05",
+      "value": 2.228,
+      "actualDf": 10,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "|t|>t_\\alpha(\\nu)\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "|t|=4.16352>t_{0.05}(10)=2.228",
+      "t_{0.002}(10)=4.144<4.1635<t_{0.001}(10)=4.587",
+      "0.001<P<0.002"
+     ],
+     "words": "The magnitude of t is larger than the 0.05 cutoff, so reject the null hypothesis. In row 10 it lies between the 0.002 column (4.144) and the 0.001 column (4.587), so 0.001 < P < 0.002."
+    }
+   ],
+   "conclusion": "The mean change is -6.909 pmol/L, t = -4.1635 with 10 degrees of freedom. Reject the null hypothesis. There is a difference in serum vitamin B12 before and after the 8 weeks, and B12 is lower after the 8 weeks on the vegan diet (0.001 < P < 0.002).",
+   "source": "Original practice example in the course style",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "10",
+    "column": "0.05",
+    "value": 2.228,
+    "actualDf": 10,
+    "approximation": false
+   },
+   "values": {
+    "n": 11,
+    "differences": [
+     -9,
+     -3,
+     2,
+     -14,
+     -5,
+     -9,
+     1,
+     -15,
+     -11,
+     -6,
+     -7
+    ],
+    "dbar": -6.909090909090909,
+    "sumSqDev": 302.9090909090909,
+    "varianceD": 30.29090909090909,
+    "sd": 5.503717751748275,
+    "se": 1.6594333395061287,
+    "t": -4.1635242251714395,
+    "df": 10,
+    "critical": 2.228,
+    "exactP": 0.0019378312405439967,
+    "reject": true
+   },
+   "module": 20,
+   "tolerance": 0.020818,
+   "answerName": "t statistic",
+   "answer": -4.1635242251714395
+  },
+  {
+   "id": "p20-bilirubin-skin-meter",
+   "title": "Newborn bilirubin by a skin meter and by the laboratory analyzer",
+   "topic": "s20paired",
+   "context": "Researchers interested in point-of-care testing (tests done at the bedside instead of in the central laboratory) did a study to evaluate a transcutaneous bilirubin meter (a handheld device that estimates bilirubin from light shone on the skin). Bilirubin is a yellow breakdown product of red blood cells, and a high level causes jaundice (yellow skin) in newborns. In each of 10 newborns with jaundice, bilirubin was measured in milligrams per deciliter (mg/dL) on a heel-prick blood sample with the laboratory analyzer (measurement 1) and with the skin meter on the forehead at the same visit (measurement 2).",
+   "unit": "mg/dL",
+   "table": {
+    "headers": [
+     "Newborn",
+     "Laboratory analyzer (mg/dL)",
+     "Skin meter (mg/dL)"
+    ],
+    "rows": [
+     [
+      1,
+      14.3,
+      15.2
+     ],
+     [
+      2,
+      16.6,
+      16
+     ],
+     [
+      3,
+      14.8,
+      14.8
+     ],
+     [
+      4,
+      11.8,
+      11.6
+     ],
+     [
+      5,
+      12.5,
+      12.4
+     ],
+     [
+      6,
+      14.7,
+      15.2
+     ],
+     [
+      7,
+      13.3,
+      13.2
+     ],
+     [
+      8,
+      15.2,
+      14.9
+     ],
+     [
+      9,
+      10.5,
+      10.9
+     ],
+     [
+      10,
+      16.6,
+      17.3
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) Based on the recorded data, is there evidence that the bilirubin reading is different with the two methods? Assume that any quantities of interest are Normally distributed. DO NOT use R."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\delta=0",
+    "alternative": "H_A:\\delta\\ne0",
+    "nullWords": "The skin meter and the laboratory analyzer give the same mean bilirubin (the true mean meter minus laboratory difference is zero).",
+    "alternativeWords": "The skin meter and the laboratory analyzer give different mean bilirubin values (the true mean meter minus laboratory difference is not zero)."
+   },
+   "symbols": "\\(d_i\\) (difference in subject \\(i\\)), \\(\\bar d\\) (mean difference), \\(s_d\\) (SD of the differences), \\(s_{\\bar d}\\) (standard error of the mean difference), \\(\\delta\\) (true mean difference), \\(n\\) (number of subjects), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\delta=0",
+      "H_A:\\delta\\ne0"
+     ],
+     "work": [
+      "\\delta=\\mu_{\\mathrm{meter}}-\\mu_{\\mathrm{lab}}"
+     ],
+     "words": "Each newborn is measured with both methods, so the procedure is the paired t test on the within-newborn differences. The skin meter and the laboratory analyzer give the same mean bilirubin (the true mean meter minus laboratory difference is zero). The skin meter and the laboratory analyzer give different mean bilirubin values (the true mean meter minus laboratory difference is not zero)."
+    },
+    {
+     "title": "Form one difference per subject",
+     "general": [
+      "d_i=x1_i-x2_i,\\quad i=1,\\dots,n"
+     ],
+     "work": [
+      "d_i=(15.2-14.3,16.0-16.6,14.8-14.8,11.6-11.8,12.4-12.5,15.2-14.7,13.2-13.3,14.9-15.2,10.9-10.5,17.3-16.6)",
+      "d_i=(0.9,-0.6,0.0,-0.2,-0.1,0.5,-0.1,-0.3,0.4,0.7),\\quad n=10"
+     ],
+     "words": "Subtract in the same direction for every subject (meter minus laboratory). The analysis now uses only these 10 numbers."
+    },
+    {
+     "title": "Calculate the mean difference",
+     "general": [
+      "\\bar d=\\frac{1}{n}\\sum_{i=1}^{n}d_i"
+     ],
+     "work": [
+      "\\bar d=\\frac{1.2}{10}=0.12000"
+     ],
+     "words": "The mean difference estimates the true mean change \\(\\delta\\) in mg/dL."
+    },
+    {
+     "title": "Calculate the SD of the differences",
+     "general": [
+      "s_d^2=\\frac{1}{n-1}\\sum_{i=1}^{n}(d_i-\\bar d)^2",
+      "s_d=\\sqrt{s_d^2}"
+     ],
+     "work": [
+      "\\sum(d_i-\\bar d)^2=2.076",
+      "s_d^2=\\frac{2.076}{9}=0.230667",
+      "s_d=0.480278"
+     ],
+     "words": "Square each deviation of a difference from the mean difference, add them, divide by \\(n-1\\), and take the square root."
+    },
+    {
+     "title": "Calculate the standard error of the mean difference",
+     "general": [
+      "s_{\\bar d}=\\frac{s_d}{\\sqrt n}"
+     ],
+     "work": [
+      "s_{\\bar d}=\\frac{0.480278}{\\sqrt{10}}=0.151877"
+     ],
+     "words": "The standard error describes how much the mean difference varies from sample to sample."
+    },
+    {
+     "title": "Calculate the t statistic",
+     "general": [
+      "t=\\frac{\\bar d-\\delta}{s_{\\bar d}}=\\frac{\\bar d}{s_{\\bar d}}\\quad(\\delta=0\\text{ under }H_0)"
+     ],
+     "work": [
+      "t=\\frac{0.12}{0.151877}=0.790112"
+     ],
+     "words": "Under the null hypothesis the true mean difference is zero, so the numerator is the mean difference itself."
+    },
+    {
+     "title": "Find the degrees of freedom and the critical value",
+     "general": [
+      "\\nu=n-1",
+      "t_c=t_{0.05}(\\nu)"
+     ],
+     "work": [
+      "\\nu=10-1=9",
+      "t_{0.05}(9)=2.262"
+     ],
+     "words": "Open t_table.pdf, PDF page 1. Use row 9 and the two-tailed 0.05 column. The printed cutoff is 2.262.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "9",
+      "column": "0.05",
+      "value": 2.262,
+      "actualDf": 9,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "|t|<t_\\alpha(\\nu)\\Rightarrow\\text{do not reject }H_0"
+     ],
+     "work": [
+      "|t|=0.790112<t_{0.05}(9)=2.262",
+      "t_{0.50}(9)=0.703<0.7901<t_{0.20}(9)=1.383",
+      "0.20<P<0.50"
+     ],
+     "words": "The magnitude of t is smaller than the 0.05 cutoff, so do not reject the null hypothesis. In row 9 it lies between the 0.50 column (0.703) and the 0.20 column (1.383), so 0.20 < P < 0.50."
+    }
+   ],
+   "conclusion": "The mean meter minus laboratory difference is 0.12 mg/dL, t = 0.7901 with 9 degrees of freedom. Do not reject the null hypothesis (0.20 < P < 0.50). There is no evidence that the skin meter reads bilirubin differently from the laboratory analyzer.",
+   "source": "Original practice example in the course style",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "9",
+    "column": "0.05",
+    "value": 2.262,
+    "actualDf": 9,
+    "approximation": false
+   },
+   "values": {
+    "n": 10,
+    "differences": [
+     0.9,
+     -0.6,
+     0,
+     -0.2,
+     -0.1,
+     0.5,
+     -0.1,
+     -0.3,
+     0.4,
+     0.7
+    ],
+    "dbar": 0.12,
+    "sumSqDev": 2.076,
+    "varianceD": 0.2306666666666667,
+    "sd": 0.4802776974487434,
+    "se": 0.1518771433319269,
+    "t": 0.7901123063510648,
+    "df": 9,
+    "critical": 2.262,
+    "exactP": 0.44977811990282013,
+    "reject": false
+   },
+   "module": 20,
+   "tolerance": 0.003951,
+   "answerName": "t statistic",
+   "answer": 0.7901123063510648
+  },
+  {
+   "id": "p20-screen-tear-breakup",
+   "title": "Tear film breakup time before and after screen reading",
+   "topic": "s20paired",
+   "context": "In a study looking at dry eye, tear film breakup time (TBUT, the number of seconds between a blink and the first dry spot on the surface of the eye) was measured in seconds (s) with a slit lamp (a microscope with a bright light for examining the eye) in 12 office workers. Each subject was evaluated before (measurement 1) and again after 2 hours of reading on a computer screen (measurement 2).",
+   "unit": "s",
+   "table": {
+    "headers": [
+     "Subject",
+     "TBUT before (s)",
+     "TBUT after 2 hours (s)"
+    ],
+    "rows": [
+     [
+      1,
+      10.7,
+      11.9
+     ],
+     [
+      2,
+      10.5,
+      8.3
+     ],
+     [
+      3,
+      12.9,
+      10.5
+     ],
+     [
+      4,
+      14.1,
+      13.1
+     ],
+     [
+      5,
+      10,
+      9.7
+     ],
+     [
+      6,
+      9.4,
+      6.4
+     ],
+     [
+      7,
+      13.3,
+      13.6
+     ],
+     [
+      8,
+      13.3,
+      12.1
+     ],
+     [
+      9,
+      11.9,
+      10.2
+     ],
+     [
+      10,
+      10.8,
+      8.6
+     ],
+     [
+      11,
+      12.1,
+      14.2
+     ],
+     [
+      12,
+      8.7,
+      6.7
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) Based on the recorded data, is there evidence that tear film breakup time is different before and after screen reading? Assume that any quantities of interest are Normally distributed. DO NOT use R.",
+    "(ii) Provide your result in a single complete sentence that would convey your conclusion in a way that could be understood by a non-expert in statistics or medicine (e.g., a typical reader of a local newspaper)."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\delta=0",
+    "alternative": "H_A:\\delta\\ne0",
+    "nullWords": "Mean tear film breakup time is the same before and after 2 hours of screen reading (the true mean after minus before difference is zero).",
+    "alternativeWords": "Mean tear film breakup time is different before and after 2 hours of screen reading (the true mean after minus before difference is not zero)."
+   },
+   "symbols": "\\(d_i\\) (difference in subject \\(i\\)), \\(\\bar d\\) (mean difference), \\(s_d\\) (SD of the differences), \\(s_{\\bar d}\\) (standard error of the mean difference), \\(\\delta\\) (true mean difference), \\(n\\) (number of subjects), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\delta=0",
+      "H_A:\\delta\\ne0"
+     ],
+     "work": [
+      "\\delta=\\mu_{\\mathrm{after}}-\\mu_{\\mathrm{before}}"
+     ],
+     "words": "Each subject is measured under both conditions, so the procedure is the paired t test on the within-subject differences. Mean tear film breakup time is the same before and after 2 hours of screen reading (the true mean after minus before difference is zero). Mean tear film breakup time is different before and after 2 hours of screen reading (the true mean after minus before difference is not zero)."
+    },
+    {
+     "title": "Form one difference per subject",
+     "general": [
+      "d_i=x1_i-x2_i,\\quad i=1,\\dots,n"
+     ],
+     "work": [
+      "d_i=(11.9-10.7,8.3-10.5,10.5-12.9,13.1-14.1,9.7-10.0,6.4-9.4,13.6-13.3,12.1-13.3,10.2-11.9,8.6-10.8,14.2-12.1,6.7-8.7)",
+      "d_i=(1.2,-2.2,-2.4,-1.0,-0.3,-3.0,0.3,-1.2,-1.7,-2.2,2.1,-2.0),\\quad n=12"
+     ],
+     "words": "Subtract in the same direction for every subject (after minus before). The analysis now uses only these 12 numbers."
+    },
+    {
+     "title": "Calculate the mean difference",
+     "general": [
+      "\\bar d=\\frac{1}{n}\\sum_{i=1}^{n}d_i"
+     ],
+     "work": [
+      "\\bar d=\\frac{-12.4}{12}=-1.0333"
+     ],
+     "words": "The mean difference estimates the true mean change \\(\\delta\\) in s."
+    },
+    {
+     "title": "Calculate the SD of the differences",
+     "general": [
+      "s_d^2=\\frac{1}{n-1}\\sum_{i=1}^{n}(d_i-\\bar d)^2",
+      "s_d=\\sqrt{s_d^2}"
+     ],
+     "work": [
+      "\\sum(d_i-\\bar d)^2=26.9867",
+      "s_d^2=\\frac{26.9867}{11}=2.45333",
+      "s_d=1.56631"
+     ],
+     "words": "Square each deviation of a difference from the mean difference, add them, divide by \\(n-1\\), and take the square root."
+    },
+    {
+     "title": "Calculate the standard error of the mean difference",
+     "general": [
+      "s_{\\bar d}=\\frac{s_d}{\\sqrt n}"
+     ],
+     "work": [
+      "s_{\\bar d}=\\frac{1.56631}{\\sqrt{12}}=0.452155"
+     ],
+     "words": "The standard error describes how much the mean difference varies from sample to sample."
+    },
+    {
+     "title": "Calculate the t statistic",
+     "general": [
+      "t=\\frac{\\bar d-\\delta}{s_{\\bar d}}=\\frac{\\bar d}{s_{\\bar d}}\\quad(\\delta=0\\text{ under }H_0)"
+     ],
+     "work": [
+      "t=\\frac{-1.03333}{0.452155}=-2.28535"
+     ],
+     "words": "Under the null hypothesis the true mean difference is zero, so the numerator is the mean difference itself."
+    },
+    {
+     "title": "Find the degrees of freedom and the critical value",
+     "general": [
+      "\\nu=n-1",
+      "t_c=t_{0.05}(\\nu)"
+     ],
+     "work": [
+      "\\nu=12-1=11",
+      "t_{0.05}(11)=2.201"
+     ],
+     "words": "Open t_table.pdf, PDF page 1. Use row 11 and the two-tailed 0.05 column. The printed cutoff is 2.201.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "11",
+      "column": "0.05",
+      "value": 2.201,
+      "actualDf": 11,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "|t|>t_\\alpha(\\nu)\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "|t|=2.28535>t_{0.05}(11)=2.201",
+      "t_{0.05}(11)=2.201<2.2854<t_{0.02}(11)=2.718",
+      "0.02<P<0.05"
+     ],
+     "words": "The magnitude of t is larger than the 0.05 cutoff, so reject the null hypothesis. In row 11 it lies between the 0.05 column (2.201) and the 0.02 column (2.718), so 0.02 < P < 0.05."
+    }
+   ],
+   "conclusion": "The mean change is -1.033 s, t = -2.2854 with 11 degrees of freedom. Reject the null hypothesis (0.02 < P < 0.05). There is a difference in tear film breakup time. In plain words, after 2 hours of reading on a screen the tear film on the eye broke up about 1 second sooner on average, so the eyes dried out faster.",
+   "source": "Original practice example in the course style",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "11",
+    "column": "0.05",
+    "value": 2.201,
+    "actualDf": 11,
+    "approximation": false
+   },
+   "values": {
+    "n": 12,
+    "differences": [
+     1.2,
+     -2.2,
+     -2.4,
+     -1,
+     -0.3,
+     -3,
+     0.3,
+     -1.2,
+     -1.7,
+     -2.2,
+     2.1,
+     -2
+    ],
+    "dbar": -1.0333333333333334,
+    "sumSqDev": 26.98666666666667,
+    "varianceD": 2.4533333333333336,
+    "sd": 1.5663120165960975,
+    "se": 0.45215533220835125,
+    "t": -2.2853503204009056,
+    "df": 11,
+    "critical": 2.201,
+    "exactP": 0.04312875280864061,
+    "reject": true
+   },
+   "module": 20,
+   "tolerance": 0.011427,
+   "answerName": "t statistic",
+   "answer": -2.2853503204009056
+  },
+  {
+   "id": "p20-water-drinking-iop-r",
+   "title": "Eye pressure before and after drinking water, by hand and in R",
+   "topic": "s20pairedR",
+   "context": "Researchers interested in the water drinking test (a test of how eye pressure responds to a fluid load) did a study to evaluate intraocular pressure (IOP, the fluid pressure inside the eye) in 10 adults. IOP was measured in millimeters of mercury (mm Hg) with a rebound tonometer (a handheld device that touches the eye very briefly with a tiny probe). Each subject was evaluated before drinking (measurement 1) and again 30 minutes after drinking 1 liter (L) of water within 5 minutes (measurement 2).",
+   "unit": "mm Hg",
+   "table": {
+    "headers": [
+     "Subject",
+     "IOP before (mm Hg)",
+     "IOP 30 min after drinking (mm Hg)"
+    ],
+    "rows": [
+     [
+      1,
+      13,
+      14
+     ],
+     [
+      2,
+      14,
+      17
+     ],
+     [
+      3,
+      14,
+      16
+     ],
+     [
+      4,
+      19,
+      19
+     ],
+     [
+      5,
+      18,
+      23
+     ],
+     [
+      6,
+      18,
+      17
+     ],
+     [
+      7,
+      17,
+      21
+     ],
+     [
+      8,
+      16,
+      18
+     ],
+     [
+      9,
+      13,
+      17
+     ],
+     [
+      10,
+      16,
+      17
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) Based on the recorded data, is there evidence that intraocular pressure is different in these two states? Assume that any quantities of interest are Normally distributed. DO NOT use R.",
+    "(ii) Answer the question in Part (i) using the R function for the test you did in Part (i). Show your R code and the output. Mark each of the lines of the output that correspond to sections of your \"by hand\" calculations and answers in Part (i)."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\delta=0",
+    "alternative": "H_A:\\delta\\ne0",
+    "nullWords": "Mean IOP is the same before and 30 minutes after drinking the water (the true mean after minus before difference is zero).",
+    "alternativeWords": "Mean IOP is different before and 30 minutes after drinking the water (the true mean after minus before difference is not zero)."
+   },
+   "symbols": "\\(d_i\\) (difference in subject \\(i\\)), \\(\\bar d\\) (mean difference), \\(s_d\\) (SD of the differences), \\(s_{\\bar d}\\) (standard error of the mean difference), \\(\\delta\\) (true mean difference), \\(n\\) (number of subjects), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\delta=0",
+      "H_A:\\delta\\ne0"
+     ],
+     "work": [
+      "\\delta=\\mu_{\\mathrm{after}}-\\mu_{\\mathrm{before}}"
+     ],
+     "words": "Each subject is measured under both conditions, so the procedure is the paired t test on the within-subject differences. Mean IOP is the same before and 30 minutes after drinking the water (the true mean after minus before difference is zero). Mean IOP is different before and 30 minutes after drinking the water (the true mean after minus before difference is not zero)."
+    },
+    {
+     "title": "Form one difference per subject",
+     "general": [
+      "d_i=x1_i-x2_i,\\quad i=1,\\dots,n"
+     ],
+     "work": [
+      "d_i=(14-13,17-14,16-14,19-19,23-18,17-18,21-17,18-16,17-13,17-16)",
+      "d_i=(1,3,2,0,5,-1,4,2,4,1),\\quad n=10"
+     ],
+     "words": "Subtract in the same direction for every subject (after minus before). The analysis now uses only these 10 numbers."
+    },
+    {
+     "title": "Calculate the mean difference",
+     "general": [
+      "\\bar d=\\frac{1}{n}\\sum_{i=1}^{n}d_i"
+     ],
+     "work": [
+      "\\bar d=\\frac{21}{10}=2.1"
+     ],
+     "words": "The mean difference estimates the true mean change \\(\\delta\\) in mm Hg."
+    },
+    {
+     "title": "Calculate the SD of the differences",
+     "general": [
+      "s_d^2=\\frac{1}{n-1}\\sum_{i=1}^{n}(d_i-\\bar d)^2",
+      "s_d=\\sqrt{s_d^2}"
+     ],
+     "work": [
+      "\\sum(d_i-\\bar d)^2=32.9",
+      "s_d^2=\\frac{32.9}{9}=3.65556",
+      "s_d=1.91195"
+     ],
+     "words": "Square each deviation of a difference from the mean difference, add them, divide by \\(n-1\\), and take the square root."
+    },
+    {
+     "title": "Calculate the standard error of the mean difference",
+     "general": [
+      "s_{\\bar d}=\\frac{s_d}{\\sqrt n}"
+     ],
+     "work": [
+      "s_{\\bar d}=\\frac{1.91195}{\\sqrt{10}}=0.604612"
+     ],
+     "words": "The standard error describes how much the mean difference varies from sample to sample."
+    },
+    {
+     "title": "Calculate the t statistic",
+     "general": [
+      "t=\\frac{\\bar d-\\delta}{s_{\\bar d}}=\\frac{\\bar d}{s_{\\bar d}}\\quad(\\delta=0\\text{ under }H_0)"
+     ],
+     "work": [
+      "t=\\frac{2.1}{0.604612}=3.4733"
+     ],
+     "words": "Under the null hypothesis the true mean difference is zero, so the numerator is the mean difference itself."
+    },
+    {
+     "title": "Find the degrees of freedom and the critical value",
+     "general": [
+      "\\nu=n-1",
+      "t_c=t_{0.05}(\\nu)"
+     ],
+     "work": [
+      "\\nu=10-1=9",
+      "t_{0.05}(9)=2.262"
+     ],
+     "words": "Open t_table.pdf, PDF page 1. Use row 9 and the two-tailed 0.05 column. The printed cutoff is 2.262.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "9",
+      "column": "0.05",
+      "value": 2.262,
+      "actualDf": 9,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "|t|>t_\\alpha(\\nu)\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "|t|=3.4733>t_{0.05}(9)=2.262",
+      "t_{0.01}(9)=3.250<3.4733<t_{0.005}(9)=3.690",
+      "0.005<P<0.01"
+     ],
+     "words": "The magnitude of t is larger than the 0.05 cutoff, so reject the null hypothesis. In row 9 it lies between the 0.01 column (3.250) and the 0.005 column (3.690), so 0.005 < P < 0.01."
+    },
+    {
+     "title": "Run the same test in R",
+     "general": [
+      "\\texttt{t.test(x1, x2, paired = TRUE)}"
+     ],
+     "work": [
+      "\\texttt{before <- c(13, 14, 14, 19, 18, 18, 17, 16, 13, 16)}",
+      "\\texttt{after <- c(14, 17, 16, 19, 23, 17, 21, 18, 17, 17)}",
+      "\\texttt{t.test(after, before, paired = TRUE)}"
+     ],
+     "words": "List after first and before second so R subtracts after minus before, the same direction as the hand calculation. The full printout is shown with the code. Its main lines give t = 3.4733 and df = 9 and p-value = 0.007012, a 95 percent confidence interval from 0.7322728 to 3.4677272 and a mean difference of 2.1."
+    },
+    {
+     "title": "Mark each R line against the hand calculation",
+     "general": [
+      "t=\\bar d/s_{\\bar d},\\ \\nu=n-1",
+      "\\bar d\\pm t_{0.05}(\\nu)\\,s_{\\bar d}"
+     ],
+     "work": [
+      "\\text{Paired t-test}\\leftrightarrow\\text{procedure (paired t test)}",
+      "\\text{alternative: true mean difference}\\ne0\\leftrightarrow H_A:\\delta\\ne0",
+      "\\text{t = 3.4733}\\leftrightarrow t=3.4733",
+      "\\text{df = 9}\\leftrightarrow \\nu=n-1=9",
+      "\\text{p-value = 0.007012}\\leftrightarrow 0.005<P<0.01",
+      "\\text{mean difference 2.1}\\leftrightarrow\\bar d=2.1",
+      "\\text{95\\% CI 0.7322728 to 3.4677272}\\leftrightarrow 2.1\\pm2.262(0.604612)=[0.73237,3.46763]"
+     ],
+     "words": "R does not print \\(s_d\\) or \\(s_{\\bar d}\\) because they are inside t. R reports an exact P value instead of a table bracket, and its interval uses the exact cutoff 2.262157 instead of the printed 2.262, so the hand interval differs only in the later decimals. The interval excludes 0, which matches rejecting the null hypothesis."
+    }
+   ],
+   "conclusion": "IOP rises by a mean of 2.1 mm Hg, t = 3.4733 with 9 degrees of freedom (0.005 < P < 0.01, and R gives P = 0.007012). Reject the null hypothesis. There is a difference in intraocular pressure before and after drinking the water.",
+   "source": "Original practice example in the course style",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "9",
+    "column": "0.05",
+    "value": 2.262,
+    "actualDf": 9,
+    "approximation": false
+   },
+   "values": {
+    "n": 10,
+    "differences": [
+     1,
+     3,
+     2,
+     0,
+     5,
+     -1,
+     4,
+     2,
+     4,
+     1
+    ],
+    "dbar": 2.1,
+    "sumSqDev": 32.900000000000006,
+    "varianceD": 3.6555555555555563,
+    "sd": 1.9119507199599983,
+    "se": 0.6046119049072352,
+    "t": 3.473302432445819,
+    "df": 9,
+    "critical": 2.262,
+    "exactP": 0.007012169754460886,
+    "reject": true,
+    "ciLowerPrinted": 0.7323678710998343,
+    "ciUpperPrinted": 3.467632128900166,
+    "ciLowerR": 0.732272848601031,
+    "ciUpperR": 3.467727151398969,
+    "rOutput": [
+     "\tPaired t-test",
+     "",
+     "data:  after and before",
+     "t = 3.4733, df = 9, p-value = 0.007012",
+     "alternative hypothesis: true mean difference is not equal to 0",
+     "95 percent confidence interval:",
+     " 0.7322728 3.4677272",
+     "sample estimates:",
+     "mean difference ",
+     "            2.1 "
+    ],
+    "rCode": "t.test(after, before, paired = TRUE)"
+   },
+   "module": 20,
+   "tolerance": 0.017367,
+   "answerName": "t statistic",
+   "answer": 3.473302432445819
+  },
+  {
+   "id": "p20-median-nerve-arms-r",
+   "title": "Median nerve conduction velocity in the two arms, by hand and in R",
+   "topic": "s20pairedR",
+   "context": "In a study looking at nerve function, median nerve motor conduction velocity (the speed at which an electrical signal travels along the nerve) was measured in meters per second (m/s) with surface electrodes in 11 healthy adults. Each subject was evaluated in the dominant arm (measurement 1) and again in the non-dominant arm (measurement 2).",
+   "unit": "m/s",
+   "table": {
+    "headers": [
+     "Subject",
+     "Dominant arm (m/s)",
+     "Non-dominant arm (m/s)"
+    ],
+    "rows": [
+     [
+      1,
+      59.2,
+      62
+     ],
+     [
+      2,
+      55.8,
+      56.2
+     ],
+     [
+      3,
+      58.3,
+      59.1
+     ],
+     [
+      4,
+      57.6,
+      58.6
+     ],
+     [
+      5,
+      55.8,
+      54.7
+     ],
+     [
+      6,
+      49.6,
+      49.3
+     ],
+     [
+      7,
+      60.7,
+      60.7
+     ],
+     [
+      8,
+      57.9,
+      59.5
+     ],
+     [
+      9,
+      53.3,
+      51.5
+     ],
+     [
+      10,
+      52.9,
+      51.9
+     ],
+     [
+      11,
+      61.8,
+      62.4
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) Based on the recorded data, is there evidence that median nerve conduction velocity is different in the two arms? Assume that any quantities of interest are Normally distributed. DO NOT use R.",
+    "(ii) Answer the question in Part (i) using the R function for the test you did in Part (i). Show your R code and the output. Mark each of the lines of the output that correspond to sections of your \"by hand\" calculations and answers in Part (i)."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\delta=0",
+    "alternative": "H_A:\\delta\\ne0",
+    "nullWords": "Mean conduction velocity is the same in the two arms (the true mean non-dominant minus dominant difference is zero).",
+    "alternativeWords": "Mean conduction velocity is different in the two arms (the true mean non-dominant minus dominant difference is not zero)."
+   },
+   "symbols": "\\(d_i\\) (difference in subject \\(i\\)), \\(\\bar d\\) (mean difference), \\(s_d\\) (SD of the differences), \\(s_{\\bar d}\\) (standard error of the mean difference), \\(\\delta\\) (true mean difference), \\(n\\) (number of subjects), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\delta=0",
+      "H_A:\\delta\\ne0"
+     ],
+     "work": [
+      "\\delta=\\mu_{\\mathrm{nondominant}}-\\mu_{\\mathrm{dominant}}"
+     ],
+     "words": "Each subject is measured under both conditions, so the procedure is the paired t test on the within-subject differences. Mean conduction velocity is the same in the two arms (the true mean non-dominant minus dominant difference is zero). Mean conduction velocity is different in the two arms (the true mean non-dominant minus dominant difference is not zero)."
+    },
+    {
+     "title": "Form one difference per subject",
+     "general": [
+      "d_i=x1_i-x2_i,\\quad i=1,\\dots,n"
+     ],
+     "work": [
+      "d_i=(62.0-59.2,56.2-55.8,59.1-58.3,58.6-57.6,54.7-55.8,49.3-49.6,60.7-60.7,59.5-57.9,51.5-53.3,51.9-52.9,62.4-61.8)",
+      "d_i=(2.8,0.4,0.8,1.0,-1.1,-0.3,0.0,1.6,-1.8,-1.0,0.6),\\quad n=11"
+     ],
+     "words": "Subtract in the same direction for every subject (non-dominant minus dominant). The analysis now uses only these 11 numbers."
+    },
+    {
+     "title": "Calculate the mean difference",
+     "general": [
+      "\\bar d=\\frac{1}{n}\\sum_{i=1}^{n}d_i"
+     ],
+     "work": [
+      "\\bar d=\\frac{3.0}{11}=0.27273"
+     ],
+     "words": "The mean difference estimates the true mean change \\(\\delta\\) in m/s."
+    },
+    {
+     "title": "Calculate the SD of the differences",
+     "general": [
+      "s_d^2=\\frac{1}{n-1}\\sum_{i=1}^{n}(d_i-\\bar d)^2",
+      "s_d=\\sqrt{s_d^2}"
+     ],
+     "work": [
+      "\\sum(d_i-\\bar d)^2=17.2818",
+      "s_d^2=\\frac{17.2818}{10}=1.72818",
+      "s_d=1.3146"
+     ],
+     "words": "Square each deviation of a difference from the mean difference, add them, divide by \\(n-1\\), and take the square root."
+    },
+    {
+     "title": "Calculate the standard error of the mean difference",
+     "general": [
+      "s_{\\bar d}=\\frac{s_d}{\\sqrt n}"
+     ],
+     "work": [
+      "s_{\\bar d}=\\frac{1.3146}{\\sqrt{11}}=0.396368"
+     ],
+     "words": "The standard error describes how much the mean difference varies from sample to sample."
+    },
+    {
+     "title": "Calculate the t statistic",
+     "general": [
+      "t=\\frac{\\bar d-\\delta}{s_{\\bar d}}=\\frac{\\bar d}{s_{\\bar d}}\\quad(\\delta=0\\text{ under }H_0)"
+     ],
+     "work": [
+      "t=\\frac{0.272727}{0.396368}=0.688066"
+     ],
+     "words": "Under the null hypothesis the true mean difference is zero, so the numerator is the mean difference itself."
+    },
+    {
+     "title": "Find the degrees of freedom and the critical value",
+     "general": [
+      "\\nu=n-1",
+      "t_c=t_{0.05}(\\nu)"
+     ],
+     "work": [
+      "\\nu=11-1=10",
+      "t_{0.05}(10)=2.228"
+     ],
+     "words": "Open t_table.pdf, PDF page 1. Use row 10 and the two-tailed 0.05 column. The printed cutoff is 2.228.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "10",
+      "column": "0.05",
+      "value": 2.228,
+      "actualDf": 10,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "|t|<t_\\alpha(\\nu)\\Rightarrow\\text{do not reject }H_0"
+     ],
+     "work": [
+      "|t|=0.688066<t_{0.05}(10)=2.228",
+      "|t|=0.6881<t_{0.50}(10)=0.700",
+      "P>0.50"
+     ],
+     "words": "The magnitude of t is smaller than the 0.05 cutoff, so do not reject the null hypothesis. In row 10 it is smaller than even the 0.50 column (0.700), so P > 0.50."
+    },
+    {
+     "title": "Run the same test in R",
+     "general": [
+      "\\texttt{t.test(x1, x2, paired = TRUE)}"
+     ],
+     "work": [
+      "\\texttt{dominant <- c(59.2, 55.8, 58.3, 57.6, 55.8, 49.6, 60.7, 57.9, 53.3, 52.9, 61.8)}",
+      "\\texttt{nondominant <- c(62.0, 56.2, 59.1, 58.6, 54.7, 49.3, 60.7, 59.5, 51.5, 51.9, 62.4)}",
+      "\\texttt{t.test(nondominant, dominant, paired = TRUE)}"
+     ],
+     "words": "List nondominant first and dominant second so R subtracts nondominant minus dominant, the same direction as the hand calculation. The full printout is shown with the code. Its main lines give t = 0.68807 and df = 10 and p-value = 0.5071, a 95 percent confidence interval from -0.6104352 to 1.1558898 and a mean difference of 0.2727273."
+    },
+    {
+     "title": "Mark each R line against the hand calculation",
+     "general": [
+      "t=\\bar d/s_{\\bar d},\\ \\nu=n-1",
+      "\\bar d\\pm t_{0.05}(\\nu)\\,s_{\\bar d}"
+     ],
+     "work": [
+      "\\text{Paired t-test}\\leftrightarrow\\text{procedure (paired t test)}",
+      "\\text{alternative: true mean difference}\\ne0\\leftrightarrow H_A:\\delta\\ne0",
+      "\\text{t = 0.68807}\\leftrightarrow t=0.688066",
+      "\\text{df = 10}\\leftrightarrow \\nu=n-1=10",
+      "\\text{p-value = 0.5071}\\leftrightarrow P>0.50",
+      "\\text{mean difference 0.2727273}\\leftrightarrow\\bar d=0.272727",
+      "\\text{95\\% CI -0.6104352 to 1.1558898}\\leftrightarrow 0.272727\\pm2.228(0.396368)=[-0.61038,1.15583]"
+     ],
+     "words": "R does not print \\(s_d\\) or \\(s_{\\bar d}\\) because they are inside t. R reports an exact P value instead of a table bracket, and its interval uses the exact cutoff 2.228139 instead of the printed 2.228, so the hand interval differs only in the later decimals. The interval contains 0, which matches not rejecting the null hypothesis."
+    }
+   ],
+   "conclusion": "The mean non-dominant minus dominant difference is 0.2727 m/s, t = 0.6881 with 10 degrees of freedom (P > 0.50, and R gives P = 0.5071). Do not reject the null hypothesis. There is no evidence that median nerve conduction velocity is different in the two arms.",
+   "source": "Original practice example in the course style",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "10",
+    "column": "0.05",
+    "value": 2.228,
+    "actualDf": 10,
+    "approximation": false
+   },
+   "values": {
+    "n": 11,
+    "differences": [
+     2.8,
+     0.4,
+     0.8,
+     1,
+     -1.1,
+     -0.3,
+     0,
+     1.6,
+     -1.8,
+     -1,
+     0.6
+    ],
+    "dbar": 0.27272727272727276,
+    "sumSqDev": 17.28181818181818,
+    "varianceD": 1.728181818181818,
+    "sd": 1.314603293081916,
+    "se": 0.39636780648348435,
+    "t": 0.6880661553895312,
+    "df": 10,
+    "critical": 2.228,
+    "exactP": 0.5070574108573308,
+    "reject": false,
+    "ciLowerPrinted": -0.6103802001179304,
+    "ciUpperPrinted": 1.155834745572476,
+    "ciLowerR": -0.6104352365751557,
+    "ciUpperR": 1.1558897820297012,
+    "rOutput": [
+     "\tPaired t-test",
+     "",
+     "data:  nondominant and dominant",
+     "t = 0.68807, df = 10, p-value = 0.5071",
+     "alternative hypothesis: true mean difference is not equal to 0",
+     "95 percent confidence interval:",
+     " -0.6104352  1.1558898",
+     "sample estimates:",
+     "mean difference ",
+     "      0.2727273 "
+    ],
+    "rCode": "t.test(nondominant, dominant, paired = TRUE)"
+   },
+   "module": 20,
+   "tolerance": 0.00344,
+   "answerName": "t statistic",
+   "answer": 0.6880661553895312
+  },
+  {
+   "id": "p20-flight-calf-unpaired",
+   "title": "Calf circumference before and after a long flight, treated as two groups",
+   "topic": "s20unpaired",
+   "context": "Ten passengers had calf circumference (the distance around the widest part of the lower leg) measured in centimeters (cm) with a tape measure before (measurement 1) and after (measurement 2) a 10-hour flight. The same ten passengers appear in both columns. The data are first analyzed as if the two columns came from two independent groups of ten different people.",
+   "unit": "cm",
+   "table": {
+    "headers": [
+     "Passenger",
+     "Before the flight (cm)",
+     "After the flight (cm)"
+    ],
+    "rows": [
+     [
+      1,
+      35.5,
+      36.1
+     ],
+     [
+      2,
+      33.9,
+      34.8
+     ],
+     [
+      3,
+      40.1,
+      40.9
+     ],
+     [
+      4,
+      38.5,
+      39.1
+     ],
+     [
+      5,
+      32.6,
+      33.9
+     ],
+     [
+      6,
+      37.3,
+      38.3
+     ],
+     [
+      7,
+      37.3,
+      37.6
+     ],
+     [
+      8,
+      39,
+      40
+     ],
+     [
+      9,
+      32.2,
+      33.8
+     ],
+     [
+      10,
+      40.4,
+      41.4
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) Treat the two columns as two independent groups. Based on the recorded data, is there evidence that calf circumference is different before and after the flight? Assume that any quantities of interest are Normally distributed. DO NOT use R.",
+    "(ii) The paired t test on the same data gives t = 7.787 with 9 degrees of freedom. Compare the two results and explain why the conclusions differ."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\mu_{\\mathrm{after}}=\\mu_{\\mathrm{before}}",
+    "alternative": "H_A:\\mu_{\\mathrm{after}}\\ne\\mu_{\\mathrm{before}}",
+    "nullWords": "Mean calf circumference is the same before and after the flight.",
+    "alternativeWords": "Mean calf circumference is different before and after the flight."
+   },
+   "symbols": "\\(\\bar x_i\\) (group sample mean), \\(s_i\\) (group sample SD), \\(n_i\\) (group size), \\(s^2\\) (pooled variance), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\mu_1=\\mu_2",
+      "H_A:\\mu_1\\ne\\mu_2"
+     ],
+     "work": [
+      "\\mu_1=\\mu_{\\mathrm{after}},\\ \\mu_2=\\mu_{\\mathrm{before}}"
+     ],
+     "words": "The unpaired t test compares two group means as if every number came from a different person. The null hypothesis states equal population means."
+    },
+    {
+     "title": "Calculate the group means and SDs",
+     "general": [
+      "\\bar x=\\frac{1}{n}\\sum x_i",
+      "s=\\sqrt{\\frac{\\sum(x_i-\\bar x)^2}{n-1}}"
+     ],
+     "work": [
+      "\\bar x_1=37.59,\\ s_1=2.82939",
+      "\\bar x_2=36.68,\\ s_2=2.99696"
+     ],
+     "words": "The SDs are large because the subjects differ a lot from one another at the start."
+    },
+    {
+     "title": "Pool the variances",
+     "general": [
+      "s^2=\\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}"
+     ],
+     "work": [
+      "s^2=\\frac{9(8.00544)+9(8.98178)}{18}=8.49361"
+     ],
+     "words": "Each group variance is weighted by its own degrees of freedom."
+    },
+    {
+     "title": "Calculate the standard error and t",
+     "general": [
+      "t=\\frac{\\bar x_1-\\bar x_2}{\\sqrt{s^2/n_1+s^2/n_2}}"
+     ],
+     "work": [
+      "\\sqrt{\\frac{8.49361}{10}+\\frac{8.49361}{10}}=1.30335",
+      "t=\\frac{37.59-36.68}{1.30335}=0.698201"
+     ],
+     "words": "The numerator is the same mean change of 0.91 cm as in the paired analysis, but the denominator now carries the spread between subjects."
+    },
+    {
+     "title": "Find the degrees of freedom and the critical value",
+     "general": [
+      "\\nu=n_1+n_2-2",
+      "t_c=t_{0.05}(\\nu)"
+     ],
+     "work": [
+      "\\nu=10+10-2=18",
+      "t_{0.05}(18)=2.101"
+     ],
+     "words": "Open t_table.pdf, PDF page 1. Use row 18 and the two-tailed 0.05 column. The printed cutoff is 2.101.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "18",
+      "column": "0.05",
+      "value": 2.101,
+      "actualDf": 18,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision",
+     "general": [
+      "|t|<t_\\alpha(\\nu)\\Rightarrow\\text{do not reject }H_0"
+     ],
+     "work": [
+      "|t|=0.698201<2.101",
+      "t_{0.50}(18)=0.688<0.6982<t_{0.20}(18)=1.330",
+      "0.20<P<0.50"
+     ],
+     "words": "The unpaired test does not reject the null hypothesis. In row 18 it lies between the 0.50 column (0.688) and the 0.20 column (1.330), so 0.20 < P < 0.50. The paired test on the same numbers gives t = 7.787 with 9 degrees of freedom and rejects it (P < 0.001), because pairing removes the large differences between subjects and leaves only each subject's own change."
+    }
+   ],
+   "conclusion": "Analyzed as two independent groups, t = 0.6982 with 18 df is below 2.101, so the unpaired test finds no difference (0.20 < P < 0.50). The paired test on the same data gives t = 7.787 with 9 df and finds an increase (P < 0.001). Ignoring the pairing hides the swelling, because the differences between passengers are much larger than each passenger's own change.",
+   "source": "Original practice example in the course style",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "18",
+    "column": "0.05",
+    "value": 2.101,
+    "actualDf": 18,
+    "approximation": false
+   },
+   "values": {
+    "n1": 10,
+    "n2": 10,
+    "x1": 37.589999999999996,
+    "x2": 36.67999999999999,
+    "s1": 2.8293894119481764,
+    "s2": 2.9969614241390854,
+    "pooledVariance": 8.493611111111113,
+    "se": 1.3033503835201885,
+    "t": 0.6982005848206421,
+    "df": 18,
+    "critical": 2.101,
+    "exactP": 0.4939738416502875,
+    "reject": false
+   },
+   "module": 20,
+   "tolerance": 0.003491,
+   "answerName": "t statistic",
+   "answer": 0.6982005848206421
+  },
+  {
+   "id": "p20-weight-program-unpaired",
+   "title": "Body mass before and after a weight-loss program, treated as two groups",
+   "topic": "s20unpaired",
+   "context": "Eleven adults with obesity took part in a 12-week residential weight-loss program. Body mass was measured in kilograms (kg) on the same calibrated scale at the start (measurement 1) and at the end (measurement 2) of the program. The same eleven adults appear in both columns. The data are first analyzed as if the two columns came from two independent groups of eleven different people.",
+   "unit": "kg",
+   "table": {
+    "headers": [
+     "Subject",
+     "Start of program (kg)",
+     "End of program (kg)"
+    ],
+    "rows": [
+     [
+      1,
+      83.3,
+      80.7
+     ],
+     [
+      2,
+      97.5,
+      93.1
+     ],
+     [
+      3,
+      109.6,
+      106.7
+     ],
+     [
+      4,
+      81.2,
+      76.6
+     ],
+     [
+      5,
+      89.1,
+      86.8
+     ],
+     [
+      6,
+      71.4,
+      68.2
+     ],
+     [
+      7,
+      108.3,
+      101.9
+     ],
+     [
+      8,
+      113.5,
+      111.6
+     ],
+     [
+      9,
+      103.6,
+      96.9
+     ],
+     [
+      10,
+      95.9,
+      92.6
+     ],
+     [
+      11,
+      120.2,
+      117.8
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) Treat the two columns as two independent groups. Based on the recorded data, is there evidence that body mass is different at the start and at the end of the program? Assume that any quantities of interest are Normally distributed. DO NOT use R.",
+    "(ii) The paired t test on the same data gives t = -7.504 with 10 degrees of freedom. Compare the two results and explain why the conclusions differ."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\mu_{\\mathrm{end}}=\\mu_{\\mathrm{start}}",
+    "alternative": "H_A:\\mu_{\\mathrm{end}}\\ne\\mu_{\\mathrm{start}}",
+    "nullWords": "Mean body mass is the same at the start and at the end of the program.",
+    "alternativeWords": "Mean body mass is different at the start and at the end of the program."
+   },
+   "symbols": "\\(\\bar x_i\\) (group sample mean), \\(s_i\\) (group sample SD), \\(n_i\\) (group size), \\(s^2\\) (pooled variance), \\(\\nu\\) (degrees of freedom).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\mu_1=\\mu_2",
+      "H_A:\\mu_1\\ne\\mu_2"
+     ],
+     "work": [
+      "\\mu_1=\\mu_{\\mathrm{end}},\\ \\mu_2=\\mu_{\\mathrm{start}}"
+     ],
+     "words": "The unpaired t test compares two group means as if every number came from a different person. The null hypothesis states equal population means."
+    },
+    {
+     "title": "Calculate the group means and SDs",
+     "general": [
+      "\\bar x=\\frac{1}{n}\\sum x_i",
+      "s=\\sqrt{\\frac{\\sum(x_i-\\bar x)^2}{n-1}}"
+     ],
+     "work": [
+      "\\bar x_1=93.9,\\ s_1=15.1924",
+      "\\bar x_2=97.6,\\ s_2=15.143"
+     ],
+     "words": "The SDs are large because the subjects differ a lot from one another at the start."
+    },
+    {
+     "title": "Pool the variances",
+     "general": [
+      "s^2=\\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}"
+     ],
+     "work": [
+      "s^2=\\frac{10(230.81)+10(229.31)}{20}=230.06"
+     ],
+     "words": "Each group variance is weighted by its own degrees of freedom."
+    },
+    {
+     "title": "Calculate the standard error and t",
+     "general": [
+      "t=\\frac{\\bar x_1-\\bar x_2}{\\sqrt{s^2/n_1+s^2/n_2}}"
+     ],
+     "work": [
+      "\\sqrt{\\frac{230.06}{11}+\\frac{230.06}{11}}=6.46754",
+      "t=\\frac{93.9-97.6}{6.46754}=-0.572088"
+     ],
+     "words": "The numerator is the same mean change of -3.7 kg as in the paired analysis, but the denominator now carries the spread between subjects."
+    },
+    {
+     "title": "Find the degrees of freedom and the critical value",
+     "general": [
+      "\\nu=n_1+n_2-2",
+      "t_c=t_{0.05}(\\nu)"
+     ],
+     "work": [
+      "\\nu=11+11-2=20",
+      "t_{0.05}(20)=2.086"
+     ],
+     "words": "Open t_table.pdf, PDF page 1. Use row 20 and the two-tailed 0.05 column. The printed cutoff is 2.086.",
+     "classTable": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 1,
+      "row": "20",
+      "column": "0.05",
+      "value": 2.086,
+      "actualDf": 20,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision",
+     "general": [
+      "|t|<t_\\alpha(\\nu)\\Rightarrow\\text{do not reject }H_0"
+     ],
+     "work": [
+      "|t|=0.572088<2.086",
+      "|t|=0.5721<t_{0.50}(20)=0.687",
+      "P>0.50"
+     ],
+     "words": "The unpaired test does not reject the null hypothesis. In row 20 it is smaller than even the 0.50 column (0.687), so P > 0.50. The paired test on the same numbers gives t = -7.504 with 10 degrees of freedom and rejects it (P < 0.001), because pairing removes the large differences between subjects and leaves only each subject's own change."
+    }
+   ],
+   "conclusion": "Analyzed as two independent groups, t = -0.5721 with 20 df is far below 2.086, so the unpaired test finds no difference (P > 0.50). The paired test on the same data gives t = -7.504 with 10 df and finds a loss of body mass (P < 0.001). Every subject lost weight, but body mass differs by up to about 50 kg between subjects, and the unpaired test buries the small change in that spread.",
+   "source": "Original practice example in the course style",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 1,
+    "row": "20",
+    "column": "0.05",
+    "value": 2.086,
+    "actualDf": 20,
+    "approximation": false
+   },
+   "values": {
+    "n1": 11,
+    "n2": 11,
+    "x1": 93.9,
+    "x2": 97.60000000000001,
+    "s1": 15.192432326655268,
+    "s2": 15.142985174660904,
+    "pooledVariance": 230.05999999999995,
+    "se": 6.467541334161762,
+    "t": -0.5720875691132399,
+    "df": 20,
+    "critical": 2.086,
+    "exactP": 0.5736374500457521,
+    "reject": false
+   },
+   "module": 20,
+   "tolerance": 0.00286,
+   "answerName": "t statistic",
+   "answer": -0.5720875691132399
+  },
+  {
+   "id": "p20-downhill-walk-ck-time",
+   "title": "Serum creatine kinase before and after downhill walking",
+   "topic": "s20rmanova",
+   "context": "In a study looking at muscle strain after exercise, 5 healthy adults walked downhill on a treadmill for 40 minutes (exercise that loads the thigh muscles while they lengthen). Serum creatine kinase (CK, an enzyme that leaks from muscle into the blood when muscle fibers are strained) was measured in units per liter (U/L) before the walk, 24 hours after the walk, and 72 hours after the walk.",
+   "unit": "U/L",
+   "table": {
+    "headers": [
+     "Subject",
+     "Before (U/L)",
+     "24 h after (U/L)",
+     "72 h after (U/L)"
+    ],
+    "rows": [
+     [
+      1,
+      84,
+      139,
+      109
+     ],
+     [
+      2,
+      90,
+      130,
+      97
+     ],
+     [
+      3,
+      78,
+      131,
+      103
+     ],
+     [
+      4,
+      85,
+      132,
+      115
+     ],
+     [
+      5,
+      73,
+      136,
+      112
+     ]
+    ]
+   },
+   "tasks": [
+    "Is there a difference in serum CK over time? Assume that any quantities of interest are Normally distributed. DO NOT use R. (Note: If a difference exists, do not identify which groups are different.)"
+   ],
+   "hypotheses": {
+    "null": "H_0:\\mu_1=\\dots=\\mu_m",
+    "alternative": "H_A:\\text{at least one treatment mean differs}",
+    "nullWords": "Mean serum CK is the same at all three times.",
+    "alternativeWords": "Mean serum CK is different at one or more of the three times."
+   },
+   "symbols": "\\(x_{ts}\\) (response to treatment \\(t\\) in subject \\(s\\)), \\(\\bar S_s\\) (subject mean), \\(\\bar T_t\\) (treatment mean), \\(\\bar X\\) (grand mean), \\(m\\) (number of treatments), \\(n\\) (number of subjects), \\(SS\\) (sum of squares), \\(MS\\) (mean square), \\(F\\) (F statistic).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\mu_1=\\mu_2=\\dots=\\mu_m",
+      "H_A:\\text{not all treatment means are equal}"
+     ],
+     "work": [
+      "\\mu_{\\mathrm{before}}=\\mu_{\\mathrm{24\\,h}}=\\mu_{\\mathrm{72\\,h}}"
+     ],
+     "words": "Every subject is measured at every time, so the procedure is repeated measures ANOVA. Mean serum CK is the same at all three times."
+    },
+    {
+     "title": "Calculate the subject means",
+     "general": [
+      "\\bar S_s=\\frac{1}{m}\\sum_{t=1}^{m}x_{ts}"
+     ],
+     "work": [
+      "\\bar S=(110.667,\\ 105.667,\\ 104,\\ 110.667,\\ 107)"
+     ],
+     "words": "Average across the 3 treatments within each subject."
+    },
+    {
+     "title": "Calculate the treatment means and the grand mean",
+     "general": [
+      "\\bar T_t=\\frac{1}{n}\\sum_{s=1}^{n}x_{ts}",
+      "\\bar X=\\frac{1}{mn}\\sum_t\\sum_s x_{ts}"
+     ],
+     "work": [
+      "\\bar T=(82,\\ 133.6,\\ 107.2)",
+      "\\bar X=\\frac{1614}{15}=107.6"
+     ],
+     "words": "Average down each treatment column across the 5 subjects, then average all 15 observations."
+    },
+    {
+     "title": "Calculate the sum of squares within subjects",
+     "general": [
+      "SS_{wit\\,subjs}=\\sum_{s=1}^{n}\\sum_{t=1}^{m}(x_{ts}-\\bar S_s)^2=\\sum_s SS_s",
+      "DF_{wit\\,subjs}=n(m-1)"
+     ],
+     "work": [
+      "SS_s=(1516.67,\\ 912.667,\\ 1406,\\ 1132.67,\\ 2022)",
+      "SS_{wit\\,subjs}=6990",
+      "DF_{wit\\,subjs}=5(3-1)=10"
+     ],
+     "words": "Each subject's own spread around their own mean is added up. Differences between subjects (SS between subjects = 107.6) are set aside."
+    },
+    {
+     "title": "Calculate the treatment sum of squares",
+     "general": [
+      "SS_{treat}=n\\sum_{t=1}^{m}(\\bar T_t-\\bar X)^2",
+      "DF_{treat}=m-1"
+     ],
+     "work": [
+      "SS_{treat}=5[(82-107.6)^2+(133.6-107.6)^2+(107.2-107.6)^2]=6657.6",
+      "DF_{treat}=3-1=2"
+     ],
+     "words": "The factor n appears because each treatment mean is based on n subjects."
+    },
+    {
+     "title": "Calculate the residual sum of squares",
+     "general": [
+      "SS_{res}=SS_{wit\\,subjs}-SS_{treat}",
+      "DF_{res}=(n-1)(m-1)"
+     ],
+     "work": [
+      "SS_{res}=6990-6657.6=332.4",
+      "DF_{res}=(5-1)(3-1)=8"
+     ],
+     "words": "What remains of the within-subject variation after the treatment effect is removed is the residual."
+    },
+    {
+     "title": "Calculate the mean squares and F",
+     "general": [
+      "F=\\frac{SS_{treat}/DF_{treat}}{SS_{res}/DF_{res}}=\\frac{MS_{treat}}{MS_{res}}"
+     ],
+     "work": [
+      "MS_{treat}=\\frac{6657.6}{2}=3328.8",
+      "MS_{res}=\\frac{332.4}{8}=41.55",
+      "F=\\frac{3328.8}{41.55}=80.1155"
+     ],
+     "words": "A large F means the treatment means differ more than the leftover within-subject noise would explain."
+    },
+    {
+     "title": "Find the critical F",
+     "general": [
+      "F_{crit}=F_\\alpha(DF_{treat},DF_{res})=F_\\alpha(\\nu_n,\\nu_d)"
+     ],
+     "work": [
+      "F_{0.05}(2,8)=4.46"
+     ],
+     "words": "Open F_table.pdf, PDF page 1. Use numerator column \\(\\nu_n=2\\) and denominator row \\(\\nu_d=8\\). The lightface (P < .05) value is 4.46 and the boldface (P < .01) value is 8.65.",
+     "classTable": {
+      "path": "sources/tables/F_table.pdf",
+      "page": 1,
+      "row": "8",
+      "column": "2 (lightface, P<.05)",
+      "value": 4.46,
+      "actualDf": [
+       2,
+       8
+      ],
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "F>F_{crit}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "F=80.1155>4.46",
+      "F=80.1155>8.65\\ (P<0.01)"
+     ],
+     "words": "F is larger than the lightface 0.05 value, so reject the null hypothesis. It is also larger than the boldface 0.01 value, so P < 0.01."
+    }
+   ],
+   "conclusion": "F = 80.1155 with 2 and 8 df is larger than 4.46 and also larger than the boldface 8.65. Reject the null hypothesis. There is a difference in serum CK over time (P < 0.01).",
+   "source": "Original practice example in the course style",
+   "lookup": {
+    "path": "sources/tables/F_table.pdf",
+    "page": 1,
+    "row": "8",
+    "column": "2 (lightface, P<.05)",
+    "value": 4.46,
+    "actualDf": [
+     2,
+     8
+    ],
+    "approximation": false
+   },
+   "values": {
+    "n": 5,
+    "m": 3,
+    "subjectMeans": [
+     110.66666666666667,
+     105.66666666666667,
+     104.0,
+     110.66666666666667,
+     107.0
+    ],
+    "treatmentMeans": [
+     82.0,
+     133.6,
+     107.2
+    ],
+    "grandMean": 107.6,
+    "SStotal": 7097.6,
+    "SSbetweenSubjects": 107.60000000000011,
+    "SSwithinSubjects": 6990.0,
+    "SStreat": 6657.5999999999985,
+    "SSres": 332.40000000000146,
+    "DFtreat": 2,
+    "DFres": 8,
+    "MStreat": 3328.7999999999993,
+    "MSres": 41.55000000000018,
+    "F": 80.1155234657036,
+    "critical05": 4.46,
+    "critical01": 8.65,
+    "exactP": 5.1137013107686466e-06,
+    "reject": true
+   },
+   "module": 20,
+   "tolerance": 0.400578,
+   "answerName": "F statistic",
+   "answer": 80.1155234657036
+  },
+  {
+   "id": "p20-three-bp-devices",
+   "title": "Systolic blood pressure by three measuring devices",
+   "topic": "s20rmanova",
+   "context": "Researchers interested in blood pressure devices did a study in which systolic blood pressure (SBP) was measured in millimeters of mercury (mm Hg) in 6 adults at one seated visit. Each subject was measured with three devices in random order, a manual auscultatory cuff (a cuff read by listening with a stethoscope), an automated upper-arm cuff, and an automated wrist cuff.",
+   "unit": "mm Hg",
+   "table": {
+    "headers": [
+     "Subject",
+     "Manual cuff (mm Hg)",
+     "Upper-arm automated (mm Hg)",
+     "Wrist automated (mm Hg)"
+    ],
+    "rows": [
+     [
+      1,
+      114,
+      116,
+      112
+     ],
+     [
+      2,
+      111,
+      116,
+      119
+     ],
+     [
+      3,
+      119,
+      116,
+      119
+     ],
+     [
+      4,
+      119,
+      119,
+      117
+     ],
+     [
+      5,
+      142,
+      145,
+      148
+     ],
+     [
+      6,
+      105,
+      112,
+      110
+     ]
+    ]
+   },
+   "tasks": [
+    "Is there a difference in the systolic blood pressure reading among the three devices? Assume that any quantities of interest are Normally distributed. DO NOT use R. (Note: If a difference exists, do not identify which groups are different.)"
+   ],
+   "hypotheses": {
+    "null": "H_0:\\mu_1=\\dots=\\mu_m",
+    "alternative": "H_A:\\text{at least one treatment mean differs}",
+    "nullWords": "The mean SBP reading is the same with all three devices.",
+    "alternativeWords": "The mean SBP reading is different with one or more of the three devices."
+   },
+   "symbols": "\\(x_{ts}\\) (response to treatment \\(t\\) in subject \\(s\\)), \\(\\bar S_s\\) (subject mean), \\(\\bar T_t\\) (treatment mean), \\(\\bar X\\) (grand mean), \\(m\\) (number of treatments), \\(n\\) (number of subjects), \\(SS\\) (sum of squares), \\(MS\\) (mean square), \\(F\\) (F statistic).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\mu_1=\\mu_2=\\dots=\\mu_m",
+      "H_A:\\text{not all treatment means are equal}"
+     ],
+     "work": [
+      "\\mu_{\\mathrm{manual}}=\\mu_{\\mathrm{arm}}=\\mu_{\\mathrm{wrist}}"
+     ],
+     "words": "Every subject is measured with every device, so the procedure is repeated measures ANOVA. The mean SBP reading is the same with all three devices."
+    },
+    {
+     "title": "Calculate the subject means",
+     "general": [
+      "\\bar S_s=\\frac{1}{m}\\sum_{t=1}^{m}x_{ts}"
+     ],
+     "work": [
+      "\\bar S=(114,\\ 115.333,\\ 118,\\ 118.333,\\ 145,\\ 109)"
+     ],
+     "words": "Average across the 3 treatments within each subject."
+    },
+    {
+     "title": "Calculate the treatment means and the grand mean",
+     "general": [
+      "\\bar T_t=\\frac{1}{n}\\sum_{s=1}^{n}x_{ts}",
+      "\\bar X=\\frac{1}{mn}\\sum_t\\sum_s x_{ts}"
+     ],
+     "work": [
+      "\\bar T=(118.333,\\ 120.667,\\ 120.833)",
+      "\\bar X=\\frac{2159}{18}=119.944"
+     ],
+     "words": "Average down each treatment column across the 6 subjects, then average all 18 observations."
+    },
+    {
+     "title": "Calculate the sum of squares within subjects",
+     "general": [
+      "SS_{wit\\,subjs}=\\sum_{s=1}^{n}\\sum_{t=1}^{m}(x_{ts}-\\bar S_s)^2=\\sum_s SS_s",
+      "DF_{wit\\,subjs}=n(m-1)"
+     ],
+     "work": [
+      "SS_s=(8,\\ 32.6667,\\ 6,\\ 2.66667,\\ 18,\\ 26)",
+      "SS_{wit\\,subjs}=93.3333",
+      "DF_{wit\\,subjs}=6(3-1)=12"
+     ],
+     "words": "Each subject's own spread around their own mean is added up. Differences between subjects (SS between subjects = 2431.61) are set aside."
+    },
+    {
+     "title": "Calculate the treatment sum of squares",
+     "general": [
+      "SS_{treat}=n\\sum_{t=1}^{m}(\\bar T_t-\\bar X)^2",
+      "DF_{treat}=m-1"
+     ],
+     "work": [
+      "SS_{treat}=6[(118.333-119.944)^2+(120.667-119.944)^2+(120.833-119.944)^2]=23.4444",
+      "DF_{treat}=3-1=2"
+     ],
+     "words": "The factor n appears because each treatment mean is based on n subjects."
+    },
+    {
+     "title": "Calculate the residual sum of squares",
+     "general": [
+      "SS_{res}=SS_{wit\\,subjs}-SS_{treat}",
+      "DF_{res}=(n-1)(m-1)"
+     ],
+     "work": [
+      "SS_{res}=93.3333-23.4444=69.8889",
+      "DF_{res}=(6-1)(3-1)=10"
+     ],
+     "words": "What remains of the within-subject variation after the treatment effect is removed is the residual."
+    },
+    {
+     "title": "Calculate the mean squares and F",
+     "general": [
+      "F=\\frac{SS_{treat}/DF_{treat}}{SS_{res}/DF_{res}}=\\frac{MS_{treat}}{MS_{res}}"
+     ],
+     "work": [
+      "MS_{treat}=\\frac{23.4444}{2}=11.7222",
+      "MS_{res}=\\frac{69.8889}{10}=6.98889",
+      "F=\\frac{11.7222}{6.98889}=1.67727"
+     ],
+     "words": "A large F means the treatment means differ more than the leftover within-subject noise would explain."
+    },
+    {
+     "title": "Find the critical F",
+     "general": [
+      "F_{crit}=F_\\alpha(DF_{treat},DF_{res})=F_\\alpha(\\nu_n,\\nu_d)"
+     ],
+     "work": [
+      "F_{0.05}(2,10)=4.10"
+     ],
+     "words": "Open F_table.pdf, PDF page 1. Use numerator column \\(\\nu_n=2\\) and denominator row \\(\\nu_d=10\\). The lightface (P < .05) value is 4.10 and the boldface (P < .01) value is 7.56.",
+     "classTable": {
+      "path": "sources/tables/F_table.pdf",
+      "page": 1,
+      "row": "10",
+      "column": "2 (lightface, P<.05)",
+      "value": 4.1,
+      "actualDf": [
+       2,
+       10
+      ],
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "F<F_{crit}\\Rightarrow\\text{do not reject }H_0"
+     ],
+     "work": [
+      "F=1.67727<4.10"
+     ],
+     "words": "F is smaller than the lightface 0.05 value, so do not reject the null hypothesis (P > 0.05)."
+    }
+   ],
+   "conclusion": "F = 1.6773 with 2 and 10 df is smaller than 4.10. Do not reject the null hypothesis (P > 0.05). There is no evidence of a difference in the SBP reading among the three devices.",
+   "source": "Original practice example in the course style",
+   "lookup": {
+    "path": "sources/tables/F_table.pdf",
+    "page": 1,
+    "row": "10",
+    "column": "2 (lightface, P<.05)",
+    "value": 4.1,
+    "actualDf": [
+     2,
+     10
+    ],
+    "approximation": false
+   },
+   "values": {
+    "n": 6,
+    "m": 3,
+    "subjectMeans": [
+     114.0,
+     115.33333333333333,
+     118.0,
+     118.33333333333333,
+     145.0,
+     109.0
+    ],
+    "treatmentMeans": [
+     118.33333333333333,
+     120.66666666666667,
+     120.83333333333333
+    ],
+    "grandMean": 119.94444444444444,
+    "SStotal": 2524.9444444444443,
+    "SSbetweenSubjects": 2431.6111111111113,
+    "SSwithinSubjects": 93.33333333333333,
+    "SStreat": 23.444444444444525,
+    "SSres": 69.8888888888888,
+    "DFtreat": 2,
+    "DFres": 10,
+    "MStreat": 11.722222222222262,
+    "MSres": 6.98888888888888,
+    "F": 1.6772655007949204,
+    "critical05": 4.1,
+    "critical01": 7.56,
+    "exactP": 0.23542728643549227,
+    "reject": false
+   },
+   "module": 20,
+   "tolerance": 0.008386,
+   "answerName": "F statistic",
+   "answer": 1.6772655007949204
+  },
+  {
+   "id": "p20-peak-flow-meters",
+   "title": "Peak expiratory flow with four peak flow meters",
+   "topic": "s20rmanova",
+   "context": "In a study looking at home asthma monitoring, peak expiratory flow (PEF, the fastest rate of air blown out in one hard breath) was measured in liters per minute (L/min) in 5 adults with asthma. Each subject used four different brands of handheld peak flow meter (meters A, B, C and D) in random order on the same morning, and the best of three blows on each meter was recorded.",
+   "unit": "L/min",
+   "table": {
+    "headers": [
+     "Subject",
+     "Meter A (L/min)",
+     "Meter B (L/min)",
+     "Meter C (L/min)",
+     "Meter D (L/min)"
+    ],
+    "rows": [
+     [
+      1,
+      321,
+      322,
+      304,
+      320
+     ],
+     [
+      2,
+      342,
+      350,
+      318,
+      340
+     ],
+     [
+      3,
+      272,
+      279,
+      269,
+      289
+     ],
+     [
+      4,
+      271,
+      271,
+      251,
+      302
+     ],
+     [
+      5,
+      212,
+      214,
+      217,
+      215
+     ]
+    ]
+   },
+   "tasks": [
+    "Is there a difference in peak expiratory flow among the four meters? Assume that any quantities of interest are Normally distributed. DO NOT use R. (Note: If a difference exists, do not identify which groups are different.)"
+   ],
+   "hypotheses": {
+    "null": "H_0:\\mu_1=\\dots=\\mu_m",
+    "alternative": "H_A:\\text{at least one treatment mean differs}",
+    "nullWords": "The mean PEF reading is the same on all four meters.",
+    "alternativeWords": "The mean PEF reading is different on one or more of the four meters."
+   },
+   "symbols": "\\(x_{ts}\\) (response to treatment \\(t\\) in subject \\(s\\)), \\(\\bar S_s\\) (subject mean), \\(\\bar T_t\\) (treatment mean), \\(\\bar X\\) (grand mean), \\(m\\) (number of treatments), \\(n\\) (number of subjects), \\(SS\\) (sum of squares), \\(MS\\) (mean square), \\(F\\) (F statistic).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\mu_1=\\mu_2=\\dots=\\mu_m",
+      "H_A:\\text{not all treatment means are equal}"
+     ],
+     "work": [
+      "\\mu_{\\mathrm{A}}=\\mu_{\\mathrm{B}}=\\mu_{\\mathrm{C}}=\\mu_{\\mathrm{D}}"
+     ],
+     "words": "Every subject uses every meter, so the procedure is repeated measures ANOVA. The mean PEF reading is the same on all four meters."
+    },
+    {
+     "title": "Calculate the subject means",
+     "general": [
+      "\\bar S_s=\\frac{1}{m}\\sum_{t=1}^{m}x_{ts}"
+     ],
+     "work": [
+      "\\bar S=(316.75,\\ 337.5,\\ 277.25,\\ 273.75,\\ 214.5)"
+     ],
+     "words": "Average across the 4 treatments within each subject."
+    },
+    {
+     "title": "Calculate the treatment means and the grand mean",
+     "general": [
+      "\\bar T_t=\\frac{1}{n}\\sum_{s=1}^{n}x_{ts}",
+      "\\bar X=\\frac{1}{mn}\\sum_t\\sum_s x_{ts}"
+     ],
+     "work": [
+      "\\bar T=(283.6,\\ 287.2,\\ 271.8,\\ 293.2)",
+      "\\bar X=\\frac{5679}{20}=283.95"
+     ],
+     "words": "Average down each treatment column across the 5 subjects, then average all 20 observations."
+    },
+    {
+     "title": "Calculate the sum of squares within subjects",
+     "general": [
+      "SS_{wit\\,subjs}=\\sum_{s=1}^{n}\\sum_{t=1}^{m}(x_{ts}-\\bar S_s)^2=\\sum_s SS_s",
+      "DF_{wit\\,subjs}=n(m-1)"
+     ],
+     "work": [
+      "SS_s=(218.75,\\ 563,\\ 236.75,\\ 1330.75,\\ 13)",
+      "SS_{wit\\,subjs}=2362.25",
+      "DF_{wit\\,subjs}=5(4-1)=15"
+     ],
+     "words": "Each subject's own spread around their own mean is added up. Differences between subjects (SS between subjects = 35662.7) are set aside."
+    },
+    {
+     "title": "Calculate the treatment sum of squares",
+     "general": [
+      "SS_{treat}=n\\sum_{t=1}^{m}(\\bar T_t-\\bar X)^2",
+      "DF_{treat}=m-1"
+     ],
+     "work": [
+      "SS_{treat}=5[(283.6-283.95)^2+(287.2-283.95)^2+(271.8-283.95)^2+(293.2-283.95)^2]=1219.35",
+      "DF_{treat}=4-1=3"
+     ],
+     "words": "The factor n appears because each treatment mean is based on n subjects."
+    },
+    {
+     "title": "Calculate the residual sum of squares",
+     "general": [
+      "SS_{res}=SS_{wit\\,subjs}-SS_{treat}",
+      "DF_{res}=(n-1)(m-1)"
+     ],
+     "work": [
+      "SS_{res}=2362.25-1219.35=1142.9",
+      "DF_{res}=(5-1)(4-1)=12"
+     ],
+     "words": "What remains of the within-subject variation after the treatment effect is removed is the residual."
+    },
+    {
+     "title": "Calculate the mean squares and F",
+     "general": [
+      "F=\\frac{SS_{treat}/DF_{treat}}{SS_{res}/DF_{res}}=\\frac{MS_{treat}}{MS_{res}}"
+     ],
+     "work": [
+      "MS_{treat}=\\frac{1219.35}{3}=406.45",
+      "MS_{res}=\\frac{1142.9}{12}=95.2417",
+      "F=\\frac{406.45}{95.2417}=4.26756"
+     ],
+     "words": "A large F means the treatment means differ more than the leftover within-subject noise would explain."
+    },
+    {
+     "title": "Find the critical F",
+     "general": [
+      "F_{crit}=F_\\alpha(DF_{treat},DF_{res})=F_\\alpha(\\nu_n,\\nu_d)"
+     ],
+     "work": [
+      "F_{0.05}(3,12)=3.49"
+     ],
+     "words": "Open F_table.pdf, PDF page 1. Use numerator column \\(\\nu_n=3\\) and denominator row \\(\\nu_d=12\\). The lightface (P < .05) value is 3.49 and the boldface (P < .01) value is 5.95.",
+     "classTable": {
+      "path": "sources/tables/F_table.pdf",
+      "page": 1,
+      "row": "12",
+      "column": "3 (lightface, P<.05)",
+      "value": 3.49,
+      "actualDf": [
+       3,
+       12
+      ],
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "F>F_{crit}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "F=4.26756>3.49",
+      "F=4.26756<5.95\\ (0.01<P<0.05)"
+     ],
+     "words": "F is larger than the lightface 0.05 value, so reject the null hypothesis. It is smaller than the boldface 0.01 value, so 0.01 < P < 0.05."
+    }
+   ],
+   "conclusion": "F = 4.2676 with 3 and 12 df is larger than 3.49 but smaller than the boldface 5.95. Reject the null hypothesis. There is a difference in peak expiratory flow among the four meters (0.01 < P < 0.05).",
+   "source": "Original practice example in the course style",
+   "lookup": {
+    "path": "sources/tables/F_table.pdf",
+    "page": 1,
+    "row": "12",
+    "column": "3 (lightface, P<.05)",
+    "value": 3.49,
+    "actualDf": [
+     3,
+     12
+    ],
+    "approximation": false
+   },
+   "values": {
+    "n": 5,
+    "m": 4,
+    "subjectMeans": [
+     316.75,
+     337.5,
+     277.25,
+     273.75,
+     214.5
+    ],
+    "treatmentMeans": [
+     283.6,
+     287.2,
+     271.8,
+     293.2
+    ],
+    "grandMean": 283.95,
+    "SStotal": 38024.950000000004,
+    "SSbetweenSubjects": 35662.700000000004,
+    "SSwithinSubjects": 2362.25,
+    "SStreat": 1219.349999999997,
+    "SSres": 1142.900000000003,
+    "DFtreat": 3,
+    "DFres": 12,
+    "MStreat": 406.44999999999897,
+    "MSres": 95.24166666666692,
+    "F": 4.267564966313741,
+    "critical05": 3.49,
+    "critical01": 5.95,
+    "exactP": 0.028740897012633205,
+    "reject": true
+   },
+   "module": 20,
+   "tolerance": 0.021338,
+   "answerName": "F statistic",
+   "answer": 4.267564966313741
+  }
+ ],
+ "questions": [],
+ "notes": [
+  "All data are invented for practice. The raw data of every case are in its table, and check_session20.py recomputes every answer and value from those tables with NumPy/SciPy.",
+  "Differences are always measurement 2 minus measurement 1 (after minus before, meter minus laboratory, non-dominant minus dominant), as in the reference paired cases. p20-screen-tear-breakup has a negative t, so the answer is the signed t and the table comparison uses |t|.",
+  "The two s20pairedR cases store real Rscript output (R 4.6.1) in values.rOutput and values.rCode, as the reference case does. The lines are exactly as R prints them, including the leading tab before Paired t-test and the blank lines. Only blank lines at the very start and end were trimmed. The step words quote the output without colons because of the no colon rule, so the exact printed lines are the ones in values.rOutput.",
+  "The unpaired cases show the raw table (the reference unpaired case shows a summary table) so that the means, SDs and the quoted paired t can be recomputed. Their values keys match the reference case.",
+  "Outcome mix. Do not reject: p20-bilirubin-skin-meter (t = 0.790), p20-median-nerve-arms-r (t = 0.688), p20-three-bp-devices (F = 1.677), and both unpaired cases by design (the paired t on the same data rejects with P < 0.001). Close to a cutoff: p20-vegan-diet-b12 (|t| = 4.164 just above the 0.002 cutoff 4.144) and p20-screen-tear-breakup (|t| = 2.285 against 2.201). Between 0.05 and 0.01: p20-peak-flow-meters (F = 4.268 against 3.49 and 5.95).",
+  "All degrees of freedom (9, 10, 11, 18, 20 for t, and (2,8), (2,10), (3,12) for F) are printed rows, so no bracketing was needed in this session.",
+  "His own phrases are kept in context and tasks with their punctuation, for example \"(Note: If a difference exists, do not identify which groups are different.)\" and the Homework 3 Problem 4 asks, so tasks may contain colons. check_session20.py allows colons and semicolons in context and tasks only."
+ ]
+}
