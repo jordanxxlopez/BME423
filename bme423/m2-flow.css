@@ -20,3 +20,10 @@ button.m2f-opened{outline:2px solid var(--accent);outline-offset:1px}
 .grid>.m2f-host{grid-column:1/-1}
 .m2f-panel{scroll-margin-top:90px}
 @media (max-width:640px){.m2f-mode{flex-wrap:wrap;max-width:100%}.m2f-seg button{padding:6px 9px;font-size:.82em}}
+/* What to know by the end: self-check options and answer order */
+.m2g-opts{display:grid;gap:8px;margin:10px 0}
+.m2g-opt{text-align:left;white-space:normal;line-height:1.45}
+.m2g-opt.m2g-right{border-color:var(--accent);background:var(--soft);font-weight:600}
+.m2g-opt.m2g-wrong{border-color:var(--red,#b42318);background:var(--redbg,#fdecea)}
+.m2g-order li{margin:6px 0}
+.m2g-order .math-display{margin:4px 0;overflow-x:auto}
