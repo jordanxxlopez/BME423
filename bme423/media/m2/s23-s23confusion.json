@@ -1,0 +1,85 @@
+{
+ "id": "s23-s23confusion",
+ "file": "media/m2/s23-s23confusion.mp4",
+ "poster": "media/m2/s23-s23confusion.png",
+ "session": 23,
+ "method": "s23confusion",
+ "title": "Confusion matrix · accuracy and error rate",
+ "duration": 76,
+ "cases": {
+  "s23-wbcd-k21-accuracy": [
+   2,
+   3,
+   4,
+   5
+  ],
+  "s23-rare-variant": [
+   7,
+   8,
+   9,
+   10
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "Four cells",
+   "start": 0,
+   "end": 7
+  },
+  {
+   "step": 2,
+   "title": "K = 21 test set",
+   "start": 7,
+   "end": 15
+  },
+  {
+   "step": 3,
+   "title": "Accuracy",
+   "start": 15,
+   "end": 22
+  },
+  {
+   "step": 4,
+   "title": "Error rate",
+   "start": 22,
+   "end": 29
+  },
+  {
+   "step": 5,
+   "title": "Each row",
+   "start": 29,
+   "end": 37
+  },
+  {
+   "step": 6,
+   "title": "Other values of K",
+   "start": 37,
+   "end": 46
+  },
+  {
+   "step": 7,
+   "title": "Rare variant",
+   "start": 46,
+   "end": 54
+  },
+  {
+   "step": 8,
+   "title": "Always say no",
+   "start": 54,
+   "end": 61
+  },
+  {
+   "step": 9,
+   "title": "Same accuracy",
+   "start": 61,
+   "end": 68
+  },
+  {
+   "step": 10,
+   "title": "Misses every defect",
+   "start": 68,
+   "end": 76
+  }
+ ]
+}

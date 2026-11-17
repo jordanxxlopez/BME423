@@ -1,0 +1,2711 @@
+{
+ "cases": [
+  {
+   "id": "n24-sleep-latency-normality",
+   "title": "Sleep onset latency in good sleepers and insomnia patients",
+   "topic": "s24normal",
+   "context": "In a study looking at sleep onset latency (the time from lights out until the first epoch of sleep scored on the polysomnogram, an overnight recording of brain waves, eye movements and muscle tone), ten good sleepers (sample 1) and ten different adults with chronic insomnia (sample 2) spent one night in a sleep laboratory. Latency was recorded in minutes (min). Before choosing a test to compare the two groups, the researchers checked whether each sample was Normally distributed. The sorted values are shown in the table below.",
+   "unit": "min",
+   "table": {
+    "headers": [
+     "Order i",
+     "Good sleepers, latency (min)",
+     "Insomnia, latency (min)",
+     "Plotting probability (i - 3/8)/(n + 1/4)",
+     "Theoretical quantile z_i"
+    ],
+    "rows": [
+     [
+      1,
+      6,
+      14,
+      0.06098,
+      -1.54664
+     ],
+     [
+      2,
+      9,
+      17,
+      0.15854,
+      -1.00049
+     ],
+     [
+      3,
+      10,
+      19,
+      0.2561,
+      -0.65542
+     ],
+     [
+      4,
+      12,
+      22,
+      0.35366,
+      -0.37546
+     ],
+     [
+      5,
+      12,
+      24,
+      0.45122,
+      -0.12258
+     ],
+     [
+      6,
+      14,
+      27,
+      0.54878,
+      0.12258
+     ],
+     [
+      7,
+      15,
+      31,
+      0.64634,
+      0.37546
+     ],
+     [
+      8,
+      17,
+      38,
+      0.7439,
+      0.65542
+     ],
+     [
+      9,
+      19,
+      55,
+      0.84146,
+      1.00049
+     ],
+     [
+      10,
+      23,
+      96,
+      0.93902,
+      1.54664
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) For each sample, calculate the mean, the SD, and the percentage of values within one SD and within two SDs of the mean, and compare them with the percentages for Normally distributed data.",
+    "(ii) Give the theoretical quantiles that qqnorm() uses for ten points, and describe how each sample lies against them on a Normal Q-Q plot.",
+    "(iii) The R output below was obtained with shapiro.test(good) and shapiro.test(insomnia). State the hypotheses, the decision at the 0.05 level, and what it says about using a parametric test.\n\n\tShapiro-Wilk normality test\n\ndata:  good\nW = 0.98534, p-value = 0.9873\n\n\n\tShapiro-Wilk normality test\n\ndata:  insomnia\nW = 0.76226, p-value = 0.005033"
+   ],
+   "hypotheses": {
+    "null": "H_0:\\text{the data come from a Normal distribution}",
+    "alternative": "H_A:\\text{the data do not come from a Normal distribution}",
+    "nullWords": "There is no difference between the distribution of the data and a Normal distribution.",
+    "alternativeWords": "The distribution of the data differs from a Normal distribution."
+   },
+   "symbols": "\\(\\bar x\\) (sample mean), \\(s\\) (sample SD), \\(p_i\\) (plotting probability), \\(z_i\\) (theoretical Normal quantile), \\(W\\) (Shapiro-Wilk statistic), \\(P\\) (P value).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\text{the data come from a Normal distribution}",
+      "H_A:\\text{the data do not come from a Normal distribution}"
+     ],
+     "work": [
+      "\\alpha=0.05"
+     ],
+     "words": "Normality is checked with the percentage of data in a range, the Normal Q-Q plot, and the Shapiro-Wilk test. The null hypothesis is that there is no difference between the distribution of the data and a Normal distribution."
+    },
+    {
+     "title": "Mean and SD of sample 1",
+     "general": [
+      "\\bar x=\\frac{1}{n}\\sum x_i",
+      "s=\\sqrt{\\frac{\\sum(x_i-\\bar x)^2}{n-1}}"
+     ],
+     "work": [
+      "\\bar x=\\frac{137}{10}=13.7",
+      "\\sum(x_i-\\bar x)^2=228.1",
+      "s=\\sqrt{\\frac{228.1}{9}}=5.03433"
+     ],
+     "words": "Add the ten values and divide by 10, then square each deviation, add them, divide by n - 1 = 9 and take the root."
+    },
+    {
+     "title": "Percentage of sample 1 within one and two SDs",
+     "general": [
+      "\\bar x-s<x<\\bar x+s",
+      "P(\\mu-\\sigma<X<\\mu+\\sigma)=0.6826"
+     ],
+     "work": [
+      "13.7-5.03433<x<13.7+5.03433",
+      "8.66567<x<18.7343",
+      "\\frac{7}{10}=70\\%\\ \\text{vs}\\ 68.26\\%",
+      "\\frac{10}{10}=100\\%\\ \\text{within two SDs vs}\\ 95.44\\%"
+     ],
+     "words": "Seven of the ten latencies (9, 10, 12, 12, 14, 15, 17) lie within one SD of the mean. This 70% is close to the Normal 68.26%, and all ten values lie within two SDs, close to the Normal 95.44%."
+    },
+    {
+     "title": "Theoretical quantiles for qqnorm()",
+     "general": [
+      "p_i=\\frac{i-3/8}{n+1/4}",
+      "z_i=\\Phi^{-1}(p_i)"
+     ],
+     "work": [
+      "p_1=\\frac{1-0.375}{10.25}=0.0609756",
+      "z_1=\\Phi^{-1}(0.0609756)=-1.54664",
+      "z_{10}=+1.54664"
+     ],
+     "words": "For ten or fewer points R uses these plotting probabilities. The ten theoretical quantiles run from -1.54664 to +1.54664 and are the horizontal axis of the Q-Q plot. The good sleepers lie close to a straight line. For the insomnia sample the first eight points rise slowly, and then 55 and 96 bend sharply upward above the line at the right end. This is the pattern of positive skew (a long right tail)."
+    },
+    {
+     "title": "Shapiro-Wilk result for sample 1",
+     "general": [
+      "P>\\alpha\\Rightarrow\\text{do not reject }H_0"
+     ],
+     "work": [
+      "W=0.98534,\\quad P=0.9873>0.05"
+     ],
+     "words": "The P value is far above 0.05, so Normality is not rejected. The latencies of the good sleepers are consistent with a Normal distribution."
+    },
+    {
+     "title": "Mean, SD and range percentages of sample 2",
+     "general": [
+      "\\bar x=\\frac{1}{n}\\sum x_i",
+      "s=\\sqrt{\\frac{\\sum(x_i-\\bar x)^2}{n-1}}"
+     ],
+     "work": [
+      "\\bar x=\\frac{343}{10}=34.3",
+      "s=\\sqrt{\\frac{5516.1}{9}}=24.7568",
+      "9.54318<x<59.0568",
+      "\\frac{9}{10}=90\\%\\ \\text{within one SD}",
+      "\\frac{9}{10}=90\\%\\ \\text{within two SDs}"
+     ],
+     "words": "The two long latencies of 55 and 96 min inflate the SD, so nine of the ten values crowd inside one SD (90% against 68.26%). The value 96 lies beyond two SDs, so only 90% lie within two SDs against 95.44%. Both counts depart from the Normal percentages, and the lower limit of the two-SD range is negative, which a latency can never be."
+    },
+    {
+     "title": "Shapiro-Wilk result for sample 2",
+     "general": [
+      "P<\\alpha\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "W=0.76226,\\quad P=0.005033<0.05"
+     ],
+     "words": "The P value is below 0.05 (and below 0.01), so Normality is rejected. The insomnia latencies are skewed to the right, so a comparison of the two groups should use a rank-based test such as the Mann-Whitney rank-sum test rather than a t test."
+    }
+   ],
+   "conclusion": "The good sleepers give W = 0.98534 with P = 0.9873, so Normality is not rejected. The insomnia patients give W = 0.76226 with P = 0.005033, so Normality is rejected. Sleep onset latency in the insomnia group is skewed to the right, and a rank-based test is the safer choice for comparing the groups.",
+   "source": "Original neuroscience practice example",
+   "lookup": null,
+   "values": {
+    "n": 10,
+    "mean1": 13.7,
+    "sd1": 5.034326612809745,
+    "within1SD_1": 7,
+    "mean2": 34.3,
+    "sd2": 24.756817242933312,
+    "within1SD_2": 9,
+    "within2SD_2": 9,
+    "W1": 0.98534,
+    "P1": 0.9873,
+    "W2": 0.76226,
+    "P2": 0.005033,
+    "reject2": true,
+    "rOutput": [
+     "\tShapiro-Wilk normality test",
+     "",
+     "data:  good",
+     "W = 0.98534, p-value = 0.9873",
+     "",
+     "",
+     "\tShapiro-Wilk normality test",
+     "",
+     "data:  insomnia",
+     "W = 0.76226, p-value = 0.005033"
+    ],
+    "rCode": "good <- c(6, 9, 10, 12, 12, 14, 15, 17, 19, 23)\ninsomnia <- c(14, 17, 19, 22, 24, 27, 31, 38, 55, 96)\nshapiro.test(good)\nshapiro.test(insomnia)"
+   },
+   "module": 24,
+   "tolerance": 0.0038113000000000005,
+   "answerName": "Shapiro-Wilk W (sample 2)",
+   "answer": 0.76226
+  },
+  {
+   "id": "n24-speech-in-noise-normality",
+   "title": "Speech reception threshold in noise with and without hearing aids",
+   "topic": "s24normal",
+   "context": "Researchers interested in hearing in noise did a study to evaluate the speech reception threshold (SRT) in noise (the signal-to-noise ratio at which a listener repeats half of the sentences correctly, so a lower value is better). Ten listeners with normal hearing (sample 1) and ten different listeners who wear hearing aids (sample 2) repeated sentences presented in background babble. The SRT was recorded in decibels signal-to-noise ratio (dB SNR). Before choosing a test to compare the two groups, the researchers checked whether each sample was Normally distributed. The sorted values are shown in the table below.",
+   "unit": "dB SNR",
+   "table": {
+    "headers": [
+     "Order i",
+     "Normal hearing, SRT (dB SNR)",
+     "Hearing aid users, SRT (dB SNR)",
+     "Plotting probability (i - 3/8)/(n + 1/4)",
+     "Theoretical quantile z_i"
+    ],
+    "rows": [
+     [
+      1,
+      -8.1,
+      -3.1,
+      0.06098,
+      -1.54664
+     ],
+     [
+      2,
+      -7.2,
+      -2.4,
+      0.15854,
+      -1.00049
+     ],
+     [
+      3,
+      -6.9,
+      -2.2,
+      0.2561,
+      -0.65542
+     ],
+     [
+      4,
+      -6.6,
+      -1.5,
+      0.35366,
+      -0.37546
+     ],
+     [
+      5,
+      -6.1,
+      -1.3,
+      0.45122,
+      -0.12258
+     ],
+     [
+      6,
+      -5.9,
+      -0.6,
+      0.54878,
+      0.12258
+     ],
+     [
+      7,
+      -5.8,
+      0.2,
+      0.64634,
+      0.37546
+     ],
+     [
+      8,
+      -5.2,
+      0.9,
+      0.7439,
+      0.65542
+     ],
+     [
+      9,
+      -4.6,
+      2.8,
+      0.84146,
+      1.00049
+     ],
+     [
+      10,
+      -3.8,
+      4.5,
+      0.93902,
+      1.54664
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) For each sample, calculate the mean, the SD, and the percentage of values within one SD and within two SDs of the mean, and compare them with the percentages for Normally distributed data.",
+    "(ii) Give the theoretical quantiles that qqnorm() uses for ten points, and describe how each sample lies against them on a Normal Q-Q plot.",
+    "(iii) The R output below was obtained with shapiro.test(normal) and shapiro.test(aided). State the hypotheses, the decision at the 0.05 level, and what it says about using a parametric test.\n\n\tShapiro-Wilk normality test\n\ndata:  normal\nW = 0.99107, p-value = 0.9979\n\n\n\tShapiro-Wilk normality test\n\ndata:  aided\nW = 0.92204, p-value = 0.3743"
+   ],
+   "hypotheses": {
+    "null": "H_0:\\text{the data come from a Normal distribution}",
+    "alternative": "H_A:\\text{the data do not come from a Normal distribution}",
+    "nullWords": "There is no difference between the distribution of the data and a Normal distribution.",
+    "alternativeWords": "The distribution of the data differs from a Normal distribution."
+   },
+   "symbols": "\\(\\bar x\\) (sample mean), \\(s\\) (sample SD), \\(p_i\\) (plotting probability), \\(z_i\\) (theoretical Normal quantile), \\(W\\) (Shapiro-Wilk statistic), \\(P\\) (P value).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\text{the data come from a Normal distribution}",
+      "H_A:\\text{the data do not come from a Normal distribution}"
+     ],
+     "work": [
+      "\\alpha=0.05"
+     ],
+     "words": "Normality is checked with the percentage of data in a range, the Normal Q-Q plot, and the Shapiro-Wilk test. The null hypothesis is that there is no difference between the distribution of the data and a Normal distribution."
+    },
+    {
+     "title": "Mean and SD of sample 1",
+     "general": [
+      "\\bar x=\\frac{1}{n}\\sum x_i",
+      "s=\\sqrt{\\frac{\\sum(x_i-\\bar x)^2}{n-1}}"
+     ],
+     "work": [
+      "\\bar x=\\frac{-60.2}{10}=-6.02",
+      "\\sum(x_i-\\bar x)^2=14.516",
+      "s=\\sqrt{\\frac{14.516}{9}}=1.27"
+     ],
+     "words": "Add the ten values and divide by 10, then square each deviation, add them, divide by n - 1 = 9 and take the root."
+    },
+    {
+     "title": "Percentage of sample 1 within one and two SDs",
+     "general": [
+      "\\bar x-s<x<\\bar x+s",
+      "P(\\mu-\\sigma<X<\\mu+\\sigma)=0.6826"
+     ],
+     "work": [
+      "-6.02-1.27<x<-6.02+1.27",
+      "-7.29<x<-4.75",
+      "\\frac{7}{10}=70\\%\\ \\text{vs}\\ 68.26\\%",
+      "\\frac{10}{10}=100\\%\\ \\text{within two SDs vs}\\ 95.44\\%"
+     ],
+     "words": "Seven of the ten thresholds (-7.2, -6.9, -6.6, -6.1, -5.9, -5.8, -5.2) lie within one SD of the mean. This 70% is close to the Normal 68.26%, and all ten values lie within two SDs, close to the Normal 95.44%."
+    },
+    {
+     "title": "Theoretical quantiles for qqnorm()",
+     "general": [
+      "p_i=\\frac{i-3/8}{n+1/4}",
+      "z_i=\\Phi^{-1}(p_i)"
+     ],
+     "work": [
+      "p_1=\\frac{1-0.375}{10.25}=0.0609756",
+      "z_1=\\Phi^{-1}(0.0609756)=-1.54664",
+      "z_{10}=+1.54664"
+     ],
+     "words": "For ten or fewer points R uses these plotting probabilities. The ten theoretical quantiles run from -1.54664 to +1.54664 and are the horizontal axis of the Q-Q plot. The normal-hearing listeners lie close to a straight line. For the hearing aid users the two largest values, 2.8 and 4.5, sit a little above the line at the right end, which is a mild hint of positive skew, but no point is far from the line."
+    },
+    {
+     "title": "Shapiro-Wilk result for sample 1",
+     "general": [
+      "P>\\alpha\\Rightarrow\\text{do not reject }H_0"
+     ],
+     "work": [
+      "W=0.99107,\\quad P=0.9979>0.05"
+     ],
+     "words": "The P value is far above 0.05, so Normality is not rejected. The thresholds of the normal-hearing listeners are consistent with a Normal distribution."
+    },
+    {
+     "title": "Mean, SD and range percentages of sample 2",
+     "general": [
+      "\\bar x=\\frac{1}{n}\\sum x_i",
+      "s=\\sqrt{\\frac{\\sum(x_i-\\bar x)^2}{n-1}}"
+     ],
+     "work": [
+      "\\bar x=\\frac{-2.7}{10}=-0.27",
+      "s=\\sqrt{\\frac{52.721}{9}}=2.42031",
+      "-2.69031<x<2.15031",
+      "\\frac{7}{10}=70\\%\\ \\text{within one SD}",
+      "\\frac{10}{10}=100\\%\\ \\text{within two SDs}"
+     ],
+     "words": "Seven of the ten thresholds (-2.4, -2.2, -1.5, -1.3, -0.6, 0.2, 0.9) lie within one SD, which is 70% against the Normal 68.26%. All ten lie within two SDs, which is 100% against 95.44%. The largest value, 4.5, is only slightly below the upper limit 4.57062. These counts are close to the Normal percentages."
+    },
+    {
+     "title": "Shapiro-Wilk result for sample 2",
+     "general": [
+      "P>\\alpha\\Rightarrow\\text{do not reject }H_0"
+     ],
+     "work": [
+      "W=0.92204,\\quad P=0.3743>0.05"
+     ],
+     "words": "The P value is above 0.05, so Normality is not rejected. The data give no evidence against Normality, which does not prove that the thresholds are Normal, but a parametric test such as the t test can be used for these two samples."
+    }
+   ],
+   "conclusion": "The normal-hearing listeners give W = 0.99107 with P = 0.9979, and the hearing aid users give W = 0.92204 with P = 0.3743. Normality is not rejected for either sample, so the speech reception thresholds are consistent with Normal distributions and a parametric test can be used.",
+   "source": "Original neuroscience practice example",
+   "lookup": null,
+   "values": {
+    "n": 10,
+    "mean1": -6.02,
+    "sd1": 1.2699956255392728,
+    "within1SD_1": 7,
+    "mean2": -0.27,
+    "sd2": 2.420307602121864,
+    "within1SD_2": 7,
+    "within2SD_2": 10,
+    "W1": 0.99107,
+    "P1": 0.9979,
+    "W2": 0.92204,
+    "P2": 0.3743,
+    "reject2": false,
+    "rOutput": [
+     "\tShapiro-Wilk normality test",
+     "",
+     "data:  normal",
+     "W = 0.99107, p-value = 0.9979",
+     "",
+     "",
+     "\tShapiro-Wilk normality test",
+     "",
+     "data:  aided",
+     "W = 0.92204, p-value = 0.3743"
+    ],
+    "rCode": "normal <- c(-8.1, -7.2, -6.9, -6.6, -6.1, -5.9, -5.8, -5.2, -4.6, -3.8)\naided <- c(-3.1, -2.4, -2.2, -1.5, -1.3, -0.6, 0.2, 0.9, 2.8, 4.5)\nshapiro.test(normal)\nshapiro.test(aided)"
+   },
+   "module": 24,
+   "tolerance": 0.0046102,
+   "answerName": "Shapiro-Wilk W (sample 2)",
+   "answer": 0.92204
+  },
+  {
+   "id": "n24-nerve-block-pain-ranksum",
+   "title": "Pain ratings after knee surgery, nerve block versus standard medication",
+   "topic": "s24mwtable",
+   "context": "In a clinical trial, patients having knee replacement surgery were randomly assigned to a nerve block (an injection of local anesthetic around the nerve that carries pain signals from the knee) or to standard pain medication. On the morning after surgery each patient rated pain on the numeric rating scale (NRS) (0 = no pain, 10 = worst pain imaginable). Five patients received the nerve block and seven different patients received standard medication. Pain ratings are ordinal (ordered categories), so they are not assumed to be Normally distributed.",
+   "unit": "NRS points",
+   "table": {
+    "headers": [
+     "Group",
+     "Pain rating (NRS, 0 to 10)",
+     "Rank (all 12 together)"
+    ],
+    "rows": [
+     [
+      "Nerve block",
+      2,
+      1
+     ],
+     [
+      "Nerve block",
+      3,
+      2.5
+     ],
+     [
+      "Nerve block",
+      4,
+      4.5
+     ],
+     [
+      "Nerve block",
+      4,
+      4.5
+     ],
+     [
+      "Nerve block",
+      5,
+      6.5
+     ],
+     [
+      "Standard",
+      3,
+      2.5
+     ],
+     [
+      "Standard",
+      5,
+      6.5
+     ],
+     [
+      "Standard",
+      6,
+      8.5
+     ],
+     [
+      "Standard",
+      6,
+      8.5
+     ],
+     [
+      "Standard",
+      7,
+      10
+     ],
+     [
+      "Standard",
+      8,
+      11
+     ],
+     [
+      "Standard",
+      9,
+      12
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) Rank all twelve ratings together, using average ranks for ties, and compute T for the smaller group.",
+    "(ii) Based on the recorded data, is there evidence that pain on the morning after surgery is different in these two groups? Use the printed critical values of T. State the hypotheses in words, the decision and a P range."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\text{same distribution of pain ratings with nerve block and standard medication}",
+    "alternative": "H_A:\\text{the distributions differ}",
+    "nullWords": "There is no difference in the distributions of pain ratings on the morning after surgery between the nerve block and standard medication groups.",
+    "alternativeWords": "The distributions of pain ratings on the morning after surgery differ between the nerve block and standard medication groups."
+   },
+   "symbols": "\\(T\\) (sum of ranks in the smaller group), \\(n_S\\) (size of the smaller group), \\(n_B\\) (size of the bigger group), \\(\\mu_T\\) (mean of \\(T\\) under the null hypothesis), \\(\\sigma_T\\) (standard deviation of \\(T\\) under the null hypothesis), \\(z_T\\) (standardized rank sum).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\text{the two population distributions are the same}"
+     ],
+     "work": [
+      "n_S=5\\ (\\text{nerve block}),\\quad n_B=7\\ (\\text{standard})\\le8"
+     ],
+     "words": "The groups contain different patients and the bigger group has 7, so the procedure is the Mann-Whitney rank-sum test with the T table. The null hypothesis is that there is no difference in the distributions of pain ratings on the morning after surgery between the nerve block and standard medication groups."
+    },
+    {
+     "title": "Rank all observations with ties",
+     "general": [
+      "\\text{tied rank}=\\text{average of the ranks the tied values occupy}"
+     ],
+     "work": [
+      "2\\to1,\\ 3,3\\to\\frac{2+3}{2}=2.5,\\ 4,4\\to\\frac{4+5}{2}=4.5,\\ 5,5\\to\\frac{6+7}{2}=6.5",
+      "6,6\\to\\frac{8+9}{2}=8.5,\\ 7\\to10,\\ 8\\to11,\\ 9\\to12"
+     ],
+     "words": "Four pairs of ratings are tied (3 and 3, 4 and 4, 5 and 5, 6 and 6). Each tied pair would occupy two neighbouring ranks, so both values receive the average of those two ranks."
+    },
+    {
+     "title": "Compute T",
+     "general": [
+      "T=\\sum(\\text{ranks in the smaller group})"
+     ],
+     "work": [
+      "T=1+2.5+4.5+4.5+6.5=19",
+      "\\text{check}\\ 19+59=78=\\frac{12(13)}{2}"
+     ],
+     "words": "The nerve block group is the smaller group, so T is the sum of its 5 ranks. The standard ranks add to 59, and the two sums together give the total of all ranks."
+    },
+    {
+     "title": "Describe the null distribution of T",
+     "general": [
+      "\\binom{N}{n_S}",
+      "\\mu_T=\\frac{n_S(n_S+n_B+1)}{2}"
+     ],
+     "work": [
+      "\\binom{12}{5}=792",
+      "\\mu_T=\\frac{5(5+7+1)}{2}=32.5"
+     ],
+     "words": "Under the null hypothesis each of the 792 sets of 5 ranks is equally likely, and the rank sums are centered at 32.5. The observed T = 19 is below this center."
+    },
+    {
+     "title": "Read the critical values",
+     "general": [
+      "T_{\\text{lower}},\\ T_{\\text{upper}}\\ \\text{for}\\ (n_S,n_B)"
+     ],
+     "work": [
+      "(5,7)\\Rightarrow20,\\ 45\\ (P=.048)",
+      "(5,7)\\Rightarrow17,\\ 48\\ (P=.010)"
+     ],
+     "words": "Open MannWhitney_RankSumT_Table.pdf, PDF page 1, row n_S = 5, n_B = 7. Near .05 the printed critical values are 20 and 45 with P = .048, and near .01 they are 17 and 48 with P = .010.",
+     "tableLookup": {
+      "path": "sources/tables/MannWhitney_RankSumT_Table.pdf",
+      "page": 1,
+      "row": "n_S = 5, n_B = 7",
+      "column": "Probability near .05, critical values (P = .048)",
+      "value": "20, 45",
+      "actualDf": null,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "T\\le T_{\\text{lower}}\\ \\text{or}\\ T\\ge T_{\\text{upper}}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "T=19\\le20",
+      "17<19",
+      "0.010<P<0.048"
+     ],
+     "words": "T = 19 is at or below the lower value 20, so the null hypothesis is rejected. It does not reach the .01 lower value of 17, so 0.010 < P < 0.048."
+    }
+   ],
+   "conclusion": "T = 19 is at or below the lower critical value of 20, so the null hypothesis is rejected (0.010 < P < 0.048). Patients who receive the nerve block tend to report lower pain on the morning after surgery than patients who receive standard medication.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/MannWhitney_RankSumT_Table.pdf",
+    "page": 1,
+    "row": "n_S = 5, n_B = 7",
+    "column": "Probability near .05, critical values (P = .048)",
+    "value": "20, 45",
+    "actualDf": null,
+    "approximation": false
+   },
+   "values": {
+    "nerveBlock": [
+     2,
+     3,
+     4,
+     4,
+     5
+    ],
+    "standard": [
+     3,
+     5,
+     6,
+     6,
+     7,
+     8,
+     9
+    ],
+    "nS": 5,
+    "nB": 7,
+    "T": 19.0,
+    "muT": 32.5,
+    "combinations": 792,
+    "critical": [
+     20,
+     45
+    ],
+    "critical01": [
+     17,
+     48
+    ],
+    "tableP": 0.048,
+    "exactP": 0.03282828282828283,
+    "reject": true
+   },
+   "module": 24,
+   "tolerance": 0.095,
+   "answerName": "Rank sum T",
+   "answer": 19.0
+  },
+  {
+   "id": "n24-radial-maze-errors-ranksum",
+   "title": "Radial maze errors in knockout and wild-type mice",
+   "topic": "s24mwtable",
+   "context": "Researchers interested in spatial memory did a study to evaluate a mouse line lacking a gene that is expressed in the hippocampus (a brain structure needed for learning places). Four knockout mice (mice with the gene removed) and seven different wild-type mice (normal littermates) were trained in an eight-arm radial maze, and the number of errors (entries into an arm that had already been visited) was counted on the fifth day of training. Error counts are small whole numbers with a skewed distribution.",
+   "unit": "errors",
+   "table": {
+    "headers": [
+     "Group",
+     "Errors on day 5 (count)",
+     "Rank (all 11 together)"
+    ],
+    "rows": [
+     [
+      "Knockout",
+      7,
+      2
+     ],
+     [
+      "Knockout",
+      9,
+      4
+     ],
+     [
+      "Knockout",
+      11,
+      6.5
+     ],
+     [
+      "Knockout",
+      12,
+      8
+     ],
+     [
+      "Wild type",
+      6,
+      1
+     ],
+     [
+      "Wild type",
+      8,
+      3
+     ],
+     [
+      "Wild type",
+      10,
+      5
+     ],
+     [
+      "Wild type",
+      11,
+      6.5
+     ],
+     [
+      "Wild type",
+      13,
+      9
+     ],
+     [
+      "Wild type",
+      14,
+      10
+     ],
+     [
+      "Wild type",
+      16,
+      11
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) Rank all eleven error counts together, using average ranks for ties, and compute T for the smaller group.",
+    "(ii) Based on the recorded data, is there evidence that the number of errors is different in these two groups of mice? Use the printed critical values of T. State the hypotheses in words, the decision and a P range."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\text{same distribution of maze errors for knockout and wild-type mice}",
+    "alternative": "H_A:\\text{the distributions differ}",
+    "nullWords": "There is no difference in the distributions of the number of maze errors between knockout and wild-type mice.",
+    "alternativeWords": "The distributions of the number of maze errors differ between knockout and wild-type mice."
+   },
+   "symbols": "\\(T\\) (sum of ranks in the smaller group), \\(n_S\\) (size of the smaller group), \\(n_B\\) (size of the bigger group), \\(\\mu_T\\) (mean of \\(T\\) under the null hypothesis), \\(\\sigma_T\\) (standard deviation of \\(T\\) under the null hypothesis), \\(z_T\\) (standardized rank sum).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\text{the two population distributions are the same}"
+     ],
+     "work": [
+      "n_S=4\\ (\\text{knockout}),\\quad n_B=7\\ (\\text{wild type})\\le8"
+     ],
+     "words": "The groups contain different mice and the bigger group has 7, so the procedure is the Mann-Whitney rank-sum test with the T table. The null hypothesis is that there is no difference in the distributions of the number of maze errors between knockout and wild-type mice."
+    },
+    {
+     "title": "Rank all observations with ties",
+     "general": [
+      "\\text{tied rank}=\\text{average of the ranks the tied values occupy}"
+     ],
+     "work": [
+      "6\\to1,\\ 7\\to2,\\ 8\\to3,\\ 9\\to4,\\ 10\\to5",
+      "11,11\\to\\frac{6+7}{2}=6.5,\\ 12\\to8,\\ 13\\to9,\\ 14\\to10,\\ 16\\to11"
+     ],
+     "words": "The two counts of 11 (one knockout mouse and one wild-type mouse) would occupy ranks 6 and 7, so each receives 6.5. Every other count has its own whole-number rank."
+    },
+    {
+     "title": "Compute T",
+     "general": [
+      "T=\\sum(\\text{ranks in the smaller group})"
+     ],
+     "work": [
+      "T=2+4+6.5+8=20.5",
+      "\\text{check}\\ 20.5+45.5=66=\\frac{11(12)}{2}"
+     ],
+     "words": "The knockout group is the smaller group, so T is the sum of its 4 ranks. The wild type ranks add to 45.5, and the two sums together give the total of all ranks."
+    },
+    {
+     "title": "Describe the null distribution of T",
+     "general": [
+      "\\binom{N}{n_S}",
+      "\\mu_T=\\frac{n_S(n_S+n_B+1)}{2}"
+     ],
+     "work": [
+      "\\binom{11}{4}=330",
+      "\\mu_T=\\frac{4(4+7+1)}{2}=24"
+     ],
+     "words": "Under the null hypothesis each of the 330 sets of 4 ranks is equally likely, and the rank sums are centered at 24. The observed T = 20.5 is below this center."
+    },
+    {
+     "title": "Read the critical values",
+     "general": [
+      "T_{\\text{lower}},\\ T_{\\text{upper}}\\ \\text{for}\\ (n_S,n_B)"
+     ],
+     "work": [
+      "(4,7)\\Rightarrow13,\\ 35\\ (P=.042)",
+      "(4,7)\\Rightarrow10,\\ 38\\ (P=.012)"
+     ],
+     "words": "Open MannWhitney_RankSumT_Table.pdf, PDF page 1, row n_S = 4, n_B = 7. Near .05 the printed critical values are 13 and 35 with P = .042, and near .01 they are 10 and 38 with P = .012.",
+     "tableLookup": {
+      "path": "sources/tables/MannWhitney_RankSumT_Table.pdf",
+      "page": 1,
+      "row": "n_S = 4, n_B = 7",
+      "column": "Probability near .05, critical values (P = .042)",
+      "value": "13, 35",
+      "actualDf": null,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "T\\le T_{\\text{lower}}\\ \\text{or}\\ T\\ge T_{\\text{upper}}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "13<20.5<35",
+      "P>0.042"
+     ],
+     "words": "T = 20.5 lies strictly between 13 and 35, so the null hypothesis is not rejected. The P value is larger than the printed 0.042, so P > 0.042."
+    }
+   ],
+   "conclusion": "T = 20.5 lies between the critical values 13 and 35, so the null hypothesis is not rejected (P > 0.042). These data do not show a difference in the number of radial maze errors between knockout and wild-type mice.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/MannWhitney_RankSumT_Table.pdf",
+    "page": 1,
+    "row": "n_S = 4, n_B = 7",
+    "column": "Probability near .05, critical values (P = .042)",
+    "value": "13, 35",
+    "actualDf": null,
+    "approximation": false
+   },
+   "values": {
+    "knockout": [
+     7,
+     9,
+     11,
+     12
+    ],
+    "wildType": [
+     6,
+     8,
+     10,
+     11,
+     13,
+     14,
+     16
+    ],
+    "nS": 4,
+    "nB": 7,
+    "T": 20.5,
+    "muT": 24.0,
+    "combinations": 330,
+    "critical": [
+     13,
+     35
+    ],
+    "critical01": [
+     10,
+     38
+    ],
+    "tableP": 0.042,
+    "exactP": 0.5606060606060606,
+    "reject": false
+   },
+   "module": 24,
+   "tolerance": 0.10250000000000001,
+   "answerName": "Rank sum T",
+   "answer": 20.5
+  },
+  {
+   "id": "n24-concussion-reaction-time-ranksum",
+   "title": "Choice reaction time after sport concussion",
+   "topic": "s24mwnormal",
+   "context": "In a study looking at recovery after sport-related concussion (a mild traumatic brain injury caused by a blow to the head), choice reaction time (time elapsed between the appearance of a left or right arrow on a screen and the press of the matching key) was measured in nine athletes three days after a concussion and in eleven different athletes from the same teams with no recent head injury (control). Each value is the median of 40 trials in milliseconds (ms), recorded to the nearest 10 ms. Reaction times are skewed to the right, and two of the concussed athletes were much slower than everyone else.",
+   "unit": "ms",
+   "table": {
+    "headers": [
+     "Group",
+     "Choice reaction time (ms)",
+     "Rank (all 20 together)"
+    ],
+    "rows": [
+     [
+      "Concussed",
+      430,
+      5.5
+     ],
+     [
+      "Concussed",
+      470,
+      10
+     ],
+     [
+      "Concussed",
+      480,
+      11.5
+     ],
+     [
+      "Concussed",
+      510,
+      14
+     ],
+     [
+      "Concussed",
+      540,
+      16
+     ],
+     [
+      "Concussed",
+      560,
+      17
+     ],
+     [
+      "Concussed",
+      600,
+      18
+     ],
+     [
+      "Concussed",
+      690,
+      19
+     ],
+     [
+      "Concussed",
+      940,
+      20
+     ],
+     [
+      "Control",
+      380,
+      1
+     ],
+     [
+      "Control",
+      400,
+      2
+     ],
+     [
+      "Control",
+      410,
+      3
+     ],
+     [
+      "Control",
+      420,
+      4
+     ],
+     [
+      "Control",
+      430,
+      5.5
+     ],
+     [
+      "Control",
+      440,
+      7
+     ],
+     [
+      "Control",
+      450,
+      8
+     ],
+     [
+      "Control",
+      460,
+      9
+     ],
+     [
+      "Control",
+      480,
+      11.5
+     ],
+     [
+      "Control",
+      490,
+      13
+     ],
+     [
+      "Control",
+      520,
+      15
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) Rank all 20 reaction times together, using average ranks for ties, and compute T.",
+    "(ii) Based on the recorded data, is there evidence that choice reaction time is different in these two groups? Do not assume that reaction times are Normally distributed. Give the mean and SD of T, z_T, the printed critical value, the decision and a P range."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\text{same distribution of reaction time for concussed and control athletes}",
+    "alternative": "H_A:\\text{the distributions differ}",
+    "nullWords": "There is no difference in the distributions of choice reaction time between concussed athletes and control athletes.",
+    "alternativeWords": "The distributions of choice reaction time differ between concussed athletes and control athletes."
+   },
+   "symbols": "\\(T\\) (sum of ranks in the smaller group), \\(n_S\\) (size of the smaller group), \\(n_B\\) (size of the bigger group), \\(\\mu_T\\) (mean of \\(T\\) under the null hypothesis), \\(\\sigma_T\\) (standard deviation of \\(T\\) under the null hypothesis), \\(z_T\\) (standardized rank sum). \\(N\\) (total number of observations, \\(n_S+n_B\\)), \\(\\tau_i\\) (number of tied ranks in the \\(i\\)th set of ties).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\text{the two population distributions are the same}"
+     ],
+     "work": [
+      "n_S=9\\ (\\text{concussed}),\\quad n_B=11\\ (\\text{control})"
+     ],
+     "words": "The two groups contain different athletes and the data are skewed with two very slow outliers, so the procedure is the Mann-Whitney rank-sum test. The null hypothesis is that there is no difference in the distributions of choice reaction time between concussed athletes and control athletes."
+    },
+    {
+     "title": "Rank all 20 values and compute T",
+     "general": [
+      "T=\\sum(\\text{ranks in the smaller group})"
+     ],
+     "work": [
+      "T=5.5+10+11.5+14+16+17+18+19+20=131",
+      "\\text{control sum}=210-131=79"
+     ],
+     "words": "Two pairs of times are tied. The two values of 430 ms (one concussed, one control) share ranks 5 and 6, so each receives 5.5, and the two values of 480 ms share ranks 11 and 12, so each receives 11.5. The concussed group is the smaller group. Its slowest athlete, 940 ms, gets rank 20, so the outlier counts no more than any other top rank."
+    },
+    {
+     "title": "Choose the Normal approximation",
+     "general": [
+      "n_B>8\\Rightarrow T\\sim N(\\mu_T,\\sigma_T^2)"
+     ],
+     "work": [
+      "n_B=11>8"
+     ],
+     "words": "The bigger group has more than 8 observations, so the T table does not apply and T is treated as Normal."
+    },
+    {
+     "title": "Mean of T",
+     "general": [
+      "\\mu_T=\\frac{n_S(n_S+n_B+1)}{2}"
+     ],
+     "work": [
+      "\\mu_T=\\frac{9(9+11+1)}{2}=94.5"
+     ],
+     "words": "This is the rank sum expected for the concussed group if there is no difference between the groups."
+    },
+    {
+     "title": "Tie sum",
+     "general": [
+      "\\sum(\\tau_i-1)\\tau_i(\\tau_i+1)"
+     ],
+     "work": [
+      "(1\\cdot2\\cdot3)+(1\\cdot2\\cdot3)=12"
+     ],
+     "words": "There are two sets of ties, each of size 2 (430 and 430, 480 and 480)."
+    },
+    {
+     "title": "Tie-corrected standard deviation of T",
+     "general": [
+      "\\sigma_T=\\sqrt{\\frac{n_Sn_B(N+1)}{12}-\\frac{n_Sn_B}{12N(N-1)}\\sum(\\tau_i-1)\\tau_i(\\tau_i+1)}",
+      "N=n_S+n_B"
+     ],
+     "work": [
+      "N=9+11=20",
+      "\\frac{9(11)(21)}{12}=173.25",
+      "\\frac{9(11)}{12(20)(19)}(12)=0.260526",
+      "\\sigma_T=\\sqrt{173.25-0.260526}=\\sqrt{172.989}=13.1525"
+     ],
+     "words": "There are ties, so the tie-corrected form is used, with N - 1 = 19 in the denominator of the tie term. The ties lower the variance from 173.25 to 172.989."
+    },
+    {
+     "title": "Compute z_T",
+     "general": [
+      "z_T=\\frac{|T-\\mu_T|-\\frac12}{\\sigma_T}"
+     ],
+     "work": [
+      "z_T=\\frac{|131-94.5|-0.5}{13.1525}=\\frac{36}{13.1525}=2.73711"
+     ],
+     "words": "The continuity correction subtracts one half from the distance between T and its mean before dividing by the standard deviation."
+    },
+    {
+     "title": "Read the critical value",
+     "general": [
+      "z_{\\text{critical}}=t_{0.05}(\\infty)"
+     ],
+     "work": [
+      "z_{0.05}=1.9600"
+     ],
+     "words": "Open t_table.pdf, PDF page 2. In the infinity row and the two-tailed 0.05 column, the printed value is 1.9600.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 2,
+      "row": "∞",
+      "column": "0.05",
+      "value": 1.96,
+      "actualDf": null,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "|z_T|>z_{\\text{critical}}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "|z_T|=2.73711>1.9600",
+      "t_{0.01}(\\infty)=2.5758<2.73711<t_{0.005}(\\infty)=2.8070",
+      "0.005<P<0.01"
+     ],
+     "words": "The statistic exceeds 1.96, so the null hypothesis is rejected. In the infinity row it passes the 0.01 column (2.5758) but not the 0.005 column (2.8070), so 0.005 < P < 0.01."
+    }
+   ],
+   "conclusion": "T = 131 gives z_T = 2.73711, which is greater than 1.9600, so the null hypothesis is rejected (0.005 < P < 0.01). Concussed athletes tend to have slower choice reaction times than athletes with no recent head injury.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 2,
+    "row": "∞",
+    "column": "0.05",
+    "value": 1.96,
+    "actualDf": null,
+    "approximation": false
+   },
+   "values": {
+    "concussed": [
+     430,
+     470,
+     480,
+     510,
+     540,
+     560,
+     600,
+     690,
+     940
+    ],
+    "control": [
+     380,
+     400,
+     410,
+     420,
+     430,
+     440,
+     450,
+     460,
+     480,
+     490,
+     520
+    ],
+    "nS": 9,
+    "nB": 11,
+    "T": 131.0,
+    "muT": 94.5,
+    "tieSum": 12,
+    "varianceNoTies": 173.25,
+    "sigmaT": 13.152546281393978,
+    "zT": 2.737112588680017,
+    "critical": 1.96,
+    "exactP": 0.003941414622529174,
+    "reject": true
+   },
+   "module": 24,
+   "tolerance": 0.013685562943400086,
+   "answerName": "z_T statistic",
+   "answer": 2.737112588680017
+  },
+  {
+   "id": "n24-smoking-craving-ranksum",
+   "title": "Cue-induced craving after cue-exposure training or usual care",
+   "topic": "s24mwnormal",
+   "context": "In a clinical trial, adults who were trying to quit smoking were randomly assigned to four weeks of cue-exposure training (repeated viewing of smoking cues without smoking, meant to weaken the learned urge) or to usual care. At the end of the trial each person watched a short video of people smoking and rated craving on a scale from 0 (no craving) to 10 (strongest craving ever felt). Ten people completed cue-exposure training and twelve different people completed usual care. Many of the ratings are tied.",
+   "unit": "rating points",
+   "table": {
+    "headers": [
+     "Group",
+     "Craving rating (0 to 10)",
+     "Rank (all 22 together)"
+    ],
+    "rows": [
+     [
+      "Cue exposure",
+      2,
+      1
+     ],
+     [
+      "Cue exposure",
+      3,
+      3
+     ],
+     [
+      "Cue exposure",
+      3,
+      3
+     ],
+     [
+      "Cue exposure",
+      4,
+      6
+     ],
+     [
+      "Cue exposure",
+      4,
+      6
+     ],
+     [
+      "Cue exposure",
+      5,
+      9.5
+     ],
+     [
+      "Cue exposure",
+      5,
+      9.5
+     ],
+     [
+      "Cue exposure",
+      6,
+      12.5
+     ],
+     [
+      "Cue exposure",
+      7,
+      15.5
+     ],
+     [
+      "Cue exposure",
+      8,
+      19
+     ],
+     [
+      "Usual care",
+      3,
+      3
+     ],
+     [
+      "Usual care",
+      4,
+      6
+     ],
+     [
+      "Usual care",
+      5,
+      9.5
+     ],
+     [
+      "Usual care",
+      5,
+      9.5
+     ],
+     [
+      "Usual care",
+      6,
+      12.5
+     ],
+     [
+      "Usual care",
+      7,
+      15.5
+     ],
+     [
+      "Usual care",
+      7,
+      15.5
+     ],
+     [
+      "Usual care",
+      7,
+      15.5
+     ],
+     [
+      "Usual care",
+      8,
+      19
+     ],
+     [
+      "Usual care",
+      8,
+      19
+     ],
+     [
+      "Usual care",
+      9,
+      21.5
+     ],
+     [
+      "Usual care",
+      9,
+      21.5
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) Rank all 22 ratings together, using average ranks for ties, and compute T.",
+    "(ii) Based on the recorded data, is there evidence that cue-induced craving is different in these two groups? Make sure to show your intermediate calculations. Give the mean and SD of T, z_T, the printed critical value, the decision and a P range."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\text{same distribution of craving ratings for cue exposure and usual care}",
+    "alternative": "H_A:\\text{the distributions differ}",
+    "nullWords": "There is no difference in the distributions of cue-induced craving ratings between the cue-exposure training and usual care groups.",
+    "alternativeWords": "The distributions of cue-induced craving ratings differ between the cue-exposure training and usual care groups."
+   },
+   "symbols": "\\(T\\) (sum of ranks in the smaller group), \\(n_S\\) (size of the smaller group), \\(n_B\\) (size of the bigger group), \\(\\mu_T\\) (mean of \\(T\\) under the null hypothesis), \\(\\sigma_T\\) (standard deviation of \\(T\\) under the null hypothesis), \\(z_T\\) (standardized rank sum). \\(N\\) (total number of observations, \\(n_S+n_B\\)), \\(\\tau_i\\) (number of tied ranks in the \\(i\\)th set of ties).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\text{the two population distributions are the same}"
+     ],
+     "work": [
+      "n_S=10\\ (\\text{cue exposure}),\\quad n_B=12\\ (\\text{usual care})"
+     ],
+     "words": "The two groups contain different people and the data are ordinal ratings with many ties, so the procedure is the Mann-Whitney rank-sum test. The null hypothesis is that there is no difference in the distributions of cue-induced craving ratings between the cue-exposure training and usual care groups."
+    },
+    {
+     "title": "Rank all 22 values and compute T",
+     "general": [
+      "T=\\sum(\\text{ranks in the smaller group})"
+     ],
+     "work": [
+      "T=1+3+3+6+6+9.5+9.5+12.5+15.5+19=85",
+      "\\text{usual care sum}=253-85=168"
+     ],
+     "words": "Only 8 different rating values occur among 22 people, so most ranks are averages. For example the four ratings of 5 occupy ranks 8 to 11 and each receives 9.5, and the four ratings of 7 occupy ranks 14 to 17 and each receives 15.5. The cue-exposure group is the smaller group."
+    },
+    {
+     "title": "Choose the Normal approximation",
+     "general": [
+      "n_B>8\\Rightarrow T\\sim N(\\mu_T,\\sigma_T^2)"
+     ],
+     "work": [
+      "n_B=12>8"
+     ],
+     "words": "The bigger group has more than 8 observations, so the T table does not apply and T is treated as Normal."
+    },
+    {
+     "title": "Mean of T",
+     "general": [
+      "\\mu_T=\\frac{n_S(n_S+n_B+1)}{2}"
+     ],
+     "work": [
+      "\\mu_T=\\frac{10(10+12+1)}{2}=115"
+     ],
+     "words": "This is the rank sum expected for the cue exposure group if there is no difference between the groups."
+    },
+    {
+     "title": "Tie sum",
+     "general": [
+      "\\sum(\\tau_i-1)\\tau_i(\\tau_i+1)"
+     ],
+     "work": [
+      "(3\\cdot4\\cdot5)+(3\\cdot4\\cdot5)+(2\\cdot3\\cdot4)+(2\\cdot3\\cdot4)+(2\\cdot3\\cdot4)+(1\\cdot2\\cdot3)+(1\\cdot2\\cdot3)=204"
+     ],
+     "words": "Ratings of 3, 4 and 8 each occur 3 times (3 sets of size 3), ratings of 5 and 7 each occur 4 times (2 sets of size 4), and ratings of 6 and 9 each occur twice (2 sets of size 2). The rating 2 occurs once and adds nothing."
+    },
+    {
+     "title": "Tie-corrected standard deviation of T",
+     "general": [
+      "\\sigma_T=\\sqrt{\\frac{n_Sn_B(N+1)}{12}-\\frac{n_Sn_B}{12N(N-1)}\\sum(\\tau_i-1)\\tau_i(\\tau_i+1)}",
+      "N=n_S+n_B"
+     ],
+     "work": [
+      "N=10+12=22",
+      "\\frac{10(12)(23)}{12}=230",
+      "\\frac{10(12)}{12(22)(21)}(204)=4.41558",
+      "\\sigma_T=\\sqrt{230-4.41558}=\\sqrt{225.584}=15.0195"
+     ],
+     "words": "There are ties, so the tie-corrected form is used, with N - 1 = 21 in the denominator of the tie term. The ties lower the variance from 230 to 225.584."
+    },
+    {
+     "title": "Compute z_T",
+     "general": [
+      "z_T=\\frac{|T-\\mu_T|-\\frac12}{\\sigma_T}"
+     ],
+     "work": [
+      "z_T=\\frac{|85-115|-0.5}{15.0195}=\\frac{29.5}{15.0195}=1.96412"
+     ],
+     "words": "The continuity correction subtracts one half from the distance between T and its mean before dividing by the standard deviation."
+    },
+    {
+     "title": "Read the critical value",
+     "general": [
+      "z_{\\text{critical}}=t_{0.05}(\\infty)"
+     ],
+     "work": [
+      "z_{0.05}=1.9600"
+     ],
+     "words": "Open t_table.pdf, PDF page 2. In the infinity row and the two-tailed 0.05 column, the printed value is 1.9600.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 2,
+      "row": "∞",
+      "column": "0.05",
+      "value": 1.96,
+      "actualDf": null,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "|z_T|>z_{\\text{critical}}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "|z_T|=1.96412>1.9600",
+      "t_{0.05}(\\infty)=1.9600<1.96412<t_{0.02}(\\infty)=2.3263",
+      "0.02<P<0.05"
+     ],
+     "words": "The statistic exceeds 1.96, so the null hypothesis is rejected. In the infinity row it passes the 0.05 column (1.9600) but not the 0.02 column (2.3263), so 0.02 < P < 0.05. The result is close to the cutoff. Without the tie correction the SD would be 15.1658 and z_T = 1.94517, below 1.96, so here the correction changes the decision."
+    }
+   ],
+   "conclusion": "T = 85 gives z_T = 1.96412, which is greater than 1.9600, so the null hypothesis is rejected (0.02 < P < 0.05). People who complete cue-exposure training tend to report less cue-induced craving than people in usual care.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 2,
+    "row": "∞",
+    "column": "0.05",
+    "value": 1.96,
+    "actualDf": null,
+    "approximation": false
+   },
+   "values": {
+    "cueExposure": [
+     2,
+     3,
+     3,
+     4,
+     4,
+     5,
+     5,
+     6,
+     7,
+     8
+    ],
+    "usualCare": [
+     3,
+     4,
+     5,
+     5,
+     6,
+     7,
+     7,
+     7,
+     8,
+     8,
+     9,
+     9
+    ],
+    "nS": 10,
+    "nB": 12,
+    "T": 85.0,
+    "muT": 115.0,
+    "tieSum": 204,
+    "varianceNoTies": 230.0,
+    "sigmaT": 15.019467886194091,
+    "zT": 1.9641175189113342,
+    "critical": 1.96,
+    "exactP": 0.047819054011004475,
+    "reject": true
+   },
+   "module": 24,
+   "tolerance": 0.009820587594556672,
+   "answerName": "z_T statistic",
+   "answer": 1.9641175189113342
+  },
+  {
+   "id": "n24-tinnitus-sound-therapy-signedrank",
+   "title": "Tinnitus loudness before and after sound therapy",
+   "topic": "s24wtable",
+   "context": "In a study looking at tinnitus (a ringing or hissing sound heard when no external sound is present), nine patients rated the loudness of their tinnitus on a scale from 0 (not audible) to 10 (as loud as can be imagined). Each patient was evaluated before starting sound therapy (low-level background noise played through ear-level devices for several hours a day) and again after eight weeks of therapy. The ratings are ordinal, so the differences are not assumed to be Normally distributed.",
+   "unit": "rating points",
+   "table": {
+    "headers": [
+     "Patient",
+     "Before therapy (0 to 10)",
+     "After 8 weeks (0 to 10)",
+     "Difference (after - before)",
+     "Rank of |difference|",
+     "Signed rank"
+    ],
+    "rows": [
+     [
+      1,
+      6,
+      3,
+      -3,
+      5.5,
+      -5.5
+     ],
+     [
+      2,
+      5,
+      3,
+      -2,
+      3.5,
+      -3.5
+     ],
+     [
+      3,
+      7,
+      5,
+      -2,
+      3.5,
+      -3.5
+     ],
+     [
+      4,
+      4,
+      4,
+      0,
+      "dropped",
+      "dropped"
+     ],
+     [
+      5,
+      8,
+      4,
+      -4,
+      7,
+      -7
+     ],
+     [
+      6,
+      3,
+      2,
+      -1,
+      1.5,
+      -1.5
+     ],
+     [
+      7,
+      6,
+      3,
+      -3,
+      5.5,
+      -5.5
+     ],
+     [
+      8,
+      7,
+      2,
+      -5,
+      8,
+      -8
+     ],
+     [
+      9,
+      4,
+      5,
+      1,
+      1.5,
+      1.5
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) Compute the differences (after - before), drop any zero difference, rank the magnitudes with average ranks for ties, attach the signs and compute W.",
+    "(ii) Based on the recorded data, is there evidence that tinnitus loudness is different before and after sound therapy? Use the printed critical values of W. State the hypotheses in words, the decision and a P range."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\text{no difference in tinnitus loudness before and after sound therapy}",
+    "alternative": "H_A:\\text{tinnitus loudness differs before and after sound therapy}",
+    "nullWords": "There is no difference in the distributions of tinnitus loudness ratings before and after sound therapy.",
+    "alternativeWords": "The distributions of tinnitus loudness ratings differ before and after sound therapy."
+   },
+   "symbols": "\\(W\\) (sum of the signed ranks), \\(n\\) (number of nonzero differences), \\(\\mu_W\\) (mean of \\(W\\) under the null hypothesis), \\(\\sigma_W\\) (standard deviation of \\(W\\) under the null hypothesis), \\(z_W\\) (standardized signed-rank sum).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\text{signed differences centered on zero}"
+     ],
+     "work": [
+      "9\\ \\text{patients}"
+     ],
+     "words": "Each patient is measured before and after, so the procedure is the Wilcoxon signed-rank test. The null hypothesis is that there is no difference in the distributions of tinnitus loudness ratings before and after sound therapy."
+    },
+    {
+     "title": "Compute the differences and drop zeros",
+     "general": [
+      "d_i=\\text{after}_i-\\text{before}_i",
+      "n=\\text{number of nonzero differences}"
+     ],
+     "work": [
+      "d=(-3,-2,-2,0,-4,-1,-3,-5,1)",
+      "n=9-1=8\\le8"
+     ],
+     "words": "Patient 4 has the same rating before and after, so that difference of zero is dropped and n becomes 8. The W table applies."
+    },
+    {
+     "title": "Rank the magnitudes and attach signs",
+     "general": [
+      "\\operatorname{sign}(d_i)\\operatorname{rank}|d_i|"
+     ],
+     "work": [
+      "|d|\\ \\text{sorted}=1,1,2,2,3,3,4,5",
+      "1,1\\to\\frac{1+2}{2}=1.5\\quad 2,2\\to\\frac{3+4}{2}=3.5\\quad 3,3\\to\\frac{5+6}{2}=5.5",
+      "\\text{signed ranks}=(-5.5,-3.5,-3.5,-7,-1.5,-5.5,-8,+1.5)"
+     ],
+     "words": "Three pairs of magnitudes are tied. The two magnitudes of 1 share ranks 1 and 2, the two of 2 share ranks 3 and 4, and the two of 3 share ranks 5 and 6. Only patient 9, whose rating rose by 1, has a positive signed rank."
+    },
+    {
+     "title": "Compute W",
+     "general": [
+      "W=\\sum\\operatorname{sign}(d_i)\\operatorname{rank}|d_i|"
+     ],
+     "work": [
+      "W=1.5-34.5=-33",
+      "\\text{check}\\ \\frac{8(9)}{2}-2(34.5)=-33"
+     ],
+     "words": "The positive ranks add to 1.5 and the negative ranks add to 34.5."
+    },
+    {
+     "title": "Read the critical value",
+     "general": [
+      "W_{\\text{critical}}\\ \\text{for}\\ n"
+     ],
+     "work": [
+      "n=8\\Rightarrow32\\ (P=.024),\\quad28\\ (P=.054)"
+     ],
+     "words": "Open WilcoxonW_Table.pdf, PDF page 1, row n = 8. The printed critical values are 32 with P = .024 and 28 with P = .054. The value 32 is the one whose P does not exceed 0.05.",
+     "tableLookup": {
+      "path": "sources/tables/WilcoxonW_Table.pdf",
+      "page": 1,
+      "row": "n = 8",
+      "column": "Critical value (P = .024)",
+      "value": 32,
+      "actualDf": null,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "|W|\\ge W_{\\text{critical}}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "|W|=33\\ge32",
+      "P<0.024"
+     ],
+     "words": "The magnitude 33 reaches the critical value of 32, so the null hypothesis is rejected. It is beyond the largest printed critical value for n = 8, so P < 0.024."
+    }
+   ],
+   "conclusion": "W = -33 with n = 8, and |W| = 33 reaches the critical value of 32, so the null hypothesis is rejected (P < 0.024). Tinnitus loudness ratings are lower after eight weeks of sound therapy.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/WilcoxonW_Table.pdf",
+    "page": 1,
+    "row": "n = 8",
+    "column": "Critical value (P = .024)",
+    "value": 32,
+    "actualDf": null,
+    "approximation": false
+   },
+   "values": {
+    "before": [
+     6,
+     5,
+     7,
+     4,
+     8,
+     3,
+     6,
+     7,
+     4
+    ],
+    "after": [
+     3,
+     3,
+     5,
+     4,
+     4,
+     2,
+     3,
+     2,
+     5
+    ],
+    "differences": [
+     -3,
+     -2,
+     -2,
+     0,
+     -4,
+     -1,
+     -3,
+     -5,
+     1
+    ],
+    "n": 8,
+    "W": -33.0,
+    "patterns": 256,
+    "critical": 32,
+    "exactP": 0.0234375,
+    "reject": true
+   },
+   "module": 24,
+   "tolerance": 0.165,
+   "answerName": "Signed-rank sum W",
+   "answer": -33.0
+  },
+  {
+   "id": "n24-ear-training-pitch-signedrank",
+   "title": "Pitch discrimination errors before and after ear training",
+   "topic": "s24wtable",
+   "context": "Researchers interested in musical pitch perception did a study to evaluate a two-week ear-training app. Seven adult amateur musicians each heard 40 pairs of tones and judged whether the second tone was higher or lower than the first. Each subject was evaluated before training and again after training, and the number of errors out of 40 was recorded. Error counts are small whole numbers, so the differences are not assumed to be Normally distributed.",
+   "unit": "errors",
+   "table": {
+    "headers": [
+     "Subject",
+     "Errors before training",
+     "Errors after training",
+     "Difference (after - before)",
+     "Rank of |difference|",
+     "Signed rank"
+    ],
+    "rows": [
+     [
+      1,
+      12,
+      8,
+      -4,
+      6,
+      -6
+     ],
+     [
+      2,
+      9,
+      7,
+      -2,
+      3.5,
+      -3.5
+     ],
+     [
+      3,
+      7,
+      8,
+      1,
+      1.5,
+      1.5
+     ],
+     [
+      4,
+      10,
+      7,
+      -3,
+      5,
+      -5
+     ],
+     [
+      5,
+      8,
+      10,
+      2,
+      3.5,
+      3.5
+     ],
+     [
+      6,
+      14,
+      9,
+      -5,
+      7,
+      -7
+     ],
+     [
+      7,
+      6,
+      5,
+      -1,
+      1.5,
+      -1.5
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) Compute the differences (after - before), rank their magnitudes with average ranks for ties, attach the signs and compute W.",
+    "(ii) Based on the recorded data, is there evidence that the number of pitch errors is different before and after ear training? Use the printed critical values of W. State the hypotheses in words, the decision and a P range."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\text{no difference in pitch errors before and after ear training}",
+    "alternative": "H_A:\\text{pitch errors differ before and after ear training}",
+    "nullWords": "There is no difference in the distributions of pitch discrimination errors before and after ear training.",
+    "alternativeWords": "The distributions of pitch discrimination errors differ before and after ear training."
+   },
+   "symbols": "\\(W\\) (sum of the signed ranks), \\(n\\) (number of nonzero differences), \\(\\mu_W\\) (mean of \\(W\\) under the null hypothesis), \\(\\sigma_W\\) (standard deviation of \\(W\\) under the null hypothesis), \\(z_W\\) (standardized signed-rank sum).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\text{signed differences centered on zero}"
+     ],
+     "work": [
+      "7\\ \\text{musicians}"
+     ],
+     "words": "Each subject is measured before and after, so the procedure is the Wilcoxon signed-rank test. The null hypothesis is that there is no difference in the distributions of pitch discrimination errors before and after ear training."
+    },
+    {
+     "title": "Compute the differences",
+     "general": [
+      "d_i=\\text{after}_i-\\text{before}_i",
+      "n=\\text{number of nonzero differences}"
+     ],
+     "work": [
+      "d=(-4,-2,1,-3,2,-5,-1)",
+      "n=7\\le8"
+     ],
+     "words": "No difference is zero, so all seven musicians are kept and n = 7. The W table applies."
+    },
+    {
+     "title": "Rank the magnitudes and attach signs",
+     "general": [
+      "\\operatorname{sign}(d_i)\\operatorname{rank}|d_i|"
+     ],
+     "work": [
+      "|d|\\ \\text{sorted}=1,1,2,2,3,4,5",
+      "1,1\\to\\frac{1+2}{2}=1.5\\quad 2,2\\to\\frac{3+4}{2}=3.5",
+      "\\text{signed ranks}=(-6,-3.5,+1.5,-5,+3.5,-7,-1.5)"
+     ],
+     "words": "The two magnitudes of 1 share ranks 1 and 2, and the two magnitudes of 2 share ranks 3 and 4. Subjects 3 and 5 made more errors after training, so their ranks are positive."
+    },
+    {
+     "title": "Compute W",
+     "general": [
+      "W=\\sum\\operatorname{sign}(d_i)\\operatorname{rank}|d_i|"
+     ],
+     "work": [
+      "W=5-23=-18",
+      "\\text{check}\\ \\frac{7(8)}{2}-2(23)=-18"
+     ],
+     "words": "The positive ranks add to 5 and the negative ranks add to 23."
+    },
+    {
+     "title": "Read the critical value",
+     "general": [
+      "W_{\\text{critical}}\\ \\text{for}\\ n"
+     ],
+     "work": [
+      "n=7\\Rightarrow28\\ (P=.016),\\quad24\\ (P=.046)"
+     ],
+     "words": "Open WilcoxonW_Table.pdf, PDF page 1, row n = 7. The printed critical values are 28 with P = .016 and 24 with P = .046. Both P values are at most 0.05, so 24 (P = .046) is the cutoff at the 0.05 level and 28 (P = .016) is a stricter cutoff.",
+     "tableLookup": {
+      "path": "sources/tables/WilcoxonW_Table.pdf",
+      "page": 1,
+      "row": "n = 7",
+      "column": "Critical value (P = .046)",
+      "value": 24,
+      "actualDf": null,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "|W|\\ge W_{\\text{critical}}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "|W|=18<24<28",
+      "P>0.046"
+     ],
+     "words": "The magnitude 18 is below both printed critical values, so the null hypothesis is not rejected. It does not reach 24, whose P is 0.046, so P > 0.046."
+    }
+   ],
+   "conclusion": "W = -18 with n = 7, and |W| = 18 is below the critical value of 24 (and below the stricter value 28), so the null hypothesis is not rejected (P > 0.046). These data do not show that the ear-training app changes the number of pitch discrimination errors.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/WilcoxonW_Table.pdf",
+    "page": 1,
+    "row": "n = 7",
+    "column": "Critical value (P = .046)",
+    "value": 24,
+    "actualDf": null,
+    "approximation": false
+   },
+   "values": {
+    "before": [
+     12,
+     9,
+     7,
+     10,
+     8,
+     14,
+     6
+    ],
+    "after": [
+     8,
+     7,
+     8,
+     7,
+     10,
+     9,
+     5
+    ],
+    "differences": [
+     -4,
+     -2,
+     1,
+     -3,
+     2,
+     -5,
+     -1
+    ],
+    "n": 7,
+    "W": -18.0,
+    "patterns": 128,
+    "critical": 24,
+    "exactP": 0.171875,
+    "reject": false
+   },
+   "module": 24,
+   "tolerance": 0.09,
+   "answerName": "Signed-rank sum W",
+   "answer": -18.0
+  },
+  {
+   "id": "n24-back-pain-mindfulness-signedrank",
+   "title": "Chronic low back pain before and after a mindfulness program",
+   "topic": "s24wnormal",
+   "context": "In a study looking at chronic low back pain (pain lasting more than three months), thirteen patients rated their average pain over the past week on the numeric rating scale (NRS) (0 = no pain, 10 = worst pain imaginable). Each patient was evaluated before an eight-week mindfulness program (guided training in noticing body sensations without reacting to them) and again at the end of the program. Pain ratings are ordinal, so they are not assumed to be Normally distributed.",
+   "unit": "NRS points",
+   "table": {
+    "headers": [
+     "Patient",
+     "Before program (NRS)",
+     "After program (NRS)",
+     "Difference (after - before)",
+     "Rank of |difference|",
+     "Signed rank"
+    ],
+    "rows": [
+     [
+      1,
+      7,
+      4,
+      -3,
+      9,
+      -9
+     ],
+     [
+      2,
+      6,
+      5,
+      -1,
+      2.5,
+      -2.5
+     ],
+     [
+      3,
+      8,
+      5,
+      -3,
+      9,
+      -9
+     ],
+     [
+      4,
+      5,
+      5,
+      0,
+      "dropped",
+      "dropped"
+     ],
+     [
+      5,
+      7,
+      5,
+      -2,
+      6,
+      -6
+     ],
+     [
+      6,
+      6,
+      3,
+      -3,
+      9,
+      -9
+     ],
+     [
+      7,
+      9,
+      5,
+      -4,
+      11.5,
+      -11.5
+     ],
+     [
+      8,
+      4,
+      5,
+      1,
+      2.5,
+      2.5
+     ],
+     [
+      9,
+      7,
+      6,
+      -1,
+      2.5,
+      -2.5
+     ],
+     [
+      10,
+      6,
+      4,
+      -2,
+      6,
+      -6
+     ],
+     [
+      11,
+      8,
+      4,
+      -4,
+      11.5,
+      -11.5
+     ],
+     [
+      12,
+      5,
+      3,
+      -2,
+      6,
+      -6
+     ],
+     [
+      13,
+      6,
+      7,
+      1,
+      2.5,
+      2.5
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) Compute the differences (after - before), drop any zero difference, rank the magnitudes with average ranks for ties, attach the signs and compute W.",
+    "(ii) Based on the recorded data, is there evidence that pain is different before and after the mindfulness program? Make sure to show your intermediate calculations. Give sigma_W, z_W, the printed critical value, the decision and a P range."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\text{no difference in pain ratings before and after the program}",
+    "alternative": "H_A:\\text{pain ratings differ before and after the program}",
+    "nullWords": "There is no difference in the distributions of weekly pain ratings before and after the mindfulness program.",
+    "alternativeWords": "The distributions of weekly pain ratings differ before and after the mindfulness program."
+   },
+   "symbols": "\\(W\\) (sum of the signed ranks), \\(n\\) (number of nonzero differences), \\(\\mu_W\\) (mean of \\(W\\) under the null hypothesis), \\(\\sigma_W\\) (standard deviation of \\(W\\) under the null hypothesis), \\(z_W\\) (standardized signed-rank sum). \\(\\tau_i\\) (number of tied ranks in the \\(i\\)th set of ties).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\text{signed differences centered on zero}"
+     ],
+     "work": [
+      "n=12>8"
+     ],
+     "words": "The same patients are measured before and after, so the procedure is the Wilcoxon signed-rank test, and with 12 nonzero differences the Normal approximation is used. The null hypothesis is that there is no difference in the distributions of weekly pain ratings before and after the mindfulness program."
+    },
+    {
+     "title": "Compute the differences and drop zeros",
+     "general": [
+      "d_i=\\text{after}_i-\\text{before}_i"
+     ],
+     "work": [
+      "d=(-3,-1,-3,0,-2,-3,-4,1,-1,-2,-4,-2,1)",
+      "n=13-1=12"
+     ],
+     "words": "Patient 4 has the same rating before and after, so that difference of zero is dropped and n becomes 12. With more than 8 nonzero differences the Normal approximation is used."
+    },
+    {
+     "title": "Rank the magnitudes with ties",
+     "general": [
+      "\\text{tied rank}=\\text{average of the ranks the tied values occupy}"
+     ],
+     "work": [
+      "|d|\\ \\text{sorted}=1,1,1,1,2,2,2,3,3,3,4,4",
+      "1,1,1,1\\to\\frac{1+2+3+4}{4}=2.5",
+      "2,2,2\\to\\frac{5+6+7}{3}=6",
+      "3,3,3\\to\\frac{8+9+10}{3}=9",
+      "4,4\\to\\frac{11+12}{2}=11.5",
+      "\\text{signed ranks}=(-9,-2.5,-9,-6,-9,-11.5,+2.5,-2.5,-6,-11.5,-6,+2.5)"
+     ],
+     "words": "Only four magnitudes occur. The four magnitudes of 1 occupy ranks 1 to 4 and each receives 2.5, the three of 2 occupy ranks 5 to 7 and each receives 6, the three of 3 occupy ranks 8 to 10 and each receives 9, and the two of 4 occupy ranks 11 and 12 and each receives 11.5. Patients 8 and 13 rated their pain higher after the program, so their ranks are positive."
+    },
+    {
+     "title": "Compute W",
+     "general": [
+      "W=\\sum\\operatorname{sign}(d_i)\\operatorname{rank}|d_i|"
+     ],
+     "work": [
+      "W=5-73=-68",
+      "\\text{check}\\ \\frac{12(13)}{2}-2(73)=-68"
+     ],
+     "words": "The positive ranks add to 5 and the negative ranks add to 73, so W is negative because most patients scored lower after."
+    },
+    {
+     "title": "Tie sum",
+     "general": [
+      "\\sum(\\tau_i-1)\\tau_i(\\tau_i+1)"
+     ],
+     "work": [
+      "(3\\cdot4\\cdot5)+(2\\cdot3\\cdot4)+(2\\cdot3\\cdot4)+(1\\cdot2\\cdot3)=114"
+     ],
+     "words": "There are four sets of ties, of sizes 4, 3, 3 and 2."
+    },
+    {
+     "title": "Tie-corrected standard deviation of W",
+     "general": [
+      "\\sigma_W=\\sqrt{\\frac{n(n+1)(2n+1)}{6}-\\sum\\frac{(\\tau_i-1)\\tau_i(\\tau_i+1)}{12}}"
+     ],
+     "work": [
+      "\\frac{12(13)(25)}{6}=650",
+      "\\sigma_W=\\sqrt{650-\\frac{114}{12}}=\\sqrt{640.5}=25.3081"
+     ],
+     "words": "The ties reduce the variance by 9.5, from 650 to 640.5."
+    },
+    {
+     "title": "Compute z_W",
+     "general": [
+      "z_W=\\frac{|W|-1/2}{\\sigma_W}"
+     ],
+     "work": [
+      "z_W=\\frac{68-0.5}{25.3081}=2.66713"
+     ],
+     "words": "The mean of W under the null hypothesis is zero, so only the continuity correction is subtracted from |W|."
+    },
+    {
+     "title": "Read the critical value",
+     "general": [
+      "z_{\\text{critical}}=t_{0.05}(\\infty)"
+     ],
+     "work": [
+      "z_{0.05}=1.9600"
+     ],
+     "words": "Open t_table.pdf, PDF page 2. In the infinity row and the two-tailed 0.05 column, the printed value is 1.9600.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 2,
+      "row": "∞",
+      "column": "0.05",
+      "value": 1.96,
+      "actualDf": null,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "|z_W|>z_{\\text{critical}}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "|z_W|=2.66713>1.9600",
+      "t_{0.01}(\\infty)=2.5758<2.66713<t_{0.005}(\\infty)=2.8070",
+      "0.005<P<0.01"
+     ],
+     "words": "The statistic exceeds 1.96, so the null hypothesis is rejected. In the infinity row it passes the 0.01 column (2.5758) but not the 0.005 column (2.8070), so 0.005 < P < 0.01. For comparison, a paired t test on the same differences gives t = -3.77269, but the ratings are ordinal, so the signed-rank test is the better choice."
+    }
+   ],
+   "conclusion": "W = -68 and z_W = 2.66713 exceeds 1.9600, so the null hypothesis is rejected (0.005 < P < 0.01). Weekly pain ratings are lower at the end of the mindfulness program than before it.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 2,
+    "row": "∞",
+    "column": "0.05",
+    "value": 1.96,
+    "actualDf": null,
+    "approximation": false
+   },
+   "values": {
+    "before": [
+     7,
+     6,
+     8,
+     5,
+     7,
+     6,
+     9,
+     4,
+     7,
+     6,
+     8,
+     5,
+     6
+    ],
+    "after": [
+     4,
+     5,
+     5,
+     5,
+     5,
+     3,
+     5,
+     5,
+     6,
+     4,
+     4,
+     3,
+     7
+    ],
+    "differences": [
+     -3,
+     -1,
+     -3,
+     0,
+     -2,
+     -3,
+     -4,
+     1,
+     -1,
+     -2,
+     -4,
+     -2,
+     1
+    ],
+    "n": 12,
+    "W": -68.0,
+    "tieSum": 114,
+    "varianceNoTies": 650.0,
+    "sigmaW": 25.30810146968753,
+    "zW": 2.6671301314658984,
+    "critical": 1.96,
+    "exactNormalP": 0.007650204383729061,
+    "pairedT": -3.7726892075152767,
+    "reject": true
+   },
+   "module": 24,
+   "tolerance": 0.013335650657329492,
+   "answerName": "z_W statistic",
+   "answer": 2.6671301314658984
+  },
+  {
+   "id": "n24-light-therapy-awakenings-signedrank",
+   "title": "Night awakenings in older adults before and during light therapy",
+   "topic": "s24wnormal",
+   "context": "Researchers interested in sleep in older adults did a study to evaluate morning bright light therapy (30 minutes each morning in front of a 10,000 lux light box). Eleven residents of an assisted living home wore a wrist actigraph (a watch-like device that records movement and estimates sleep and wake). The number of awakenings per night, averaged over one week and rounded to a whole number, was recorded. Each resident was evaluated in the week before therapy and again in the fourth week of therapy.",
+   "unit": "awakenings per night",
+   "table": {
+    "headers": [
+     "Resident",
+     "Before therapy (awakenings/night)",
+     "Week 4 of therapy (awakenings/night)",
+     "Difference (after - before)",
+     "Rank of |difference|",
+     "Signed rank"
+    ],
+    "rows": [
+     [
+      1,
+      5,
+      3,
+      -2,
+      6.5,
+      -6.5
+     ],
+     [
+      2,
+      4,
+      3,
+      -1,
+      3,
+      -3
+     ],
+     [
+      3,
+      6,
+      4,
+      -2,
+      6.5,
+      -6.5
+     ],
+     [
+      4,
+      3,
+      4,
+      1,
+      3,
+      3
+     ],
+     [
+      5,
+      7,
+      4,
+      -3,
+      9.5,
+      -9.5
+     ],
+     [
+      6,
+      5,
+      2,
+      -3,
+      9.5,
+      -9.5
+     ],
+     [
+      7,
+      4,
+      5,
+      1,
+      3,
+      3
+     ],
+     [
+      8,
+      6,
+      3,
+      -3,
+      9.5,
+      -9.5
+     ],
+     [
+      9,
+      8,
+      5,
+      -3,
+      9.5,
+      -9.5
+     ],
+     [
+      10,
+      3,
+      2,
+      -1,
+      3,
+      -3
+     ],
+     [
+      11,
+      5,
+      4,
+      -1,
+      3,
+      -3
+     ]
+    ]
+   },
+   "tasks": [
+    "(i) Compute the differences (after - before), rank the magnitudes with average ranks for ties, attach the signs and compute W.",
+    "(ii) Based on the recorded data, is there evidence that the number of night awakenings is different before and during light therapy? Do not assume that the differences are Normally distributed. Give sigma_W, z_W, the printed critical value, the decision and a P range."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\text{no difference in night awakenings before and during light therapy}",
+    "alternative": "H_A:\\text{night awakenings differ before and during light therapy}",
+    "nullWords": "There is no difference in the distributions of night awakenings before and during light therapy.",
+    "alternativeWords": "The distributions of night awakenings differ before and during light therapy."
+   },
+   "symbols": "\\(W\\) (sum of the signed ranks), \\(n\\) (number of nonzero differences), \\(\\mu_W\\) (mean of \\(W\\) under the null hypothesis), \\(\\sigma_W\\) (standard deviation of \\(W\\) under the null hypothesis), \\(z_W\\) (standardized signed-rank sum). \\(\\tau_i\\) (number of tied ranks in the \\(i\\)th set of ties).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\text{signed differences centered on zero}"
+     ],
+     "work": [
+      "n=11>8"
+     ],
+     "words": "The same residents are measured before and after, so the procedure is the Wilcoxon signed-rank test, and with 11 nonzero differences the Normal approximation is used. The null hypothesis is that there is no difference in the distributions of night awakenings before and during light therapy."
+    },
+    {
+     "title": "Compute the differences",
+     "general": [
+      "d_i=\\text{after}_i-\\text{before}_i"
+     ],
+     "work": [
+      "d=(-2,-1,-2,1,-3,-3,1,-3,-3,-1,-1)"
+     ],
+     "words": "No difference is zero, so all eleven residents are kept and n = 11. With more than 8 nonzero differences the Normal approximation is used."
+    },
+    {
+     "title": "Rank the magnitudes with ties",
+     "general": [
+      "\\text{tied rank}=\\text{average of the ranks the tied values occupy}"
+     ],
+     "work": [
+      "|d|\\ \\text{sorted}=1,1,1,1,1,2,2,3,3,3,3",
+      "1,1,1,1,1\\to\\frac{1+2+3+4+5}{5}=3",
+      "2,2\\to\\frac{6+7}{2}=6.5",
+      "3,3,3,3\\to\\frac{8+9+10+11}{4}=9.5",
+      "\\text{signed ranks}=(-6.5,-3,-6.5,+3,-9.5,-9.5,+3,-9.5,-9.5,-3,-3)"
+     ],
+     "words": "Only three magnitudes occur. The five magnitudes of 1 occupy ranks 1 to 5 and each receives 3, the two of 2 occupy ranks 6 and 7 and each receives 6.5, and the four of 3 occupy ranks 8 to 11 and each receives 9.5. Residents 4 and 7 woke more often during therapy, so their ranks are positive."
+    },
+    {
+     "title": "Compute W",
+     "general": [
+      "W=\\sum\\operatorname{sign}(d_i)\\operatorname{rank}|d_i|"
+     ],
+     "work": [
+      "W=6-60=-54",
+      "\\text{check}\\ \\frac{11(12)}{2}-2(60)=-54"
+     ],
+     "words": "The positive ranks add to 6 and the negative ranks add to 60, so W is negative because most residents woke less often during therapy."
+    },
+    {
+     "title": "Tie sum",
+     "general": [
+      "\\sum(\\tau_i-1)\\tau_i(\\tau_i+1)"
+     ],
+     "work": [
+      "(4\\cdot5\\cdot6)+(3\\cdot4\\cdot5)+(1\\cdot2\\cdot3)=186"
+     ],
+     "words": "There are three sets of ties, of sizes 5, 4 and 2."
+    },
+    {
+     "title": "Tie-corrected standard deviation of W",
+     "general": [
+      "\\sigma_W=\\sqrt{\\frac{n(n+1)(2n+1)}{6}-\\sum\\frac{(\\tau_i-1)\\tau_i(\\tau_i+1)}{12}}"
+     ],
+     "work": [
+      "\\frac{11(12)(23)}{6}=506",
+      "\\sigma_W=\\sqrt{506-\\frac{186}{12}}=\\sqrt{490.5}=22.1472"
+     ],
+     "words": "The ties reduce the variance by 15.5, from 506 to 490.5."
+    },
+    {
+     "title": "Compute z_W",
+     "general": [
+      "z_W=\\frac{|W|-1/2}{\\sigma_W}"
+     ],
+     "work": [
+      "z_W=\\frac{54-0.5}{22.1472}=2.41565"
+     ],
+     "words": "The mean of W under the null hypothesis is zero, so only the continuity correction is subtracted from |W|."
+    },
+    {
+     "title": "Read the critical value",
+     "general": [
+      "z_{\\text{critical}}=t_{0.05}(\\infty)"
+     ],
+     "work": [
+      "z_{0.05}=1.9600"
+     ],
+     "words": "Open t_table.pdf, PDF page 2. In the infinity row and the two-tailed 0.05 column, the printed value is 1.9600.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 2,
+      "row": "∞",
+      "column": "0.05",
+      "value": 1.96,
+      "actualDf": null,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "|z_W|>z_{\\text{critical}}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "|z_W|=2.41565>1.9600",
+      "t_{0.02}(\\infty)=2.3263<2.41565<t_{0.01}(\\infty)=2.5758",
+      "0.01<P<0.02"
+     ],
+     "words": "The statistic exceeds 1.96, so the null hypothesis is rejected. In the infinity row it passes the 0.02 column (2.3263) but not the 0.01 column (2.5758), so 0.01 < P < 0.02. For comparison, a paired t test on the same differences gives t = -3.4, but the counts are small whole numbers with many ties, so the signed-rank test is the better choice."
+    }
+   ],
+   "conclusion": "W = -54 and z_W = 2.41565 exceeds 1.9600, so the null hypothesis is rejected (0.01 < P < 0.02). Older adults wake fewer times per night during morning bright light therapy than before it.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 2,
+    "row": "∞",
+    "column": "0.05",
+    "value": 1.96,
+    "actualDf": null,
+    "approximation": false
+   },
+   "values": {
+    "before": [
+     5,
+     4,
+     6,
+     3,
+     7,
+     5,
+     4,
+     6,
+     8,
+     3,
+     5
+    ],
+    "after": [
+     3,
+     3,
+     4,
+     4,
+     4,
+     2,
+     5,
+     3,
+     5,
+     2,
+     4
+    ],
+    "differences": [
+     -2,
+     -1,
+     -2,
+     1,
+     -3,
+     -3,
+     1,
+     -3,
+     -3,
+     -1,
+     -1
+    ],
+    "n": 11,
+    "W": -54.0,
+    "tieSum": 186,
+    "varianceNoTies": 506.0,
+    "sigmaW": 22.147234590350102,
+    "zW": 2.4156514792736603,
+    "critical": 1.96,
+    "exactNormalP": 0.015707087607412316,
+    "pairedT": -3.3999999999999995,
+    "reject": true
+   },
+   "module": 24,
+   "tolerance": 0.012078257396368301,
+   "answerName": "z_W statistic",
+   "answer": 2.4156514792736603
+  }
+ ],
+ "questions": [
+  {
+   "id": "m2-n24-qa01",
+   "module": 24,
+   "topic": "s24normal",
+   "stem": "In the sleep onset latency study, what is the sample SD of the ten insomnia latencies?",
+   "options": [
+    "\\(551.61\\) min",
+    "\\(7.82879\\) min",
+    "\\(24.7568\\) min",
+    "\\(23.4864\\) min"
+   ],
+   "correct": 2,
+   "why": "The squared deviations from the mean of 34.3 min add to 5516.1. Dividing by n - 1 = 9 and taking the root gives 24.7568 min. Dividing by n gives 23.4864, dividing by n without the root gives 551.61, and 7.82879 is the standard error.",
+   "case": "n24-sleep-latency-normality",
+   "equations": [
+    "s=\\sqrt{\\frac{\\sum(x_i-\\bar x)^2}{n-1}}",
+    "s=\\sqrt{\\frac{5516.1}{9}}=24.7568"
+   ]
+  },
+  {
+   "id": "m2-n24-qa02",
+   "module": 24,
+   "topic": "s24mwtable",
+   "stem": "In the knee surgery pain study (5 nerve block patients, 7 standard medication patients), what is the rank sum T?",
+   "options": [
+    "\\(32.5\\)",
+    "\\(59\\)",
+    "\\(17\\)",
+    "\\(19\\)"
+   ],
+   "correct": 3,
+   "why": "All twelve ratings are ranked together with average ranks for ties. The nerve block ratings 2, 3, 4, 4 and 5 get ranks 1, 2.5, 4.5, 4.5 and 6.5, which add to 19. The value 59 is the sum for the bigger group and 32.5 is the mean of T.",
+   "case": "n24-nerve-block-pain-ranksum",
+   "equations": [
+    "T=1+2.5+4.5+4.5+6.5=19"
+   ]
+  },
+  {
+   "id": "m2-n24-qa03",
+   "module": 24,
+   "topic": "s24mwnormal",
+   "stem": "In the craving study (10 cue exposure, 12 usual care, tie sum 204), what is the tie-corrected standard deviation of T?",
+   "options": [
+    "\\(15.0195\\)",
+    "\\(15.1658\\)",
+    "\\(15.0322\\)",
+    "\\(225.584\\)"
+   ],
+   "correct": 0,
+   "why": "The tie term is 120/(12·22·21)·204 = 4.41558, so σ_T = √(230 - 4.41558) = 15.0195. Using N + 1 in place of N - 1 gives 15.0322, ignoring ties gives 15.1658, and stopping before the root gives the variance.",
+   "case": "n24-smoking-craving-ranksum",
+   "equations": [
+    "\\sigma_T=\\sqrt{\\frac{n_Sn_B(N+1)}{12}-\\frac{n_Sn_B}{12N(N-1)}\\sum(\\tau_i-1)\\tau_i(\\tau_i+1)}",
+    "\\sigma_T=\\sqrt{230-4.41558}=15.0195"
+   ]
+  },
+  {
+   "id": "m2-n24-qa04",
+   "module": 24,
+   "topic": "s24mwnormal",
+   "stem": "In the concussion reaction time study (T = 131, μ_T = 94.5, σ_T = 13.1525), what is z_T?",
+   "options": [
+    "\\(2.77513\\)",
+    "\\(2.73711\\)",
+    "\\(2.73505\\)",
+    "\\(1.14046\\)"
+   ],
+   "correct": 1,
+   "why": "z_T = (|131 - 94.5| - 0.5)/13.1525 = 36/13.1525 = 2.73711. Leaving out the continuity correction gives 2.77513, ignoring the ties in σ_T gives 2.73505, and using the mean for the bigger group, 115.5, gives 1.14046.",
+   "case": "n24-concussion-reaction-time-ranksum",
+   "equations": [
+    "z_T=\\frac{|T-\\mu_T|-\\frac12}{\\sigma_T}",
+    "z_T=\\frac{36}{13.1525}=2.73711"
+   ]
+  },
+  {
+   "id": "m2-n24-qa05",
+   "module": 24,
+   "topic": "s24wtable",
+   "stem": "In the tinnitus study, patient 4 rated loudness 4 before and 4 after therapy. What are n and W?",
+   "options": [
+    "n = 9 and W = -33",
+    "n = 8 and W = -36",
+    "n = 9 and W = -39",
+    "n = 8 and W = -33"
+   ],
+   "correct": 3,
+   "why": "The zero difference is dropped and n falls from 9 to 8. The eight remaining signed ranks add to 1.5 - 34.5 = -33. Ranking the zero as 1 and keeping it gives n = 9 and W = -39, and making every rank negative gives -36.",
+   "case": "n24-tinnitus-sound-therapy-signedrank",
+   "equations": [
+    "W=1.5-34.5=-33"
+   ]
+  },
+  {
+   "id": "m2-n24-qa06",
+   "module": 24,
+   "topic": "s24wnormal",
+   "stem": "In the chronic low back pain study (W = -68, n = 12, tie sum 114), what is z_W?",
+   "options": [
+    "\\(2.64757\\)",
+    "\\(2.68689\\)",
+    "\\(2.66713\\)",
+    "\\(2.37244\\)"
+   ],
+   "correct": 2,
+   "why": "σ_W = √(650 - 114/12) = √640.5 = 25.3081, so z_W = (68 - 0.5)/25.3081 = 2.66713. Ignoring the ties gives 2.64757, leaving out the continuity correction gives 2.68689, and keeping the zero difference (n = 13) gives 2.37244.",
+   "case": "n24-back-pain-mindfulness-signedrank",
+   "equations": [
+    "z_W=\\frac{|W|-1/2}{\\sigma_W}",
+    "z_W=\\frac{67.5}{25.3081}=2.66713"
+   ]
+  },
+  {
+   "id": "m2-n24-qa07",
+   "module": 24,
+   "topic": "s24normal",
+   "stem": "Simple reaction times from 12 subjects give a Shapiro-Wilk p-value = 0.003, and the Normal Q-Q plot bends sharply upward at the right end. The researchers want to compare these subjects with 12 different subjects. Which approach fits best?",
+   "options": [
+    "A t test, because the sample has more than 10 subjects",
+    "The Mann-Whitney rank-sum test, because Normality is rejected and the groups contain different subjects",
+    "The Wilcoxon signed-rank test, because Normality is rejected",
+    "A t test after removing the slowest reaction times"
+   ],
+   "correct": 1,
+   "why": "P = 0.003 rejects Normality, and the upward bend at the right end is positive skew. Two groups of different subjects call for the Mann-Whitney rank-sum test, while the signed-rank test is for paired data.",
+   "case": null,
+   "equations": [
+    "P=0.003<0.05"
+   ]
+  },
+  {
+   "id": "m2-n24-qa08",
+   "module": 24,
+   "topic": "s24mwtable",
+   "stem": "A hearing study compares tinnitus loudness ratings of 6 patients with noise-induced hearing loss and 11 different patients with age-related hearing loss. How should T be judged?",
+   "options": [
+    "With the T table in row n_S = 6, n_B = 11",
+    "With the W table in row n = 6",
+    "With the Normal approximation, because n_B = 11 is greater than 8",
+    "With the T table in row n_S = 6, n_B = 8, the nearest printed row"
+   ],
+   "correct": 2,
+   "why": "The T table only covers a bigger group of 8 or fewer. With n_B = 11, T is compared with its Normal distribution using μ_T, σ_T and z_T.",
+   "case": null,
+   "equations": [
+    "n_B=11>8"
+   ]
+  },
+  {
+   "id": "m2-n24-qa09",
+   "module": 24,
+   "topic": "s24wtable",
+   "stem": "In a before and after study of migraine pain ratings, which statement about the Wilcoxon signed-rank test is correct?",
+   "options": [
+    "Each rank takes the sign of its difference after the magnitudes are ranked",
+    "The differences are ranked from most negative to most positive",
+    "A zero difference is given rank 1",
+    "W is the sum of the positive ranks only"
+   ],
+   "correct": 0,
+   "why": "The magnitudes |d| are ranked from smallest to largest, ties get average ranks, zeros are dropped, and then each rank takes the sign of its difference. W adds all the signed ranks.",
+   "case": null,
+   "equations": [
+    "W=\\sum\\operatorname{sign}(d_i)\\operatorname{rank}|d_i|"
+   ]
+  },
+  {
+   "id": "m2-n24-qa10",
+   "module": 24,
+   "topic": "s24wnormal",
+   "stem": "In a hearing-in-noise training study with 14 nonzero differences, why is the mean of W under the null hypothesis equal to 0?",
+   "options": [
+    "Because the differences are centered on their sample mean",
+    "Because each rank is equally likely to carry a plus or a minus sign when there is no difference",
+    "Because zero differences are dropped",
+    "Because the tie correction removes the mean"
+   ],
+   "correct": 1,
+   "why": "If there is no difference, every signed rank is as likely to be positive as negative, so the positive and negative ranks balance on average and μ_W = 0.",
+   "case": null,
+   "equations": [
+    "\\mu_W=0"
+   ]
+  }
+ ],
+ "notes": [
+  "All data are invented for practice. Critical values are the printed ones. MannWhitney_RankSumT_Table.pdf page 1 rows n_S = 5, n_B = 7 (20,45 P = .048 and 17,48 P = .010) and n_S = 4, n_B = 7 (13,35 P = .042 and 10,38 P = .012). WilcoxonW_Table.pdf page 1 rows n = 8 (32 P = .024, 28 P = .054) and n = 7 (28 P = .016, 24 P = .046). t_table.pdf page 2 infinity row (0.6745 to 3.2905) for every z cutoff and P bracket. No row had to be bracketed.",
+  "Tie-corrected sigma_T uses 12N(N-1) in the tie term, as the task asked and as the studio does. The slides print 12N(N+1), which is a misprint. Question m2-n24-qa03 offers the N+1 value (15.0322) as a distractor. In n24-smoking-craving-ranksum the tie correction changes the decision (z_T = 1.96412 with it, 1.94514 without), which is deliberate and stated in the last step.",
+  "The two s24mwnormal cases carry two extra values keys, tieSum and varianceNoTies (named as in the ref s24wnormal case), because the ref s24mwnormal case has no ties. The two s24normal cases carry two extra values keys, rOutput and rCode, holding the exact shapiro.test output from Rscript (R 4.6.1), as session20a does for its R cases. The same output is printed inside task (iii) with its original line breaks and tab.",
+  "s24mwtable and s24wtable cases with ties use the printed tables, which assume no ties. values.exactP is the exact permutation P over average ranks (all C(N, n_S) splits or all 2^n sign patterns). values.exactP of the s24mwnormal cases is the exact permutation P as in the ref Leboyer case, and values.exactNormalP of the s24wnormal cases is 2(1 - Phi(z_W)) as in the ref platelet case.",
+  "Outcome mix. Do not reject: n24-speech-in-noise-normality (Normality kept for both samples), n24-radial-maze-errors-ranksum, n24-ear-training-pitch-signedrank. Close to a cutoff: n24-smoking-craving-ranksum (z_T = 1.96412) and n24-tinnitus-sound-therapy-signedrank (|W| = 33 against 32). Zero differences dropped: n24-tinnitus-sound-therapy-signedrank and n24-back-pain-mindfulness-signedrank. Shapiro-Wilk failure: n24-sleep-latency-normality (insomnia sample, P = 0.005033).",
+  "Printed-table discrepancy (source kept as printed). MannWhitney_RankSumT_Table.pdf row n_S = 4, n_B = 7, near .01, prints 10,38 with P = .012. The exact no-tie probability of T <= 10 or T >= 38 is 0.0061, and P = .012 belongs to 11,37. n24-radial-maze-errors-ranksum quotes the printed entry as printed. It does not affect that case (T = 20.5 is far from both pairs), but a student using that row at the .01 level would be told P = .012 for a cutoff whose true P is about .006.",
+  "As in the ref cases, the rank tables show the ranks, and the s24mwtable and s24wtable tables show the signed ranks, because the cases are worked solutions. A quiz or exam version would hide those columns.",
+  "Wording. context and tasks keep the course phrases with their punctuation (for example the R output lines 'data:  good'). words, conclusion and the hypotheses in words contain no colons or semicolons, and the check script scans only those fields for them."
+ ]
+}

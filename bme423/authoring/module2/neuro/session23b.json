@@ -1,0 +1,1445 @@
+{
+ "cases": [
+  {
+   "id": "n23-b-vowel-formant-knn",
+   "title": "Classifying a recorded vowel as front or back with K = 3",
+   "topic": "s23knn",
+   "context": "In a study of vowel production, the first and second formant frequencies (F1 and F2, the two lowest resonance frequencies of the vocal tract, in hertz, Hz) of 6 recorded vowels were measured. A trained phonetician labeled each vowel as a Front vowel (tongue body pushed forward, as in \"heed\") or a Back vowel (tongue body pulled back, as in \"who'd\"). The data were standardized to avoid any issues associated with differences in scale; the scaled data are unitless. A new vowel was then recorded with a scaled F1 of 0.5 and a scaled F2 of 0. The 6 labeled vowels were measured with the following results (training set):",
+   "unit": "probability",
+   "table": {
+    "headers": [
+     "Vowel",
+     "x1: scaled F1",
+     "x2: scaled F2",
+     "y: vowel class"
+    ],
+    "rows": [
+     [
+      "A",
+      0.5,
+      0.5,
+      "Front"
+     ],
+     [
+      "B",
+      1.5,
+      1.5,
+      "Front"
+     ],
+     [
+      "C",
+      1,
+      -0.5,
+      "Back"
+     ],
+     [
+      "D",
+      -0.5,
+      -0.5,
+      "Back"
+     ],
+     [
+      "E",
+      -1,
+      1.5,
+      "Front"
+     ],
+     [
+      "F",
+      2.5,
+      -1,
+      "Back"
+     ]
+    ]
+   },
+   "tasks": [
+    "Calculate the Euclidean distance from the new vowel (0.5, 0) to each of the 6 labeled vowels and rank the distances. Make sure to show your intermediate calculations.",
+    "Based on the data listed in the table, classify the new vowel as a Front vowel or a Back vowel. Use a K-NN classification with K = 3. Provide the probability of your classification."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(q\\) (new sample), \\(r\\) (a training sample), \\(d(q,r)\\) (Euclidean distance), \\(K\\) (number of nearest neighbors).",
+   "steps": [
+    {
+     "title": "Set up the new sample and the training set",
+     "general": [
+      "q=(q_1,q_2)"
+     ],
+     "work": [
+      "q=(0.5,0)",
+      "A=(0.5,0.5),\\ B=(1.5,1.5),\\ C=(1,-0.5),\\ D=(-0.5,-0.5),\\ E=(-1,1.5),\\ F=(2.5,-1)"
+     ],
+     "words": "The six labeled vowels are the training set and the new vowel is the test sample. The features are already z-scores, so no further scaling is needed."
+    },
+    {
+     "title": "Distances to A, B and C",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d_A=\\sqrt{(0.5-0.5)^2+(0-0.5)^2}=\\sqrt{0.25}=0.5",
+      "d_B=\\sqrt{(0.5-1.5)^2+(0-1.5)^2}=\\sqrt{3.25}=1.80278",
+      "d_C=\\sqrt{(0.5-1)^2+(0-(-0.5))^2}=\\sqrt{0.5}=0.70711"
+     ],
+     "words": "Subtract matching features, square the differences, add them and take the square root. A minus sign inside the bracket turns into a plus when the training value is negative."
+    },
+    {
+     "title": "Distances to D, E and F",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d_D=\\sqrt{(0.5-(-0.5))^2+(0-(-0.5))^2}=\\sqrt{1.25}=1.11803",
+      "d_E=\\sqrt{(0.5-(-1))^2+(0-1.5)^2}=\\sqrt{4.5}=2.12132",
+      "d_F=\\sqrt{(0.5-2.5)^2+(0-(-1))^2}=\\sqrt{5}=2.23607"
+     ],
+     "words": "The same formula is applied to every training vowel."
+    },
+    {
+     "title": "Rank the distances",
+     "general": [
+      "\\text{rank }d(q,r)\\text{ from smallest}"
+     ],
+     "work": [
+      "A\\ (0.5)<C\\ (0.70711)<D\\ (1.11803)<B\\ (1.80278)<E\\ (2.12132)<F\\ (2.23607)"
+     ],
+     "words": "A is closest, C is second and D is third. There are no ties."
+    },
+    {
+     "title": "Read the classes of the 3 nearest neighbors",
+     "general": [
+      "y_{(1)},\\ y_{(2)},\\ y_{(3)}"
+     ],
+     "work": [
+      "A=\\text{Front},\\ C=\\text{Back},\\ D=\\text{Back}"
+     ],
+     "words": "Only the three closest vowels vote. B, E and F are not neighbors when K is 3."
+    },
+    {
+     "title": "Classify and give the probability",
+     "general": [
+      "P(\\text{Back})=\\frac{\\#\\text{ Back among the }K\\text{ neighbors}}{K}"
+     ],
+     "work": [
+      "P(\\text{Back})=\\frac{2}{3}=0.66667"
+     ],
+     "words": "Back has 2 of the 3 votes, so it is the plurality class. The single nearest vowel A is a front vowel, so K = 1 would give the other class."
+    }
+   ],
+   "conclusion": "With K = 3 the nearest neighbors are A (Front), C (Back) and D (Back). The new vowel is classified as a Back vowel with probability 2/3, or 0.66667.",
+   "source": "Original neuroscience practice example",
+   "lookup": null,
+   "values": {
+    "newSample": [
+     0.5,
+     0
+    ],
+    "distances": {
+     "A": 0.5,
+     "B": 1.8027756377319946,
+     "C": 0.7071067811865476,
+     "D": 1.118033988749895,
+     "E": 2.1213203435596424,
+     "F": 2.23606797749979
+    },
+    "neighbors": [
+     "A",
+     "C",
+     "D"
+    ],
+    "K": 3,
+    "class": "Back",
+    "pBack": 0.6666666666666666
+   },
+   "module": 23,
+   "tolerance": 0.003333333333333333,
+   "answerName": "Probability",
+   "answer": 0.6666666666666666
+  },
+  {
+   "id": "n23-b-instrument-timbre-knn",
+   "title": "Classifying the timbre of an unknown instrument note with K = 5",
+   "topic": "s23knn",
+   "context": "In a study of musical timbre (the tone quality that lets a listener tell two instruments apart at the same pitch and loudness), single notes played on a clarinet and on a trumpet were recorded. Two acoustic features were measured for each note, the spectral centroid (the energy-weighted average frequency of the sound, heard as brightness) and the attack time (the time the note takes to reach full loudness). Both features were rescaled to a 0 to 10 scale, so the scaled values are unitless. A new note from an unknown instrument had a scaled spectral centroid of 5 and a scaled attack time of 3. The 6 labeled notes were measured with the following results (training set):",
+   "unit": "probability",
+   "table": {
+    "headers": [
+     "Note",
+     "x1: spectral centroid",
+     "x2: attack time",
+     "y: instrument"
+    ],
+    "rows": [
+     [
+      "Note 1",
+      6,
+      3,
+      "Trumpet"
+     ],
+     [
+      "Note 2",
+      4,
+      4,
+      "Clarinet"
+     ],
+     [
+      "Note 3",
+      5,
+      6,
+      "Clarinet"
+     ],
+     [
+      "Note 4",
+      7,
+      1,
+      "Trumpet"
+     ],
+     [
+      "Note 5",
+      2,
+      2,
+      "Clarinet"
+     ],
+     [
+      "Note 6",
+      8,
+      5,
+      "Trumpet"
+     ]
+    ]
+   },
+   "tasks": [
+    "Calculate the Euclidean distance from the new note (5, 3) to each of the 6 labeled notes and rank the distances. Make sure to show your intermediate calculations.",
+    "Based on the data listed in the table, classify the new note as a Clarinet note or a Trumpet note. Use a K-NN classification with K = 5. Provide the probability of your classification.",
+    "Repeat the classification with K = 3 and compare the two results."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(q\\) (new sample), \\(r\\) (a training sample), \\(d(q,r)\\) (Euclidean distance), \\(K\\) (number of nearest neighbors).",
+   "steps": [
+    {
+     "title": "Set up the new sample and the training set",
+     "general": [
+      "q=(q_1,q_2)"
+     ],
+     "work": [
+      "q=(5,3)",
+      "N_1=(6,3),\\ N_2=(4,4),\\ N_3=(5,6),\\ N_4=(7,1),\\ N_5=(2,2),\\ N_6=(8,5)"
+     ],
+     "words": "The six labeled notes are the training set and the new note is the test sample. Both features are on the same 0 to 10 scale, so no further scaling is needed."
+    },
+    {
+     "title": "Distances to notes 1, 2 and 3",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d_1=\\sqrt{(5-6)^2+(3-3)^2}=\\sqrt{1}=1",
+      "d_2=\\sqrt{(5-4)^2+(3-4)^2}=\\sqrt{2}=1.41421",
+      "d_3=\\sqrt{(5-5)^2+(3-6)^2}=\\sqrt{9}=3"
+     ],
+     "words": "Subtract matching features, square the differences, add them and take the square root."
+    },
+    {
+     "title": "Distances to notes 4, 5 and 6",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d_4=\\sqrt{(5-7)^2+(3-1)^2}=\\sqrt{8}=2.82843",
+      "d_5=\\sqrt{(5-2)^2+(3-2)^2}=\\sqrt{10}=3.16228",
+      "d_6=\\sqrt{(5-8)^2+(3-5)^2}=\\sqrt{13}=3.60555"
+     ],
+     "words": "The same formula is applied to every training note."
+    },
+    {
+     "title": "Rank the distances",
+     "general": [
+      "\\text{rank }d(q,r)\\text{ from smallest}"
+     ],
+     "work": [
+      "N_1\\ (1)<N_2\\ (1.41421)<N_4\\ (2.82843)<N_3\\ (3)<N_5\\ (3.16228)<N_6\\ (3.60555)"
+     ],
+     "words": "Note 1 is closest, then notes 2, 4, 3 and 5. Note 6 is the farthest. There are no ties."
+    },
+    {
+     "title": "Read the classes of the 5 nearest neighbors",
+     "general": [
+      "y_{(1)},\\dots,y_{(5)}"
+     ],
+     "work": [
+      "N_1=\\text{Trumpet},\\ N_2=\\text{Clarinet},\\ N_4=\\text{Trumpet},\\ N_3=\\text{Clarinet},\\ N_5=\\text{Clarinet}"
+     ],
+     "words": "The five closest notes vote. Note 6 is too far away to vote when K is 5."
+    },
+    {
+     "title": "Classify and give the probability with K = 5",
+     "general": [
+      "P(\\text{Clarinet})=\\frac{\\#\\text{ Clarinet among the }K\\text{ neighbors}}{K}"
+     ],
+     "work": [
+      "P(\\text{Clarinet})=\\frac{3}{5}=0.6"
+     ],
+     "words": "Clarinet has 3 of the 5 votes, so the new note is classified as a clarinet note with probability 3/5."
+    },
+    {
+     "title": "Repeat with K = 3",
+     "general": [
+      "P(\\text{Trumpet})=\\frac{\\#\\text{ Trumpet among the }K\\text{ neighbors}}{K}"
+     ],
+     "work": [
+      "N_1=\\text{Trumpet},\\ N_2=\\text{Clarinet},\\ N_4=\\text{Trumpet}",
+      "P(\\text{Trumpet})=\\frac{2}{3}=0.66667"
+     ],
+     "words": "With only the three closest notes, trumpet has 2 of the 3 votes. The class changes from trumpet at K = 3 to clarinet at K = 5, so the choice of K matters."
+    }
+   ],
+   "conclusion": "With K = 5 the neighbors are notes 1, 2, 4, 3 and 5, and three of them are clarinet notes. The new note is classified as a clarinet note with probability 0.6, while K = 3 gives trumpet with probability 2/3.",
+   "source": "Original neuroscience practice example",
+   "lookup": null,
+   "values": {
+    "newSample": [
+     5,
+     3
+    ],
+    "distances": {
+     "N1": 1.0,
+     "N2": 1.4142135623730951,
+     "N3": 3.0,
+     "N4": 2.8284271247461903,
+     "N5": 3.1622776601683795,
+     "N6": 3.605551275463989
+    },
+    "neighbors": [
+     "N1",
+     "N2",
+     "N4",
+     "N3",
+     "N5"
+    ],
+    "K": 5,
+    "class": "Clarinet",
+    "pClarinet": 0.6
+   },
+   "module": 23,
+   "tolerance": 0.003,
+   "answerName": "Probability",
+   "answer": 0.6
+  },
+  {
+   "id": "n23-b-fear-freezing-minmax",
+   "title": "Min-max normalization of freezing time in a fear memory test",
+   "topic": "s23scaling",
+   "context": "In a study of fear memory in mice, each mouse heard a tone that had been paired with a mild foot shock on the previous day. Freezing time (the time the mouse stayed completely still except for breathing, in seconds, s) was recorded during a 300 s test. Before K-NN, every feature was rescaled with the normalize() function (min-max normalization). The R summary() output for freezing time is shown below.",
+   "unit": "scaled units (0 to 1)",
+   "table": {
+    "headers": [
+     "Statistic",
+     "Freezing time (s)"
+    ],
+    "rows": [
+     [
+      "Min.",
+      4.2
+     ],
+     [
+      "1st Qu.",
+      31.5
+     ],
+     [
+      "Median",
+      58.8
+     ],
+     [
+      "Mean",
+      61.37
+     ],
+     [
+      "3rd Qu.",
+      88.0
+     ],
+     [
+      "Max.",
+      152.6
+     ]
+    ]
+   },
+   "tasks": [
+    "Find the range of freezing time.",
+    "Compute the min-max normalized values of the mean (61.37 s) and the median (58.80 s), and of the maximum."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(x\\) (feature value), \\(\\min(x),\\max(x)\\) (smallest and largest value), \\(x_{\\text{scaled}}\\) (normalized value).",
+   "steps": [
+    {
+     "title": "Read the minimum and maximum",
+     "general": [
+      "\\min(x),\\ \\max(x)"
+     ],
+     "work": [
+      "\\min(x)=4.20,\\quad \\max(x)=152.60"
+     ],
+     "words": "The summary() output gives both values for freezing time."
+    },
+    {
+     "title": "Find the range",
+     "general": [
+      "R=\\max(x)-\\min(x)"
+     ],
+     "work": [
+      "R=152.60-4.20=148.40"
+     ],
+     "words": "The range is the denominator of every normalized value of this feature."
+    },
+    {
+     "title": "Normalize the mean freezing time",
+     "general": [
+      "x_{\\text{scaled}}=\\frac{x-\\min(x)}{\\max(x)-\\min(x)}"
+     ],
+     "work": [
+      "x_{\\text{scaled}}=\\frac{61.37-4.20}{148.40}=\\frac{57.17}{148.40}=0.38524"
+     ],
+     "words": "Subtract the minimum first, then divide by the range. Dividing by the maximum alone would give a wrong value."
+    },
+    {
+     "title": "Normalize the median and the maximum",
+     "general": [
+      "x_{\\text{scaled}}=\\frac{x-\\min(x)}{\\max(x)-\\min(x)}"
+     ],
+     "work": [
+      "x_{\\text{scaled}}=\\frac{58.80-4.20}{148.40}=\\frac{54.60}{148.40}=0.36792",
+      "x_{\\text{scaled}}=\\frac{152.60-4.20}{148.40}=1"
+     ],
+     "words": "The maximum always maps to 1 and the minimum to 0. Every other freezing time falls between them, and the seconds cancel, so the scaled values have no unit."
+    }
+   ],
+   "conclusion": "The range of freezing time is 148.40 s, so the mean of 61.37 s normalizes to 0.38524 and the median of 58.80 s to 0.36792. All normalized freezing times lie between 0 and 1.",
+   "source": "Original neuroscience practice example",
+   "lookup": null,
+   "values": {
+    "min": 4.2,
+    "max": 152.6,
+    "mean": 61.37,
+    "median": 58.8,
+    "range": 148.4,
+    "scaledMean": 0.3852425876010781,
+    "scaledMedian": 0.36792452830188677
+   },
+   "module": 23,
+   "tolerance": 0.0019262129380053907,
+   "answerName": "Normalized value",
+   "answer": 0.3852425876010781
+  },
+  {
+   "id": "n23-b-working-memory-zscore",
+   "title": "z-score standardization of digit span and reaction time in older adults",
+   "topic": "s23scaling",
+   "context": "In a study of cognitive aging, 40 older adults completed a forward digit span task (the longest list of digits a person can repeat back in order, counted in digits) and a choice reaction time task (time between the appearance of an arrow and the press of the matching button, in milliseconds, ms). The sample mean and standard deviation (SD) of each measure are given below. Before K-NN, each measure was standardized with the scale() function (z-score standardization). Participant 1 had a digit span of 5 digits and a reaction time of 520 ms. Participant 2 had a digit span of 9 digits and a reaction time of 498 ms.",
+   "unit": "standardized units",
+   "table": {
+    "headers": [
+     "Row",
+     "Digit span (digits)",
+     "Reaction time (ms)"
+    ],
+    "rows": [
+     [
+      "Mean",
+      6.7,
+      452
+     ],
+     [
+      "SD",
+      1.3,
+      64
+     ],
+     [
+      "Participant 1",
+      5,
+      520
+     ],
+     [
+      "Participant 2",
+      9,
+      498
+     ]
+    ]
+   },
+   "tasks": [
+    "Calculate the Euclidean distance between participant 1 and participant 2 using the raw (unscaled) values.",
+    "Compute the z-scores of both participants on both measures.",
+    "Calculate the Euclidean distance between the two participants using the z-scores, and state which measure dominates each distance."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(x\\) (feature value), \\(\\bar x\\) (sample mean), \\(s_x\\) (sample standard deviation), \\(z\\) (standardized value), \\(d(q,r)\\) (Euclidean distance).",
+   "steps": [
+    {
+     "title": "Distance on the raw scale",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d=\\sqrt{(5-9)^2+(520-498)^2}=\\sqrt{16+484}=\\sqrt{500}=22.36068"
+     ],
+     "words": "The reaction time difference of 22 ms contributes 484 of the 500 squared units. The 4-digit span difference, which is large for this task, contributes only 16."
+    },
+    {
+     "title": "z-scores of participant 1",
+     "general": [
+      "z=\\frac{x-\\bar x}{s_x}"
+     ],
+     "work": [
+      "z_{\\text{span}}=\\frac{5-6.7}{1.3}=\\frac{-1.7}{1.3}=-1.30769",
+      "z_{\\text{RT}}=\\frac{520-452}{64}=\\frac{68}{64}=1.0625"
+     ],
+     "words": "Subtract the mean, then divide by the SD of the same measure. Participant 1 has a short span and a slow reaction time."
+    },
+    {
+     "title": "z-scores of participant 2",
+     "general": [
+      "z=\\frac{x-\\bar x}{s_x}"
+     ],
+     "work": [
+      "z_{\\text{span}}=\\frac{9-6.7}{1.3}=\\frac{2.3}{1.3}=1.76923",
+      "z_{\\text{RT}}=\\frac{498-452}{64}=\\frac{46}{64}=0.71875"
+     ],
+     "words": "Participant 2 has a long span and a reaction time a little slower than average."
+    },
+    {
+     "title": "Distance on the z-score scale",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d=\\sqrt{(-1.30769-1.76923)^2+(1.0625-0.71875)^2}",
+      "=\\sqrt{3.07692^2+0.34375^2}=\\sqrt{9.46746+0.11816}=\\sqrt{9.58562}=3.09607"
+     ],
+     "words": "Both measures are now in SD units with no unit, so they can be added fairly."
+    },
+    {
+     "title": "Compare the two distances",
+     "general": [
+      "\\frac{(\\Delta z_{\\text{span}})^2}{d^2}"
+     ],
+     "work": [
+      "\\frac{9.46746}{9.58562}=0.98767"
+     ],
+     "words": "After standardizing, digit span gives about 99% of the squared distance. Before standardizing, reaction time gave about 97% of it because milliseconds are much larger numbers than digits."
+    }
+   ],
+   "conclusion": "On the raw scale the distance is 22.36068 and is driven almost entirely by reaction time. After z-score standardization the distance is 3.09607 and is driven mainly by digit span, so scaling changes which measure decides the nearest neighbors.",
+   "source": "Original neuroscience practice example",
+   "lookup": null,
+   "values": {
+    "mean": [
+     6.7,
+     452.0
+    ],
+    "sd": [
+     1.3,
+     64.0
+    ],
+    "participant1": [
+     5,
+     520
+    ],
+    "participant2": [
+     9,
+     498
+    ],
+    "z1": [
+     -1.3076923076923077,
+     1.0625
+    ],
+    "z2": [
+     1.769230769230769,
+     0.71875
+    ],
+    "distRaw": 22.360679774997898,
+    "distScaled": 3.0960651937260257
+   },
+   "module": 23,
+   "tolerance": 0.015480325968630129,
+   "answerName": "Distance",
+   "answer": 3.0960651937260257
+  },
+  {
+   "id": "n23-b-recognition-memory-confusion",
+   "title": "Hits and false alarms in a recognition memory test",
+   "topic": "s23confusion",
+   "context": "In a recognition memory experiment, 16 participants studied a list of 50 words. In the test phase each participant saw the 50 studied (old) words mixed with 50 new words and judged each word as Old or New. A response of Old to an old word is a hit, and a response of Old to a new word is a false alarm. The responses of all participants were pooled into the table below. Old is the positive class.",
+   "unit": "proportion",
+   "table": {
+    "headers": [
+     "Actual \\ Predicted",
+     "New",
+     "Old",
+     "Row total"
+    ],
+    "rows": [
+     [
+      "New",
+      654,
+      146,
+      800
+     ],
+     [
+      "Old",
+      212,
+      588,
+      800
+     ],
+     [
+      "Column total",
+      866,
+      734,
+      1600
+     ]
+    ]
+   },
+   "tasks": [
+    "Identify TP, TN, FP and FN, and name the hits, misses, false alarms and correct rejections.",
+    "Compute the accuracy and the error rate.",
+    "Compute the sensitivity (hit rate) and the specificity."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(TP\\) (true positives), \\(TN\\) (true negatives), \\(FP\\) (false positives), \\(FN\\) (false negatives), \\(n\\) (number of test cases).",
+   "steps": [
+    {
+     "title": "Name the four cells",
+     "general": [
+      "\\text{positive}=\\text{Old},\\ \\text{negative}=\\text{New}"
+     ],
+     "work": [
+      "TN=654,\\ FP=146,\\ FN=212,\\ TP=588"
+     ],
+     "words": "Rows are the actual word types and columns are the responses. Hits are true positives and false alarms are false positives. Misses (old words called new) are false negatives and correct rejections are true negatives."
+    },
+    {
+     "title": "Compute the accuracy",
+     "general": [
+      "\\text{accuracy}=\\frac{TP+TN}{TP+TN+FP+FN}"
+     ],
+     "work": [
+      "\\text{accuracy}=\\frac{588+654}{588+654+146+212}=\\frac{1242}{1600}=0.77625"
+     ],
+     "words": "The two diagonal cells are the correct responses."
+    },
+    {
+     "title": "Compute the error rate",
+     "general": [
+      "\\text{error rate}=\\frac{FP+FN}{TP+TN+FP+FN}"
+     ],
+     "work": [
+      "\\text{error rate}=\\frac{146+212}{1600}=\\frac{358}{1600}=0.22375=1-0.77625"
+     ],
+     "words": "The two off-diagonal cells are the wrong responses. Accuracy and error rate add to 1."
+    },
+    {
+     "title": "Compute sensitivity and specificity",
+     "general": [
+      "\\text{sensitivity}=\\frac{TP}{TP+FN}",
+      "\\text{specificity}=\\frac{TN}{TN+FP}"
+     ],
+     "work": [
+      "\\text{sensitivity}=\\frac{588}{588+212}=\\frac{588}{800}=0.735",
+      "\\text{specificity}=\\frac{654}{654+146}=\\frac{654}{800}=0.8175"
+     ],
+     "words": "Sensitivity is the hit rate. One minus the specificity, 146/800 = 0.1825, is the false alarm rate. Participants miss more old words than they falsely call new words old."
+    }
+   ],
+   "conclusion": "Participants respond correctly to 1242 of the 1600 test words, an accuracy of 0.77625 and an error rate of 0.22375. The hit rate (sensitivity) is 0.735 and the specificity is 0.8175, so misses are more common than false alarms.",
+   "source": "Original neuroscience practice example",
+   "lookup": null,
+   "values": {
+    "TN": 654,
+    "FP": 146,
+    "FN": 212,
+    "TP": 588,
+    "n": 1600,
+    "accuracy": 0.77625,
+    "errorRate": 0.22375,
+    "sensitivity": 0.735,
+    "specificity": 0.8175
+   },
+   "module": 23,
+   "tolerance": 0.00388125,
+   "answerName": "Accuracy",
+   "answer": 0.77625
+  },
+  {
+   "id": "n23-b-alarm-call-detector-rare",
+   "title": "Automatic detector of rare prairie dog alarm calls",
+   "topic": "s23confusion",
+   "context": "Researchers studying alarm calls (calls given when a predator is seen) in a prairie dog colony ran an automatic detector on 2,000 one-second audio clips recorded at the colony. A trained listener found alarm calls in 24 of the clips. The detector's predictions against the listener's labels are shown below. Alarm call is the positive class.",
+   "unit": "proportion",
+   "table": {
+    "headers": [
+     "Actual \\ Predicted",
+     "No alarm call",
+     "Alarm call",
+     "Row total"
+    ],
+    "rows": [
+     [
+      "No alarm call",
+      1964,
+      12,
+      1976
+     ],
+     [
+      "Alarm call",
+      18,
+      6,
+      24
+     ],
+     [
+      "Column total",
+      1982,
+      18,
+      2000
+     ]
+    ]
+   },
+   "tasks": [
+    "Identify TP, TN, FP and FN, and compute the accuracy and the error rate of the detector.",
+    "A rule that always predicts No alarm call needs no training at all. Build its confusion matrix and compute its accuracy.",
+    "Compute the sensitivity of the detector and of the always-no rule. Explain the limitation of accuracy."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(TP\\) (true positives), \\(TN\\) (true negatives), \\(FP\\) (false positives), \\(FN\\) (false negatives), \\(n\\) (number of test cases).",
+   "steps": [
+    {
+     "title": "Name the four cells",
+     "general": [
+      "\\text{positive}=\\text{Alarm call},\\ \\text{negative}=\\text{No alarm call}"
+     ],
+     "work": [
+      "TN=1964,\\ FP=12,\\ FN=18,\\ TP=6"
+     ],
+     "words": "Rows are the listener's labels and columns are the detector's predictions. An alarm call that the detector misses is a false negative."
+    },
+    {
+     "title": "Accuracy and error rate of the detector",
+     "general": [
+      "\\text{accuracy}=\\frac{TP+TN}{TP+TN+FP+FN}",
+      "\\text{error rate}=\\frac{FP+FN}{TP+TN+FP+FN}"
+     ],
+     "work": [
+      "\\text{accuracy}=\\frac{6+1964}{2000}=\\frac{1970}{2000}=0.985",
+      "\\text{error rate}=\\frac{12+18}{2000}=\\frac{30}{2000}=0.015"
+     ],
+     "words": "The detector is right in 98.5% of clips."
+    },
+    {
+     "title": "Fill the cells for the always-no rule",
+     "general": [
+      "TN,\\ FP,\\ FN,\\ TP"
+     ],
+     "work": [
+      "TN=1976,\\ FP=0,\\ FN=24,\\ TP=0"
+     ],
+     "words": "Every clip is predicted negative. The 24 clips with alarm calls become false negatives and no clip is a true positive."
+    },
+    {
+     "title": "Accuracy of the always-no rule",
+     "general": [
+      "\\text{accuracy}=\\frac{TP+TN}{TP+TN+FP+FN}"
+     ],
+     "work": [
+      "\\text{accuracy}=\\frac{0+1976}{2000}=0.988"
+     ],
+     "words": "The rule that never finds an alarm call has a higher accuracy than the trained detector because alarm calls are rare."
+    },
+    {
+     "title": "Sensitivity of both",
+     "general": [
+      "\\text{sensitivity}=\\frac{TP}{TP+FN}"
+     ],
+     "work": [
+      "\\text{sensitivity}=\\frac{6}{6+18}=\\frac{6}{24}=0.25",
+      "\\text{sensitivity}=\\frac{0}{0+24}=0"
+     ],
+     "words": "The detector finds 1 in 4 alarm calls and the always-no rule finds none. Accuracy hides this because 1976 of the 2000 clips are negative."
+    }
+   ],
+   "conclusion": "The detector is correct in 1970 of 2000 clips, an accuracy of 0.985, yet it finds only 6 of the 24 alarm calls, a sensitivity of 0.25. A rule that never predicts an alarm call reaches an even higher accuracy of 0.988, so accuracy alone is misleading for a rare class and sensitivity is also needed.",
+   "source": "Original neuroscience practice example",
+   "lookup": null,
+   "values": {
+    "TN": 1964,
+    "FP": 12,
+    "FN": 18,
+    "TP": 6,
+    "n": 2000,
+    "accuracy": 0.985,
+    "errorRate": 0.015,
+    "sensitivity": 0.25,
+    "specificity": 0.9939271255060729,
+    "accuracyAlwaysNo": 0.988,
+    "sensitivityAlwaysNo": 0.0
+   },
+   "module": 23,
+   "tolerance": 0.004925,
+   "answerName": "Accuracy",
+   "answer": 0.985
+  },
+  {
+   "id": "n23-b-dyslexia-screen-sensspec",
+   "title": "Classroom dyslexia screening test in second grade",
+   "topic": "s23sensspec",
+   "context": "In a reading study, 240 second-grade children took a 10-minute dyslexia screening test (letter-sound knowledge and rapid naming of colors and objects). All children also had a full assessment by a reading specialist, which found dyslexia (a specific difficulty learning to read despite adequate teaching) in 30 children. The screening results against the full assessment are shown below. Dyslexia is the positive class.",
+   "unit": "proportion",
+   "table": {
+    "headers": [
+     "Actual \\ Predicted",
+     "No dyslexia",
+     "Dyslexia",
+     "Row total"
+    ],
+    "rows": [
+     [
+      "No dyslexia",
+      176,
+      34,
+      210
+     ],
+     [
+      "Dyslexia",
+      5,
+      25,
+      30
+     ],
+     [
+      "Column total",
+      181,
+      59,
+      240
+     ]
+    ]
+   },
+   "tasks": [
+    "Identify TP, TN, FP and FN.",
+    "Compute the sensitivity and the specificity of the screening test.",
+    "Compute the accuracy and state which kind of error the screening test makes more often."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(TP\\) (true positives), \\(TN\\) (true negatives), \\(FP\\) (false positives), \\(FN\\) (false negatives), \\(n\\) (number of test cases).",
+   "steps": [
+    {
+     "title": "Name the four cells",
+     "general": [
+      "\\text{positive}=\\text{Dyslexia},\\ \\text{negative}=\\text{No dyslexia}"
+     ],
+     "work": [
+      "TN=176,\\ FP=34,\\ FN=5,\\ TP=25"
+     ],
+     "words": "Rows are the specialist's findings and columns are the screening results. A child with dyslexia who passes the screen is a false negative."
+    },
+    {
+     "title": "Compute the sensitivity",
+     "general": [
+      "\\text{sensitivity}=\\frac{TP}{TP+FN}"
+     ],
+     "work": [
+      "\\text{sensitivity}=\\frac{25}{25+5}=\\frac{25}{30}=0.83333"
+     ],
+     "words": "Only the dyslexia row is used. The screen flags 25 of the 30 children with dyslexia."
+    },
+    {
+     "title": "Compute the specificity",
+     "general": [
+      "\\text{specificity}=\\frac{TN}{TN+FP}"
+     ],
+     "work": [
+      "\\text{specificity}=\\frac{176}{176+34}=\\frac{176}{210}=0.8381"
+     ],
+     "words": "Only the no-dyslexia row is used. The screen clears 176 of the 210 children without dyslexia."
+    },
+    {
+     "title": "Compute the accuracy",
+     "general": [
+      "\\text{accuracy}=\\frac{TP+TN}{TP+TN+FP+FN}"
+     ],
+     "work": [
+      "\\text{accuracy}=\\frac{25+176}{240}=\\frac{201}{240}=0.8375"
+     ],
+     "words": "There are 34 false positives and 5 false negatives. Most errors are children without dyslexia who are flagged, and the full assessment then clears them."
+    }
+   ],
+   "conclusion": "The screening test finds 25 of the 30 children with dyslexia, a sensitivity of 0.83333, and clears 176 of the 210 children without dyslexia, a specificity of 0.8381. The accuracy is 0.8375, and most of the errors are false positives.",
+   "source": "Original neuroscience practice example",
+   "lookup": null,
+   "values": {
+    "TN": 176,
+    "FP": 34,
+    "FN": 5,
+    "TP": 25,
+    "n": 240,
+    "accuracy": 0.8375,
+    "sensitivity": 0.8333333333333334,
+    "specificity": 0.8380952380952381
+   },
+   "module": 23,
+   "tolerance": 0.004166666666666667,
+   "answerName": "Sensitivity",
+   "answer": 0.8333333333333334
+  },
+  {
+   "id": "n23-b-anxiety-questionnaire-sensspec",
+   "title": "Anxiety questionnaire screen against a clinical interview",
+   "topic": "s23sensspec",
+   "context": "In a study at a university counseling center, 180 adults completed a 7-item anxiety questionnaire (each item scored 0 to 3 points) and a structured clinical interview on the same day. The interview found generalized anxiety disorder (GAD, persistent worry that is hard to control) in 36 adults. A questionnaire score of 15 points or more was counted as a positive screen. The screening results against the interview are shown below. GAD is the positive class.",
+   "unit": "proportion",
+   "table": {
+    "headers": [
+     "Actual \\ Predicted",
+     "No GAD",
+     "GAD",
+     "Row total"
+    ],
+    "rows": [
+     [
+      "No GAD",
+      138,
+      6,
+      144
+     ],
+     [
+      "GAD",
+      16,
+      20,
+      36
+     ],
+     [
+      "Column total",
+      154,
+      26,
+      180
+     ]
+    ]
+   },
+   "tasks": [
+    "Identify TP, TN, FP and FN.",
+    "Compute the accuracy, the sensitivity and the specificity of the questionnaire screen.",
+    "Is accuracy alone enough to judge this screen? Please state how you reached your conclusions."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(TP\\) (true positives), \\(TN\\) (true negatives), \\(FP\\) (false positives), \\(FN\\) (false negatives), \\(n\\) (number of test cases).",
+   "steps": [
+    {
+     "title": "Name the four cells",
+     "general": [
+      "\\text{positive}=\\text{GAD},\\ \\text{negative}=\\text{No GAD}"
+     ],
+     "work": [
+      "TN=138,\\ FP=6,\\ FN=16,\\ TP=20"
+     ],
+     "words": "Rows are the interview findings and columns are the questionnaire results. An adult with GAD who scores below 15 is a false negative."
+    },
+    {
+     "title": "Compute the accuracy",
+     "general": [
+      "\\text{accuracy}=\\frac{TP+TN}{TP+TN+FP+FN}"
+     ],
+     "work": [
+      "\\text{accuracy}=\\frac{20+138}{180}=\\frac{158}{180}=0.87778"
+     ],
+     "words": "The screen agrees with the interview for 158 of the 180 adults."
+    },
+    {
+     "title": "Compute the sensitivity",
+     "general": [
+      "\\text{sensitivity}=\\frac{TP}{TP+FN}"
+     ],
+     "work": [
+      "\\text{sensitivity}=\\frac{20}{20+16}=\\frac{20}{36}=0.55556"
+     ],
+     "words": "Only the GAD row is used. The screen misses 16 of the 36 adults with GAD."
+    },
+    {
+     "title": "Compute the specificity",
+     "general": [
+      "\\text{specificity}=\\frac{TN}{TN+FP}"
+     ],
+     "work": [
+      "\\text{specificity}=\\frac{138}{138+6}=\\frac{138}{144}=0.95833"
+     ],
+     "words": "Only the no-GAD row is used. Almost every adult without GAD is cleared."
+    },
+    {
+     "title": "Judge accuracy alone",
+     "general": [
+      "\\text{accuracy}\\ \\text{vs}\\ \\text{sensitivity}"
+     ],
+     "work": [
+      "0.55556<0.87778"
+     ],
+     "words": "Accuracy is high because 144 of the 180 adults do not have GAD and nearly all of them are cleared. Sensitivity shows that the screen misses almost half of the adults with GAD, so accuracy alone is not enough."
+    }
+   ],
+   "conclusion": "The questionnaire screen has an accuracy of 0.87778 and a specificity of 0.95833, but a sensitivity of only 0.55556. It misses 16 of the 36 adults with GAD, so accuracy alone gives too good an impression of the screen.",
+   "source": "Original neuroscience practice example",
+   "lookup": null,
+   "values": {
+    "TN": 138,
+    "FP": 6,
+    "FN": 16,
+    "TP": 20,
+    "n": 180,
+    "accuracy": 0.8777777777777778,
+    "sensitivity": 0.5555555555555556,
+    "specificity": 0.9583333333333334
+   },
+   "module": 23,
+   "tolerance": 0.002777777777777778,
+   "answerName": "Sensitivity",
+   "answer": 0.5555555555555556
+  },
+  {
+   "id": "n23-b-voicing-sigmoid-neuron",
+   "title": "Sigmoid neuron deciding whether a stop consonant is voiced",
+   "topic": "s23neuron",
+   "context": "In a speech perception study, a single artificial neuron was trained to decide whether a recorded stop consonant was voiceless (/p/, /t/, /k/) or voiced (/b/, /d/, /g/). The two inputs were the min-max normalized voice onset time (VOT, the time from the release of the lips or tongue to the start of vocal fold vibration), x1, and the normalized burst loudness (loudness of the short noise at the release), x2. The weights were w1 = 6.2 and w2 = -1.8, the bias weight was w0 = -3.1, and the activation function was the sigmoid (logistic) function. An output above 0.5 was read as voiceless. The two tokens below were tested.",
+   "unit": "neuron output (0 to 1)",
+   "table": {
+    "headers": [
+     "Token",
+     "x1: normalized VOT",
+     "x2: normalized burst loudness"
+    ],
+    "rows": [
+     [
+      "Token 1",
+      0.7,
+      0.4
+     ],
+     [
+      "Token 2",
+      0.2,
+      0.6
+     ]
+    ]
+   },
+   "tasks": [
+    "Compute the weighted sum of the inputs and add the bias weight for each token.",
+    "Apply the sigmoid activation to get the neuron output for each token, and classify each token as voiced or voiceless.",
+    "What output would a threshold (step) activation give for each token?"
+   ],
+   "hypotheses": null,
+   "symbols": "\\(x_j\\) (normalized input), \\(w_j\\) (input weight), \\(w_0\\) (bias weight), \\(s\\) (net input), \\(y\\) (neuron output).",
+   "steps": [
+    {
+     "title": "Weighted sum for token 1",
+     "general": [
+      "\\sum_{j=1}^{2}w_jx_j"
+     ],
+     "work": [
+      "6.2(0.7)+(-1.8)(0.4)=4.34-0.72=3.62"
+     ],
+     "words": "Multiply each input by its weight and add the products. The negative weight lowers the sum."
+    },
+    {
+     "title": "Add the bias weight",
+     "general": [
+      "s=w_0+\\sum_{j=1}^{2}w_jx_j"
+     ],
+     "work": [
+      "s=-3.1+3.62=0.52"
+     ],
+     "words": "The bias node is a constant input of 1, so its weight is added to the sum."
+    },
+    {
+     "title": "Apply the sigmoid to token 1",
+     "general": [
+      "y=f(s)=\\frac{1}{1+e^{-s}}"
+     ],
+     "work": [
+      "y=\\frac{1}{1+e^{-0.52}}=0.62715"
+     ],
+     "words": "The net input is positive, so the output is above 0.5 and token 1 is classified as voiceless."
+    },
+    {
+     "title": "Repeat for token 2",
+     "general": [
+      "s=w_0+\\sum_{j=1}^{2}w_jx_j",
+      "y=f(s)=\\frac{1}{1+e^{-s}}"
+     ],
+     "work": [
+      "s=-3.1+6.2(0.2)+(-1.8)(0.6)=-3.1+1.24-1.08=-2.94",
+      "y=\\frac{1}{1+e^{2.94}}=0.05021"
+     ],
+     "words": "The short VOT gives a negative net input, so the output is close to 0 and token 2 is classified as voiced."
+    },
+    {
+     "title": "Threshold activation",
+     "general": [
+      "f(x)=\\begin{cases}0 & x<0\\\\ 1 & x\\ge0\\end{cases}"
+     ],
+     "work": [
+      "f(0.52)=1,\\quad f(-2.94)=0"
+     ],
+     "words": "A threshold activation gives only 0 or 1. It gives the same two classes here but loses the information that token 1 is a much less certain case than token 2."
+    }
+   ],
+   "conclusion": "Token 1 has a net input of 0.52 and a sigmoid output of 0.62715, so it is classified as voiceless. Token 2 has a net input of -2.94 and an output of 0.05021, so it is classified as voiced. A threshold activation gives outputs 1 and 0, the same classes.",
+   "source": "Original neuroscience practice example",
+   "lookup": null,
+   "values": {
+    "weights": [
+     6.2,
+     -1.8
+    ],
+    "bias": -3.1,
+    "inputs": [
+     [
+      0.7,
+      0.4
+     ],
+     [
+      0.2,
+      0.6
+     ]
+    ],
+    "weightedSum": 3.6199999999999997,
+    "netInput": [
+     0.5199999999999997,
+     -2.94
+    ],
+    "outputs": [
+     0.6271477663131955,
+     0.05021127319026653
+    ],
+    "threshold": [
+     1,
+     0
+    ]
+   },
+   "module": 23,
+   "tolerance": 0.0031357388315659774,
+   "answerName": "Neuron output",
+   "answer": 0.6271477663131955
+  },
+  {
+   "id": "n23-b-beat-threshold-sse",
+   "title": "Threshold neuron marking beat onsets in a drum recording",
+   "topic": "s23neuron",
+   "context": "In a study of musical beat detection, a single artificial neuron with a threshold (step) activation was used to mark which short frames (slices of 50 milliseconds, ms) of a drum recording contain a beat onset. The two inputs were the normalized spectral flux (how much the sound spectrum changes from the previous frame), x1, and the normalized loudness increase, x2. The weights were w1 = 1.5 and w2 = 2.0 and the bias weight was w0 = -1.6. A trained listener labeled four frames, with 1 for a beat onset and 0 for no onset.",
+   "unit": "squared output units",
+   "table": {
+    "headers": [
+     "Frame",
+     "x1",
+     "x2",
+     "Known output y"
+    ],
+    "rows": [
+     [
+      1,
+      0.8,
+      0.3,
+      1
+     ],
+     [
+      2,
+      0.2,
+      0.4,
+      0
+     ],
+     [
+      3,
+      0.5,
+      0.2,
+      1
+     ],
+     [
+      4,
+      0.6,
+      0.5,
+      0
+     ]
+    ]
+   },
+   "tasks": [
+    "Compute the weighted sum, including the bias weight, for each frame.",
+    "Apply the threshold activation to get each prediction.",
+    "Compute each error and the sum of squared errors."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(x_{ij}\\) (input \\(j\\) of observation \\(i\\)), \\(w_j\\) (weight), \\(w_0\\) (bias weight), \\(s_i\\) (weighted sum), \\(\\hat y_i\\) (prediction), \\(e_i\\) (error), \\(SS\\) (sum of squared errors).",
+   "steps": [
+    {
+     "title": "Weighted sums",
+     "general": [
+      "s_i=w_0+\\sum_{j=1}^{2}w_jx_{ij}"
+     ],
+     "work": [
+      "s_1=-1.6+1.5(0.8)+2.0(0.3)=0.2",
+      "s_2=-1.6+1.5(0.2)+2.0(0.4)=-0.5",
+      "s_3=-1.6+1.5(0.5)+2.0(0.2)=-0.45",
+      "s_4=-1.6+1.5(0.6)+2.0(0.5)=0.3"
+     ],
+     "words": "Each frame gets its own weighted sum, with the same weights and bias for every frame."
+    },
+    {
+     "title": "Threshold predictions",
+     "general": [
+      "\\hat y_i=f(s_i)=\\begin{cases}0 & s_i<0\\\\ 1 & s_i\\ge0\\end{cases}"
+     ],
+     "work": [
+      "\\hat y_1=f(0.2)=1,\\quad \\hat y_2=f(-0.5)=0",
+      "\\hat y_3=f(-0.45)=0,\\quad \\hat y_4=f(0.3)=1"
+     ],
+     "words": "A sum of 0 or more gives 1 and a negative sum gives 0."
+    },
+    {
+     "title": "Errors",
+     "general": [
+      "e_i=y_i-\\hat y_i"
+     ],
+     "work": [
+      "e_1=1-1=0",
+      "e_2=0-0=0",
+      "e_3=1-0=1",
+      "e_4=0-1=-1"
+     ],
+     "words": "Each error is the known output minus the prediction. Frame 3 is a missed onset and frame 4 is a false onset."
+    },
+    {
+     "title": "Sum of squared errors",
+     "general": [
+      "SS=\\sum_{i=1}^{n}e_i^2=\\sum_{i=1}^{n}(y_i-\\hat y_i)^2"
+     ],
+     "work": [
+      "SS=0^2+0^2+1^2+(-1)^2=2"
+     ],
+     "words": "With a threshold activation every error is 0, 1 or -1, so the sum of squared errors counts the wrong frames. Training would change the weights to make this total smaller."
+    }
+   ],
+   "conclusion": "The weighted sums are 0.2, -0.5, -0.45 and 0.3, so the predictions are 1, 0, 0 and 1. Frames 3 and 4 are wrong, so the sum of squared errors is 2.",
+   "source": "Original neuroscience practice example",
+   "lookup": null,
+   "values": {
+    "weights": [
+     1.5,
+     2.0
+    ],
+    "bias": -1.6,
+    "sums": [
+     0.20000000000000007,
+     -0.5,
+     -0.45000000000000007,
+     0.2999999999999998
+    ],
+    "predictions": [
+     1,
+     0,
+     0,
+     1
+    ],
+    "errors": [
+     0,
+     0,
+     1,
+     -1
+    ],
+    "SSE": 2
+   },
+   "module": 23,
+   "tolerance": 0.01,
+   "answerName": "Sum of squared errors",
+   "answer": 2.0
+  }
+ ],
+ "questions": [
+  {
+   "id": "m2-n23-qb01",
+   "module": 23,
+   "topic": "s23knn",
+   "stem": "A new vowel has scaled formants (F1, F2) of (0.5, 0). What is its Euclidean distance to the training vowel C at (1, -0.5)?",
+   "options": [
+    "\\(1\\)",
+    "\\(0.5\\)",
+    "\\(0.70711\\)",
+    "\\(0.25\\)"
+   ],
+   "correct": 2,
+   "why": "The differences are 0.5 and 0.5, so \\(\\sqrt{0.25+0.25}=\\sqrt{0.5}\\approx0.70711\\). Adding the absolute differences gives 1, the Manhattan distance.",
+   "case": "n23-b-vowel-formant-knn",
+   "equations": [
+    "d_C=\\sqrt{0.5^2+0.5^2}=\\sqrt{0.5}"
+   ]
+  },
+  {
+   "id": "m2-n23-qb02",
+   "module": 23,
+   "topic": "s23knn",
+   "stem": "For the new note (5, 3) in the timbre study, the 5 nearest labeled notes are Trumpet, Clarinet, Trumpet, Clarinet and Clarinet. What is the K = 5 classification and its probability?",
+   "options": [
+    "Trumpet, \\(2/3=0.66667\\)",
+    "Clarinet, \\(3/5=0.6\\)",
+    "Clarinet, \\(3/6=0.5\\)",
+    "Trumpet, \\(2/5=0.4\\)"
+   ],
+   "correct": 1,
+   "why": "Clarinet has 3 of the 5 votes, so the probability is 3/5. Trumpet with 2/3 is the K = 3 answer, and 3/6 divides by all six training notes instead of K.",
+   "case": "n23-b-instrument-timbre-knn",
+   "equations": [
+    "P(\\text{Clarinet})=\\frac{3}{5}=0.6"
+   ]
+  },
+  {
+   "id": "m2-n23-qb03",
+   "module": 23,
+   "topic": "s23scaling",
+   "stem": "Freezing time has a minimum of 4.20 s and a maximum of 152.60 s. What is the min-max normalized value of the mean freezing time of 61.37 s?",
+   "options": [
+    "\\(0.38524\\)",
+    "\\(0.40216\\)",
+    "\\(0.37464\\)",
+    "\\(57.17\\)"
+   ],
+   "correct": 0,
+   "why": "\\((61.37-4.20)/(152.60-4.20)=57.17/148.40=0.38524\\). 0.40216 divides by the maximum without subtracting the minimum, and 0.37464 subtracts the minimum but divides by the maximum.",
+   "case": "n23-b-fear-freezing-minmax",
+   "equations": [
+    "x_{\\text{scaled}}=\\frac{61.37-4.20}{148.40}=0.38524"
+   ]
+  },
+  {
+   "id": "m2-n23-qb04",
+   "module": 23,
+   "topic": "s23confusion",
+   "stem": "In a recognition memory test, Old (studied word) is the positive class. A participant responds Old to a word that was never studied. Which cell of the confusion matrix is this response?",
+   "options": [
+    "True positive (hit)",
+    "False negative (miss)",
+    "True negative (correct rejection)",
+    "False positive (false alarm)"
+   ],
+   "correct": 3,
+   "why": "The actual class is New (negative) and the prediction is Old (positive), so it is a false positive. In memory research this is called a false alarm.",
+   "case": null,
+   "equations": [
+    "FP=\\text{actual negative, predicted positive}"
+   ]
+  },
+  {
+   "id": "m2-n23-qb05",
+   "module": 23,
+   "topic": "s23confusion",
+   "stem": "Of 2,000 audio clips, 24 contain prairie dog alarm calls. What is the accuracy of a rule that always predicts No alarm call?",
+   "options": [
+    "\\(0.985\\)",
+    "\\(0.012\\)",
+    "\\(0.988\\)",
+    "\\(0\\)"
+   ],
+   "correct": 2,
+   "why": "The rule is right on all 1976 clips without a call, so the accuracy is 1976/2000 = 0.988. That beats the trained detector's 0.985, even though its sensitivity is 0.",
+   "case": "n23-b-alarm-call-detector-rare",
+   "equations": [
+    "\\text{accuracy}=\\frac{1976}{2000}=0.988"
+   ]
+  },
+  {
+   "id": "m2-n23-qb06",
+   "module": 23,
+   "topic": "s23sensspec",
+   "stem": "An anxiety questionnaire screen gives TN = 138, FP = 6, FN = 16 and TP = 20, with GAD as the positive class. What is its sensitivity?",
+   "options": [
+    "\\(0.55556\\)",
+    "\\(0.87778\\)",
+    "\\(0.95833\\)",
+    "\\(0.76923\\)"
+   ],
+   "correct": 0,
+   "why": "Sensitivity uses only the GAD row, so it is 20/(20+16) = 0.55556. 0.87778 is the accuracy, 0.95833 the specificity and 0.76923 the column proportion 20/26.",
+   "case": "n23-b-anxiety-questionnaire-sensspec",
+   "equations": [
+    "\\text{sensitivity}=\\frac{20}{36}=0.55556"
+   ]
+  },
+  {
+   "id": "m2-n23-qb07",
+   "module": 23,
+   "topic": "s23sensspec",
+   "stem": "A school wants a dyslexia screening test that misses as few children with dyslexia as possible, because every flagged child gets a full assessment anyway. Which measure should be as high as possible?",
+   "options": [
+    "Specificity",
+    "Accuracy",
+    "Error rate",
+    "Sensitivity"
+   ],
+   "correct": 3,
+   "why": "Sensitivity is TP/(TP+FN), the share of children with dyslexia who are flagged. A high sensitivity means few false negatives, and the follow-up assessment clears the false positives.",
+   "case": null,
+   "equations": [
+    "\\text{sensitivity}=\\frac{TP}{TP+FN}"
+   ]
+  },
+  {
+   "id": "m2-n23-qb08",
+   "module": 23,
+   "topic": "s23neuron",
+   "stem": "A sigmoid neuron has weights w1 = 6.2 and w2 = -1.8 and bias weight w0 = -3.1. What is its output for the inputs x1 = 0.7 and x2 = 0.4?",
+   "options": [
+    "\\(0.52\\)",
+    "\\(0.62715\\)",
+    "\\(0.97392\\)",
+    "\\(1\\)"
+   ],
+   "correct": 1,
+   "why": "The net input is \\(-3.1+4.34-0.72=0.52\\), and the sigmoid of 0.52 is 0.62715. 0.52 forgets the activation, 0.97392 forgets the bias and 1 is the threshold output.",
+   "case": "n23-b-voicing-sigmoid-neuron",
+   "equations": [
+    "s=-3.1+6.2(0.7)+(-1.8)(0.4)=0.52",
+    "y=\\frac{1}{1+e^{-0.52}}=0.62715"
+   ]
+  },
+  {
+   "id": "m2-n23-qb09",
+   "module": 23,
+   "topic": "s23neuron",
+   "stem": "A neuron with a threshold (step) activation receives a net input of exactly 0. What is its output?",
+   "options": [
+    "\\(1\\)",
+    "\\(0\\)",
+    "\\(0.5\\)",
+    "It is undefined"
+   ],
+   "correct": 0,
+   "why": "The threshold function gives 1 when its input is 0 or more, so an input of exactly 0 gives 1. 0.5 is the sigmoid output at 0.",
+   "case": null,
+   "equations": [
+    "f(x)=\\begin{cases}0 & x<0\\\\ 1 & x\\ge0\\end{cases}"
+   ]
+  },
+  {
+   "id": "m2-n23-qb10",
+   "module": 23,
+   "topic": "s23scaling",
+   "stem": "Older adults are compared on digit span (about 5 to 9 digits) and reaction time (about 400 to 550 ms) with K-NN. Why are both measures standardized before the distances are computed?",
+   "options": [
+    "Because K-NN requires Normally distributed features",
+    "Because standardizing makes reaction time count more",
+    "Because otherwise reaction time, with its much larger numbers, decides almost all of every distance",
+    "Because z-scores are always between 0 and 1"
+   ],
+   "correct": 2,
+   "why": "The Euclidean distance adds squared differences, so a measure in hundreds of ms swamps a measure in single digits. After z-scores both measures are in SD units, so both count.",
+   "case": null,
+   "equations": [
+    "z=\\frac{x-\\bar x}{s_x}"
+   ]
+  }
+ ],
+ "notes": [
+  "All data are invented for practice. Every lookup is null because no printed critical value is used in this session.",
+  "Course wording is kept with its own punctuation in context and tasks (\"The data were standardized to avoid any issues associated with differences in scale; the scaled data are unitless.\", \"... with the following results (training set):\", \"Use a K-NN classification with K = 3.\"). The check script allows colons and semicolons in context and tasks only and bans them in step words and conclusions.",
+  "n23-b-vowel-formant-knn uses the standardized phrase with z-score-like features (negative and positive values around 0), so the phrase matches the numbers. Its single nearest vowel is Front but K = 3 gives Back.",
+  "n23-b-instrument-timbre-knn is built so that K = 3 gives Trumpet (2/3) and K = 5 gives Clarinet (3/5), like the K = 3 / K = 5 pair in the reference exercise. No distance ties occur in either K-NN case.",
+  "The reference has no z-score case, so n23-b-working-memory-zscore uses the method's own formula symbols (x bar, s_x, z) plus d(q,r). Its values keys are mean, sd, participant1, participant2, z1, z2, distRaw and distScaled. Its graded answer is the distance on the z-score scale.",
+  "Accuracy and sensitivity tell different stories in n23-b-alarm-call-detector-rare (accuracy 0.985 but sensitivity 0.25, and the always-no rule reaches 0.988) and in n23-b-anxiety-questionnaire-sensspec (accuracy 0.87778 but sensitivity 0.55556). The alarm-call case stores two extra values keys, accuracyAlwaysNo and sensitivityAlwaysNo.",
+  "Both neuron cases use a bias weight w0 (as in the reference concrete-model case) with 2 inputs. The sigmoid case stores netInput and outputs as two-token lists. The threshold case's SSE (2) counts the wrong frames, which is stated in the solution.",
+  "The anxiety questionnaire is a generic 7-item, 0 to 3 point scale with a cutoff of 15. No real instrument's accuracy is claimed."
+ ]
+}

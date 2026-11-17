@@ -20,6 +20,15 @@ TABLES = {
   'F': ('F_table.pdf', 1, 0, 38, 129, 57, 62),
   'c1': ('Chi_Squared_Table1.pdf', 1, -90, 204, 293, 23, 98),
   'c2': ('Chi_Squared_Table2.pdf', 1, 0, 231, 748, 32, 125),
+  'mw': ('MannWhitney_RankSumT_Table.pdf', 1, 0, 327, 275, 44, 140),
+  'w': ('WilcoxonW_Table.pdf', 1, 0, 98, 245, 67, 150),
+}
+# Optional crop windows for the rank tables (defaults keep every older crop unchanged):
+# lc/lh label window center and half-width (both n_S and n_B columns), hh header half-height (".05" above "Critical Values"),
+# rf row half-height in row heights (keeps the n_S printed on the first row of its block), ch cell half-width (reaches the P column).
+XTRA = {
+  'mw': dict(lc=447, lh=150, hh=60, rf=3.4, ch=380),
+  'w': dict(ch=600),
 }
 def t1(row, col): return ('t1', T1_COLS[col], T1_ROWS[T1_KEYS.index(row)])
 # lookup key (file|page|row|column as stored in the cases) -> (table, cell x, cell y)
@@ -37,6 +46,11 @@ for r, c, x, y in [('6', '2', 154, 466), ('8', '2', 154, 584), ('10', '2', 154, 
         CELLS[f'F_table.pdf|1|{r}|{col}'] = ('F', x, y)
 CELLS['Chi_Squared_Table1.pdf|1|1|.05'] = ('c1', 579, 337)
 CELLS['Chi_Squared_Table2.pdf|1|1|0.050'] = ('c2', 1077, 790)
+# Session 24 rank tests (positions read from the 200 dpi scans and checked by eye)
+CELLS['MannWhitney_RankSumT_Table.pdf|1|n_S = 3, n_B = 4|Probability near .05, critical values (P = .057)'] = ('mw', 899, 363)
+CELLS['MannWhitney_RankSumT_Table.pdf|1|n_S = 4, n_B = 6|Probability near .05, critical values (P = .038)'] = ('mw', 887, 792)
+CELLS['WilcoxonW_Table.pdf|1|n = 6|Critical value (P = .032)'] = ('w', 618, 422)
+CELLS['WilcoxonW_Table.pdf|1|n = 8|Critical value (P = .024)'] = ('w', 618, 688)
 
 def page(tab):
     f, pg, rot = TABLES[tab][:3]
@@ -54,7 +68,8 @@ def build():
     for key, (tab, cx, cy) in sorted(CELLS.items()):
         f, pg, rot, lx, hy, rh, cw = TABLES[tab]
         im = pages.setdefault(tab, page(tab))
-        xs = spans(lx, cx, 27, int(cw * 1.6)); ys = spans(hy, cy, 26, int(rh * 2.6))
+        x = XTRA.get(tab, {})
+        xs = spans(x.get('lc', lx), cx, x.get('lh', 27), x.get('ch', int(cw * 1.6))); ys = spans(hy, cy, x.get('hh', 26), int(rh * x.get('rf', 2.6)))
         G = 16
         Wd = sum(b - a for a, b in xs) + G * (len(xs) - 1); Ht = sum(b - a for a, b in ys) + G * (len(ys) - 1)
         canvas = Image.new('RGB', (Wd, Ht), (255, 255, 255)); dr = ImageDraw.Draw(canvas)

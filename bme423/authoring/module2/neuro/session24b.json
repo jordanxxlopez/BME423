@@ -1,0 +1,2838 @@
+{
+ "cases": [
+  {
+   "id": "n24-b-pitch-matching-normality",
+   "title": "Pitch-matching error in singers and non-musicians",
+   "topic": "s24normal",
+   "context": "In a study looking at vocal pitch control, ten trained choir singers and ten non-musicians each heard a sung target note and sang it back. The pitch-matching error (the absolute distance between the sung note and the target) was recorded in cents (one hundredth of a semitone). The researchers wanted to know whether the errors in each group could be treated as Normally distributed before choosing a test.",
+   "unit": "cents",
+   "table": {
+    "headers": [
+     "Order i",
+     "Trained singers, sorted (cents)",
+     "Non-musicians, sorted (cents)",
+     "Plotting probability (i - 3/8)/(n + 1/4)",
+     "Theoretical quantile z_i"
+    ],
+    "rows": [
+     [
+      1,
+      7,
+      15,
+      0.06098,
+      -1.54664
+     ],
+     [
+      2,
+      10,
+      18,
+      0.15854,
+      -1.00049
+     ],
+     [
+      3,
+      11,
+      20,
+      0.2561,
+      -0.65542
+     ],
+     [
+      4,
+      12,
+      22,
+      0.35366,
+      -0.37546
+     ],
+     [
+      5,
+      13,
+      25,
+      0.45122,
+      -0.12258
+     ],
+     [
+      6,
+      13,
+      28,
+      0.54878,
+      0.12258
+     ],
+     [
+      7,
+      14,
+      34,
+      0.64634,
+      0.37546
+     ],
+     [
+      8,
+      16,
+      45,
+      0.7439,
+      0.65542
+     ],
+     [
+      9,
+      17,
+      70,
+      0.84146,
+      1.00049
+     ],
+     [
+      10,
+      19,
+      110,
+      0.93902,
+      1.54664
+     ]
+    ]
+   },
+   "tasks": [
+    "For each group, calculate the mean, the SD, and the percentage of values within one SD and within two SDs of the mean, and compare them with the percentages expected for a Normal distribution.",
+    "Give the theoretical quantiles that qqnorm() uses for the smallest and the largest of the ten points.",
+    "For the trained singers, shapiro.test(x) in R printed \"W = 0.98879, p-value = 0.9951\". For the non-musicians it printed \"W = 0.76707, p-value = 0.005761\". State the hypotheses, the decision at the 0.05 level, and whether a parametric test such as the t test is appropriate for each group."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\text{the data come from a Normal distribution}",
+    "alternative": "H_A:\\text{the data do not come from a Normal distribution}",
+    "nullWords": "There is no difference between the distribution of the data and a Normal distribution.",
+    "alternativeWords": "The distribution of the data differs from a Normal distribution."
+   },
+   "symbols": "\\(\\bar x\\) (sample mean), \\(s\\) (sample SD), \\(p_i\\) (plotting probability), \\(z_i\\) (theoretical Normal quantile), \\(W\\) (Shapiro-Wilk statistic), \\(P\\) (P value).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\text{the data come from a Normal distribution}",
+      "H_A:\\text{the data do not come from a Normal distribution}"
+     ],
+     "work": [
+      "\\alpha=0.05"
+     ],
+     "words": "Normality is checked with the percentage of data in a range, the Normal Q-Q plot, and the Shapiro-Wilk test, one group at a time. The null hypothesis is that there is no difference between the distribution of the data and a Normal distribution."
+    },
+    {
+     "title": "Mean and SD of the trained singers",
+     "general": [
+      "\\bar x=\\frac{1}{n}\\sum x_i",
+      "s=\\sqrt{\\frac{\\sum(x_i-\\bar x)^2}{n-1}}"
+     ],
+     "work": [
+      "\\bar x=\\frac{132}{10}=13.2",
+      "\\sum(x_i-\\bar x)^2=111.6",
+      "s=\\sqrt{\\frac{111.6}{9}}=3.52136"
+     ],
+     "words": "Add the ten values and divide by 10, then square each deviation, add them, divide by n - 1 = 9 and take the root."
+    },
+    {
+     "title": "Percentages of the trained singers within one and two SDs",
+     "general": [
+      "\\bar x-s<x<\\bar x+s",
+      "P(\\mu-\\sigma<X<\\mu+\\sigma)=0.6826",
+      "P(\\mu-2\\sigma<X<\\mu+2\\sigma)=0.9544"
+     ],
+     "work": [
+      "13.2-3.52136<x<13.2+3.52136",
+      "9.67864<x<16.7214",
+      "\\frac{7}{10}=70\\%\\ \\text{vs}\\ 68.26\\%",
+      "\\frac{10}{10}=100\\%\\ \\text{within two SDs vs}\\ 95.44\\%"
+     ],
+     "words": "Seven of the ten values (10, 11, 12, 13, 13, 14, 16) lie within one SD of the mean. This is 70% against the Normal 68.26%. All ten values lie within two SDs, close to the Normal 95.44%."
+    },
+    {
+     "title": "Theoretical quantiles for qqnorm()",
+     "general": [
+      "p_i=\\frac{i-3/8}{n+1/4}",
+      "z_i=\\Phi^{-1}(p_i)"
+     ],
+     "work": [
+      "p_1=\\frac{1-0.375}{10.25}=0.0609756",
+      "z_1=\\Phi^{-1}(0.0609756)=-1.54664",
+      "z_{10}=+1.54664"
+     ],
+     "words": "For ten or fewer points R uses these plotting probabilities. The ten theoretical quantiles run from -1.54664 to +1.54664 and are the horizontal axis of the Q-Q plot. Each group's sorted values are plotted against them."
+    },
+    {
+     "title": "Shapiro-Wilk result for the trained singers",
+     "general": [
+      "P>\\alpha\\Rightarrow\\text{do not reject }H_0"
+     ],
+     "work": [
+      "W=0.98879,\\quad P=0.9951>0.05"
+     ],
+     "words": "The P value is far above 0.05, so Normality is not rejected for the trained singers. The data are consistent with a Normal distribution. The Q-Q plot of the singers lies close to a straight line. A parametric test can be used for this group."
+    },
+    {
+     "title": "Mean, SD and range percentages of the non-musicians",
+     "general": [
+      "\\bar x=\\frac{1}{n}\\sum x_i",
+      "s=\\sqrt{\\frac{\\sum(x_i-\\bar x)^2}{n-1}}"
+     ],
+     "work": [
+      "\\bar x=\\frac{387}{10}=38.7",
+      "s=\\sqrt{\\frac{8046.1}{9}}=29.9",
+      "8.79998<x<68.6",
+      "\\frac{8}{10}=80\\%\\ \\text{within one SD}",
+      "\\frac{9}{10}=90\\%\\ \\text{within two SDs}"
+     ],
+     "words": "Eight of the ten values (15, 18, 20, 22, 25, 28, 34, 45) lie within one SD of the mean. This is 80% against the Normal 68.26%. Nine values lie within two SDs (90% against the Normal 95.44%) because 110 lies beyond two SDs."
+    },
+    {
+     "title": "Shapiro-Wilk result for the non-musicians",
+     "general": [
+      "P<\\alpha\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "W=0.76707,\\quad P=0.005761<0.05"
+     ],
+     "words": "The P value is below 0.05 (and below 0.01), so Normality is rejected for the non-musicians. On the Q-Q plot the non-musicians bend upward away from the line at the right end, the positive-skew pattern of a long right tail. A rank-based test is preferred for these data."
+    }
+   ],
+   "conclusion": "The trained singers give W = 0.98879 with P = 0.9951, so Normality is not rejected and the data are consistent with a Normal distribution. The non-musicians give W = 0.76707 with P = 0.005761, so Normality is rejected and the data are not Normal. So a t test is reasonable for the singers alone, but a comparison that includes the non-musicians should use a rank-based test.",
+   "source": "Original neuroscience practice example",
+   "lookup": null,
+   "values": {
+    "n": 10,
+    "mean1": 13.2,
+    "sd1": 3.5213633723318014,
+    "within1SD_1": 7,
+    "within2SD_1": 10,
+    "mean2": 38.7,
+    "sd2": 29.90001858044759,
+    "within1SD_2": 8,
+    "within2SD_2": 9,
+    "W1": 0.98879,
+    "P1": 0.9951,
+    "W2": 0.76707,
+    "P2": 0.005761,
+    "reject1": false,
+    "reject2": true,
+    "sample1": [
+     7,
+     10,
+     11,
+     12,
+     13,
+     13,
+     14,
+     16,
+     17,
+     19
+    ],
+    "sample2": [
+     15,
+     18,
+     20,
+     22,
+     25,
+     28,
+     34,
+     45,
+     70,
+     110
+    ],
+    "rOutput1": [
+     "\tShapiro-Wilk normality test",
+     "",
+     "data:  x",
+     "W = 0.98879, p-value = 0.9951"
+    ],
+    "rOutput2": [
+     "\tShapiro-Wilk normality test",
+     "",
+     "data:  x",
+     "W = 0.76707, p-value = 0.005761"
+    ]
+   },
+   "module": 24,
+   "tolerance": 0.0038353500000000004,
+   "answerName": "Shapiro-Wilk W (non-musicians)",
+   "answer": 0.76707
+  },
+  {
+   "id": "n24-b-amygdala-bold-normality",
+   "title": "Amygdala fMRI response to fearful faces",
+   "topic": "s24normal",
+   "context": "Researchers interested in emotion processing did a study using functional magnetic resonance imaging (fMRI, a scan that tracks blood oxygen changes linked to brain activity). The peak blood-oxygen-level-dependent (BOLD) response of the amygdala (an almond-shaped structure involved in fear) to fearful faces was recorded as percent signal change (%) in ten healthy adults and in ten adults with social anxiety. One scan in the social anxiety group was affected by head motion during the run.",
+   "unit": "% signal change",
+   "table": {
+    "headers": [
+     "Order i",
+     "Healthy adults, sorted (%)",
+     "Adults with social anxiety, sorted (%)",
+     "Plotting probability (i - 3/8)/(n + 1/4)",
+     "Theoretical quantile z_i"
+    ],
+    "rows": [
+     [
+      1,
+      0.18,
+      0.28,
+      0.06098,
+      -1.54664
+     ],
+     [
+      2,
+      0.36,
+      0.36,
+      0.15854,
+      -1.00049
+     ],
+     [
+      3,
+      0.4,
+      0.41,
+      0.2561,
+      -0.65542
+     ],
+     [
+      4,
+      0.47,
+      0.45,
+      0.35366,
+      -0.37546
+     ],
+     [
+      5,
+      0.53,
+      0.49,
+      0.45122,
+      -0.12258
+     ],
+     [
+      6,
+      0.54,
+      0.52,
+      0.54878,
+      0.12258
+     ],
+     [
+      7,
+      0.62,
+      0.58,
+      0.64634,
+      0.37546
+     ],
+     [
+      8,
+      0.65,
+      0.63,
+      0.7439,
+      0.65542
+     ],
+     [
+      9,
+      0.77,
+      0.69,
+      0.84146,
+      1.00049
+     ],
+     [
+      10,
+      0.84,
+      1.92,
+      0.93902,
+      1.54664
+     ]
+    ]
+   },
+   "tasks": [
+    "For each group, calculate the mean, the SD, and the percentage of values within one SD and within two SDs of the mean, and compare them with the percentages expected for a Normal distribution.",
+    "Give the theoretical quantiles that qqnorm() uses for the smallest and the largest of the ten points.",
+    "For the healthy adults, shapiro.test(x) in R printed \"W = 0.98701, p-value = 0.9917\". For the adults with social anxiety it printed \"W = 0.62714, p-value = 0.0001167\". State the hypotheses, the decision at the 0.05 level, and whether a parametric test such as the t test is appropriate for each group."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\text{the data come from a Normal distribution}",
+    "alternative": "H_A:\\text{the data do not come from a Normal distribution}",
+    "nullWords": "There is no difference between the distribution of the data and a Normal distribution.",
+    "alternativeWords": "The distribution of the data differs from a Normal distribution."
+   },
+   "symbols": "\\(\\bar x\\) (sample mean), \\(s\\) (sample SD), \\(p_i\\) (plotting probability), \\(z_i\\) (theoretical Normal quantile), \\(W\\) (Shapiro-Wilk statistic), \\(P\\) (P value).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\text{the data come from a Normal distribution}",
+      "H_A:\\text{the data do not come from a Normal distribution}"
+     ],
+     "work": [
+      "\\alpha=0.05"
+     ],
+     "words": "Normality is checked with the percentage of data in a range, the Normal Q-Q plot, and the Shapiro-Wilk test, one group at a time. The null hypothesis is that there is no difference between the distribution of the data and a Normal distribution."
+    },
+    {
+     "title": "Mean and SD of the healthy adults",
+     "general": [
+      "\\bar x=\\frac{1}{n}\\sum x_i",
+      "s=\\sqrt{\\frac{\\sum(x_i-\\bar x)^2}{n-1}}"
+     ],
+     "work": [
+      "\\bar x=\\frac{5.36}{10}=0.536",
+      "\\sum(x_i-\\bar x)^2=0.34784",
+      "s=\\sqrt{\\frac{0.34784}{9}}=0.196593"
+     ],
+     "words": "Add the ten values and divide by 10, then square each deviation, add them, divide by n - 1 = 9 and take the root."
+    },
+    {
+     "title": "Percentages of the healthy adults within one and two SDs",
+     "general": [
+      "\\bar x-s<x<\\bar x+s",
+      "P(\\mu-\\sigma<X<\\mu+\\sigma)=0.6826",
+      "P(\\mu-2\\sigma<X<\\mu+2\\sigma)=0.9544"
+     ],
+     "work": [
+      "0.536-0.196593<x<0.536+0.196593",
+      "0.339407<x<0.732593",
+      "\\frac{7}{10}=70\\%\\ \\text{vs}\\ 68.26\\%",
+      "\\frac{10}{10}=100\\%\\ \\text{within two SDs vs}\\ 95.44\\%"
+     ],
+     "words": "Seven of the ten values (0.36, 0.4, 0.47, 0.53, 0.54, 0.62, 0.65) lie within one SD of the mean. This is 70% against the Normal 68.26%. All ten values lie within two SDs, close to the Normal 95.44%."
+    },
+    {
+     "title": "Theoretical quantiles for qqnorm()",
+     "general": [
+      "p_i=\\frac{i-3/8}{n+1/4}",
+      "z_i=\\Phi^{-1}(p_i)"
+     ],
+     "work": [
+      "p_1=\\frac{1-0.375}{10.25}=0.0609756",
+      "z_1=\\Phi^{-1}(0.0609756)=-1.54664",
+      "z_{10}=+1.54664"
+     ],
+     "words": "For ten or fewer points R uses these plotting probabilities. The ten theoretical quantiles run from -1.54664 to +1.54664 and are the horizontal axis of the Q-Q plot. Each group's sorted values are plotted against them."
+    },
+    {
+     "title": "Shapiro-Wilk result for the healthy adults",
+     "general": [
+      "P>\\alpha\\Rightarrow\\text{do not reject }H_0"
+     ],
+     "work": [
+      "W=0.98701,\\quad P=0.9917>0.05"
+     ],
+     "words": "The P value is far above 0.05, so Normality is not rejected for the healthy adults. The data are consistent with a Normal distribution. The Q-Q plot of the healthy adults lies close to a straight line. A parametric test can be used for this group."
+    },
+    {
+     "title": "Mean, SD and range percentages of the adults with social anxiety",
+     "general": [
+      "\\bar x=\\frac{1}{n}\\sum x_i",
+      "s=\\sqrt{\\frac{\\sum(x_i-\\bar x)^2}{n-1}}"
+     ],
+     "work": [
+      "\\bar x=\\frac{6.33}{10}=0.633",
+      "s=\\sqrt{\\frac{1.97801}{9}}=0.468806",
+      "0.164194<x<1.10181",
+      "\\frac{9}{10}=90\\%\\ \\text{within one SD}",
+      "\\frac{9}{10}=90\\%\\ \\text{within two SDs}"
+     ],
+     "words": "Nine of the ten values (0.28, 0.36, 0.41, 0.45, 0.49, 0.52, 0.58, 0.63, 0.69) lie within one SD of the mean. This is 90% against the Normal 68.26%. Nine values lie within two SDs (90% against the Normal 95.44%) because 1.92 lies beyond two SDs."
+    },
+    {
+     "title": "Shapiro-Wilk result for the adults with social anxiety",
+     "general": [
+      "P<\\alpha\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "W=0.62714,\\quad P=0.0001167<0.05"
+     ],
+     "words": "The P value is below 0.05 (and below 0.01), so Normality is rejected for the adults with social anxiety. On the Q-Q plot nine points follow a line, while the largest value, 1.92, sits far above it as a single outlier. A rank-based test is preferred for these data."
+    }
+   ],
+   "conclusion": "The healthy adults give W = 0.98701 with P = 0.9917, so Normality is not rejected and the data are consistent with a Normal distribution. The adults with social anxiety give W = 0.62714 with P = 0.0001167, so Normality is rejected and the data are not Normal. So the outlier makes the social anxiety group non-Normal, and a rank-based test is safer for a comparison of the two groups.",
+   "source": "Original neuroscience practice example",
+   "lookup": null,
+   "values": {
+    "n": 10,
+    "mean1": 0.5359999999999999,
+    "sd1": 0.19659320661937657,
+    "within1SD_1": 7,
+    "within2SD_1": 10,
+    "mean2": 0.633,
+    "sd2": 0.4688058114922306,
+    "within1SD_2": 9,
+    "within2SD_2": 9,
+    "W1": 0.98701,
+    "P1": 0.9917,
+    "W2": 0.62714,
+    "P2": 0.0001167,
+    "reject1": false,
+    "reject2": true,
+    "sample1": [
+     0.18,
+     0.36,
+     0.4,
+     0.47,
+     0.53,
+     0.54,
+     0.62,
+     0.65,
+     0.77,
+     0.84
+    ],
+    "sample2": [
+     0.28,
+     0.36,
+     0.41,
+     0.45,
+     0.49,
+     0.52,
+     0.58,
+     0.63,
+     0.69,
+     1.92
+    ],
+    "rOutput1": [
+     "\tShapiro-Wilk normality test",
+     "",
+     "data:  x",
+     "W = 0.98701, p-value = 0.9917"
+    ],
+    "rOutput2": [
+     "\tShapiro-Wilk normality test",
+     "",
+     "data:  x",
+     "W = 0.62714, p-value = 0.0001167"
+    ]
+   },
+   "module": 24,
+   "tolerance": 0.0031357000000000004,
+   "answerName": "Shapiro-Wilk W (adults with social anxiety)",
+   "answer": 0.62714
+  },
+  {
+   "id": "n24-b-lever-extinction",
+   "title": "Lever presses in extinction after two reinforcement schedules",
+   "topic": "s24mwtable",
+   "context": "Researchers interested in animal learning did a study to evaluate how the training schedule affects extinction (the decline of a learned response once it is no longer rewarded). Rats were trained to press a lever for food pellets. Five rats were trained on continuous reinforcement (CRF, every press rewarded) and seven different rats on partial reinforcement (only some presses rewarded). In a 20-minute extinction session with no food, the number of lever presses was counted. The counts were skewed, so the researchers did not want to assume Normal populations.",
+   "unit": "presses",
+   "table": {
+    "headers": [
+     "Group",
+     "Lever presses in extinction (presses)",
+     "Rank (all 12 together)"
+    ],
+    "rows": [
+     [
+      "CRF",
+      12,
+      2
+     ],
+     [
+      "CRF",
+      22,
+      4.5
+     ],
+     [
+      "CRF",
+      9,
+      1
+     ],
+     [
+      "CRF",
+      29,
+      7.5
+     ],
+     [
+      "CRF",
+      15,
+      3
+     ],
+     [
+      "Partial",
+      31,
+      9
+     ],
+     [
+      "Partial",
+      26,
+      6
+     ],
+     [
+      "Partial",
+      45,
+      11
+     ],
+     [
+      "Partial",
+      22,
+      4.5
+     ],
+     [
+      "Partial",
+      38,
+      10
+     ],
+     [
+      "Partial",
+      29,
+      7.5
+     ],
+     [
+      "Partial",
+      52,
+      12
+     ]
+    ]
+   },
+   "tasks": [
+    "Rank all 12 counts together, using average ranks for ties, and compute T for the smaller group.",
+    "Based on the recorded data, is there evidence that the number of lever presses in extinction is different in these two groups? Do not assume that the counts are Normally distributed. Make sure to show your intermediate calculations.",
+    "Provide your result in a single complete sentence that would convey your conclusion in a way that could be understood by a non-expert in statistics or medicine (e.g., a typical reader of a local newspaper)."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\text{same distribution of extinction presses for CRF and partial}",
+    "alternative": "H_A:\\text{the distributions differ}",
+    "nullWords": "There is no difference in the distributions of lever presses in extinction between the CRF and partial reinforcement groups.",
+    "alternativeWords": "The distributions of lever presses in extinction differ between the CRF and partial reinforcement groups."
+   },
+   "symbols": "\\(T\\) (sum of ranks in the smaller group), \\(n_S\\) (size of the smaller group), \\(n_B\\) (size of the bigger group), \\(\\mu_T\\) (mean of \\(T\\) under the null hypothesis), \\(\\sigma_T\\) (standard deviation of \\(T\\) under the null hypothesis), \\(z_T\\) (standardized rank sum).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\text{the two population distributions are the same}"
+     ],
+     "work": [
+      "n_S=5\\ (\\text{CRF}),\\quad n_B=7\\ (\\text{partial})\\le8"
+     ],
+     "words": "The groups contain different rats and the bigger group has 7, so the procedure is the Mann-Whitney rank-sum test with the T table. The null hypothesis is that there is no difference in the distributions of lever presses in extinction between the two groups."
+    },
+    {
+     "title": "Rank all observations with ties",
+     "general": [
+      "\\text{tied rank}=\\text{average of the ranks the tied values occupy}"
+     ],
+     "work": [
+      "9\\to1,\\ 12\\to2,\\ 15\\to3,\\ 22,22\\to\\frac{4+5}{2}=4.5,\\ 26\\to6,\\ 29,29\\to\\frac{7+8}{2}=7.5",
+      "31\\to9,\\ 38\\to10,\\ 45\\to11,\\ 52\\to12"
+     ],
+     "words": "All 12 values are ranked in one list regardless of group. Tied values each receive the average of the ranks they occupy, which applies to the two values of 22 and the two values of 29."
+    },
+    {
+     "title": "Compute T",
+     "general": [
+      "T=\\sum(\\text{ranks in the smaller group})"
+     ],
+     "work": [
+      "T=2+4.5+1+7.5+3=18",
+      "\\text{check}\\ 18+60=78=\\frac{12(13)}{2}"
+     ],
+     "words": "The CRF group is the smaller group, so T is the sum of its 5 ranks. The two rank sums together must equal the total of the ranks 1 to 12."
+    },
+    {
+     "title": "Describe the null distribution of T",
+     "general": [
+      "\\binom{N}{n_S}",
+      "\\mu_T=\\frac{n_S(n_S+n_B+1)}{2}"
+     ],
+     "work": [
+      "\\binom{12}{5}=792",
+      "\\mu_T=\\frac{5(5+7+1)}{2}=32.5"
+     ],
+     "words": "Under the null hypothesis each of the 792 sets of 5 ranks is equally likely. The rank sums are centered at 32.5."
+    },
+    {
+     "title": "Read the critical values",
+     "general": [
+      "T_{\\text{lower}},\\ T_{\\text{upper}}\\ \\text{for}\\ (n_S,n_B)"
+     ],
+     "work": [
+      "(5,7)\\Rightarrow20,\\ 45\\ (P=.048)",
+      "(5,7)\\Rightarrow17,\\ 48\\ (P=.010)"
+     ],
+     "words": "Open MannWhitney_RankSumT_Table.pdf, PDF page 1, row n_S = 5, n_B = 7. Near .05 the printed critical values are 20 and 45 with P = .048, and near .01 they are 17 and 48 with P = .010.",
+     "tableLookup": {
+      "path": "sources/tables/MannWhitney_RankSumT_Table.pdf",
+      "page": 1,
+      "row": "n_S = 5, n_B = 7",
+      "column": "Probability near .05, critical values (P = .048)",
+      "value": "20, 45",
+      "actualDf": null,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "T\\le T_{\\text{lower}}\\ \\text{or}\\ T\\ge T_{\\text{upper}}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "T=18\\le20",
+      "17<18",
+      "0.010<P<0.048"
+     ],
+     "words": "T = 18 is at or below the lower value 20, so the null hypothesis is rejected. It does not reach the .01 lower value of 17, so 0.010 < P < 0.048."
+    }
+   ],
+   "conclusion": "T = 18 is at or below the lower critical value of 20, so the null hypothesis is rejected (0.010 < P < 0.048). There is a difference in lever presses in extinction between the two groups. Rats trained with partial reinforcement kept pressing the lever more often once food stopped than rats rewarded for every press.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/MannWhitney_RankSumT_Table.pdf",
+    "page": 1,
+    "row": "n_S = 5, n_B = 7",
+    "column": "Probability near .05, critical values (P = .048)",
+    "value": "20, 45",
+    "actualDf": null,
+    "approximation": false
+   },
+   "values": {
+    "crf": [
+     12,
+     22,
+     9,
+     29,
+     15
+    ],
+    "partial": [
+     31,
+     26,
+     45,
+     22,
+     38,
+     29,
+     52
+    ],
+    "groups": [
+     "crf",
+     "partial"
+    ],
+    "nS": 5,
+    "nB": 7,
+    "T": 18.0,
+    "muT": 32.5,
+    "combinations": 792,
+    "critical": [
+     20,
+     45
+    ],
+    "tableP": 0.048,
+    "critical01": [
+     17,
+     48
+    ],
+    "tableP01": 0.01,
+    "tieSets": [
+     2,
+     2
+    ],
+    "exactP": 0.016414141414141416,
+    "reject": true
+   },
+   "module": 24,
+   "tolerance": 0.09,
+   "answerName": "Rank sum T",
+   "answer": 18.0
+  },
+  {
+   "id": "n24-b-stuttering-therapy",
+   "title": "Stuttered syllables after two fluency therapies",
+   "topic": "s24mwtable",
+   "context": "In a clinical trial on stuttering, adults who stutter were randomly assigned to fluency shaping (a therapy that teaches slow and smooth speech) or to stuttering modification (a therapy that teaches easier and shorter stutters). After 8 weeks of therapy each person read the same 200-syllable passage aloud, and the number of stuttered syllables (syllables with a repetition, prolongation or block) was counted. Four people completed fluency shaping and seven completed stuttering modification.",
+   "unit": "stuttered syllables",
+   "table": {
+    "headers": [
+     "Group",
+     "Stuttered syllables (count per 200 syllables)",
+     "Rank (all 11 together)"
+    ],
+    "rows": [
+     [
+      "Fluency shaping",
+      6,
+      4
+     ],
+     [
+      "Fluency shaping",
+      11,
+      9
+     ],
+     [
+      "Fluency shaping",
+      4,
+      2
+     ],
+     [
+      "Fluency shaping",
+      9,
+      6.5
+     ],
+     [
+      "Stuttering modification",
+      7,
+      5
+     ],
+     [
+      "Stuttering modification",
+      3,
+      1
+     ],
+     [
+      "Stuttering modification",
+      12,
+      10
+     ],
+     [
+      "Stuttering modification",
+      9,
+      6.5
+     ],
+     [
+      "Stuttering modification",
+      15,
+      11
+     ],
+     [
+      "Stuttering modification",
+      5,
+      3
+     ],
+     [
+      "Stuttering modification",
+      10,
+      8
+     ]
+    ]
+   },
+   "tasks": [
+    "Rank all 11 counts together, using average ranks for ties, and compute T for the smaller group.",
+    "Based on the recorded data, is there evidence that the number of stuttered syllables is different in these two groups? Do not assume that the counts are Normally distributed. Please state how you reached your conclusions.",
+    "Provide your result in a single complete sentence that would convey your conclusion in a way that could be understood by a non-expert in statistics or medicine (e.g., a typical reader of a local newspaper)."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\text{same distribution of stuttered syllables for both therapies}",
+    "alternative": "H_A:\\text{the distributions differ}",
+    "nullWords": "There is no difference in the distributions of stuttered syllables between the fluency shaping and stuttering modification groups.",
+    "alternativeWords": "The distributions of stuttered syllables differ between the fluency shaping and stuttering modification groups."
+   },
+   "symbols": "\\(T\\) (sum of ranks in the smaller group), \\(n_S\\) (size of the smaller group), \\(n_B\\) (size of the bigger group), \\(\\mu_T\\) (mean of \\(T\\) under the null hypothesis), \\(\\sigma_T\\) (standard deviation of \\(T\\) under the null hypothesis), \\(z_T\\) (standardized rank sum).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\text{the two population distributions are the same}"
+     ],
+     "work": [
+      "n_S=4\\ (\\text{fluency shaping}),\\quad n_B=7\\ (\\text{stuttering modification})\\le8"
+     ],
+     "words": "The groups contain different people and the bigger group has 7, so the procedure is the Mann-Whitney rank-sum test with the T table. The null hypothesis is that there is no difference in the distributions of stuttered syllables between the two groups."
+    },
+    {
+     "title": "Rank all observations with ties",
+     "general": [
+      "\\text{tied rank}=\\text{average of the ranks the tied values occupy}"
+     ],
+     "work": [
+      "3\\to1,\\ 4\\to2,\\ 5\\to3,\\ 6\\to4,\\ 7\\to5,\\ 9,9\\to\\frac{6+7}{2}=6.5,\\ 10\\to8,\\ 11\\to9,\\ 12\\to10,\\ 15\\to11"
+     ],
+     "words": "All 11 values are ranked in one list regardless of group. Tied values each receive the average of the ranks they occupy, which applies to the two values of 9."
+    },
+    {
+     "title": "Compute T",
+     "general": [
+      "T=\\sum(\\text{ranks in the smaller group})"
+     ],
+     "work": [
+      "T=4+9+2+6.5=21.5",
+      "\\text{check}\\ 21.5+44.5=66=\\frac{11(12)}{2}"
+     ],
+     "words": "The fluency shaping group is the smaller group, so T is the sum of its 4 ranks. The two rank sums together must equal the total of the ranks 1 to 11."
+    },
+    {
+     "title": "Describe the null distribution of T",
+     "general": [
+      "\\binom{N}{n_S}",
+      "\\mu_T=\\frac{n_S(n_S+n_B+1)}{2}"
+     ],
+     "work": [
+      "\\binom{11}{4}=330",
+      "\\mu_T=\\frac{4(4+7+1)}{2}=24"
+     ],
+     "words": "Under the null hypothesis each of the 330 sets of 4 ranks is equally likely. The rank sums are centered at 24."
+    },
+    {
+     "title": "Read the critical values",
+     "general": [
+      "T_{\\text{lower}},\\ T_{\\text{upper}}\\ \\text{for}\\ (n_S,n_B)"
+     ],
+     "work": [
+      "(4,7)\\Rightarrow13,\\ 35\\ (P=.042)",
+      "(4,7)\\Rightarrow10,\\ 38\\ (P=.012)"
+     ],
+     "words": "Open MannWhitney_RankSumT_Table.pdf, PDF page 1, row n_S = 4, n_B = 7. Near .05 the printed critical values are 13 and 35 with P = .042, and near .01 they are 10 and 38 with P = .012.",
+     "tableLookup": {
+      "path": "sources/tables/MannWhitney_RankSumT_Table.pdf",
+      "page": 1,
+      "row": "n_S = 4, n_B = 7",
+      "column": "Probability near .05, critical values (P = .042)",
+      "value": "13, 35",
+      "actualDf": null,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision",
+     "general": [
+      "T\\le T_{\\text{lower}}\\ \\text{or}\\ T\\ge T_{\\text{upper}}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "13<21.5<35",
+      "P(|T-\\mu_T|\\ge2.5)=\\frac{226}{330}=0.684848"
+     ],
+     "words": "T = 21.5 lies strictly between 13 and 35, so the null hypothesis is not rejected. Counting the equally likely rank sets with these tied ranks, 226 of the 330 are at least as far from 24 as T = 21.5, so the exact two-tailed P is 0.684848."
+    }
+   ],
+   "conclusion": "T = 21.5 lies between the critical values 13 and 35, so the null hypothesis is not rejected (P = 0.685). These data do not show that one therapy leaves people with fewer stuttered syllables than the other.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/MannWhitney_RankSumT_Table.pdf",
+    "page": 1,
+    "row": "n_S = 4, n_B = 7",
+    "column": "Probability near .05, critical values (P = .042)",
+    "value": "13, 35",
+    "actualDf": null,
+    "approximation": false
+   },
+   "values": {
+    "fluencyShaping": [
+     6,
+     11,
+     4,
+     9
+    ],
+    "stutteringModification": [
+     7,
+     3,
+     12,
+     9,
+     15,
+     5,
+     10
+    ],
+    "groups": [
+     "fluencyShaping",
+     "stutteringModification"
+    ],
+    "nS": 4,
+    "nB": 7,
+    "T": 21.5,
+    "muT": 24.0,
+    "combinations": 330,
+    "critical": [
+     13,
+     35
+    ],
+    "tableP": 0.042,
+    "critical01": [
+     10,
+     38
+    ],
+    "tableP01": 0.012,
+    "tieSets": [
+     2
+    ],
+    "exactP": 0.6848484848484848,
+    "reject": false
+   },
+   "module": 24,
+   "tolerance": 0.1075,
+   "answerName": "Rank sum T",
+   "answer": 21.5
+  },
+  {
+   "id": "n24-b-dizziness-vestibular-rehab",
+   "title": "Dizziness ratings after vestibular rehabilitation",
+   "topic": "s24mwnormal",
+   "context": "In a clinical trial on chronic dizziness, adults with a vestibular disorder (a problem of the balance organs of the inner ear) were randomly assigned to an 8-week vestibular rehabilitation course (home exercises of head and eye movements that retrain balance) or to a waitlist. At the end of the 8 weeks each person walked down a hallway while turning the head from side to side and rated dizziness on a 0 to 10 scale (0 = no dizziness, 10 = the worst dizziness imaginable). Nine people completed the rehabilitation course and eleven were on the waitlist. The ratings are ordinal and contain many ties.",
+   "unit": "rating points",
+   "table": {
+    "headers": [
+     "Group",
+     "Dizziness rating (0 to 10)",
+     "Rank (all 20 together)"
+    ],
+    "rows": [
+     [
+      "Rehabilitation",
+      3,
+      2.5
+     ],
+     [
+      "Rehabilitation",
+      5,
+      8
+     ],
+     [
+      "Rehabilitation",
+      2,
+      1
+     ],
+     [
+      "Rehabilitation",
+      4,
+      5
+     ],
+     [
+      "Rehabilitation",
+      6,
+      11.5
+     ],
+     [
+      "Rehabilitation",
+      3,
+      2.5
+     ],
+     [
+      "Rehabilitation",
+      7,
+      15
+     ],
+     [
+      "Rehabilitation",
+      4,
+      5
+     ],
+     [
+      "Rehabilitation",
+      5,
+      8
+     ],
+     [
+      "Waitlist",
+      6,
+      11.5
+     ],
+     [
+      "Waitlist",
+      8,
+      17.5
+     ],
+     [
+      "Waitlist",
+      5,
+      8
+     ],
+     [
+      "Waitlist",
+      7,
+      15
+     ],
+     [
+      "Waitlist",
+      9,
+      19
+     ],
+     [
+      "Waitlist",
+      6,
+      11.5
+     ],
+     [
+      "Waitlist",
+      4,
+      5
+     ],
+     [
+      "Waitlist",
+      8,
+      17.5
+     ],
+     [
+      "Waitlist",
+      7,
+      15
+     ],
+     [
+      "Waitlist",
+      10,
+      20
+     ],
+     [
+      "Waitlist",
+      6,
+      11.5
+     ]
+    ]
+   },
+   "tasks": [
+    "Rank all 20 ratings together, using average ranks for ties, and compute T for the smaller group.",
+    "Based on the recorded data, is there evidence that the dizziness rating is different in these two groups? The ratings are ordinal, so do not assume that they are Normally distributed. Use the Normal approximation and correct for ties.",
+    "Provide your result in a single complete sentence that would convey your conclusion in a way that could be understood by a non-expert in statistics or medicine (e.g., a typical reader of a local newspaper)."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\text{same distribution of dizziness ratings for rehabilitation and waitlist}",
+    "alternative": "H_A:\\text{the distributions differ}",
+    "nullWords": "There is no difference in the distributions of dizziness ratings between the rehabilitation and waitlist groups.",
+    "alternativeWords": "The distributions of dizziness ratings differ between the rehabilitation and waitlist groups."
+   },
+   "symbols": "\\(T\\) (sum of ranks in the smaller group), \\(n_S\\) (size of the smaller group), \\(n_B\\) (size of the bigger group), \\(\\mu_T\\) (mean of \\(T\\) under the null hypothesis), \\(\\sigma_T\\) (standard deviation of \\(T\\) under the null hypothesis), \\(z_T\\) (standardized rank sum). \\(\\tau_i\\) (number of tied ranks in the \\(i\\)th set of ties). \\(N\\) (total number of observations).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\text{the two population distributions are the same}"
+     ],
+     "work": [
+      "n_S=9,\\quad n_B=11"
+     ],
+     "words": "The two groups contain different people and the data are ordinal ratings with many ties, so the procedure is the Mann-Whitney rank-sum test. The null hypothesis is that there is no difference in the distributions of dizziness ratings between the two groups."
+    },
+    {
+     "title": "Rank all 20 values and compute T",
+     "general": [
+      "T=\\sum(\\text{ranks in the smaller group})"
+     ],
+     "work": [
+      "2\\to1,\\ 3,3\\to\\frac{2+3}{2}=2.5,\\ 4,4,4\\to\\frac{4+5+6}{3}=5,\\ 5,5,5\\to\\frac{7+8+9}{3}=8",
+      "6,6,6,6\\to\\frac{10+11+12+13}{4}=11.5,\\ 7,7,7\\to\\frac{14+15+16}{3}=15,\\ 8,8\\to\\frac{17+18}{2}=17.5",
+      "9\\to19,\\ 10\\to20",
+      "T=1+2.5+2.5+5+5+8+8+11.5+15=58.5",
+      "\\text{waitlist sum}=210-58.5=151.5"
+     ],
+     "words": "All 20 values are ranked in one list, and tied values receive the average of the ranks they occupy. The rehabilitation group is the smaller group, so T is the sum of its ranks."
+    },
+    {
+     "title": "Choose the Normal approximation",
+     "general": [
+      "n_B>8\\Rightarrow T\\sim N(\\mu_T,\\sigma_T^2)"
+     ],
+     "work": [
+      "n_B=11>8"
+     ],
+     "words": "The bigger group has more than 8 observations, so the T table does not apply and T is treated as Normal."
+    },
+    {
+     "title": "Mean of T",
+     "general": [
+      "\\mu_T=\\frac{n_S(n_S+n_B+1)}{2}"
+     ],
+     "work": [
+      "\\mu_T=\\frac{9(9+11+1)}{2}=94.5"
+     ],
+     "words": "This is the rank sum expected for the rehabilitation group if there is no difference between the groups."
+    },
+    {
+     "title": "Tie sum",
+     "general": [
+      "\\sum(\\tau_i-1)\\tau_i(\\tau_i+1)"
+     ],
+     "work": [
+      "2(1\\cdot2\\cdot3)+3(2\\cdot3\\cdot4)+(3\\cdot4\\cdot5)=144"
+     ],
+     "words": "There are two sets of size 2, three sets of size 3 and one set of size 4. Each set of size \\(\\tau_i\\) adds \\((\\tau_i-1)\\tau_i(\\tau_i+1)\\)."
+    },
+    {
+     "title": "Tie-corrected standard deviation of T",
+     "general": [
+      "\\sigma_T=\\sqrt{\\frac{n_Sn_B(N+1)}{12}-\\frac{n_Sn_B}{12N(N-1)}\\sum(\\tau_i-1)\\tau_i(\\tau_i+1)}"
+     ],
+     "work": [
+      "N=n_S+n_B=20",
+      "\\frac{9(11)(21)}{12}=173.25",
+      "\\frac{9(11)}{12(20)(19)}(144)=3.12632",
+      "\\sigma_T=\\sqrt{173.25-3.12632}=\\sqrt{170.124}=13.0431"
+     ],
+     "words": "The ties reduce the variance of T from 173.25 to 170.124, so the standard deviation drops from 13.1624 to 13.0431."
+    },
+    {
+     "title": "Compute z_T",
+     "general": [
+      "z_T=\\frac{|T-\\mu_T|-\\frac12}{\\sigma_T}"
+     ],
+     "work": [
+      "z_T=\\frac{|58.5-94.5|-0.5}{13.0431}=\\frac{35.5}{13.0431}=2.72174"
+     ],
+     "words": "The continuity correction subtracts one half from the distance between T and its mean before dividing by the standard deviation."
+    },
+    {
+     "title": "Read the critical value",
+     "general": [
+      "z_{\\text{critical}}=t_{0.05}(\\infty)"
+     ],
+     "work": [
+      "z_{0.05}=1.9600"
+     ],
+     "words": "Start with \\(\\alpha=0.05\\). Open t_table.pdf, PDF page 2. In the infinity row and the two-tailed 0.05 column, the printed value is 1.9600.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 2,
+      "row": "∞",
+      "column": "0.05",
+      "value": 1.96,
+      "actualDf": null,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "|z_T|>z_{\\text{critical}}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "|z_T|=2.72174>1.9600",
+      "t_{0.01}(\\infty)=2.5758<2.72174<t_{0.005}(\\infty)=2.8070",
+      "0.005<P<0.01"
+     ],
+     "words": "The statistic exceeds 1.96, so the null hypothesis is rejected. In the infinity row it passes the 0.01 column (2.5758) but not the 0.005 column (2.8070), so 0.005 < P < 0.01."
+    }
+   ],
+   "conclusion": "T = 58.5 gives z_T = 2.72174, which exceeds 1.9600, so the null hypothesis is rejected (0.005 < P < 0.01). There is a difference in dizziness ratings between the two groups. People who completed vestibular rehabilitation reported less dizziness during head turns than people on the waitlist.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 2,
+    "row": "∞",
+    "column": "0.05",
+    "value": 1.96,
+    "actualDf": null,
+    "approximation": false
+   },
+   "values": {
+    "rehabilitation": [
+     3,
+     5,
+     2,
+     4,
+     6,
+     3,
+     7,
+     4,
+     5
+    ],
+    "waitlist": [
+     6,
+     8,
+     5,
+     7,
+     9,
+     6,
+     4,
+     8,
+     7,
+     10,
+     6
+    ],
+    "groups": [
+     "rehabilitation",
+     "waitlist"
+    ],
+    "nS": 9,
+    "nB": 11,
+    "N": 20,
+    "T": 58.5,
+    "muT": 94.5,
+    "tieSum": 144,
+    "tieSets": [
+     2,
+     3,
+     3,
+     4,
+     3,
+     2
+    ],
+    "varianceNoTies": 173.25,
+    "sigmaTNoTies": 13.162446581088183,
+    "sigmaT": 13.043147020965696,
+    "zT": 2.7217357853083244,
+    "critical": 1.96,
+    "exactP": 0.004411764705882353,
+    "reject": true
+   },
+   "module": 24,
+   "tolerance": 0.013608678926541622,
+   "answerName": "z_T statistic",
+   "answer": 2.7217357853083244
+  },
+  {
+   "id": "n24-b-freezing-extinction",
+   "title": "Freezing time in mice with and without extinction training",
+   "topic": "s24mwnormal",
+   "context": "Researchers interested in fear memory did a study in mice using fear conditioning (pairing a tone with a mild foot shock so the tone alone comes to cause fear). One day after conditioning, mice were randomly assigned to extinction training (the tone played 30 times with no shock) or to no extinction training. On the next day each mouse heard the tone for 5 minutes and freezing time (complete stillness except for breathing) was recorded in seconds (s). Ten mice had extinction training and twelve did not. Freezing times were skewed to the right, with a few very long times.",
+   "unit": "s",
+   "table": {
+    "headers": [
+     "Group",
+     "Freezing time (s)",
+     "Rank (all 22 together)"
+    ],
+    "rows": [
+     [
+      "Extinction",
+      38,
+      1
+     ],
+     [
+      "Extinction",
+      52,
+      4
+     ],
+     [
+      "Extinction",
+      61,
+      6
+     ],
+     [
+      "Extinction",
+      45,
+      2
+     ],
+     [
+      "Extinction",
+      120,
+      16
+     ],
+     [
+      "Extinction",
+      74,
+      9.5
+     ],
+     [
+      "Extinction",
+      49,
+      3
+     ],
+     [
+      "Extinction",
+      58,
+      5
+     ],
+     [
+      "Extinction",
+      212,
+      21
+     ],
+     [
+      "Extinction",
+      66,
+      8
+     ],
+     [
+      "No extinction",
+      95,
+      13
+     ],
+     [
+      "No extinction",
+      140,
+      18
+     ],
+     [
+      "No extinction",
+      77,
+      11
+     ],
+     [
+      "No extinction",
+      188,
+      20
+     ],
+     [
+      "No extinction",
+      102,
+      14
+     ],
+     [
+      "No extinction",
+      63,
+      7
+     ],
+     [
+      "No extinction",
+      256,
+      22
+     ],
+     [
+      "No extinction",
+      131,
+      17
+     ],
+     [
+      "No extinction",
+      88,
+      12
+     ],
+     [
+      "No extinction",
+      74,
+      9.5
+     ],
+     [
+      "No extinction",
+      162,
+      19
+     ],
+     [
+      "No extinction",
+      110,
+      15
+     ]
+    ]
+   },
+   "tasks": [
+    "Rank all 22 freezing times together, using average ranks for ties, and compute T for the smaller group.",
+    "Based on the recorded data, is there evidence that freezing time is different in these two groups? Do not assume that the freezing times are Normally distributed. Make sure to show your intermediate calculations.",
+    "Provide your result in a single complete sentence that would convey your conclusion in a way that could be understood by a non-expert in statistics or medicine (e.g., a typical reader of a local newspaper)."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\text{same distribution of freezing time with and without extinction}",
+    "alternative": "H_A:\\text{the distributions differ}",
+    "nullWords": "There is no difference in the distributions of freezing time to the tone between mice with and without extinction training.",
+    "alternativeWords": "The distributions of freezing time to the tone differ between mice with and without extinction training."
+   },
+   "symbols": "\\(T\\) (sum of ranks in the smaller group), \\(n_S\\) (size of the smaller group), \\(n_B\\) (size of the bigger group), \\(\\mu_T\\) (mean of \\(T\\) under the null hypothesis), \\(\\sigma_T\\) (standard deviation of \\(T\\) under the null hypothesis), \\(z_T\\) (standardized rank sum). \\(\\tau_i\\) (number of tied ranks in the \\(i\\)th set of ties). \\(N\\) (total number of observations).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\text{the two population distributions are the same}"
+     ],
+     "work": [
+      "n_S=10,\\quad n_B=12"
+     ],
+     "words": "The two groups contain different mice and the data are skewed with a few very long times, so the procedure is the Mann-Whitney rank-sum test. The null hypothesis is that there is no difference in the distributions of freezing time to the tone between the two groups."
+    },
+    {
+     "title": "Rank all 22 values and compute T",
+     "general": [
+      "T=\\sum(\\text{ranks in the smaller group})"
+     ],
+     "work": [
+      "38\\to1,\\ 45\\to2,\\ 49\\to3,\\ 52\\to4,\\ 58\\to5,\\ 61\\to6,\\ 63\\to7,\\ 66\\to8,\\ 74,74\\to\\frac{9+10}{2}=9.5",
+      "77\\to11,\\ 88\\to12,\\ 95\\to13,\\ 102\\to14,\\ 110\\to15,\\ 120\\to16,\\ 131\\to17,\\ 140\\to18,\\ 162\\to19,\\ 188\\to20",
+      "212\\to21,\\ 256\\to22",
+      "T=1+2+3+4+5+6+8+9.5+16+21=75.5",
+      "\\text{no extinction sum}=253-75.5=177.5"
+     ],
+     "words": "All 22 values are ranked in one list, and tied values receive the average of the ranks they occupy. The extinction group is the smaller group, so T is the sum of its ranks."
+    },
+    {
+     "title": "Choose the Normal approximation",
+     "general": [
+      "n_B>8\\Rightarrow T\\sim N(\\mu_T,\\sigma_T^2)"
+     ],
+     "work": [
+      "n_B=12>8"
+     ],
+     "words": "The bigger group has more than 8 observations, so the T table does not apply and T is treated as Normal."
+    },
+    {
+     "title": "Mean of T",
+     "general": [
+      "\\mu_T=\\frac{n_S(n_S+n_B+1)}{2}"
+     ],
+     "work": [
+      "\\mu_T=\\frac{10(10+12+1)}{2}=115"
+     ],
+     "words": "This is the rank sum expected for the extinction group if there is no difference between the groups."
+    },
+    {
+     "title": "Tie sum",
+     "general": [
+      "\\sum(\\tau_i-1)\\tau_i(\\tau_i+1)"
+     ],
+     "work": [
+      "(1\\cdot2\\cdot3)=6"
+     ],
+     "words": "There is one set of size 2. Each set of size \\(\\tau_i\\) adds \\((\\tau_i-1)\\tau_i(\\tau_i+1)\\)."
+    },
+    {
+     "title": "Tie-corrected standard deviation of T",
+     "general": [
+      "\\sigma_T=\\sqrt{\\frac{n_Sn_B(N+1)}{12}-\\frac{n_Sn_B}{12N(N-1)}\\sum(\\tau_i-1)\\tau_i(\\tau_i+1)}"
+     ],
+     "work": [
+      "N=n_S+n_B=22",
+      "\\frac{10(12)(23)}{12}=230",
+      "\\frac{10(12)}{12(22)(21)}(6)=0.12987",
+      "\\sigma_T=\\sqrt{230-0.12987}=\\sqrt{229.87}=15.1615"
+     ],
+     "words": "The ties reduce the variance of T from 230 to 229.87, so the standard deviation drops from 15.1658 to 15.1615."
+    },
+    {
+     "title": "Compute z_T",
+     "general": [
+      "z_T=\\frac{|T-\\mu_T|-\\frac12}{\\sigma_T}"
+     ],
+     "work": [
+      "z_T=\\frac{|75.5-115|-0.5}{15.1615}=\\frac{39}{15.1615}=2.57231"
+     ],
+     "words": "The continuity correction subtracts one half from the distance between T and its mean before dividing by the standard deviation."
+    },
+    {
+     "title": "Read the critical value",
+     "general": [
+      "z_{\\text{critical}}=t_{0.05}(\\infty)"
+     ],
+     "work": [
+      "z_{0.05}=1.9600"
+     ],
+     "words": "Start with \\(\\alpha=0.05\\). Open t_table.pdf, PDF page 2. In the infinity row and the two-tailed 0.05 column, the printed value is 1.9600.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 2,
+      "row": "∞",
+      "column": "0.05",
+      "value": 1.96,
+      "actualDf": null,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "|z_T|>z_{\\text{critical}}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "|z_T|=2.57231>1.9600",
+      "t_{0.02}(\\infty)=2.3263<2.57231<t_{0.01}(\\infty)=2.5758",
+      "0.01<P<0.02"
+     ],
+     "words": "The statistic exceeds 1.96, so the null hypothesis is rejected. In the infinity row it passes the 0.02 column (2.3263) but not the 0.01 column (2.5758), so 0.01 < P < 0.02."
+    }
+   ],
+   "conclusion": "T = 75.5 gives z_T = 2.57231, which exceeds 1.9600, so the null hypothesis is rejected (0.01 < P < 0.02). There is a difference in freezing time to the tone between the two groups. Mice that had extinction training spent less time frozen with fear when they heard the tone again.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 2,
+    "row": "∞",
+    "column": "0.05",
+    "value": 1.96,
+    "actualDf": null,
+    "approximation": false
+   },
+   "values": {
+    "extinction": [
+     38,
+     52,
+     61,
+     45,
+     120,
+     74,
+     49,
+     58,
+     212,
+     66
+    ],
+    "noExtinction": [
+     95,
+     140,
+     77,
+     188,
+     102,
+     63,
+     256,
+     131,
+     88,
+     74,
+     162,
+     110
+    ],
+    "groups": [
+     "extinction",
+     "noExtinction"
+    ],
+    "nS": 10,
+    "nB": 12,
+    "N": 22,
+    "T": 75.5,
+    "muT": 115.0,
+    "tieSum": 6,
+    "tieSets": [
+     2
+    ],
+    "varianceNoTies": 230.0,
+    "sigmaTNoTies": 15.165750888103101,
+    "sigmaT": 15.16146859212952,
+    "zT": 2.5723101797833303,
+    "critical": 1.96,
+    "exactP": 0.007562097345379079,
+    "reject": true
+   },
+   "module": 24,
+   "tolerance": 0.012861550898916652,
+   "answerName": "z_T statistic",
+   "answer": 2.5723101797833303
+  },
+  {
+   "id": "n24-b-tic-habit-reversal",
+   "title": "Tic counts before and after habit reversal training",
+   "topic": "s24wtable",
+   "context": "In a study looking at Tourette syndrome (a disorder with sudden, repeated movements or sounds called tics), nine patients were video-recorded for 5 minutes while seated at rest, and the number of tics was counted. Each patient was evaluated before 3 weeks of habit reversal training (practice in noticing the urge that comes before a tic and making a competing movement instead) (measurement 1) and again after it (measurement 2). Tic counts are small integers and are not Normally distributed.",
+   "unit": "tics",
+   "table": {
+    "headers": [
+     "Patient",
+     "Before training (tics)",
+     "After training (tics)",
+     "Difference (after - before)",
+     "Rank of |difference|",
+     "Signed rank"
+    ],
+    "rows": [
+     [
+      1,
+      9,
+      4,
+      -5,
+      5.5,
+      -5.5
+     ],
+     [
+      2,
+      7,
+      7,
+      0,
+      "dropped",
+      "dropped"
+     ],
+     [
+      3,
+      12,
+      6,
+      -6,
+      7,
+      -7
+     ],
+     [
+      4,
+      6,
+      5,
+      -1,
+      1.5,
+      -1.5
+     ],
+     [
+      5,
+      10,
+      3,
+      -7,
+      8,
+      -8
+     ],
+     [
+      6,
+      8,
+      4,
+      -4,
+      4,
+      -4
+     ],
+     [
+      7,
+      11,
+      8,
+      -3,
+      3,
+      -3
+     ],
+     [
+      8,
+      7,
+      2,
+      -5,
+      5.5,
+      -5.5
+     ],
+     [
+      9,
+      9,
+      10,
+      1,
+      1.5,
+      1.5
+     ]
+    ]
+   },
+   "tasks": [
+    "Compute the differences (after - before), drop any zero difference, rank the magnitudes with average ranks for ties, attach the signs and compute W.",
+    "Based on the recorded data, is there evidence that the number of tics is different in these two states? Do not assume that the differences are Normally distributed. Make sure to show your intermediate calculations.",
+    "Provide your result in a single complete sentence that would convey your conclusion in a way that could be understood by a non-expert in statistics or medicine (e.g., a typical reader of a local newspaper)."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\text{no difference in tic counts before and after training}",
+    "alternative": "H_A:\\text{tic counts differ before and after training}",
+    "nullWords": "There is no difference in the distributions of tic counts before and after habit reversal training.",
+    "alternativeWords": "The distributions of tic counts differ before and after habit reversal training."
+   },
+   "symbols": "\\(W\\) (sum of the signed ranks), \\(n\\) (number of nonzero differences), \\(\\mu_W\\) (mean of \\(W\\) under the null hypothesis), \\(\\sigma_W\\) (standard deviation of \\(W\\) under the null hypothesis), \\(z_W\\) (standardized signed-rank sum).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\text{signed differences centered on zero}"
+     ],
+     "work": [
+      "9\\ \\text{patients}"
+     ],
+     "words": "Each patient is measured twice, so the procedure is the Wilcoxon signed-rank test. The null hypothesis is that there is no difference in the distributions of tic counts before and after habit reversal training."
+    },
+    {
+     "title": "Drop the zero difference",
+     "general": [
+      "n=\\text{number of nonzero differences}"
+     ],
+     "work": [
+      "d=(-5,0,-6,-1,-7,-4,-3,-5,1)",
+      "n=9-1=8\\le8"
+     ],
+     "words": "Patient 2 has no change, so that difference is dropped and n becomes 8. The W table applies."
+    },
+    {
+     "title": "Rank the magnitudes and attach signs",
+     "general": [
+      "\\operatorname{sign}(d_i)\\operatorname{rank}|d_i|"
+     ],
+     "work": [
+      "|d|\\ \\text{sorted}=1,1,3,4,5,5,6,7",
+      "1,1\\to\\frac{1+2}{2}=1.5,\\ 3\\to3,\\ 4\\to4,\\ 5,5\\to\\frac{5+6}{2}=5.5,\\ 6\\to7,\\ 7\\to8",
+      "\\text{signed ranks}=(-5.5,-7,-1.5,-8,-4,-3,-5.5,+1.5)"
+     ],
+     "words": "Tied magnitudes share the average of the ranks they occupy. Each rank then takes the sign of its difference."
+    },
+    {
+     "title": "Compute W",
+     "general": [
+      "W=\\sum\\operatorname{sign}(d_i)\\operatorname{rank}|d_i|"
+     ],
+     "work": [
+      "W=1.5-34.5=-33",
+      "\\text{check}\\ 2(1.5)-\\frac{8(9)}{2}=-33"
+     ],
+     "words": "The positive ranks add to 1.5 and the negative ranks add to 34.5."
+    },
+    {
+     "title": "Read the critical value",
+     "general": [
+      "W_{\\text{critical}}\\ \\text{for}\\ n"
+     ],
+     "work": [
+      "n=8\\Rightarrow32\\ (P=.024),\\quad28\\ (P=.054)"
+     ],
+     "words": "Open WilcoxonW_Table.pdf, PDF page 1, row n = 8. The printed critical values are 32 with P = .024 and 28 with P = .054. The value 32 is the one whose P does not exceed 0.05.",
+     "tableLookup": {
+      "path": "sources/tables/WilcoxonW_Table.pdf",
+      "page": 1,
+      "row": "n = 8",
+      "column": "Critical value (P = .024)",
+      "value": 32,
+      "actualDf": null,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "|W|\\ge W_{\\text{critical}}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "|W|=33\\ge32",
+      "P<0.024"
+     ],
+     "words": "The magnitude 33 reaches the critical value of 32, so the null hypothesis is rejected. It is beyond the largest printed critical value for n = 8, so P < 0.024."
+    }
+   ],
+   "conclusion": "W = -33 with n = 8, and |W| = 33 reaches the critical value of 32, so the null hypothesis is rejected (P < 0.024). There is a difference in tic counts before and after habit reversal training. Patients had fewer tics during the 5-minute recording after three weeks of habit reversal training than before it.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/WilcoxonW_Table.pdf",
+    "page": 1,
+    "row": "n = 8",
+    "column": "Critical value (P = .024)",
+    "value": 32,
+    "actualDf": null,
+    "approximation": false
+   },
+   "values": {
+    "before": [
+     9,
+     7,
+     12,
+     6,
+     10,
+     8,
+     11,
+     7,
+     9
+    ],
+    "after": [
+     4,
+     7,
+     6,
+     5,
+     3,
+     4,
+     8,
+     2,
+     10
+    ],
+    "differences": [
+     -5,
+     0,
+     -6,
+     -1,
+     -7,
+     -4,
+     -3,
+     -5,
+     1
+    ],
+    "n": 8,
+    "W": -33.0,
+    "patterns": 256,
+    "critical": 32,
+    "critical2": 28,
+    "tableP": 0.024,
+    "tieSets": [
+     2,
+     2
+    ],
+    "exactP": 0.0234375,
+    "reject": true
+   },
+   "module": 24,
+   "tolerance": 0.165,
+   "answerName": "Signed-rank sum W",
+   "answer": -33.0
+  },
+  {
+   "id": "n24-b-music-session-mood",
+   "title": "Mood ratings before and after a group music session",
+   "topic": "s24wtable",
+   "context": "In a study looking at music and mood, eight adults with depression rated their current mood on a 1 to 10 scale (1 = very low, 10 = very good) right before a 30-minute group music session (measurement 1) and again right after it (measurement 2). Mood ratings are ordinal, so the researchers did not want to assume that the differences are Normally distributed.",
+   "unit": "rating points",
+   "table": {
+    "headers": [
+     "Person",
+     "Mood before (1 to 10)",
+     "Mood after (1 to 10)",
+     "Difference (after - before)",
+     "Rank of |difference|",
+     "Signed rank"
+    ],
+    "rows": [
+     [
+      1,
+      4,
+      6,
+      2,
+      4,
+      4
+     ],
+     [
+      2,
+      3,
+      3,
+      0,
+      "dropped",
+      "dropped"
+     ],
+     [
+      3,
+      5,
+      4,
+      -1,
+      2,
+      -2
+     ],
+     [
+      4,
+      2,
+      5,
+      3,
+      6,
+      6
+     ],
+     [
+      5,
+      6,
+      7,
+      1,
+      2,
+      2
+     ],
+     [
+      6,
+      4,
+      7,
+      3,
+      6,
+      6
+     ],
+     [
+      7,
+      3,
+      2,
+      -1,
+      2,
+      -2
+     ],
+     [
+      8,
+      5,
+      8,
+      3,
+      6,
+      6
+     ]
+    ]
+   },
+   "tasks": [
+    "Compute the differences (after - before), drop any zero difference, rank the magnitudes with average ranks for ties, attach the signs and compute W.",
+    "Based on the recorded data, is there evidence that the mood rating is different in these two states? Please state how you reached your conclusions.",
+    "Provide your result in a single complete sentence that would convey your conclusion in a way that could be understood by a non-expert in statistics or medicine (e.g., a typical reader of a local newspaper)."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\text{no difference in mood before and after the session}",
+    "alternative": "H_A:\\text{mood differs before and after the session}",
+    "nullWords": "There is no difference in the distributions of mood ratings before and after the group music session.",
+    "alternativeWords": "The distributions of mood ratings differ before and after the group music session."
+   },
+   "symbols": "\\(W\\) (sum of the signed ranks), \\(n\\) (number of nonzero differences), \\(\\mu_W\\) (mean of \\(W\\) under the null hypothesis), \\(\\sigma_W\\) (standard deviation of \\(W\\) under the null hypothesis), \\(z_W\\) (standardized signed-rank sum).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\text{signed differences centered on zero}"
+     ],
+     "work": [
+      "8\\ \\text{people}"
+     ],
+     "words": "Each person is measured twice, so the procedure is the Wilcoxon signed-rank test. The null hypothesis is that there is no difference in the distributions of mood ratings before and after the group music session."
+    },
+    {
+     "title": "Drop the zero difference",
+     "general": [
+      "n=\\text{number of nonzero differences}"
+     ],
+     "work": [
+      "d=(2,0,-1,3,1,3,-1,3)",
+      "n=8-1=7\\le8"
+     ],
+     "words": "Person 2 has no change, so that difference is dropped and n becomes 7. The W table applies."
+    },
+    {
+     "title": "Rank the magnitudes and attach signs",
+     "general": [
+      "\\operatorname{sign}(d_i)\\operatorname{rank}|d_i|"
+     ],
+     "work": [
+      "|d|\\ \\text{sorted}=1,1,1,2,3,3,3",
+      "1,1,1\\to\\frac{1+2+3}{3}=2,\\ 2\\to4,\\ 3,3,3\\to\\frac{5+6+7}{3}=6",
+      "\\text{signed ranks}=(+4,-2,+6,+2,+6,-2,+6)"
+     ],
+     "words": "Tied magnitudes share the average of the ranks they occupy. Each rank then takes the sign of its difference."
+    },
+    {
+     "title": "Compute W",
+     "general": [
+      "W=\\sum\\operatorname{sign}(d_i)\\operatorname{rank}|d_i|"
+     ],
+     "work": [
+      "W=24-4=20",
+      "\\text{check}\\ \\frac{7(8)}{2}-2(4)=20"
+     ],
+     "words": "The positive ranks add to 24 and the negative ranks add to 4."
+    },
+    {
+     "title": "Read the critical value",
+     "general": [
+      "W_{\\text{critical}}\\ \\text{for}\\ n"
+     ],
+     "work": [
+      "n=7\\Rightarrow28\\ (P=.016),\\quad24\\ (P=.046)"
+     ],
+     "words": "Open WilcoxonW_Table.pdf, PDF page 1, row n = 7. The printed critical values are 28 with P = .016 and 24 with P = .046. Both P values are at most 0.05, so 24 (P = .046) is the cutoff at the 0.05 level and 28 (P = .016) is a stricter cutoff.",
+     "tableLookup": {
+      "path": "sources/tables/WilcoxonW_Table.pdf",
+      "page": 1,
+      "row": "n = 7",
+      "column": "Critical value (P = .046)",
+      "value": 24,
+      "actualDf": null,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision",
+     "general": [
+      "|W|\\ge W_{\\text{critical}}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "|W|=20<24<28",
+      "P(|W|\\ge20)=\\frac{16}{128}=0.125"
+     ],
+     "words": "The magnitude 20 is below both printed critical values, so the null hypothesis is not rejected. Counting the 128 equally likely sign patterns with these tied ranks, 16 give |W| of 20 or more."
+    }
+   ],
+   "conclusion": "W = 20, and |W| = 20 is below the critical value of 24 (and below the stricter value 28), so the null hypothesis is not rejected (P = 0.125). These data do not show that a single group music session changes the mood ratings of adults with depression.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/WilcoxonW_Table.pdf",
+    "page": 1,
+    "row": "n = 7",
+    "column": "Critical value (P = .046)",
+    "value": 24,
+    "actualDf": null,
+    "approximation": false
+   },
+   "values": {
+    "before": [
+     4,
+     3,
+     5,
+     2,
+     6,
+     4,
+     3,
+     5
+    ],
+    "after": [
+     6,
+     3,
+     4,
+     5,
+     7,
+     7,
+     2,
+     8
+    ],
+    "differences": [
+     2,
+     0,
+     -1,
+     3,
+     1,
+     3,
+     -1,
+     3
+    ],
+    "n": 7,
+    "W": 20.0,
+    "patterns": 128,
+    "critical": 24,
+    "critical2": 28,
+    "tableP": 0.046,
+    "tieSets": [
+     3,
+     3
+    ],
+    "exactP": 0.125,
+    "reject": false
+   },
+   "module": 24,
+   "tolerance": 0.1,
+   "answerName": "Signed-rank sum W",
+   "answer": 20.0
+  },
+  {
+   "id": "n24-b-p300-attention-training",
+   "title": "P300 amplitude before and after attention training",
+   "topic": "s24wnormal",
+   "context": "Researchers interested in attention did a study using electroencephalography (EEG, recording of the brain's electrical activity from the scalp). The P300 (a positive brain wave about 300 ms after a rare target sound) was measured in microvolts (μV) in twelve adults before 4 weeks of computer-based attention training (measurement 1) and again after it (measurement 2). The after recording of subject 10 contained a very large value, so the researchers chose a test that does not assume Normal differences.",
+   "unit": "μV",
+   "table": {
+    "headers": [
+     "Subject",
+     "Before training (μV)",
+     "After training (μV)",
+     "Difference (after - before)",
+     "Rank of |difference|",
+     "Signed rank"
+    ],
+    "rows": [
+     [
+      1,
+      8.4,
+      9.6,
+      1.2,
+      6.5,
+      6.5
+     ],
+     [
+      2,
+      10.2,
+      11.0,
+      0.8,
+      4,
+      4
+     ],
+     [
+      3,
+      7.6,
+      10.1,
+      2.5,
+      10,
+      10
+     ],
+     [
+      4,
+      12.1,
+      11.7,
+      -0.4,
+      1,
+      -1
+     ],
+     [
+      5,
+      9.3,
+      10.5,
+      1.2,
+      6.5,
+      6.5
+     ],
+     [
+      6,
+      6.8,
+      9.9,
+      3.1,
+      11,
+      11
+     ],
+     [
+      7,
+      11.5,
+      12.3,
+      0.8,
+      4,
+      4
+     ],
+     [
+      8,
+      8.9,
+      10.8,
+      1.9,
+      9,
+      9
+     ],
+     [
+      9,
+      10.7,
+      10.1,
+      -0.6,
+      2,
+      -2
+     ],
+     [
+      10,
+      7.2,
+      17.0,
+      9.8,
+      12,
+      12
+     ],
+     [
+      11,
+      9.8,
+      11.3,
+      1.5,
+      8,
+      8
+     ],
+     [
+      12,
+      11.0,
+      11.8,
+      0.8,
+      4,
+      4
+     ]
+    ]
+   },
+   "tasks": [
+    "Compute the differences (after - before), rank the magnitudes with average ranks for ties, attach the signs and compute W.",
+    "Based on the recorded data, is there evidence that the P300 amplitude is different in these two states? Do not assume that the differences are Normally distributed. Make sure to show your intermediate calculations.",
+    "Provide your result in a single complete sentence that would convey your conclusion in a way that could be understood by a non-expert in statistics or medicine (e.g., a typical reader of a local newspaper)."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\text{no difference in P300 amplitude before and after training}",
+    "alternative": "H_A:\\text{P300 amplitude differs before and after training}",
+    "nullWords": "There is no difference in the distributions of P300 amplitude before and after attention training.",
+    "alternativeWords": "The distributions of P300 amplitude differ before and after attention training."
+   },
+   "symbols": "\\(W\\) (sum of the signed ranks), \\(n\\) (number of nonzero differences), \\(\\mu_W\\) (mean of \\(W\\) under the null hypothesis), \\(\\sigma_W\\) (standard deviation of \\(W\\) under the null hypothesis), \\(z_W\\) (standardized signed-rank sum). \\(\\tau_i\\) (number of tied ranks in the \\(i\\)th set of ties).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\text{signed differences centered on zero}"
+     ],
+     "work": [
+      "12\\ \\text{subjects}"
+     ],
+     "words": "The same subjects are measured twice, so the procedure is the Wilcoxon signed-rank test. The null hypothesis is that there is no difference in the distributions of P300 amplitude before and after attention training."
+    },
+    {
+     "title": "Compute the differences",
+     "general": [
+      "d_i=\\text{after}_i-\\text{before}_i"
+     ],
+     "work": [
+      "d=(1.2,0.8,2.5,-0.4,1.2,3.1,0.8,1.9,-0.6,9.8,1.5,0.8)",
+      "n=12>8"
+     ],
+     "words": "No difference is zero, so n stays 12. With more than 8 nonzero differences the Normal approximation is used."
+    },
+    {
+     "title": "Rank the magnitudes with ties",
+     "general": [
+      "\\text{tied rank}=\\text{average of the ranks the tied values occupy}"
+     ],
+     "work": [
+      "|d|\\ \\text{sorted}=0.4,0.6,0.8,0.8,0.8,1.2,1.2,1.5,1.9,2.5,3.1,9.8",
+      "0.4\\to1,\\ 0.6\\to2,\\ 0.8,0.8,0.8\\to\\frac{3+4+5}{3}=4,\\ 1.2,1.2\\to\\frac{6+7}{2}=6.5",
+      "1.5\\to8,\\ 1.9\\to9,\\ 2.5\\to10,\\ 3.1\\to11,\\ 9.8\\to12",
+      "\\text{signed ranks}=(+6.5,+4,+10,-1,+6.5,+11,+4,+9,-2,+12,+8,+4)"
+     ],
+     "words": "Tied magnitudes share the average of the ranks they occupy, and each rank then takes the sign of its difference. The very large change of 9.8 for subject 10 gets the top rank of 12, so it cannot pull W further than any other largest value would."
+    },
+    {
+     "title": "Compute W",
+     "general": [
+      "W=\\sum\\operatorname{sign}(d_i)\\operatorname{rank}|d_i|"
+     ],
+     "work": [
+      "W=75-3=72",
+      "\\text{check}\\ \\frac{12(13)}{2}-2(3)=72"
+     ],
+     "words": "The positive ranks add to 75 and the negative ranks add to 3, so W is the total of all ranks, 78, minus twice 3."
+    },
+    {
+     "title": "Tie sum",
+     "general": [
+      "\\sum(\\tau_i-1)\\tau_i(\\tau_i+1)"
+     ],
+     "work": [
+      "(1\\cdot2\\cdot3)+(2\\cdot3\\cdot4)=30"
+     ],
+     "words": "There is one set of size 2 and one set of size 3 among the magnitudes."
+    },
+    {
+     "title": "Tie-corrected standard deviation of W",
+     "general": [
+      "\\sigma_W=\\sqrt{\\frac{n(n+1)(2n+1)}{6}-\\sum\\frac{(\\tau_i-1)\\tau_i(\\tau_i+1)}{12}}"
+     ],
+     "work": [
+      "\\frac{12(13)(25)}{6}=650",
+      "\\sigma_W=\\sqrt{650-\\frac{30}{12}}=\\sqrt{647.5}=25.446"
+     ],
+     "words": "The ties reduce the variance by 2.5, from 650 to 647.5."
+    },
+    {
+     "title": "Compute z_W",
+     "general": [
+      "z_W=\\frac{|W|-1/2}{\\sigma_W}"
+     ],
+     "work": [
+      "z_W=\\frac{72-0.5}{25.446}=2.80987"
+     ],
+     "words": "The mean of W under the null hypothesis is zero, so only the continuity correction is subtracted from |W|."
+    },
+    {
+     "title": "Read the critical value",
+     "general": [
+      "z_{\\text{critical}}=t_{0.05}(\\infty)"
+     ],
+     "work": [
+      "z_{0.05}=1.9600"
+     ],
+     "words": "Start with \\(\\alpha=0.05\\). Open t_table.pdf, PDF page 2. In the infinity row and the two-tailed 0.05 column, the printed value is 1.9600.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 2,
+      "row": "∞",
+      "column": "0.05",
+      "value": 1.96,
+      "actualDf": null,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "|z_W|>z_{\\text{critical}}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "|z_W|=2.80987>1.9600",
+      "t_{0.005}(\\infty)=2.8070<2.80987<t_{0.002}(\\infty)=3.0902",
+      "0.002<P<0.005"
+     ],
+     "words": "The statistic exceeds 1.96, so the null hypothesis is rejected. In the infinity row it passes the 0.005 column (2.8070) but not the 0.002 column (3.0902), so 0.002 < P < 0.005."
+    }
+   ],
+   "conclusion": "W = 72 and z_W = 2.80987 exceeds 1.9600, so the null hypothesis is rejected (0.002 < P < 0.005). There is a difference in P300 amplitude before and after attention training. The brain response to rare target sounds was larger after four weeks of attention training.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 2,
+    "row": "∞",
+    "column": "0.05",
+    "value": 1.96,
+    "actualDf": null,
+    "approximation": false
+   },
+   "values": {
+    "before": [
+     8.4,
+     10.2,
+     7.6,
+     12.1,
+     9.3,
+     6.8,
+     11.5,
+     8.9,
+     10.7,
+     7.2,
+     9.8,
+     11.0
+    ],
+    "after": [
+     9.6,
+     11.0,
+     10.1,
+     11.7,
+     10.5,
+     9.9,
+     12.3,
+     10.8,
+     10.1,
+     17.0,
+     11.3,
+     11.8
+    ],
+    "differences": [
+     1.2,
+     0.8,
+     2.5,
+     -0.4,
+     1.2,
+     3.1,
+     0.8,
+     1.9,
+     -0.6,
+     9.8,
+     1.5,
+     0.8
+    ],
+    "n": 12,
+    "W": 72.0,
+    "tieSum": 30,
+    "tieSets": [
+     3,
+     2
+    ],
+    "varianceNoTies": 650.0,
+    "sigmaW": 25.446021299998947,
+    "zW": 2.809869533513397,
+    "critical": 1.96,
+    "exactNormalP": 0.004956158638506798,
+    "pairedT": 2.411411152548712,
+    "reject": true
+   },
+   "module": 24,
+   "tolerance": 0.014049347667566985,
+   "answerName": "z_W statistic",
+   "answer": 2.809869533513397
+  },
+  {
+   "id": "n24-b-sung-spoken-recall",
+   "title": "Words recalled from sung and spoken lists",
+   "topic": "s24wnormal",
+   "context": "In a study looking at music and verbal memory, each of twelve adults learned two different 20-word lists, one spoken (measurement 1) and one sung to a simple melody (measurement 2), in random order. Ten minutes after each list the number of words recalled was counted. Word counts are small integers with many ties, so the researchers did not want to assume that the differences are Normally distributed.",
+   "unit": "words",
+   "table": {
+    "headers": [
+     "Subject",
+     "Spoken list (words recalled)",
+     "Sung list (words recalled)",
+     "Difference (sung - spoken)",
+     "Rank of |difference|",
+     "Signed rank"
+    ],
+    "rows": [
+     [
+      1,
+      11,
+      12,
+      1,
+      3,
+      3
+     ],
+     [
+      2,
+      9,
+      11,
+      2,
+      8,
+      8
+     ],
+     [
+      3,
+      14,
+      13,
+      -1,
+      3,
+      -3
+     ],
+     [
+      4,
+      8,
+      10,
+      2,
+      8,
+      8
+     ],
+     [
+      5,
+      12,
+      12,
+      0,
+      "dropped",
+      "dropped"
+     ],
+     [
+      6,
+      10,
+      9,
+      -1,
+      3,
+      -3
+     ],
+     [
+      7,
+      13,
+      15,
+      2,
+      8,
+      8
+     ],
+     [
+      8,
+      7,
+      9,
+      2,
+      8,
+      8
+     ],
+     [
+      9,
+      9,
+      8,
+      -1,
+      3,
+      -3
+     ],
+     [
+      10,
+      12,
+      14,
+      2,
+      8,
+      8
+     ],
+     [
+      11,
+      10,
+      13,
+      3,
+      11,
+      11
+     ],
+     [
+      12,
+      11,
+      10,
+      -1,
+      3,
+      -3
+     ]
+    ]
+   },
+   "tasks": [
+    "Compute the differences (sung - spoken), drop any zero difference, rank the magnitudes with average ranks for ties, attach the signs and compute W.",
+    "Based on the recorded data, is there evidence that the number of words recalled is different in these two conditions? Do not assume that the differences are Normally distributed. Please state how you reached your conclusions.",
+    "Provide your result in a single complete sentence that would convey your conclusion in a way that could be understood by a non-expert in statistics or medicine (e.g., a typical reader of a local newspaper)."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\text{no difference in words recalled between sung and spoken lists}",
+    "alternative": "H_A:\\text{words recalled differ between sung and spoken lists}",
+    "nullWords": "There is no difference in the distributions of the number of words recalled between the sung and spoken lists.",
+    "alternativeWords": "The distributions of the number of words recalled differ between the sung and spoken lists."
+   },
+   "symbols": "\\(W\\) (sum of the signed ranks), \\(n\\) (number of nonzero differences), \\(\\mu_W\\) (mean of \\(W\\) under the null hypothesis), \\(\\sigma_W\\) (standard deviation of \\(W\\) under the null hypothesis), \\(z_W\\) (standardized signed-rank sum). \\(\\tau_i\\) (number of tied ranks in the \\(i\\)th set of ties).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\text{signed differences centered on zero}"
+     ],
+     "work": [
+      "12\\ \\text{subjects}"
+     ],
+     "words": "The same subjects are measured twice, so the procedure is the Wilcoxon signed-rank test. The null hypothesis is that there is no difference in the distributions of the number of words recalled between the sung and spoken lists."
+    },
+    {
+     "title": "Compute the differences",
+     "general": [
+      "d_i=\\text{sung}_i-\\text{spoken}_i"
+     ],
+     "work": [
+      "d=(1,2,-1,2,0,-1,2,2,-1,2,3,-1)",
+      "n=12-1=11>8"
+     ],
+     "words": "Subject 5 has a difference of zero, so it is dropped and n becomes 11. With more than 8 nonzero differences the Normal approximation is used."
+    },
+    {
+     "title": "Rank the magnitudes with ties",
+     "general": [
+      "\\text{tied rank}=\\text{average of the ranks the tied values occupy}"
+     ],
+     "work": [
+      "|d|\\ \\text{sorted}=1,1,1,1,1,2,2,2,2,2,3",
+      "1,1,1,1,1\\to\\frac{1+2+3+4+5}{5}=3,\\ 2,2,2,2,2\\to\\frac{6+7+8+9+10}{5}=8,\\ 3\\to11",
+      "\\text{signed ranks}=(+3,+8,-3,+8,-3,+8,+8,-3,+8,+11,-3)"
+     ],
+     "words": "Tied magnitudes share the average of the ranks they occupy, and each rank then takes the sign of its difference. Most magnitudes are 1 or 2, so large tie sets form."
+    },
+    {
+     "title": "Compute W",
+     "general": [
+      "W=\\sum\\operatorname{sign}(d_i)\\operatorname{rank}|d_i|"
+     ],
+     "work": [
+      "W=54-12=42",
+      "\\text{check}\\ \\frac{11(12)}{2}-2(12)=42"
+     ],
+     "words": "The positive ranks add to 54 and the negative ranks add to 12, so W is the total of all ranks, 66, minus twice 12."
+    },
+    {
+     "title": "Tie sum",
+     "general": [
+      "\\sum(\\tau_i-1)\\tau_i(\\tau_i+1)"
+     ],
+     "work": [
+      "2(4\\cdot5\\cdot6)=240"
+     ],
+     "words": "There are two sets of size 5 among the magnitudes."
+    },
+    {
+     "title": "Tie-corrected standard deviation of W",
+     "general": [
+      "\\sigma_W=\\sqrt{\\frac{n(n+1)(2n+1)}{6}-\\sum\\frac{(\\tau_i-1)\\tau_i(\\tau_i+1)}{12}}"
+     ],
+     "work": [
+      "\\frac{11(12)(23)}{6}=506",
+      "\\sigma_W=\\sqrt{506-\\frac{240}{12}}=\\sqrt{486}=22.0454"
+     ],
+     "words": "The ties reduce the variance by 20, from 506 to 486."
+    },
+    {
+     "title": "Compute z_W",
+     "general": [
+      "z_W=\\frac{|W|-1/2}{\\sigma_W}"
+     ],
+     "work": [
+      "z_W=\\frac{42-0.5}{22.0454}=1.88248"
+     ],
+     "words": "The mean of W under the null hypothesis is zero, so only the continuity correction is subtracted from |W|."
+    },
+    {
+     "title": "Read the critical value",
+     "general": [
+      "z_{\\text{critical}}=t_{0.05}(\\infty)"
+     ],
+     "work": [
+      "z_{0.05}=1.9600"
+     ],
+     "words": "Start with \\(\\alpha=0.05\\). Open t_table.pdf, PDF page 2. In the infinity row and the two-tailed 0.05 column, the printed value is 1.9600.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 2,
+      "row": "∞",
+      "column": "0.05",
+      "value": 1.96,
+      "actualDf": null,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "|z_W|>z_{\\text{critical}}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "|z_W|=1.88248<1.9600",
+      "t_{0.10}(\\infty)=1.6449<1.88248<t_{0.05}(\\infty)=1.9600",
+      "0.05<P<0.10"
+     ],
+     "words": "The statistic is below 1.96, so the null hypothesis is not rejected. In the infinity row it passes the 0.10 column (1.6449) but not the 0.05 column (1.9600), so 0.05 < P < 0.10."
+    }
+   ],
+   "conclusion": "W = 42 and z_W = 1.88248 is less than 1.9600, so the null hypothesis is not rejected (0.05 < P < 0.10). The data do not show a difference in the number of words recalled between the sung and spoken lists. In this study, people did not remember reliably more or fewer words from a sung list than from a spoken list.",
+   "source": "Original neuroscience practice example",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 2,
+    "row": "∞",
+    "column": "0.05",
+    "value": 1.96,
+    "actualDf": null,
+    "approximation": false
+   },
+   "values": {
+    "before": [
+     11,
+     9,
+     14,
+     8,
+     12,
+     10,
+     13,
+     7,
+     9,
+     12,
+     10,
+     11
+    ],
+    "after": [
+     12,
+     11,
+     13,
+     10,
+     12,
+     9,
+     15,
+     9,
+     8,
+     14,
+     13,
+     10
+    ],
+    "differences": [
+     1,
+     2,
+     -1,
+     2,
+     0,
+     -1,
+     2,
+     2,
+     -1,
+     2,
+     3,
+     -1
+    ],
+    "n": 11,
+    "W": 42.0,
+    "tieSum": 240,
+    "tieSets": [
+     5,
+     5
+    ],
+    "varianceNoTies": 506.0,
+    "sigmaW": 22.045407685048602,
+    "zW": 1.8824782282500352,
+    "critical": 1.96,
+    "exactNormalP": 0.05977111322701996,
+    "pairedT": 1.8898223650461365,
+    "reject": false
+   },
+   "module": 24,
+   "tolerance": 0.009412391141250176,
+   "answerName": "z_W statistic",
+   "answer": 1.8824782282500352
+  }
+ ],
+ "questions": [
+  {
+   "id": "m2-n24-qb01",
+   "module": 24,
+   "topic": "s24normal",
+   "stem": "For the pitch-matching errors of the ten trained singers (7, 10, 11, 12, 13, 13, 14, 16, 17, 19 cents), what is the sample SD?",
+   "options": [
+    "\\(3.34066\\) cents",
+    "\\(12.4\\) cents",
+    "\\(3.52136\\) cents",
+    "\\(1.11355\\) cents"
+   ],
+   "correct": 2,
+   "why": "The squared deviations from the mean 13.2 add to 111.6. Dividing by n - 1 = 9 gives 12.4, and its square root is 3.52136. Dividing by n, skipping the root, or dividing by the root of n gives the other values.",
+   "case": "n24-b-pitch-matching-normality",
+   "equations": [
+    "s=\\sqrt{\\frac{\\sum(x_i-\\bar x)^2}{n-1}}",
+    "s=\\sqrt{\\frac{111.6}{9}}=3.52136"
+   ]
+  },
+  {
+   "id": "m2-n24-qb02",
+   "module": 24,
+   "topic": "s24mwtable",
+   "stem": "For the lever presses in extinction (CRF 12, 22, 9, 29, 15 and partial 31, 26, 45, 22, 38, 29, 52), what is the rank sum T of the smaller group?",
+   "options": [
+    "\\(18\\)",
+    "\\(17\\)",
+    "\\(60\\)",
+    "\\(32.5\\)"
+   ],
+   "correct": 0,
+   "why": "Ranking all twelve counts gives the CRF ranks 1, 2, 3, 4.5 and 7.5, which add to 18. Breaking the ties without averaging gives 17, 60 is the partial group's sum, and 32.5 is the mean of T under the null hypothesis.",
+   "case": "n24-b-lever-extinction",
+   "equations": [
+    "T=1+2+3+4.5+7.5=18"
+   ]
+  },
+  {
+   "id": "m2-n24-qb03",
+   "module": 24,
+   "topic": "s24mwnormal",
+   "stem": "For the dizziness ratings of 9 rehabilitation and 11 waitlist patients, the tie sum is 144. What is the tie-corrected standard deviation \\(\\sigma_T\\)?",
+   "options": [
+    "\\(13.1624\\)",
+    "\\(13.0431\\)",
+    "\\(170.124\\)",
+    "\\(12.6984\\)"
+   ],
+   "correct": 1,
+   "why": "The variance without ties is 9(11)(21)/12 = 173.25, and the ties remove 9(11)(144)/(12(20)(19)) = 3.12632. The root of 170.124 is 13.0431. The other values ignore the ties, forget the root, or subtract the tie sum over 12 as in the signed-rank test.",
+   "case": "n24-b-dizziness-vestibular-rehab",
+   "equations": [
+    "\\sigma_T=\\sqrt{\\frac{n_Sn_B(N+1)}{12}-\\frac{n_Sn_B}{12N(N-1)}\\sum(\\tau_i-1)\\tau_i(\\tau_i+1)}",
+    "\\sigma_T=\\sqrt{173.25-3.12632}=13.0431"
+   ]
+  },
+  {
+   "id": "m2-n24-qb04",
+   "module": 24,
+   "topic": "s24mwnormal",
+   "stem": "For the freezing times of 10 mice with extinction training and 12 without, T = 75.5, \\(\\mu_T=115\\) and \\(\\sigma_T=15.1615\\). What is \\(z_T\\)?",
+   "options": [
+    "\\(2.60529\\)",
+    "\\(4.08931\\)",
+    "\\(0.169661\\)",
+    "\\(2.57231\\)"
+   ],
+   "correct": 3,
+   "why": "The distance 39.5 minus the continuity correction 0.5 is 39, and 39 divided by 15.1615 is 2.57231. The other values skip the correction, use the bigger group's mean, or divide by the variance.",
+   "case": "n24-b-freezing-extinction",
+   "equations": [
+    "z_T=\\frac{|T-\\mu_T|-\\frac12}{\\sigma_T}",
+    "z_T=\\frac{|75.5-115|-0.5}{15.1615}=2.57231"
+   ]
+  },
+  {
+   "id": "m2-n24-qb05",
+   "module": 24,
+   "topic": "s24wtable",
+   "stem": "For the tic counts of nine patients before and after habit reversal training, one patient shows no change. What is W (after minus before)?",
+   "options": [
+    "\\(-33\\)",
+    "\\(-39\\)",
+    "\\(-34.5\\)",
+    "\\(1.5\\)"
+   ],
+   "correct": 0,
+   "why": "Dropping the zero leaves n = 8. The only positive rank is 1.5 and the negative ranks add to 34.5, so W = 1.5 - 34.5 = -33. Keeping the zero as a rank gives -39, and -34.5 or 1.5 are only one side of the sum.",
+   "case": "n24-b-tic-habit-reversal",
+   "equations": [
+    "W=\\sum\\operatorname{sign}(d_i)\\operatorname{rank}|d_i|",
+    "W=1.5-34.5=-33"
+   ]
+  },
+  {
+   "id": "m2-n24-qb06",
+   "module": 24,
+   "topic": "s24wnormal",
+   "stem": "For the words recalled from sung and spoken lists, W = 42 with n = 11 nonzero differences and a tie sum of 240. What is \\(z_W\\)?",
+   "options": [
+    "\\(1.8449\\)",
+    "\\(1.90516\\)",
+    "\\(1.88248\\)",
+    "\\(0.0853909\\)"
+   ],
+   "correct": 2,
+   "why": "The variance without ties is 11(12)(23)/6 = 506, and the ties remove 240/12 = 20, so \\(\\sigma_W=\\sqrt{486}=22.0454\\). Then (42 - 0.5)/22.0454 = 1.88248. The other values ignore the ties, skip the continuity correction, or divide by the variance.",
+   "case": "n24-b-sung-spoken-recall",
+   "equations": [
+    "z_W=\\frac{|W|-1/2}{\\sigma_W}",
+    "z_W=\\frac{42-0.5}{22.0454}=1.88248"
+   ]
+  },
+  {
+   "id": "m2-n24-qb07",
+   "module": 24,
+   "topic": "s24normal",
+   "stem": "Ten fMRI percent signal change values follow a straight line on a Normal Q-Q plot except one value far above the others, and shapiro.test gives p-value = 0.0001167. Which conclusion fits?",
+   "options": [
+    "Normality is not rejected because nine points follow the line.",
+    "Normality is rejected, so a rank-based test is safer for comparing this group.",
+    "The data are proven to be Normal because P is small.",
+    "The single outlier should be deleted and the t test used without comment."
+   ],
+   "correct": 1,
+   "why": "The Shapiro-Wilk null hypothesis is Normality, and P = 0.0001167 is below 0.05, so Normality is rejected. A rank test uses only the order of the values, so one extreme value cannot dominate it.",
+   "case": null,
+   "equations": []
+  },
+  {
+   "id": "m2-n24-qb08",
+   "module": 24,
+   "topic": "s24mwtable",
+   "stem": "Spike counts are recorded from 6 neurons in control slices and 11 different neurons in slices bathed in a test solution, and the counts are skewed. How should the two groups be compared?",
+   "options": [
+    "Wilcoxon signed-rank test with the W table",
+    "Mann-Whitney rank-sum test with the T table",
+    "Paired t test on the counts",
+    "Mann-Whitney rank-sum test with the Normal approximation, because n_B = 11 > 8"
+   ],
+   "correct": 3,
+   "why": "The neurons in the two groups are different, so the rank-sum test applies. The printed T table only covers a bigger group of 8 or fewer, so with 11 the Normal approximation is used.",
+   "case": null,
+   "equations": []
+  },
+  {
+   "id": "m2-n24-qb09",
+   "module": 24,
+   "topic": "s24wtable",
+   "stem": "In a signed-rank test on nine people measured before and after a speech therapy, one person's difference is exactly zero. What happens to that person?",
+   "options": [
+    "The zero difference is dropped, so n = 8 and the W table row n = 8 is used.",
+    "The zero gets rank 1 and a positive sign.",
+    "The zero is split into half a positive and half a negative rank, and n stays 9.",
+    "The whole data set must be analyzed with a paired t test instead."
+   ],
+   "correct": 0,
+   "why": "A zero difference carries no sign, so it is removed before ranking and n counts only the nonzero differences.",
+   "case": null,
+   "equations": []
+  },
+  {
+   "id": "m2-n24-qb10",
+   "module": 24,
+   "topic": "s24wnormal",
+   "stem": "In a signed-rank test with the Normal approximation, many differences in a word-recall study share the same magnitude. How does the tie correction change the result?",
+   "options": [
+    "It increases \\(\\sigma_W\\), so \\(z_W\\) gets smaller.",
+    "It changes W itself but not \\(\\sigma_W\\).",
+    "It reduces \\(\\sigma_W\\), so \\(z_W\\) gets slightly larger.",
+    "It has no effect because ties only matter for the T table."
+   ],
+   "correct": 2,
+   "why": "Each tie set subtracts \\((\\tau_i-1)\\tau_i(\\tau_i+1)/12\\) from the variance, so \\(\\sigma_W\\) shrinks and dividing by it gives a larger z.",
+   "case": null,
+   "equations": [
+    "\\sigma_W=\\sqrt{\\frac{n(n+1)(2n+1)}{6}-\\sum\\frac{(\\tau_i-1)\\tau_i(\\tau_i+1)}{12}}"
+   ]
+  }
+ ],
+ "notes": [
+  "All data are invented for practice. Critical values were read from sources/tables/MannWhitney_RankSumT_Table.pdf page 1 (rows n_S = 5, n_B = 7 and n_S = 4, n_B = 7), sources/tables/WilcoxonW_Table.pdf page 1 (rows n = 7 and n = 8) and sources/tables/t_table.pdf page 2 (infinity row, columns 0.50 to 0.001). Each step that reads a table carries tableLookup, and the case lookup repeats the 0.05-level entry, as in the ref cases.",
+  "Formula discrepancy (for the reviewer, not stated in the cases). The lecture slide prints the tie term of sigma_T with 12N(N+1) in the denominator. The correct form, used in the ref file and here, is 12N(N-1). The two s24mwnormal cases use N - 1, and the check script confirms the result against SciPy mannwhitneyu (asymptotic, continuity corrected), which uses the same correction.",
+  "Wilcoxon W table, row n = 7. Both printed values (28 with P = .016 and 24 with P = .046) have P at most 0.05, so the mood case uses 24 as the 0.05 cutoff and names 28 as the stricter value. The ref cases only show rows n = 6 and n = 8, where one printed P exceeds 0.05.",
+  "Printed-table discrepancy (for the reviewer, not stated in the case). In MannWhitney_RankSumT_Table.pdf, row n_S = 4, n_B = 7, the .01 entry is printed as 10,38 with P = .012. The exact two-tailed P of 10,38 is 2/330 = .006, and P = .012 belongs to 11,37 (4/330). The stuttering case records the printed 10,38 (P = .012) faithfully. It does not affect the decision because T = 21.5 is far from both entries.",
+  "Outcomes. Reject: lever presses (0.010 < P < 0.048), dizziness (0.005 < P < 0.01), freezing (0.01 < P < 0.02, z just below the 0.01 column value 2.5758), tic counts (P < 0.024), P300 (0.002 < P < 0.005). Do not reject: stuttering therapy (exact P = 0.685), music-session mood (exact P = 0.125), sung versus spoken recall (0.05 < P < 0.10, close to the cutoff). In the two Normality cases, the first group of each is consistent with Normal (P = 0.9951 and P = 0.9917) and the second is rejected.",
+  "Following the ref cases of the table methods, a non-rejecting T or W table case states the exact permutation P counted from the actual (tied) ranks. Normal-approximation cases give only a P range from the infinity row.",
+  "Ties appear in every rank case. Zero differences are dropped in the tic counts (patient 2), music-session mood (person 2) and sung versus spoken recall (subject 5) cases.",
+  "Shapiro-Wilk output was produced by running Rscript (R 4.6.1, shapiro.test on x) on each sample. It is quoted in the third task and stored in full, as R prints it, in values.rOutput1 and values.rOutput2. Values keys added beyond the ref key sets are raw samples (sample1, sample2), group arrays with a groups list naming them (small group first), tie bookkeeping (tieSum, tieSets, varianceNoTies, sigmaTNoTies) and the other printed table entry (critical01, tableP01, critical2).",
+  "In the sung versus spoken case the Wilcoxon values keys before and after hold measurement 1 (spoken) and measurement 2 (sung), to keep the ref key names.",
+  "The answer of each s24normal case is the Shapiro-Wilk W of the second group, read from the R output as in the ref case.",
+  "Colons and semicolons are kept out of words, conclusion and the hypotheses in words. Context and tasks keep the course's exact phrases, including the newspaper sentence with e.g. and the quoted R output line."
+ ]
+}

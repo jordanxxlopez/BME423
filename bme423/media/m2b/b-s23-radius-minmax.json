@@ -1,0 +1,57 @@
+{
+ "id": "b-s23-radius-minmax",
+ "file": "media/m2b/b-s23-radius-minmax.mp4",
+ "poster": "media/m2b/b-s23-radius-minmax.png",
+ "session": 23,
+ "method": "s23scaling",
+ "title": "Min-max normalization of mean radius in the Wisconsin data",
+ "duration": 73.933,
+ "cases": {
+  "s23-radius-minmax": [
+   2,
+   3,
+   4,
+   5
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 16
+  },
+  {
+   "step": 2,
+   "title": "Read the minimum and maximum",
+   "start": 16,
+   "end": 27.467
+  },
+  {
+   "step": 3,
+   "title": "Find the range",
+   "start": 27.467,
+   "end": 37.133
+  },
+  {
+   "step": 4,
+   "title": "Normalize the mean radius",
+   "start": 37.133,
+   "end": 45.733
+  },
+  {
+   "step": 5,
+   "title": "Normalize the median and the maximum",
+   "start": 45.733,
+   "end": 57.933
+  },
+  {
+   "step": 6,
+   "title": "Conclusion",
+   "start": 57.933,
+   "end": 73.933
+  }
+ ],
+ "case": "s23-radius-minmax",
+ "kind": "board"
+}

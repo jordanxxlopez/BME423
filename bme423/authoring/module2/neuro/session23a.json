@@ -1,0 +1,1461 @@
+{
+ "cases": [
+  {
+   "id": "n23-eeg-seizure-knn",
+   "title": "EEG epochs labeled Seizure or Non-seizure (K = 3)",
+   "topic": "s23knn",
+   "context": "In a study of automatic seizure detection, the electroencephalogram (EEG, the electrical activity of the brain recorded from the scalp) of patients in an epilepsy monitoring unit was cut into 10-second segments (epochs). Six epochs were reviewed by a neurologist and labeled as Seizure or Non-seizure. Two features of each epoch, the line length (the summed size of the sample-to-sample changes, which grows when the signal is large and jagged) and the rhythmicity (how strongly a single frequency dominates the signal), were converted to dimensionless scores. A new epoch that was not reviewed by the neurologist had a line length score of 5 and a rhythmicity score of 4. The six labeled epochs were measured with the following results (training set):",
+   "unit": "probability",
+   "table": {
+    "headers": [
+     "Epoch",
+     "Line length score",
+     "Rhythmicity score",
+     "Label"
+    ],
+    "rows": [
+     [
+      "A",
+      1,
+      2,
+      "Non-seizure"
+     ],
+     [
+      "B",
+      5,
+      6,
+      "Seizure"
+     ],
+     [
+      "C",
+      3,
+      3,
+      "Non-seizure"
+     ],
+     [
+      "D",
+      6,
+      3,
+      "Seizure"
+     ],
+     [
+      "E",
+      7,
+      6,
+      "Seizure"
+     ],
+     [
+      "F",
+      2,
+      5,
+      "Non-seizure"
+     ]
+    ]
+   },
+   "tasks": [
+    "Based on the data listed in the table below, classify the new epoch as Seizure or Non-seizure. Use a K-NN classification with K = 3. Use the Euclidian distance formula for your calculations.",
+    "Make sure to show your intermediate calculations. As part of your final answer, provide the probability for the class that you chose."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(q\\) (new sample), \\(r\\) (a training sample), \\(d(q,r)\\) (Euclidean distance), \\(K\\) (number of nearest neighbors).",
+   "steps": [
+    {
+     "title": "Set up the new sample and the training set",
+     "general": [
+      "q=(q_1,q_2)"
+     ],
+     "work": [
+      "q=(5,4)",
+      "A=(1,2),\\ B=(5,6),\\ C=(3,3),\\ D=(6,3),\\ E=(7,6),\\ F=(2,5)"
+     ],
+     "words": "The six epochs labeled by the neurologist are the training set. The new epoch with scores 5 and 4 is the test sample. The scores are already dimensionless, so no further scaling is needed."
+    },
+    {
+     "title": "Distances to A, B and C",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d_A=\\sqrt{(5-1)^2+(4-2)^2}=\\sqrt{20}=4.47214",
+      "d_B=\\sqrt{(5-5)^2+(4-6)^2}=\\sqrt{4}=2",
+      "d_C=\\sqrt{(5-3)^2+(4-3)^2}=\\sqrt{5}=2.23607"
+     ],
+     "words": "Subtract matching scores, square the differences, add them and take the square root."
+    },
+    {
+     "title": "Distances to D, E and F",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d_D=\\sqrt{(5-6)^2+(4-3)^2}=\\sqrt{2}=1.41421",
+      "d_E=\\sqrt{(5-7)^2+(4-6)^2}=\\sqrt{8}=2.82843",
+      "d_F=\\sqrt{(5-2)^2+(4-5)^2}=\\sqrt{10}=3.16228"
+     ],
+     "words": "The same formula is applied to every epoch of the training set."
+    },
+    {
+     "title": "Rank the distances",
+     "general": [
+      "\\text{rank }d(q,r)\\text{ from smallest}"
+     ],
+     "work": [
+      "D\\ (1.41421)<B\\ (2)<C\\ (2.23607)<E\\ (2.82843)<F\\ (3.16228)<A\\ (4.47214)"
+     ],
+     "words": "There are no ties. The 3 nearest neighbors are D, B and C."
+    },
+    {
+     "title": "Read the classes of the 3 nearest neighbors",
+     "general": [
+      "y_{(1)},\\ y_{(2)},\\ y_{(3)}"
+     ],
+     "work": [
+      "D=\\text{Seizure},\\ B=\\text{Seizure},\\ C=\\text{Non-seizure}"
+     ],
+     "words": "Only the three closest epochs vote. E, F and A are too far away to be neighbors when K is 3."
+    },
+    {
+     "title": "Classify and give the probability",
+     "general": [
+      "P(\\text{Seizure})=\\frac{\\#\\text{ Seizure among the }K\\text{ neighbors}}{K}"
+     ],
+     "work": [
+      "P(\\text{Seizure})=\\frac{2}{3}=0.66667"
+     ],
+     "words": "Seizure has 2 of the 3 votes, so it is the plurality class. The new epoch is classified as Seizure with probability 2/3. The one Non-seizure neighbor, C, is outvoted."
+    }
+   ],
+   "conclusion": "With K = 3 the nearest neighbors are D (Seizure), B (Seizure) and C (Non-seizure). The new epoch is classified as Seizure. Probability of 2/3 that the new epoch contains seizure activity.",
+   "source": "Original neuroscience practice example",
+   "lookup": null,
+   "values": {
+    "newSample": [
+     5,
+     4
+    ],
+    "distances": {
+     "A": 4.47213595499958,
+     "B": 2.0,
+     "C": 2.23606797749979,
+     "D": 1.4142135623730951,
+     "E": 2.8284271247461903,
+     "F": 3.1622776601683795
+    },
+    "neighbors": [
+     "D",
+     "B",
+     "C"
+    ],
+    "K": 3,
+    "class": "Seizure",
+    "pSeizure": 0.6666666666666666
+   },
+   "module": 23,
+   "tolerance": 0.003333333333333333,
+   "answerName": "Probability",
+   "answer": 0.6666666666666666
+  },
+  {
+   "id": "n23-concussion-screen-knn",
+   "title": "Athlete concussion screening by sway and reaction time (K = 5)",
+   "topic": "s23knn",
+   "context": "In a concussion screening program for college athletes, seven athletes were examined by a sports medicine physician after a hit to the head and diagnosed as Concussed (a mild traumatic brain injury) or Not concussed. Each athlete also completed a balance test on a force plate, which measured postural sway (how far the body's center of pressure moves while standing still, in millimeters (mm)), and a computer test of simple reaction time (time elapsed between the appearance of a dot on the screen and the athlete's pressing a key, in milliseconds (ms)). The data were standardized to avoid any issues associated with differences in scale; the scaled data are unitless. A new athlete who had not yet seen the physician had a scaled sway of 4 and a scaled reaction time of 3. The seven diagnosed athletes were measured with the following results (training set):",
+   "unit": "probability",
+   "table": {
+    "headers": [
+     "Athlete",
+     "Sway",
+     "Reaction time",
+     "Diagnosis"
+    ],
+    "rows": [
+     [
+      "A",
+      2,
+      3,
+      "Not concussed"
+     ],
+     [
+      "B",
+      6,
+      5,
+      "Concussed"
+     ],
+     [
+      "C",
+      3,
+      6,
+      "Concussed"
+     ],
+     [
+      "D",
+      5,
+      2,
+      "Not concussed"
+     ],
+     [
+      "E",
+      7,
+      7,
+      "Concussed"
+     ],
+     [
+      "F",
+      5,
+      5,
+      "Concussed"
+     ],
+     [
+      "G",
+      1,
+      1,
+      "Not concussed"
+     ]
+    ]
+   },
+   "tasks": [
+    "Based on the resulting data listed in the table below, classify the new athlete as Concussed or Not concussed. Use a K-NN classification with K = 5. Use the Euclidian distance formula for your calculations.",
+    "Make sure to show your intermediate calculations. As part of your final answer, provide the probability for the class that you chose."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(q\\) (new sample), \\(r\\) (a training sample), \\(d(q,r)\\) (Euclidean distance), \\(K\\) (number of nearest neighbors).",
+   "steps": [
+    {
+     "title": "Set up the new sample and the training set",
+     "general": [
+      "q=(q_1,q_2)"
+     ],
+     "work": [
+      "q=(4,3)",
+      "A=(2,3),\\ B=(6,5),\\ C=(3,6),\\ D=(5,2),\\ E=(7,7),\\ F=(5,5),\\ G=(1,1)"
+     ],
+     "words": "The seven athletes with known diagnoses are the training set. The new athlete with scaled scores 4 and 3 is the test sample. The data are already standardized, so no further scaling is needed."
+    },
+    {
+     "title": "Distances to A, B, C and D",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d_A=\\sqrt{(4-2)^2+(3-3)^2}=\\sqrt{4}=2",
+      "d_B=\\sqrt{(4-6)^2+(3-5)^2}=\\sqrt{8}=2.82843",
+      "d_C=\\sqrt{(4-3)^2+(3-6)^2}=\\sqrt{10}=3.16228",
+      "d_D=\\sqrt{(4-5)^2+(3-2)^2}=\\sqrt{2}=1.41421"
+     ],
+     "words": "Subtract matching scores, square the differences, add them and take the square root."
+    },
+    {
+     "title": "Distances to E, F and G",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d_E=\\sqrt{(4-7)^2+(3-7)^2}=\\sqrt{25}=5",
+      "d_F=\\sqrt{(4-5)^2+(3-5)^2}=\\sqrt{5}=2.23607",
+      "d_G=\\sqrt{(4-1)^2+(3-1)^2}=\\sqrt{13}=3.60555"
+     ],
+     "words": "The same formula is applied to every athlete of the training set."
+    },
+    {
+     "title": "Rank the distances",
+     "general": [
+      "\\text{rank }d(q,r)\\text{ from smallest}"
+     ],
+     "work": [
+      "D\\ (1.41421)<A\\ (2)<F\\ (2.23607)<B\\ (2.82843)<C\\ (3.16228)<G\\ (3.60555)<E\\ (5)"
+     ],
+     "words": "There are no ties. The 5 nearest neighbors are D, A, F, B and C."
+    },
+    {
+     "title": "Read the classes of the 5 nearest neighbors",
+     "general": [
+      "y_{(1)},\\dots,y_{(5)}"
+     ],
+     "work": [
+      "D=\\text{Not concussed},\\ A=\\text{Not concussed},\\ F=\\text{Concussed},\\ B=\\text{Concussed},\\ C=\\text{Concussed}"
+     ],
+     "words": "The five closest athletes are D, A, F, B and C. G and E are too far away to vote when K is 5."
+    },
+    {
+     "title": "Classify and give the probability",
+     "general": [
+      "P(\\text{Concussed})=\\frac{\\#\\text{ Concussed among the }K\\text{ neighbors}}{K}"
+     ],
+     "work": [
+      "P(\\text{Concussed})=\\frac{3}{5}=0.6"
+     ],
+     "words": "Concussed has 3 of the 5 votes, so it is the plurality class. The new athlete is classified as Concussed with probability 3/5. With K = 3 only D, A and F would vote, which gives Not concussed with probability 2/3, so the choice of K matters."
+    }
+   ],
+   "conclusion": "With K = 5 the nearest neighbors are D (Not concussed), A (Not concussed), F (Concussed), B (Concussed) and C (Concussed). The new athlete is classified as Concussed. Probability of 3/5 that the new athlete is concussed.",
+   "source": "Original neuroscience practice example",
+   "lookup": null,
+   "values": {
+    "newSample": [
+     4,
+     3
+    ],
+    "distances": {
+     "A": 2.0,
+     "B": 2.8284271247461903,
+     "C": 3.1622776601683795,
+     "D": 1.4142135623730951,
+     "E": 5.0,
+     "F": 2.23606797749979,
+     "G": 3.605551275463989
+    },
+    "neighbors": [
+     "D",
+     "A",
+     "F",
+     "B",
+     "C"
+    ],
+    "K": 5,
+    "class": "Concussed",
+    "pConcussed": 0.6
+   },
+   "module": 23,
+   "tolerance": 0.003,
+   "answerName": "Probability",
+   "answer": 0.6
+  },
+  {
+   "id": "n23-dat-spect-minmax",
+   "title": "Dopamine transporter scan ratio, min-max normalization",
+   "topic": "s23scaling",
+   "context": "In a movement disorders clinic, patients with a tremor were scanned with dopamine transporter SPECT (single-photon emission computed tomography, an imaging test that shows how many dopamine nerve endings remain in the striatum) to help separate Parkinson disease (PD) from essential tremor (ET, a tremor disorder in which the dopamine nerve endings are preserved). For each patient, the specific binding ratio (SBR, the tracer uptake in the putamen divided by the uptake in a reference region, unitless) was recorded. The R summary of the SBR for 140 patients is shown below. Before K-NN, every feature was rescaled with the normalize() function (min-max normalization). A new patient had an SBR of 0.95.",
+   "unit": "scaled units (0 to 1)",
+   "table": {
+    "headers": [
+     "Statistic",
+     "SBR"
+    ],
+    "rows": [
+     [
+      "Min.",
+      0.42
+     ],
+     [
+      "1st Qu.",
+      1.08
+     ],
+     [
+      "Median",
+      1.63
+     ],
+     [
+      "Mean",
+      1.71
+     ],
+     [
+      "3rd Qu.",
+      2.29
+     ],
+     [
+      "Max.",
+      3.38
+     ]
+    ]
+   },
+   "tasks": [
+    "Find the range of the SBR.",
+    "Compute the min-max normalized values of the mean (1.71) and the median (1.63), and of the maximum.",
+    "Compute the min-max normalized value for the new patient (0.95)."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(x\\) (feature value), \\(\\min(x),\\max(x)\\) (smallest and largest value), \\(x_{\\text{scaled}}\\) (normalized value).",
+   "steps": [
+    {
+     "title": "Read the minimum and maximum",
+     "general": [
+      "\\min(x),\\ \\max(x)"
+     ],
+     "work": [
+      "\\min(x)=0.42,\\quad \\max(x)=3.38"
+     ],
+     "words": "The summary() output gives both values for the SBR."
+    },
+    {
+     "title": "Find the range",
+     "general": [
+      "R=\\max(x)-\\min(x)"
+     ],
+     "work": [
+      "R=3.38-0.42=2.96"
+     ],
+     "words": "The range is the denominator of every normalized value of this feature."
+    },
+    {
+     "title": "Normalize the mean SBR",
+     "general": [
+      "x_{\\text{scaled}}=\\frac{x-\\min(x)}{\\max(x)-\\min(x)}"
+     ],
+     "work": [
+      "x_{\\text{scaled}}=\\frac{1.71-0.42}{2.96}=\\frac{1.29}{2.96}=0.43581"
+     ],
+     "words": "Subtract the minimum first, then divide by the range."
+    },
+    {
+     "title": "Normalize the median and the maximum",
+     "general": [
+      "x_{\\text{scaled}}=\\frac{x-\\min(x)}{\\max(x)-\\min(x)}"
+     ],
+     "work": [
+      "x_{\\text{scaled}}=\\frac{1.63-0.42}{2.96}=\\frac{1.21}{2.96}=0.40878",
+      "x_{\\text{scaled}}=\\frac{3.38-0.42}{2.96}=1"
+     ],
+     "words": "The maximum always maps to 1 and the minimum to 0. Every other value falls between them."
+    },
+    {
+     "title": "Normalize the new patient",
+     "general": [
+      "x_{\\text{scaled}}=\\frac{x-\\min(x)}{\\max(x)-\\min(x)}"
+     ],
+     "work": [
+      "x_{\\text{scaled}}=\\frac{0.95-0.42}{2.96}=\\frac{0.53}{2.96}=0.17905"
+     ],
+     "words": "The new patient uses the same minimum and range as the training data. The value is close to 0, so this patient's SBR is near the low end of the observed range."
+    }
+   ],
+   "conclusion": "The range of the SBR is 2.96, so the mean 1.71 normalizes to 0.43581 and the median 1.63 to 0.40878. The new patient's SBR of 0.95 normalizes to 0.17905, and every normalized SBR of the 140 patients lies between 0 and 1.",
+   "source": "Original neuroscience practice example",
+   "lookup": null,
+   "values": {
+    "min": 0.42,
+    "max": 3.38,
+    "mean": 1.71,
+    "median": 1.63,
+    "range": 2.96,
+    "scaledMean": 0.4358108108108108,
+    "scaledMedian": 0.40878378378378377,
+    "newValue": 0.95,
+    "scaledNew": 0.17905405405405406
+   },
+   "module": 23,
+   "tolerance": 0.001,
+   "answerName": "Normalized value",
+   "answer": 0.17905405405405406
+  },
+  {
+   "id": "n23-audiogram-pta-zscore",
+   "title": "Pure-tone average of audiograms, z-score standardization",
+   "topic": "s23scaling",
+   "context": "In a hearing clinic, audiograms (charts of the softest tone a person can hear at each frequency) were to be classified as Normal hearing or Hearing loss with K-NN. For each ear, the pure-tone average (PTA, the mean hearing threshold at 500, 1000 and 2000 hertz (Hz)) was measured in decibels hearing level (dB HL). Before K-NN, the PTA values of six training ears were standardized with the scale() function (z-scores), which uses the sample mean and the sample standard deviation (SD) of the training ears. A new ear had a PTA of 47 dB HL.",
+   "unit": "standardized units (z)",
+   "table": {
+    "headers": [
+     "Ear",
+     "PTA (dB HL)"
+    ],
+    "rows": [
+     [
+      1,
+      10
+     ],
+     [
+      2,
+      15
+     ],
+     [
+      3,
+      25
+     ],
+     [
+      4,
+      40
+     ],
+     [
+      5,
+      50
+     ],
+     [
+      6,
+      64
+     ]
+    ]
+   },
+   "tasks": [
+    "Compute the mean and the SD of the six PTA values.",
+    "Compute the z-score of the new ear (47 dB HL) and of the ear with the lowest PTA (10 dB HL)."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(x\\) (feature value), \\(\\bar x\\) (sample mean), \\(s_x\\) (sample standard deviation), \\(z\\) (standardized value).",
+   "steps": [
+    {
+     "title": "Compute the mean",
+     "general": [
+      "\\bar x=\\frac{\\sum x_i}{n}"
+     ],
+     "work": [
+      "\\bar x=\\frac{10+15+25+40+50+64}{6}=\\frac{204}{6}=34"
+     ],
+     "words": "Add the six PTA values and divide by 6."
+    },
+    {
+     "title": "Sum of squared deviations",
+     "general": [
+      "\\sum(x_i-\\bar x)^2"
+     ],
+     "work": [
+      "\\sum(x_i-\\bar x)^2=(-24)^2+(-19)^2+(-9)^2+6^2+16^2+30^2=2210"
+     ],
+     "words": "Each deviation is a PTA value minus the mean. The deviations are squared so that values below and above the mean both count."
+    },
+    {
+     "title": "Compute the SD",
+     "general": [
+      "s_x=\\sqrt{\\frac{\\sum(x_i-\\bar x)^2}{n-1}}"
+     ],
+     "work": [
+      "s_x=\\sqrt{\\frac{2210}{5}}=\\sqrt{442}=21.0238"
+     ],
+     "words": "The sample SD divides by n minus 1, which is 5 here. This is the SD that scale() uses."
+    },
+    {
+     "title": "Standardize the new ear",
+     "general": [
+      "z=\\frac{x-\\bar x}{s_x}"
+     ],
+     "work": [
+      "z=\\frac{47-34}{21.0238}=\\frac{13}{21.0238}=0.61835"
+     ],
+     "words": "The new ear is scaled with the mean and SD of the training ears. Its PTA is about 0.6 SD above the training mean."
+    },
+    {
+     "title": "Standardize the lowest PTA",
+     "general": [
+      "z=\\frac{x-\\bar x}{s_x}"
+     ],
+     "work": [
+      "z=\\frac{10-34}{21.0238}=\\frac{-24}{21.0238}=-1.14156"
+     ],
+     "words": "A value below the mean gives a negative z-score. Unlike min-max values, z-scores are not limited to the range 0 to 1."
+    }
+   ],
+   "conclusion": "The six PTA values have mean 34 dB HL and SD 21.0238 dB HL. The new ear at 47 dB HL has a z-score of 0.61835, and the ear at 10 dB HL has a z-score of -1.14156.",
+   "source": "Original neuroscience practice example",
+   "lookup": null,
+   "values": {
+    "data": [
+     10,
+     15,
+     25,
+     40,
+     50,
+     64
+    ],
+    "mean": 34.0,
+    "sumSq": 2210.0,
+    "sd": 21.02379604162864,
+    "newValue": 47,
+    "zNew": 0.6183469424008423,
+    "zMin": -1.1415635859707858
+   },
+   "module": 23,
+   "tolerance": 0.0030917347120042117,
+   "answerName": "z-score",
+   "answer": 0.6183469424008423
+  },
+  {
+   "id": "n23-mri-lesion-confusion",
+   "title": "MRI white-matter lesions, Demyelinating or Vascular",
+   "topic": "s23confusion",
+   "context": "In a study of brain magnetic resonance imaging (MRI), white-matter lesions (small damaged areas that appear as bright spots on the scan) were classified with K-NN as Demyelinating (caused by loss of the myelin sheath around nerve fibers, as in multiple sclerosis) or Vascular (caused by disease of the small blood vessels). The model was trained on 360 lesions and tested on 120 other lesions whose cause was confirmed at follow-up. CrossTable() gave the actual cause (rows) against the predicted cause (columns). Demyelinating was the positive class.",
+   "unit": "proportion",
+   "table": {
+    "headers": [
+     "Actual \\ Predicted",
+     "Vascular",
+     "Demyelinating",
+     "Row total"
+    ],
+    "rows": [
+     [
+      "Vascular",
+      66,
+      6,
+      72
+     ],
+     [
+      "Demyelinating",
+      5,
+      43,
+      48
+     ],
+     [
+      "Column total",
+      71,
+      49,
+      120
+     ]
+    ]
+   },
+   "tasks": [
+    "Identify TP, TN, FP and FN.",
+    "Compute the accuracy and the error rate.",
+    "Compute the sensitivity and the specificity."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(TP\\) (true positives), \\(TN\\) (true negatives), \\(FP\\) (false positives), \\(FN\\) (false negatives), \\(n\\) (number of test cases).",
+   "steps": [
+    {
+     "title": "Name the four cells",
+     "general": [
+      "\\text{positive}=\\text{Demyelinating},\\ \\text{negative}=\\text{Vascular}"
+     ],
+     "work": [
+      "TN=66,\\ FP=6,\\ FN=5,\\ TP=43"
+     ],
+     "words": "Rows are the actual causes and columns are the predicted causes. A demyelinating lesion predicted vascular is a false negative, and a vascular lesion predicted demyelinating is a false positive."
+    },
+    {
+     "title": "Compute the accuracy",
+     "general": [
+      "\\text{accuracy}=\\frac{TP+TN}{TP+TN+FP+FN}"
+     ],
+     "work": [
+      "\\text{accuracy}=\\frac{43+66}{43+66+6+5}=\\frac{109}{120}=0.90833"
+     ],
+     "words": "The two diagonal cells are the correct predictions."
+    },
+    {
+     "title": "Compute the error rate",
+     "general": [
+      "\\text{error rate}=\\frac{FP+FN}{TP+TN+FP+FN}"
+     ],
+     "work": [
+      "\\text{error rate}=\\frac{6+5}{120}=\\frac{11}{120}=0.09167=1-0.90833"
+     ],
+     "words": "The two off-diagonal cells are the wrong predictions. Accuracy and error rate add to 1."
+    },
+    {
+     "title": "Compute sensitivity and specificity",
+     "general": [
+      "\\text{sensitivity}=\\frac{TP}{TP+FN}",
+      "\\text{specificity}=\\frac{TN}{TN+FP}"
+     ],
+     "work": [
+      "\\text{sensitivity}=\\frac{43}{43+5}=\\frac{43}{48}=0.89583",
+      "\\text{specificity}=\\frac{66}{66+6}=\\frac{66}{72}=0.91667"
+     ],
+     "words": "Sensitivity uses only the actual-demyelinating row and specificity uses only the actual-vascular row. The two error types are close in number here."
+    }
+   ],
+   "conclusion": "The model classifies 109 of the 120 test lesions correctly, an accuracy of 0.90833 and an error rate of 0.09167. It finds 43 of the 48 demyelinating lesions (sensitivity 0.89583) and 66 of the 72 vascular lesions (specificity 0.91667).",
+   "source": "Original neuroscience practice example",
+   "lookup": null,
+   "values": {
+    "TN": 66,
+    "FP": 6,
+    "FN": 5,
+    "TP": 43,
+    "n": 120,
+    "accuracy": 0.9083333333333333,
+    "errorRate": 0.09166666666666666,
+    "sensitivity": 0.8958333333333334,
+    "specificity": 0.9166666666666666
+   },
+   "module": 23,
+   "tolerance": 0.004541666666666667,
+   "answerName": "Accuracy",
+   "answer": 0.9083333333333333
+  },
+  {
+   "id": "n23-newborn-oae-rare",
+   "title": "Newborn hearing screening with otoacoustic emissions, a rare condition",
+   "topic": "s23confusion",
+   "context": "In a newborn hearing screening program, otoacoustic emissions (OAEs, faint sounds that a healthy inner ear produces in response to clicks, recorded with a small probe in the ear canal) were measured in 4,000 newborns before they left the hospital. A classifier based on the OAE recordings predicted Pass or Refer (sent for full diagnostic hearing testing). Follow-up testing showed that 8 of the 4,000 babies had permanent hearing loss. Hearing loss was the positive class.",
+   "unit": "proportion",
+   "table": {
+    "headers": [
+     "Actual \\ Predicted",
+     "Pass",
+     "Refer",
+     "Row total"
+    ],
+    "rows": [
+     [
+      "No hearing loss",
+      3952,
+      40,
+      3992
+     ],
+     [
+      "Hearing loss",
+      5,
+      3,
+      8
+     ],
+     [
+      "Column total",
+      3957,
+      43,
+      4000
+     ]
+    ]
+   },
+   "tasks": [
+    "Identify TP, TN, FP and FN.",
+    "Compute the accuracy and the error rate.",
+    "Compute the sensitivity and the specificity.",
+    "Compute the accuracy and the sensitivity of a screen that predicts Pass for every baby. Explain the limitation of accuracy."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(TP\\) (true positives), \\(TN\\) (true negatives), \\(FP\\) (false positives), \\(FN\\) (false negatives), \\(n\\) (number of test cases).",
+   "steps": [
+    {
+     "title": "Name the four cells",
+     "general": [
+      "\\text{positive}=\\text{Hearing loss},\\ \\text{negative}=\\text{No hearing loss}"
+     ],
+     "work": [
+      "TN=3952,\\ FP=40,\\ FN=5,\\ TP=3"
+     ],
+     "words": "Rows are the actual hearing status and columns are the screening result. A baby with hearing loss who passes the screen is a false negative."
+    },
+    {
+     "title": "Compute the accuracy",
+     "general": [
+      "\\text{accuracy}=\\frac{TP+TN}{TP+TN+FP+FN}"
+     ],
+     "work": [
+      "\\text{accuracy}=\\frac{3+3952}{3+3952+40+5}=\\frac{3955}{4000}=0.98875"
+     ],
+     "words": "Almost 99% of the babies are classified correctly."
+    },
+    {
+     "title": "Compute the error rate",
+     "general": [
+      "\\text{error rate}=\\frac{FP+FN}{TP+TN+FP+FN}"
+     ],
+     "work": [
+      "\\text{error rate}=\\frac{40+5}{4000}=\\frac{45}{4000}=0.01125=1-0.98875"
+     ],
+     "words": "Most of the 45 errors are false positives, babies with normal hearing who are referred."
+    },
+    {
+     "title": "Compute sensitivity and specificity",
+     "general": [
+      "\\text{sensitivity}=\\frac{TP}{TP+FN}",
+      "\\text{specificity}=\\frac{TN}{TN+FP}"
+     ],
+     "work": [
+      "\\text{sensitivity}=\\frac{3}{3+5}=\\frac{3}{8}=0.375",
+      "\\text{specificity}=\\frac{3952}{3952+40}=\\frac{3952}{3992}=0.98998"
+     ],
+     "words": "The screen finds only 3 of the 8 babies with hearing loss. The high accuracy comes from the large number of babies with normal hearing."
+    },
+    {
+     "title": "Compare with a screen that always predicts Pass",
+     "general": [
+      "\\text{accuracy}=\\frac{TP+TN}{TP+TN+FP+FN}",
+      "\\text{sensitivity}=\\frac{TP}{TP+FN}"
+     ],
+     "work": [
+      "\\text{accuracy}=\\frac{0+3992}{4000}=0.998",
+      "\\text{sensitivity}=\\frac{0}{0+8}=0"
+     ],
+     "words": "A screen that refers nobody is right for all 3992 babies with normal hearing, so its accuracy is even higher. It misses every baby with hearing loss, so accuracy alone cannot judge a screen for a rare condition."
+    }
+   ],
+   "conclusion": "The OAE classifier has an accuracy of 0.98875 and an error rate of 0.01125, but its sensitivity is only 0.375 and its specificity is 0.98998. A screen that passes every baby has an even higher accuracy of 0.998 with a sensitivity of 0, so accuracy hides the missed babies when hearing loss is rare.",
+   "source": "Original neuroscience practice example",
+   "lookup": null,
+   "values": {
+    "TN": 3952,
+    "FP": 40,
+    "FN": 5,
+    "TP": 3,
+    "n": 4000,
+    "accuracy": 0.98875,
+    "errorRate": 0.01125,
+    "sensitivity": 0.375,
+    "specificity": 0.9899799599198397,
+    "accuracyAlwaysPass": 0.998
+   },
+   "module": 23,
+   "tolerance": 0.00494375,
+   "answerName": "Accuracy",
+   "answer": 0.98875
+  },
+  {
+   "id": "n23-stroke-lvo-sensspec",
+   "title": "Automated detection of large vessel occlusion on CT angiography",
+   "topic": "s23sensspec",
+   "context": "In a study of emergency stroke imaging, an automated classifier read the computed tomography angiography (CTA, a CT scan of the brain arteries taken after an injection of contrast dye) of 250 patients with stroke symptoms and predicted whether a large vessel occlusion (LVO, a blockage of a major artery of the brain) was present. The final diagnosis of each patient was made by two neuroradiologists. The cross table gave the actual diagnosis (rows) against the predicted diagnosis (columns). LVO was the positive class.",
+   "unit": "proportion",
+   "table": {
+    "headers": [
+     "Actual \\ Predicted",
+     "No LVO",
+     "LVO",
+     "Row total"
+    ],
+    "rows": [
+     [
+      "No LVO",
+      171,
+      19,
+      190
+     ],
+     [
+      "LVO",
+      8,
+      52,
+      60
+     ],
+     [
+      "Column total",
+      179,
+      71,
+      250
+     ]
+    ]
+   },
+   "tasks": [
+    "Identify TP, TN, FP and FN.",
+    "Compute the accuracy, sensitivity and specificity."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(TP\\) (true positives), \\(TN\\) (true negatives), \\(FP\\) (false positives), \\(FN\\) (false negatives), \\(n\\) (number of test cases).",
+   "steps": [
+    {
+     "title": "Name the four cells",
+     "general": [
+      "\\text{positive}=\\text{LVO},\\ \\text{negative}=\\text{No LVO}"
+     ],
+     "work": [
+      "TN=171,\\ FP=19,\\ FN=8,\\ TP=52"
+     ],
+     "words": "Rows are the actual diagnoses and columns are the predicted diagnoses. A patient with an LVO predicted as No LVO is a false negative."
+    },
+    {
+     "title": "Compute the accuracy",
+     "general": [
+      "\\text{accuracy}=\\frac{TP+TN}{TP+TN+FP+FN}"
+     ],
+     "work": [
+      "\\text{accuracy}=\\frac{52+171}{250}=\\frac{223}{250}=0.892"
+     ],
+     "words": "The diagonal cells are the correct predictions."
+    },
+    {
+     "title": "Compute the sensitivity",
+     "general": [
+      "\\text{sensitivity}=\\frac{TP}{TP+FN}"
+     ],
+     "work": [
+      "\\text{sensitivity}=\\frac{52}{52+8}=\\frac{52}{60}=0.86667"
+     ],
+     "words": "Only the actual-LVO row is used. Eight patients with a blocked artery are called No LVO."
+    },
+    {
+     "title": "Compute the specificity",
+     "general": [
+      "\\text{specificity}=\\frac{TN}{TN+FP}"
+     ],
+     "work": [
+      "\\text{specificity}=\\frac{171}{171+19}=\\frac{171}{190}=0.9"
+     ],
+     "words": "Only the actual-No-LVO row is used. Nineteen patients without a blocked artery are flagged as LVO."
+    }
+   ],
+   "conclusion": "The classifier detects 52 of the 60 patients with an LVO, a sensitivity of 0.86667, and correctly clears 171 of the 190 patients without one, a specificity of 0.9. Its overall accuracy is 0.892.",
+   "source": "Original neuroscience practice example",
+   "lookup": null,
+   "values": {
+    "TN": 171,
+    "FP": 19,
+    "FN": 8,
+    "TP": 52,
+    "n": 250,
+    "accuracy": 0.892,
+    "sensitivity": 0.8666666666666667,
+    "specificity": 0.9
+   },
+   "module": 23,
+   "tolerance": 0.004333333333333334,
+   "answerName": "Sensitivity",
+   "answer": 0.8666666666666667
+  },
+  {
+   "id": "n23-neuropathy-ncs-sensspec",
+   "title": "Diabetic neuropathy from nerve conduction studies",
+   "topic": "s23sensspec",
+   "context": "Researchers interested in early detection of diabetic peripheral neuropathy (damage to the long nerves of the feet and legs caused by diabetes) trained a K-NN model with K = 7 on nerve conduction study results, the sural nerve conduction velocity in meters per second (m/s) and the sensory response amplitude in microvolts (μV), after min-max normalization. The model was tested on 90 patients with diabetes whose diagnosis was confirmed by a neurologist. The cross table gave the actual diagnosis (rows) against the predicted diagnosis (columns). Neuropathy was the positive class.",
+   "unit": "proportion",
+   "table": {
+    "headers": [
+     "Actual \\ Predicted",
+     "No neuropathy",
+     "Neuropathy",
+     "Row total"
+    ],
+    "rows": [
+     [
+      "No neuropathy",
+      53,
+      3,
+      56
+     ],
+     [
+      "Neuropathy",
+      9,
+      25,
+      34
+     ],
+     [
+      "Column total",
+      62,
+      28,
+      90
+     ]
+    ]
+   },
+   "tasks": [
+    "Identify TP, TN, FP and FN.",
+    "Compute the accuracy, sensitivity and specificity, and state which class the model misses more often."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(TP\\) (true positives), \\(TN\\) (true negatives), \\(FP\\) (false positives), \\(FN\\) (false negatives), \\(n\\) (number of test cases).",
+   "steps": [
+    {
+     "title": "Name the four cells",
+     "general": [
+      "\\text{positive}=\\text{Neuropathy},\\ \\text{negative}=\\text{No neuropathy}"
+     ],
+     "work": [
+      "TN=53,\\ FP=3,\\ FN=9,\\ TP=25"
+     ],
+     "words": "Rows are the actual diagnoses and columns are the predicted diagnoses. A patient with neuropathy predicted as No neuropathy is a false negative."
+    },
+    {
+     "title": "Compute the accuracy",
+     "general": [
+      "\\text{accuracy}=\\frac{TP+TN}{TP+TN+FP+FN}"
+     ],
+     "work": [
+      "\\text{accuracy}=\\frac{25+53}{90}=\\frac{78}{90}=0.86667"
+     ],
+     "words": "The diagonal cells are the correct predictions."
+    },
+    {
+     "title": "Compute the sensitivity",
+     "general": [
+      "\\text{sensitivity}=\\frac{TP}{TP+FN}"
+     ],
+     "work": [
+      "\\text{sensitivity}=\\frac{25}{25+9}=\\frac{25}{34}=0.73529"
+     ],
+     "words": "Only the actual-neuropathy row is used. Nine patients with neuropathy are called No neuropathy."
+    },
+    {
+     "title": "Compute the specificity",
+     "general": [
+      "\\text{specificity}=\\frac{TN}{TN+FP}"
+     ],
+     "work": [
+      "\\text{specificity}=\\frac{53}{53+3}=\\frac{53}{56}=0.94643"
+     ],
+     "words": "Only the actual-No-neuropathy row is used. Only three patients without neuropathy are flagged."
+    },
+    {
+     "title": "Compare the two rates",
+     "general": [
+      "\\text{sensitivity}\\ \\text{vs}\\ \\text{specificity}"
+     ],
+     "work": [
+      "0.73529<0.94643"
+     ],
+     "words": "Sensitivity is lower than specificity, so the model misses patients with neuropathy more often than it falsely flags patients without it. For an early detection program this is the weaker side of the model."
+    }
+   ],
+   "conclusion": "The model has an accuracy of 0.86667. Its specificity is 0.94643 but its sensitivity is only 0.73529, so it misses 9 of the 34 patients with neuropathy, which is the more frequent kind of error.",
+   "source": "Original neuroscience practice example",
+   "lookup": null,
+   "values": {
+    "TN": 53,
+    "FP": 3,
+    "FN": 9,
+    "TP": 25,
+    "n": 90,
+    "accuracy": 0.8666666666666667,
+    "sensitivity": 0.7352941176470589,
+    "specificity": 0.9464285714285714
+   },
+   "module": 23,
+   "tolerance": 0.0047321428571428575,
+   "answerName": "Specificity",
+   "answer": 0.9464285714285714
+  },
+  {
+   "id": "n23-motor-neuron-threshold-sse",
+   "title": "Threshold neuron as a model of a motor neuron's firing threshold",
+   "topic": "s23neuron",
+   "context": "A simplified model of a spinal motor neuron (a nerve cell that drives a muscle) received input from three presynaptic neurons. Each input was 1 when that presynaptic neuron fired and 0 when it was silent. The synaptic weights were w1 = 0.7 and w2 = 0.5 (excitatory synapses) and w3 = -0.9 (an inhibitory synapse), and the bias weight was w0 = -1, so the model neuron fires (output 1) only when the summed synaptic input reaches its firing threshold of 1. The activation was the threshold (step) function. In five recorded trials the real motor neuron's firing (1 = fired, 0 = silent) was observed as shown below.",
+   "unit": "squared output units",
+   "table": {
+    "headers": [
+     "Trial",
+     "x1",
+     "x2",
+     "x3",
+     "Observed firing y"
+    ],
+    "rows": [
+     [
+      1,
+      1,
+      1,
+      0,
+      1
+     ],
+     [
+      2,
+      1,
+      0,
+      0,
+      0
+     ],
+     [
+      3,
+      1,
+      1,
+      1,
+      1
+     ],
+     [
+      4,
+      0,
+      1,
+      0,
+      1
+     ],
+     [
+      5,
+      1,
+      0,
+      1,
+      0
+     ]
+    ]
+   },
+   "tasks": [
+    "Compute the net input for each trial.",
+    "Apply the threshold activation to get each predicted output.",
+    "Compute each error and the sum of squared errors."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(x_{ij}\\) (input \\(j\\) of trial \\(i\\)), \\(w_j\\) (synaptic weight), \\(w_0\\) (bias weight), \\(s_i\\) (net input), \\(\\hat y_i\\) (predicted output), \\(e_i\\) (error), \\(SS\\) (sum of squared errors).",
+   "steps": [
+    {
+     "title": "Net input for each trial",
+     "general": [
+      "s_i=w_0+\\sum_{j=1}^{3}w_jx_{ij}"
+     ],
+     "work": [
+      "s_1=-1+0.7(1)+0.5(1)-0.9(0)=0.2",
+      "s_2=-1+0.7(1)+0.5(0)-0.9(0)=-0.3",
+      "s_3=-1+0.7(1)+0.5(1)-0.9(1)=-0.7",
+      "s_4=-1+0.7(0)+0.5(1)-0.9(0)=-0.5",
+      "s_5=-1+0.7(1)+0.5(0)-0.9(1)=-1.2"
+     ],
+     "words": "The bias of -1 is added to every trial. Reaching the firing threshold of 1 is the same as a net input of 0 or more."
+    },
+    {
+     "title": "Threshold outputs",
+     "general": [
+      "\\hat y_i=f(s_i)=\\begin{cases}0 & s_i<0\\\\ 1 & s_i\\ge0\\end{cases}"
+     ],
+     "work": [
+      "\\hat y_1=f(0.2)=1",
+      "\\hat y_2=f(-0.3)=0",
+      "\\hat y_3=f(-0.7)=0",
+      "\\hat y_4=f(-0.5)=0",
+      "\\hat y_5=f(-1.2)=0"
+     ],
+     "words": "Only trial 1 reaches the threshold, because both excitatory inputs are active and the inhibitory input is silent."
+    },
+    {
+     "title": "Errors",
+     "general": [
+      "e_i=y_i-\\hat y_i"
+     ],
+     "work": [
+      "e_1=1-1=0",
+      "e_2=0-0=0",
+      "e_3=1-0=1",
+      "e_4=1-0=1",
+      "e_5=0-0=0"
+     ],
+     "words": "Each error is the observed firing minus the predicted output. Trials 3 and 4 fired although the model predicts silence."
+    },
+    {
+     "title": "Sum of squared errors",
+     "general": [
+      "SS=\\sum_{i=1}^{n}e_i^2=\\sum_{i=1}^{n}(y_i-\\hat y_i)^2"
+     ],
+     "work": [
+      "SS=0^2+0^2+1^2+1^2+0^2=2"
+     ],
+     "words": "With a threshold activation every error is 0 or 1, so SS counts the wrong trials. Training would change the synaptic weights or the bias to make this total smaller."
+    }
+   ],
+   "conclusion": "The net inputs are 0.2, -0.3, -0.7, -0.5 and -1.2, so the model neuron fires only in trial 1. It misses the firing in trials 3 and 4, and the sum of squared errors is 2.",
+   "source": "Original neuroscience practice example",
+   "lookup": null,
+   "values": {
+    "weights": [
+     0.7,
+     0.5,
+     -0.9
+    ],
+    "bias": -1.0,
+    "sums": [
+     0.19999999999999996,
+     -0.30000000000000004,
+     -0.7000000000000001,
+     -0.5,
+     -1.2000000000000002
+    ],
+    "predictions": [
+     1,
+     0,
+     0,
+     0,
+     0
+    ],
+    "errors": [
+     0,
+     0,
+     1,
+     1,
+     0
+    ],
+    "SSE": 2
+   },
+   "module": 23,
+   "tolerance": 0.01,
+   "answerName": "Sum of squared errors",
+   "answer": 2.0
+  },
+  {
+   "id": "n23-pyramidal-sigmoid-ltp",
+   "title": "Sigmoid neuron with synaptic weights before and after LTP",
+   "topic": "s23neuron",
+   "context": "A model of a pyramidal neuron in the cortex received input from three presynaptic neurons. Each input was that neuron's firing rate scaled from 0 to 1, with x1 = 0.8, x2 = 0.4 and x3 = 0.5. The synaptic weights were w1 = 2.5 and w3 = 1.0 (excitatory synapses) and w2 = -1.5 (an inhibitory synapse), the bias weight was w0 = -1.2, and the activation was the sigmoid (logistic) function, so the output is read as the probability that the model neuron fires a spike in a 10-millisecond (ms) window. After a stimulation protocol that produced long-term potentiation (LTP, a lasting strengthening of a synapse), the weight w1 was 3.0.",
+   "unit": "probability",
+   "table": {
+    "headers": [
+     "Input",
+     "Weight w_j",
+     "Input x_j",
+     "Product w_j x_j"
+    ],
+    "rows": [
+     [
+      "x1",
+      2.5,
+      0.8,
+      2.0
+     ],
+     [
+      "x2",
+      -1.5,
+      0.4,
+      -0.6
+     ],
+     [
+      "x3",
+      1.0,
+      0.5,
+      0.5
+     ]
+    ]
+   },
+   "tasks": [
+    "Compute the weighted sum of the inputs and add the bias weight.",
+    "Apply the sigmoid activation to get the output.",
+    "Give the output of the same neuron with a threshold activation.",
+    "Compute the sigmoid output after LTP."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(x_j\\) (scaled input firing rate), \\(w_j\\) (synaptic weight), \\(w_0\\) (bias weight), \\(s\\) (net input), \\(y\\) (output).",
+   "steps": [
+    {
+     "title": "Weighted sum of the three inputs",
+     "general": [
+      "\\sum_{j=1}^{3}w_jx_j"
+     ],
+     "work": [
+      "2.5(0.8)-1.5(0.4)+1(0.5)=2-0.6+0.5=1.9"
+     ],
+     "words": "Multiply each input by the weight of its synapse and add the products. The inhibitory synapse has a negative weight, so it lowers the sum."
+    },
+    {
+     "title": "Add the bias weight",
+     "general": [
+      "s=w_0+\\sum_{j=1}^{3}w_jx_j"
+     ],
+     "work": [
+      "s=-1.2+1.9=0.7"
+     ],
+     "words": "The bias works like the firing threshold. A more negative bias needs more synaptic input before the output rises above 0.5."
+    },
+    {
+     "title": "Apply the sigmoid activation",
+     "general": [
+      "y=f(s)=\\frac{1}{1+e^{-s}}"
+     ],
+     "work": [
+      "y=\\frac{1}{1+e^{-0.7}}=0.66819"
+     ],
+     "words": "The net input is positive, so the output is above 0.5."
+    },
+    {
+     "title": "Output with a threshold activation",
+     "general": [
+      "f(s)=\\begin{cases}0 & s<0\\\\ 1 & s\\ge0\\end{cases}"
+     ],
+     "work": [
+      "f(0.7)=1"
+     ],
+     "words": "With a threshold activation the neuron gives only 0 or 1, like an all-or-none action potential. The sigmoid gives a graded value between 0 and 1 instead."
+    },
+    {
+     "title": "Sigmoid output after LTP",
+     "general": [
+      "s=w_0+\\sum_{j=1}^{3}w_jx_j",
+      "y=\\frac{1}{1+e^{-s}}"
+     ],
+     "work": [
+      "s=-1.2+3(0.8)-1.5(0.4)+1(0.5)=1.1",
+      "y=\\frac{1}{1+e^{-1.1}}=0.75026"
+     ],
+     "words": "The stronger first synapse raises the net input by 0.4, so the output rises."
+    }
+   ],
+   "conclusion": "The net input is 0.7, so the sigmoid output is 0.66819 and the threshold output is 1. After LTP raises w1 to 3.0, the net input is 1.1 and the sigmoid output rises to 0.75026.",
+   "source": "Original neuroscience practice example",
+   "lookup": null,
+   "values": {
+    "weights": [
+     2.5,
+     -1.5,
+     1.0
+    ],
+    "inputs": [
+     0.8,
+     0.4,
+     0.5
+    ],
+    "bias": -1.2,
+    "weightedSum": 1.9,
+    "netInput": 0.7,
+    "output": 0.6681877721681662,
+    "thresholdOutput": 1,
+    "w1LTP": 3.0,
+    "netInputLTP": 1.1000000000000003,
+    "outputLTP": 0.7502601055951177
+   },
+   "module": 23,
+   "tolerance": 0.003340938860840831,
+   "answerName": "Neuron output",
+   "answer": 0.6681877721681662
+  }
+ ],
+ "questions": [
+  {
+   "id": "m2-n23-qa01",
+   "module": 23,
+   "topic": "s23knn",
+   "stem": "For the EEG epochs, what is the Euclidean distance from the new epoch (5, 4) to epoch C (3, 3)?",
+   "options": [
+    "\\(3\\)",
+    "\\(5\\)",
+    "\\(1.73205\\)",
+    "\\(2.23607\\)"
+   ],
+   "correct": 3,
+   "why": "The differences are 2 and 1, so \\(\\sqrt{4+1}=\\sqrt5\\approx2.23607\\). Adding the absolute differences gives 3, the Manhattan distance, and 5 forgets the square root.",
+   "case": "n23-eeg-seizure-knn",
+   "equations": [
+    "d_C=\\sqrt{(5-3)^2+(4-3)^2}=\\sqrt5"
+   ]
+  },
+  {
+   "id": "m2-n23-qa02",
+   "module": 23,
+   "topic": "s23knn",
+   "stem": "In a study of hearing, each listener's hearing threshold was measured in decibels hearing level (dB HL, range about 0 to 90) and the proportion of words repeated correctly in background noise was recorded (range 0 to 1). Before a K-NN classification of hearing loss, why are both features rescaled?",
+   "options": [
+    "So that the feature with the larger numeric range does not dominate the Euclidean distance",
+    "So that the probability of the class becomes larger",
+    "Because K-NN only works when K is larger than the number of features",
+    "Because rescaling removes the need for a training set"
+   ],
+   "correct": 0,
+   "why": "The Euclidean distance adds squared differences, so the threshold, measured on a much larger scale, would decide the neighbors almost alone. Min-max normalization or z-scores put the features on comparable scales.",
+   "case": null,
+   "equations": [
+    "d(q,r)=\\sqrt{\\sum_{i=1}^{m}(q_i-r_i)^2}"
+   ]
+  },
+  {
+   "id": "m2-n23-qa03",
+   "module": 23,
+   "topic": "s23scaling",
+   "stem": "For the six training ears with mean PTA 34 dB HL and SD 21.0238 dB HL, what is the z-score of the new ear with a PTA of 47 dB HL?",
+   "options": [
+    "\\(0.67737\\)",
+    "\\(0.61835\\)",
+    "\\(13\\)",
+    "\\(0.68519\\)"
+   ],
+   "correct": 1,
+   "why": "\\(z=(47-34)/21.0238=0.61835\\). 0.67737 divides by the SD with \\(n\\) instead of \\(n-1\\), 13 forgets to divide by the SD, and 0.68519 is the min-max value.",
+   "case": "n23-audiogram-pta-zscore",
+   "equations": [
+    "z=\\frac{47-34}{21.0238}"
+   ]
+  },
+  {
+   "id": "m2-n23-qa04",
+   "module": 23,
+   "topic": "s23confusion",
+   "stem": "A classifier for a rare inherited ataxia (a disorder of movement coordination) was tested on 5,000 people, 10 of whom had the disorder. It reported an accuracy of 0.998. What is the main problem with judging it by accuracy alone?",
+   "options": [
+    "An accuracy of 0.998 means the error rate must be 0.998 as well",
+    "Accuracy cannot be computed when the classes have different sizes",
+    "A test that calls everyone healthy is correct for the 4,990 healthy people, so it also has an accuracy of 0.998 while missing all 10 patients",
+    "Accuracy already equals the sensitivity when the condition is rare"
+   ],
+   "correct": 2,
+   "why": "When the condition is rare the healthy group dominates the count of correct predictions. Sensitivity shows whether the patients themselves are found.",
+   "case": null,
+   "equations": [
+    "\\text{accuracy}=\\frac{0+4990}{5000}=0.998",
+    "\\text{sensitivity}=\\frac{0}{0+10}=0"
+   ]
+  },
+  {
+   "id": "m2-n23-qa05",
+   "module": 23,
+   "topic": "s23confusion",
+   "stem": "In the newborn hearing screening with 3,992 babies with normal hearing and 8 babies with permanent hearing loss, what is the accuracy of a screen that predicts Pass for every baby?",
+   "options": [
+    "\\(0.98875\\)",
+    "\\(0\\)",
+    "\\(0.002\\)",
+    "\\(0.998\\)"
+   ],
+   "correct": 3,
+   "why": "Every baby with normal hearing is a true negative, so \\(3992/4000=0.998\\). This is higher than the 0.98875 of the real classifier even though the sensitivity is 0.",
+   "case": "n23-newborn-oae-rare",
+   "equations": [
+    "\\text{accuracy}=\\frac{0+3992}{4000}"
+   ]
+  },
+  {
+   "id": "m2-n23-qa06",
+   "module": 23,
+   "topic": "s23sensspec",
+   "stem": "For the stroke imaging classifier (TN 171, FP 19, FN 8, TP 52), what is the specificity?",
+   "options": [
+    "\\(0.9\\)",
+    "\\(0.86667\\)",
+    "\\(0.95531\\)",
+    "\\(0.684\\)"
+   ],
+   "correct": 0,
+   "why": "\\(171/(171+19)=171/190=0.9\\). 0.86667 is the sensitivity, 0.95531 divides by the predicted No LVO column 171 + 8, and 0.684 divides by all 250 patients.",
+   "case": "n23-stroke-lvo-sensspec",
+   "equations": [
+    "\\text{specificity}=\\frac{171}{171+19}"
+   ]
+  },
+  {
+   "id": "m2-n23-qa07",
+   "module": 23,
+   "topic": "s23neuron",
+   "stem": "For the pyramidal neuron model (x = 0.8, 0.4, 0.5, w = 2.5, -1.5, 1.0, bias -1.2, sigmoid activation), what is the output before LTP?",
+   "options": [
+    "\\(0.7\\)",
+    "\\(0.86989\\)",
+    "\\(0.66819\\)",
+    "\\(1\\)"
+   ],
+   "correct": 2,
+   "why": "The net input is \\(-1.2+1.9=0.7\\) and \\(1/(1+e^{-0.7})=0.66819\\). 0.86989 forgets the bias, 0.7 is the net input before the activation, and 1 is the threshold output.",
+   "case": "n23-pyramidal-sigmoid-ltp",
+   "equations": [
+    "y=\\frac{1}{1+e^{-0.7}}"
+   ]
+  },
+  {
+   "id": "m2-n23-qa08",
+   "module": 23,
+   "topic": "s23sensspec",
+   "stem": "An EEG classifier is used in an intensive care unit to alert nurses to seizures, and a missed seizure can cause lasting brain damage. Which property matters most when choosing between two classifiers?",
+   "options": [
+    "A high specificity, \\(TN/(TN+FP)\\)",
+    "A high sensitivity, \\(TP/(TP+FN)\\)",
+    "A low number of true negatives",
+    "A high accuracy, whatever the sensitivity"
+   ],
+   "correct": 1,
+   "why": "Sensitivity is the share of real seizures that are detected, so a high sensitivity means few missed seizures. Some extra false alarms lower the specificity but are less harmful here.",
+   "case": null,
+   "equations": [
+    "\\text{sensitivity}=\\frac{TP}{TP+FN}"
+   ]
+  },
+  {
+   "id": "m2-n23-qa09",
+   "module": 23,
+   "topic": "s23neuron",
+   "stem": "For the motor neuron model with threshold activation (five trials, observed firing 1, 0, 1, 1, 0), what is the sum of squared errors?",
+   "options": [
+    "\\(1\\)",
+    "\\(0\\)",
+    "\\(4\\)",
+    "\\(2\\)"
+   ],
+   "correct": 3,
+   "why": "The model fires only in trial 1, so the errors are 0, 0, 1, 1 and 0 and \\(SS=1+1=2\\). 4 squares the sum of the errors instead of adding the squares.",
+   "case": "n23-motor-neuron-threshold-sse",
+   "equations": [
+    "SS=0^2+0^2+1^2+1^2+0^2=2"
+   ]
+  },
+  {
+   "id": "m2-n23-qa10",
+   "module": 23,
+   "topic": "s23neuron",
+   "stem": "In an artificial neuron used as a model of a real neuron, which pairing of parts is correct?",
+   "options": [
+    "Weights are the action potentials, and the bias is the axon",
+    "Inputs are the synaptic weights, and the activation function is the dendrite",
+    "Weights are the strengths of the synapses, and the bias sets the firing threshold",
+    "The sum of squared errors is the resting membrane potential"
+   ],
+   "correct": 2,
+   "why": "Each weight scales one input like the strength of a synapse, with negative weights acting like inhibitory synapses. The bias shifts how much summed input is needed before the output turns on, like a firing threshold.",
+   "case": null,
+   "equations": [
+    "y=f\\left(\\sum_{j=1}^{K}w_jx_j\\right)"
+   ]
+  }
+ ],
+ "notes": [
+  "All data are invented for practice. No real study is cited.",
+  "The course's own phrasing is kept with its punctuation in context and tasks, for example 'Use a K-NN classification with K = 3.', '(training set):' and 'differences in scale; the scaled data are unitless.' The check script allows colons and semicolons in context and tasks only.",
+  "The K-NN cases follow the course exercise in showing dimensionless or standardized data as small positive integers. Real z-scores would include negative decimals.",
+  "No K-NN case has tied distances. In n23-concussion-screen-knn the class changes with K (K = 3 gives Not concussed 2/3, K = 5 gives Concussed 3/5), which the last step points out like the reference K = 5 exercise.",
+  "n23-newborn-oae-rare is the rare-condition case (8 of 4,000). Accuracy is 0.98875 while sensitivity is 0.375, and a screen that passes every baby reaches 0.998. The classifier is invented and does not describe the performance of real OAE screening.",
+  "values keys follow the reference cases (newSample, distances, neighbors, K, class, min, max, mean, median, range, scaledMean, scaledMedian, TN, FP, FN, TP, n, accuracy, errorRate, sensitivity, specificity, weights, sums, predictions, errors, SSE, weightedSum, netInput). The probability key is named for the winning class (pSeizure, pConcussed). New keys were added where a case goes further than its reference (newValue, scaledNew, accuracyAlwaysPass, thresholdOutput, w1LTP, netInputLTP, outputLTP) and for the z-score case, which has no reference case of its own (data, sumSq, sd, zNew, zMin).",
+  "The z-score case uses the sample SD with n - 1, which is what R's scale() uses. Quiz qa03 lists the n-divisor value as a wrong option.",
+  "Parkinson disease and essential tremor appear as an imaging (SPECT binding ratio) scaling case, a different setting from the tremor K-NN case in the neighboring session."
+ ]
+}

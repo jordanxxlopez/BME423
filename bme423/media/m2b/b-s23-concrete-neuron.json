@@ -1,0 +1,57 @@
+{
+ "id": "b-s23-concrete-neuron",
+ "file": "media/m2b/b-s23-concrete-neuron.mp4",
+ "poster": "media/m2b/b-s23-concrete-neuron.png",
+ "session": 23,
+ "method": "s23neuron",
+ "title": "Prediction from the one-hidden-neuron concrete model",
+ "duration": 80.4,
+ "cases": {
+  "s23-concrete-neuron": [
+   2,
+   3,
+   4,
+   5
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 16
+  },
+  {
+   "step": 2,
+   "title": "Weighted sum of the eight inputs",
+   "start": 16,
+   "end": 28.533
+  },
+  {
+   "step": 3,
+   "title": "Add the bias weight",
+   "start": 28.533,
+   "end": 39.6
+  },
+  {
+   "step": 4,
+   "title": "Apply the sigmoid activation",
+   "start": 39.6,
+   "end": 48.667
+  },
+  {
+   "step": 5,
+   "title": "Compute the output node",
+   "start": 48.667,
+   "end": 64.4
+  },
+  {
+   "step": 6,
+   "title": "Conclusion",
+   "start": 64.4,
+   "end": 80.4
+  }
+ ],
+ "case": "s23-concrete-neuron",
+ "kind": "board"
+}

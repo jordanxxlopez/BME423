@@ -1,0 +1,57 @@
+{
+ "id": "b-s23-wbcd-k21-accuracy",
+ "file": "media/m2b/b-s23-wbcd-k21-accuracy.mp4",
+ "poster": "media/m2b/b-s23-wbcd-k21-accuracy.png",
+ "session": 23,
+ "method": "s23confusion",
+ "title": "Breast cancer test set, min-max scaling and K = 21",
+ "duration": 78.467,
+ "cases": {
+  "s23-wbcd-k21-accuracy": [
+   2,
+   3,
+   4,
+   5
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 16
+  },
+  {
+   "step": 2,
+   "title": "Name the four cells",
+   "start": 16,
+   "end": 28.733
+  },
+  {
+   "step": 3,
+   "title": "Compute the accuracy",
+   "start": 28.733,
+   "end": 37.267
+  },
+  {
+   "step": 4,
+   "title": "Compute the error rate",
+   "start": 37.267,
+   "end": 47.867
+  },
+  {
+   "step": 5,
+   "title": "Compute sensitivity and specificity",
+   "start": 47.867,
+   "end": 63.133
+  },
+  {
+   "step": 6,
+   "title": "Conclusion",
+   "start": 63.133,
+   "end": 78.467
+  }
+ ],
+ "case": "s23-wbcd-k21-accuracy",
+ "kind": "board"
+}

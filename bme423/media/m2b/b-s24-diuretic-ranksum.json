@@ -1,0 +1,71 @@
+{
+ "id": "b-s24-diuretic-ranksum",
+ "file": "media/m2b/b-s24-diuretic-ranksum.mp4",
+ "poster": "media/m2b/b-s24-diuretic-ranksum.png",
+ "session": 24,
+ "method": "s24mwtable",
+ "title": "Diuretic experiment with three placebo and four drug values",
+ "duration": 126.667,
+ "cases": {
+  "s24-diuretic-ranksum": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 16
+  },
+  {
+   "step": 2,
+   "title": "State the procedure and hypotheses",
+   "start": 16,
+   "end": 37
+  },
+  {
+   "step": 3,
+   "title": "Rank all observations together",
+   "start": 37,
+   "end": 47.133
+  },
+  {
+   "step": 4,
+   "title": "Compute T",
+   "start": 47.133,
+   "end": 58.533
+  },
+  {
+   "step": 5,
+   "title": "Describe the null distribution of T",
+   "start": 58.533,
+   "end": 74.4
+  },
+  {
+   "step": 6,
+   "title": "Read the critical values",
+   "start": 74.4,
+   "end": 93.2
+  },
+  {
+   "step": 7,
+   "title": "Make the decision",
+   "start": 93.2,
+   "end": 110.667
+  },
+  {
+   "step": 8,
+   "title": "Conclusion",
+   "start": 110.667,
+   "end": 126.667
+  }
+ ],
+ "case": "s24-diuretic-ranksum",
+ "kind": "board"
+}

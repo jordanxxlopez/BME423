@@ -1,0 +1,78 @@
+{
+ "id": "b-s24-shapiro-two-samples",
+ "file": "media/m2b/b-s24-shapiro-two-samples.mp4",
+ "poster": "media/m2b/b-s24-shapiro-two-samples.png",
+ "session": 24,
+ "method": "s24normal",
+ "title": "Checking Normality of two ten-value samples",
+ "duration": 164.467,
+ "cases": {
+  "s24-shapiro-two-samples": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 15
+  },
+  {
+   "step": 2,
+   "title": "State the procedure and hypotheses",
+   "start": 15,
+   "end": 34.6
+  },
+  {
+   "step": 3,
+   "title": "Mean and SD of sample 1",
+   "start": 34.6,
+   "end": 50.733
+  },
+  {
+   "step": 4,
+   "title": "Percentage of sample 1 within one SD",
+   "start": 50.733,
+   "end": 71.4
+  },
+  {
+   "step": 5,
+   "title": "Theoretical quantiles for qqnorm()",
+   "start": 71.4,
+   "end": 94.2
+  },
+  {
+   "step": 6,
+   "title": "Shapiro-Wilk result for sample 1",
+   "start": 94.2,
+   "end": 108.333
+  },
+  {
+   "step": 7,
+   "title": "Mean, SD and range percentages of sample 2",
+   "start": 108.333,
+   "end": 131.6
+  },
+  {
+   "step": 8,
+   "title": "Shapiro-Wilk result for sample 2",
+   "start": 131.6,
+   "end": 148.467
+  },
+  {
+   "step": 9,
+   "title": "Conclusion",
+   "start": 148.467,
+   "end": 164.467
+  }
+ ],
+ "case": "s24-shapiro-two-samples",
+ "kind": "board"
+}

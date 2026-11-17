@@ -1,0 +1,2487 @@
+{
+ "module": {
+  "id": 23,
+  "title": "Machine learning: K-NN in practice, model evaluation and neural networks",
+  "date": "2026-11-16",
+  "count": 35,
+  "pdf": "sources/session23.pdf",
+  "pptx": null,
+  "slides": [
+   {
+    "page": 1,
+    "title": "Session 23 outline: clustering recap and breast cancer diagnosis with K-NN",
+    "topic": "s23knn",
+    "paragraphs": [
+     "Session 23 continues machine learning for clustering and classification. It opens with a brief recap of clustering (Part II.A), the unsupervised problem solved by k-means in Session 22.",
+     "Part V applies K-nearest neighbors to breast cancer diagnosis. It covers the knn() function in R, the breast cancer example, and how to evaluate model performance.",
+     "The last section revisits the breast cancer example with the evaluation tools, comparing different data scaling and different values of \\(K\\)."
+    ],
+    "equations": [],
+    "symbols": "",
+    "case": null,
+    "subset": null,
+    "core": false
+   },
+   {
+    "page": 2,
+    "title": "Outline continued: a quick tour of artificial neural networks",
+    "topic": "s23neuron",
+    "paragraphs": [
+     "Part VI is a quick tour of artificial neural networks (NN). It covers the purpose of a NN, its biological motivation, its components and the algorithm used to train it.",
+     "The tour ends with an example in R that models the compressive strength of concrete from the amounts of its ingredients.",
+     "The material is taken from Lantz, Machine Learning with R (4th edition, 2023), the same reference used for the K-NN material."
+    ],
+    "equations": [],
+    "symbols": "",
+    "case": null,
+    "subset": null,
+    "core": false
+   },
+   {
+    "page": 3,
+    "title": "Recap: the clustering problem",
+    "topic": "s23knn",
+    "paragraphs": [
+     "In clustering, each element of the data set has a vector of features, and no group labels are given. The question is how to group the data into several cohesive clusters.",
+     "Elements within a cluster are grouped by their similarity, and the clusters are defined by their dissimilarity from each other. The purpose is to uncover previously undetected relations in the data.",
+     "The listed examples are segmenting customers by buying patterns, image compression by grouping similar features (the slide cites principal component analysis), and detecting network intrusions that fall outside known clusters."
+    ],
+    "equations": [],
+    "symbols": "",
+    "case": null,
+    "subset": null,
+    "core": true
+   },
+   {
+    "page": 4,
+    "title": "Clustering illustration: SAT scores in feature space",
+    "topic": "s23knn",
+    "paragraphs": [
+     "Each point is one student plotted by SAT math score (horizontal axis) and SAT reading and writing score (vertical axis). This plot of the feature values is called a feature space plot.",
+     "No labels are attached to the points. The question is whether groups can be seen by eye.",
+     "Points that lie close together have similar scores. Groups of nearby points that are separated by empty space suggest clusters."
+    ],
+    "equations": [],
+    "symbols": "",
+    "case": null,
+    "subset": null,
+    "core": true
+   },
+   {
+    "page": 5,
+    "title": "Clustering illustration: three clusters found by k-means",
+    "topic": "s23knn",
+    "paragraphs": [
+     "The same SAT points are now enclosed in three dashed boxes. These are the three clusters identified by the k-means algorithm.",
+     "One large cluster has higher reading and writing scores with lower math scores. A small cluster is high on both, and a third cluster has high math scores with lower reading and writing scores.",
+     "The clusters were found without any labels, which is what makes clustering unsupervised. The analyst then interprets what each cluster means."
+    ],
+    "equations": [],
+    "symbols": "",
+    "case": null,
+    "subset": null,
+    "core": true
+   },
+   {
+    "page": 6,
+    "title": "Recap: the classification problem",
+    "topic": "s23knn",
+    "paragraphs": [
+     "In classification, each element has a feature vector and also a known class from a predetermined set. The question is what rule assigns a new object to one of the classes.",
+     "The new object is assigned to the class of the object or objects it is most similar to. The purpose is to assign objects to predefined groups, which makes classification supervised learning.",
+     "The examples are spam versus ham email, optical character recognition such as zip codes on envelopes, detecting faces in images, predicting music preferences and assigning a phenotype from a genotype."
+    ],
+    "equations": [],
+    "symbols": "",
+    "case": null,
+    "subset": null,
+    "core": true
+   },
+   {
+    "page": 7,
+    "title": "Classification illustration: how a tomato is classified",
+    "topic": "s23knn",
+    "paragraphs": [
+     "Foods are plotted by how sweet they taste and how crunchy they are, and each belongs to a known class, vegetables, proteins or fruits.",
+     "The tomato is the new object. Dotted lines connect it to its nearest foods, green bean, nuts, grape and orange.",
+     "The K-nearest neighbors algorithm assigns the tomato to the most common class among its \\(K\\) nearest neighbors. In Session 22 the tomato with \\(K=3\\) is classified as a fruit."
+    ],
+    "equations": [],
+    "symbols": "",
+    "case": null,
+    "subset": null,
+    "core": true
+   },
+   {
+    "page": 8,
+    "title": "The knn() function in R",
+    "topic": "s23knn",
+    "paragraphs": [
+     "K-NN is run in R with knn(train, test, cl, k, prob=TRUE) from the class package. train is the matrix or data frame of training cases and test is the matrix or data frame of test cases.",
+     "cl is a factor holding the true classes of the training cases, and k is the number of neighbors to consider. The function returns a predicted class for every test case.",
+     "With prob=TRUE, the proportion of the votes for the winning class is returned as the attribute prob. With \\(K\\) neighbors, this proportion is the number of votes for the winning class divided by \\(K\\)."
+    ],
+    "equations": [
+     "\\texttt{knn(train, test, cl, k, prob=TRUE)}",
+     "P(\\text{winning class})=\\frac{\\#\\text{ votes for the winning class}}{K}"
+    ],
+    "symbols": "\\(K\\) (number of neighbors, the argument k).",
+    "case": null,
+    "subset": null,
+    "core": true
+   },
+   {
+    "page": 9,
+    "title": "Breast cancer diagnosis: FNAB background and nuclear features",
+    "topic": "s23knn",
+    "paragraphs": [
+     "Breast cancer diagnosis often uses an image-guided fine needle aspirate biopsy (FNAB), followed by cytology analysis of the prepared samples.",
+     "From digitized images the pathologist measures ten quantities of the cell nuclei, using several cells per image. They are radius, texture, perimeter, area, smoothness, compactness, concavity, concave points, symmetry and fractal dimension.",
+     "Several are defined from the nuclear outline. Radius is the mean distance from the center to the perimeter, texture is the standard deviation of gray-scale values, and compactness is perimeter squared divided by area, minus 1."
+    ],
+    "equations": [],
+    "symbols": "",
+    "case": null,
+    "subset": null,
+    "core": false
+   },
+   {
+    "page": 10,
+    "title": "Why nuclear size and shape help diagnosis",
+    "topic": "s23knn",
+    "paragraphs": [
+     "The left image is a fine needle aspiration smear of an invasive lobular carcinoma, and the right image shows computerized interactive morphometry of nuclei (Coll. Antropol. 34, 2010).",
+     "The nucleus of a cancer cell is often larger and darker than that of a normal cell, and its size can vary greatly. It is larger and darker because it often contains too much DNA.",
+     "This is why nuclear size and shape measurements can separate benign from malignant samples, and why they serve as features for a classifier."
+    ],
+    "equations": [],
+    "symbols": "",
+    "case": null,
+    "subset": null,
+    "core": false
+   },
+   {
+    "page": 11,
+    "title": "The Wisconsin FNAB data set",
+    "topic": "s23knn",
+    "paragraphs": [
+     "The K-NN example uses an FNAB data set created by the University of Wisconsin. It has 569 samples with 30 attributes each.",
+     "The 30 attributes are three summaries (mean, standard error and a largest value) of each of the ten nuclear quantities. The table shows the first rows of radius, texture and perimeter, such as sample 87139402 with radius_mean 12.32.",
+     "The first two columns hold the patient id and the diagnosis, B for benign and M for malignant. The file wisc_bc_data.csv therefore has 569 rows and 32 columns."
+    ],
+    "equations": [],
+    "symbols": "",
+    "case": null,
+    "subset": null,
+    "core": true
+   },
+   {
+    "page": 12,
+    "title": "R step 1: import the data and code the diagnosis as a factor",
+    "topic": "s23knn",
+    "paragraphs": [
+     "read.csv() imports wisc_bc_data.csv into the data frame wbcd, and str() shows 569 observations of 32 variables. The id is an integer, the diagnosis is a character string, and the measurements are numeric.",
+     "Many R classifiers need the target attribute coded as a factor. factor() converts diagnosis using the levels B and M.",
+     "The labels argument gives the levels the more informative names Benign and Malignant. These are the class names that appear in all later output."
+    ],
+    "equations": [],
+    "symbols": "",
+    "case": null,
+    "subset": null,
+    "core": true
+   },
+   {
+    "page": 13,
+    "title": "R step 2: class balance and feature summaries",
+    "topic": "s23scaling",
+    "paragraphs": [
+     "table() counts 357 benign and 212 malignant samples. prop.table() converts them to percentages, 62.7% benign and 37.3% malignant.",
+     "summary() shows that the features have very different ranges. radius_mean runs from 6.981 to 28.110, area_mean from 143.5 to 2501.0 and smoothness_mean from 0.05263 to 0.16340.",
+     "Without rescaling, area would dominate any distance and smoothness would hardly count. This is the reason for normalizing the features before K-NN."
+    ],
+    "equations": [],
+    "symbols": "",
+    "case": "s23-radius-minmax",
+    "subset": [
+     0,
+     1
+    ],
+    "core": true
+   },
+   {
+    "page": 14,
+    "title": "R step 2: box plots and histograms by diagnosis",
+    "topic": "s23knn",
+    "paragraphs": [
+     "Box plots of radius, area and concavity are drawn separately for benign (B) and malignant (M) samples. For all three, the malignant samples have higher medians and a wider spread.",
+     "Histograms of the same three attributes show the B and M distributions on the same axes. The two distributions overlap only partly.",
+     "Attributes whose B and M distributions are well separated carry information about the diagnosis, which is what K-NN uses to classify a new sample."
+    ],
+    "equations": [],
+    "symbols": "",
+    "case": null,
+    "subset": null,
+    "core": true
+   },
+   {
+    "page": 15,
+    "title": "R step 2: scatter plot matrix of seven attributes",
+    "topic": "s23knn",
+    "paragraphs": [
+     "The scatter plot matrix shows every pair of seven attributes, with benign samples in green and malignant samples in red. The diagonal shows each attribute's histogram by class.",
+     "Radius, perimeter and area lie almost on a curve with each other, because all three measure nuclear size.",
+     "In most panels the red and green points occupy different regions with some overlap. Nearby points tend to share a diagnosis, which is the assumption behind K-NN."
+    ],
+    "equations": [],
+    "symbols": "",
+    "case": null,
+    "subset": null,
+    "core": true
+   },
+   {
+    "page": 16,
+    "title": "R step 3: normalize, split into training and test sets, run knn()",
+    "topic": "s23scaling",
+    "paragraphs": [
+     "The normalize() function returns (x - min(x)) / (max(x) - min(x)), and lapply() applies it to each of the 30 feature columns to form wbcd_n. Every feature then runs from 0 to 1.",
+     "Rows 1 to 469 form the training set and rows 470 to 569 form the test set of 100 samples. The diagnoses of the same rows are stored as wbcd_train_labels and wbcd_test_labels.",
+     "knn() is run with \\(K=21\\), which is close to \\(\\sqrt{469}\\approx21.66\\), and prob=TRUE. attr(wbcd_test_pred, \"prob\") extracts the proportion of votes for each predicted class."
+    ],
+    "equations": [
+     "x_{\\text{scaled}}=\\frac{x-\\min(x)}{\\max(x)-\\min(x)}",
+     "K\\approx\\sqrt{n}=\\sqrt{469}\\approx21.66"
+    ],
+    "symbols": "\\(x\\) (feature value), \\(K\\) (number of neighbors), \\(n\\) (number of training samples).",
+    "case": "s23-radius-minmax",
+    "subset": [
+     1,
+     4
+    ],
+    "core": true
+   },
+   {
+    "page": 17,
+    "title": "R step 4: test-set confusion table with K = 21",
+    "topic": "s23confusion",
+    "paragraphs": [
+     "CrossTable() cross-tabulates the actual test labels (rows) against the predicted labels (columns). prop.chisq = FALSE leaves out the chi-square contributions.",
+     "All 61 benign samples are predicted benign. Of the 39 malignant samples, 37 are predicted malignant and 2 are predicted benign.",
+     "So 98 of the 100 test samples are classified correctly, an accuracy of 0.98. Each cell also shows its row proportion, column proportion and table proportion."
+    ],
+    "equations": [
+     "\\text{accuracy}=\\frac{TP+TN}{n}"
+    ],
+    "symbols": "\\(TP\\) (true positives), \\(TN\\) (true negatives), \\(FP\\) (false positives), \\(FN\\) (false negatives), \\(n\\) (number of test cases).",
+    "case": "s23-wbcd-k21-accuracy",
+    "subset": null,
+    "core": true
+   },
+   {
+    "page": 18,
+    "title": "Test-set predictions with their probabilities",
+    "topic": "s23knn",
+    "paragraphs": [
+     "Each test sample gets a predicted class and a probability, which is the proportion of the 21 neighbors that vote for that class. A value such as 0.7619048 is 16/21.",
+     "The two samples circled in red (32 and 54) are malignant but predicted benign, with probabilities 0.7619048 and 0.8095238. Sample 51, circled in green, is correctly predicted benign with the lower probability 0.6666667.",
+     "The probability can guide how one acts on a prediction, but it is only an estimate of the chance that the classification is correct. A wrong prediction can still have a high probability."
+    ],
+    "equations": [
+     "P=\\frac{\\#\\text{ votes for the predicted class}}{21}"
+    ],
+    "symbols": "\\(P\\) (reported probability).",
+    "case": null,
+    "subset": null,
+    "core": true
+   },
+   {
+    "page": 19,
+    "title": "R step 5: z-score standardization instead of min-max",
+    "topic": "s23scaling",
+    "paragraphs": [
+     "scale() converts every feature to a z-score by subtracting its mean and dividing by its standard deviation. The same rows 1 to 469 and 470 to 569 form the training and test sets.",
+     "knn() is rerun with \\(K=21\\). All 61 benign samples are still correct, but 5 of the 39 malignant samples are now predicted benign.",
+     "The accuracy falls from 0.98 to 0.95, so z-score scaling does not improve this model. The false negatives, malignant samples called benign, are the costly errors."
+    ],
+    "equations": [
+     "z=\\frac{x-\\bar x}{s_x}"
+    ],
+    "symbols": "\\(x\\) (feature value), \\(\\bar x\\) (feature mean), \\(s_x\\) (feature standard deviation).",
+    "case": "s23-wbcd-zscore-sens",
+    "subset": [
+     0,
+     2
+    ],
+    "core": true
+   },
+   {
+    "page": 20,
+    "title": "R step 5: min-max scaling with K = 1 and K = 27",
+    "topic": "s23confusion",
+    "paragraphs": [
+     "With min-max scaling and \\(K=1\\), 58 of 61 benign and 38 of 39 malignant samples are correct, so the accuracy is 0.96. There are 3 false positives and 1 false negative.",
+     "With \\(K=27\\), all 61 benign and 35 of 39 malignant samples are correct, so the accuracy is again 0.96, now with 4 false negatives.",
+     "Neither value beats \\(K=21\\), which had accuracy 0.98. Changing \\(K\\) moves the errors between the two classes, so the kind of error matters as well as the count."
+    ],
+    "equations": [
+     "\\text{accuracy}=\\frac{TP+TN}{n}"
+    ],
+    "symbols": "\\(TP\\) (true positives), \\(TN\\) (true negatives), \\(FP\\) (false positives), \\(FN\\) (false negatives), \\(n\\) (number of test cases).",
+    "case": null,
+    "subset": null,
+    "core": true
+   },
+   {
+    "page": 21,
+    "title": "The confusion matrix",
+    "topic": "s23confusion",
+    "paragraphs": [
+     "A confusion matrix counts the test cases where the predicted class agrees or disagrees with the actual class. It evaluates a classification model on a test data set.",
+     "Actual classes are the rows and predicted classes are the columns. With two classes there are 4 cells, and with three classes there are 9.",
+     "The circles on the diagonal mark correct predictions and the crosses off the diagonal mark errors. A good model puts most of the counts on the diagonal."
+    ],
+    "equations": [],
+    "symbols": "",
+    "case": null,
+    "subset": null,
+    "core": true
+   },
+   {
+    "page": 22,
+    "title": "Accuracy, error rate and the rare-variant limitation",
+    "topic": "s23confusion",
+    "paragraphs": [
+     "With two levels, the cells are true negative, false positive, false negative and true positive, much like the two types of error in hypothesis testing. Accuracy is the share of correct predictions, and error rate is the share of wrong ones.",
+     "A classifier that is correct for 99,990 of 100,000 newborns has accuracy 99.99% and error rate 0.01%.",
+     "If a defect occurs in only 10 of 100,000 babies, a test that always predicts no defect is also 99.99% accurate but wrong in all 10 defect cases. Accuracy alone is misleading when one class is rare."
+    ],
+    "equations": [
+     "\\text{accuracy}=\\frac{TP+TN}{TP+TN+FP+FN}",
+     "\\text{error rate}=\\frac{FP+FN}{TP+TN+FP+FN}"
+    ],
+    "symbols": "\\(TP\\) (true positives), \\(TN\\) (true negatives), \\(FP\\) (false positives), \\(FN\\) (false negatives), \\(n\\) (number of test cases).",
+    "case": "s23-rare-variant",
+    "subset": null,
+    "core": true
+   },
+   {
+    "page": 23,
+    "title": "Sensitivity and specificity for the z-score model",
+    "topic": "s23sensspec",
+    "paragraphs": [
+     "Sensitivity is the true positive rate, TP/(TP + FN). Specificity is the true negative rate, TN/(TN + FP).",
+     "For the z-score model, sensitivity is 34/(34 + 5) = 0.872 and specificity is 61/(61 + 0) = 1.00. All benign samples are recognized, but about 13% of malignant samples are missed.",
+     "The trade-off between sensitivity and specificity can be studied with a receiver operating characteristic (ROC) curve."
+    ],
+    "equations": [
+     "\\text{sensitivity}=\\frac{TP}{TP+FN}",
+     "\\text{specificity}=\\frac{TN}{TN+FP}"
+    ],
+    "symbols": "\\(TP\\) (true positives), \\(TN\\) (true negatives), \\(FP\\) (false positives), \\(FN\\) (false negatives), \\(n\\) (number of test cases).",
+    "case": "s23-wbcd-zscore-sens",
+    "subset": [
+     2,
+     4
+    ],
+    "core": true
+   },
+   {
+    "page": 24,
+    "title": "Purpose of a neural network",
+    "topic": "s23neuron",
+    "paragraphs": [
+     "A NN takes an input vector \\(x=[x_1\\dots x_K]\\) and builds a nonlinear function \\(f(x)\\) to predict a response \\(y=f(x)\\). It is used for both numeric prediction and classification.",
+     "Its distinguishing features are a model based on the topology of neurons in the brain and a model constructed from large data sets.",
+     "Applications include speech, handwriting and image recognition, mail sorting and search engines, smart devices such as room temperature control, self-driving cars and drones, and models of weather, material strength and economic events."
+    ],
+    "equations": [
+     "y=f(x),\\quad x=[x_1\\dots x_K]"
+    ],
+    "symbols": "\\(x\\) (input vector), \\(K\\) (number of inputs), \\(f\\) (nonlinear function), \\(y\\) (response).",
+    "case": null,
+    "subset": null,
+    "core": true
+   },
+   {
+    "page": 25,
+    "title": "Biological motivation: the artificial neuron",
+    "topic": "s23neuron",
+    "paragraphs": [
+     "A biological neuron receives signals through its dendrites, combines them in the cell body, and sends an output signal along the axon to the axon terminals.",
+     "An artificial neuron copies this structure. Each input \\(x_j\\) is a signal from another neuron, and each weight \\(w_j\\) sets how strongly that signal counts.",
+     "The weighted inputs are added, and the activation function \\(f\\) turns the sum into the output \\(y\\)."
+    ],
+    "equations": [
+     "y=f\\left(\\sum_{j=1}^{K}w_jx_j\\right)"
+    ],
+    "symbols": "\\(x_j\\) (input from another neuron), \\(w_j\\) (weight), \\(K\\) (number of inputs), \\(f\\) (activation function), \\(y\\) (output).",
+    "case": null,
+    "subset": null,
+    "core": true
+   },
+   {
+    "page": 26,
+    "title": "Components of a NN: activation functions",
+    "topic": "s23neuron",
+    "paragraphs": [
+     "A particular NN is determined by its activation function, its network topology and its training algorithm. These are the building blocks of complex models.",
+     "The threshold activation function outputs 0 when the sum of input signals is below 0 and 1 when it is 0 or more. It is on only once the sum reaches the threshold.",
+     "The sigmoid activation function \\(1/(1+e^{-x})\\) gives a continuous output between 0 and 1. It equals 0.5 at a sum of 0 and approaches 0 and 1 for large negative and positive sums."
+    ],
+    "equations": [
+     "f(x)=\\begin{cases}0 & x<0\\\\ 1 & x\\ge0\\end{cases}",
+     "f(x)=\\frac{1}{1+e^{-x}}"
+    ],
+    "symbols": "\\(x\\) (sum of input signals), \\(f(x)\\) (output signal).",
+    "case": null,
+    "subset": null,
+    "core": true
+   },
+   {
+    "page": 27,
+    "title": "Network topology: nodes in each layer",
+    "topic": "s23neuron",
+    "paragraphs": [
+     "Network topology is determined by the number of nodes in each layer, the number of layers and outputs, and the direction of information flow.",
+     "In the simplest network, the data feed three input nodes \\(X_1,X_2,X_3\\). Each connects to one output node \\(Y\\) through a weight \\(w_1,w_2,w_3\\).",
+     "The output node combines the weighted inputs with its activation function and returns the prediction \\(p\\). This network is a single artificial neuron."
+    ],
+    "equations": [
+     "p=f(w_1X_1+w_2X_2+w_3X_3)"
+    ],
+    "symbols": "\\(X_j\\) (input node), \\(w_j\\) (weight), \\(f\\) (activation function), \\(p\\) (output).",
+    "case": null,
+    "subset": null,
+    "core": true
+   },
+   {
+    "page": 28,
+    "title": "Network topology: number of layers and outputs",
+    "topic": "s23neuron",
+    "paragraphs": [
+     "The left network has five input nodes, one hidden layer of three nodes and two output nodes. Every node in one layer connects to every node in the next.",
+     "The right network has two hidden layers of three nodes each and one output. A network with multiple hidden layers is called deep learning.",
+     "Convolutional neural networks, used for image recognition, are not fully connected. Each node connects only to part of the layer before it."
+    ],
+    "equations": [],
+    "symbols": "",
+    "case": null,
+    "subset": null,
+    "core": false
+   },
+   {
+    "page": 29,
+    "title": "Network topology: direction of information flow",
+    "topic": "s23neuron",
+    "paragraphs": [
+     "In the networks so far, information flows only forward from inputs to outputs. In a recurrent NN, information can also travel backward.",
+     "In the diagram, the output of hidden node \\(H_1\\) returns through a delay, and hidden node \\(H_2\\) feeds back into itself.",
+     "This memory of earlier inputs lets a recurrent network learn complex patterns, which is why it is used for time series data."
+    ],
+    "equations": [],
+    "symbols": "",
+    "case": null,
+    "subset": null,
+    "core": false
+   },
+   {
+    "page": 30,
+    "title": "Training a NN: backpropagation minimizes the sum of squared errors",
+    "topic": "s23neuron",
+    "paragraphs": [
+     "Training requires data where the outputs are known for given inputs. Each known output \\(y_i\\) equals the network function of the inputs plus an error \\(e_i\\).",
+     "The NN prediction \\(\\hat y_i\\) is the same function without the error. The same weights are used for every observation.",
+     "For a selected topology and activation function, backpropagation finds the weights that minimize the sum of squared errors \\(SS\\). This is the same least-squares idea as in regression."
+    ],
+    "equations": [
+     "y_i=f\\left(\\sum_{j=1}^{K}w_jx_{ij}\\right)+e_i,\\quad i=1,\\dots,n",
+     "\\hat y_i=f\\left(\\sum_{j=1}^{K}w_jx_{ij}\\right)",
+     "SS=\\sum_{i=1}^{n}e_i^2=\\sum_{i=1}^{n}(y_i-\\hat y_i)^2"
+    ],
+    "symbols": "\\(y_i\\) (known output of observation \\(i\\)), \\(x_{ij}\\) (input \\(j\\) of observation \\(i\\)), \\(w_j\\) (weight), \\(e_i\\) (error), \\(\\hat y_i\\) (prediction), \\(n\\) (number of observations), \\(SS\\) (sum of squared errors).",
+    "case": null,
+    "subset": null,
+    "core": true
+   },
+   {
+    "page": 31,
+    "title": "Example: modeling the compressive strength of concrete",
+    "topic": "s23neuron",
+    "paragraphs": [
+     "The compressive strength of concrete (MPa) depends on the amounts of its components in kg per cubic meter, cement, slag, ash, water, superplasticizer, coarse aggregate and fine aggregate, and on the aging time in days.",
+     "The data are 1030 concrete samples with measured strength and mixing amounts (Yeh, Cement and Concrete Research vol. 28, 1998).",
+     "read.csv() imports concrete.csv, and str() shows 1030 observations of 9 variables. Eight are inputs and strength is the response."
+    ],
+    "equations": [],
+    "symbols": "",
+    "case": null,
+    "subset": null,
+    "core": false
+   },
+   {
+    "page": 32,
+    "title": "R code: normalize, train with neuralnet() and evaluate",
+    "topic": "s23neuron",
+    "paragraphs": [
+     "The same min-max normalize() function is applied to every column of the concrete data, so all inputs and the strength lie between 0 and 1.",
+     "neuralnet() from the neuralnet package fits strength on all eight inputs with a single hidden neuron by default. set.seed(12345) makes the random starting weights repeatable, and plot() draws the fitted network.",
+     "compute() applies the model to the eight input columns of the test set, net.result holds the predicted strengths, and cor() measures how closely the predictions follow the actual strengths."
+    ],
+    "equations": [
+     "x_{\\text{scaled}}=\\frac{x-\\min(x)}{\\max(x)-\\min(x)}"
+    ],
+    "symbols": "\\(x\\) (variable value).",
+    "case": null,
+    "subset": null,
+    "core": true
+   },
+   {
+    "page": 33,
+    "title": "The fitted network with one hidden neuron",
+    "topic": "s23neuron",
+    "paragraphs": [
+     "Each of the eight inputs connects to the single hidden neuron through a weight, such as 4.27674 for cement and 10.72208 for age. The blue nodes labeled 1 are bias terms with weights -2.32599 and -0.03395.",
+     "The hidden neuron applies the sigmoid to its weighted sum plus bias. The output node multiplies the hidden output by 0.70671 and adds its bias to give the predicted strength.",
+     "The plot reports Error 5.077438 after 4882 steps. The correlation between predicted and actual test strengths is 0.8064656, a strong relationship for such a simple network."
+    ],
+    "equations": [
+     "h=f\\left(w_0+\\sum_{j=1}^{8}w_jx_j\\right)",
+     "\\hat y=v_0+v_1h"
+    ],
+    "symbols": "\\(x_j\\) (normalized input), \\(w_j\\) (input weight), \\(w_0\\) (hidden bias), \\(h\\) (hidden output), \\(v_0,v_1\\) (output bias and weight), \\(\\hat y\\) (predicted strength).",
+    "case": null,
+    "subset": null,
+    "core": true
+   },
+   {
+    "page": 34,
+    "title": "Improving the model: five hidden neurons",
+    "topic": "s23neuron",
+    "paragraphs": [
+     "The model is refit with hidden = 5, a more complex topology with five hidden neurons. Every input now connects to every hidden neuron, and each hidden neuron connects to the output.",
+     "The reported Error falls from 5.077438 to 1.626684, and training takes 86849 steps instead of 4882.",
+     "The correlation between predicted and actual test strengths rises from 0.8064656 to 0.9244533. More hidden neurons let the network fit a more complex function, at the cost of longer training."
+    ],
+    "equations": [],
+    "symbols": "",
+    "case": null,
+    "subset": null,
+    "core": true
+   },
+   {
+    "page": 35,
+    "title": "Lecture exercise: K-NN for a new tumor sample",
+    "topic": "s23knn",
+    "paragraphs": [
+     "Seven tumor samples A to G have known diagnoses and two dimensionless scores, nuclear size and nuclear irregularity. A new sample has scores (4, 4).",
+     "With the Euclidean distance, A and C are at distance 1, B at 1.41421, D at 2 and E at 2.23607. With \\(K=3\\) the neighbors A, C and B give benign with probability 2/3.",
+     "With \\(K=5\\) the neighbors add D and E, both malignant, so the sample is classified as malignant with probability 3/5. The choice of \\(K\\) changes the classification."
+    ],
+    "equations": [
+     "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}",
+     "P(\\text{class})=\\frac{\\#\\text{ neighbors in the class}}{K}"
+    ],
+    "symbols": "\\(q\\) (new sample), \\(r\\) (a training sample), \\(d(q,r)\\) (Euclidean distance), \\(K\\) (number of nearest neighbors).",
+    "case": "s23-exercise-k3",
+    "subset": null,
+    "core": true
+   }
+  ]
+ },
+ "methods": [
+  {
+   "id": "s23knn",
+   "title": "K-NN classification with knn() → K nearest neighbors, plurality class and vote probability",
+   "trigger": "A labeled training set and a new sample are given, or knn() output with prob is shown; classify the sample and give the probability of the classification.",
+   "pages": [
+    1,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    14,
+    15,
+    18,
+    35
+   ],
+   "formula": [
+    "d(q,r)=\\sqrt{\\sum_{i=1}^{m}(q_i-r_i)^2}",
+    "P(\\text{class})=\\frac{\\#\\text{ of the }K\\text{ neighbors in the class}}{K}",
+    "\\texttt{knn(train, test, cl, k, prob=TRUE)}"
+   ],
+   "example": "s23-exercise-k3",
+   "shortcut": "Compute every distance once, sort them, and read off the first K classes. The same sorted list answers K = 3 and K = 5, so only the vote count changes.",
+   "paragraphs": [
+    "The distance from the new sample to every training sample is computed, the distances are ranked, and the \\(K\\) smallest are kept. The new sample gets the plurality class of those \\(K\\) neighbors.",
+    "The probability reported with the classification is the share of the \\(K\\) votes that the winning class receives. In R, knn() with prob=TRUE returns this share as the attribute prob, so with \\(K=21\\) every probability is a multiple of 1/21.",
+    "The probability is only an estimate of how likely the classification is to be correct. A wrong classification can carry a high probability, and a correct one can carry a low probability."
+   ],
+   "symbols": "\\(q\\) (new sample), \\(r\\) (training sample), \\(q_i,r_i\\) (their \\(i\\)th features), \\(m\\) (number of features), \\(K\\) (number of nearest neighbors), \\(d(q,r)\\) (Euclidean distance)."
+  },
+  {
+   "id": "s23scaling",
+   "title": "Data scaling before K-NN → min-max normalization or z-score standardization",
+   "trigger": "Feature values with different ranges are given, or a min, max, mean and SD are given; rescale a value before computing distances.",
+   "pages": [
+    13,
+    16,
+    19,
+    32
+   ],
+   "formula": [
+    "x_{\\text{scaled}}=\\frac{x-\\min(x)}{\\max(x)-\\min(x)}",
+    "z=\\frac{x-\\bar x}{s_x}"
+   ],
+   "example": "s23-radius-minmax",
+   "shortcut": "Min-max scaling always sends the minimum to 0 and the maximum to 1. A z-score is negative below the mean and positive above it.",
+   "paragraphs": [
+    "Features measured on very different ranges are rescaled so that no single feature dominates the distance. Mean area runs from 143.5 to 2501, while mean smoothness runs from 0.05263 to 0.1634, so without scaling area would decide almost every distance.",
+    "Min-max normalization subtracts the feature minimum and divides by the range, so every scaled value lies between 0 and 1. In R this is the user-written normalize() function applied to each column with lapply().",
+    "z-score standardization subtracts the feature mean and divides by the feature standard deviation. In R the scale() function does this for every column of a data frame. The scaled values have mean 0 and standard deviation 1 and have no fixed upper or lower limit."
+   ],
+   "symbols": "\\(x\\) (one feature value), \\(\\min(x),\\max(x)\\) (smallest and largest value of the feature), \\(\\bar x\\) (feature mean), \\(s_x\\) (feature standard deviation), \\(z\\) (z-score)."
+  },
+  {
+   "id": "s23confusion",
+   "title": "Confusion matrix → accuracy and error rate",
+   "trigger": "A cross table of predicted versus actual classes is given; find accuracy or error rate, or judge whether accuracy alone is enough.",
+   "pages": [
+    17,
+    20,
+    21,
+    22
+   ],
+   "formula": [
+    "\\text{accuracy}=\\frac{TP+TN}{TP+TN+FP+FN}",
+    "\\text{error rate}=\\frac{FP+FN}{TP+TN+FP+FN}=1-\\text{accuracy}"
+   ],
+   "example": "s23-wbcd-k21-accuracy",
+   "shortcut": "Accuracy is the diagonal total divided by the grand total. Error rate is the off-diagonal total divided by the grand total, so the two always add to 1.",
+   "paragraphs": [
+    "A confusion matrix counts the test cases where the predicted class agrees or disagrees with the actual class. Rows are the actual classes and columns are the predicted classes, so correct predictions lie on the diagonal.",
+    "With two classes, one class is called positive (yes) and the other negative (no). This gives four cells, true negative (TN), false positive (FP), false negative (FN) and true positive (TP). For the breast cancer data, Malignant is the positive class.",
+    "Accuracy is misleading when one class is rare. If a defect occurs in only 10 of 100,000 newborns, a test that always predicts no defect is 99.99% accurate yet misses every defect."
+   ],
+   "symbols": "\\(TP\\) (true positives), \\(TN\\) (true negatives), \\(FP\\) (false positives), \\(FN\\) (false negatives)."
+  },
+  {
+   "id": "s23sensspec",
+   "title": "Sensitivity and specificity → true positive rate and true negative rate",
+   "trigger": "A two-class confusion matrix is given and the question asks how well each class is detected, or why accuracy is not enough.",
+   "pages": [
+    19,
+    23
+   ],
+   "formula": [
+    "\\text{sensitivity}=\\frac{TP}{TP+FN}",
+    "\\text{specificity}=\\frac{TN}{TN+FP}"
+   ],
+   "example": "s23-wbcd-zscore-sens",
+   "shortcut": "Sensitivity uses only the actual-positive row and specificity uses only the actual-negative row. In the CrossTable output each is the row proportion printed under the diagonal count.",
+   "paragraphs": [
+    "Sensitivity is the true positive rate, the share of actual positives that the model classifies as positive. Specificity is the true negative rate, the share of actual negatives that the model classifies as negative.",
+    "Each one is computed within one actual-class row, so a rare class cannot hide behind a large majority class. A classifier that always says no has specificity 1 but sensitivity 0.",
+    "Raising sensitivity usually lowers specificity and the reverse. This trade-off is studied with a receiver operating characteristic (ROC) curve."
+   ],
+   "symbols": "\\(TP\\) (true positives), \\(TN\\) (true negatives), \\(FP\\) (false positives), \\(FN\\) (false negatives)."
+  },
+  {
+   "id": "s23neuron",
+   "title": "Artificial neuron and neural network → weighted sum, activation function, sum of squared errors",
+   "trigger": "Inputs, weights and an activation function are given; find a neuron's output, a network prediction or the sum of squared errors used in training.",
+   "pages": [
+    2,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34
+   ],
+   "formula": [
+    "y=f\\left(\\sum_{j=1}^{K}w_jx_j\\right)",
+    "f(x)=\\frac{1}{1+e^{-x}}",
+    "f(x)=\\begin{cases}0 & x<0\\\\ 1 & x\\ge0\\end{cases}",
+    "SS=\\sum_{i=1}^{n}e_i^2=\\sum_{i=1}^{n}(y_i-\\hat y_i)^2"
+   ],
+   "example": "s23-concrete-neuron",
+   "shortcut": "Multiply each input by its weight, add, then apply the activation function once. For the sigmoid, a sum of 0 gives 0.5, a positive sum gives more than 0.5 and a negative sum gives less.",
+   "paragraphs": [
+    "An artificial neuron multiplies each input \\(x_j\\) by a weight \\(w_j\\), adds the products, and passes the sum through an activation function \\(f\\). The threshold function outputs 1 when the sum is at least 0 and 0 otherwise. The sigmoid outputs a continuous value between 0 and 1.",
+    "A network is set by its activation function, its topology (nodes per layer, number of layers and outputs, direction of information flow) and its training algorithm. Several hidden layers give deep learning, and a recurrent network lets information travel backward.",
+    "Backpropagation needs training data with known outputs. For a chosen topology and activation function, it finds the weights that minimize the sum of squared errors between the data \\(y_i\\) and the predictions \\(\\hat y_i\\)."
+   ],
+   "symbols": "\\(x_j\\) (input), \\(w_j\\) (weight), \\(K\\) (number of inputs), \\(f\\) (activation function), \\(y\\) (output), \\(\\hat y_i\\) (prediction for observation \\(i\\)), \\(e_i\\) (error), \\(n\\) (number of training observations), \\(SS\\) (sum of squared errors)."
+  }
+ ],
+ "cases": [
+  {
+   "id": "s23-exercise-k3",
+   "title": "Lecture exercise, new tumor sample (4, 4) with K = 3",
+   "topic": "s23knn",
+   "context": "Seven tumor samples have known diagnoses. Two image features, nuclear size and nuclear irregularity, have been converted to dimensionless scores. A new sample has scores (4, 4). Classify it as benign or malignant with K-NN using the Euclidean distance and K = 3, and give the probability of the classification.",
+   "unit": "probability",
+   "table": {
+    "headers": [
+     "Sample",
+     "Size score",
+     "Irregularity score",
+     "Known diagnosis"
+    ],
+    "rows": [
+     [
+      "A",
+      4,
+      3,
+      "Benign"
+     ],
+     [
+      "B",
+      3,
+      3,
+      "Benign"
+     ],
+     [
+      "C",
+      4,
+      5,
+      "Malignant"
+     ],
+     [
+      "D",
+      6,
+      4,
+      "Malignant"
+     ],
+     [
+      "E",
+      5,
+      6,
+      "Malignant"
+     ],
+     [
+      "F",
+      1,
+      3,
+      "Benign"
+     ],
+     [
+      "G",
+      7,
+      7,
+      "Malignant"
+     ]
+    ]
+   },
+   "tasks": [
+    "Compute the Euclidean distance from (4, 4) to each of the seven samples and rank them.",
+    "Identify the K = 3 nearest neighbors, classify the new sample and give the probability of the classification."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(q\\) (new sample), \\(r\\) (a training sample), \\(d(q,r)\\) (Euclidean distance), \\(K\\) (number of nearest neighbors).",
+   "steps": [
+    {
+     "title": "Set up the new sample and the training set",
+     "general": [
+      "q=(q_1,q_2)"
+     ],
+     "work": [
+      "q=(4,4)",
+      "A=(4,3),\\ B=(3,3),\\ C=(4,5),\\ D=(6,4),\\ E=(5,6),\\ F=(1,3),\\ G=(7,7)"
+     ],
+     "words": "The seven samples with known diagnoses are the training set. The new sample with scores 4 and 4 is the test sample. The scores are already dimensionless, so no further scaling is needed."
+    },
+    {
+     "title": "Distances to A, B, C and D",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d_A=\\sqrt{(4-4)^2+(4-3)^2}=\\sqrt{1}=1",
+      "d_B=\\sqrt{(4-3)^2+(4-3)^2}=\\sqrt{2}=1.41421",
+      "d_C=\\sqrt{(4-4)^2+(4-5)^2}=\\sqrt{1}=1",
+      "d_D=\\sqrt{(4-6)^2+(4-4)^2}=\\sqrt{4}=2"
+     ],
+     "words": "Subtract matching scores, square the differences, add them and take the square root."
+    },
+    {
+     "title": "Distances to E, F and G",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d_E=\\sqrt{(4-5)^2+(4-6)^2}=\\sqrt{5}=2.23607",
+      "d_F=\\sqrt{(4-1)^2+(4-3)^2}=\\sqrt{10}=3.16228",
+      "d_G=\\sqrt{(4-7)^2+(4-7)^2}=\\sqrt{18}=4.24264"
+     ],
+     "words": "The same formula is applied to every training sample."
+    },
+    {
+     "title": "Rank the distances",
+     "general": [
+      "\\text{rank }d(q,r)\\text{ from smallest}"
+     ],
+     "work": [
+      "A\\ (1)=C\\ (1)<B\\ (1.41421)<D\\ (2)<E\\ (2.23607)<F\\ (3.16228)<G\\ (4.24264)"
+     ],
+     "words": "A and C tie at distance 1 for the first two places. B is third, D fourth and E fifth."
+    },
+    {
+     "title": "Read the classes of the 3 nearest neighbors",
+     "general": [
+      "y_{(1)},\\ y_{(2)},\\ y_{(3)}"
+     ],
+     "work": [
+      "A=\\text{Benign},\\ C=\\text{Malignant},\\ B=\\text{Benign}"
+     ],
+     "words": "Only the three closest samples vote. D, E, F and G are not neighbors when K is 3."
+    },
+    {
+     "title": "Classify and give the probability",
+     "general": [
+      "P(\\text{Benign})=\\frac{\\#\\text{ Benign among the }K\\text{ neighbors}}{K}"
+     ],
+     "work": [
+      "P(\\text{Benign})=\\frac{2}{3}=0.66667"
+     ],
+     "words": "Benign has 2 of the 3 votes, so it is the plurality class. The new sample is classified as benign with probability 2/3."
+    }
+   ],
+   "conclusion": "With K = 3 the nearest neighbors are A (Benign), C (Malignant) and B (Benign). The new sample is classified as benign with probability 2/3, or 0.66667.",
+   "source": "Session 23 page 35",
+   "lookup": null,
+   "values": {
+    "newSample": [
+     4,
+     4
+    ],
+    "distances": {
+     "A": 1.0,
+     "B": 1.4142135623730951,
+     "C": 1.0,
+     "D": 2.0,
+     "E": 2.23606797749979,
+     "F": 3.1622776601683795,
+     "G": 4.242640687119285
+    },
+    "neighbors": [
+     "A",
+     "C",
+     "B"
+    ],
+    "K": 3,
+    "class": "Benign",
+    "pBenign": 0.6666666666666666
+   },
+   "module": 23,
+   "tolerance": 0.003333333333333333,
+   "answerName": "Probability",
+   "answer": 0.6666666666666666
+  },
+  {
+   "id": "s23-exercise-k5",
+   "title": "Lecture exercise, new tumor sample (4, 4) with K = 5",
+   "topic": "s23knn",
+   "context": "The same seven tumor samples and the same new sample (4, 4) are used. Classify the new sample with K-NN using the Euclidean distance and K = 5, and give the probability of the classification.",
+   "unit": "probability",
+   "table": {
+    "headers": [
+     "Sample",
+     "Size score",
+     "Irregularity score",
+     "Known diagnosis"
+    ],
+    "rows": [
+     [
+      "A",
+      4,
+      3,
+      "Benign"
+     ],
+     [
+      "B",
+      3,
+      3,
+      "Benign"
+     ],
+     [
+      "C",
+      4,
+      5,
+      "Malignant"
+     ],
+     [
+      "D",
+      6,
+      4,
+      "Malignant"
+     ],
+     [
+      "E",
+      5,
+      6,
+      "Malignant"
+     ],
+     [
+      "F",
+      1,
+      3,
+      "Benign"
+     ],
+     [
+      "G",
+      7,
+      7,
+      "Malignant"
+     ]
+    ]
+   },
+   "tasks": [
+    "Compute and rank the Euclidean distances from (4, 4) to the seven samples.",
+    "Identify the K = 5 nearest neighbors, classify the new sample, give the probability, and compare with the K = 3 result."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(q\\) (new sample), \\(r\\) (a training sample), \\(d(q,r)\\) (Euclidean distance), \\(K\\) (number of nearest neighbors).",
+   "steps": [
+    {
+     "title": "Set up the new sample and the training set",
+     "general": [
+      "q=(q_1,q_2)"
+     ],
+     "work": [
+      "q=(4,4)",
+      "A=(4,3),\\ B=(3,3),\\ C=(4,5),\\ D=(6,4),\\ E=(5,6),\\ F=(1,3),\\ G=(7,7)"
+     ],
+     "words": "The seven samples with known diagnoses are the training set. The new sample with scores 4 and 4 is the test sample. The scores are already dimensionless, so no further scaling is needed."
+    },
+    {
+     "title": "Distances to A, B, C and D",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d_A=\\sqrt{(4-4)^2+(4-3)^2}=\\sqrt{1}=1",
+      "d_B=\\sqrt{(4-3)^2+(4-3)^2}=\\sqrt{2}=1.41421",
+      "d_C=\\sqrt{(4-4)^2+(4-5)^2}=\\sqrt{1}=1",
+      "d_D=\\sqrt{(4-6)^2+(4-4)^2}=\\sqrt{4}=2"
+     ],
+     "words": "Subtract matching scores, square the differences, add them and take the square root."
+    },
+    {
+     "title": "Distances to E, F and G",
+     "general": [
+      "d(q,r)=\\sqrt{(q_1-r_1)^2+(q_2-r_2)^2}"
+     ],
+     "work": [
+      "d_E=\\sqrt{(4-5)^2+(4-6)^2}=\\sqrt{5}=2.23607",
+      "d_F=\\sqrt{(4-1)^2+(4-3)^2}=\\sqrt{10}=3.16228",
+      "d_G=\\sqrt{(4-7)^2+(4-7)^2}=\\sqrt{18}=4.24264"
+     ],
+     "words": "The same formula is applied to every training sample."
+    },
+    {
+     "title": "Rank the distances",
+     "general": [
+      "\\text{rank }d(q,r)\\text{ from smallest}"
+     ],
+     "work": [
+      "A\\ (1)=C\\ (1)<B\\ (1.41421)<D\\ (2)<E\\ (2.23607)<F\\ (3.16228)<G\\ (4.24264)"
+     ],
+     "words": "A and C tie at distance 1 for the first two places. B is third, D fourth and E fifth."
+    },
+    {
+     "title": "Read the classes of the 5 nearest neighbors",
+     "general": [
+      "y_{(1)},\\dots,y_{(5)}"
+     ],
+     "work": [
+      "A=\\text{B},\\ C=\\text{M},\\ B=\\text{B},\\ D=\\text{M},\\ E=\\text{M}"
+     ],
+     "words": "The five closest samples are A, C, B, D and E. F and G are still too far away to vote."
+    },
+    {
+     "title": "Classify and give the probability",
+     "general": [
+      "P(\\text{Malignant})=\\frac{\\#\\text{ Malignant among the }K\\text{ neighbors}}{K}"
+     ],
+     "work": [
+      "P(\\text{Malignant})=\\frac{3}{5}=0.6"
+     ],
+     "words": "Malignant has 3 of the 5 votes, so the new sample is classified as malignant with probability 3/5. The class changes from benign at K = 3 to malignant at K = 5, so the choice of K matters."
+    }
+   ],
+   "conclusion": "With K = 5 the neighbors are A, C, B, D and E, three of them malignant. The new sample is classified as malignant with probability 0.6, while K = 3 gives benign with probability 2/3.",
+   "source": "Session 23 page 35",
+   "lookup": null,
+   "values": {
+    "newSample": [
+     4,
+     4
+    ],
+    "distances": {
+     "A": 1.0,
+     "B": 1.4142135623730951,
+     "C": 1.0,
+     "D": 2.0,
+     "E": 2.23606797749979,
+     "F": 3.1622776601683795,
+     "G": 4.242640687119285
+    },
+    "neighbors": [
+     "A",
+     "C",
+     "B",
+     "D",
+     "E"
+    ],
+    "K": 5,
+    "class": "Malignant",
+    "pMalignant": 0.6
+   },
+   "module": 23,
+   "tolerance": 0.003,
+   "answerName": "Probability",
+   "answer": 0.6
+  },
+  {
+   "id": "s23-radius-minmax",
+   "title": "Min-max normalization of mean radius in the Wisconsin data",
+   "topic": "s23scaling",
+   "context": "The R summary of the Wisconsin breast cancer data gives radius_mean a minimum of 6.981, a median of 13.370, a mean of 14.127 and a maximum of 28.110. Before K-NN, every feature is rescaled with the normalize() function (min-max normalization).",
+   "unit": "scaled units (0 to 1)",
+   "table": {
+    "headers": [
+     "Statistic",
+     "radius_mean"
+    ],
+    "rows": [
+     [
+      "Min.",
+      6.981
+     ],
+     [
+      "1st Qu.",
+      11.7
+     ],
+     [
+      "Median",
+      13.37
+     ],
+     [
+      "Mean",
+      14.127
+     ],
+     [
+      "3rd Qu.",
+      15.78
+     ],
+     [
+      "Max.",
+      28.11
+     ]
+    ]
+   },
+   "tasks": [
+    "Find the range of radius_mean.",
+    "Compute the min-max normalized values of the mean (14.127) and the median (13.370), and of the maximum."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(x\\) (feature value), \\(\\min(x),\\max(x)\\) (smallest and largest value), \\(x_{\\text{scaled}}\\) (normalized value).",
+   "steps": [
+    {
+     "title": "Read the minimum and maximum",
+     "general": [
+      "\\min(x),\\ \\max(x)"
+     ],
+     "work": [
+      "\\min(x)=6.981,\\quad \\max(x)=28.110"
+     ],
+     "words": "The summary() output on page 13 gives both values for radius_mean."
+    },
+    {
+     "title": "Find the range",
+     "general": [
+      "R=\\max(x)-\\min(x)"
+     ],
+     "work": [
+      "R=28.110-6.981=21.129"
+     ],
+     "words": "The range is the denominator of every normalized value of this feature."
+    },
+    {
+     "title": "Normalize the mean radius",
+     "general": [
+      "x_{\\text{scaled}}=\\frac{x-\\min(x)}{\\max(x)-\\min(x)}"
+     ],
+     "work": [
+      "x_{\\text{scaled}}=\\frac{14.127-6.981}{21.129}=\\frac{7.146}{21.129}=0.33821"
+     ],
+     "words": "Subtract the minimum first, then divide by the range."
+    },
+    {
+     "title": "Normalize the median and the maximum",
+     "general": [
+      "x_{\\text{scaled}}=\\frac{x-\\min(x)}{\\max(x)-\\min(x)}"
+     ],
+     "work": [
+      "x_{\\text{scaled}}=\\frac{13.370-6.981}{21.129}=\\frac{6.389}{21.129}=0.30238",
+      "x_{\\text{scaled}}=\\frac{28.110-6.981}{21.129}=1"
+     ],
+     "words": "The maximum always maps to 1 and the minimum to 0. Every other value falls between them."
+    }
+   ],
+   "conclusion": "The range of radius_mean is 21.129, so the mean radius 14.127 normalizes to 0.33821 and the median 13.370 to 0.30238. All normalized radius values lie between 0 and 1.",
+   "source": "Session 23 pages 13 and 16",
+   "lookup": null,
+   "values": {
+    "min": 6.981,
+    "max": 28.11,
+    "mean": 14.127,
+    "median": 13.37,
+    "range": 21.128999999999998,
+    "scaledMean": 0.33820814993610687,
+    "scaledMedian": 0.30238061432154856
+   },
+   "module": 23,
+   "tolerance": 0.0016910407496805344,
+   "answerName": "Normalized value",
+   "answer": 0.33820814993610687
+  },
+  {
+   "id": "s23-wbcd-k21-accuracy",
+   "title": "Breast cancer test set, min-max scaling and K = 21",
+   "topic": "s23confusion",
+   "context": "K-NN with K = 21 is trained on 469 min-max normalized FNAB samples and tested on the remaining 100. CrossTable() gives the actual diagnosis (rows) against the predicted diagnosis (columns). Malignant is the positive class.",
+   "unit": "proportion",
+   "table": {
+    "headers": [
+     "Actual \\ Predicted",
+     "Benign",
+     "Malignant",
+     "Row total"
+    ],
+    "rows": [
+     [
+      "Benign",
+      61,
+      0,
+      61
+     ],
+     [
+      "Malignant",
+      2,
+      37,
+      39
+     ],
+     [
+      "Column total",
+      63,
+      37,
+      100
+     ]
+    ]
+   },
+   "tasks": [
+    "Identify TP, TN, FP and FN.",
+    "Compute the accuracy and the error rate.",
+    "Compute the sensitivity and the specificity."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(TP\\) (true positives), \\(TN\\) (true negatives), \\(FP\\) (false positives), \\(FN\\) (false negatives), \\(n\\) (number of test cases).",
+   "steps": [
+    {
+     "title": "Name the four cells",
+     "general": [
+      "\\text{positive}=\\text{Malignant},\\ \\text{negative}=\\text{Benign}"
+     ],
+     "work": [
+      "TN=61,\\ FP=0,\\ FN=2,\\ TP=37"
+     ],
+     "words": "Rows are the actual classes and columns are the predicted classes. A malignant sample predicted benign is a false negative."
+    },
+    {
+     "title": "Compute the accuracy",
+     "general": [
+      "\\text{accuracy}=\\frac{TP+TN}{TP+TN+FP+FN}"
+     ],
+     "work": [
+      "\\text{accuracy}=\\frac{37+61}{37+61+0+2}=\\frac{98}{100}=0.98"
+     ],
+     "words": "The two diagonal cells are the correct predictions."
+    },
+    {
+     "title": "Compute the error rate",
+     "general": [
+      "\\text{error rate}=\\frac{FP+FN}{TP+TN+FP+FN}"
+     ],
+     "work": [
+      "\\text{error rate}=\\frac{0+2}{100}=0.02=1-0.98"
+     ],
+     "words": "The two off-diagonal cells are the wrong predictions. Accuracy and error rate add to 1."
+    },
+    {
+     "title": "Compute sensitivity and specificity",
+     "general": [
+      "\\text{sensitivity}=\\frac{TP}{TP+FN}",
+      "\\text{specificity}=\\frac{TN}{TN+FP}"
+     ],
+     "work": [
+      "\\text{sensitivity}=\\frac{37}{37+2}=\\frac{37}{39}=0.94872",
+      "\\text{specificity}=\\frac{61}{61+0}=1"
+     ],
+     "words": "Both match the row proportions 0.949 and 1.000 printed in the CrossTable output. The two errors are malignant samples called benign."
+    }
+   ],
+   "conclusion": "The model classifies 98 of the 100 test samples correctly, an accuracy of 0.98 and an error rate of 0.02. Both errors are false negatives, so sensitivity is 0.94872 and specificity is 1.",
+   "source": "Session 23 page 17",
+   "lookup": null,
+   "values": {
+    "TN": 61,
+    "FP": 0,
+    "FN": 2,
+    "TP": 37,
+    "n": 100,
+    "accuracy": 0.98,
+    "errorRate": 0.02,
+    "sensitivity": 0.9487179487179487,
+    "specificity": 1.0
+   },
+   "module": 23,
+   "tolerance": 0.0049,
+   "answerName": "Accuracy",
+   "answer": 0.98
+  },
+  {
+   "id": "s23-rare-variant",
+   "title": "Rare genetic variant in newborns and the limits of accuracy",
+   "topic": "s23confusion",
+   "context": "A classifier predicts whether newborns carry a genetic variant associated with a disease and is correct in 99,990 of 100,000 cases. Suppose the defect occurs in only 10 of the 100,000 babies, and a test always predicts no defect. Carrying the variant is the positive class.",
+   "unit": "proportion",
+   "table": {
+    "headers": [
+     "Actual \\ Predicted",
+     "No defect",
+     "Defect",
+     "Row total"
+    ],
+    "rows": [
+     [
+      "No defect",
+      99990,
+      0,
+      99990
+     ],
+     [
+      "Defect",
+      10,
+      0,
+      10
+     ],
+     [
+      "Column total",
+      100000,
+      0,
+      100000
+     ]
+    ]
+   },
+   "tasks": [
+    "Compute the accuracy and error rate of the classifier that is correct in 99,990 of 100,000 cases.",
+    "Build the confusion matrix of the always-no test and compute its accuracy and its sensitivity. Explain the limitation of accuracy."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(TP\\) (true positives), \\(TN\\) (true negatives), \\(FP\\) (false positives), \\(FN\\) (false negatives), \\(n\\) (number of test cases).",
+   "steps": [
+    {
+     "title": "Accuracy and error rate from the counts",
+     "general": [
+      "\\text{accuracy}=\\frac{\\#\\text{ correct}}{n}",
+      "\\text{error rate}=\\frac{\\#\\text{ wrong}}{n}"
+     ],
+     "work": [
+      "\\text{accuracy}=\\frac{99990}{100000}=0.9999",
+      "\\text{error rate}=\\frac{10}{100000}=0.0001"
+     ],
+     "words": "This is 99.99% accuracy and a 0.01% error rate."
+    },
+    {
+     "title": "Fill the cells for the always-no test",
+     "general": [
+      "TN,\\ FP,\\ FN,\\ TP"
+     ],
+     "work": [
+      "TN=99990,\\ FP=0,\\ FN=10,\\ TP=0"
+     ],
+     "words": "Every baby is predicted negative. The 10 babies with the defect become false negatives and nobody is a true positive."
+    },
+    {
+     "title": "Accuracy of the always-no test",
+     "general": [
+      "\\text{accuracy}=\\frac{TP+TN}{TP+TN+FP+FN}"
+     ],
+     "work": [
+      "\\text{accuracy}=\\frac{0+99990}{100000}=0.9999"
+     ],
+     "words": "The useless test has the same 99.99% accuracy."
+    },
+    {
+     "title": "Sensitivity of the always-no test",
+     "general": [
+      "\\text{sensitivity}=\\frac{TP}{TP+FN}"
+     ],
+     "work": [
+      "\\text{sensitivity}=\\frac{0}{0+10}=0"
+     ],
+     "words": "The test misses all 10 defects. Accuracy hides this because the defect is so rare."
+    }
+   ],
+   "conclusion": "A test that always predicts no defect is correct in 99.99% of cases yet wrong in all 10 cases with the defect. Accuracy alone is misleading for a rare class, so sensitivity and specificity are also needed.",
+   "source": "Session 23 page 22",
+   "lookup": null,
+   "values": {
+    "TN": 99990,
+    "FP": 0,
+    "FN": 10,
+    "TP": 0,
+    "n": 100000,
+    "accuracy": 0.9999,
+    "errorRate": 0.0001,
+    "sensitivity": 0.0,
+    "specificity": 1.0
+   },
+   "module": 23,
+   "tolerance": 0.0001,
+   "answerName": "Accuracy",
+   "answer": 0.9999
+  },
+  {
+   "id": "s23-wbcd-zscore-sens",
+   "title": "Breast cancer test set with z-score scaling, sensitivity and specificity",
+   "topic": "s23sensspec",
+   "context": "The breast cancer features are standardized with scale() (z-scores) instead of min-max normalization, and K-NN with K = 21 is rerun on the same 469 training and 100 test samples. Malignant is the positive class.",
+   "unit": "proportion",
+   "table": {
+    "headers": [
+     "Actual \\ Predicted",
+     "Benign",
+     "Malignant",
+     "Row total"
+    ],
+    "rows": [
+     [
+      "Benign",
+      61,
+      0,
+      61
+     ],
+     [
+      "Malignant",
+      5,
+      34,
+      39
+     ],
+     [
+      "Column total",
+      66,
+      34,
+      100
+     ]
+    ]
+   },
+   "tasks": [
+    "Identify TP, TN, FP and FN.",
+    "Compute the accuracy, sensitivity and specificity, and compare with min-max scaling."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(TP\\) (true positives), \\(TN\\) (true negatives), \\(FP\\) (false positives), \\(FN\\) (false negatives), \\(n\\) (number of test cases).",
+   "steps": [
+    {
+     "title": "Name the four cells",
+     "general": [
+      "\\text{positive}=\\text{Malignant},\\ \\text{negative}=\\text{Benign}"
+     ],
+     "work": [
+      "TN=61,\\ FP=0,\\ FN=5,\\ TP=34"
+     ],
+     "words": "Rows are the actual classes and columns are the predicted classes. A malignant sample predicted benign is a false negative."
+    },
+    {
+     "title": "Compute the accuracy",
+     "general": [
+      "\\text{accuracy}=\\frac{TP+TN}{TP+TN+FP+FN}"
+     ],
+     "work": [
+      "\\text{accuracy}=\\frac{34+61}{100}=0.95"
+     ],
+     "words": "Min-max scaling gave 0.98, so z-scores do slightly worse here."
+    },
+    {
+     "title": "Compute the sensitivity",
+     "general": [
+      "\\text{sensitivity}=\\frac{TP}{TP+FN}"
+     ],
+     "work": [
+      "\\text{sensitivity}=\\frac{34}{34+5}=\\frac{34}{39}=0.87179"
+     ],
+     "words": "Only the actual-malignant row is used. Five malignant samples are called benign."
+    },
+    {
+     "title": "Compute the specificity",
+     "general": [
+      "\\text{specificity}=\\frac{TN}{TN+FP}"
+     ],
+     "work": [
+      "\\text{specificity}=\\frac{61}{61+0}=1"
+     ],
+     "words": "Only the actual-benign row is used. No benign sample is called malignant."
+    }
+   ],
+   "conclusion": "With z-score scaling the sensitivity is 34/39 = 0.87179 and the specificity is 1. The false negatives rise from 2 to 5, so min-max scaling works better for this data set.",
+   "source": "Session 23 pages 19 and 23",
+   "lookup": null,
+   "values": {
+    "TN": 61,
+    "FP": 0,
+    "FN": 5,
+    "TP": 34,
+    "n": 100,
+    "accuracy": 0.95,
+    "sensitivity": 0.8717948717948718,
+    "specificity": 1.0
+   },
+   "module": 23,
+   "tolerance": 0.004358974358974359,
+   "answerName": "Sensitivity",
+   "answer": 0.8717948717948718
+  },
+  {
+   "id": "s23-concrete-neuron",
+   "title": "Prediction from the one-hidden-neuron concrete model",
+   "topic": "s23neuron",
+   "context": "Original practice example using the Session 23 page 33 weights. The neuralnet() model has one hidden neuron with a sigmoid (logistic) activation and a linear output node, and all inputs are min-max normalized. A mix has normalized inputs cement 0.6, slag 0.2, ash 0, water 0.5, superplastic 0.3, coarseagg 0.5, fineagg 0.5 and age 0.1. The bias node 1 has weight -2.32599 into the hidden neuron and -0.03395 into the output, and the hidden-to-output weight is 0.70671.",
+   "unit": "normalized strength",
+   "table": {
+    "headers": [
+     "Input",
+     "Weight w_j",
+     "Normalized input x_j",
+     "Product w_j x_j"
+    ],
+    "rows": [
+     [
+      "cement",
+      4.27674,
+      0.6,
+      2.566044
+     ],
+     [
+      "slag",
+      2.50472,
+      0.2,
+      0.500944
+     ],
+     [
+      "ash",
+      0.83143,
+      0.0,
+      0.0
+     ],
+     [
+      "water",
+      -1.61849,
+      0.5,
+      -0.809245
+     ],
+     [
+      "superplastic",
+      1.36199,
+      0.3,
+      0.408597
+     ],
+     [
+      "coarseagg",
+      0.12667,
+      0.5,
+      0.063335
+     ],
+     [
+      "fineagg",
+      0.09672,
+      0.5,
+      0.04836
+     ],
+     [
+      "age",
+      10.72208,
+      0.1,
+      1.072208
+     ]
+    ]
+   },
+   "tasks": [
+    "Compute the weighted sum of the inputs and add the bias weight.",
+    "Apply the sigmoid activation to get the hidden-neuron output.",
+    "Compute the predicted normalized strength at the output node."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(x_j\\) (normalized input), \\(w_j\\) (input weight), \\(w_0\\) (bias weight into the hidden neuron), \\(s\\) (net input), \\(h\\) (hidden-neuron output), \\(v_0,v_1\\) (output bias and hidden-to-output weight), \\(\\hat y\\) (predicted normalized strength).",
+   "steps": [
+    {
+     "title": "Weighted sum of the eight inputs",
+     "general": [
+      "\\sum_{j=1}^{8}w_jx_j"
+     ],
+     "work": [
+      "4.27674(0.6)+2.50472(0.2)+0.83143(0)-1.61849(0.5)",
+      "+1.36199(0.3)+0.12667(0.5)+0.09672(0.5)+10.72208(0.1)",
+      "=2.566044+0.500944+0-0.809245+0.408597+0.063335+0.04836+1.072208=3.850243"
+     ],
+     "words": "Multiply each input by the weight on its arrow and add the products."
+    },
+    {
+     "title": "Add the bias weight",
+     "general": [
+      "s=w_0+\\sum_{j=1}^{8}w_jx_j"
+     ],
+     "work": [
+      "s=-2.32599+3.850243=1.524253"
+     ],
+     "words": "The blue node 1 is a constant input, so its weight is simply added to the sum."
+    },
+    {
+     "title": "Apply the sigmoid activation",
+     "general": [
+      "h=f(s)=\\frac{1}{1+e^{-s}}"
+     ],
+     "work": [
+      "h=\\frac{1}{1+e^{-1.524253}}=0.82116"
+     ],
+     "words": "The net input is positive, so the hidden output is above 0.5."
+    },
+    {
+     "title": "Compute the output node",
+     "general": [
+      "\\hat y=v_0+v_1h"
+     ],
+     "work": [
+      "\\hat y=-0.03395+0.70671(0.82116)=0.54637"
+     ],
+     "words": "The output node of this model is linear, so it adds its bias to the weighted hidden output without another sigmoid. The prediction is on the normalized 0 to 1 strength scale."
+    }
+   ],
+   "conclusion": "The net input to the hidden neuron is 1.52425 and its sigmoid output is 0.82116. The predicted normalized strength is 0.54637 on the 0 to 1 scale.",
+   "source": "Original practice example using the Session 23 page 33 weights",
+   "lookup": null,
+   "values": {
+    "weights": {
+     "cement": 4.27674,
+     "slag": 2.50472,
+     "ash": 0.83143,
+     "water": -1.61849,
+     "superplastic": 1.36199,
+     "coarseagg": 0.12667,
+     "fineagg": 0.09672,
+     "age": 10.72208
+    },
+    "inputs": {
+     "cement": 0.6,
+     "slag": 0.2,
+     "ash": 0.0,
+     "water": 0.5,
+     "superplastic": 0.3,
+     "coarseagg": 0.5,
+     "fineagg": 0.5,
+     "age": 0.1
+    },
+    "biasHidden": -2.32599,
+    "biasOutput": -0.03395,
+    "hiddenToOutput": 0.70671,
+    "weightedSum": 3.8502430000000003,
+    "netInput": 1.5242530000000003,
+    "hidden": 0.8211639029085818,
+    "prediction": 0.5463747418245237
+   },
+   "module": 23,
+   "tolerance": 0.002731873709122619,
+   "answerName": "Predicted normalized strength",
+   "answer": 0.5463747418245237
+  },
+  {
+   "id": "s23-neuron-sse",
+   "title": "Sum of squared errors for a three-input sigmoid neuron",
+   "topic": "s23neuron",
+   "context": "Original practice example. A single artificial neuron has three inputs with weights w1 = 1, w2 = -2 and w3 = 0.5 and a sigmoid activation function. Three training observations with known outputs are given. Compute the neuron's predictions and the sum of squared errors that backpropagation would minimize.",
+   "unit": "squared output units",
+   "table": {
+    "headers": [
+     "Observation",
+     "x1",
+     "x2",
+     "x3",
+     "Known output y"
+    ],
+    "rows": [
+     [
+      1,
+      1,
+      0,
+      1,
+      1
+     ],
+     [
+      2,
+      0,
+      1,
+      1,
+      0
+     ],
+     [
+      3,
+      1,
+      1,
+      0,
+      1
+     ]
+    ]
+   },
+   "tasks": [
+    "Compute the weighted sum for each observation.",
+    "Apply the sigmoid to get each prediction.",
+    "Compute each error and the sum of squared errors."
+   ],
+   "hypotheses": null,
+   "symbols": "\\(x_{ij}\\) (input \\(j\\) of observation \\(i\\)), \\(w_j\\) (weight), \\(s_i\\) (weighted sum), \\(\\hat y_i\\) (prediction), \\(e_i\\) (error), \\(SS\\) (sum of squared errors).",
+   "steps": [
+    {
+     "title": "Weighted sums",
+     "general": [
+      "s_i=\\sum_{j=1}^{3}w_jx_{ij}"
+     ],
+     "work": [
+      "s_1=1(1)-2(0)+0.5(1)=1.5",
+      "s_2=1(0)-2(1)+0.5(1)=-1.5",
+      "s_3=1(1)-2(1)+0.5(0)=-1"
+     ],
+     "words": "Each observation gets its own weighted sum, with the same weights for every observation."
+    },
+    {
+     "title": "Sigmoid predictions",
+     "general": [
+      "\\hat y_i=\\frac{1}{1+e^{-s_i}}"
+     ],
+     "work": [
+      "\\hat y_1=\\frac{1}{1+e^{-1.5}}=0.81757",
+      "\\hat y_2=\\frac{1}{1+e^{1.5}}=0.18243",
+      "\\hat y_3=\\frac{1}{1+e^{1}}=0.26894"
+     ],
+     "words": "A positive sum gives a prediction above 0.5 and a negative sum gives one below 0.5."
+    },
+    {
+     "title": "Errors",
+     "general": [
+      "e_i=y_i-\\hat y_i"
+     ],
+     "work": [
+      "e_1=1-0.81757=0.18243",
+      "e_2=0-0.18243=-0.18243",
+      "e_3=1-0.26894=0.73106"
+     ],
+     "words": "Each error is the known output minus the prediction."
+    },
+    {
+     "title": "Sum of squared errors",
+     "general": [
+      "SS=\\sum_{i=1}^{n}e_i^2=\\sum_{i=1}^{n}(y_i-\\hat y_i)^2"
+     ],
+     "work": [
+      "SS=0.18243^2+(-0.18243)^2+0.73106^2",
+      "=0.03328+0.03328+0.53445=0.601"
+     ],
+     "words": "Observation 3 contributes most of the error. Backpropagation would change the weights to make this total smaller."
+    }
+   ],
+   "conclusion": "The predictions are 0.81757, 0.18243 and 0.26894, and the sum of squared errors is 0.60100. Most of the error comes from observation 3, whose known output is 1 but whose prediction is only 0.26894.",
+   "source": "Original practice example",
+   "lookup": null,
+   "values": {
+    "weights": [
+     1.0,
+     -2.0,
+     0.5
+    ],
+    "sums": [
+     1.5,
+     -1.5,
+     -1.0
+    ],
+    "predictions": [
+     0.8175744761936437,
+     0.18242552380635635,
+     0.2689414213699951
+    ],
+    "errors": [
+     0.18242552380635635,
+     -0.18242552380635635,
+     0.7310585786300049
+    ],
+    "SSE": 0.6010047888605701
+   },
+   "module": 23,
+   "tolerance": 0.0030050239443028502,
+   "answerName": "Sum of squared errors",
+   "answer": 0.6010047888605701
+  }
+ ],
+ "questions": [
+  {
+   "id": "m2-s23-q001",
+   "module": 23,
+   "topic": "s23knn",
+   "stem": "For the lecture exercise, what is the Euclidean distance from the new sample (4, 4) to sample B (3, 3)?",
+   "options": [
+    "\\(2\\)",
+    "\\(1\\)",
+    "\\(1.41421\\)",
+    "\\(0.70711\\)"
+   ],
+   "correct": 2,
+   "why": "The differences are 1 and 1, so \\(\\sqrt{1+1}=\\sqrt2\\approx1.41421\\). Adding the absolute differences gives 2, the Manhattan distance.",
+   "case": "s23-exercise-k3",
+   "equations": [
+    "d_B=\\sqrt{1^2+1^2}=\\sqrt2"
+   ]
+  },
+  {
+   "id": "m2-s23-q002",
+   "module": 23,
+   "topic": "s23knn",
+   "stem": "For the lecture exercise, which three samples are the K = 3 nearest neighbors of (4, 4)?",
+   "options": [
+    "A, C and B",
+    "A, C and D",
+    "A, B and F",
+    "C, D and E"
+   ],
+   "correct": 0,
+   "why": "A and C are at distance 1 and B at 1.41421. D is fourth at distance 2.",
+   "case": "s23-exercise-k3",
+   "equations": []
+  },
+  {
+   "id": "m2-s23-q003",
+   "module": 23,
+   "topic": "s23knn",
+   "stem": "For the lecture exercise with K = 3, what is the classification of (4, 4) and its probability?",
+   "options": [
+    "Malignant, \\(2/3=0.66667\\)",
+    "Benign, \\(1/3=0.33333\\)",
+    "Malignant, \\(3/5=0.6\\)",
+    "Benign, \\(2/3=0.66667\\)"
+   ],
+   "correct": 3,
+   "why": "Two of the three neighbors (A and B) are benign, so the plurality class is benign with probability 2/3.",
+   "case": "s23-exercise-k3",
+   "equations": [
+    "P(\\text{Benign})=\\frac{2}{3}"
+   ]
+  },
+  {
+   "id": "m2-s23-q004",
+   "module": 23,
+   "topic": "s23knn",
+   "stem": "For the lecture exercise, what is the Euclidean distance from (4, 4) to sample E (5, 6)?",
+   "options": [
+    "\\(3\\)",
+    "\\(2.23607\\)",
+    "\\(5\\)",
+    "\\(1.73205\\)"
+   ],
+   "correct": 1,
+   "why": "The differences are 1 and 2, so \\(\\sqrt{1+4}=\\sqrt5\\approx2.23607\\). Forgetting the root gives 5.",
+   "case": "s23-exercise-k5",
+   "equations": [
+    "d_E=\\sqrt{1^2+2^2}=\\sqrt5"
+   ]
+  },
+  {
+   "id": "m2-s23-q005",
+   "module": 23,
+   "topic": "s23knn",
+   "stem": "For the lecture exercise with K = 5, what is the classification of (4, 4) and its probability?",
+   "options": [
+    "Benign, \\(3/5=0.6\\)",
+    "Malignant, \\(3/5=0.6\\)",
+    "Malignant, \\(4/5=0.8\\)",
+    "Benign, \\(2/3=0.66667\\)"
+   ],
+   "correct": 1,
+   "why": "The five neighbors are A, C, B, D and E. C, D and E are malignant, so the plurality is malignant with probability 3/5.",
+   "case": "s23-exercise-k5",
+   "equations": [
+    "P(\\text{Malignant})=\\frac{3}{5}"
+   ]
+  },
+  {
+   "id": "m2-s23-q006",
+   "module": 23,
+   "topic": "s23scaling",
+   "stem": "radius_mean has minimum 6.981, maximum 28.110 and mean 14.127. What is the min-max normalized value of the mean?",
+   "options": [
+    "\\(0.50257\\)",
+    "\\(0.66861\\)",
+    "\\(7.146\\)",
+    "\\(0.33821\\)"
+   ],
+   "correct": 3,
+   "why": "\\((14.127-6.981)/(28.110-6.981)=7.146/21.129=0.33821\\). Dividing by the maximum alone gives 0.50257, dividing the value itself by the range gives 0.66861, and 7.146 forgets to divide by the range.",
+   "case": "s23-radius-minmax",
+   "equations": [
+    "x_{\\text{scaled}}=\\frac{14.127-6.981}{21.129}"
+   ]
+  },
+  {
+   "id": "m2-s23-q007",
+   "module": 23,
+   "topic": "s23scaling",
+   "stem": "Using the same minimum 6.981 and maximum 28.110, what is the normalized value of the median radius 13.370?",
+   "options": [
+    "\\(0.30238\\)",
+    "\\(0.47563\\)",
+    "\\(0.33821\\)",
+    "\\(6.389\\)"
+   ],
+   "correct": 0,
+   "why": "\\((13.370-6.981)/21.129=6.389/21.129=0.30238\\).",
+   "case": "s23-radius-minmax",
+   "equations": [
+    "x_{\\text{scaled}}=\\frac{13.370-6.981}{21.129}"
+   ]
+  },
+  {
+   "id": "m2-s23-q008",
+   "module": 23,
+   "topic": "s23confusion",
+   "stem": "For the K = 21 min-max model (TN 61, FP 0, FN 2, TP 37), what is the accuracy?",
+   "options": [
+    "\\(0.61\\)",
+    "\\(0.37\\)",
+    "\\(0.98\\)",
+    "\\(0.94872\\)"
+   ],
+   "correct": 2,
+   "why": "\\((37+61)/100=0.98\\). 0.94872 is the sensitivity, not the accuracy.",
+   "case": "s23-wbcd-k21-accuracy",
+   "equations": [
+    "\\text{accuracy}=\\frac{37+61}{100}"
+   ]
+  },
+  {
+   "id": "m2-s23-q009",
+   "module": 23,
+   "topic": "s23confusion",
+   "stem": "For the same K = 21 model, what is the error rate?",
+   "options": [
+    "\\(0.98\\)",
+    "\\(0.05128\\)",
+    "\\(2\\)",
+    "\\(0.02\\)"
+   ],
+   "correct": 3,
+   "why": "\\((0+2)/100=0.02\\), which equals 1 minus the accuracy.",
+   "case": "s23-wbcd-k21-accuracy",
+   "equations": [
+    "\\text{error rate}=\\frac{0+2}{100}"
+   ]
+  },
+  {
+   "id": "m2-s23-q010",
+   "module": 23,
+   "topic": "s23sensspec",
+   "stem": "For the K = 21 min-max model, what is the sensitivity for detecting malignancy?",
+   "options": [
+    "\\(0.98\\)",
+    "\\(0.94872\\)",
+    "\\(1\\)",
+    "\\(0.37\\)"
+   ],
+   "correct": 1,
+   "why": "\\(37/(37+2)=37/39=0.94872\\). It uses only the 39 actual malignant samples.",
+   "case": "s23-wbcd-k21-accuracy",
+   "equations": [
+    "\\text{sensitivity}=\\frac{37}{39}"
+   ]
+  },
+  {
+   "id": "m2-s23-q011",
+   "module": 23,
+   "topic": "s23confusion",
+   "stem": "A test always predicts no defect, and the defect occurs in 10 of 100,000 newborns. What is the test's accuracy?",
+   "options": [
+    "\\(0.0001\\)",
+    "\\(0\\)",
+    "\\(0.9999\\)",
+    "\\(0.999\\)"
+   ],
+   "correct": 2,
+   "why": "It is right for all 99,990 babies without the defect, so the accuracy is \\(99990/100000=0.9999\\).",
+   "case": "s23-rare-variant",
+   "equations": [
+    "\\text{accuracy}=\\frac{99990}{100000}"
+   ]
+  },
+  {
+   "id": "m2-s23-q012",
+   "module": 23,
+   "topic": "s23sensspec",
+   "stem": "For the always-no test with 10 defects in 100,000 newborns, what is the sensitivity?",
+   "options": [
+    "\\(0\\)",
+    "\\(0.9999\\)",
+    "\\(1\\)",
+    "\\(0.0001\\)"
+   ],
+   "correct": 0,
+   "why": "No defect is detected, so \\(TP=0\\) and sensitivity is \\(0/(0+10)=0\\).",
+   "case": "s23-rare-variant",
+   "equations": [
+    "\\text{sensitivity}=\\frac{0}{0+10}"
+   ]
+  },
+  {
+   "id": "m2-s23-q013",
+   "module": 23,
+   "topic": "s23sensspec",
+   "stem": "For the z-score model (TN 61, FP 0, FN 5, TP 34), what is the sensitivity?",
+   "options": [
+    "\\(0.87179\\)",
+    "\\(0.95\\)",
+    "\\(0.55738\\)",
+    "\\(0.12821\\)"
+   ],
+   "correct": 0,
+   "why": "\\(34/(34+5)=34/39=0.87179\\). 0.12821 is the false negative share 5/39.",
+   "case": "s23-wbcd-zscore-sens",
+   "equations": [
+    "\\text{sensitivity}=\\frac{34}{39}"
+   ]
+  },
+  {
+   "id": "m2-s23-q014",
+   "module": 23,
+   "topic": "s23sensspec",
+   "stem": "For the z-score model, what is the specificity?",
+   "options": [
+    "\\(0.87179\\)",
+    "\\(0.92424\\)",
+    "\\(1\\)",
+    "\\(0.61\\)"
+   ],
+   "correct": 2,
+   "why": "\\(61/(61+0)=1\\). No benign sample is called malignant. 0.92424 is the column proportion 61/66.",
+   "case": "s23-wbcd-zscore-sens",
+   "equations": [
+    "\\text{specificity}=\\frac{61}{61}"
+   ]
+  },
+  {
+   "id": "m2-s23-q015",
+   "module": 23,
+   "topic": "s23confusion",
+   "stem": "For the z-score model, what is the accuracy?",
+   "options": [
+    "\\(0.98\\)",
+    "\\(0.95\\)",
+    "\\(0.87179\\)",
+    "\\(0.34\\)"
+   ],
+   "correct": 1,
+   "why": "\\((34+61)/100=0.95\\), lower than the 0.98 of min-max scaling.",
+   "case": "s23-wbcd-zscore-sens",
+   "equations": [
+    "\\text{accuracy}=\\frac{34+61}{100}"
+   ]
+  },
+  {
+   "id": "m2-s23-q016",
+   "module": 23,
+   "topic": "s23neuron",
+   "stem": "In the concrete example, the hidden neuron's net input is 1.524253. What is its sigmoid output?",
+   "options": [
+    "\\(1.52425\\)",
+    "\\(0.17884\\)",
+    "\\(1\\)",
+    "\\(0.82116\\)"
+   ],
+   "correct": 3,
+   "why": "\\(1/(1+e^{-1.524253})=0.82116\\). Using \\(e^{+s}\\) gives 0.17884, and 1 is the threshold output.",
+   "case": "s23-concrete-neuron",
+   "equations": [
+    "h=\\frac{1}{1+e^{-s}}"
+   ]
+  },
+  {
+   "id": "m2-s23-q017",
+   "module": 23,
+   "topic": "s23neuron",
+   "stem": "In the concrete example, the weighted input sum is 3.850243 and the hidden bias is -2.32599. What is the net input s?",
+   "options": [
+    "\\(6.176233\\)",
+    "\\(1.524253\\)",
+    "\\(3.850243\\)",
+    "\\(-1.524253\\)"
+   ],
+   "correct": 1,
+   "why": "\\(s=-2.32599+3.850243=1.524253\\). Subtracting the bias instead of adding it gives 6.176233.",
+   "case": "s23-concrete-neuron",
+   "equations": [
+    "s=w_0+\\sum w_jx_j"
+   ]
+  },
+  {
+   "id": "m2-s23-q018",
+   "module": 23,
+   "topic": "s23neuron",
+   "stem": "In the concrete example, the hidden output is 0.82116. What is the predicted normalized strength?",
+   "options": [
+    "\\(0.58032\\)",
+    "\\(0.78721\\)",
+    "\\(0.63329\\)",
+    "\\(0.54637\\)"
+   ],
+   "correct": 3,
+   "why": "The output node is linear, so \\(\\hat y=-0.03395+0.70671(0.82116)=0.54637\\). Leaving out the output bias gives 0.58032, using a weight of 1 instead of 0.70671 gives 0.78721, and applying a second sigmoid gives 0.63329.",
+   "case": "s23-concrete-neuron",
+   "equations": [
+    "\\hat y=v_0+v_1h"
+   ]
+  },
+  {
+   "id": "m2-s23-q019",
+   "module": 23,
+   "topic": "s23neuron",
+   "stem": "A sigmoid neuron has weights (1, -2, 0.5) and inputs (1, 0, 1). What is its output?",
+   "options": [
+    "\\(1.5\\)",
+    "\\(0.18243\\)",
+    "\\(0.81757\\)",
+    "\\(1\\)"
+   ],
+   "correct": 2,
+   "why": "The weighted sum is \\(1+0+0.5=1.5\\), and \\(1/(1+e^{-1.5})=0.81757\\). 1 is the threshold output.",
+   "case": "s23-neuron-sse",
+   "equations": [
+    "\\hat y=\\frac{1}{1+e^{-1.5}}"
+   ]
+  },
+  {
+   "id": "m2-s23-q020",
+   "module": 23,
+   "topic": "s23neuron",
+   "stem": "For the three-observation sigmoid neuron with errors 0.18243, -0.18243 and 0.73106, what is the sum of squared errors?",
+   "options": [
+    "\\(0.601\\)",
+    "\\(0.73106\\)",
+    "\\(0.20034\\)",
+    "\\(1.09592\\)"
+   ],
+   "correct": 0,
+   "why": "Square each error and add, \\(0.03328+0.03328+0.53445=0.60100\\). Adding the raw errors gives 0.73106, averaging the squares gives 0.20034, and adding the absolute errors gives 1.09592.",
+   "case": "s23-neuron-sse",
+   "equations": [
+    "SS=\\sum e_i^2"
+   ]
+  },
+  {
+   "id": "m2-s23-q021",
+   "module": 23,
+   "topic": "s23neuron",
+   "stem": "For the same three observations with sums 1.5, -1.5 and -1, the threshold activation is used instead of the sigmoid. What is the sum of squared errors?",
+   "options": [
+    "\\(0\\)",
+    "\\(2\\)",
+    "\\(1\\)",
+    "\\(0.60100\\)"
+   ],
+   "correct": 2,
+   "why": "Threshold outputs are 1, 0 and 0 against known outputs 1, 0 and 1, so only observation 3 is wrong and \\(SS=1\\).",
+   "case": "s23-neuron-sse",
+   "equations": [
+    "f(x)=1\\text{ if }x\\ge0"
+   ]
+  },
+  {
+   "id": "m2-s23-q022",
+   "module": 23,
+   "topic": "s23confusion",
+   "stem": "With min-max scaling and K = 1 (TN 58, FP 3, FN 1, TP 38), what is the accuracy?",
+   "options": [
+    "\\(0.96\\)",
+    "\\(0.98\\)",
+    "\\(0.97436\\)",
+    "\\(0.58\\)"
+   ],
+   "correct": 0,
+   "why": "\\((38+58)/100=0.96\\). 0.97436 is the sensitivity 38/39.",
+   "case": null,
+   "equations": [
+    "\\text{accuracy}=\\frac{38+58}{100}"
+   ]
+  },
+  {
+   "id": "m2-s23-q023",
+   "module": 23,
+   "topic": "s23sensspec",
+   "stem": "With min-max scaling and K = 1 (TN 58, FP 3, FN 1, TP 38), what is the specificity?",
+   "options": [
+    "\\(0.97436\\)",
+    "\\(0.98305\\)",
+    "\\(0.96\\)",
+    "\\(0.95082\\)"
+   ],
+   "correct": 3,
+   "why": "\\(58/(58+3)=58/61=0.95082\\). 0.98305 is the column proportion 58/59.",
+   "case": null,
+   "equations": [
+    "\\text{specificity}=\\frac{58}{61}"
+   ]
+  },
+  {
+   "id": "m2-s23-q024",
+   "module": 23,
+   "topic": "s23knn",
+   "stem": "With K = 21, a test sample is reported with probability 0.7619048. How many of its 21 neighbors voted for the predicted class?",
+   "options": [
+    "\\(15\\)",
+    "\\(16\\)",
+    "\\(17\\)",
+    "\\(21\\)"
+   ],
+   "correct": 1,
+   "why": "\\(16/21=0.7619048\\), while 17/21 = 0.8095238 and 15/21 = 0.7142857.",
+   "case": null,
+   "equations": [
+    "P=\\frac{16}{21}"
+   ]
+  },
+  {
+   "id": "m2-s23-q025",
+   "module": 23,
+   "topic": "s23scaling",
+   "stem": "Original practice example. The seven exercise size scores 4, 3, 4, 6, 5, 1, 7 have mean 4.28571 and SD 1.97605. What is the z-score of the size score 7?",
+   "options": [
+    "\\(1\\)",
+    "\\(2.71429\\)",
+    "\\(0.5\\)",
+    "\\(1.37359\\)"
+   ],
+   "correct": 3,
+   "why": "\\(z=(7-4.28571)/1.97605=1.37359\\). 2.71429 forgets to divide by the SD, and 1 is the min-max value.",
+   "case": null,
+   "equations": [
+    "z=\\frac{x-\\bar x}{s_x}"
+   ]
+  },
+  {
+   "id": "m2-s23-q026",
+   "module": 23,
+   "topic": "s23knn",
+   "stem": "In knn(train, test, cl, k, prob=TRUE), what is cl?",
+   "options": [
+    "The number of neighbors to consider",
+    "A factor of the true classes of the training cases",
+    "The data frame of test cases",
+    "The class predicted for each test case"
+   ],
+   "correct": 1,
+   "why": "cl holds the known training labels, here wbcd_train_labels. k is the number of neighbors.",
+   "case": null,
+   "equations": []
+  },
+  {
+   "id": "m2-s23-q027",
+   "module": 23,
+   "topic": "s23knn",
+   "stem": "What does the attribute prob returned by knn() with prob=TRUE contain?",
+   "options": [
+    "The proportion of the K votes for the winning class",
+    "The p-value for the classification",
+    "The distance to the nearest neighbor",
+    "The share of the training set in the winning class"
+   ],
+   "correct": 0,
+   "why": "With K = 21, each prob value is the number of winning votes divided by 21.",
+   "case": null,
+   "equations": []
+  },
+  {
+   "id": "m2-s23-q028",
+   "module": 23,
+   "topic": "s23knn",
+   "stem": "Why is the breast cancer data split into rows 1 to 469 and rows 470 to 569?",
+   "options": [
+    "So that K equals the number of test samples",
+    "Because the last 100 rows have no diagnosis",
+    "So the model is evaluated on 100 samples it was not trained on",
+    "So that the benign and malignant samples are separated"
+   ],
+   "correct": 2,
+   "why": "Performance is measured on a held-out test set whose true labels are known but not used for training.",
+   "case": null,
+   "equations": []
+  },
+  {
+   "id": "m2-s23-q029",
+   "module": 23,
+   "topic": "s23knn",
+   "stem": "Why is K = 21 a sensible choice for the breast cancer training set?",
+   "options": [
+    "It is close to the square root of the 469 training samples",
+    "It is the number of attributes",
+    "It guarantees 100% accuracy",
+    "It equals the number of malignant test samples"
+   ],
+   "correct": 0,
+   "why": "\\(\\sqrt{469}\\approx21.66\\), the guideline from Session 22. An odd K also avoids tied votes between two classes.",
+   "case": null,
+   "equations": []
+  },
+  {
+   "id": "m2-s23-q030",
+   "module": 23,
+   "topic": "s23knn",
+   "stem": "Test sample 32 is predicted benign with probability 0.7619 but is actually malignant. What does this show?",
+   "options": [
+    "knn() reports the probability of the wrong class",
+    "The model has 76% accuracy",
+    "The vote probability is only an estimate and can be high for a wrong classification",
+    "Sample 32 should have been in the training set"
+   ],
+   "correct": 2,
+   "why": "The probability is the share of neighbors that agree, not a guarantee that the classification is correct.",
+   "case": null,
+   "equations": []
+  },
+  {
+   "id": "m2-s23-q031",
+   "module": 23,
+   "topic": "s23scaling",
+   "stem": "Why are the breast cancer features rescaled before K-NN?",
+   "options": [
+    "K-NN only accepts values between 0 and 1",
+    "Area values in the hundreds would otherwise dominate the distance over features like smoothness",
+    "Rescaling changes the diagnosis labels",
+    "Rescaling removes the outliers"
+   ],
+   "correct": 1,
+   "why": "The Euclidean distance adds squared differences, so a feature with a large range would outweigh the others.",
+   "case": null,
+   "equations": []
+  },
+  {
+   "id": "m2-s23-q032",
+   "module": 23,
+   "topic": "s23confusion",
+   "stem": "In a two-class confusion matrix with Malignant as positive, what is a malignant sample predicted benign?",
+   "options": [
+    "A false positive",
+    "A true negative",
+    "A true positive",
+    "A false negative"
+   ],
+   "correct": 3,
+   "why": "The prediction is negative (benign) and wrong, so it is a false negative.",
+   "case": null,
+   "equations": []
+  },
+  {
+   "id": "m2-s23-q033",
+   "module": 23,
+   "topic": "s23confusion",
+   "stem": "Why can a 99.99% accurate classifier be useless for a rare genetic variant?",
+   "options": [
+    "Accuracy above 99% always means overfitting",
+    "Always predicting no variant is also 99.99% accurate while missing every case",
+    "Accuracy ignores the true negatives",
+    "The error rate is then larger than the accuracy"
+   ],
+   "correct": 1,
+   "why": "When a class is rare, accuracy is dominated by the majority class, so sensitivity must be checked too.",
+   "case": null,
+   "equations": []
+  },
+  {
+   "id": "m2-s23-q034",
+   "module": 23,
+   "topic": "s23sensspec",
+   "stem": "Which quantity is the true negative rate?",
+   "options": [
+    "Sensitivity, TP/(TP + FN)",
+    "Accuracy, (TP + TN)/n",
+    "Specificity, TN/(TN + FP)",
+    "Error rate, (FP + FN)/n"
+   ],
+   "correct": 2,
+   "why": "Specificity is the share of actual negatives correctly classified as negative.",
+   "case": null,
+   "equations": []
+  },
+  {
+   "id": "m2-s23-q035",
+   "module": 23,
+   "topic": "s23sensspec",
+   "stem": "What is studied with a receiver operating characteristic (ROC) curve?",
+   "options": [
+    "The trade-off between K and the number of features",
+    "The convergence of backpropagation",
+    "The within-cluster sum of squares",
+    "The trade-off between sensitivity and specificity"
+   ],
+   "correct": 3,
+   "why": "As the decision rule shifts, sensitivity rises while specificity falls, and the ROC curve shows this trade-off.",
+   "case": null,
+   "equations": []
+  },
+  {
+   "id": "m2-s23-q036",
+   "module": 23,
+   "topic": "s23neuron",
+   "stem": "Which activation function gives a continuous output between 0 and 1?",
+   "options": [
+    "The sigmoid, \\(1/(1+e^{-x})\\)",
+    "The threshold function",
+    "The identity function \\(f(x)=x\\)",
+    "The sum of squared errors"
+   ],
+   "correct": 0,
+   "why": "The threshold function jumps from 0 to 1, while the sigmoid rises smoothly.",
+   "case": null,
+   "equations": []
+  },
+  {
+   "id": "m2-s23-q037",
+   "module": 23,
+   "topic": "s23neuron",
+   "stem": "Which three things determine a particular neural network?",
+   "options": [
+    "Its number of samples, K and distance measure",
+    "Its accuracy, sensitivity and specificity",
+    "Its activation function, network topology and training algorithm",
+    "Its input data, random seed and plot"
+   ],
+   "correct": 2,
+   "why": "These three components are listed in the NN components section.",
+   "case": null,
+   "equations": []
+  },
+  {
+   "id": "m2-s23-q038",
+   "module": 23,
+   "topic": "s23neuron",
+   "stem": "What is a network with multiple hidden layers called?",
+   "options": [
+    "A recurrent network",
+    "A convolutional network",
+    "A single artificial neuron",
+    "Deep learning"
+   ],
+   "correct": 3,
+   "why": "Multiple hidden layers define deep learning. A recurrent network is defined by backward information flow.",
+   "case": null,
+   "equations": []
+  },
+  {
+   "id": "m2-s23-q039",
+   "module": 23,
+   "topic": "s23neuron",
+   "stem": "What does backpropagation choose the weights to minimize?",
+   "options": [
+    "The sum of squared errors between known outputs and predictions",
+    "The number of hidden neurons",
+    "The correlation between predictions and data",
+    "The number of training steps"
+   ],
+   "correct": 0,
+   "why": "\\(SS=\\sum(y_i-\\hat y_i)^2\\) is minimized for a chosen topology and activation function, using training data with known outputs.",
+   "case": null,
+   "equations": [
+    "SS=\\sum_{i=1}^{n}(y_i-\\hat y_i)^2"
+   ]
+  },
+  {
+   "id": "m2-s23-q040",
+   "module": 23,
+   "topic": "s23neuron",
+   "stem": "Going from 1 to 5 hidden neurons in the concrete model, how does the test correlation change?",
+   "options": [
+    "It falls from 0.9244533 to 0.8064656",
+    "It rises from 0.8064656 to 0.9244533",
+    "It stays at 0.8064656",
+    "It rises from 5.077438 to 1.626684"
+   ],
+   "correct": 1,
+   "why": "The more complex topology fits strength better on the test set. 5.077438 and 1.626684 are the reported training errors.",
+   "case": null,
+   "equations": []
+  }
+ ],
+ "sourceNotes": [
+  {
+   "page": 1,
+   "text": "The course syllabus lists Session 23 as \"Decision Trees\", but the Session 23 slides cover K-NN in R with the breast cancer example, evaluation of model performance with the confusion matrix, and a quick tour of artificial neural networks. Decision trees are not covered in these slides."
+  },
+  {
+   "page": 1,
+   "text": "Section labels differ from the outline. The outline lists V.D \"Breast cancer diagnosis example - revisited\", which has no separate heading. Page 18 is headed Step 3 although it follows Step 4 on page 17. Page 30 is headed \"D. Components of a NN\" while the outline (page 2) names D as \"Algorithm for training a NN\". Page 16 has the comment typo predcit (predict), and page 25 reads \"is design to\" (designed)."
+  },
+  {
+   "page": 16,
+   "text": "The code wbcd[2:31] (features) and wbcd[1:469, 1] (labels) only works after the id column has been removed with wbcd <- wbcd[-1], a step not shown on page 12. As imported, column 1 is id and column 2 is diagnosis, so these indices would select the wrong columns. Page 19's scale(wbcd[-1]) also assumes id was removed, leaving diagnosis as column 1."
+  },
+  {
+   "page": 13,
+   "text": "The code comment says \"summarize three numeric features\", but six are summarized (radius_mean, area_mean, smoothness_mean, radius_se, area_se, smoothness_se), and the summary() call is cut off at the slide edge."
+  },
+  {
+   "page": 11,
+   "text": "The third set of 10 attributes is described as the maximum value of each quantity. In the Wisconsin data description this set is the \"worst\" value, the mean of the three largest values, rather than the single maximum."
+  },
+  {
+   "page": 22,
+   "text": "The sentence \"interpreted similarly to how we viewed the types of errors of\" ends without naming the topic. The comparison is with Type I (false positive) and Type II (false negative) errors in hypothesis testing."
+  },
+  {
+   "page": 23,
+   "text": "ROC is written as \"receiver operator curve\". The standard name is receiver operating characteristic (ROC) curve."
+  },
+  {
+   "page": 25,
+   "text": "The equation y = f(Σ x_j) leaves out the weights, although the diagram labels w_1, w_2, w_3 and w_i is defined below it. The artificial neuron output is y = f(Σ w_j x_j), as used in the teaching text. The slide also says the cell body receives input from the dendrites of other neurons. A neuron's own dendrites receive signals from other neurons' axon terminals and pass them to its cell body."
+  },
+  {
+   "page": 26,
+   "text": "The threshold function is written f(x) = 0 for x < 0 and 1 for x ≥ 0, while the caption says it is on only when the sum exceeds the threshold. By the formula the output is already 1 when the sum equals 0."
+  },
+  {
+   "page": 30,
+   "text": "The training equations write the weights as w_ij with i = 1,...,n indexing observations and the inputs as x_j without an observation index. The weights are the same for every observation and the inputs change, so the teaching text writes y_i = f(Σ_j w_j x_ij) + e_i."
+  },
+  {
+   "page": 32,
+   "text": "concrete_train and concrete_test are used but their creation (splitting concrete_norm into training and test rows) is not shown, and predicted_strength2 on page 34 is not defined on the slides. The Error values on pages 33 and 34 are those printed by neuralnet(), whose default error function is one half of the sum of squared errors. The original-variant case reads the page 33 slag weight as 2.50472 from the rotated label."
+  },
+  {
+   "page": 3,
+   "text": "Principal Component Analysis is given as an example of grouping similar features into homogeneous categories for image compression. PCA is a dimension-reduction method, not a clustering method; clustering-based image compression groups similar pixel colors with an algorithm such as k-means (color quantization)."
+  }
+ ]
+}

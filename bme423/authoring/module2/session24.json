@@ -1,0 +1,2986 @@
+{
+ "module": {
+  "id": 24,
+  "title": "Nonparametric methods: Normality checks and rank tests",
+  "date": "2026-11-18",
+  "count": 27,
+  "pdf": "sources/session24.pdf",
+  "pptx": null,
+  "slides": [
+   {
+    "page": 1,
+    "title": "Methods based on ranks: outline",
+    "topic": "s24normal",
+    "paragraphs": [
+     "This session introduces nonparametric methods, which base inference on the ranks of the observations instead of on the observed values themselves. Ranking removes the need to assume that the data come from a Normal population.",
+     "Part I contrasts parametric and nonparametric methods and shows how to check whether data are Normally distributed. Part II is the Mann-Whitney rank-sum test for two groups made of different individuals, developed through its idea, the test procedure, and an example.",
+     "Part III is the Wilcoxon signed-rank test for two observations on the same subject, again developed through the idea, the test procedure, and an example. The two rank tests are the ordinal counterparts of the unpaired and paired t tests."
+    ],
+    "equations": [],
+    "symbols": "",
+    "case": null,
+    "subset": null,
+    "core": false
+   },
+   {
+    "page": 2,
+    "title": "Choosing a test by scale of measurement and type of experiment",
+    "topic": "s24normal",
+    "paragraphs": [
+     "The summary table sorts hypothesis tests by the scale of measurement (interval data from Normal populations, nominal, ordinal, survival time) and by the design of the experiment. Methods already covered are circled in red.",
+     "The green arrows mark the two new methods in the ordinal row. The Mann-Whitney rank-sum test is used for two treatment groups made of different individuals. The Wilcoxon signed-rank test is used for a single treatment measured before and after in the same individuals.",
+     "The footnotes explain when the ordinal row applies. When the assumption of Normally distributed populations is not met, the observations are ranked and the ordinal methods are used. The ordinal row also covers interval data that are not necessarily Normally distributed."
+    ],
+    "equations": [],
+    "symbols": "",
+    "case": null,
+    "subset": null,
+    "core": true
+   },
+   {
+    "page": 3,
+    "title": "The Normal density behind t and F",
+    "topic": "s24normal",
+    "paragraphs": [
+     "The Normal, or Gaussian, density has a bell shape centered on the mean \\(\\mu\\), with spread set by the standard deviation \\(\\sigma\\). The notation \\(X\\sim N(\\mu,\\sigma^2)\\) states that the random variable \\(X\\) follows this distribution.",
+     "The sampling distributions of the t and F statistics were derived under the assumption that the random variable is Normally distributed. The t tests, analysis of variance and regression tests therefore depend on Normality.",
+     "Methods that assume a particular distribution with parameters such as the mean and standard deviation are called parametric. Methods based on ranks do not need that assumption, so they are called nonparametric."
+    ],
+    "equations": [
+     "f(x)=\\frac{1}{\\sigma\\sqrt{2\\pi}}\\exp\\left(\\frac{-(x-\\mu)^2}{2\\sigma^2}\\right)",
+     "X\\sim N(\\mu,\\sigma^2)"
+    ],
+    "symbols": "\\(f(x)\\) (Normal density), \\(x\\) (value of the variable), \\(\\mu\\) (population mean), \\(\\sigma\\) (population standard deviation), \\(X\\) (random variable).",
+    "case": null,
+    "subset": null,
+    "core": true
+   },
+   {
+    "page": 4,
+    "title": "A symmetric and a skewed population",
+    "topic": "s24normal",
+    "paragraphs": [
+     "The 200 Martians have heights that are symmetric about the mean of 40 cm with a standard deviation of 5.0 cm, ranging from 27 to 53 cm. Each Martian is more likely to have a height near the mean than far from it and is equally likely to be shorter or taller than average.",
+     "The 100 Jovians have a mean of 37.6 cm and a standard deviation of 4.5 cm, but their heights range from 32 to 49 cm and pile up on the low side with a long tail toward high values. This population is skewed, not Normal.",
+     "For a skewed population the mean and standard deviation do not describe the data the way they do for a Normal population. The mean lies above the most common heights, and the bar showing the mean plus or minus one SD is not centered on the bulk of the Jovians, which is why Normality is checked before a parametric test is used."
+    ],
+    "equations": [],
+    "symbols": "",
+    "case": null,
+    "subset": null,
+    "core": true
+   },
+   {
+    "page": 5,
+    "title": "Checking Normality by the percentage of data in a range",
+    "topic": "s24normal",
+    "paragraphs": [
+     "For a Normal distribution fixed fractions of the values fall in fixed ranges. About 0.3413 of the area lies between the mean and one SD on each side, so about 68% lies within one SD, about 95% within 1.96 SD and about 99% within 2.58 SD.",
+     "A first, qualitative check counts the percentage of the data in a range such as \\(\\bar x-s\\) to \\(\\bar x+s\\), or below \\(\\bar x-2s\\), and compares it with the Normal percentage. The cumulative row gives the Normal fractions below each point, 0.001, 0.023, 0.159, 0.5, 0.841, 0.977 and 0.999 at \\(-3\\sigma\\) through \\(+3\\sigma\\).",
+     "This idea was applied in Homework 1 Question 4 (v) and is then generalized by using the full Normal probability density function, which leads to the quantile plot on the next page."
+    ],
+    "equations": [
+     "P(\\mu-\\sigma<X<\\mu+\\sigma)=2(0.3413)=0.6826",
+     "\\bar x-s<x<\\bar x+s"
+    ],
+    "symbols": "\\(\\mu\\) (population mean), \\(\\sigma\\) (population SD), \\(\\bar x\\) (sample mean), \\(s\\) (sample SD), \\(X\\) (random variable).",
+    "case": null,
+    "subset": null,
+    "core": true
+   },
+   {
+    "page": 6,
+    "title": "The Normal quantile-quantile plot",
+    "topic": "s24normal",
+    "paragraphs": [
+     "A general quantile-quantile (Q-Q) plot compares the quantiles of two sets of data. The Normal quantile plot is the version that compares the sample with a Normal distribution.",
+     "Each data point is plotted as its sample quantile against the Z value expected for that position in a Normal sample. If the sample quantiles match the theoretical Normal quantiles, the points fall on a straight line.",
+     "Even data drawn from a Normal distribution show some departure from a straight line because of sampling variation. The R function qqnorm() computes the quantiles and draws the plot, and the approach was applied in Homework 1 Question 4 (vi)."
+    ],
+    "equations": [],
+    "symbols": "",
+    "case": null,
+    "subset": null,
+    "core": true
+   },
+   {
+    "page": 7,
+    "title": "Reading qqnorm() output, including non-Normal shapes",
+    "topic": "s24normal",
+    "paragraphs": [
+     "The ten values 60, 62, 62, 63, 64, 64, 65, 65, 67 and 68 are plotted with qqnorm(x), and qqline(x, col=2) adds a reference line through the first and third quartiles. The theoretical quantiles run from \\(-1.55\\) to \\(+1.55\\), and the points lie close to the line, so the data can be treated as coming from a Normal distribution.",
+     "The four lower panels show typical departures. Light tails bend the ends of the plot toward the center, so the extreme points fall inside the line. Heavy tails make the extreme points run away from the line at both ends.",
+     "Positive skew bends the plot upward at the right end, because the largest values are larger than Normal quantiles predict. Negative skew bends it downward at the left end, because the smallest values are smaller than predicted."
+    ],
+    "equations": [],
+    "symbols": "",
+    "case": "s24-shapiro-two-samples",
+    "subset": null,
+    "core": true
+   },
+   {
+    "page": 8,
+    "title": "The Shapiro-Wilk test of Normality",
+    "topic": "s24normal",
+    "paragraphs": [
+     "The Shapiro-Wilk test is a formal test of Normality. It compares the distribution function of the data with the Normal distribution function. Its null hypothesis is that the data are Normally distributed, that is, there is no difference between the distribution of the data and a Normal distribution.",
+     "For the ten values from page 7, shapiro.test(x) gives W = 0.97577 with p-value 0.9386. The P value is larger than 0.05, so the null hypothesis is not rejected and the slide treats the data as Normal.",
+     "Replacing 60 by 50 and 68 by 88 gives W = 0.75726 with p-value 0.004374. The P value is smaller than 0.05, so the null hypothesis is rejected and the data are not Normal. The Q-Q plot shows the two extreme points far from the line formed by the others."
+    ],
+    "equations": [
+     "H_0:\\text{data are Normally distributed}",
+     "P<\\alpha\\Rightarrow\\text{reject }H_0"
+    ],
+    "symbols": "\\(H_0\\) (null hypothesis), \\(P\\) (P value from shapiro.test), \\(\\alpha\\) (significance level).",
+    "case": "s24-shapiro-two-samples",
+    "subset": null,
+    "core": true,
+    "hypotheses": {
+     "null": "H_0:\\text{the data come from a Normal distribution}",
+     "alternative": "H_A:\\text{the data do not come from a Normal distribution}",
+     "nullWords": "There is no difference between the distribution of the data and a Normal distribution.",
+     "alternativeWords": "The distribution of the data differs from a Normal distribution."
+    }
+   },
+   {
+    "page": 9,
+    "title": "Mann-Whitney idea with three placebo and four drug values",
+    "topic": "s24mwtable",
+    "paragraphs": [
+     "Seven people in a diuretic experiment are ranked from 1 (smallest daily urine production) to 7 (largest), regardless of group. The placebo group has \\(n_S=3\\) people with ranks 1, 5 and 3, and the drug group has \\(n_B=4\\) people with ranks 6, 7, 2 and 4.",
+     "The test statistic \\(T\\) is the sum of the ranks in the smaller group, here \\(T=1+5+3=9\\). Inferences are made from the ranks, not from the urine volumes, so no Normal population is assumed.",
+     "The null hypothesis is that the distributions of both groups are the same. The question is whether T = 9 is extreme enough to reject the hypothesis that the drug had no effect. The parametric analog of this test is the unpaired t test."
+    ],
+    "equations": [
+     "T=\\sum(\\text{ranks in the smaller group})",
+     "T=1+5+3=9"
+    ],
+    "symbols": "\\(T\\) (sum of ranks in the smaller group), \\(n_S\\) (size of the smaller group), \\(n_B\\) (size of the bigger group), \\(\\mu_T\\) (mean of \\(T\\) under the null hypothesis), \\(\\sigma_T\\) (standard deviation of \\(T\\) under the null hypothesis), \\(z_T\\) (standardized rank sum).",
+    "case": "s24-diuretic-ranksum",
+    "subset": null,
+    "core": true,
+    "hypotheses": {
+     "null": "H_0:\\text{the two population distributions are the same}",
+     "alternative": "H_A:\\text{the two population distributions differ}",
+     "nullWords": "There is no difference between the distributions of the response in the two groups.",
+     "alternativeWords": "The distributions of the response in the two groups differ."
+    }
+   },
+   {
+    "page": 10,
+    "title": "All 35 possible rank sets for three of seven",
+    "topic": "s24mwtable",
+    "paragraphs": [
+     "If the drug has no effect, every set of three ranks out of seven is equally likely to belong to the smaller group. There are \\(\\binom{7}{3}=35\\) such sets, and Table 10-2 lists each one with its rank sum.",
+     "The rank sums run from 6 (ranks 1, 2, 3) to 18 (ranks 5, 6, 7). Counting them gives the frequencies 1, 1, 2, 3, 4, 4, 5, 4, 4, 3, 2, 1, 1 for T = 6 through 18.",
+     "Seven of the 35 sets have \\(T\\le9\\), and by symmetry about 12 another seven have \\(T\\ge15\\). A result at least as far from the center as T = 9 therefore has probability 14/35 = 0.4, which is not small."
+    ],
+    "equations": [
+     "\\binom{7}{3}=\\frac{7!}{3!\\,4!}=35",
+     "P(T\\le9\\ \\text{or}\\ T\\ge15)=\\frac{14}{35}=0.4"
+    ],
+    "symbols": "\\(T\\) (sum of ranks in the smaller group), \\(n_S\\) (size of the smaller group), \\(n_B\\) (size of the bigger group), \\(\\mu_T\\) (mean of \\(T\\) under the null hypothesis), \\(\\sigma_T\\) (standard deviation of \\(T\\) under the null hypothesis), \\(z_T\\) (standardized rank sum).",
+    "case": "s24-diuretic-ranksum",
+    "subset": null,
+    "core": true
+   },
+   {
+    "page": 11,
+    "title": "Distribution of T under the null hypothesis",
+    "topic": "s24mwtable",
+    "paragraphs": [
+     "Each circle in Figure 10-1 is one of the 35 equally likely rank sums for three individuals out of seven. The distribution is symmetric, centered at T = 12, and runs from 6 to 18.",
+     "Values in the middle are common and values at the ends are rare. Only one rank set gives T = 6 and only one gives T = 18, so each extreme has probability 1/35.",
+     "The critical values cut off the extreme tails. Rejecting when T is 6 or 18 gives a two-tailed probability of 2/35 = 0.057, the level printed in the T table. T = 9 lies well inside this range."
+    ],
+    "equations": [
+     "\\mu_T=\\frac{n_S(n_S+n_B+1)}{2}=\\frac{3(3+4+1)}{2}=12",
+     "P(T=6\\ \\text{or}\\ T=18)=\\frac{2}{35}=0.057"
+    ],
+    "symbols": "\\(T\\) (sum of ranks in the smaller group), \\(n_S\\) (size of the smaller group), \\(n_B\\) (size of the bigger group), \\(\\mu_T\\) (mean of \\(T\\) under the null hypothesis), \\(\\sigma_T\\) (standard deviation of \\(T\\) under the null hypothesis), \\(z_T\\) (standardized rank sum).",
+    "case": "s24-diuretic-ranksum",
+    "subset": null,
+    "core": true
+   },
+   {
+    "page": 12,
+    "title": "Two-tailed critical values of T (use when n_B is at most 8)",
+    "topic": "s24mwtable",
+    "paragraphs": [
+     "Table 10-3 gives pairs of critical values of \\(T\\) for each combination of \\(n_S\\) and \\(n_B\\) with \\(n_B\\le8\\). Each pair is a lower and an upper cutoff, and the column P gives the exact two-tailed probability, near 0.05 or near 0.01.",
+     "The null hypothesis is rejected when T is at or below the lower value or at or above the upper value. Because T can take only whole-number values, the printed P is close to, but not exactly, the nominal level.",
+     "For \\(n_S=3\\) and \\(n_B=4\\) the pair is 6 and 18 with P = .057. T = 9 lies between them, so the null hypothesis that the drug had no effect is not rejected."
+    ],
+    "equations": [
+     "T\\le T_{\\text{lower}}\\ \\text{or}\\ T\\ge T_{\\text{upper}}\\Rightarrow\\text{reject }H_0"
+    ],
+    "symbols": "\\(T\\) (sum of ranks in the smaller group), \\(n_S\\) (size of the smaller group), \\(n_B\\) (size of the bigger group), \\(\\mu_T\\) (mean of \\(T\\) under the null hypothesis), \\(\\sigma_T\\) (standard deviation of \\(T\\) under the null hypothesis), \\(z_T\\) (standardized rank sum).",
+    "case": "s24-diuretic-ranksum",
+    "subset": null,
+    "core": true
+   },
+   {
+    "page": 13,
+    "title": "Mann-Whitney procedure and the Normal approximation",
+    "topic": "s24mwtable",
+    "paragraphs": [
+     "Step 1 ranks all observations in ascending order regardless of group, with special handling for ties. Step 2 computes \\(T\\), the sum of ranks in the smaller group. Step 3 compares \\(T\\) with its critical values, using the T table when \\(n_B\\le8\\).",
+     "When \\(n_B>8\\), \\(T\\) is approximately Normal with mean \\(\\mu_T\\) and standard deviation \\(\\sigma_T\\). Subtracting the mean and dividing by the standard deviation turns it into a standard Normal \\(z\\).",
+     "The statistic \\(z_T\\) subtracts one half from \\(|T-\\mu_T|\\) as a continuity correction, because \\(T\\) is discrete. The null hypothesis is rejected when \\(|z_T|>z_{\\text{critical}}\\), where \\(z_{\\text{critical}}=t_\\alpha(\\nu\\to\\infty)\\) is read from the infinity row of the two-tailed t table."
+    ],
+    "equations": [
+     "\\mu_T=\\frac{n_S(n_S+n_B+1)}{2}",
+     "\\sigma_T=\\sqrt{\\frac{n_Sn_B(n_S+n_B+1)}{12}}",
+     "T\\sim N(\\mu_T,\\sigma_T^2)\\to z\\sim N(0,1)",
+     "z_T=\\frac{|T-\\mu_T|-\\frac12}{\\sigma_T}",
+     "|z_T|>z_{\\text{critical}}=t_\\alpha(\\nu\\to\\infty)\\Rightarrow\\text{reject }H_0"
+    ],
+    "symbols": "\\(T\\) (sum of ranks in the smaller group), \\(n_S\\) (size of the smaller group), \\(n_B\\) (size of the bigger group), \\(\\mu_T\\) (mean of \\(T\\) under the null hypothesis), \\(\\sigma_T\\) (standard deviation of \\(T\\) under the null hypothesis), \\(z_T\\) (standardized rank sum).",
+    "case": null,
+    "subset": null,
+    "core": true
+   },
+   {
+    "page": 14,
+    "title": "Ranking tied observations",
+    "topic": "s24mwnormal",
+    "paragraphs": [
+     "Tied observations are assigned the same rank, equal to the average of the ranks they would have been assigned if no ties had occurred. The ranks are still assigned over all observations regardless of group.",
+     "In the example, the two values of 1200 would occupy ranks 2 and 3, so each gets \\((2+3)/2=2.5\\). The three values of 1500 would occupy ranks 5, 6 and 7, so each gets \\((5+6+7)/3=6\\). The next value, 1600, takes rank 8.",
+     "With ties, the T table is still used when \\(n_B\\le8\\). When \\(n_B>8\\), the Normal approximation needs a special form of \\(\\sigma_T\\), because ties reduce the variability of the rank sum."
+    ],
+    "equations": [
+     "\\text{tied rank}=\\frac{2+3}{2}=2.5",
+     "\\text{tied rank}=\\frac{5+6+7}{3}=6"
+    ],
+    "symbols": "\\(T\\) (sum of ranks in the smaller group), \\(n_B\\) (size of the bigger group).",
+    "case": null,
+    "subset": null,
+    "core": true
+   },
+   {
+    "page": 15,
+    "title": "Tie-corrected standard deviation of T",
+    "topic": "s24mwnormal",
+    "paragraphs": [
+     "Each set of tied ranks is counted by its size \\(\\tau_i\\). In the example the pair of 1200s gives \\(\\tau_1=2\\) and the triple of 1500s gives \\(\\tau_2=3\\).",
+     "The statistic \\(z_T\\) and the mean \\(\\mu_T\\) keep the same form as without ties, with \\(N=n_S+n_B\\). Only the standard deviation changes.",
+     "The tie-corrected \\(\\sigma_T\\) subtracts a term built from \\(\\sum(\\tau_i-1)\\tau_i(\\tau_i+1)\\) from the no-tie variance. This special case is needed when ties occur and \\(n_B>8\\)."
+    ],
+    "equations": [
+     "z_T=\\frac{|T-\\mu_T|-\\frac12}{\\sigma_T}",
+     "\\mu_T=\\frac{n_S(n_S+n_B+1)}{2},\\quad N=n_S+n_B",
+     "\\sigma_T=\\sqrt{\\frac{n_Sn_B(N+1)}{12}-\\frac{n_Sn_B}{12N(N-1)}\\sum(\\tau_i-1)\\tau_i(\\tau_i+1)}"
+    ],
+    "symbols": "\\(T\\) (sum of ranks in the smaller group), \\(n_S\\) (size of the smaller group), \\(n_B\\) (size of the bigger group), \\(\\mu_T\\) (mean of \\(T\\) under the null hypothesis), \\(\\sigma_T\\) (standard deviation of \\(T\\) under the null hypothesis), \\(z_T\\) (standardized rank sum). \\(N\\) (total number of observations), \\(\\tau_i\\) (number of tied observations in the \\(i\\)th set of ties).",
+    "case": null,
+    "subset": null,
+    "core": true
+   },
+   {
+    "page": 16,
+    "title": "Computing the tie sum",
+    "topic": "s24mwnormal",
+    "paragraphs": [
+     "In the tie-corrected \\(\\sigma_T\\), \\(\\tau_i\\) is the number of tied ranks in the \\(i\\)th set of ties, and the sum runs over all sets of tied ranks. A set of size \\(\\tau\\) contributes \\((\\tau-1)\\tau(\\tau+1)\\).",
+     "With one tie between 2 observations and two ties among 3 observations, the contributions are \\(1\\cdot2\\cdot3=6\\) for the pair and \\(2\\cdot3\\cdot4=24\\) for each triple.",
+     "The total is \\(6+2(24)=54\\). This number goes into the second term under the square root, and the larger the tie sum, the smaller \\(\\sigma_T\\) becomes."
+    ],
+    "equations": [
+     "\\sum(\\tau_i-1)\\tau_i(\\tau_i+1)=(1\\cdot2\\cdot3)+2(2\\cdot3\\cdot4)=6+2\\cdot24=54"
+    ],
+    "symbols": "\\(T\\) (sum of ranks in the smaller group), \\(n_S\\) (size of the smaller group), \\(n_B\\) (size of the bigger group), \\(\\mu_T\\) (mean of \\(T\\) under the null hypothesis), \\(\\sigma_T\\) (standard deviation of \\(T\\) under the null hypothesis), \\(z_T\\) (standardized rank sum). \\(N\\) (total number of observations), \\(\\tau_i\\) (number of tied observations in the \\(i\\)th set of ties).",
+    "case": null,
+    "subset": null,
+    "core": true
+   },
+   {
+    "page": 17,
+    "title": "Leboyer childbirth example: the data",
+    "topic": "s24mwnormal",
+    "paragraphs": [
+     "Minutes of alert behavior during the first hour of life are recorded for 20 infants delivered by conventional gentle techniques (control) and 20 infants delivered by the Leboyer method. The dot plot shows each infant as one point on a 0 to 60 minute scale.",
+     "The caption notes that the times are skewed toward higher values. A skewed response is the setting where a rank test is preferred to the unpaired t test.",
+     "The null hypothesis is that there is no difference in the distributions of the number of minutes awake in the first hour after birth between the two birth-method groups."
+    ],
+    "equations": [],
+    "symbols": "",
+    "case": "s24-leboyer-ranksum",
+    "subset": null,
+    "core": true,
+    "hypotheses": {
+     "null": "H_0:\\text{same distribution of alert minutes for control and Leboyer}",
+     "alternative": "H_A:\\text{the distributions differ}",
+     "nullWords": "There is no difference in the distributions of the number of minutes awake in the first hour after birth between the two birth-method groups.",
+     "alternativeWords": "The distributions of minutes awake in the first hour differ between the two birth-method groups."
+    }
+   },
+   {
+    "page": 18,
+    "title": "Leboyer example: ranks and T",
+    "topic": "s24mwnormal",
+    "paragraphs": [
+     "Table 10-4 ranks all 40 times together, from 1 for the Leboyer infant at 2.0 minutes to 40 for the control infant at 58.0 minutes. No two times are equal, so no average ranks are needed.",
+     "Both groups have 20 infants. The sum of the control ranks is \\(T=374\\), and the Leboyer ranks sum to 446, which together give \\(40(41)/2=820\\).",
+     "Because \\(n_B=20>8\\), the T table does not apply. The Normal approximation \\(T\\sim N(\\mu_T,\\sigma_T^2)\\) is used instead."
+    ],
+    "equations": [
+     "T=\\sum(\\text{control ranks})=374"
+    ],
+    "symbols": "\\(T\\) (sum of ranks in the smaller group), \\(n_S\\) (size of the smaller group), \\(n_B\\) (size of the bigger group), \\(\\mu_T\\) (mean of \\(T\\) under the null hypothesis), \\(\\sigma_T\\) (standard deviation of \\(T\\) under the null hypothesis), \\(z_T\\) (standardized rank sum).",
+    "case": "s24-leboyer-ranksum",
+    "subset": null,
+    "core": true
+   },
+   {
+    "page": 19,
+    "title": "Leboyer example: z_T and the decision",
+    "topic": "s24mwnormal",
+    "paragraphs": [
+     "Under the null hypothesis the mean rank sum is \\(\\mu_T=20(41)/2=410\\), and the standard deviation is \\(\\sigma_T=\\sqrt{20(20)(41)/12}=36.97\\).",
+     "The standardized statistic is \\(z_T=(|374-410|-1/2)/36.97=35.5/36.97=0.960\\). The slide prints 0.962, and both round to 0.96.",
+     "The two-tailed 0.05 cutoff from the infinity row of the t table is 1.96. Because \\(|z_T|<1.96\\), the null hypothesis is not rejected, and the data do not show a difference in alert minutes between the Leboyer and control deliveries."
+    ],
+    "equations": [
+     "\\mu_T=\\frac{n_S(n_S+n_B+1)}{2}=\\frac{20(20+20+1)}{2}=410",
+     "\\sigma_T=\\sqrt{\\frac{n_Sn_B(n_S+n_B+1)}{12}}=\\sqrt{\\frac{20(20)(20+20+1)}{12}}=36.97",
+     "z_T=\\frac{|T-\\mu_T|-\\frac12}{\\sigma_T}=\\frac{|374-410|-\\frac12}{36.97}=0.960",
+     "|z_T|=0.960<z_{0.05}=1.96"
+    ],
+    "symbols": "\\(T\\) (sum of ranks in the smaller group), \\(n_S\\) (size of the smaller group), \\(n_B\\) (size of the bigger group), \\(\\mu_T\\) (mean of \\(T\\) under the null hypothesis), \\(\\sigma_T\\) (standard deviation of \\(T\\) under the null hypothesis), \\(z_T\\) (standardized rank sum).",
+    "case": "s24-leboyer-ranksum",
+    "subset": null,
+    "core": true
+   },
+   {
+    "page": 20,
+    "title": "Wilcoxon signed-rank idea with six people",
+    "topic": "s24wtable",
+    "paragraphs": [
+     "Six people have daily urine production measured before and after a potential diuretic. Each difference is after minus before, and the differences are ranked by magnitude from 1 (smallest) to 6 (largest).",
+     "The sign of each difference is attached to its rank, giving signed ranks \\(-5,-6,+4,-3,-2,-1\\). The test statistic \\(W\\) is the sum of the signed ranks, \\(W=-13\\).",
+     "If the drug has no effect, positive and negative differences are equally likely and W should be near zero. The parametric analog of this test is the paired t test."
+    ],
+    "equations": [
+     "W=\\sum(\\text{signed ranks})",
+     "W=-5-6+4-3-2-1=-13"
+    ],
+    "symbols": "\\(W\\) (sum of the signed ranks), \\(n\\) (number of nonzero differences), \\(\\mu_W\\) (mean of \\(W\\) under the null hypothesis), \\(\\sigma_W\\) (standard deviation of \\(W\\) under the null hypothesis), \\(z_W\\) (standardized signed-rank sum).",
+    "case": "s24-diuretic-signedrank",
+    "subset": null,
+    "core": true,
+    "hypotheses": {
+     "null": "H_0:\\text{no difference in the distribution of the response before and after}",
+     "alternative": "H_A:\\text{the response differs before and after}",
+     "nullWords": "There is no difference in the response before and after the treatment, so the signed differences are centered on zero.",
+     "alternativeWords": "The treatment changes the response, so the signed differences are not centered on zero."
+    }
+   },
+   {
+    "page": 21,
+    "title": "Distribution of W for n = 6 and the W table",
+    "topic": "s24wtable",
+    "paragraphs": [
+     "With six people each signed rank can be positive or negative, so there are \\(2^6=64\\) equally likely sign patterns under the null hypothesis. The dot plot shows the 64 possible values of \\(W\\), from \\(-21\\) to \\(+21\\) in steps of 2.",
+     "Table 10-7 gives two-tailed critical values of \\(|W|\\) for \\(n\\le8\\). For \\(n=6\\) the printed values are 21 with P = .032 and 19 with P = .062. For \\(n=7\\) they are 28 (.016) and 24 (.046), and for \\(n=8\\) they are 32 (.024) and 28 (.054).",
+     "For the diuretic data \\(|W|=13\\), which is smaller than both critical values for \\(n=6\\). Fourteen of the 64 patterns give \\(|W|\\ge13\\), so P = 0.219 and the null hypothesis of no drug effect is not rejected."
+    ],
+    "equations": [
+     "2^6=64",
+     "|W|\\ge W_{\\text{critical}}\\Rightarrow\\text{reject }H_0"
+    ],
+    "symbols": "\\(W\\) (sum of the signed ranks), \\(n\\) (number of nonzero differences), \\(\\mu_W\\) (mean of \\(W\\) under the null hypothesis), \\(\\sigma_W\\) (standard deviation of \\(W\\) under the null hypothesis), \\(z_W\\) (standardized signed-rank sum).",
+    "case": "s24-diuretic-signedrank",
+    "subset": null,
+    "core": true
+   },
+   {
+    "page": 22,
+    "title": "Normal approximation for W when n > 8",
+    "topic": "s24wnormal",
+    "paragraphs": [
+     "For \\(n>8\\), \\(W\\) is approximately Normal with mean \\(\\mu_W=0\\) and standard deviation \\(\\sigma_W=\\sqrt{n(n+1)(2n+1)/6}\\). The mean is zero because positive and negative signed ranks are equally likely under the null hypothesis.",
+     "The standardized statistic subtracts one half from \\(|W|\\) as a continuity correction, \\(z_W=(|W|-1/2)/\\sigma_W\\). The null hypothesis is rejected when \\(|z_W|>z_{\\text{critical}}\\), read from the two-tailed t table.",
+     "When ties occur and \\(n>8\\), the standard deviation is reduced by subtracting \\(\\sum(\\tau_i-1)\\tau_i(\\tau_i+1)/12\\) inside the square root, where \\(\\tau_i\\) is the number of ties in group \\(i\\)."
+    ],
+    "equations": [
+     "W\\sim N(\\mu_W,\\sigma_W^2),\\quad\\mu_W=0",
+     "\\sigma_W=\\sqrt{\\frac{n(n+1)(2n+1)}{6}}",
+     "z_W=\\frac{|W|-1/2}{\\sigma_W}=\\frac{|W|-1/2}{\\sqrt{n(n+1)(2n+1)/6}}",
+     "|z_W|>z_{\\text{critical}}\\Rightarrow\\text{reject }H_0",
+     "\\sigma_W=\\sqrt{\\frac{n(n+1)(2n+1)}{6}-\\sum_{i=1}^{\\#\\text{ties}}\\frac{(\\tau_i-1)\\tau_i(\\tau_i+1)}{12}}"
+    ],
+    "symbols": "\\(W\\) (sum of the signed ranks), \\(n\\) (number of nonzero differences), \\(\\mu_W\\) (mean of \\(W\\) under the null hypothesis), \\(\\sigma_W\\) (standard deviation of \\(W\\) under the null hypothesis), \\(z_W\\) (standardized signed-rank sum). \\(\\tau_i\\) (number of tied ranks in the \\(i\\)th set of ties).",
+    "case": null,
+    "subset": null,
+    "core": true
+   },
+   {
+    "page": 23,
+    "title": "Wilcoxon signed-rank procedure",
+    "topic": "s24wtable",
+    "paragraphs": [
+     "Rank the absolute values of the differences from smallest to largest, using average ranks for ties. Then apply the sign of each difference to its rank.",
+     "Add all the signed ranks to get \\(W\\). Compare \\(W\\) with its critical values, using the W table with \\(|W|\\) when \\(n\\le8\\).",
+     "When \\(n>8\\), use the Normal distribution of \\(W\\) with mean 0 and variance \\(\\sigma_W^2\\). The tie-corrected \\(\\sigma_W\\) is needed when ties occur and \\(n>8\\)."
+    ],
+    "equations": [
+     "W=\\sum\\operatorname{sign}(d_i)\\,\\operatorname{rank}|d_i|"
+    ],
+    "symbols": "\\(W\\) (sum of signed ranks), \\(d_i\\) (difference for subject \\(i\\)), \\(n\\) (number of nonzero differences).",
+    "case": null,
+    "subset": null,
+    "core": true
+   },
+   {
+    "page": 24,
+    "title": "Zero differences and tied differences",
+    "topic": "s24wnormal",
+    "paragraphs": [
+     "A zero difference carries no sign, so it is dropped, with a corresponding reduction in \\(n\\). In the example, subject 4 has a difference of 0, so ten subjects give \\(n=9\\).",
+     "Tied magnitudes get the average of the ranks they would otherwise occupy. The differences 5 and 5 would take ranks 2 and 3, so each gets 2.5.",
+     "Ranking uses the absolute values, so the difference of -1 gets rank 1 even though it is negative. The sign is restored after the ranking is done."
+    ],
+    "equations": [
+     "\\text{rank}=\\frac{2+3}{2}=2.5",
+     "n=10-1=9"
+    ],
+    "symbols": "\\(n\\) (number of nonzero differences).",
+    "case": null,
+    "subset": null,
+    "core": true
+   },
+   {
+    "page": 25,
+    "title": "Tie-corrected z_W",
+    "topic": "s24wnormal",
+    "paragraphs": [
+     "The same ranking rules apply. Zero differences are dropped and \\(n\\) is reduced, and tied magnitudes receive average ranks.",
+     "With \\(n=9>8\\), the Normal approximation is used, and because ties occur, the standard deviation includes the tie correction.",
+     "The statistic is \\(z_W=(|W|-1/2)/\\sigma_W\\), with \\(\\sigma_W^2=n(n+1)(2n+1)/6-\\sum(\\tau_i-1)\\tau_i(\\tau_i+1)/12\\)."
+    ],
+    "equations": [
+     "z_W=\\frac{|W|-1/2}{\\sigma_W}",
+     "\\sigma_W=\\sqrt{\\frac{n(n+1)(2n+1)}{6}-\\sum\\frac{(\\tau_i-1)\\tau_i(\\tau_i+1)}{12}}"
+    ],
+    "symbols": "\\(W\\) (sum of the signed ranks), \\(n\\) (number of nonzero differences), \\(\\mu_W\\) (mean of \\(W\\) under the null hypothesis), \\(\\sigma_W\\) (standard deviation of \\(W\\) under the null hypothesis), \\(z_W\\) (standardized signed-rank sum). \\(\\tau_i\\) (number of tied ranks in the \\(i\\)th set of ties).",
+    "case": null,
+    "subset": null,
+    "core": true
+   },
+   {
+    "page": 26,
+    "title": "Platelet aggregation and smoking with a paired t test",
+    "topic": "s24wnormal",
+    "paragraphs": [
+     "Eleven people have maximum percent platelet aggregation measured before and after smoking one cigarette (Levine et al., Circulation, 1973). The changes are 2, 4, 10, 12, 16, 15, 4, 27, 9, -1 and 15 percentage points.",
+     "The paired t test gives \\(\\bar d=10.3\\%\\), \\(s_d=8.0\\%\\), \\(s_{\\bar d}=2.41\\%\\) and \\(t=10.3/2.41=4.27\\) with \\(\\nu=10\\). The unrounded statistic is 4.27161.",
+     "Since \\(|t|=4.27>t_{0.002}(10)=4.144\\), the null hypothesis is rejected with \\(P<0.002\\). The next page analyzes the same data with the Wilcoxon signed-rank test, which does not need the differences to be Normal."
+    ],
+    "equations": [
+     "s_{\\bar d}=\\frac{s_d}{\\sqrt n}=2.41\\%",
+     "t=\\frac{\\bar d}{s_{\\bar d}}=\\frac{10.3}{2.41}=4.27,\\quad\\nu=n-1=10",
+     "|t|=4.27>t_{0.002}(10)=4.144",
+     "P<0.002"
+    ],
+    "symbols": "\\(d_i\\) (change for person \\(i\\)), \\(\\bar d\\) (mean change), \\(s_d\\) (SD of the changes), \\(s_{\\bar d}\\) (standard error of the mean change), \\(\\nu\\) (degrees of freedom), \\(n\\) (number of people).",
+    "case": "s24-platelet-signedrank",
+    "subset": null,
+    "core": true
+   },
+   {
+    "page": 27,
+    "title": "Lecture exercise: platelet data with the Wilcoxon signed-rank test",
+    "topic": "s24wnormal",
+    "paragraphs": [
+     "Table 10-8 gives maximum percentage platelet aggregation before and after smoking one cigarette for 11 people. The exercise repeats the analysis with the nonparametric signed-rank test.",
+     "The null hypothesis is that there is no difference in platelet aggregation before and after smoking a single cigarette.",
+     "The magnitudes 1, 2, 4, 4, 9, 10, 12, 15, 15, 16, 27 have two tied pairs, and only the \\(-1\\) change is negative, so \\(W=64\\). With \\(n=11>8\\) and ties, \\(\\sigma_W=\\sqrt{505}=22.47\\) and \\(z_W=2.826\\), which exceeds 1.96. The null hypothesis is rejected with \\(0.002<P<0.005\\)."
+    ],
+    "equations": [
+     "W=64,\\quad\\sigma_W=\\sqrt{506-1}=22.4722",
+     "z_W=\\frac{|W|-1/2}{\\sigma_W}=\\frac{64-0.5}{22.4722}=2.82571"
+    ],
+    "symbols": "\\(W\\) (sum of the signed ranks), \\(n\\) (number of nonzero differences), \\(\\mu_W\\) (mean of \\(W\\) under the null hypothesis), \\(\\sigma_W\\) (standard deviation of \\(W\\) under the null hypothesis), \\(z_W\\) (standardized signed-rank sum). \\(\\tau_i\\) (number of tied ranks in the \\(i\\)th set of ties).",
+    "case": "s24-platelet-signedrank",
+    "subset": null,
+    "core": true,
+    "hypotheses": {
+     "null": "H_0:\\text{no difference in platelet aggregation before and after smoking}",
+     "alternative": "H_A:\\text{platelet aggregation differs before and after smoking}",
+     "nullWords": "There is no difference in platelet aggregation before and after smoking a single cigarette.",
+     "alternativeWords": "Platelet aggregation differs before and after smoking a single cigarette."
+    }
+   }
+  ]
+ },
+ "methods": [
+  {
+   "id": "s24normal",
+   "title": "Checking Normality (range percentages, Q-Q plot, Shapiro-Wilk)",
+   "trigger": "A question asks whether data are Normally distributed, shows qqnorm or shapiro.test output, or asks whether a parametric test is appropriate.",
+   "pages": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+   ],
+   "formula": [
+    "\\bar x-s<x<\\bar x+s\\ \\ (\\approx68\\%\\ \\text{if Normal})",
+    "p_i=\\frac{i-3/8}{n+1/4}\\ (n\\le10),\\quad z_i=\\Phi^{-1}(p_i)",
+    "H_0:\\text{data are Normally distributed},\\quad P<\\alpha\\Rightarrow\\text{reject}"
+   ],
+   "example": "s24-shapiro-two-samples",
+   "shortcut": "In shapiro.test output, a P value above 0.05 means Normality is not rejected and a P value below 0.05 means the data are not Normal. On a Q-Q plot, points along a straight line support Normality.",
+   "paragraphs": [
+    "The t and F tests were derived for Normally distributed data, so Normality is checked first. The percentage of data within one or two SDs of the mean is compared with the Normal values of about 68% and 95%.",
+    "The Normal Q-Q plot from qqnorm() plots each sample quantile against its expected Z value. A straight line supports Normality, while curved ends show light tails, heavy tails or skew.",
+    "The Shapiro-Wilk test is the formal check. Its null hypothesis is that the data are Normally distributed. A small P value rejects Normality, which points to a rank-based method."
+   ],
+   "symbols": "\\(\\bar x\\) (sample mean), \\(s\\) (sample SD), \\(p_i\\) (plotting probability), \\(z_i\\) (theoretical Normal quantile), \\(\\Phi^{-1}\\) (inverse standard Normal distribution function), \\(P\\) (P value), \\(\\alpha\\) (significance level)."
+  },
+  {
+   "id": "s24mwtable",
+   "title": "Mann-Whitney rank-sum test with the T table (n_B at most 8)",
+   "trigger": "Two groups of different individuals, ordinal or non-Normal data, and the bigger group has 8 or fewer observations.",
+   "pages": [
+    9,
+    10,
+    11,
+    12,
+    13
+   ],
+   "formula": [
+    "T=\\sum(\\text{ranks in the smaller group})",
+    "T\\le T_{\\text{lower}}\\ \\text{or}\\ T\\ge T_{\\text{upper}}\\Rightarrow\\text{reject }H_0"
+   ],
+   "example": "s24-diuretic-ranksum",
+   "shortcut": "The rank sums of the two groups add to \\(N(N+1)/2\\), which checks the ranking. The center of \\(T\\) is \\(\\mu_T=n_S(N+1)/2\\).",
+   "paragraphs": [
+    "Rank all observations together from smallest to largest, regardless of group, and give tied observations the average of their ranks. The statistic T is the sum of the ranks in the smaller group.",
+    "Under the null hypothesis every set of \\(n_S\\) ranks is equally likely, which gives the exact distribution of \\(T\\). The T table prints a lower and upper critical value with the exact two-tailed P, and the null hypothesis is rejected when T is at or beyond either value."
+   ],
+   "symbols": "\\(T\\) (sum of ranks in the smaller group), \\(n_S\\) (size of the smaller group), \\(n_B\\) (size of the bigger group), \\(\\mu_T\\) (mean of \\(T\\) under the null hypothesis), \\(\\sigma_T\\) (standard deviation of \\(T\\) under the null hypothesis), \\(z_T\\) (standardized rank sum)."
+  },
+  {
+   "id": "s24mwnormal",
+   "title": "Mann-Whitney with the Normal approximation and ties (n_B > 8)",
+   "trigger": "Two groups of different individuals with non-Normal or skewed data and more than 8 observations in the bigger group.",
+   "pages": [
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+   ],
+   "formula": [
+    "\\mu_T=\\frac{n_S(n_S+n_B+1)}{2}",
+    "\\sigma_T=\\sqrt{\\frac{n_Sn_B(n_S+n_B+1)}{12}}",
+    "\\sigma_T=\\sqrt{\\frac{n_Sn_B(N+1)}{12}-\\frac{n_Sn_B}{12N(N-1)}\\sum(\\tau_i-1)\\tau_i(\\tau_i+1)}",
+    "z_T=\\frac{|T-\\mu_T|-\\frac12}{\\sigma_T}"
+   ],
+   "example": "s24-leboyer-ranksum",
+   "shortcut": "The cutoff is the infinity row of the two-tailed t table, 1.9600 for 0.05. With no ties use the simple sigma_T, and with ties subtract the tie term.",
+   "paragraphs": [
+    "For \\(n_B>8\\), \\(T\\) is approximately Normal with mean \\(\\mu_T\\) and standard deviation \\(\\sigma_T\\). The statistic \\(z_T\\) uses a continuity correction of one half because \\(T\\) is discrete.",
+    "Ties reduce the variability of \\(T\\). Each set of tied ranks of size \\(\\tau_i\\) contributes \\((\\tau_i-1)\\tau_i(\\tau_i+1)\\) to the correction term.",
+    "The null hypothesis is rejected when \\(|z_T|\\) exceeds the two-tailed Normal cutoff read from the infinity row of the t table."
+   ],
+   "symbols": "\\(T\\) (sum of ranks in the smaller group), \\(n_S\\) (size of the smaller group), \\(n_B\\) (size of the bigger group), \\(\\mu_T\\) (mean of \\(T\\) under the null hypothesis), \\(\\sigma_T\\) (standard deviation of \\(T\\) under the null hypothesis), \\(z_T\\) (standardized rank sum). \\(N\\) (total number of observations), \\(\\tau_i\\) (number of tied observations in the \\(i\\)th set of ties)."
+  },
+  {
+   "id": "s24wtable",
+   "title": "Wilcoxon signed-rank test with the W table (n at most 8)",
+   "trigger": "The same subjects are measured twice (before and after), the differences are ordinal or non-Normal, and there are 8 or fewer nonzero differences.",
+   "pages": [
+    20,
+    21,
+    23
+   ],
+   "formula": [
+    "W=\\sum\\operatorname{sign}(d_i)\\,\\operatorname{rank}|d_i|",
+    "|W|\\ge W_{\\text{critical}}\\Rightarrow\\text{reject }H_0"
+   ],
+   "example": "s24-diuretic-signedrank",
+   "shortcut": "The unsigned ranks add to \\(n(n+1)/2\\), so \\(W=n(n+1)/2-2\\times(\\text{sum of negative ranks})\\).",
+   "paragraphs": [
+    "Compute each difference, drop zero differences, and rank the absolute differences from smallest to largest with average ranks for ties. Attach the sign of each difference to its rank and add the signed ranks to get W.",
+    "Under the null hypothesis each sign pattern is equally likely, so there are \\(2^n\\) patterns. The W table gives two-tailed critical values of \\(|W|\\) for \\(n\\le8\\), and the null hypothesis is rejected when \\(|W|\\) reaches the critical value."
+   ],
+   "symbols": "\\(W\\) (sum of signed ranks), \\(d_i\\) (difference for subject \\(i\\)), \\(n\\) (number of nonzero differences), \\(W_{\\text{critical}}\\) (printed critical value of \\(|W|\\))."
+  },
+  {
+   "id": "s24wnormal",
+   "title": "Wilcoxon signed-rank with the Normal approximation and ties (n > 8)",
+   "trigger": "Before-and-after data on the same subjects with more than 8 nonzero differences, often with tied magnitudes.",
+   "pages": [
+    22,
+    24,
+    25,
+    26,
+    27
+   ],
+   "formula": [
+    "\\mu_W=0",
+    "\\sigma_W=\\sqrt{\\frac{n(n+1)(2n+1)}{6}-\\sum\\frac{(\\tau_i-1)\\tau_i(\\tau_i+1)}{12}}",
+    "z_W=\\frac{|W|-1/2}{\\sigma_W}"
+   ],
+   "example": "s24-platelet-signedrank",
+   "shortcut": "A pair of tied magnitudes removes 6/12 = 0.5 from the variance, and a triple removes 24/12 = 2.",
+   "paragraphs": [
+    "For \\(n>8\\), \\(W\\) is approximately Normal with mean 0 and variance \\(n(n+1)(2n+1)/6\\), reduced by the tie term when ties occur.",
+    "The statistic \\(z_W=(|W|-1/2)/\\sigma_W\\) is compared with the two-tailed Normal cutoff from the infinity row of the t table. The parametric analog is the paired t test, which assumes Normal differences."
+   ],
+   "symbols": "\\(W\\) (sum of the signed ranks), \\(n\\) (number of nonzero differences), \\(\\mu_W\\) (mean of \\(W\\) under the null hypothesis), \\(\\sigma_W\\) (standard deviation of \\(W\\) under the null hypothesis), \\(z_W\\) (standardized signed-rank sum). \\(\\tau_i\\) (number of tied ranks in the \\(i\\)th set of ties)."
+  }
+ ],
+ "cases": [
+  {
+   "id": "s24-shapiro-two-samples",
+   "title": "Checking Normality of two ten-value samples",
+   "topic": "s24normal",
+   "context": "Two samples of ten values are checked for Normality with range percentages, qqnorm() and shapiro.test(). Sample 2 equals sample 1 except that 60 is replaced by 50 and 68 by 88.",
+   "unit": "data units",
+   "table": {
+    "headers": [
+     "Order i",
+     "Sample 1",
+     "Sample 2",
+     "Plotting probability (i - 3/8)/(n + 1/4)",
+     "Theoretical quantile z_i"
+    ],
+    "rows": [
+     [
+      1,
+      60,
+      50,
+      0.06098,
+      -1.54664
+     ],
+     [
+      2,
+      62,
+      62,
+      0.15854,
+      -1.00049
+     ],
+     [
+      3,
+      62,
+      62,
+      0.2561,
+      -0.65542
+     ],
+     [
+      4,
+      63,
+      63,
+      0.35366,
+      -0.37546
+     ],
+     [
+      5,
+      64,
+      64,
+      0.45122,
+      -0.12258
+     ],
+     [
+      6,
+      64,
+      64,
+      0.54878,
+      0.12258
+     ],
+     [
+      7,
+      65,
+      65,
+      0.64634,
+      0.37546
+     ],
+     [
+      8,
+      65,
+      65,
+      0.7439,
+      0.65542
+     ],
+     [
+      9,
+      67,
+      67,
+      0.84146,
+      1.00049
+     ],
+     [
+      10,
+      68,
+      88,
+      0.93902,
+      1.54664
+     ]
+    ]
+   },
+   "tasks": [
+    "For each sample, calculate the mean, the SD, and the percentage of values within one SD of the mean, and compare it with the Normal percentage.",
+    "Give the theoretical quantiles that qqnorm() uses for ten points.",
+    "Using the shapiro.test output, state the hypotheses, the decision at the 0.05 level, and what it says about using a parametric test."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\text{the data come from a Normal distribution}",
+    "alternative": "H_A:\\text{the data do not come from a Normal distribution}",
+    "nullWords": "There is no difference between the distribution of the data and a Normal distribution.",
+    "alternativeWords": "The distribution of the data differs from a Normal distribution."
+   },
+   "symbols": "\\(\\bar x\\) (sample mean), \\(s\\) (sample SD), \\(p_i\\) (plotting probability), \\(z_i\\) (theoretical Normal quantile), \\(W\\) (Shapiro-Wilk statistic), \\(P\\) (P value).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\text{the data come from a Normal distribution}",
+      "H_A:\\text{the data do not come from a Normal distribution}"
+     ],
+     "work": [
+      "\\alpha=0.05"
+     ],
+     "words": "Normality is checked with the percentage of data in a range, the Normal Q-Q plot, and the Shapiro-Wilk test. The null hypothesis is that there is no difference between the distribution of the data and a Normal distribution."
+    },
+    {
+     "title": "Mean and SD of sample 1",
+     "general": [
+      "\\bar x=\\frac{1}{n}\\sum x_i",
+      "s=\\sqrt{\\frac{\\sum(x_i-\\bar x)^2}{n-1}}"
+     ],
+     "work": [
+      "\\bar x=\\frac{640}{10}=64",
+      "\\sum(x_i-\\bar x)^2=52",
+      "s=\\sqrt{\\frac{52}{9}}=2.4037"
+     ],
+     "words": "Add the ten values and divide by 10, then square each deviation, add them, divide by n - 1 = 9 and take the root."
+    },
+    {
+     "title": "Percentage of sample 1 within one SD",
+     "general": [
+      "\\bar x-s<x<\\bar x+s",
+      "P(\\mu-\\sigma<X<\\mu+\\sigma)=0.6826"
+     ],
+     "work": [
+      "64-2.4037<x<64+2.4037",
+      "61.5963<x<66.4037",
+      "\\frac{7}{10}=70\\%\\ \\text{vs}\\ 68.26\\%"
+     ],
+     "words": "Seven of the ten values (62, 62, 63, 64, 64, 65, 65) lie within one SD of the mean. This 70% is close to the Normal 68.26%, and all ten values lie within two SDs, close to the Normal 95.44%."
+    },
+    {
+     "title": "Theoretical quantiles for qqnorm()",
+     "general": [
+      "p_i=\\frac{i-3/8}{n+1/4}",
+      "z_i=\\Phi^{-1}(p_i)"
+     ],
+     "work": [
+      "p_1=\\frac{1-0.375}{10.25}=0.0609756",
+      "z_1=\\Phi^{-1}(0.0609756)=-1.54664",
+      "z_{10}=+1.54664"
+     ],
+     "words": "For ten or fewer points R uses these plotting probabilities. The ten theoretical quantiles run from -1.54664 to +1.54664 and are the horizontal axis of the Q-Q plot. Sample 1 plotted against them lies close to a straight line."
+    },
+    {
+     "title": "Shapiro-Wilk result for sample 1",
+     "general": [
+      "P>\\alpha\\Rightarrow\\text{do not reject }H_0"
+     ],
+     "work": [
+      "W=0.97577,\\quad P=0.9386>0.05"
+     ],
+     "words": "The P value is far above 0.05, so Normality is not rejected. The data are consistent with a Normal distribution, and a parametric test can be used."
+    },
+    {
+     "title": "Mean, SD and range percentages of sample 2",
+     "general": [
+      "\\bar x=\\frac{1}{n}\\sum x_i",
+      "s=\\sqrt{\\frac{\\sum(x_i-\\bar x)^2}{n-1}}"
+     ],
+     "work": [
+      "\\bar x=\\frac{650}{10}=65",
+      "s=\\sqrt{\\frac{782}{9}}=9.32142",
+      "\\frac{8}{10}=80\\%\\ \\text{within one SD}",
+      "\\frac{9}{10}=90\\%\\ \\text{within two SDs}"
+     ],
+     "words": "The two extreme values inflate the SD, so eight values crowd inside one SD (80% against 68.26%) while 88 lies beyond two SDs (90% within two SDs against 95.44%). The counts depart from the Normal percentages."
+    },
+    {
+     "title": "Shapiro-Wilk result for sample 2",
+     "general": [
+      "P<\\alpha\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "W=0.75726,\\quad P=0.004374<0.05"
+     ],
+     "words": "The P value is below 0.05 (and below 0.01), so Normality is rejected. The Q-Q plot shows 50 and 88 far from the line through the other points, and a rank-based test is preferred for these data."
+    }
+   ],
+   "conclusion": "Sample 1 gives W = 0.97577 with P = 0.9386, so Normality is not rejected and the data are consistent with a Normal distribution. Sample 2 gives W = 0.75726 with P = 0.004374, so Normality is rejected and the data are not Normal.",
+   "source": "Session 24 pages 5, 7 and 8",
+   "lookup": null,
+   "values": {
+    "n": 10,
+    "mean1": 64.0,
+    "sd1": 2.4037008503093262,
+    "within1SD_1": 7,
+    "mean2": 65.0,
+    "sd2": 9.321420969406375,
+    "within1SD_2": 8,
+    "within2SD_2": 9,
+    "W1": 0.97577,
+    "P1": 0.9386,
+    "W2": 0.75726,
+    "P2": 0.004374,
+    "reject2": true
+   },
+   "module": 24,
+   "tolerance": 0.0037863000000000003,
+   "answerName": "Shapiro-Wilk W (sample 2)",
+   "answer": 0.75726
+  },
+  {
+   "id": "s24-diuretic-ranksum",
+   "title": "Diuretic experiment with three placebo and four drug values",
+   "topic": "s24mwtable",
+   "context": "Daily urine production is measured in three people given a placebo and four different people given a drug. The data are ranked to test whether the drug changes urine production without assuming Normal populations.",
+   "unit": "mL/day",
+   "table": {
+    "headers": [
+     "Group",
+     "Daily urine production (mL/day)",
+     "Rank (all 7 together)"
+    ],
+    "rows": [
+     [
+      "Placebo",
+      1000,
+      1
+     ],
+     [
+      "Placebo",
+      1380,
+      5
+     ],
+     [
+      "Placebo",
+      1200,
+      3
+     ],
+     [
+      "Drug",
+      1400,
+      6
+     ],
+     [
+      "Drug",
+      1600,
+      7
+     ],
+     [
+      "Drug",
+      1180,
+      2
+     ],
+     [
+      "Drug",
+      1220,
+      4
+     ]
+    ]
+   },
+   "tasks": [
+    "Rank all seven observations together and compute T for the smaller group.",
+    "Use the printed T table to test at the level near 0.05 whether the drug changes urine production. State the hypotheses in words and the conclusion."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\text{same distribution of urine production with placebo and drug}",
+    "alternative": "H_A:\\text{the distributions differ}",
+    "nullWords": "There is no difference in the distributions of daily urine production between the placebo and drug groups, so the drug has no effect.",
+    "alternativeWords": "The distributions of daily urine production differ between the placebo and drug groups."
+   },
+   "symbols": "\\(T\\) (sum of ranks in the smaller group), \\(n_S\\) (size of the smaller group), \\(n_B\\) (size of the bigger group), \\(\\mu_T\\) (mean of \\(T\\) under the null hypothesis), \\(\\sigma_T\\) (standard deviation of \\(T\\) under the null hypothesis), \\(z_T\\) (standardized rank sum).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\text{the two population distributions are the same}"
+     ],
+     "work": [
+      "n_S=3\\ (\\text{placebo}),\\quad n_B=4\\ (\\text{drug})"
+     ],
+     "words": "The groups contain different people and the bigger group has 4 people, so the procedure is the Mann-Whitney rank-sum test with the T table. The null hypothesis is that there is no difference in the distributions of daily urine production between placebo and drug."
+    },
+    {
+     "title": "Rank all observations together",
+     "general": [
+      "\\text{rank }1=\\text{smallest},\\ \\dots,\\ \\text{rank }N=\\text{largest}"
+     ],
+     "work": [
+      "1000\\to1,\\ 1180\\to2,\\ 1200\\to3,\\ 1220\\to4,\\ 1380\\to5,\\ 1400\\to6,\\ 1600\\to7"
+     ],
+     "words": "All seven values are ranked in one list regardless of group. There are no ties."
+    },
+    {
+     "title": "Compute T",
+     "general": [
+      "T=\\sum(\\text{ranks in the smaller group})"
+     ],
+     "work": [
+      "T=1+5+3=9",
+      "\\text{check}\\ 9+(6+7+2+4)=28=\\frac{7(8)}{2}"
+     ],
+     "words": "The placebo group is the smaller group, so T is the sum of its three ranks."
+    },
+    {
+     "title": "Describe the null distribution of T",
+     "general": [
+      "\\binom{N}{n_S}",
+      "\\mu_T=\\frac{n_S(n_S+n_B+1)}{2}"
+     ],
+     "work": [
+      "\\binom{7}{3}=35",
+      "\\mu_T=\\frac{3(3+4+1)}{2}=12"
+     ],
+     "words": "Under the null hypothesis each of the 35 sets of three ranks is equally likely. The rank sums run from 6 to 18 and are centered at 12."
+    },
+    {
+     "title": "Read the critical values",
+     "general": [
+      "T_{\\text{lower}},\\ T_{\\text{upper}}\\ \\text{for}\\ (n_S,n_B)"
+     ],
+     "work": [
+      "(n_S,n_B)=(3,4)\\Rightarrow6,\\ 18\\ (P=.057)"
+     ],
+     "words": "Open MannWhitney_RankSumT_Table.pdf, PDF page 1. In the row n_S = 3, n_B = 4 under probability levels near .05, the printed critical values are 6 and 18 with P = .057. No .01 entry is printed for this row.",
+     "tableLookup": {
+      "path": "sources/tables/MannWhitney_RankSumT_Table.pdf",
+      "page": 1,
+      "row": "n_S = 3, n_B = 4",
+      "column": "Probability near .05, critical values (P = .057)",
+      "value": "6, 18",
+      "actualDf": null,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision",
+     "general": [
+      "T\\le T_{\\text{lower}}\\ \\text{or}\\ T\\ge T_{\\text{upper}}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "6<9<18",
+      "P(T\\le9\\ \\text{or}\\ T\\ge15)=\\frac{14}{35}=0.4"
+     ],
+     "words": "T = 9 lies strictly between 6 and 18, so the null hypothesis is not rejected. Fourteen of the 35 rank sets are at least as far from 12 as T = 9, so the exact two-tailed P is 0.4."
+    }
+   ],
+   "conclusion": "T = 9 lies between the critical values 6 and 18, so the null hypothesis is not rejected (P = 0.4). These data do not show that the drug changes daily urine production.",
+   "source": "Session 24 pages 9-12",
+   "lookup": {
+    "path": "sources/tables/MannWhitney_RankSumT_Table.pdf",
+    "page": 1,
+    "row": "n_S = 3, n_B = 4",
+    "column": "Probability near .05, critical values (P = .057)",
+    "value": "6, 18",
+    "actualDf": null,
+    "approximation": false
+   },
+   "values": {
+    "placebo": [
+     1000,
+     1380,
+     1200
+    ],
+    "drug": [
+     1400,
+     1600,
+     1180,
+     1220
+    ],
+    "nS": 3,
+    "nB": 4,
+    "T": 9,
+    "muT": 12,
+    "combinations": 35,
+    "critical": [
+     6,
+     18
+    ],
+    "tableP": 0.057,
+    "exactP": 0.4,
+    "reject": false
+   },
+   "module": 24,
+   "tolerance": 0.045,
+   "answerName": "Rank sum T",
+   "answer": 9
+  },
+  {
+   "id": "s24-leboyer-ranksum",
+   "title": "Leboyer versus control delivery, minutes of alert behavior",
+   "topic": "s24mwnormal",
+   "context": "Twenty infants delivered by conventional gentle techniques (control) and twenty delivered by the Leboyer method have their minutes of alert behavior recorded during the first hour of life. The times are skewed toward higher values.",
+   "unit": "minutes",
+   "table": {
+    "headers": [
+     "Control delivery (min)",
+     "Rank",
+     "Leboyer delivery (min)",
+     "Rank"
+    ],
+    "rows": [
+     [
+      5.0,
+      2,
+      2.0,
+      1
+     ],
+     [
+      10.1,
+      3,
+      19.0,
+      5
+     ],
+     [
+      17.7,
+      4,
+      29.7,
+      10
+     ],
+     [
+      20.3,
+      6,
+      32.1,
+      12
+     ],
+     [
+      22.0,
+      7,
+      35.4,
+      15
+     ],
+     [
+      24.9,
+      8,
+      36.7,
+      17
+     ],
+     [
+      26.5,
+      9,
+      38.5,
+      19
+     ],
+     [
+      30.8,
+      11,
+      40.2,
+      20
+     ],
+     [
+      34.2,
+      13,
+      42.1,
+      22
+     ],
+     [
+      35.0,
+      14,
+      43.0,
+      23
+     ],
+     [
+      36.6,
+      16,
+      44.4,
+      24
+     ],
+     [
+      37.9,
+      18,
+      45.6,
+      26
+     ],
+     [
+      40.4,
+      21,
+      46.7,
+      27
+     ],
+     [
+      45.5,
+      25,
+      47.1,
+      28
+     ],
+     [
+      49.3,
+      31,
+      48.0,
+      29
+     ],
+     [
+      51.1,
+      33,
+      49.0,
+      30
+     ],
+     [
+      53.1,
+      36,
+      50.9,
+      32
+     ],
+     [
+      55.0,
+      38,
+      51.2,
+      34
+     ],
+     [
+      56.7,
+      39,
+      52.5,
+      35
+     ],
+     [
+      58.0,
+      40,
+      53.3,
+      37
+     ]
+    ]
+   },
+   "tasks": [
+    "Rank all 40 times together and compute T.",
+    "Use the Normal approximation to test at the two-sided 0.05 level whether the distributions differ. Give the mean and SD of T, z_T, the printed critical value, the decision and a P range."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\text{same distribution of alert minutes for control and Leboyer}",
+    "alternative": "H_A:\\text{the distributions differ}",
+    "nullWords": "There is no difference in the distributions of the number of minutes awake in the first hour after birth between the two birth-method groups.",
+    "alternativeWords": "The distributions of minutes awake in the first hour differ between the two birth-method groups."
+   },
+   "symbols": "\\(T\\) (sum of ranks in the smaller group), \\(n_S\\) (size of the smaller group), \\(n_B\\) (size of the bigger group), \\(\\mu_T\\) (mean of \\(T\\) under the null hypothesis), \\(\\sigma_T\\) (standard deviation of \\(T\\) under the null hypothesis), \\(z_T\\) (standardized rank sum).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\text{the two population distributions are the same}"
+     ],
+     "work": [
+      "n_S=n_B=20"
+     ],
+     "words": "The two groups contain different infants and the times are skewed, so the procedure is the Mann-Whitney rank-sum test. The null hypothesis is that there is no difference in the distributions of minutes awake in the first hour after birth between the two birth-method groups."
+    },
+    {
+     "title": "Rank all 40 times and compute T",
+     "general": [
+      "T=\\sum(\\text{ranks in the smaller group})"
+     ],
+     "work": [
+      "T=2+3+4+6+7+8+9+11+13+14+16+18+21+25+31+33+36+38+39+40=374",
+      "\\text{Leboyer sum}=820-374=446"
+     ],
+     "words": "No two times are equal, so every rank is a whole number. The groups have equal size, and the control group is used as on the slide."
+    },
+    {
+     "title": "Choose the Normal approximation",
+     "general": [
+      "n_B>8\\Rightarrow T\\sim N(\\mu_T,\\sigma_T^2)"
+     ],
+     "work": [
+      "n_B=20>8"
+     ],
+     "words": "The bigger group has more than 8 observations, so the T table does not apply and T is treated as Normal."
+    },
+    {
+     "title": "Mean of T",
+     "general": [
+      "\\mu_T=\\frac{n_S(n_S+n_B+1)}{2}"
+     ],
+     "work": [
+      "\\mu_T=\\frac{20(20+20+1)}{2}=410"
+     ],
+     "words": "This is the rank sum expected for the control group if the method has no effect."
+    },
+    {
+     "title": "Standard deviation of T",
+     "general": [
+      "\\sigma_T=\\sqrt{\\frac{n_Sn_B(n_S+n_B+1)}{12}}"
+     ],
+     "work": [
+      "\\sigma_T=\\sqrt{\\frac{20(20)(41)}{12}}=\\sqrt{1366.67}=36.9685"
+     ],
+     "words": "There are no ties, so the simple form of the standard deviation applies."
+    },
+    {
+     "title": "Compute z_T",
+     "general": [
+      "z_T=\\frac{|T-\\mu_T|-\\frac12}{\\sigma_T}"
+     ],
+     "work": [
+      "z_T=\\frac{|374-410|-0.5}{36.9685}=\\frac{35.5}{36.9685}=0.960278"
+     ],
+     "words": "The continuity correction subtracts one half from the distance between T and its mean before dividing by the standard deviation."
+    },
+    {
+     "title": "Read the critical value",
+     "general": [
+      "z_{\\text{critical}}=t_{0.05}(\\infty)"
+     ],
+     "work": [
+      "z_{0.05}=1.9600"
+     ],
+     "words": "Open t_table.pdf, PDF page 2. In the infinity row and the two-tailed 0.05 column, the printed value is 1.9600.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 2,
+      "row": "∞",
+      "column": "0.05",
+      "value": 1.96,
+      "actualDf": null,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "|z_T|>z_{\\text{critical}}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "|z_T|=0.960278<1.9600",
+      "t_{0.50}(\\infty)=0.6745<0.960278<t_{0.20}(\\infty)=1.2816",
+      "0.20<P<0.50"
+     ],
+     "words": "The statistic is below 1.96, so the null hypothesis is not rejected. In the infinity row it lies between the 0.50 and 0.20 columns, so 0.20 < P < 0.50."
+    }
+   ],
+   "conclusion": "T = 374 gives z_T = 0.960278, which is less than 1.9600, so the null hypothesis is not rejected (0.20 < P < 0.50). The data do not show a difference in minutes of alert behavior between Leboyer and control deliveries.",
+   "source": "Session 24 pages 17-19",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 2,
+    "row": "∞",
+    "column": "0.05",
+    "value": 1.96,
+    "actualDf": null,
+    "approximation": false
+   },
+   "values": {
+    "control": [
+     5.0,
+     10.1,
+     17.7,
+     20.3,
+     22.0,
+     24.9,
+     26.5,
+     30.8,
+     34.2,
+     35.0,
+     36.6,
+     37.9,
+     40.4,
+     45.5,
+     49.3,
+     51.1,
+     53.1,
+     55.0,
+     56.7,
+     58.0
+    ],
+    "leboyer": [
+     2.0,
+     19.0,
+     29.7,
+     32.1,
+     35.4,
+     36.7,
+     38.5,
+     40.2,
+     42.1,
+     43.0,
+     44.4,
+     45.6,
+     46.7,
+     47.1,
+     48.0,
+     49.0,
+     50.9,
+     51.2,
+     52.5,
+     53.3
+    ],
+    "nS": 20,
+    "nB": 20,
+    "T": 374,
+    "muT": 410.0,
+    "sigmaT": 36.968455021364726,
+    "zT": 0.9602781609208153,
+    "critical": 1.96,
+    "exactP": 0.34078485158912686,
+    "reject": false
+   },
+   "module": 24,
+   "tolerance": 0.004801390804604077,
+   "answerName": "z_T statistic",
+   "answer": 0.9602781609208153
+  },
+  {
+   "id": "s24-diuretic-signedrank",
+   "title": "Potential diuretic in six people, before and after",
+   "topic": "s24wtable",
+   "context": "Six people have daily urine production measured before and after taking a potential diuretic. The signed-rank test is used without assuming Normal differences.",
+   "unit": "mL/day",
+   "table": {
+    "headers": [
+     "Person",
+     "Before drug",
+     "After drug",
+     "Difference (after - before)",
+     "Rank of |difference|",
+     "Signed rank"
+    ],
+    "rows": [
+     [
+      1,
+      1600,
+      1490,
+      -110,
+      5,
+      -5
+     ],
+     [
+      2,
+      1850,
+      1300,
+      -550,
+      6,
+      -6
+     ],
+     [
+      3,
+      1300,
+      1400,
+      100,
+      4,
+      4
+     ],
+     [
+      4,
+      1500,
+      1410,
+      -90,
+      3,
+      -3
+     ],
+     [
+      5,
+      1400,
+      1350,
+      -50,
+      2,
+      -2
+     ],
+     [
+      6,
+      1010,
+      1000,
+      -10,
+      1,
+      -1
+     ]
+    ]
+   },
+   "tasks": [
+    "Compute the differences, rank their magnitudes, attach the signs and compute W.",
+    "Use the printed W table to test whether the drug changes urine production. State the hypotheses in words and the conclusion."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\text{no difference in urine production before and after the drug}",
+    "alternative": "H_A:\\text{urine production differs before and after the drug}",
+    "nullWords": "There is no difference in daily urine production before and after the drug, so the drug has no effect.",
+    "alternativeWords": "Daily urine production differs before and after the drug."
+   },
+   "symbols": "\\(W\\) (sum of the signed ranks), \\(n\\) (number of nonzero differences), \\(\\mu_W\\) (mean of \\(W\\) under the null hypothesis), \\(\\sigma_W\\) (standard deviation of \\(W\\) under the null hypothesis), \\(z_W\\) (standardized signed-rank sum).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\text{signed differences centered on zero}"
+     ],
+     "work": [
+      "n=6\\le8"
+     ],
+     "words": "Each person is measured before and after, so the procedure is the Wilcoxon signed-rank test, and with 6 nonzero differences the W table is used. The null hypothesis is that there is no difference in daily urine production before and after the drug."
+    },
+    {
+     "title": "Compute the differences",
+     "general": [
+      "d_i=\\text{after}_i-\\text{before}_i"
+     ],
+     "work": [
+      "d=(-110,-550,+100,-90,-50,-10)"
+     ],
+     "words": "No difference is zero, so all six people are kept."
+    },
+    {
+     "title": "Rank the magnitudes and attach signs",
+     "general": [
+      "\\operatorname{rank}|d_i|,\\quad\\operatorname{sign}(d_i)\\operatorname{rank}|d_i|"
+     ],
+     "work": [
+      "|d|=(110,550,100,90,50,10)\\to(5,6,4,3,2,1)",
+      "\\text{signed ranks}=(-5,-6,+4,-3,-2,-1)"
+     ],
+     "words": "The smallest magnitude, 10, gets rank 1 and the largest, 550, gets rank 6. Each rank then takes the sign of its difference."
+    },
+    {
+     "title": "Compute W",
+     "general": [
+      "W=\\sum\\operatorname{sign}(d_i)\\operatorname{rank}|d_i|"
+     ],
+     "work": [
+      "W=-5-6+4-3-2-1=-13",
+      "\\text{check}\\ 21-2(17)=-13"
+     ],
+     "words": "The positive rank is 4 and the negative ranks add to 17."
+    },
+    {
+     "title": "Read the critical value",
+     "general": [
+      "W_{\\text{critical}}\\ \\text{for}\\ n"
+     ],
+     "work": [
+      "n=6\\Rightarrow21\\ (P=.032),\\quad19\\ (P=.062)"
+     ],
+     "words": "Open WilcoxonW_Table.pdf, PDF page 1, row n = 6. The printed critical values are 21 with P = .032 and 19 with P = .062. The value 21 is the one whose P does not exceed 0.05.",
+     "tableLookup": {
+      "path": "sources/tables/WilcoxonW_Table.pdf",
+      "page": 1,
+      "row": "n = 6",
+      "column": "Critical value (P = .032)",
+      "value": 21,
+      "actualDf": null,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision",
+     "general": [
+      "|W|\\ge W_{\\text{critical}}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "|W|=13<19<21",
+      "P(|W|\\ge13)=\\frac{14}{64}=0.21875"
+     ],
+     "words": "The magnitude 13 is below both printed critical values, so the null hypothesis is not rejected. Fourteen of the 64 equally likely sign patterns give |W| of 13 or more."
+    }
+   ],
+   "conclusion": "W = -13 and |W| = 13 is below the critical value of 21 (and below 19), so the null hypothesis is not rejected (P = 0.219). The data do not show that the drug changes daily urine production.",
+   "source": "Session 24 pages 20-21",
+   "lookup": {
+    "path": "sources/tables/WilcoxonW_Table.pdf",
+    "page": 1,
+    "row": "n = 6",
+    "column": "Critical value (P = .032)",
+    "value": 21,
+    "actualDf": null,
+    "approximation": false
+   },
+   "values": {
+    "before": [
+     1600,
+     1850,
+     1300,
+     1500,
+     1400,
+     1010
+    ],
+    "after": [
+     1490,
+     1300,
+     1400,
+     1410,
+     1350,
+     1000
+    ],
+    "differences": [
+     -110,
+     -550,
+     100,
+     -90,
+     -50,
+     -10
+    ],
+    "n": 6,
+    "W": -13,
+    "patterns": 64,
+    "critical": 21,
+    "exactP": 0.21875,
+    "reject": false
+   },
+   "module": 24,
+   "tolerance": 0.065,
+   "answerName": "Signed-rank sum W",
+   "answer": -13
+  },
+  {
+   "id": "s24-platelet-signedrank",
+   "title": "Lecture exercise, platelet aggregation with the signed-rank test",
+   "topic": "s24wnormal",
+   "context": "Eleven people have maximum percentage platelet aggregation measured before and after smoking one cigarette. The Session 24 lecture exercise analyzes the same data used for the paired t test with the Wilcoxon signed-rank test.",
+   "unit": "percentage points",
+   "table": {
+    "headers": [
+     "Person",
+     "Before smoking",
+     "After smoking",
+     "Difference",
+     "Rank of |difference|",
+     "Signed rank"
+    ],
+    "rows": [
+     [
+      1,
+      25,
+      27,
+      2,
+      2,
+      2
+     ],
+     [
+      2,
+      25,
+      29,
+      4,
+      3.5,
+      3.5
+     ],
+     [
+      3,
+      27,
+      37,
+      10,
+      6,
+      6
+     ],
+     [
+      4,
+      44,
+      56,
+      12,
+      7,
+      7
+     ],
+     [
+      5,
+      30,
+      46,
+      16,
+      10,
+      10
+     ],
+     [
+      6,
+      67,
+      82,
+      15,
+      8.5,
+      8.5
+     ],
+     [
+      7,
+      53,
+      57,
+      4,
+      3.5,
+      3.5
+     ],
+     [
+      8,
+      53,
+      80,
+      27,
+      11,
+      11
+     ],
+     [
+      9,
+      52,
+      61,
+      9,
+      5,
+      5
+     ],
+     [
+      10,
+      60,
+      59,
+      -1,
+      1,
+      -1
+     ],
+     [
+      11,
+      28,
+      43,
+      15,
+      8.5,
+      8.5
+     ]
+    ]
+   },
+   "tasks": [
+    "Rank the magnitudes of the differences with average ranks for ties, attach the signs and compute W.",
+    "Use the tie-corrected Normal approximation to test at the two-sided 0.05 level. Give sigma_W, z_W, the printed critical value, the decision and the P range, and compare with the paired t test."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\text{no difference in platelet aggregation before and after smoking}",
+    "alternative": "H_A:\\text{platelet aggregation differs before and after smoking}",
+    "nullWords": "There is no difference in platelet aggregation before and after smoking a single cigarette.",
+    "alternativeWords": "Platelet aggregation differs before and after smoking a single cigarette."
+   },
+   "symbols": "\\(W\\) (sum of the signed ranks), \\(n\\) (number of nonzero differences), \\(\\mu_W\\) (mean of \\(W\\) under the null hypothesis), \\(\\sigma_W\\) (standard deviation of \\(W\\) under the null hypothesis), \\(z_W\\) (standardized signed-rank sum). \\(\\tau_i\\) (number of tied ranks in the \\(i\\)th set of ties).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\text{signed differences centered on zero}"
+     ],
+     "work": [
+      "n=11>8"
+     ],
+     "words": "The same people are measured before and after, so the procedure is the Wilcoxon signed-rank test, and with 11 nonzero differences the Normal approximation is used. The null hypothesis is that there is no difference in platelet aggregation before and after smoking a single cigarette."
+    },
+    {
+     "title": "Compute the differences",
+     "general": [
+      "d_i=\\text{after}_i-\\text{before}_i"
+     ],
+     "work": [
+      "d=(2,4,10,12,16,15,4,27,9,-1,15)"
+     ],
+     "words": "No difference is zero, so n stays 11."
+    },
+    {
+     "title": "Rank the magnitudes with ties",
+     "general": [
+      "\\text{tied rank}=\\text{average of the ranks the tied values occupy}"
+     ],
+     "work": [
+      "|d|\\ \\text{sorted}=1,2,4,4,9,10,12,15,15,16,27",
+      "4,4\\to\\frac{3+4}{2}=3.5,\\quad15,15\\to\\frac{8+9}{2}=8.5"
+     ],
+     "words": "The magnitudes 4 and 4 share ranks 3 and 4, and the magnitudes 15 and 15 share ranks 8 and 9. The change of -1 has the smallest magnitude and gets rank 1."
+    },
+    {
+     "title": "Compute W",
+     "general": [
+      "W=\\sum\\operatorname{sign}(d_i)\\operatorname{rank}|d_i|"
+     ],
+     "work": [
+      "W=65-1=64",
+      "\\text{check}\\ \\frac{11(12)}{2}-2(1)=64"
+     ],
+     "words": "Only the rank of the -1 change is negative, so W is the total of all ranks, 66, minus twice 1."
+    },
+    {
+     "title": "Tie sum",
+     "general": [
+      "\\sum(\\tau_i-1)\\tau_i(\\tau_i+1)"
+     ],
+     "work": [
+      "(1\\cdot2\\cdot3)+(1\\cdot2\\cdot3)=12"
+     ],
+     "words": "There are two sets of ties, each of size 2."
+    },
+    {
+     "title": "Tie-corrected standard deviation of W",
+     "general": [
+      "\\sigma_W=\\sqrt{\\frac{n(n+1)(2n+1)}{6}-\\sum\\frac{(\\tau_i-1)\\tau_i(\\tau_i+1)}{12}}"
+     ],
+     "work": [
+      "\\frac{11(12)(23)}{6}=506",
+      "\\sigma_W=\\sqrt{506-\\frac{12}{12}}=\\sqrt{505}=22.4722"
+     ],
+     "words": "The ties reduce the variance by 1, from 506 to 505."
+    },
+    {
+     "title": "Compute z_W",
+     "general": [
+      "z_W=\\frac{|W|-1/2}{\\sigma_W}"
+     ],
+     "work": [
+      "z_W=\\frac{64-0.5}{22.4722}=2.82571"
+     ],
+     "words": "The mean of W under the null hypothesis is zero, so only the continuity correction is subtracted from |W|."
+    },
+    {
+     "title": "Read the critical value",
+     "general": [
+      "z_{\\text{critical}}=t_{0.05}(\\infty)"
+     ],
+     "work": [
+      "z_{0.05}=1.9600"
+     ],
+     "words": "Open t_table.pdf, PDF page 2. In the infinity row and the two-tailed 0.05 column, the printed value is 1.9600.",
+     "tableLookup": {
+      "path": "sources/tables/t_table.pdf",
+      "page": 2,
+      "row": "∞",
+      "column": "0.05",
+      "value": 1.96,
+      "actualDf": null,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "|z_W|>z_{\\text{critical}}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "|z_W|=2.82571>1.9600",
+      "t_{0.005}(\\infty)=2.8070<2.82571<t_{0.002}(\\infty)=3.0902",
+      "0.002<P<0.005"
+     ],
+     "words": "The statistic exceeds 1.96, so the null hypothesis is rejected. In the infinity row it passes the 0.005 column (2.8070) but not the 0.002 column (3.0902), so 0.002 < P < 0.005. The paired t test on page 26 also rejects, with t = 4.27 and P < 0.002."
+    }
+   ],
+   "conclusion": "W = 64 and z_W = 2.82571 exceeds 1.9600, so the null hypothesis is rejected (0.002 < P < 0.005). Smoking one cigarette increases platelet aggregation, in agreement with the paired t test.",
+   "source": "Session 24 page 27 (lecture exercise), data and paired t test on page 26",
+   "lookup": {
+    "path": "sources/tables/t_table.pdf",
+    "page": 2,
+    "row": "∞",
+    "column": "0.05",
+    "value": 1.96,
+    "actualDf": null,
+    "approximation": false
+   },
+   "values": {
+    "before": [
+     25,
+     25,
+     27,
+     44,
+     30,
+     67,
+     53,
+     53,
+     52,
+     60,
+     28
+    ],
+    "after": [
+     27,
+     29,
+     37,
+     56,
+     46,
+     82,
+     57,
+     80,
+     61,
+     59,
+     43
+    ],
+    "differences": [
+     2,
+     4,
+     10,
+     12,
+     16,
+     15,
+     4,
+     27,
+     9,
+     -1,
+     15
+    ],
+    "n": 11,
+    "W": 64,
+    "tieSum": 12,
+    "varianceNoTies": 506.0,
+    "sigmaW": 22.47220505424423,
+    "zW": 2.8257129127614036,
+    "critical": 1.96,
+    "exactNormalP": 0.004717552432442185,
+    "pairedT": 4.271608818429545,
+    "reject": true
+   },
+   "module": 24,
+   "tolerance": 0.014128564563807018,
+   "answerName": "z_W statistic",
+   "answer": 2.8257129127614036
+  },
+  {
+   "id": "s24-orig-recovery-ranksum",
+   "title": "Original practice example, days to normal walking under two protocols",
+   "topic": "s24mwtable",
+   "context": "Original practice example with invented illustrative data. Four people follow rehabilitation protocol A and six different people follow protocol B, and the number of days until normal walking is recorded.",
+   "unit": "days",
+   "table": {
+    "headers": [
+     "Group",
+     "Days to normal walking",
+     "Rank (all 10 together)"
+    ],
+    "rows": [
+     [
+      "A",
+      4,
+      1
+     ],
+     [
+      "A",
+      5,
+      2
+     ],
+     [
+      "A",
+      6,
+      3
+     ],
+     [
+      "A",
+      9,
+      5
+     ],
+     [
+      "B",
+      8,
+      4
+     ],
+     [
+      "B",
+      10,
+      6.5
+     ],
+     [
+      "B",
+      10,
+      6.5
+     ],
+     [
+      "B",
+      12,
+      8
+     ],
+     [
+      "B",
+      13,
+      9
+     ],
+     [
+      "B",
+      15,
+      10
+     ]
+    ]
+   },
+   "tasks": [
+    "Rank all ten observations together, using average ranks for ties, and compute T.",
+    "Use the printed T table to test whether the protocols differ. State the hypotheses in words, the decision and a P range."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\text{same distribution of days to normal walking for A and B}",
+    "alternative": "H_A:\\text{the distributions differ}",
+    "nullWords": "There is no difference in the distributions of days to normal walking between protocols A and B.",
+    "alternativeWords": "The distributions of days to normal walking differ between protocols A and B."
+   },
+   "symbols": "\\(T\\) (sum of ranks in the smaller group), \\(n_S\\) (size of the smaller group), \\(n_B\\) (size of the bigger group), \\(\\mu_T\\) (mean of \\(T\\) under the null hypothesis), \\(\\sigma_T\\) (standard deviation of \\(T\\) under the null hypothesis), \\(z_T\\) (standardized rank sum).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\text{the two population distributions are the same}"
+     ],
+     "work": [
+      "n_S=4\\ (A),\\quad n_B=6\\ (B)\\le8"
+     ],
+     "words": "The groups contain different people and the bigger group has 6 people, so the procedure is the Mann-Whitney rank-sum test with the T table. The null hypothesis is that there is no difference in the distributions of days to normal walking between the protocols."
+    },
+    {
+     "title": "Rank all observations with ties",
+     "general": [
+      "\\text{tied rank}=\\text{average of the ranks the tied values occupy}"
+     ],
+     "work": [
+      "4\\to1,\\ 5\\to2,\\ 6\\to3,\\ 8\\to4,\\ 9\\to5",
+      "10,10\\to\\frac{6+7}{2}=6.5,\\ 12\\to8,\\ 13\\to9,\\ 15\\to10"
+     ],
+     "words": "The two values of 10 would occupy ranks 6 and 7, so each receives 6.5."
+    },
+    {
+     "title": "Compute T",
+     "general": [
+      "T=\\sum(\\text{ranks in the smaller group})"
+     ],
+     "work": [
+      "T=1+2+3+5=11",
+      "\\text{check}\\ 11+44=55=\\frac{10(11)}{2}"
+     ],
+     "words": "Protocol A is the smaller group."
+    },
+    {
+     "title": "Read the critical values",
+     "general": [
+      "T_{\\text{lower}},\\ T_{\\text{upper}}\\ \\text{for}\\ (n_S,n_B)"
+     ],
+     "work": [
+      "(4,6)\\Rightarrow12,\\ 32\\ (P=.038)",
+      "(4,6)\\Rightarrow10,\\ 34\\ (P=.010)"
+     ],
+     "words": "Open MannWhitney_RankSumT_Table.pdf, PDF page 1, row n_S = 4, n_B = 6. Near .05 the printed critical values are 12 and 32 with P = .038, and near .01 they are 10 and 34 with P = .010.",
+     "tableLookup": {
+      "path": "sources/tables/MannWhitney_RankSumT_Table.pdf",
+      "page": 1,
+      "row": "n_S = 4, n_B = 6",
+      "column": "Probability near .05, critical values (P = .038)",
+      "value": "12, 32",
+      "actualDf": null,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "T\\le T_{\\text{lower}}\\ \\text{or}\\ T\\ge T_{\\text{upper}}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "T=11\\le12",
+      "10<11",
+      "0.010<P<0.038"
+     ],
+     "words": "T = 11 is at or below the lower value 12, so the null hypothesis is rejected. It does not reach the .01 lower value of 10, so 0.010 < P < 0.038."
+    }
+   ],
+   "conclusion": "T = 11 is at or below the lower critical value of 12, so the null hypothesis is rejected (0.010 < P < 0.038). Protocol A tends to give fewer days to normal walking than protocol B.",
+   "source": "Original practice example",
+   "lookup": {
+    "path": "sources/tables/MannWhitney_RankSumT_Table.pdf",
+    "page": 1,
+    "row": "n_S = 4, n_B = 6",
+    "column": "Probability near .05, critical values (P = .038)",
+    "value": "12, 32",
+    "actualDf": null,
+    "approximation": false
+   },
+   "values": {
+    "A": [
+     4,
+     5,
+     6,
+     9
+    ],
+    "B": [
+     8,
+     10,
+     10,
+     12,
+     13,
+     15
+    ],
+    "nS": 4,
+    "nB": 6,
+    "T": 11,
+    "muT": 22,
+    "critical": [
+     12,
+     32
+    ],
+    "critical01": [
+     10,
+     34
+    ],
+    "exactP": 0.01904761904761905,
+    "reject": true
+   },
+   "module": 24,
+   "tolerance": 0.055,
+   "answerName": "Rank sum T",
+   "answer": 11
+  },
+  {
+   "id": "s24-orig-grip-signedrank",
+   "title": "Original practice example, grip strength before and after hand therapy",
+   "topic": "s24wtable",
+   "context": "Original practice example with invented illustrative data. Nine people have grip strength measured before and after a hand-therapy program, and one person shows no change.",
+   "unit": "kg",
+   "table": {
+    "headers": [
+     "Person",
+     "Before",
+     "After",
+     "Difference (after - before)",
+     "Rank of |difference|",
+     "Signed rank"
+    ],
+    "rows": [
+     [
+      1,
+      30,
+      33,
+      3,
+      2.5,
+      2.5
+     ],
+     [
+      2,
+      28,
+      27,
+      -1,
+      1,
+      -1
+     ],
+     [
+      3,
+      35,
+      35,
+      0,
+      "dropped",
+      "dropped"
+     ],
+     [
+      4,
+      25,
+      31,
+      6,
+      4,
+      4
+     ],
+     [
+      5,
+      32,
+      35,
+      3,
+      2.5,
+      2.5
+     ],
+     [
+      6,
+      27,
+      35,
+      8,
+      5,
+      5
+     ],
+     [
+      7,
+      22,
+      34,
+      12,
+      7,
+      7
+     ],
+     [
+      8,
+      31,
+      40,
+      9,
+      6,
+      6
+     ],
+     [
+      9,
+      26,
+      41,
+      15,
+      8,
+      8
+     ]
+    ]
+   },
+   "tasks": [
+    "Drop the zero difference, rank the magnitudes with average ranks for ties, attach the signs and compute W.",
+    "Use the printed W table to test whether grip strength changes. State the hypotheses in words, the decision and a P range."
+   ],
+   "hypotheses": {
+    "null": "H_0:\\text{no difference in grip strength before and after therapy}",
+    "alternative": "H_A:\\text{grip strength differs before and after therapy}",
+    "nullWords": "There is no difference in grip strength before and after the hand-therapy program.",
+    "alternativeWords": "Grip strength differs before and after the hand-therapy program."
+   },
+   "symbols": "\\(W\\) (sum of the signed ranks), \\(n\\) (number of nonzero differences), \\(\\mu_W\\) (mean of \\(W\\) under the null hypothesis), \\(\\sigma_W\\) (standard deviation of \\(W\\) under the null hypothesis), \\(z_W\\) (standardized signed-rank sum).",
+   "steps": [
+    {
+     "title": "State the procedure and hypotheses",
+     "general": [
+      "H_0:\\text{signed differences centered on zero}"
+     ],
+     "work": [
+      "9\\ \\text{people}"
+     ],
+     "words": "Each person is measured before and after, so the procedure is the Wilcoxon signed-rank test. The null hypothesis is that there is no difference in grip strength before and after the program."
+    },
+    {
+     "title": "Drop the zero difference",
+     "general": [
+      "n=\\text{number of nonzero differences}"
+     ],
+     "work": [
+      "d=(3,-1,0,6,3,8,12,9,15)",
+      "n=9-1=8\\le8"
+     ],
+     "words": "Person 3 has no change, so that difference is dropped and n becomes 8. The W table applies."
+    },
+    {
+     "title": "Rank the magnitudes and attach signs",
+     "general": [
+      "\\operatorname{sign}(d_i)\\operatorname{rank}|d_i|"
+     ],
+     "work": [
+      "|d|\\ \\text{sorted}=1,3,3,6,8,9,12,15",
+      "3,3\\to\\frac{2+3}{2}=2.5",
+      "\\text{signed ranks}=(+2.5,-1,+4,+2.5,+5,+7,+6,+8)"
+     ],
+     "words": "The two magnitudes of 3 share ranks 2 and 3. Only the -1 change has a negative sign."
+    },
+    {
+     "title": "Compute W",
+     "general": [
+      "W=\\sum\\operatorname{sign}(d_i)\\operatorname{rank}|d_i|"
+     ],
+     "work": [
+      "W=35-1=34",
+      "\\text{check}\\ \\frac{8(9)}{2}-2(1)=34"
+     ],
+     "words": "The positive ranks add to 35 and the single negative rank is 1."
+    },
+    {
+     "title": "Read the critical value",
+     "general": [
+      "W_{\\text{critical}}\\ \\text{for}\\ n"
+     ],
+     "work": [
+      "n=8\\Rightarrow32\\ (P=.024),\\quad28\\ (P=.054)"
+     ],
+     "words": "Open WilcoxonW_Table.pdf, PDF page 1, row n = 8. The printed critical values are 32 with P = .024 and 28 with P = .054. The value 32 is the one whose P does not exceed 0.05.",
+     "tableLookup": {
+      "path": "sources/tables/WilcoxonW_Table.pdf",
+      "page": 1,
+      "row": "n = 8",
+      "column": "Critical value (P = .024)",
+      "value": 32,
+      "actualDf": null,
+      "approximation": false
+     }
+    },
+    {
+     "title": "Make the decision and bracket P",
+     "general": [
+      "|W|\\ge W_{\\text{critical}}\\Rightarrow\\text{reject }H_0"
+     ],
+     "work": [
+      "|W|=34\\ge32",
+      "P<0.024"
+     ],
+     "words": "The magnitude 34 reaches the critical value of 32, so the null hypothesis is rejected. It is beyond the largest printed critical value for n = 8, so P < 0.024."
+    }
+   ],
+   "conclusion": "W = 34 with n = 8 reaches the critical value of 32, so the null hypothesis is rejected (P < 0.024). Grip strength increases after the hand-therapy program.",
+   "source": "Original practice example",
+   "lookup": {
+    "path": "sources/tables/WilcoxonW_Table.pdf",
+    "page": 1,
+    "row": "n = 8",
+    "column": "Critical value (P = .024)",
+    "value": 32,
+    "actualDf": null,
+    "approximation": false
+   },
+   "values": {
+    "before": [
+     30,
+     28,
+     35,
+     25,
+     32,
+     27,
+     22,
+     31,
+     26
+    ],
+    "after": [
+     33,
+     27,
+     35,
+     31,
+     35,
+     35,
+     34,
+     40,
+     41
+    ],
+    "differences": [
+     3,
+     -1,
+     0,
+     6,
+     3,
+     8,
+     12,
+     9,
+     15
+    ],
+    "n": 8,
+    "W": 34,
+    "critical": 32,
+    "exactP": 0.015625,
+    "reject": true
+   },
+   "module": 24,
+   "tolerance": 0.17,
+   "answerName": "Signed-rank sum W",
+   "answer": 34
+  }
+ ],
+ "questions": [
+  {
+   "id": "m2-s24-q001",
+   "module": 24,
+   "topic": "s24normal",
+   "stem": "For sample 1 on page 8 (60, 62, 62, 63, 64, 64, 65, 65, 67, 68), what is the sample SD?",
+   "options": [
+    "\\(2.28035\\)",
+    "\\(5.77778\\)",
+    "\\(2.4037\\)",
+    "\\(0.760117\\)"
+   ],
+   "correct": 2,
+   "why": "The squared deviations add to 52. Dividing by n - 1 = 9 gives 5.77778, and its square root is 2.4037.",
+   "case": "s24-shapiro-two-samples",
+   "equations": [
+    "s=\\sqrt{\\frac{\\sum(x_i-\\bar x)^2}{n-1}}",
+    "s=\\sqrt{\\frac{52}{9}}=2.4037"
+   ]
+  },
+  {
+   "id": "m2-s24-q002",
+   "module": 24,
+   "topic": "s24normal",
+   "stem": "For sample 1, what percentage of the values lies within one SD of the mean, and how does it compare with a Normal distribution?",
+   "options": [
+    "70%, close to the Normal 68.26%",
+    "50%, far below the Normal 68.26%",
+    "100%, far above the Normal 68.26%",
+    "90%, close to the Normal 95.44%"
+   ],
+   "correct": 0,
+   "why": "The interval 61.596 to 66.404 contains 62, 62, 63, 64, 64, 65 and 65, which is 7 of 10 values. A Normal distribution has 68.26% within one SD.",
+   "case": "s24-shapiro-two-samples",
+   "equations": [
+    "\\bar x\\pm s=64\\pm2.4037"
+   ]
+  },
+  {
+   "id": "m2-s24-q003",
+   "module": 24,
+   "topic": "s24normal",
+   "stem": "qqnorm() for ten points uses plotting probabilities (i - 3/8)/(n + 1/4). What is the theoretical quantile of the smallest point?",
+   "options": [
+    "\\(-1.33518\\)",
+    "\\(-1.64485\\)",
+    "\\(-1.28155\\)",
+    "\\(-1.54664\\)"
+   ],
+   "correct": 3,
+   "why": "The plotting probability is (1 - 0.375)/10.25 = 0.0609756, and the standard Normal quantile at that probability is -1.54664.",
+   "case": "s24-shapiro-two-samples",
+   "equations": [
+    "p_1=\\frac{1-3/8}{10+1/4}=0.0609756",
+    "z_1=\\Phi^{-1}(0.0609756)=-1.54664"
+   ]
+  },
+  {
+   "id": "m2-s24-q004",
+   "module": 24,
+   "topic": "s24normal",
+   "stem": "Sample 2 on page 8 gives W = 0.75726 and p-value = 0.004374 from shapiro.test. What is the correct decision at the 0.05 level?",
+   "options": [
+    "Do not reject the null hypothesis, so the data are Normally distributed.",
+    "Reject the null hypothesis, so the data are not Normally distributed.",
+    "Reject the null hypothesis, so the two samples have different means.",
+    "No decision is possible without the T table."
+   ],
+   "correct": 1,
+   "why": "The Shapiro-Wilk null hypothesis is Normality. A P value of 0.004374 is below 0.05, so Normality is rejected.",
+   "case": "s24-shapiro-two-samples",
+   "equations": [
+    "P=0.004374<0.05"
+   ]
+  },
+  {
+   "id": "m2-s24-q005",
+   "module": 24,
+   "topic": "s24normal",
+   "stem": "For sample 2, what is the sample SD?",
+   "options": [
+    "\\(9.32142\\)",
+    "\\(8.84308\\)",
+    "\\(86.8889\\)",
+    "\\(2.4037\\)"
+   ],
+   "correct": 0,
+   "why": "The squared deviations from the mean of 65 add to 782. Dividing by 9 and taking the root gives 9.32142.",
+   "case": "s24-shapiro-two-samples",
+   "equations": [
+    "s=\\sqrt{\\frac{782}{9}}=9.32142"
+   ]
+  },
+  {
+   "id": "m2-s24-q006",
+   "module": 24,
+   "topic": "s24normal",
+   "stem": "What is the null hypothesis of the Shapiro-Wilk test?",
+   "options": [
+    "The data are not Normally distributed.",
+    "The two group means are equal.",
+    "The data are Normally distributed.",
+    "The sample median equals zero."
+   ],
+   "correct": 2,
+   "why": "The test compares the distribution of the data with the Normal distribution, and the null hypothesis is that there is no difference between them.",
+   "case": null,
+   "equations": []
+  },
+  {
+   "id": "m2-s24-q007",
+   "module": 24,
+   "topic": "s24normal",
+   "stem": "A Shapiro-Wilk test gives P = 0.9386. Which statement is most accurate?",
+   "options": [
+    "The data are proven to come from a Normal distribution.",
+    "Normality is not rejected, so the data are consistent with a Normal distribution.",
+    "The data are not Normal because P is large.",
+    "A rank test must be used."
+   ],
+   "correct": 1,
+   "why": "A large P value means the data give no evidence against Normality. Failing to reject does not prove the null hypothesis.",
+   "case": null,
+   "equations": []
+  },
+  {
+   "id": "m2-s24-q008",
+   "module": 24,
+   "topic": "s24normal",
+   "stem": "On a Normal Q-Q plot the middle points follow the line, but the largest points rise far above it and the smallest fall far below it. Which shape does this show?",
+   "options": [
+    "Light tails",
+    "Positive skew only",
+    "A perfectly Normal sample",
+    "Heavy tails"
+   ],
+   "correct": 3,
+   "why": "Extreme values that are more extreme than Normal quantiles predict at both ends are the heavy-tail pattern on page 7.",
+   "case": null,
+   "equations": []
+  },
+  {
+   "id": "m2-s24-q009",
+   "module": 24,
+   "topic": "s24normal",
+   "stem": "On a Normal Q-Q plot the points bend upward away from the line only at the right end. Which shape does this show?",
+   "options": [
+    "Negative skew",
+    "Light tails",
+    "Heavy tails at both ends",
+    "Positive skew"
+   ],
+   "correct": 3,
+   "why": "The largest values are larger than Normal quantiles predict, which is the positive-skew pattern with a long right tail.",
+   "case": null,
+   "equations": []
+  },
+  {
+   "id": "m2-s24-q010",
+   "module": 24,
+   "topic": "s24normal",
+   "stem": "Why is Normality checked before an unpaired t test or analysis of variance?",
+   "options": [
+    "Ranks can only be computed for Normal data.",
+    "The sampling distributions of t and F were derived assuming a Normally distributed random variable.",
+    "The T table requires Normal data.",
+    "Normal data never contain ties."
+   ],
+   "correct": 1,
+   "why": "Page 3 states that the derivations for t and F assume Normality. When it fails, the observations are ranked and an ordinal method is used.",
+   "case": null,
+   "equations": []
+  },
+  {
+   "id": "m2-s24-q011",
+   "module": 24,
+   "topic": "s24mwtable",
+   "stem": "In the diuretic experiment on page 9, what is T?",
+   "options": [
+    "\\(9\\)",
+    "\\(19\\)",
+    "\\(12\\)",
+    "\\(28\\)"
+   ],
+   "correct": 0,
+   "why": "T is the sum of the ranks in the smaller (placebo) group, 1 + 5 + 3 = 9. The drug ranks add to 19.",
+   "case": "s24-diuretic-ranksum",
+   "equations": [
+    "T=1+5+3=9"
+   ]
+  },
+  {
+   "id": "m2-s24-q012",
+   "module": 24,
+   "topic": "s24mwtable",
+   "stem": "How many equally likely rank sets for the smaller group are there when n_S = 3 and n_B = 4?",
+   "options": [
+    "\\(210\\)",
+    "\\(128\\)",
+    "\\(35\\)",
+    "\\(7\\)"
+   ],
+   "correct": 2,
+   "why": "Choosing 3 of 7 ranks gives 7!/(3! 4!) = 35 sets.",
+   "case": "s24-diuretic-ranksum",
+   "equations": [
+    "\\binom{7}{3}=35"
+   ]
+  },
+  {
+   "id": "m2-s24-q013",
+   "module": 24,
+   "topic": "s24mwtable",
+   "stem": "For the diuretic experiment, what is the exact two-tailed probability of a rank sum at least as far from 12 as T = 9?",
+   "options": [
+    "\\(0.2\\)",
+    "\\(0.4\\)",
+    "\\(0.057\\)",
+    "\\(0.02857\\)"
+   ],
+   "correct": 1,
+   "why": "Seven sets give T of 9 or less and seven give T of 15 or more, so P = 14/35 = 0.4.",
+   "case": "s24-diuretic-ranksum",
+   "equations": [
+    "P=\\frac{14}{35}=0.4"
+   ]
+  },
+  {
+   "id": "m2-s24-q014",
+   "module": 24,
+   "topic": "s24mwtable",
+   "stem": "Which printed critical values of T apply to n_S = 3 and n_B = 4 near the 0.05 level?",
+   "options": [
+    "6 and 21 (P = .036)",
+    "7 and 20 (P = .071)",
+    "6 and 18 (P = .057)",
+    "11 and 25 (P = .057)"
+   ],
+   "correct": 2,
+   "why": "The first row of the T table, n_S = 3 and n_B = 4, prints 6 and 18 with P = .057. T = 9 lies between them, so the null hypothesis is not rejected.",
+   "case": "s24-diuretic-ranksum",
+   "equations": []
+  },
+  {
+   "id": "m2-s24-q015",
+   "module": 24,
+   "topic": "s24mwtable",
+   "stem": "In the original protocol example, what is T for protocol A (4, 5, 6, 9 days)?",
+   "options": [
+    "\\(11\\)",
+    "\\(44\\)",
+    "\\(12\\)",
+    "\\(10\\)"
+   ],
+   "correct": 0,
+   "why": "The ranks of protocol A are 1, 2, 3 and 5, which add to 11. The protocol B ranks add to 44.",
+   "case": "s24-orig-recovery-ranksum",
+   "equations": [
+    "T=1+2+3+5=11"
+   ]
+  },
+  {
+   "id": "m2-s24-q016",
+   "module": 24,
+   "topic": "s24mwtable",
+   "stem": "In the original protocol example, the two values of 10 days would occupy ranks 6 and 7. What rank does each receive?",
+   "options": [
+    "\\(6\\)",
+    "\\(7\\)",
+    "\\(13\\)",
+    "\\(6.5\\)"
+   ],
+   "correct": 3,
+   "why": "Tied observations get the average of the ranks they would occupy, (6 + 7)/2 = 6.5.",
+   "case": "s24-orig-recovery-ranksum",
+   "equations": [
+    "\\frac{6+7}{2}=6.5"
+   ]
+  },
+  {
+   "id": "m2-s24-q017",
+   "module": 24,
+   "topic": "s24mwtable",
+   "stem": "For the original protocol example (T = 11, n_S = 4, n_B = 6), what are the decision and P range?",
+   "options": [
+    "Do not reject, P > 0.038",
+    "Reject, P < 0.010",
+    "Reject, 0.010 < P < 0.038",
+    "Do not reject, 0.010 < P < 0.038"
+   ],
+   "correct": 2,
+   "why": "The near-.05 values are 12 and 32 (P = .038), and T = 11 is at or below 12. The near-.01 lower value is 10, which T does not reach.",
+   "case": "s24-orig-recovery-ranksum",
+   "equations": [
+    "T=11\\le12,\\quad T>10"
+   ]
+  },
+  {
+   "id": "m2-s24-q018",
+   "module": 24,
+   "topic": "s24mwtable",
+   "stem": "In the Mann-Whitney rank-sum test, what is T?",
+   "options": [
+    "The sum of the ranks in the bigger group",
+    "The difference between the two group means",
+    "The number of observations in the smaller group",
+    "The sum of the ranks in the smaller group"
+   ],
+   "correct": 3,
+   "why": "All observations are ranked together and T adds the ranks of the smaller group.",
+   "case": null,
+   "equations": []
+  },
+  {
+   "id": "m2-s24-q019",
+   "module": 24,
+   "topic": "s24mwtable",
+   "stem": "What is the parametric analog of the Mann-Whitney rank-sum test?",
+   "options": [
+    "The paired t test",
+    "The unpaired t test",
+    "Repeated measures analysis of variance",
+    "McNemar test"
+   ],
+   "correct": 1,
+   "why": "Both compare two groups made of different individuals. The rank-sum test replaces the observed values with ranks.",
+   "case": null,
+   "equations": []
+  },
+  {
+   "id": "m2-s24-q020",
+   "module": 24,
+   "topic": "s24mwtable",
+   "stem": "Three observations tie for the positions that would be ranks 5, 6 and 7. What rank does each receive?",
+   "options": [
+    "\\(6\\)",
+    "\\(5\\)",
+    "\\(7\\)",
+    "\\(18\\)"
+   ],
+   "correct": 0,
+   "why": "Each tied observation receives the average of the ranks it would have had, (5 + 6 + 7)/3 = 6.",
+   "case": null,
+   "equations": [
+    "\\frac{5+6+7}{3}=6"
+   ]
+  },
+  {
+   "id": "m2-s24-q021",
+   "module": 24,
+   "topic": "s24mwnormal",
+   "stem": "For the Leboyer example (n_S = n_B = 20), what is the mean of T under the null hypothesis?",
+   "options": [
+    "\\(420\\)",
+    "\\(820\\)",
+    "\\(205\\)",
+    "\\(410\\)"
+   ],
+   "correct": 3,
+   "why": "The mean rank sum is n_S(n_S + n_B + 1)/2 = 20(41)/2 = 410.",
+   "case": "s24-leboyer-ranksum",
+   "equations": [
+    "\\mu_T=\\frac{20(20+20+1)}{2}=410"
+   ]
+  },
+  {
+   "id": "m2-s24-q022",
+   "module": 24,
+   "topic": "s24mwnormal",
+   "stem": "For the Leboyer example, what is the standard deviation of T?",
+   "options": [
+    "\\(36.9685\\)",
+    "\\(1366.67\\)",
+    "\\(36.5148\\)",
+    "\\(8.2664\\)"
+   ],
+   "correct": 0,
+   "why": "There are no ties, so the simple form applies, the square root of 20(20)(41)/12 = 1366.67.",
+   "case": "s24-leboyer-ranksum",
+   "equations": [
+    "\\sigma_T=\\sqrt{\\frac{20(20)(41)}{12}}=36.9685"
+   ]
+  },
+  {
+   "id": "m2-s24-q023",
+   "module": 24,
+   "topic": "s24mwnormal",
+   "stem": "For the Leboyer example with T = 374, what is z_T?",
+   "options": [
+    "\\(0.973803\\)",
+    "\\(0.987328\\)",
+    "\\(0.960278\\)",
+    "\\(1.96\\)"
+   ],
+   "correct": 2,
+   "why": "Subtract one half from |374 - 410| = 36 and divide by 36.9685. Omitting the continuity correction gives 0.973803.",
+   "case": "s24-leboyer-ranksum",
+   "equations": [
+    "z_T=\\frac{|374-410|-0.5}{36.9685}=0.960278"
+   ]
+  },
+  {
+   "id": "m2-s24-q024",
+   "module": 24,
+   "topic": "s24mwnormal",
+   "stem": "For the Leboyer example, what are the decision and P range?",
+   "options": [
+    "Reject, P < 0.05",
+    "Do not reject, 0.20 < P < 0.50",
+    "Do not reject, 0.05 < P < 0.10",
+    "Reject, 0.20 < P < 0.50"
+   ],
+   "correct": 1,
+   "why": "z_T = 0.960 is below 1.9600. In the infinity row of the t table it lies between 0.6745 (0.50) and 1.2816 (0.20).",
+   "case": "s24-leboyer-ranksum",
+   "equations": [
+    "0.6745<0.960278<1.2816"
+   ]
+  },
+  {
+   "id": "m2-s24-q025",
+   "module": 24,
+   "topic": "s24mwnormal",
+   "stem": "Two groups with \\(n_S=10\\) and \\(n_B=12\\) have one tie between 2 observations and two ties among 3 observations. What is the tie-corrected \\(\\sigma_T\\)?",
+   "options": [
+    "\\(15.1658\\)",
+    "\\(15.1272\\)",
+    "\\(15.1305\\)",
+    "\\(228.831\\)"
+   ],
+   "correct": 1,
+   "why": "The tie sum is 54 and N = 22. The correction term is 10(12)(54)/(12(22)(21)) = 1.16883, subtracted from 10(12)(23)/12 = 230 before taking the root.",
+   "case": null,
+   "equations": [
+    "\\sigma_T=\\sqrt{\\frac{n_Sn_B(N+1)}{12}-\\frac{n_Sn_B}{12N(N-1)}\\sum(\\tau_i-1)\\tau_i(\\tau_i+1)}",
+    "\\sigma_T=\\sqrt{230-1.16883}=15.1272"
+   ]
+  },
+  {
+   "id": "m2-s24-q026",
+   "module": 24,
+   "topic": "s24mwnormal",
+   "stem": "With one tie between 2 observations and two ties among 3 observations, what is \\(\\sum(\\tau_i-1)\\tau_i(\\tau_i+1)\\)?",
+   "options": [
+    "\\(30\\)",
+    "\\(24\\)",
+    "\\(78\\)",
+    "\\(54\\)"
+   ],
+   "correct": 3,
+   "why": "A pair contributes 1(2)(3) = 6 and each triple contributes 2(3)(4) = 24, so the sum is 6 + 2(24) = 54.",
+   "case": null,
+   "equations": [
+    "6+2(24)=54"
+   ]
+  },
+  {
+   "id": "m2-s24-q027",
+   "module": 24,
+   "topic": "s24mwnormal",
+   "stem": "When does the Mann-Whitney test switch from the T table to the Normal approximation?",
+   "options": [
+    "When the bigger group has more than 8 observations",
+    "When the smaller group has more than 3 observations",
+    "Whenever there are ties",
+    "When the data are Normally distributed"
+   ],
+   "correct": 0,
+   "why": "The T table covers n_B up to 8. For n_B > 8, T is approximately Normal with mean mu_T and standard deviation sigma_T.",
+   "case": null,
+   "equations": []
+  },
+  {
+   "id": "m2-s24-q028",
+   "module": 24,
+   "topic": "s24mwnormal",
+   "stem": "Where does the two-tailed 0.05 cutoff for z_T come from in the class tables?",
+   "options": [
+    "The T table row for n_S and n_B",
+    "The 0.05 column of the t table at n - 1 degrees of freedom",
+    "The infinity row of the two-tailed t table, 1.9600",
+    "The chi-square table with 1 degree of freedom"
+   ],
+   "correct": 2,
+   "why": "As the degrees of freedom grow without bound the t distribution becomes the standard Normal, so the infinity row gives the z cutoffs.",
+   "case": null,
+   "equations": []
+  },
+  {
+   "id": "m2-s24-q029",
+   "module": 24,
+   "topic": "s24wtable",
+   "stem": "For the six-person diuretic data on page 20, what is W?",
+   "options": [
+    "\\(-13\\)",
+    "\\(13\\)",
+    "\\(4\\)",
+    "\\(-17\\)"
+   ],
+   "correct": 0,
+   "why": "The signed ranks are -5, -6, +4, -3, -2 and -1, which add to -13.",
+   "case": "s24-diuretic-signedrank",
+   "equations": [
+    "W=-5-6+4-3-2-1=-13"
+   ]
+  },
+  {
+   "id": "m2-s24-q030",
+   "module": 24,
+   "topic": "s24wtable",
+   "stem": "How many equally likely sign patterns does the null distribution of W have when n = 6?",
+   "options": [
+    "\\(36\\)",
+    "\\(64\\)",
+    "\\(21\\)",
+    "\\(720\\)"
+   ],
+   "correct": 1,
+   "why": "Each of the 6 signed ranks can be positive or negative, giving 2^6 = 64 patterns.",
+   "case": "s24-diuretic-signedrank",
+   "equations": [
+    "2^6=64"
+   ]
+  },
+  {
+   "id": "m2-s24-q031",
+   "module": 24,
+   "topic": "s24wtable",
+   "stem": "For the diuretic data, what is the exact two-tailed P for |W| = 13 with n = 6?",
+   "options": [
+    "\\(0.032\\)",
+    "\\(0.062\\)",
+    "\\(0.109375\\)",
+    "\\(0.21875\\)"
+   ],
+   "correct": 3,
+   "why": "Fourteen of the 64 sign patterns give |W| of 13 or more, so P = 14/64 = 0.21875.",
+   "case": "s24-diuretic-signedrank",
+   "equations": [
+    "P=\\frac{14}{64}=0.21875"
+   ]
+  },
+  {
+   "id": "m2-s24-q032",
+   "module": 24,
+   "topic": "s24wtable",
+   "stem": "In the original grip strength example, nine people are measured and one shows no change. What n is used for the W table?",
+   "options": [
+    "\\(9\\)",
+    "\\(7\\)",
+    "\\(8\\)",
+    "\\(10\\)"
+   ],
+   "correct": 2,
+   "why": "A zero difference has no sign, so it is dropped with a corresponding reduction in n, from 9 to 8.",
+   "case": "s24-orig-grip-signedrank",
+   "equations": [
+    "n=9-1=8"
+   ]
+  },
+  {
+   "id": "m2-s24-q033",
+   "module": 24,
+   "topic": "s24wtable",
+   "stem": "In the original grip strength example, what is W?",
+   "options": [
+    "\\(35\\)",
+    "\\(36\\)",
+    "\\(34\\)",
+    "\\(33\\)"
+   ],
+   "correct": 2,
+   "why": "The positive ranks add to 35 and the only negative rank is 1, so W = 35 - 1 = 34.",
+   "case": "s24-orig-grip-signedrank",
+   "equations": [
+    "W=36-2(1)=34"
+   ]
+  },
+  {
+   "id": "m2-s24-q034",
+   "module": 24,
+   "topic": "s24wtable",
+   "stem": "For the original grip strength example (W = 34, n = 8), what are the decision and P range?",
+   "options": [
+    "Reject, P < 0.024",
+    "Do not reject, P > 0.054",
+    "Reject, 0.024 < P < 0.054",
+    "Do not reject, P < 0.024"
+   ],
+   "correct": 0,
+   "why": "The W table row n = 8 prints 32 (P = .024) and 28 (P = .054). Since |W| = 34 reaches 32, the null hypothesis is rejected with P < 0.024.",
+   "case": "s24-orig-grip-signedrank",
+   "equations": [
+    "|W|=34\\ge32"
+   ]
+  },
+  {
+   "id": "m2-s24-q035",
+   "module": 24,
+   "topic": "s24wtable",
+   "stem": "A subject has a difference of -1, the smallest magnitude among the differences. What rank does it receive before the sign is attached?",
+   "options": [
+    "No rank, negative differences are dropped",
+    "Rank 1, then the sign makes it -1",
+    "The largest rank, because it is negative",
+    "Rank 0"
+   ],
+   "correct": 1,
+   "why": "The magnitudes are ranked first and the sign is restored after ranking, as the note on page 24 explains.",
+   "case": null,
+   "equations": []
+  },
+  {
+   "id": "m2-s24-q036",
+   "module": 24,
+   "topic": "s24wnormal",
+   "stem": "For the platelet lecture exercise on page 27, what is W?",
+   "options": [
+    "\\(65\\)",
+    "\\(66\\)",
+    "\\(-64\\)",
+    "\\(64\\)"
+   ],
+   "correct": 3,
+   "why": "Only the -1 change is negative and it has rank 1, so W = 66 - 2(1) = 64. R reports V = 65, the sum of the positive ranks only.",
+   "case": "s24-platelet-signedrank",
+   "equations": [
+    "W=65-1=64"
+   ]
+  },
+  {
+   "id": "m2-s24-q037",
+   "module": 24,
+   "topic": "s24wnormal",
+   "stem": "For the platelet exercise, what is the tie-corrected standard deviation of W?",
+   "options": [
+    "\\(22.4722\\)",
+    "\\(22.4944\\)",
+    "\\(505\\)",
+    "\\(22.2261\\)"
+   ],
+   "correct": 0,
+   "why": "The no-tie variance is 11(12)(23)/6 = 506. Two tied pairs give a tie sum of 12, and 12/12 = 1 is subtracted, so sigma_W = sqrt(505).",
+   "case": "s24-platelet-signedrank",
+   "equations": [
+    "\\sigma_W=\\sqrt{506-\\frac{12}{12}}=22.4722"
+   ]
+  },
+  {
+   "id": "m2-s24-q038",
+   "module": 24,
+   "topic": "s24wnormal",
+   "stem": "For the platelet exercise, what is z_W?",
+   "options": [
+    "\\(2.84796\\)",
+    "\\(2.82292\\)",
+    "\\(2.8070\\)",
+    "\\(2.82571\\)"
+   ],
+   "correct": 3,
+   "why": "Subtract one half from |W| = 64 and divide by the tie-corrected 22.4722. Omitting the continuity correction gives 2.84796.",
+   "case": "s24-platelet-signedrank",
+   "equations": [
+    "z_W=\\frac{64-0.5}{22.4722}=2.82571"
+   ]
+  },
+  {
+   "id": "m2-s24-q039",
+   "module": 24,
+   "topic": "s24wnormal",
+   "stem": "For the platelet exercise, what P range follows from z_W = 2.8257 and the infinity row of the t table?",
+   "options": [
+    "\\(0.005<P<0.01\\)",
+    "\\(P<0.001\\)",
+    "\\(0.002<P<0.005\\)",
+    "\\(0.01<P<0.02\\)"
+   ],
+   "correct": 2,
+   "why": "z_W passes the 0.005 column (2.8070) but not the 0.002 column (3.0902).",
+   "case": "s24-platelet-signedrank",
+   "equations": [
+    "2.8070<2.8257<3.0902"
+   ]
+  },
+  {
+   "id": "m2-s24-q040",
+   "module": 24,
+   "topic": "s24wnormal",
+   "stem": "Under the null hypothesis of the signed-rank test with n > 8, what is the mean of W, and what is the parametric analog of the test?",
+   "options": [
+    "The mean is n(n+1)/4, and the analog is the unpaired t test.",
+    "The mean is 0, and the analog is the paired t test.",
+    "The mean is n(n+1)/2, and the analog is the paired t test.",
+    "The mean is 0, and the analog is analysis of variance."
+   ],
+   "correct": 1,
+   "why": "Positive and negative signed ranks are equally likely under the null hypothesis, so W averages zero. Both tests analyze before-and-after measurements on the same subjects.",
+   "case": null,
+   "equations": []
+  }
+ ],
+ "sourceNotes": [
+  {
+   "page": 15,
+   "text": "The tie-corrected sigma_T on pages 15 and 16 prints the denominator of the tie term as 12N(N+1). The correct denominator is 12N(N-1), so sigma_T = sqrt(n_S n_B (N+1)/12 - n_S n_B sum((tau_i-1)tau_i(tau_i+1))/(12N(N-1))). This was confirmed by enumerating every rank set for a small tied example (variance 10.5804 with N-1 versus 10.7292 with N+1). The teaching text uses N-1. The difference is small for large N."
+  },
+  {
+   "page": 19,
+   "text": "The Leboyer slide prints z_T = 0.962. Using its own numbers, (|374-410| - 0.5)/36.97 = 0.9602, and the unrounded value is 0.960278. The decision (|z_T| < 1.96, do not reject) is unchanged."
+  },
+  {
+   "page": 8,
+   "text": "The slide labels the first Shapiro-Wilk result 'Do not reject H0, Data are Normal'. Not rejecting means the data are consistent with a Normal distribution, not that Normality is proven. The teaching text records the slide's decision and states it as consistent with Normality."
+  },
+  {
+   "page": 23,
+   "text": "The signed-rank procedure numbers two steps as 3 (Add up all signed ranks, and Compare W to its critical values). The comparison is step 4."
+  },
+  {
+   "page": 21,
+   "text": "For n = 6 the W table prints two critical values, 21 (P = .032) and 19 (P = .062). The cases use the value whose P does not exceed 0.05 (21 for n = 6, 32 for n = 8). For n_S = 3, n_B = 4 the T table prints only 6, 18 with P = .057, which is used as the near-.05 entry. None of the slide decisions depend on this choice."
+  },
+  {
+   "page": 27,
+   "text": "The slide does not show the answer to the lecture exercise. The case uses the slide method, z_W = (|W| - 1/2)/sigma_W with the tie correction, giving W = 64, sigma_W = 22.4722, z_W = 2.82571, 0.002 < P < 0.005. R 4.6.1 wilcox.test(after, before, paired = TRUE) reports V = 65 (sum of positive ranks) with an exact p-value of 0.001953, a different but consistent result."
+  },
+  {
+   "page": 2,
+   "text": "The summary table lists 'Cochrane Q'. The test is usually named Cochran's Q (after William Cochran). It is not covered in this course."
+  },
+  {
+   "page": 1,
+   "text": "The two original practice examples (days to normal walking under two protocols, grip strength before and after hand therapy) use invented illustrative data and are labeled as original. Their exact P values were computed by enumeration (0.0190 and 0.0156) and agree with the printed-table decisions."
+  }
+ ]
+}

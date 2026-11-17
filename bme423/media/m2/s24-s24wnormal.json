@@ -1,0 +1,78 @@
+{
+ "id": "s24-s24wnormal",
+ "file": "media/m2/s24-s24wnormal.mp4",
+ "poster": "media/m2/s24-s24wnormal.png",
+ "session": 24,
+ "method": "s24wnormal",
+ "title": "Signed-rank test · Normal approximation with ties",
+ "duration": 72,
+ "cases": {
+  "s24-platelet-signedrank": [
+   2,
+   1,
+   3,
+   4,
+   6,
+   6,
+   7,
+   8,
+   9
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "Eleven changes",
+   "start": 0,
+   "end": 7
+  },
+  {
+   "step": 2,
+   "title": "Null hypothesis",
+   "start": 7,
+   "end": 14
+  },
+  {
+   "step": 3,
+   "title": "Rank sizes with ties",
+   "start": 14,
+   "end": 23
+  },
+  {
+   "step": 4,
+   "title": "Signed ranks into W",
+   "start": 23,
+   "end": 32
+  },
+  {
+   "step": 5,
+   "title": "Normal approximation",
+   "start": 32,
+   "end": 39
+  },
+  {
+   "step": 6,
+   "title": "Tie correction",
+   "start": 39,
+   "end": 48
+  },
+  {
+   "step": 7,
+   "title": "Compute z_W",
+   "start": 48,
+   "end": 56
+  },
+  {
+   "step": 8,
+   "title": "Class t table",
+   "start": 56,
+   "end": 63
+  },
+  {
+   "step": 9,
+   "title": "Decision",
+   "start": 63,
+   "end": 72
+  }
+ ]
+}

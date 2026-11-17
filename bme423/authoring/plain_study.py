@@ -66,6 +66,8 @@ CHI = ('Chi_Squared_Table2.pdf', 'Use the class chi-square table (upper tail). R
 Z = ('z_table_NormalDist.pdf', 'Use the class z table. It lists z beside F(z), the area to the left of z, and only for positive z.')
 THOLM = ('t_table.pdf', 'Use the class t table (two-tailed) with the within-groups or residual degrees of freedom. A level like 0.0167 is not printed, so bracket it between the 0.01 and 0.02 columns, or use a cutoff the question gives.')
 CHIHOLM = ('Chi_Squared_Table2.pdf', 'Use the class chi-square table with 1 degree of freedom. A level like 0.0167 is not printed, so bracket it between the 0.01 and 0.025 columns.')
+MW = ('MannWhitney_RankSumT_Table.pdf', 'Use the class Mann-Whitney T table (two-tailed). Find the row for the smaller group size and then the larger group size. The pair of critical values is read in the column near 0.05, and the next column gives the exact P for that pair.')
+WT = ('WilcoxonW_Table.pdf', 'Use the class Wilcoxon W table (two-tailed). Find the row for n, the number of nonzero differences, and compare the size of W with the critical value. The P column gives the exact probability for that cutoff.')
 POWER = (None, 'Use the class power chart for the t test, posted with the statistical tables.')
 TABLE_STEPS = [
  (5, 'Look up each left area', Z), (5, 'Find the z with that left area', Z), (5, 'Use the table and combine', Z),
@@ -81,6 +83,7 @@ TABLE_STEPS = [
  (18, 'Compare with the two-tailed t cutoff', T), (18, 'Use the t cutoff with n minus 2', T), (18, 'Compare with the cutoff and say how strong', T), (18, 'Compare with the cutoff and conclude', T),
  (19, 'Read the F statistic', F),
  (20, 'Compare with the two-tailed cutoff', T),
+ (24, 'Look up the critical pair for the two group sizes', MW), (24, 'Compare z with the infinity row', TINF), (24, 'If n is 8 or fewer, compare the size of W', WT),
  (21, 'Compare with the F cutoff', F), (21, 'Use the residual degrees of freedom for the table', THOLM), (21, 'Compare with the chi-square cutoff', CHI),
 ]
 for lid, prefix, (path, note) in TABLE_STEPS:

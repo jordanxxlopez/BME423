@@ -1,0 +1,41 @@
+{
+ "s23-exercise-k3": {
+  "intro": "Seven tumor samples have known diagnoses and two dimensionless scores, nuclear size and nuclear irregularity. A new sample has scores (4, 4). Classify it with K-NN using the Euclidean distance and K = 3, and give the probability.",
+  "3": "A and C tie at distance 1 for the first two places. B is third, D is fourth and E is fifth.",
+  "end": "The new sample is called benign because two of its three nearest samples, A and B, are benign. C is malignant, so the vote is 2 to 1 and the probability of benign is 2/3, not 1."
+ },
+ "s23-exercise-k5": {
+  "intro": "The same seven tumor samples and the same new sample (4, 4) are used again. Classify the new sample with K-NN using the Euclidean distance and K = 5, and give the probability.",
+  "3": "A and C tie at distance 1 for the first two places. B is third, D is fourth and E is fifth.",
+  "end": "The two extra neighbors, D and E, are both malignant, so the vote turns from 2 to 1 for benign into 3 to 2 for malignant. The same distances give a different class, so K must be chosen with care."
+ },
+ "s23-radius-minmax": {
+  "intro": "The R summary of the Wisconsin breast cancer data gives radius_mean a minimum of 6.981, a median of 13.370, a mean of 14.127 and a maximum of 28.110. Every feature is rescaled with normalize(), which is min-max normalization.",
+  "0": "The R summary() output gives both values for radius_mean, a minimum of 6.981 and a maximum of 28.110.",
+  "end": "The mean radius sits about a third of the way from the smallest to the largest radius, so it becomes 0.33821. Every feature now runs from 0 to 1, so large features like area no longer swamp the distance."
+ },
+ "s23-wbcd-k21-accuracy": {
+  "intro": "K-NN with K = 21 is trained on 469 min-max normalized FNAB samples and tested on the other 100. The cross table gives the actual diagnosis in the rows and the predicted diagnosis in the columns. Malignant is the positive class.",
+  "3": "Both match the row proportions 0.949 and 1.000 printed by CrossTable(). The two errors are malignant samples called benign.",
+  "end": "The 0.98 accuracy looks excellent, but both errors are cancers called benign. Those false negatives are the costly mistakes, which is why sensitivity is checked as well as accuracy."
+ },
+ "s23-rare-variant": {
+  "intro": "A classifier for a genetic variant in newborns is correct in 99,990 of 100,000 cases. Suppose the defect occurs in only 10 of the 100,000 babies, and a test always predicts no defect. Carrying the variant is the positive class.",
+  "1": "Every baby is predicted negative, so the 10 babies with the defect become false negatives and nobody is a true positive.",
+  "2": "The useless test has the same 99.99% accuracy, because almost every baby truly has no defect.",
+  "end": "The always-no test scores 99.99% only because 99,990 of the babies have no defect. Its sensitivity of 0 shows that it never finds the condition it is meant to find."
+ },
+ "s23-wbcd-zscore-sens": {
+  "intro": "The breast cancer features are standardized with scale(), which gives z-scores, instead of min-max normalization. K-NN with K = 21 is rerun on the same 469 training and 100 test samples. Malignant is the positive class.",
+  "end": "The z-score model misses 5 of the 39 cancers, so its sensitivity of 0.87179 is lower than the 0.94872 of min-max scaling. Specificity is 1 for both, so min-max scaling is the better choice here."
+ },
+ "s23-concrete-neuron": {
+  "intro": "This practice example uses the weights of the fitted one-hidden-neuron concrete model. The hidden neuron is a sigmoid and the output node is linear. A mix has normalized inputs cement 0.6, slag 0.2, ash 0, water 0.5, superplastic 0.3, coarseagg 0.5, fineagg 0.5 and age 0.1.",
+  "1": "The bias node 1 is a constant input of 1, so its weight of -2.32599 is simply added to the sum.",
+  "end": "The large cement and age weights push the net input above 0, so the hidden neuron outputs 0.82116. The output node scales this to a predicted strength of 0.54637, a little above the middle of the 0 to 1 scale."
+ },
+ "s23-neuron-sse": {
+  "intro": "A single artificial neuron has three inputs with weights w1 = 1, w2 = -2 and w3 = 0.5 and a sigmoid activation. Three training observations with known outputs are given. Compute the predictions and the sum of squared errors.",
+  "end": "Observation 3 has a known output of 1 but a prediction of only 0.26894, so its squared error of 0.53445 is most of the 0.601 total. Training would move the weights to raise that prediction."
+ }
+}

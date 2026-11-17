@@ -239,6 +239,86 @@
   "rowH": 30,
   "colW": 62
  },
+ "MannWhitney_RankSumT_Table.pdf|1|n_S = 3, n_B = 4|Probability near .05, critical values (P = .057)": {
+  "img": "tables/MannWhitney_RankSumT_Table.pdf_1_n_S3n_B4_Probabilitynear.05criticalvaluesP.057.png",
+  "w": 982,
+  "h": 298,
+  "table": "mw",
+  "cell": [
+   602,
+   149
+  ],
+  "label": [
+   30,
+   149
+  ],
+  "head": [
+   602,
+   61
+  ],
+  "rowH": 44,
+  "colW": 140
+ },
+ "MannWhitney_RankSumT_Table.pdf|1|n_S = 4, n_B = 6|Probability near .05, critical values (P = .038)": {
+  "img": "tables/MannWhitney_RankSumT_Table.pdf_1_n_S4n_B6_Probabilitynear.05criticalvaluesP.038.png",
+  "w": 970,
+  "h": 434,
+  "table": "mw",
+  "cell": [
+   590,
+   285
+  ],
+  "label": [
+   30,
+   285
+  ],
+  "head": [
+   590,
+   60
+  ],
+  "rowH": 44,
+  "colW": 140
+ },
+ "WilcoxonW_Table.pdf|1|n = 6|Critical value (P = .032)": {
+  "img": "tables/WilcoxonW_Table.pdf_1_n6_CriticalvalueP.032.png",
+  "w": 1200,
+  "h": 377,
+  "table": "w",
+  "cell": [
+   600,
+   203
+  ],
+  "label": [
+   80,
+   203
+  ],
+  "head": [
+   600,
+   26
+  ],
+  "rowH": 67,
+  "colW": 150
+ },
+ "WilcoxonW_Table.pdf|1|n = 8|Critical value (P = .024)": {
+  "img": "tables/WilcoxonW_Table.pdf_1_n8_CriticalvalueP.024.png",
+  "w": 1200,
+  "h": 416,
+  "table": "w",
+  "cell": [
+   600,
+   242
+  ],
+  "label": [
+   80,
+   242
+  ],
+  "head": [
+   600,
+   26
+  ],
+  "rowH": 67,
+  "colW": 150
+ },
  "t_table.pdf|1|10|0.01": {
   "img": "tables/t_table.pdf_1_10_0.01.png",
   "w": 440,

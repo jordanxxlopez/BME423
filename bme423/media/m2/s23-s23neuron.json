@@ -1,0 +1,85 @@
+{
+ "id": "s23-s23neuron",
+ "file": "media/m2/s23-s23neuron.mp4",
+ "poster": "media/m2/s23-s23neuron.png",
+ "session": 23,
+ "method": "s23neuron",
+ "title": "Artificial neuron · weighted sum, activation, squared error",
+ "duration": 78,
+ "cases": {
+  "s23-concrete-neuron": [
+   3,
+   4,
+   5,
+   6
+  ],
+  "s23-neuron-sse": [
+   7,
+   8,
+   9,
+   10
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "One neuron",
+   "start": 0,
+   "end": 7
+  },
+  {
+   "step": 2,
+   "title": "Activation functions",
+   "start": 7,
+   "end": 14
+  },
+  {
+   "step": 3,
+   "title": "Concrete inputs",
+   "start": 14,
+   "end": 23
+  },
+  {
+   "step": 4,
+   "title": "Add the bias",
+   "start": 23,
+   "end": 30
+  },
+  {
+   "step": 5,
+   "title": "Sigmoid",
+   "start": 30,
+   "end": 38
+  },
+  {
+   "step": 6,
+   "title": "Output node",
+   "start": 38,
+   "end": 46
+  },
+  {
+   "step": 7,
+   "title": "Three observations",
+   "start": 46,
+   "end": 54
+  },
+  {
+   "step": 8,
+   "title": "Predictions",
+   "start": 54,
+   "end": 62
+  },
+  {
+   "step": 9,
+   "title": "Errors",
+   "start": 62,
+   "end": 70
+  },
+  {
+   "step": 10,
+   "title": "Sum of squared errors",
+   "start": 70,
+   "end": 78
+  }
+ ]
+}

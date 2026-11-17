@@ -1,0 +1,71 @@
+{
+ "id": "b-s24-diuretic-signedrank",
+ "file": "media/m2b/b-s24-diuretic-signedrank.mp4",
+ "poster": "media/m2b/b-s24-diuretic-signedrank.png",
+ "session": 24,
+ "method": "s24wtable",
+ "title": "Potential diuretic in six people, before and after",
+ "duration": 117.267,
+ "cases": {
+  "s24-diuretic-signedrank": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 13.933
+  },
+  {
+   "step": 2,
+   "title": "State the procedure and hypotheses",
+   "start": 13.933,
+   "end": 34
+  },
+  {
+   "step": 3,
+   "title": "Compute the differences",
+   "start": 34,
+   "end": 42.467
+  },
+  {
+   "step": 4,
+   "title": "Rank the magnitudes and attach signs",
+   "start": 42.467,
+   "end": 56.733
+  },
+  {
+   "step": 5,
+   "title": "Compute W",
+   "start": 56.733,
+   "end": 67
+  },
+  {
+   "step": 6,
+   "title": "Read the critical value",
+   "start": 67,
+   "end": 84.6
+  },
+  {
+   "step": 7,
+   "title": "Make the decision",
+   "start": 84.6,
+   "end": 101.4
+  },
+  {
+   "step": 8,
+   "title": "Conclusion",
+   "start": 101.4,
+   "end": 117.267
+  }
+ ],
+ "case": "s24-diuretic-signedrank",
+ "kind": "board"
+}

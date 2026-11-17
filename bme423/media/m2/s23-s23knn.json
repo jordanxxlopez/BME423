@@ -1,0 +1,83 @@
+{
+ "id": "s23-s23knn",
+ "file": "media/m2/s23-s23knn.mp4",
+ "poster": "media/m2/s23-s23knn.png",
+ "session": 23,
+ "method": "s23knn",
+ "title": "K-NN in practice · classify a new tumor sample",
+ "duration": 67,
+ "cases": {
+  "s23-exercise-k3": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6
+  ],
+  "s23-exercise-k5": [
+   1,
+   2,
+   3,
+   4,
+   7,
+   8
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "Training set",
+   "start": 0,
+   "end": 7
+  },
+  {
+   "step": 2,
+   "title": "Distances A to D",
+   "start": 7,
+   "end": 15
+  },
+  {
+   "step": 3,
+   "title": "Distances E to G",
+   "start": 15,
+   "end": 22
+  },
+  {
+   "step": 4,
+   "title": "Rank",
+   "start": 22,
+   "end": 29
+  },
+  {
+   "step": 5,
+   "title": "K = 3 nearest",
+   "start": 29,
+   "end": 36
+  },
+  {
+   "step": 6,
+   "title": "Vote, K = 3",
+   "start": 36,
+   "end": 44
+  },
+  {
+   "step": 7,
+   "title": "K = 5 nearest",
+   "start": 44,
+   "end": 51
+  },
+  {
+   "step": 8,
+   "title": "Vote, K = 5",
+   "start": 51,
+   "end": 59
+  },
+  {
+   "step": 9,
+   "title": "knn() probability",
+   "start": 59,
+   "end": 67
+  }
+ ]
+}

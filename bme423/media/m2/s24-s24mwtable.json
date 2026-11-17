@@ -1,0 +1,76 @@
+{
+ "id": "s24-s24mwtable",
+ "file": "media/m2/s24-s24mwtable.mp4",
+ "poster": "media/m2/s24-s24mwtable.png",
+ "session": 24,
+ "method": "s24mwtable",
+ "title": "Mann-Whitney rank-sum test · T table",
+ "duration": 64,
+ "cases": {
+  "s24-diuretic-ranksum": [
+   2,
+   3,
+   4,
+   5,
+   7,
+   8
+  ],
+  "s24-orig-recovery-ranksum": [
+   2,
+   3,
+   4,
+   7,
+   8
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "Two groups",
+   "start": 0,
+   "end": 7
+  },
+  {
+   "step": 2,
+   "title": "Null hypothesis",
+   "start": 7,
+   "end": 14
+  },
+  {
+   "step": 3,
+   "title": "Rank all together",
+   "start": 14,
+   "end": 22
+  },
+  {
+   "step": 4,
+   "title": "Compute T",
+   "start": 22,
+   "end": 30
+  },
+  {
+   "step": 5,
+   "title": "All 35 rank sets",
+   "start": 30,
+   "end": 40
+  },
+  {
+   "step": 6,
+   "title": "Where T = 9 lands",
+   "start": 40,
+   "end": 47
+  },
+  {
+   "step": 7,
+   "title": "Class T table",
+   "start": 47,
+   "end": 55
+  },
+  {
+   "step": 8,
+   "title": "Decision",
+   "start": 55,
+   "end": 64
+  }
+ ]
+}

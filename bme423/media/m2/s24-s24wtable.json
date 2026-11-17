@@ -1,0 +1,83 @@
+{
+ "id": "s24-s24wtable",
+ "file": "media/m2/s24-s24wtable.mp4",
+ "poster": "media/m2/s24-s24wtable.png",
+ "session": 24,
+ "method": "s24wtable",
+ "title": "Wilcoxon signed-rank test · W table",
+ "duration": 72,
+ "cases": {
+  "s24-diuretic-signedrank": [
+   2,
+   3,
+   5,
+   6,
+   8,
+   9
+  ],
+  "s24-orig-grip-signedrank": [
+   2,
+   3,
+   5,
+   6,
+   8,
+   9
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "Same six people",
+   "start": 0,
+   "end": 7
+  },
+  {
+   "step": 2,
+   "title": "Null hypothesis",
+   "start": 7,
+   "end": 14
+  },
+  {
+   "step": 3,
+   "title": "Differences",
+   "start": 14,
+   "end": 21
+  },
+  {
+   "step": 4,
+   "title": "Rank the sizes",
+   "start": 21,
+   "end": 29
+  },
+  {
+   "step": 5,
+   "title": "Signed ranks",
+   "start": 29,
+   "end": 37
+  },
+  {
+   "step": 6,
+   "title": "Add up W",
+   "start": 37,
+   "end": 45
+  },
+  {
+   "step": 7,
+   "title": "All 64 sign patterns",
+   "start": 45,
+   "end": 55
+  },
+  {
+   "step": 8,
+   "title": "Class W table",
+   "start": 55,
+   "end": 63
+  },
+  {
+   "step": 9,
+   "title": "Decision",
+   "start": 63,
+   "end": 72
+  }
+ ]
+}

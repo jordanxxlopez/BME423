@@ -1,0 +1,67 @@
+{
+ "id": "s23-s23sensspec",
+ "file": "media/m2/s23-s23sensspec.mp4",
+ "poster": "media/m2/s23-s23sensspec.png",
+ "session": 23,
+ "method": "s23sensspec",
+ "title": "Sensitivity and specificity · one row at a time",
+ "duration": 61,
+ "cases": {
+  "s23-wbcd-zscore-sens": [
+   2,
+   3,
+   4,
+   5
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "Two rates",
+   "start": 0,
+   "end": 7
+  },
+  {
+   "step": 2,
+   "title": "z-score model",
+   "start": 7,
+   "end": 15
+  },
+  {
+   "step": 3,
+   "title": "Accuracy",
+   "start": 15,
+   "end": 22
+  },
+  {
+   "step": 4,
+   "title": "Sensitivity",
+   "start": 22,
+   "end": 30
+  },
+  {
+   "step": 5,
+   "title": "Specificity",
+   "start": 30,
+   "end": 37
+  },
+  {
+   "step": 6,
+   "title": "Min-max versus z-score",
+   "start": 37,
+   "end": 45
+  },
+  {
+   "step": 7,
+   "title": "Always say no",
+   "start": 45,
+   "end": 53
+  },
+  {
+   "step": 8,
+   "title": "Trade-off",
+   "start": 53,
+   "end": 61
+  }
+ ]
+}

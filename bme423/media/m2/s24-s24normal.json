@@ -1,0 +1,82 @@
+{
+ "id": "s24-s24normal",
+ "file": "media/m2/s24-s24normal.mp4",
+ "poster": "media/m2/s24-s24normal.png",
+ "session": 24,
+ "method": "s24normal",
+ "title": "Checking Normality · range, Q-Q plot, Shapiro-Wilk",
+ "duration": 72,
+ "cases": {
+  "s24-shapiro-two-samples": [
+   2,
+   3,
+   4,
+   6,
+   9,
+   5,
+   10
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "Two samples",
+   "start": 0,
+   "end": 7
+  },
+  {
+   "step": 2,
+   "title": "Null hypothesis",
+   "start": 7,
+   "end": 13
+  },
+  {
+   "step": 3,
+   "title": "Mean and SD",
+   "start": 13,
+   "end": 20
+  },
+  {
+   "step": 4,
+   "title": "Within one SD",
+   "start": 20,
+   "end": 27
+  },
+  {
+   "step": 5,
+   "title": "Sample 2 percentages",
+   "start": 27,
+   "end": 35
+  },
+  {
+   "step": 6,
+   "title": "Theoretical quantiles",
+   "start": 35,
+   "end": 43
+  },
+  {
+   "step": 7,
+   "title": "Q-Q plot sample 1",
+   "start": 43,
+   "end": 50
+  },
+  {
+   "step": 8,
+   "title": "Q-Q plot sample 2",
+   "start": 50,
+   "end": 57
+  },
+  {
+   "step": 9,
+   "title": "Shapiro-Wilk sample 1",
+   "start": 57,
+   "end": 64
+  },
+  {
+   "step": 10,
+   "title": "Shapiro-Wilk sample 2",
+   "start": 64,
+   "end": 72
+  }
+ ]
+}

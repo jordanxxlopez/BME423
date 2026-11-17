@@ -18,7 +18,8 @@ export type VizC = React.FC<{c: BCase; k: number; t: number; w: number; h: numbe
 
 const TABLE_NAMES: Record<string, string> = {
   't_table.pdf': 'Class t table (two-tailed)', 'F_table.pdf': 'Class F table (lightface 0.05)',
-  'Chi_Squared_Table1.pdf': 'Class chi-square table 1', 'Chi_Squared_Table2.pdf': 'Class chi-square table 2'};
+  'Chi_Squared_Table1.pdf': 'Class chi-square table 1', 'Chi_Squared_Table2.pdf': 'Class chi-square table 2',
+  'MannWhitney_RankSumT_Table.pdf': 'Class Mann-Whitney T table (two-tailed)', 'WilcoxonW_Table.pdf': 'Class Wilcoxon W table (two-tailed)'};
 export const lookupKey = (l: any) => [String(l.path).split('/').pop(), l.page, l.row, l.column].join('|');
 export const capFor = (c: BCase) => (k: string) => {
   const o = CAPS[c.id] || {};
@@ -62,7 +63,7 @@ const LookupPanel: React.FC<{l: any; t: number}> = ({l, t}) => {
   const [cx, cy] = d.cell, [lx] = d.label, [, hy] = d.head; const rh = d.rowH * sc, cw = Math.min(d.colW * 0.9, 120) * sc;
   return (<div style={{fontFamily: inter, color: P.ink}}>
     <div style={{fontSize: 15, fontWeight: 700, letterSpacing: 0.4, color: P.blue}}>{name}</div>
-    <div style={{fontSize: 14, color: P.soft, marginTop: 2}}>{file.includes('F_') ? `numerator ${col} across the top · denominator ${row} down the side` : `row ${row} · column ${col}`}</div>
+    <div style={{fontSize: 14, color: P.soft, marginTop: 2}}>{file.includes('F_') ? `numerator ${col} across the top · denominator ${row} down the side` : file.includes('MannWhitney') ? `row ${row} · critical values near 0.05` : file.includes('Wilcoxon') ? `row ${row} · critical value` : `row ${row} · column ${col}`}</div>
     <div style={{position: 'relative', width: iw, height: ih, marginTop: 10, boxShadow: '0 2px 10px rgba(0,0,0,0.12)', border: `1px solid ${P.line}`}}>
       <Img src={staticFile(d.img)} style={{width: iw, height: ih, display: 'block'}} />
       <svg width={iw} height={ih} style={{position: 'absolute', left: 0, top: 0}}>

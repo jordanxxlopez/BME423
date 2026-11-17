@@ -1,0 +1,32 @@
+{
+ "s24-shapiro-two-samples": {
+  "end": "The two samples differ in only two values, yet only sample 1 passes. This is because 50 and 88 pull the ends of sample 2 off the Q-Q line, so sample 2 should be analyzed with a rank-based test instead of a t test."
+ },
+ "s24-diuretic-ranksum": {
+  "4": "Use the class Mann-Whitney T table, row nS = 3, nB = 4, under probability levels near .05. The printed critical values are 6 and 18 with P = .057. No .01 entry is printed for this row.",
+  "end": "These data give no evidence that the drug changes urine production. This is because T = 9 sits only 3 below the center 12, and 14 of the 35 equally likely rank sets are at least that far from the center."
+ },
+ "s24-leboyer-ranksum": {
+  "1": "No two times are equal, so every rank is a whole number. The groups have equal size, so either group can give T, and the control group is used here.",
+  "6": "Use the class t table (two-tailed), infinity row and the 0.05 column. The printed value is 1.9600, which is the two-tailed Normal cutoff.",
+  "end": "The Leboyer method does not change minutes of alert behavior in these data. This is because the control rank sum of 374 is less than one standard deviation, 36.9685, from the 410 expected under no effect."
+ },
+ "s24-diuretic-signedrank": {
+  "4": "Use the class Wilcoxon W table, row n = 6. The printed critical values are 21 with P = .032 and 19 with P = .062, so 21 is used because its P does not exceed 0.05.",
+  "end": "These data give no evidence that the drug changes urine production. Five of six people went down, but with only six people even |W| = 13 happens in 14 of the 64 equally likely sign patterns."
+ },
+ "s24-platelet-signedrank": {
+  "7": "Use the class t table (two-tailed), infinity row and the 0.05 column. The printed value is 1.9600, which is the two-tailed Normal cutoff.",
+  "8": "The statistic exceeds 1.96, so the null hypothesis is rejected. In the infinity row it passes 2.8070 (column 0.005) but not 3.0902 (column 0.002), so 0.002 < P < 0.005. The paired t test on the same data also rejects, with t = 4.27 and P < 0.002.",
+  "intro": "Eleven people have maximum percentage platelet aggregation measured before and after smoking one cigarette. The same data used for the paired t test are analyzed here with the Wilcoxon signed-rank test.",
+  "end": "Smoking one cigarette raises platelet aggregation. This is because 10 of the 11 changes are increases, so W = 64 is close to its largest possible value of 66, and the rank test agrees with the paired t test without assuming Normal differences."
+ },
+ "s24-orig-recovery-ranksum": {
+  "3": "Use the class Mann-Whitney T table, row nS = 4, nB = 6. Near .05 the printed critical values are 12 and 32 with P = .038, and near .01 they are 10 and 34 with P = .010.",
+  "end": "Protocol A gets people walking normally sooner. This is because all four protocol A people hold four of the five smallest ranks, so T = 11 reaches the lower critical value of 12."
+ },
+ "s24-orig-grip-signedrank": {
+  "4": "Use the class Wilcoxon W table, row n = 8. The printed critical values are 32 with P = .024 and 28 with P = .054, so 32 is used because its P does not exceed 0.05.",
+  "end": "Grip strength increases after the hand-therapy program. This is because seven of the eight nonzero changes are increases and the one decrease has the smallest size, so W = 34 is close to its largest possible value of 36."
+ }
+}

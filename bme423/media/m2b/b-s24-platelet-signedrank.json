@@ -1,0 +1,92 @@
+{
+ "id": "b-s24-platelet-signedrank",
+ "file": "media/m2b/b-s24-platelet-signedrank.mp4",
+ "poster": "media/m2b/b-s24-platelet-signedrank.png",
+ "session": 24,
+ "method": "s24wnormal",
+ "title": "Lecture exercise, platelet aggregation with the signed-rank test",
+ "duration": 159.2,
+ "cases": {
+  "s24-platelet-signedrank": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 16
+  },
+  {
+   "step": 2,
+   "title": "State the procedure and hypotheses",
+   "start": 16,
+   "end": 38.133
+  },
+  {
+   "step": 3,
+   "title": "Compute the differences",
+   "start": 38.133,
+   "end": 45.8
+  },
+  {
+   "step": 4,
+   "title": "Rank the magnitudes with ties",
+   "start": 45.8,
+   "end": 61.867
+  },
+  {
+   "step": 5,
+   "title": "Compute W",
+   "start": 61.867,
+   "end": 74.4
+  },
+  {
+   "step": 6,
+   "title": "Tie sum",
+   "start": 74.4,
+   "end": 82.4
+  },
+  {
+   "step": 7,
+   "title": "Tie-corrected standard deviation of W",
+   "start": 82.4,
+   "end": 92.4
+  },
+  {
+   "step": 8,
+   "title": "Compute z_W",
+   "start": 92.4,
+   "end": 104.133
+  },
+  {
+   "step": 9,
+   "title": "Read the critical value",
+   "start": 104.133,
+   "end": 120.2
+  },
+  {
+   "step": 10,
+   "title": "Make the decision and bracket P",
+   "start": 120.2,
+   "end": 143.2
+  },
+  {
+   "step": 11,
+   "title": "Conclusion",
+   "start": 143.2,
+   "end": 159.2
+  }
+ ],
+ "case": "s24-platelet-signedrank",
+ "kind": "board"
+}

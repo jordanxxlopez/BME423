@@ -1,0 +1,57 @@
+{
+ "id": "b-s23-wbcd-zscore-sens",
+ "file": "media/m2b/b-s23-wbcd-zscore-sens.mp4",
+ "poster": "media/m2b/b-s23-wbcd-zscore-sens.png",
+ "session": 23,
+ "method": "s23sensspec",
+ "title": "Breast cancer test set with z-score scaling, sensitivity and specificity",
+ "duration": 73.867,
+ "cases": {
+  "s23-wbcd-zscore-sens": [
+   2,
+   3,
+   4,
+   5
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 16
+  },
+  {
+   "step": 2,
+   "title": "Name the four cells",
+   "start": 16,
+   "end": 28.733
+  },
+  {
+   "step": 3,
+   "title": "Compute the accuracy",
+   "start": 28.733,
+   "end": 37.867
+  },
+  {
+   "step": 4,
+   "title": "Compute the sensitivity",
+   "start": 37.867,
+   "end": 48.067
+  },
+  {
+   "step": 5,
+   "title": "Compute the specificity",
+   "start": 48.067,
+   "end": 57.867
+  },
+  {
+   "step": 6,
+   "title": "Conclusion",
+   "start": 57.867,
+   "end": 73.867
+  }
+ ],
+ "case": "s23-wbcd-zscore-sens",
+ "kind": "board"
+}

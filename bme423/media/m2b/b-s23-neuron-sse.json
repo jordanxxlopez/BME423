@@ -1,0 +1,57 @@
+{
+ "id": "b-s23-neuron-sse",
+ "file": "media/m2b/b-s23-neuron-sse.mp4",
+ "poster": "media/m2b/b-s23-neuron-sse.png",
+ "session": 23,
+ "method": "s23neuron",
+ "title": "Sum of squared errors for a three-input sigmoid neuron",
+ "duration": 84.067,
+ "cases": {
+  "s23-neuron-sse": [
+   2,
+   3,
+   4,
+   5
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 16
+  },
+  {
+   "step": 2,
+   "title": "Weighted sums",
+   "start": 16,
+   "end": 29.667
+  },
+  {
+   "step": 3,
+   "title": "Sigmoid predictions",
+   "start": 29.667,
+   "end": 43.067
+  },
+  {
+   "step": 4,
+   "title": "Errors",
+   "start": 43.067,
+   "end": 54.6
+  },
+  {
+   "step": 5,
+   "title": "Sum of squared errors",
+   "start": 54.6,
+   "end": 68.267
+  },
+  {
+   "step": 6,
+   "title": "Conclusion",
+   "start": 68.267,
+   "end": 84.067
+  }
+ ],
+ "case": "s23-neuron-sse",
+ "kind": "board"
+}

@@ -1,0 +1,71 @@
+{
+ "id": "b-s23-exercise-k5",
+ "file": "media/m2b/b-s23-exercise-k5.mp4",
+ "poster": "media/m2b/b-s23-exercise-k5.png",
+ "session": 23,
+ "method": "s23knn",
+ "title": "Lecture exercise, new tumor sample (4, 4) with K = 5",
+ "duration": 113.333,
+ "cases": {
+  "s23-exercise-k5": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 14.933
+  },
+  {
+   "step": 2,
+   "title": "Set up the new sample and the training set",
+   "start": 14.933,
+   "end": 32.867
+  },
+  {
+   "step": 3,
+   "title": "Distances to A, B, C and D",
+   "start": 32.867,
+   "end": 47.8
+  },
+  {
+   "step": 4,
+   "title": "Distances to E, F and G",
+   "start": 47.8,
+   "end": 59.4
+  },
+  {
+   "step": 5,
+   "title": "Rank the distances",
+   "start": 59.4,
+   "end": 70.267
+  },
+  {
+   "step": 6,
+   "title": "Read the classes of the 5 nearest neighbors",
+   "start": 70.267,
+   "end": 80.8
+  },
+  {
+   "step": 7,
+   "title": "Classify and give the probability",
+   "start": 80.8,
+   "end": 97.333
+  },
+  {
+   "step": 8,
+   "title": "Conclusion",
+   "start": 97.333,
+   "end": 113.333
+  }
+ ],
+ "case": "s23-exercise-k5",
+ "kind": "board"
+}

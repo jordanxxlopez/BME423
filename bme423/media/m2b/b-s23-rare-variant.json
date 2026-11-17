@@ -1,0 +1,57 @@
+{
+ "id": "b-s23-rare-variant",
+ "file": "media/m2b/b-s23-rare-variant.mp4",
+ "poster": "media/m2b/b-s23-rare-variant.png",
+ "session": 23,
+ "method": "s23confusion",
+ "title": "Rare genetic variant in newborns and the limits of accuracy",
+ "duration": 74.867,
+ "cases": {
+  "s23-rare-variant": [
+   2,
+   3,
+   4,
+   5
+  ]
+ },
+ "steps": [
+  {
+   "step": 1,
+   "title": "The question",
+   "start": 0,
+   "end": 16
+  },
+  {
+   "step": 2,
+   "title": "Accuracy and error rate from the counts",
+   "start": 16,
+   "end": 26.733
+  },
+  {
+   "step": 3,
+   "title": "Fill the cells for the always-no test",
+   "start": 26.733,
+   "end": 39.267
+  },
+  {
+   "step": 4,
+   "title": "Accuracy of the always-no test",
+   "start": 39.267,
+   "end": 50.267
+  },
+  {
+   "step": 5,
+   "title": "Sensitivity of the always-no test",
+   "start": 50.267,
+   "end": 60.6
+  },
+  {
+   "step": 6,
+   "title": "Conclusion",
+   "start": 60.6,
+   "end": 74.867
+  }
+ ],
+ "case": "s23-rare-variant",
+ "kind": "board"
+}
