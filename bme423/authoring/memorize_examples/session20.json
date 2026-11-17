@@ -1,0 +1,140 @@
+{
+ "examples": [
+  {
+   "title": "Paired t test",
+   "source": "Session 20 lecture example (page 10), before and after values from Session 24 page 26",
+   "prompt": "Eleven people have maximum percent platelet aggregation measured before and after smoking one cigarette. Assume the differences are Normal. Does smoking change platelet aggregation at the two-sided 0.05 level?",
+   "table": {
+    "headers": [
+     "Person",
+     "Before (%)",
+     "After (%)"
+    ],
+    "rows": [
+     [
+      "1",
+      "25",
+      "27"
+     ],
+     [
+      "2",
+      "25",
+      "29"
+     ],
+     [
+      "3",
+      "27",
+      "37"
+     ],
+     [
+      "4",
+      "44",
+      "56"
+     ],
+     [
+      "5",
+      "30",
+      "46"
+     ],
+     [
+      "6",
+      "67",
+      "82"
+     ],
+     [
+      "7",
+      "53",
+      "57"
+     ],
+     [
+      "8",
+      "53",
+      "80"
+     ],
+     [
+      "9",
+      "52",
+      "61"
+     ],
+     [
+      "10",
+      "60",
+      "59"
+     ],
+     [
+      "11",
+      "28",
+      "43"
+     ]
+    ]
+   },
+   "steps": [
+    {
+     "say": "This is a paired t test because each of the 11 people was measured twice, once before and once after the cigarette.",
+     "work": [
+      "n=11"
+     ]
+    },
+    {
+     "say": "The null hypothesis is that smoking one cigarette causes no change in mean platelet aggregation, so the true mean difference is zero.",
+     "work": [
+      "H_0:\\delta=0",
+      "H_A:\\delta\\ne0"
+     ]
+    },
+    {
+     "say": "Each person gives one difference, after minus before. Only person 10 went down.",
+     "work": [
+      "d_i=x_{\\mathrm{after},i}-x_{\\mathrm{before},i}",
+      "d_1=27-25=2,\\quad d_2=29-25=4,\\quad d_3=37-27=10,\\quad d_4=56-44=12",
+      "d_5=46-30=16,\\quad d_6=82-67=15,\\quad d_7=57-53=4,\\quad d_8=80-53=27",
+      "d_9=61-52=9,\\quad d_{10}=59-60=-1,\\quad d_{11}=43-28=15"
+     ]
+    },
+    {
+     "say": "The differences add to 113, so the mean change is about 10.27 percentage points. The squared deviations add to 636.18, which gives an SD of 7.976.",
+     "work": [
+      "\\bar d=\\frac1n\\sum d_i,\\quad s_d=\\sqrt{\\frac{\\sum(d_i-\\bar d)^2}{n-1}}",
+      "\\bar d=\\frac{2+4+10+12+16+15+4+27+9-1+15}{11}=\\frac{113}{11}=10.2727",
+      "\\sum(d_i-\\bar d)^2=636.1818",
+      "s_d=\\sqrt{\\frac{636.1818}{11-1}}=\\sqrt{63.6182}=7.9761"
+     ]
+    },
+    {
+     "say": "The standard error is the SD shrunk by the square root of 11, because a mean of 11 differences varies less than one difference.",
+     "work": [
+      "s_{\\bar d}=\\frac{s_d}{\\sqrt n}",
+      "s_{\\bar d}=\\frac{7.9761}{\\sqrt{11}}=\\frac{7.9761}{3.3166}=2.4049"
+     ]
+    },
+    {
+     "say": "The mean change is about 4.27 standard errors away from zero. The degrees of freedom are one less than the number of people.",
+     "work": [
+      "t=\\frac{\\bar d}{s_{\\bar d}},\\quad \\nu=n-1",
+      "t=\\frac{10.2727}{2.4049}=4.2716",
+      "\\nu=11-1=10"
+     ]
+    },
+    {
+     "say": "Because 4.2716 is larger than 2.228, reject the null hypothesis. It also passes the 0.002 cutoff of 4.144 but not the 0.001 cutoff, so smoking increases platelet aggregation with P below 0.002.",
+     "work": [
+      "t_{0.05}(10)=2.228\\ \\ (\\text{row }10,\\ \\text{column }0.05)",
+      "|t|=4.2716>2.228",
+      "t_{0.002}(10)=4.144<4.2716<t_{0.001}(10)=4.587",
+      "0.001<P<0.002"
+     ]
+    },
+    {
+     "say": "The R lines repeat the hand work. The t of 4.2716 and df of 10 match, the P value of 0.001633 sits inside the bracket, and the interval misses 0, which agrees with the test rejecting.",
+     "work": [
+      "\\texttt{t.test(after, before, paired = TRUE)}",
+      "t=4.2716,\\quad df=10,\\quad p\\text{-value}=0.001633",
+      "\\text{95\\% CI from R}\\ \\ 4.914310\\ \\ 15.631145",
+      "\\text{by hand}\\ \\ 10.2727-2.228(2.4049)=4.9146,\\quad 10.2727+2.228(2.4049)=15.6308",
+      "\\text{mean difference}\\ \\ 10.2727"
+     ]
+    }
+   ]
+  }
+ ]
+}

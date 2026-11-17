@@ -1,0 +1,299 @@
+{
+ "examples": [
+  {
+   "title": "Confidence interval for one mean",
+   "source": "Session 17 lecture example (page 10)",
+   "prompt": "Ten BME 423 students have a mean heart rate of 67 beats/min with a sample SD of 9 beats/min. Find the 95% confidence interval for the population mean heart rate \\(\\mu_{HR}\\).",
+   "table": {
+    "headers": [
+     "\\(n\\)",
+     "\\(\\bar x\\) (beats/min)",
+     "\\(s\\) (beats/min)"
+    ],
+    "rows": [
+     [
+      "10",
+      "67",
+      "9"
+     ]
+    ]
+   },
+   "steps": [
+    {
+     "say": "The SD of 9 beats/min is divided by the square root of 10. So the mean of ten students is uncertain by about 2.846 beats/min.",
+     "work": [
+      "s_{\\bar x}=\\frac{s}{\\sqrt n}",
+      "s_{\\bar x}=\\frac{9}{\\sqrt{10}}=\\frac{9}{3.162278}=2.846050"
+     ]
+    },
+    {
+     "say": "Row 9 and the two-tailed 0.05 column of the t table give 2.262. That column already holds both tails, so it is not halved again.",
+     "work": [
+      "\\nu=n-1=10-1=9",
+      "\\alpha=1-0.95=0.05",
+      "t_{0.05}(9)=2.262"
+     ]
+    },
+    {
+     "say": "The margin is the cutoff times the standard error, about 6.44 beats/min. Taking it off 67 gives the lower end and adding it gives the upper end.",
+     "work": [
+      "\\bar x\\pm t_c\\,\\frac{s}{\\sqrt n}",
+      "M=2.262(2.846050)=6.437765",
+      "L=67-6.437765=60.56224",
+      "U=67+6.437765=73.43776"
+     ]
+    },
+    {
+     "say": "We are 95% confident that the mean heart rate of all BME 423 students is between about 60.6 and 73.4 beats/min. This range is for the mean, not for single students.",
+     "work": [
+      "60.56224<\\mu_{HR}<73.43776\\ \\text{beats/min}"
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Confidence interval for a difference of two means",
+   "source": "Session 17 lecture example (page 6)",
+   "prompt": "Daily urine production is compared between a diuretic group and a placebo group. Assume Normal responses with a common variance. Find the 95% confidence interval for \\(\\mu_{\\mathrm{diuretic}}-\\mu_{\\mathrm{placebo}}\\).",
+   "table": {
+    "headers": [
+     "Group",
+     "\\(n\\)",
+     "\\(\\bar x\\) (mL/day)",
+     "\\(s\\) (mL/day)"
+    ],
+    "rows": [
+     [
+      "Diuretic (1)",
+      "10",
+      "1400",
+      "245"
+     ],
+     [
+      "Placebo (2)",
+      "10",
+      "1180",
+      "144"
+     ]
+    ]
+   },
+   "steps": [
+    {
+     "say": "Diuretic minus placebo is 220 mL/day. This order is kept to the end so the sign of the interval keeps its meaning.",
+     "work": [
+      "\\bar x_1-\\bar x_2=1400-1180=220"
+     ]
+    },
+    {
+     "say": "Each variance is weighted by its own 9 degrees of freedom before pooling. The pooled variance then gives a standard error of about 89.87 mL/day.",
+     "work": [
+      "s_{\\bar x_1-\\bar x_2}=\\sqrt{s_p^2\\left(\\frac1{n_1}+\\frac1{n_2}\\right)},\\quad s_p^2=\\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}",
+      "s_p^2=\\frac{9(245^2)+9(144^2)}{10+10-2}=\\frac{540225+186624}{18}=40380.5",
+      "s_{\\bar x_1-\\bar x_2}=\\sqrt{40380.5\\left(\\frac1{10}+\\frac1{10}\\right)}=\\sqrt{8076.1}=89.86712"
+     ]
+    },
+    {
+     "say": "Row 18 and the two-tailed 0.05 column of the t table give 2.101.",
+     "work": [
+      "\\nu=n_1+n_2-2=10+10-2=18",
+      "t_{0.05}(18)=2.101"
+     ]
+    },
+    {
+     "say": "The margin is about 188.8 mL/day. It is taken off and added to the difference of 220 mL/day.",
+     "work": [
+      "(\\bar x_1-\\bar x_2)\\pm t_c\\, s_{\\bar x_1-\\bar x_2}",
+      "M=2.101(89.86712)=188.8108",
+      "L=220-188.8108=31.1892",
+      "U=220+188.8108=408.8108"
+     ]
+    },
+    {
+     "say": "We are 95% confident that the diuretic raises mean urine production by between about 31 and 409 mL/day. Zero is outside the interval, so the diuretic does change urine production.",
+     "work": [
+      "31.19<\\mu_{\\mathrm{diuretic}}-\\mu_{\\mathrm{placebo}}<408.81\\ \\text{mL/day}"
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Confidence interval for one proportion",
+   "source": "Session 17 lecture example (pages 14 and 15)",
+   "prompt": "A survey asked college students “Did you take a non-prescribed stimulant in the last year?” Of the 500 students who responded, 177 said yes. Find the 95% confidence interval for the population proportion and decide whether it differs from 0.5.",
+   "table": {
+    "headers": [
+     "Said yes \\(m\\)",
+     "Responded \\(n\\)",
+     "Null value \\(p_0\\)"
+    ],
+    "rows": [
+     [
+      "177",
+      "500",
+      "0.5"
+     ]
+    ]
+   },
+   "steps": [
+    {
+     "say": "177 of the 500 students said yes. So the sample proportion is 0.354.",
+     "work": [
+      "\\hat p=\\frac{m}{n}=\\frac{177}{500}=0.354"
+     ]
+    },
+    {
+     "say": "The proportion times one minus the proportion is divided by 500. The square root gives a standard error of about 0.0214.",
+     "work": [
+      "s_{\\hat p}=\\sqrt{\\frac{\\hat p(1-\\hat p)}{n}}",
+      "s_{\\hat p}=\\sqrt{\\frac{0.354(1-0.354)}{500}}=\\sqrt{\\frac{0.228684}{500}}=\\sqrt{0.000457368}=0.02138616"
+     ]
+    },
+    {
+     "say": "The infinity row and the 0.05 column of the t table give 1.96. So the interval runs from about 0.312 to 0.396.",
+     "work": [
+      "z_c=t_{0.05}(\\infty)=1.9600",
+      "\\hat p\\pm z_c\\,s_{\\hat p}",
+      "M=1.96(0.02138616)=0.04191688",
+      "L=0.354-0.04191688=0.3120831",
+      "U=0.354+0.04191688=0.3959169"
+     ]
+    },
+    {
+     "say": "One half lies above the whole interval. So the proportion of students who took a stimulant differs from 0.5 at the 0.05 level, and it is lower.",
+     "work": [
+      "0.3121<p<0.3959",
+      "p_0=0.5\\notin[0.3121,\\ 0.3959]"
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Confidence interval for a difference of two proportions",
+   "source": "Session 17 lecture example (page 12)",
+   "prompt": "A trial records thrombosis with placebo and with aspirin. Find the 95% confidence interval for the difference in the probability of thrombosis, placebo minus aspirin, using the pooled standard error.",
+   "table": {
+    "headers": [
+     "Group",
+     "Thrombosis \\(m\\)",
+     "Total \\(n\\)"
+    ],
+    "rows": [
+     [
+      "Placebo (1)",
+      "18",
+      "25"
+     ],
+     [
+      "Aspirin (2)",
+      "6",
+      "19"
+     ]
+    ]
+   },
+   "steps": [
+    {
+     "say": "Group 1 is placebo and group 2 is aspirin. The difference is placebo minus aspirin, so a positive value means more thrombosis with placebo.",
+     "work": [
+      "\\hat p_1=\\frac{18}{25}=0.72,\\quad \\hat p_2=\\frac{6}{19}=0.3157895",
+      "\\hat p_1-\\hat p_2=0.72-0.3157895=0.4042105"
+     ]
+    },
+    {
+     "say": "The counts and the sizes are added first to get the pooled proportion. That pooled value goes into the standard error, which is about 0.1515.",
+     "work": [
+      "s_{\\hat p_1-\\hat p_2}=\\sqrt{\\hat p(1-\\hat p)\\left(\\frac1{n_1}+\\frac1{n_2}\\right)},\\quad \\hat p=\\frac{m_1+m_2}{n_1+n_2}",
+      "\\hat p=\\frac{18+6}{25+19}=\\frac{24}{44}=0.5454545",
+      "s_{\\hat p_1-\\hat p_2}=\\sqrt{0.5454545(1-0.5454545)\\left(\\frac1{25}+\\frac1{19}\\right)}=\\sqrt{0.2479339(0.09263158)}=0.1515470"
+     ]
+    },
+    {
+     "say": "Proportions use the Normal distribution, so the cutoff comes from the infinity row of the t table in the 0.05 column.",
+     "work": [
+      "z_c=t_{0.05}(\\infty)=1.9600"
+     ]
+    },
+    {
+     "say": "The margin is about 0.297. So the interval runs from about 0.107 to 0.701.",
+     "work": [
+      "(\\hat p_1-\\hat p_2)\\pm z_c\\, s_{\\hat p_1-\\hat p_2}",
+      "M=1.96(0.1515470)=0.2970322",
+      "L=0.4042105-0.2970322=0.1071783",
+      "U=0.4042105+0.2970322=0.7012427"
+     ]
+    },
+    {
+     "say": "With 95% confidence, aspirin lowers the chance of thrombosis by about 10.7 to 70.1 percentage points compared with placebo. Zero is outside, so the two probabilities differ.",
+     "work": [
+      "10.72<100(p_1-p_2)<70.12\\ \\text{percentage points}"
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Decide significance from intervals only",
+   "source": "Homework 3 Problem 1",
+   "prompt": "Six-month survival after heart-transplant surgery is compared between two ways of transporting the heart. Find the 95% and 99% confidence intervals for the difference in the proportion alive at 6 months. Using only these intervals, is the difference significant with \\(P<0.05\\)? With \\(P<0.01\\)? State how you reached each conclusion.",
+   "table": {
+    "headers": [
+     "Group",
+     "Alive at 6 months",
+     "Not alive at 6 months",
+     "Total"
+    ],
+    "rows": [
+     [
+      "Warm and beating (1)",
+      "82",
+      "11",
+      "93"
+     ],
+     [
+      "Stopped and on ice (2)",
+      "72",
+      "26",
+      "98"
+     ]
+    ]
+   },
+   "steps": [
+    {
+     "say": "The 95% interval uses the pooled standard error and the cutoff 1.96. It runs from about 0.035 to 0.259, so it does not contain zero.",
+     "work": [
+      "\\hat p_1=\\frac{82}{93}=0.8817204,\\quad \\hat p_2=\\frac{72}{98}=0.7346939,\\quad \\hat p_1-\\hat p_2=0.1470266",
+      "\\hat p=\\frac{82+72}{93+98}=\\frac{154}{191}=0.8062827",
+      "s_{\\hat p_1-\\hat p_2}=\\sqrt{0.8062827(1-0.8062827)\\left(\\frac1{93}+\\frac1{98}\\right)}=0.05721238",
+      "0.1470266\\pm1.96(0.05721238)=0.1470266\\pm0.1121363",
+      "0.03489<p_1-p_2<0.2592"
+     ]
+    },
+    {
+     "say": "Zero is outside the 95% interval, so a difference of zero is not a believable value. The difference in survival is significant with P less than 0.05.",
+     "work": [
+      "0\\notin[0.03489,\\ 0.2592]\\ \\Rightarrow\\ P<0.05"
+     ]
+    },
+    {
+     "say": "The 99% interval uses 2.5758 from the infinity row and the 0.01 column. Its lower end sits just below zero, so the difference is not significant with P less than 0.01.",
+     "work": [
+      "z_c=t_{0.01}(\\infty)=2.5758",
+      "0.1470266\\pm2.5758(0.05721238)=0.1470266\\pm0.1473677",
+      "-0.0003411<p_1-p_2<0.2944",
+      "0\\in[-0.0003411,\\ 0.2944]\\ \\Rightarrow\\ P>0.01"
+     ]
+    },
+    {
+     "say": "This is a difference of two proportions, so the null value is zero and not one half. A single proportion would be checked against its own reference value instead.",
+     "work": [
+      "H_0:p_1-p_2=0"
+     ]
+    },
+    {
+     "say": "The 95% interval leaves out zero, so P is below 0.05. The wider 99% interval just includes zero, so P is not below 0.01. The higher survival with warm transport is significant at the 0.05 level only.",
+     "work": [
+      "0.01<P<0.05"
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,220 @@
+{
+ "examples": [
+  {
+   "title": "Repeated measures ANOVA by hand",
+   "source": "Session 21 lecture example (pages 9 to 11)",
+   "prompt": "FEV1 (L) is measured in the same 4 people at baseline, 1 hour after inhaling endotoxin, and 2 hours after endotoxin plus salbutamol. Does mean FEV1 differ across the 3 conditions at the 0.05 level?",
+   "table": {
+    "headers": [
+     "Subject",
+     "Baseline",
+     "Endotoxin",
+     "Endotoxin + salbutamol"
+    ],
+    "rows": [
+     [
+      "1",
+      "3.7",
+      "3.4",
+      "4.0"
+     ],
+     [
+      "2",
+      "4.0",
+      "3.7",
+      "4.4"
+     ],
+     [
+      "3",
+      "3.0",
+      "2.8",
+      "3.2"
+     ],
+     [
+      "4",
+      "3.2",
+      "2.9",
+      "3.4"
+     ]
+    ]
+   },
+   "steps": [
+    {
+     "say": "This is a repeated measures ANOVA because the same 4 people are measured under all 3 conditions. The null hypothesis is that mean FEV1 does not differ across the conditions.",
+     "work": [
+      "H_0:\\mu_{base}=\\mu_{endo}=\\mu_{endo+salb}",
+      "m=3,\\quad n=4"
+     ]
+    },
+    {
+     "say": "Each row gives a subject mean and each column gives a treatment mean. The grand mean is the mean of all 12 values.",
+     "work": [
+      "\\bar S_1=\\frac{3.7+3.4+4.0}{3}=3.7000,\\quad \\bar S_2=\\frac{4.0+3.7+4.4}{3}=4.0333",
+      "\\bar S_3=\\frac{3.0+2.8+3.2}{3}=3.0000,\\quad \\bar S_4=\\frac{3.2+2.9+3.4}{3}=3.1667",
+      "\\bar T_1=\\frac{3.7+4.0+3.0+3.2}{4}=3.475,\\quad \\bar T_2=\\frac{3.4+3.7+2.8+2.9}{4}=3.200",
+      "\\bar T_3=\\frac{4.0+4.4+3.2+3.4}{4}=3.750",
+      "\\bar X=\\frac{41.7}{12}=3.475"
+     ]
+    },
+    {
+     "say": "Each person is compared only with their own mean, so differences in lung size between people drop out. The four pieces add to 0.6333.",
+     "work": [
+      "SS_1=(3.7-3.7)^2+(3.4-3.7)^2+(4.0-3.7)^2=0.1800",
+      "SS_2=(4.0-4.0333)^2+(3.7-4.0333)^2+(4.4-4.0333)^2=0.2467",
+      "SS_3=(3.0-3.0)^2+(2.8-3.0)^2+(3.2-3.0)^2=0.0800",
+      "SS_4=(3.2-3.1667)^2+(2.9-3.1667)^2+(3.4-3.1667)^2=0.1267",
+      "SS_{wit\\,subjs}=0.1800+0.2467+0.0800+0.1267=0.6333"
+     ]
+    },
+    {
+     "say": "The treatment means sit 0, 0.275 and 0.275 L from the grand mean. Each mean uses 4 people, so the squared distances are multiplied by 4.",
+     "work": [
+      "SS_{treat}=n\\sum_t(\\bar T_t-\\bar X)^2",
+      "SS_{treat}=4\\left[(3.475-3.475)^2+(3.200-3.475)^2+(3.750-3.475)^2\\right]=0.6050"
+     ]
+    },
+    {
+     "say": "Most of the within-subject variation is explained by the treatments, so only a small residual is left.",
+     "work": [
+      "SS_{res}=SS_{wit\\,subjs}-SS_{treat}",
+      "SS_{res}=0.63333-0.60500=0.02833"
+     ]
+    },
+    {
+     "say": "The treatment mean square is about 64 times the residual mean square.",
+     "work": [
+      "DF_{treat}=3-1=2,\\quad DF_{res}=(4-1)(3-1)=6",
+      "MS_{treat}=\\frac{0.6050}{2}=0.3025,\\quad MS_{res}=\\frac{0.02833}{6}=0.004722",
+      "F=\\frac{0.3025}{0.004722}=64.06"
+     ]
+    },
+    {
+     "say": "F is far above both cutoffs, so reject the null hypothesis. Mean FEV1 differs across baseline, endotoxin, and endotoxin plus salbutamol, with P below 0.01.",
+     "work": [
+      "F_{0.05}(2,6)=5.14,\\quad F_{0.01}(2,6)=10.92\\ \\ (\\text{column }2,\\ \\text{row }6)",
+      "F=64.06>10.92",
+      "P<0.01"
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Holm pairwise t tests after repeated measures ANOVA",
+   "source": "Session 21 lecture example (pages 11 and 12)",
+   "prompt": "The FEV1 repeated measures ANOVA rejected. Using rounded values, treatment means 3.48 L (baseline), 3.20 L (endotoxin) and 3.75 L (endotoxin + salbutamol), \\(MS_{res}=0.0047\\) and \\(n=4\\), find which conditions differ with an overall 0.05 level.",
+   "table": {
+    "headers": [
+     "Condition",
+     "Treatment mean (L)"
+    ],
+    "rows": [
+     [
+      "Baseline",
+      "3.48"
+     ],
+     [
+      "Endotoxin",
+      "3.20"
+     ],
+     [
+      "Endotoxin + salbutamol",
+      "3.75"
+     ]
+    ]
+   },
+   "steps": [
+    {
+     "say": "All three pairs share one standard error because every treatment mean uses the same 4 people. Endotoxin against salbutamol gives the biggest t.",
+     "work": [
+      "t=\\frac{\\bar T_i-\\bar T_j}{\\sqrt{2MS_{res}/n}}",
+      "\\sqrt{\\frac{2(0.0047)}{4}}=0.048477",
+      "t_{\\text{base, endo}}=\\frac{3.48-3.20}{0.048477}=5.776",
+      "t_{\\text{endo, salb}}=\\frac{3.20-3.75}{0.048477}=-11.346",
+      "t_{\\text{base, salb}}=\\frac{3.48-3.75}{0.048477}=-5.570"
+     ]
+    },
+    {
+     "say": "The table row is 6 because the shared error came from the residual mean square.",
+     "work": [
+      "\\nu=(n-1)(m-1)=(4-1)(3-1)=6"
+     ]
+    },
+    {
+     "say": "The largest t is tested at the strictest level. The levels 0.0167 and 0.025 are not printed, so use the stricter printed columns 0.01 and 0.02. Every pair passes, so no stop is needed.",
+     "work": [
+      "\\alpha_1=\\frac{0.05}{3}=0.0167,\\quad \\alpha_2=\\frac{0.05}{2}=0.025,\\quad \\alpha_3=\\frac{0.05}{1}=0.05",
+      "|t|=11.346>t_{0.01}(6)=3.707>t_{0.0167}(6)\\ \\Rightarrow\\ \\text{endo and salb differ}",
+      "|t|=5.776>t_{0.02}(6)=3.143>t_{0.025}(6)\\ \\Rightarrow\\ \\text{base and endo differ}",
+      "|t|=5.570>t_{0.05}(6)=2.447\\ \\Rightarrow\\ \\text{base and salb differ}"
+     ]
+    },
+    {
+     "say": "All three conditions differ from each other with P below 0.05. FEV1 falls after endotoxin, and after salbutamol it rises above both the endotoxin level and baseline.",
+     "work": [
+      "P<0.05"
+     ]
+    }
+   ]
+  },
+  {
+   "title": "McNemar's test",
+   "source": "Session 21 lecture example (page 17)",
+   "prompt": "Twenty people, none of whom has hypertension by the gold standard, are judged by an automated BP machine and by an experienced person. Do the two methods differ in specificity at the 0.05 level?",
+   "table": {
+    "headers": [
+     "BP machine by person",
+     "Person positive",
+     "Person negative"
+    ],
+    "rows": [
+     [
+      "Machine positive",
+      "3",
+      "7"
+     ],
+     [
+      "Machine negative",
+      "1",
+      "9"
+     ]
+    ]
+   },
+   "steps": [
+    {
+     "say": "The same 20 people were judged both ways. Only the 7 called positive by the machine alone and the 1 called positive by the person alone disagree.",
+     "work": [
+      "a=3,\\quad b=7,\\quad c=1,\\quad d=9"
+     ]
+    },
+    {
+     "say": "The null hypothesis is that machine positive with person negative is as likely as the reverse, so the two methods have the same specificity.",
+     "work": [
+      "H_0:P(\\text{machine}+,\\ \\text{person}-)=P(\\text{machine}-,\\ \\text{person}+)"
+     ]
+    },
+    {
+     "say": "Eight people changed, so 4 are expected in each direction if the methods agree.",
+     "work": [
+      "E=\\frac{b+c}{2}=\\frac{7+1}{2}=4"
+     ]
+    },
+    {
+     "say": "Each changing cell is 3 away from 4. The Yates correction takes off one half before squaring.",
+     "work": [
+      "\\chi^2=\\frac{(|b-E|-\\frac12)^2}{E}+\\frac{(|c-E|-\\frac12)^2}{E}",
+      "\\chi^2=\\frac{(|7-4|-\\frac12)^2}{4}+\\frac{(|1-4|-\\frac12)^2}{4}=\\frac{6.25}{4}+\\frac{6.25}{4}=3.125",
+      "\\nu=1"
+     ]
+    },
+    {
+     "say": "Because 3.125 is below 3.841, do not reject the null hypothesis. The machine and the person do not differ significantly in specificity, even though the machine made 7 false calls and the person 1.",
+     "work": [
+      "\\chi^2_{0.05}(1)=3.841\\ \\ (\\text{row }1,\\ \\text{column }\\chi^2_{.050})",
+      "\\chi^2=3.125<3.841",
+      "\\chi^2_{0.10}(1)=2.706<3.125\\ \\Rightarrow\\ 0.05<P<0.10"
+     ]
+    }
+   ]
+  }
+ ]
+}

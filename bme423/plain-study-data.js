@@ -151,7 +151,83 @@ const PLAIN_STUDY={
 "do": "Write the answer with its units.",
 "why": "This is because a percentile is a measurement, not a percent."
 }
+],
+"example": {
+"source": "Homework 1 Problem 4(i)",
+"prompt": "Heights (in) of a random sample of \\(n=10\\) BME freshmen are 65, 69, 59, 64, 62, 67, 68, 62, 64, 65. Find the 75th percentile.",
+"table": {
+"headers": [
+"Rank",
+"1",
+"2",
+"3",
+"4",
+"5",
+"6",
+"7",
+"8",
+"9",
+"10"
+],
+"rows": [
+[
+"Height (in)",
+"59",
+"62",
+"62",
+"64",
+"64",
+"65",
+"65",
+"67",
+"68",
+"69"
 ]
+]
+},
+"steps": [
+{
+"say": "The ten heights are put in order from shortest to tallest, so each height now has a rank from 1 to 10.",
+"work": [
+"65,\\ 69,\\ 59,\\ 64,\\ 62,\\ 67,\\ 68,\\ 62,\\ 64,\\ 65",
+"x_{(1)},\\dots,x_{(10)}\\;=\\;59,\\ 62,\\ 62,\\ 64,\\ 64,\\ 65,\\ 65,\\ 67,\\ 68,\\ 69"
+]
+},
+{
+"say": "With p of 75 and n of 10, the 75th percentile sits at position 7.75 in the ordered list.",
+"work": [
+"\\text{position}=1+\\frac{p(n-1)}{100}",
+"\\text{position}=1+\\frac{75(10-1)}{100}",
+"\\text{position}=1+6.75=7.75"
+]
+},
+{
+"say": "The whole part is 7 and the leftover is 0.75, so the answer lies three quarters of the way from the 7th value to the 8th value.",
+"work": [
+"k=\\lfloor 7.75\\rfloor=7",
+"f=7.75-7=0.75"
+]
+},
+{
+"say": "The position 7.75 is not a whole number, so no single height can be read off directly and the next step is needed.",
+"work": []
+},
+{
+"say": "The 7th value is 65 and the 8th value is 67, so the percentile is 65 plus three quarters of the 2 inch gap.",
+"work": [
+"x_{(k)}+f\\,\\big(x_{(k+1)}-x_{(k)}\\big)",
+"x_{(7)}+0.75\\,\\big(x_{(8)}-x_{(7)}\\big)=65+0.75\\,(67-65)",
+"=65+1.5=66.5"
+]
+},
+{
+"say": "The 75th percentile of the freshman heights is 66.5 inches, so about three quarters of the sample is shorter than 66.5 inches.",
+"work": [
+"x_{75}=66.5\\ \\text{in}"
+]
+}
+]
+}
 },
 {
 "title": "Standard error from one sample",
@@ -171,7 +247,34 @@ const PLAIN_STUDY={
 "do": "Say that the SE describes the mean, not individual people.",
 "why": "This is because that is the difference most questions are checking."
 }
+],
+"example": {
+"source": "Homework 1 Problem 4(i)",
+"prompt": "For the same freshman heights (65, 69, 59, 64, 62, 67, 68, 62, 64, 65 in, \\(n=10\\)), find the standard error of the mean.",
+"steps": [
+{
+"say": "The ten heights add to 645 inches, so the mean is 64.5 inches. The squared distances from 64.5 add to 82.5, so the SD is 3.028 inches.",
+"work": [
+"\\bar x=\\frac{\\sum x_i}{n}=\\frac{645}{10}=64.5\\ \\text{in}",
+"s=\\sqrt{\\frac{\\sum (x_i-\\bar x)^2}{n-1}}",
+"\\sum (x_i-\\bar x)^2=(65-64.5)^2+(69-64.5)^2+\\dots+(65-64.5)^2=82.5",
+"s^2=\\frac{82.5}{10-1}=9.167\\ \\text{in}^2,\\quad s=\\sqrt{9.167}=3.028\\ \\text{in}"
 ]
+},
+{
+"say": "Dividing the SD by the square root of 10 gives an SE of 0.9574 inches.",
+"work": [
+"s_{\\bar x}=\\frac{s}{\\sqrt n}",
+"s_{\\bar x}=\\frac{3.028}{\\sqrt{10}}=\\frac{3.028}{3.162}",
+"s_{\\bar x}=0.9574\\ \\text{in}"
+]
+},
+{
+"say": "The SE of 0.9574 inches is the typical error when 64.5 inches is used to estimate the population mean. Individual freshmen still spread about 3.028 inches around the mean, because that is the SD.",
+"work": []
+}
+]
+}
 },
 {
 "title": "Check whether data look Normal using percentiles",
@@ -194,7 +297,74 @@ const PLAIN_STUDY={
 "do": "State a cautious conclusion about whether the data look Normal.",
 "why": "This is because a small sample can only suggest the shape, not prove it."
 }
+],
+"example": {
+"source": "Homework 1 Problem 4(v)",
+"prompt": "Heights (in) of a random sample of \\(n=10\\) BME seniors are 69, 66, 70, 71, 72, 67, 70, 71, 72, 69. Does the senior population seem to be Normally distributed? Show how you came to this conclusion.",
+"table": {
+"headers": [
+"Rank",
+"1",
+"2",
+"3",
+"4",
+"5",
+"6",
+"7",
+"8",
+"9",
+"10"
+],
+"rows": [
+[
+"Height (in)",
+"66",
+"67",
+"69",
+"69",
+"70",
+"70",
+"71",
+"71",
+"72",
+"72"
 ]
+]
+},
+"steps": [
+{
+"say": "The mean is 69.7 inches and the median is 70 inches. They are only 0.3 inches apart, so the center looks like a Normal center.",
+"work": [
+"\\bar x=\\frac{697}{10}=69.7\\ \\text{in}",
+"\\text{median}=\\frac{x_{(5)}+x_{(6)}}{2}=\\frac{70+70}{2}=70\\ \\text{in}"
+]
+},
+{
+"say": "The SD is 2.003 inches, so a Normal shape would put the 16th percentile near 67.70 inches and the 84th percentile near 71.70 inches.",
+"work": [
+"\\sum (x_i-\\bar x)^2=(66-69.7)^2+(67-69.7)^2+\\dots+(72-69.7)^2=36.1",
+"s=\\sqrt{\\frac{36.1}{10-1}}=\\sqrt{4.011}=2.003\\ \\text{in}",
+"x_{16}\\approx \\bar x-s=69.7-2.003=67.70\\ \\text{in}",
+"x_{84}\\approx \\bar x+s=69.7+2.003=71.70\\ \\text{in}"
+]
+},
+{
+"say": "From the ordered heights the 16th percentile is 67.88 inches and the 84th percentile is 71.56 inches.",
+"work": [
+"\\text{position}_{16}=1+\\frac{16(10-1)}{100}=2.44,\\quad k=2,\\ f=0.44",
+"x_{16}=x_{(2)}+0.44\\,\\big(x_{(3)}-x_{(2)}\\big)=67+0.44\\,(69-67)=67.88\\ \\text{in}",
+"\\text{position}_{84}=1+\\frac{84(10-1)}{100}=8.56,\\quad k=8,\\ f=0.56",
+"x_{84}=x_{(8)}+0.56\\,\\big(x_{(9)}-x_{(8)}\\big)=71+0.56\\,(72-71)=71.56\\ \\text{in}"
+]
+},
+{
+"say": "The mean is close to the median, and both percentiles land within 0.2 inches of the Normal targets. So the senior heights may come from a Normal population, but 10 values can only suggest this.",
+"work": [
+"67.88\\approx 67.70,\\qquad 71.56\\approx 71.70"
+]
+}
+]
+}
 }
 ]
 },
@@ -325,7 +495,65 @@ const PLAIN_STUDY={
 "do": "Name the rule that fails for any function that is not valid.",
 "why": "This is because the answer must say why it is not a probability function."
 }
+],
+"example": {
+"source": "Homework 1 Problem 2(a)",
+"prompt": "Which of these functions could be probability functions of a discrete random variable \\(X\\)? Each is 0 elsewhere.",
+"table": {
+"headers": [
+"Function",
+"Values of x",
+"f(x)"
+],
+"rows": [
+[
+"f2",
+"0, 3, 4, 5, 8, 10",
+"0.2, 0, 0.4, 0.2, 0.2, 0.1"
+],
+[
+"f3",
+"-2, 1, 3, 4.5, 7",
+"0.3, 0.3, -0.1, 0.1, 0.4"
+],
+[
+"f4",
+"0.5, 1, 2",
+"0.4, 0.1, 0.4"
+],
+[
+"f5",
+"1, 2, 3",
+"1/6, 2/6, 1/2"
 ]
+]
+},
+"steps": [
+{
+"say": "Every value of f2, f4 and f5 is between 0 and 1. The function f3 gives a negative value at x of 3, so f3 already fails.",
+"work": [
+"0\\le f(x_i)\\le 1\\ \\text{for all } x_i",
+"f_3(3)=-0.1<0"
+]
+},
+{
+"say": "The sums are 1.1 for f2, 1.0 for f3, 0.9 for f4 and 1 for f5. So f3 adds to 1 even though one of its values is negative.",
+"work": [
+"\\sum_{i=1}^{k} f(x_i)=1",
+"f_2\\!:\\ 0.2+0+0.4+0.2+0.2+0.1=1.1",
+"f_3\\!:\\ 0.3+0.3+(-0.1)+0.1+0.4=1.0",
+"f_4\\!:\\ 0.4+0.1+0.4=0.9",
+"f_5\\!:\\ \\tfrac{1}{6}+\\tfrac{2}{6}+\\tfrac{1}{2}=1"
+]
+},
+{
+"say": "Only f5 is a probability function. f2 breaks the sum rule because it totals 1.1, f4 breaks it because it totals 0.9, and f3 breaks the rule that no probability is negative.",
+"work": [
+"f_2,\\ f_4\\!:\\ \\sum f(x_i)\\ne 1,\\qquad f_3\\!:\\ f(3)<0"
+]
+}
+]
+}
 },
 {
 "title": "Turn a CDF graph into a probability function",
@@ -352,7 +580,46 @@ const PLAIN_STUDY={
 "do": "Check that the probabilities add up to 1.",
 "why": "This is because a valid probability function always totals 1."
 }
+],
+"example": {
+"source": "Exam 1 Question 1(i)",
+"prompt": "The d.f. \\(F(y)\\) of the discrete random variable \\(Y\\) is a staircase. It is 0 for \\(y<-2\\), \\(\\tfrac{1}{3}\\) for \\(-2\\le y<1\\), \\(\\tfrac{1}{2}\\) for \\(1\\le y<3\\) and 1 for \\(y\\ge 3\\). Write \\(f(y)\\) for all values of \\(y\\).",
+"steps": [
+{
+"say": "The staircase jumps at y of minus 2, at y of 1 and at y of 3, so those are the only values Y can take.",
+"work": [
+"\\text{jumps at } y=-2,\\ 1,\\ 3"
 ]
+},
+{
+"say": "Each jump is the new height minus the old height, so the jumps are one third, one sixth and one half.",
+"work": [
+"f(y_k)=F(y_k)-F(y_{k-1})",
+"f(-2)=\\tfrac{1}{3}-0=\\tfrac{1}{3}",
+"f(1)=\\tfrac{1}{2}-\\tfrac{1}{3}=\\tfrac{1}{6}",
+"f(3)=1-\\tfrac{1}{2}=\\tfrac{1}{2}"
+]
+},
+{
+"say": "Each value is written next to its jump size.",
+"work": [
+"f(y)=\\tfrac{1}{3} \\text{ for } y=-2,\\quad \\tfrac{1}{6} \\text{ for } y=1,\\quad \\tfrac{1}{2} \\text{ for } y=3"
+]
+},
+{
+"say": "Every other value of y gets probability 0, so the function is now defined for all y.",
+"work": [
+"f(y)=\\begin{cases}\\tfrac{1}{3} & y=-2\\\\[2pt] \\tfrac{1}{6} & y=1\\\\[2pt] \\tfrac{1}{2} & y=3\\\\[2pt] 0 & \\text{elsewhere}\\end{cases}"
+]
+},
+{
+"say": "The three probabilities add to 1, so f is a valid probability function.",
+"work": [
+"\\tfrac{1}{3}+\\tfrac{1}{6}+\\tfrac{1}{2}=\\tfrac{2}{6}+\\tfrac{1}{6}+\\tfrac{3}{6}=1"
+]
+}
+]
+}
 },
 {
 "title": "Read a probability from the CDF",
@@ -376,7 +643,41 @@ const PLAIN_STUDY={
 "do": "Check whether each endpoint is included.",
 "why": "This is because a discrete variable can sit exactly on an endpoint, and strict or not strict changes the answer."
 }
+],
+"example": {
+"source": "Exam 1 Question 1(ii) and (iii)",
+"prompt": "For the same \\(Y\\) (jumps of \\(\\tfrac{1}{3}\\) at \\(-2\\), \\(\\tfrac{1}{6}\\) at 1 and \\(\\tfrac{1}{2}\\) at 3), find (ii) \\(P(Y>-1)\\) and (iii) \\(P(-0.5<Y<2.25)\\).",
+"steps": [
+{
+"say": "Both questions are rewritten with less than or equal to, so they can be read from F.",
+"work": [
+"P(Y>-1)=1-P(Y\\le -1)",
+"P(-0.5<Y<2.25)=P(Y\\le 2.25)-P(Y\\le -0.5)"
 ]
+},
+{
+"say": "F at minus 1 is one third because only the jump at minus 2 has been collected, so the right tail is two thirds.",
+"work": [
+"P(Y>a)=1-F(a)",
+"P(Y>-1)=1-F(-1)=1-\\tfrac{1}{3}=\\tfrac{2}{3}"
+]
+},
+{
+"say": "F at 2.25 is one half and F at minus 0.5 is one third, so the interval holds one sixth.",
+"work": [
+"P(a<Y\\le b)=F(b)-F(a)",
+"P(-0.5<Y<2.25)=F(2.25)-F(-0.5)=\\tfrac{1}{2}-\\tfrac{1}{3}=\\tfrac{1}{6}"
+]
+},
+{
+"say": "None of minus 1, minus 0.5 or 2.25 is a value Y can take, so strict or not strict gives the same answer here. Adding the jumps at 1 and 3 confirms two thirds.",
+"work": [
+"P(Y>-1)=f(1)+f(3)=\\tfrac{1}{6}+\\tfrac{1}{2}=\\tfrac{2}{3}",
+"P(-0.5<Y<2.25)=f(1)=\\tfrac{1}{6}"
+]
+}
+]
+}
 },
 {
 "title": "Expected value and variance of a discrete variable",
@@ -400,7 +701,61 @@ const PLAIN_STUDY={
 "do": "Take the square root if the SD is asked.",
 "why": "This is because the SD puts the spread back in the original units."
 }
+],
+"example": {
+"source": "Homework 1 Problem 2(b)",
+"prompt": "\\(f_6(x)=0.55\\) for \\(x=-1\\), 0.15 for \\(x=2\\), 0.1 for \\(x=3\\), 0.2 for \\(x=7\\), and 0 elsewhere. Compute \\(E[X]\\), \\(E[(X-E[X])^2]\\), \\(E[X^2]\\) and \\(E[X^2]-(E[X])^2\\).",
+"table": {
+"headers": [
+"x",
+"-1",
+"2",
+"3",
+"7"
+],
+"rows": [
+[
+"f(x)",
+"0.55",
+"0.15",
+"0.1",
+"0.2"
 ]
+]
+},
+"steps": [
+{
+"say": "The four values are paired with their probabilities, and the probabilities add to 1.",
+"work": [
+"0.55+0.15+0.1+0.2=1"
+]
+},
+{
+"say": "Each value times its probability gives minus 0.55, 0.3, 0.3 and 1.4, so the expected value is 1.45.",
+"work": [
+"E[X]=\\sum x\\,f(x)",
+"E[X]=(-1)(0.55)+(2)(0.15)+(3)(0.1)+(7)(0.2)",
+"E[X]=-0.55+0.3+0.3+1.4=1.45"
+]
+},
+{
+"say": "The weighted squared distances from 1.45 add to 9.7475. The shortcut with E of X squared, which is 11.85, gives the same variance.",
+"work": [
+"\\operatorname{Var}(X)=\\sum (x-\\mu)^2 f(x)",
+"=(-1-1.45)^2(0.55)+(2-1.45)^2(0.15)+(3-1.45)^2(0.1)+(7-1.45)^2(0.2)",
+"=3.301+0.04538+0.2403+6.161=9.7475",
+"E[X^2]=(-1)^2(0.55)+(2)^2(0.15)+(3)^2(0.1)+(7)^2(0.2)=11.85",
+"E[X^2]-(E[X])^2=11.85-(1.45)^2=11.85-2.1025=9.7475"
+]
+},
+{
+"say": "The SD is the square root of 9.7475, so X spreads about 3.122 units around its mean of 1.45.",
+"work": [
+"\\sigma=\\sqrt{9.7475}=3.122"
+]
+}
+]
+}
 }
 ]
 },
@@ -515,7 +870,45 @@ const PLAIN_STUDY={
 "do": "Check that the pieces meet at each boundary.",
 "why": "This is because the CDF of a continuous variable has no jumps."
 }
+],
+"example": {
+"source": "Exam 1 Question 2(ii)",
+"prompt": "The p.d.f. of \\(X\\) is \\(f(x)=0\\) for \\(x\\le 0\\), \\(f(x)=\\tfrac{1}{8} x\\) for \\(0<x\\le 4\\), and \\(f(x)=0\\) for \\(x>4\\). Write \\(F(x)\\) for all values of \\(x\\).",
+"steps": [
+{
+"say": "The CDF is the area under f from the far left up to x.",
+"work": [
+"F(x)=\\int_{-\\infty}^{x} f(u)\\,du"
 ]
+},
+{
+"say": "For x at or below 0 the density is 0, so no area has been collected.",
+"work": [
+"x\\le 0\\!:\\quad F(x)=\\int_{-\\infty}^{x} 0\\,du=0"
+]
+},
+{
+"say": "For x between 0 and 4 the area so far is F of 0, which is 0, plus the area under u over 8 from 0 to x. That gives x squared over 16.",
+"work": [
+"F(x)=F(a)+\\int_{a}^{x} f(u)\\,du",
+"0<x\\le 4\\!:\\quad F(x)=F(0)+\\int_0^x \\tfrac{1}{8} u\\,du=0+\\tfrac{1}{16}u^2\\Big|_0^x=\\tfrac{1}{16}x^2"
+]
+},
+{
+"say": "Past 4 the density is 0 again, so F stays at F of 4, which is 1.",
+"work": [
+"x>4\\!:\\quad F(x)=F(4)+\\int_4^x 0\\,du=1+0=1"
+]
+},
+{
+"say": "At 0 the middle piece gives 0 and at 4 it gives 1, so the pieces meet with no jump.",
+"work": [
+"\\tfrac{1}{16}(0)^2=0,\\qquad \\tfrac{1}{16}(4)^2=\\tfrac{16}{16}=1",
+"F(x)=\\begin{cases}0 & x\\le 0\\\\[2pt] \\tfrac{1}{16}x^2 & 0<x\\le 4\\\\[2pt] 1 & x>4\\end{cases}"
+]
+}
+]
+}
 },
 {
 "title": "Percentile or median of a continuous variable",
@@ -538,7 +931,40 @@ const PLAIN_STUDY={
 "do": "Solve for c and keep the root inside that piece's range.",
 "why": "This is because a root outside the range does not belong to this variable."
 }
+],
+"example": {
+"source": "Exam 1 Question 2(iii)",
+"prompt": "For the same \\(X\\) with \\(f(x)=\\tfrac{1}{8} x\\) on \\(0<x\\le 4\\), what is the 75th percentile of \\(X\\)?",
+"steps": [
+{
+"say": "The CDF from the density is written out first.",
+"work": [
+"F(x)=\\begin{cases}0 & x\\le 0\\\\[2pt] \\tfrac{1}{16}x^2 & 0<x\\le 4\\\\[2pt] 1 & x>4\\end{cases}"
 ]
+},
+{
+"say": "F rises from 0 at x of 0 to 1 at x of 4, so 0.75 is reached inside the middle piece.",
+"work": [
+"F(0)=0<0.75<1=F(4)"
+]
+},
+{
+"say": "The middle piece is set equal to three quarters.",
+"work": [
+"F(c)=\\frac{p}{100}",
+"F(c)=\\tfrac{1}{16}c^2=\\tfrac{3}{4}"
+]
+},
+{
+"say": "Solving gives c squared of 12, so c is 2 root 3, about 3.464. The negative root is dropped because it is outside 0 to 4.",
+"work": [
+"c^2=\\frac{16\\cdot 3}{4}=12",
+"c=\\pm\\sqrt{12}=\\pm 3.464",
+"c=2\\sqrt3\\approx 3.464"
+]
+}
+]
+}
 },
 {
 "title": "Expected value from a density",
@@ -557,7 +983,33 @@ const PLAIN_STUDY={
 "do": "Integrate and plug in the upper bound minus the lower bound.",
 "why": "This is because a definite integral is the difference between the two ends."
 }
+],
+"example": {
+"source": "Exam 1 Question 2(i)",
+"prompt": "For the same \\(X\\) with \\(f(x)=\\tfrac{1}{8} x\\) on \\(0<x\\le 4\\), what is \\(E[X]\\)?",
+"steps": [
+{
+"say": "E of X weights each x by its density.",
+"work": [
+"E[X]=\\int_{-\\infty}^{\\infty} x\\,f(x)\\,dx"
 ]
+},
+{
+"say": "The integral splits into three pieces. The two outer pieces are 0, so only 0 to 4 is kept.",
+"work": [
+"E[X]=\\int_{-\\infty}^{0} x\\cdot 0\\,dx+\\int_0^4 x\\left(\\tfrac{1}{8} x\\right)dx+\\int_4^{\\infty} x\\cdot 0\\,dx",
+"E[X]=\\tfrac{1}{8}\\int_0^4 x^2\\,dx"
+]
+},
+{
+"say": "The antiderivative is x cubed over 24, so the answer is 64 over 24, which is 8 thirds.",
+"work": [
+"E[X]=\\tfrac{1}{24}x^3\\Big|_0^4=\\tfrac{1}{24}\\big(4^3-0^3\\big)=\\tfrac{64}{24}",
+"E[X]=\\tfrac{8}{3}\\approx 2.667"
+]
+}
+]
+}
 },
 {
 "title": "Find an unknown constant in a density",
@@ -576,7 +1028,35 @@ const PLAIN_STUDY={
 "do": "Keep only the solution that makes sense.",
 "why": "This is because a range endpoint or density value cannot be negative."
 }
+],
+"example": {
+"source": "Homework 1 Problem 3(a)(i)",
+"prompt": "The p.d.f. of \\(X\\) is \\(f(x)=0\\) for \\(x\\le 0\\), \\(f(x)=0.1+x\\) for \\(0<x\\le c\\), and \\(f(x)=0\\) for \\(c<x\\). Find \\(c\\).",
+"steps": [
+{
+"say": "The density is only nonzero from 0 to c, so the area over that range must be 1.",
+"work": [
+"\\int_{-\\infty}^{\\infty} f(x)\\,dx=1",
+"\\int_0^c (0.1+x)\\,dx=1"
 ]
+},
+{
+"say": "Integrating gives 0.1c plus c squared over 2. Setting that to 1 gives a quadratic with roots 1.3177 and minus 1.5177.",
+"work": [
+"\\left[0.1x+\\tfrac{1}{2} x^2\\right]_0^c=0.1c+\\tfrac{1}{2} c^2=1",
+"c^2+0.2c-2=0",
+"c=\\frac{-0.2\\pm\\sqrt{0.2^2+4(2)}}{2}=\\frac{-0.2\\pm\\sqrt{8.04}}{2}=\\frac{-0.2\\pm 2.8355}{2}",
+"c=1.3177\\quad\\text{or}\\quad c=-1.5177"
+]
+},
+{
+"say": "The range 0 to c needs c above 0, so the negative root is dropped and c is 1.3177.",
+"work": [
+"c=1.3177"
+]
+}
+]
+}
 }
 ]
 },
@@ -692,7 +1172,47 @@ const PLAIN_STUDY={
 "do": "State the probability in words about the original variable.",
 "why": "This is because the question is about the measurement, not about Z."
 }
+],
+"example": {
+"source": "Homework 1 Problem 3(b)(ii)",
+"prompt": "Fasting blood glucose in healthy U.S. adults aged 30 to 50 is Normal with mean 95 mg/dL and SD 8.7 mg/dL, \\(X\\sim N(95,8.7^2)\\). Find \\(P(85\\le X<115)\\).",
+"steps": [
+{
+"say": "X is fasting glucose, Normal with mean 95 mg/dL and SD 8.7 mg/dL.",
+"work": [
+"X\\sim N(\\mu,\\sigma^2)=N(95,\\ 8.7^2)\\ \\text{mg/dL}"
 ]
+},
+{
+"say": "The cutoff 85 sits 1.149 SDs below the mean and 115 sits 2.299 SDs above it. The table rows nearest these are 1.15 and 2.30.",
+"work": [
+"z=\\frac{x-\\mu}{\\sigma}",
+"z_{85}=\\frac{85-95}{8.7}=-1.149\\approx -1.15",
+"z_{115}=\\frac{115-95}{8.7}=2.299\\approx 2.30"
+]
+},
+{
+"say": "The wanted area is the middle band between the two cutoffs, so it is the left area at 2.30 minus the left area at minus 1.15.",
+"work": [
+"P(85\\le X<115)=P(-1.15\\le Z<2.30)"
+]
+},
+{
+"say": "The table gives 0.9893 at 2.30 and 0.8749 at 1.15. Symmetry turns the negative cutoff into 0.1251, so the band holds 0.8642.",
+"work": [
+"P(a<X<b)=F(z_b)-F(z_a),\\quad F(-z)=1-F(z)",
+"F(2.30)=0.9893,\\qquad F(-1.15)=1-F(1.15)=1-0.8749=0.1251",
+"P(85\\le X<115)=0.9893-0.1251=0.8642"
+]
+},
+{
+"say": "About 86.4 percent of healthy adults aged 30 to 50 have fasting glucose from 85 up to 115 mg/dL.",
+"work": [
+"P(85\\le X<115)\\approx 0.864"
+]
+}
+]
+}
 },
 {
 "title": "Normal probability for a sample mean",
@@ -718,7 +1238,39 @@ const PLAIN_STUDY={
 "table": "Use the class z table. It lists z beside F(z), the area to the left of z, and only for positive z.",
 "tablePath": "sources/tables/z_table_NormalDist.pdf"
 }
+],
+"example": {
+"source": "Exam 1 Question 3",
+"prompt": "BUN in healthy U.S. adults aged 20 to 60 is Normal with mean 18 mg/100mL and SD 6 mg/100mL. What is the probability that the mean BUN in a sample of 16 healthy adults is between 15 and 24 mg/100mL?",
+"steps": [
+{
+"say": "The sample mean of 16 adults is its own random variable. By the central limit theorem it is Normal and centered on the same mean of 18 mg/100mL.",
+"work": [
+"\\bar X\\sim N\\big(\\mu_{\\bar X},\\sigma_{\\bar X}^2\\big),\\quad \\mu_{\\bar X}=\\mu=18\\ \\text{mg/100mL}"
 ]
+},
+{
+"say": "The SD of 6 is divided by the square root of 16, so the SE is 1.5 mg/100mL.",
+"work": [
+"\\sigma_{\\bar X}=\\frac{\\sigma}{\\sqrt n}=\\frac{6}{\\sqrt{16}}=\\frac{6}{4}=1.5\\ \\text{mg/100mL}"
+]
+},
+{
+"say": "Measured in SEs, 15 is 2 below the mean and 24 is 4 above it.",
+"work": [
+"z=\\frac{\\bar x-\\mu}{\\sigma/\\sqrt n}",
+"P(15<\\bar X<24)=P\\left(\\frac{15-18}{1.5}<Z<\\frac{24-18}{1.5}\\right)=P(-2<Z<4)"
+]
+},
+{
+"say": "The table gives 1.0000 at 4.00 and 0.9773 at 2.00, so the chance the sample mean lands between 15 and 24 is 0.9773.",
+"work": [
+"P(-2<Z<4)=F(4)-F(-2)=F(4)-\\big(1-F(2)\\big)",
+"=1.0000-(1-0.9773)=0.9773"
+]
+}
+]
+}
 },
 {
 "title": "Normal percentile",
@@ -739,7 +1291,34 @@ const PLAIN_STUDY={
 "why": "This is because the answer must be a measurement.",
 "tex": "x=\\mu+z\\,\\sigma"
 }
+],
+"example": {
+"source": "Homework 1 Problem 3(b)(ii)",
+"prompt": "For fasting blood glucose \\(X\\sim N(95,8.7^2)\\) mg/dL, find the 25th percentile.",
+"steps": [
+{
+"say": "The 25th percentile is the value with 25 percent of the area to its left.",
+"work": [
+"F(z_{25})=0.25"
 ]
+},
+{
+"say": "The table starts at one half, so symmetry is used. The left area 0.75 falls between 0.7486 at 0.67 and 0.7517 at 0.68, so z is about 0.675 and the 25th percentile z is minus 0.675.",
+"work": [
+"F(-z_{25})=1-0.25=0.75",
+"F(0.67)=0.7486,\\quad F(0.68)=0.7517\\ \\Rightarrow\\ -z_{25}\\approx 0.675",
+"z_{25}=-0.675"
+]
+},
+{
+"say": "Going 0.675 SDs below the mean of 95 gives 89.13 mg/dL, so a quarter of these adults fall below about 89.13 mg/dL.",
+"work": [
+"x=\\mu+z\\,\\sigma",
+"x_{25}=95+8.7(-0.675)=95-5.8725=89.1275\\approx 89.13\\ \\text{mg/dL}"
+]
+}
+]
+}
 }
 ]
 },
@@ -979,7 +1558,120 @@ const PLAIN_STUDY={
 "do": "Stop without naming which groups differ unless asked.",
 "why": "This is because the exam rules say not to isolate differences unless told to."
 }
+],
+"example": {
+"source": "Exam 1 Question 4",
+"prompt": "Postmenopausal women were randomized to three treatment groups (\\(n = 12\\) each) and their rate of bone loss was measured for 2 years. Is there a difference in the rate of bone loss among these three groups? Use \\(\\alpha = 0.05\\), and if a difference exists do not identify which groups are different.",
+"table": {
+"headers": [
+"Group",
+"Mean rate of bone loss (%/year)",
+"SD (%/year)"
+],
+"rows": [
+[
+"1: estrogen cream, placebo calcium",
+"0.43",
+"1.6"
+],
+[
+"2: placebo cream, 2000 mg/day calcium",
+"2.62",
+"2.68"
+],
+[
+"3: placebo cream, placebo calcium",
+"3.98",
+"1.63"
 ]
+]
+},
+"steps": [
+{
+"say": "The test is analysis of variance (there are more than two groups made of different subjects, and the data are interval and Normally distributed).",
+"work": []
+},
+{
+"say": "The null hypothesis is that there is no difference in the mean rate of bone loss among women in these three treatment groups.",
+"work": []
+},
+{
+"say": "There are three groups and 12 women in each group.",
+"work": [
+"m=3",
+"n=12"
+]
+},
+{
+"say": "These are the general equations, written before any numbers go in, because each one earns credit on its own.",
+"work": [
+"s^2_{wit}=\\frac{1}{m}\\sum_{i=1}^{m}s_i^2",
+"\\bar X=\\frac{1}{m}\\sum_{i=1}^{m}\\bar x_i",
+"s^2_{\\bar X}=\\frac{\\sum_{i=1}^{m}(\\bar x_i-\\bar X)^2}{m-1}",
+"s^2_{bet}=n\\,s^2_{\\bar X}",
+"F=\\frac{s^2_{bet}}{s^2_{wit}}",
+"\\nu_n=m-1,\\quad \\nu_d=m(n-1)"
+]
+},
+{
+"say": "Square each SD and average the three squares. This gives the within-groups variance.",
+"work": [
+"s^2_{wit}=\\frac{1}{m}\\sum_{i=1}^{m}s_i^2",
+"s^2_{wit}=\\frac{1}{3}\\left(1.6^2+2.68^2+1.63^2\\right)=\\frac{1}{3}(2.56+7.1824+2.6569)",
+"=\\frac{12.3993}{3}=4.1331\\;(\\%/\\mathrm{yr})^2"
+]
+},
+{
+"say": "Average the three group means to get the grand mean. Then find how far each group mean sits from it and turn that into a variance.",
+"work": [
+"\\bar X=\\frac{1}{m}\\sum_{i=1}^{m}\\bar x_i=\\frac{1}{3}(0.43+2.62+3.98)=2.3433\\;\\%/\\mathrm{yr}",
+"s^2_{\\bar X}=\\frac{\\sum_{i=1}^{m}(\\bar x_i-\\bar X)^2}{m-1}",
+"s^2_{\\bar X}=\\frac{(0.43-2.3433)^2+(2.62-2.3433)^2+(3.98-2.3433)^2}{3-1}",
+"=\\frac{3.6608+0.07654+2.6787}{2}=\\frac{6.4161}{2}=3.2080\\;(\\%/\\mathrm{yr})^2"
+]
+},
+{
+"say": "Multiply by the 12 women per group. This gives the between-groups variance.",
+"work": [
+"s^2_{bet}=n\\,s^2_{\\bar X}",
+"s^2_{bet}=12(3.2080)=38.496\\;(\\%/\\mathrm{yr})^2"
+]
+},
+{
+"say": "Divide the between-groups variance by the within-groups variance.",
+"work": [
+"F=\\frac{s^2_{bet}}{s^2_{wit}}",
+"F=\\frac{38.496}{4.1331}=9.314"
+]
+},
+{
+"say": "The numerator uses the number of groups minus 1. The denominator uses the 11 free values in each of the three groups.",
+"work": [
+"\\nu_n=m-1=3-1=2",
+"\\nu_d=m(n-1)=3(12-1)=33"
+]
+},
+{
+"say": "Row 33 is not printed in the F table, so the cutoff sits between rows 32 and 34 in the column for 2. Lightface numbers give 0.05 and boldface numbers give 0.01.",
+"work": [
+"F_{0.05}(2,34)=3.28<F_{0.05}(2,33)<F_{0.05}(2,32)=3.30",
+"F_{0.01}(2,34)=5.29<F_{0.01}(2,33)<F_{0.01}(2,32)=5.34"
+]
+},
+{
+"say": "F is larger than both cutoffs, so reject the null hypothesis. There is a difference in the mean rate of bone loss among women in these three treatment groups, with P less than 0.01.",
+"work": [
+"F=9.314>F_{0.05}(2,32)=3.30>F_{0.05}(2,33)",
+"F=9.314>F_{0.01}(2,32)=5.34>F_{0.01}(2,33)",
+"P<0.01"
+]
+},
+{
+"say": "The question says not to identify which groups are different, so the answer ends with the overall conclusion and no pairwise tests.",
+"work": []
+}
+]
+}
 },
 {
 "title": "Read an R aov table",
@@ -1001,7 +1693,70 @@ const PLAIN_STUDY={
 "do": "Keep the Residuals Mean Sq for any pairwise tests that follow.",
 "why": "This is because pairwise t tests reuse it as the pooled variance."
 }
+],
+"example": {
+"source": "Homework 1 Problem 5(b)",
+"prompt": "165 subjects with raised BNP levels were randomly assigned to a placebo, an experimental drug or the standard treatment (55 per group). R gives this ANOVA output from aov(BNP ~ Group). Read the table and state the result.",
+"table": {
+"headers": [
+"",
+"Df",
+"Sum Sq",
+"Mean Sq",
+"F value",
+"Pr(>F)"
+],
+"rows": [
+[
+"Group",
+"2",
+"47686",
+"23843",
+"11.49",
+"2.16e-05 ***"
+],
+[
+"Residuals",
+"162",
+"336188",
+"2075",
+"",
+""
 ]
+]
+},
+"steps": [
+{
+"say": "The Group row has Df 2, which is the numerator degrees of freedom because there are three groups.",
+"work": [
+"\\nu_n=\\text{Df}_{\\text{Group}}=2",
+"\\nu_n=m-1=3-1=2"
+]
+},
+{
+"say": "The Residuals row has Df 162 and Mean Sq 2075. These are the within degrees of freedom and the within-groups variance.",
+"work": [
+"\\nu_d=\\text{Df}_{\\text{Residuals}}=162",
+"\\nu_d=N-m=165-3=162",
+"s^2_{wit}=\\text{Mean Sq}_{\\text{Residuals}}=\\frac{336188}{162}=2075\\;(\\mathrm{pg/mL})^2"
+]
+},
+{
+"say": "F is 11.49 and P is \\(2.16\\times10^{-5}\\), so reject the null hypothesis. There is a difference in BNP levels among the three treatment groups, with P less than 0.001.",
+"work": [
+"F=\\frac{\\text{Mean Sq}_{\\text{Group}}}{\\text{Mean Sq}_{\\text{Residuals}}}=\\frac{23843}{2075}=11.49",
+"P=2.16\\times10^{-5}<0.001"
+]
+},
+{
+"say": "Keep 2075 as the within-groups variance with 162 degrees of freedom, because any pairwise t tests after this ANOVA reuse them.",
+"work": [
+"s^2_{wit}=2075\\;(\\mathrm{pg/mL})^2",
+"\\nu=162"
+]
+}
+]
+}
 }
 ]
 },
@@ -1131,7 +1886,64 @@ const PLAIN_STUDY={
 "do": "If you reject, check 0.01 as well and write the conclusion with the P range.",
 "why": "This is because the homework guidelines ask for the tightest P range you can show."
 }
+],
+"example": {
+"source": "Homework 2 Problem 1(a)",
+"prompt": "Subjects over 65 with cognitive decline were split into a control group (\\(n_1 = 22\\), \\(\\bar x_1 = 49\\), \\(s_1 = 8.4\\)) and a treatment group of diet, exercise and brain training (\\(n_2 = 27\\), \\(\\bar x_2 = 57\\), \\(s_2 = 9.5\\)). Is there a difference in cognitive scores between the two populations?",
+"steps": [
+{
+"say": "The test is the unpaired two-sample t test, because the control group and the treatment group are made of different subjects.",
+"work": []
+},
+{
+"say": "The null hypothesis is that there is no difference in cognitive scores between the control group and the treatment group.",
+"work": []
+},
+{
+"say": "These are the general equations, written before any numbers go in.",
+"work": [
+"s_p^2=\\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}",
+"t=\\frac{\\bar x_1-\\bar x_2}{\\sqrt{s_p^2\\left(\\frac{1}{n_1}+\\frac{1}{n_2}\\right)}}",
+"\\nu=n_1+n_2-2"
 ]
+},
+{
+"say": "Weight each squared SD by its group size minus 1 and divide by the total degrees of freedom. This gives one shared variance.",
+"work": [
+"s_p^2=\\frac{(22-1)(8.4)^2+(27-1)(9.5)^2}{22+27-2}",
+"=\\frac{1481.76+2346.5}{47}=\\frac{3828.26}{47}=81.452",
+"s_p=\\sqrt{81.452}=9.0251"
+]
+},
+{
+"say": "The standard error of the difference is 2.5921, so the means are about 3.1 standard errors apart.",
+"work": [
+"t=\\frac{49-57}{\\sqrt{81.452\\left(\\frac{1}{22}+\\frac{1}{27}\\right)}}=\\frac{-8}{\\sqrt{6.7191}}=\\frac{-8}{2.5921}=-3.086"
+]
+},
+{
+"say": "Both groups lose one degree of freedom for their own mean.",
+"work": [
+"\\nu=n_1+n_2-2=22+27-2=47"
+]
+},
+{
+"say": "Row 47 is not printed, so the cutoff sits between rows 46 and 48 in the 0.05 column. The size of t is larger, so reject at 0.05.",
+"work": [
+"t_{0.05}(46)=2.013>t_{0.05}(47)>t_{0.05}(48)=2.011",
+"\\lvert t\\rvert=3.086>t_{0.05}(46)=2.013>t_{0.05}(47)"
+]
+},
+{
+"say": "The size of t also beats the 0.01 cutoff. There is a difference in cognitive scores between the control group and the treatment group, with P less than 0.01.",
+"work": [
+"t_{0.01}(46)=2.687>t_{0.01}(47)>t_{0.01}(48)=2.682",
+"\\lvert t\\rvert=3.086>t_{0.01}(46)=2.687>t_{0.01}(47)",
+"P<0.01"
+]
+}
+]
+}
 },
 {
 "title": "One-sample t test",
@@ -1160,7 +1972,48 @@ const PLAIN_STUDY={
 "do": "Compare, decide and write the full conclusion.",
 "why": "This is because the conclusion must answer the study question."
 }
+],
+"example": {
+"source": "Homework 2 Problem 1(b)",
+"prompt": "The average LDL of USC faculty and staff is 115 mg/dL. A random sample of 16 USC undergraduates had mean LDL 103 mg/dL with SD 16 mg/dL. Is there a significant difference in LDL between USC undergraduates and the faculty and staff value?",
+"steps": [
+{
+"say": "The test is the one-sample t test. The null hypothesis is that mean LDL in USC undergraduates is not different from the faculty and staff value of 115 mg/dL.",
+"work": [
+"\\mu_0=115\\;\\mathrm{mg/dL}"
 ]
+},
+{
+"say": "These are the general equations, written before any numbers go in.",
+"work": [
+"t=\\frac{\\bar x-\\mu_0}{s/\\sqrt n}",
+"\\nu=n-1"
+]
+},
+{
+"say": "The standard error is 4 mg/dL, so the sample mean sits 3 standard errors below 115.",
+"work": [
+"t=\\frac{103-115}{16/\\sqrt{16}}=\\frac{-12}{4}=-3.000"
+]
+},
+{
+"say": "One mean was estimated from the 16 students, so there are 15 degrees of freedom. Row 15 is printed in the two-tailed t table.",
+"work": [
+"\\nu=n-1=16-1=15",
+"t_{0.05}(15)=2.131",
+"t_{0.01}(15)=2.947"
+]
+},
+{
+"say": "The size of t passes both cutoffs, so reject the null hypothesis. Mean LDL in USC undergraduates differs from the faculty and staff value of 115 mg/dL, with P less than 0.01.",
+"work": [
+"\\lvert t\\rvert=3.000>t_{0.05}(15)=2.131",
+"\\lvert t\\rvert=3.000>t_{0.01}(15)=2.947",
+"P<0.01"
+]
+}
+]
+}
 }
 ]
 },
@@ -1292,7 +2145,109 @@ const PLAIN_STUDY={
 "do": "Write one conclusion naming which pairs differ and which do not, made with P less than 0.05.",
 "why": "This is because the whole statement holds at the overall level."
 }
+],
+"example": {
+"source": "Exam 1 Question 5",
+"prompt": "Subjects with low hematocrit got a placebo or one of two doses of EPO for two months. An ANOVA in R found a difference among the three groups (Treatment Df 2, Mean Sq 906.1, F 49.35, Pr(>F) 5.97e-16; Residuals Df 108, Mean Sq 18.4). Use multiple pairwise comparisons with the Holm correction at an overall level of 0.05 to find which groups differ.",
+"table": {
+"headers": [
+"",
+"Placebo",
+"EPO Dose 1",
+"EPO Dose 2"
+],
+"rows": [
+[
+"Mean (%)",
+"31.39",
+"39.87",
+"40.05"
+],
+[
+"Variance",
+"28.24",
+"16.65",
+"10.20"
+],
+[
+"n",
+"37",
+"37",
+"37"
 ]
+]
+},
+"steps": [
+{
+"say": "The procedure is multiple unpaired t tests with the Holm correction.",
+"work": []
+},
+{
+"say": "The null hypothesis is that there is no difference in hematocrit between placebo and Dose 1, AND between placebo and Dose 2, AND between Dose 1 and Dose 2.",
+"work": []
+},
+{
+"say": "These are the general equations, written before any numbers go in.",
+"work": [
+"t_{AB}=\\frac{\\bar x_A-\\bar x_B}{\\sqrt{s^2_{wit}\\left(\\frac{1}{n_A}+\\frac{1}{n_B}\\right)}}",
+"\\alpha_j=\\frac{\\alpha_T}{k-j+1}"
+]
+},
+{
+"say": "R gives the Residuals Mean Sq as 18.4 and the Residuals Df as 108, so these are the shared variance and degrees of freedom.",
+"work": [
+"s^2_{wit}=18.4\\;\\%^2",
+"\\nu=108"
+]
+},
+{
+"say": "All three groups have 37 subjects, so every pair shares the same standard error of 0.99729.",
+"work": [
+"\\sqrt{18.4\\left(\\frac{1}{37}+\\frac{1}{37}\\right)}=\\sqrt{0.99459}=0.99729",
+"t_{P,D1}=\\frac{31.39-39.87}{0.99729}=\\frac{-8.48}{0.99729}=-8.503",
+"t_{P,D2}=\\frac{31.39-40.05}{0.99729}=\\frac{-8.66}{0.99729}=-8.684",
+"t_{D1,D2}=\\frac{39.87-40.05}{0.99729}=\\frac{-0.18}{0.99729}=-0.1805"
+]
+},
+{
+"say": "Placebo against Dose 2 has the largest size of t, so it goes first. Dose 1 against Dose 2 has the smallest, so it goes last.",
+"work": [
+"\\lvert t_{P,D2}\\rvert=8.684>\\lvert t_{P,D1}\\rvert=8.503>\\lvert t_{D1,D2}\\rvert=0.1805"
+]
+},
+{
+"say": "There are three comparisons, so the first pair is tested at 0.05 divided by 3 and the last pair at 0.05.",
+"work": [
+"k=3,\\quad \\alpha_T=0.05",
+"\\alpha_1=\\frac{0.05}{3-1+1}=0.0167",
+"\\alpha_2=\\frac{0.05}{3-2+1}=0.025",
+"\\alpha_3=\\frac{0.05}{3-3+1}=0.05"
+]
+},
+{
+"say": "Row 108 and the levels 0.0167 and 0.025 are not printed. So each cutoff is bracketed between rows 100 and 120 and between the printed columns on either side.",
+"work": [
+"t_{0.01}(100)=2.626>t_{0.0167}(108)>t_{0.02}(120)=2.358",
+"t_{0.02}(100)=2.364>t_{0.025}(108)>t_{0.05}(120)=1.980",
+"t_{0.05}(100)=1.984>t_{0.05}(108)>t_{0.05}(120)=1.980"
+]
+},
+{
+"say": "The first two pairs beat even the top of their brackets, so both are significant. The third pair is below the bottom of its bracket, so it is not significant and the procedure stops there.",
+"work": [
+"\\lvert t_{P,D2}\\rvert=8.684>2.626>t_{0.0167}(108)",
+"\\lvert t_{P,D1}\\rvert=8.503>2.364>t_{0.025}(108)",
+"\\lvert t_{D1,D2}\\rvert=0.1805<1.980<t_{0.05}(108)"
+]
+},
+{
+"say": "There is a difference in hematocrit between placebo and Dose 2, AND between placebo and Dose 1, AND there is no difference between Dose 1 and Dose 2. This entire statement is made with P less than 0.05.",
+"work": [
+"P<0.05"
+]
+}
+]
+}
 },
 {
 "title": "Bonferroni pairwise t tests",
@@ -1325,7 +2280,80 @@ const PLAIN_STUDY={
 "do": "Write the combined conclusion and say the entire statement is made with P less than 0.05.",
 "why": "This is because the answer names every pair at the overall level."
 }
+],
+"example": {
+"source": "Homework 2 Problem 1(c)",
+"prompt": "Patients were randomized to low, medium or high doses of filgrastim (\\(n = 15\\) each) and blood neutrophil count was measured. An ANOVA was significant (\\(F = 3.3839\\), \\(P < 0.05\\)) with \\(s^2_{wit} = 2.5267\\). Using pairwise comparisons with the Bonferroni correction, find which dose groups differ. You will need \\(t_{0.0167}(42)\\) from qt((0.05/2)/3, 42, lower.tail=FALSE).",
+"table": {
+"headers": [
+"Dose group",
+"Mean neutrophil count (10^9 cells/L)",
+"SD (10^9 cells/L)"
+],
+"rows": [
+[
+"1: Low dose",
+"3.7",
+"1.1"
+],
+[
+"2: Medium dose",
+"4.6",
+"1.4"
+],
+[
+"3: High dose",
+"5.2",
+"2.1"
 ]
+]
+},
+"steps": [
+{
+"say": "The procedure is multiple unpaired t tests with the Bonferroni correction.",
+"work": []
+},
+{
+"say": "The null hypothesis is that there is no difference in neutrophil count between low and medium dose, AND between low and high dose, AND between medium and high dose.",
+"work": []
+},
+{
+"say": "Three groups give three pairs, so every pair is tested at 0.05 divided by 3. The degrees of freedom are the within-groups degrees of freedom from the ANOVA.",
+"work": [
+"k=3",
+"\\alpha=\\frac{\\alpha_T}{k}=\\frac{0.05}{3}=0.0167",
+"\\nu=m(n-1)=3(15-1)=42"
+]
+},
+{
+"say": "The within-groups variance of 2.5267 is given, and it equals the average of the squared SDs. Every pair has 15 per group, so they share one standard error.",
+"work": [
+"s^2_{wit}=\\frac{1}{3}\\left(1.1^2+1.4^2+2.1^2\\right)=2.5267\\;(10^9\\ \\mathrm{cells/L})^2",
+"t_{AB}=\\frac{\\bar x_A-\\bar x_B}{\\sqrt{s^2_{wit}\\left(\\frac{1}{n_A}+\\frac{1}{n_B}\\right)}}",
+"\\sqrt{2.5267\\left(\\frac{1}{15}+\\frac{1}{15}\\right)}=\\sqrt{0.33689}=0.58043",
+"t_{12}=\\frac{3.7-4.6}{0.58043}=-1.5506",
+"t_{13}=\\frac{3.7-5.2}{0.58043}=-2.5843",
+"t_{23}=\\frac{4.6-5.2}{0.58043}=-1.0337"
+]
+},
+{
+"say": "The printed 0.02 and 0.01 columns settle the first and third pairs. The low against high pair falls inside that bracket, so the cutoff the question gives decides it.",
+"work": [
+"t_{0.02}(42)=2.418<t_{0.0167}(42)<t_{0.01}(42)=2.698",
+"t_{0.0167}(42)=2.4937",
+"\\lvert t_{12}\\rvert=1.5506<2.418<t_{0.0167}(42)",
+"\\lvert t_{13}\\rvert=2.5843>t_{0.0167}(42)=2.4937",
+"\\lvert t_{23}\\rvert=1.0337<2.418<t_{0.0167}(42)"
+]
+},
+{
+"say": "There is a difference in neutrophil count between low and high dose, AND no difference between low and medium dose, AND no difference between medium and high dose. This entire statement is made with P less than 0.05.",
+"work": [
+"P<0.05"
+]
+}
+]
+}
 }
 ]
 },
@@ -1455,7 +2483,41 @@ const PLAIN_STUDY={
 "table": "Use the class t table, infinity row on PDF page 2. The 0.05 column gives 1.96 and the 0.01 column gives 2.576.",
 "tablePath": "sources/tables/t_table.pdf#page=2"
 }
+],
+"example": {
+"source": "Exam 1 Questions 3 and 4, Homework 2 Problems 1(b) and 2(a)",
+"prompt": "Name the reference distribution for each statistic. (a) Exam 1 Question 3, the mean BUN of 16 healthy adults compared with the cutoff 15 mg/100mL, when the population mean is \\(\\mu = 18\\) mg/100mL and the population SD is \\(\\sigma = 6\\) mg/100mL. (b) Homework 2 Problem 1(b), the mean LDL of 16 undergraduates, \\(\\bar x = 103\\) mg/dL, compared with 115 mg/dL, with \\(s = 16\\) mg/dL found from the sample. (c) Exam 1 Question 4, the ANOVA ratio for three groups of 12. (d) Homework 2 Problem 2(a), the difference in the proportion of female babies for 186 and 220 births.",
+"steps": [
+{
+"say": "In (a) the population SD of 6 is given, so the standardized mean follows Z. In (b) the SD of 16 comes from the sample, so it does not follow Z.",
+"work": [
+"\\sigma_{\\bar X}=\\frac{\\sigma}{\\sqrt n}=\\frac{6}{\\sqrt{16}}=1.5",
+"Z=\\frac{\\bar x-\\mu}{\\sigma/\\sqrt n}=\\frac{15-18}{1.5}=-2.00\\sim N(0,1)"
 ]
+},
+{
+"say": "In (b) the SD is estimated from 16 students, so the statistic follows t with 15 degrees of freedom.",
+"work": [
+"t=\\frac{\\bar x-\\mu_0}{s/\\sqrt n}\\sim t(n-1)",
+"t=\\frac{103-115}{16/\\sqrt{16}}=-3.000,\\quad \\nu=n-1=16-1=15"
+]
+},
+{
+"say": "In (c) F divides one variance estimate by another, so it follows F with 2 and 33 degrees of freedom.",
+"work": [
+"F=\\frac{s^2_{bet}}{s^2_{wit}}\\sim F(\\nu_n,\\nu_d)",
+"\\nu_n=m-1=3-1=2,\\quad \\nu_d=m(n-1)=3(12-1)=33"
+]
+},
+{
+"say": "In (d) the samples are large, so the z statistic for two proportions is compared with the infinity row of the t table. That row is the Normal distribution.",
+"work": [
+"z_{crit,0.05}=t_{0.05}(\\infty)=1.9600",
+"z_{crit,0.01}=t_{0.01}(\\infty)=2.5758"
+]
+}
+]
+}
 }
 ]
 },
@@ -1562,7 +2624,56 @@ const PLAIN_STUDY={
 "do": "Compare, decide and write the conclusion with a P range.",
 "why": "This is because the answer must state what the data show."
 }
+],
+"example": {
+"source": "Homework 2 Problem 2(a)",
+"prompt": "When only the father was exposed to dioxin, the proportion of female babies was 0.565 out of 186 births. When only the mother was exposed, it was 0.455 out of 220 births. Of all 406 babies, 205 were female. Use a z test to decide whether the proportion of female babies differs between the two exposure groups.",
+"steps": [
+{
+"say": "The test is the z test for two proportions, because sex of the baby is nominal and there are two groups. The null hypothesis is that there is no difference in the proportion of female babies when only the father or only the mother was exposed to dioxin.",
+"work": []
+},
+{
+"say": "These are the general equations, written before any numbers go in.",
+"work": [
+"\\hat p=\\frac{\\text{total events}}{n_1+n_2}",
+"z=\\frac{\\lvert\\hat p_1-\\hat p_2\\rvert-\\frac{1}{2}\\left(\\frac{1}{n_1}+\\frac{1}{n_2}\\right)}{\\sqrt{\\hat p(1-\\hat p)\\left(\\frac{1}{n_1}+\\frac{1}{n_2}\\right)}}"
 ]
+},
+{
+"say": "The two group proportions are given. The pooled proportion uses all 205 female babies out of 406 births, because the null hypothesis says both groups share one rate.",
+"work": [
+"\\hat p_1=0.565,\\quad n_1=186",
+"\\hat p_2=0.455,\\quad n_2=220",
+"\\hat p=\\frac{205}{186+220}=\\frac{205}{406}=0.5049"
+]
+},
+{
+"say": "The Yates correction takes 0.0049609 off the gap of 0.110 between the proportions. Dividing by the standard error gives z.",
+"work": [
+"\\frac{1}{2}\\left(\\frac{1}{186}+\\frac{1}{220}\\right)=\\frac{1}{2}(0.0099218)=0.0049609",
+"\\lvert 0.565-0.455\\rvert-0.0049609=0.10504",
+"\\sqrt{0.5049(1-0.5049)\\left(\\frac{1}{186}+\\frac{1}{220}\\right)}=\\sqrt{0.0024802}=0.049802",
+"z=\\frac{0.10504}{0.049802}=2.109"
+]
+},
+{
+"say": "A large-sample z is compared with the infinity row of the t table, because that row is the Normal distribution.",
+"work": [
+"z_{crit,0.05}=t_{0.05}(\\infty)=1.9600",
+"z_{crit,0.01}=t_{0.01}(\\infty)=2.5758"
+]
+},
+{
+"say": "The size of z passes the 0.05 cutoff but not the 0.01 cutoff, so reject at 0.05 only. The proportion of female babies differs between father-only and mother-only exposure, with P less than 0.05.",
+"work": [
+"\\lvert z\\rvert=2.109>t_{0.05}(\\infty)=1.9600",
+"\\lvert z\\rvert=2.109<t_{0.01}(\\infty)=2.5758",
+"0.01<P<0.05"
+]
+}
+]
+}
 }
 ]
 },
@@ -1697,7 +2808,94 @@ const PLAIN_STUDY={
 "table": "Use the class chi-square table (upper tail). Read the row for the degrees of freedom and the column for alpha. For 1 degree of freedom at 0.05 the printed value is 3.841.",
 "tablePath": "sources/tables/Chi_Squared_Table2.pdf"
 }
+],
+"example": {
+"source": "Exam 1 Question 6",
+"prompt": "Subjects at a military medical center were randomized to duct tape, cryotherapy or salicylic acid and checked for complete wart resolution after two months. Is there a difference in rates of wart resolution among the treatment groups? Use \\(\\alpha=0.05\\), and do not isolate differences.",
+"table": {
+"headers": [
+"",
+"Duct tape",
+"Cryotherapy",
+"Salicylic acid"
+],
+"rows": [
+[
+"Complete wart resolution",
+"134",
+"107",
+"122"
+],
+[
+"Warts remain",
+"94",
+"105",
+"99"
 ]
+]
+},
+"steps": [
+{
+"say": "This is a chi-square test because the outcome is a nominal count. The table is 2 by 3, with two outcomes in the rows and three treatments in the columns.",
+"work": [
+"\\chi^2\\ \\text{test},\\ 2\\times 3\\ \\text{contingency table}"
+]
+},
+{
+"say": "There is no difference in the rates of wart resolution among the duct tape, cryotherapy and salicylic acid groups.",
+"work": []
+},
+{
+"say": "Write the expected count, the chi-square sum and the degrees of freedom before any numbers go in.",
+"work": [
+"E_{ij}=\\frac{R_i\\,C_j}{n}",
+"\\chi^2=\\sum\\frac{(O-E)^2}{E}",
+"\\nu=(r-1)(c-1)"
+]
+},
+{
+"say": "Add across each row and down each column. Both sets of totals give the same grand total of 661 subjects.",
+"work": [
+"R_1=134+107+122=363",
+"R_2=94+105+99=298",
+"C_1=134+94=228,\\quad C_2=107+105=212,\\quad C_3=122+99=221",
+"n=363+298=661"
+]
+},
+{
+"say": "Each expected count is its row total times its column total over 661. These six counts are what no treatment effect would look like.",
+"work": [
+"E_{ij}=\\frac{R_i\\,C_j}{n}",
+"E_{11}=\\frac{363\\cdot 228}{661}=125.210,\\quad E_{12}=\\frac{363\\cdot 212}{661}=116.424,\\quad E_{13}=\\frac{363\\cdot 221}{661}=121.366",
+"E_{21}=\\frac{298\\cdot 228}{661}=102.790,\\quad E_{22}=\\frac{298\\cdot 212}{661}=95.576,\\quad E_{23}=\\frac{298\\cdot 221}{661}=99.634"
+]
+},
+{
+"say": "The table is 2 by 3 and not 2 by 2, so no Yates correction is used. The six standardized gaps add up to 3.068.",
+"work": [
+"\\chi^2=\\sum\\frac{(O-E)^2}{E}",
+"\\frac{(134-125.210)^2}{125.210}=0.6171,\\quad \\frac{(107-116.424)^2}{116.424}=0.7628,\\quad \\frac{(122-121.366)^2}{121.366}=0.003312",
+"\\frac{(94-102.790)^2}{102.790}=0.7517,\\quad \\frac{(105-95.576)^2}{95.576}=0.9292,\\quad \\frac{(99-99.634)^2}{99.634}=0.004034",
+"\\chi^2=0.6171+0.7628+0.003312+0.7517+0.9292+0.004034=3.068"
+]
+},
+{
+"say": "There are 2 rows and 3 columns, so the test has 2 degrees of freedom.",
+"work": [
+"\\nu=(r-1)(c-1)",
+"\\nu=(2-1)(3-1)=2"
+]
+},
+{
+"say": "The printed cutoff for 2 degrees of freedom at 0.05 is 5.991. Because 3.068 is below it, do not reject the null, so the resolution rates do not differ among the three treatments (P greater than 0.05).",
+"work": [
+"\\chi^2_{0.05}(2)=5.991",
+"\\chi^2=3.068<5.991=\\chi^2_{0.05}(2)",
+"\\text{do not reject } H_0,\\ P>0.05"
+]
+}
+]
+}
 },
 {
 "title": "Pairwise chi-square with Holm from R output",
@@ -1738,7 +2936,93 @@ const PLAIN_STUDY={
 "do": "Write the combined conclusion with P less than 0.05.",
 "why": "This is because the statement covers all the comparisons together."
 }
+],
+"example": {
+"source": "Homework 2 Problem 3(b)",
+"prompt": "Heart attack patients got standard care (control) or one of three clot-dissolving treatments, and 30-day deaths were counted. R gave the Yates-corrected chi-square for all six pairs. Use the Holm correction with \\(\\alpha_T=0.05\\) to find which treatments differ from the control.",
+"table": {
+"headers": [
+"Pair from chisq.test",
+"X-squared"
+],
+"rows": [
+[
+"Control vs Group 1",
+"9.4944"
+],
+[
+"Control vs Group 2",
+"4.6895"
+],
+[
+"Control vs Group 3",
+"18.234"
+],
+[
+"Group 1 vs Group 2",
+"0.64312"
+],
+[
+"Group 1 vs Group 3",
+"1.4982"
+],
+[
+"Group 2 vs Group 3",
+"4.2807"
 ]
+]
+},
+"steps": [
+{
+"say": "This is multiple pairwise chi-square tests with the Holm correction. Each pair of groups is its own 2 by 2 table of survived and died.",
+"work": []
+},
+{
+"say": "The question asks only which treatments differ from the control. So keep the three control comparisons and drop the three group versus group results.",
+"work": [
+"k=3"
+]
+},
+{
+"say": "There is no difference in 30-day mortality between the control and Group 1, AND none between the control and Group 2, AND none between the control and Group 3.",
+"work": []
+},
+{
+"say": "Every subtable is 2 by 2, so each comparison has 1 degree of freedom.",
+"work": [
+"\\nu=(2-1)(2-1)=1"
+]
+},
+{
+"say": "Control versus Group 3 is largest, then Group 1, then Group 2. The strongest result gets the tightest level.",
+"work": [
+"\\chi^2_{C,3}=18.234>\\chi^2_{C,1}=9.4944>\\chi^2_{C,2}=4.6895",
+"\\alpha_j=\\frac{\\alpha_T}{k-j+1}",
+"\\alpha_1=\\frac{0.05}{3-1+1}=0.01667,\\quad \\alpha_2=\\frac{0.05}{3-2+1}=0.025,\\quad \\alpha_3=\\frac{0.05}{3-3+1}=0.05"
+]
+},
+{
+"say": "The table has no 0.0167 column, so its cutoff sits between the printed 0.025 and 0.01 values on the 1 degree of freedom row.",
+"work": [
+"\\chi^2_{0.025}(1)=5.024<\\chi^2_{0.0167}(1)<\\chi^2_{0.01}(1)=6.635"
+]
+},
+{
+"say": "18.234 clears even 6.635, and 9.4944 and 4.6895 clear their cutoffs too. No comparison fails, so all three nulls are rejected.",
+"work": [
+"\\chi^2_{C,3}=18.234>6.635>\\chi^2_{0.0167}(1)\\ \\text{reject}",
+"\\chi^2_{C,1}=9.4944>5.024=\\chi^2_{0.025}(1)\\ \\text{reject}",
+"\\chi^2_{C,2}=4.6895>3.841=\\chi^2_{0.05}(1)\\ \\text{reject}"
+]
+},
+{
+"say": "There is a difference in 30-day mortality between the control and Group 3, AND between the control and Group 1, AND between the control and Group 2. This whole statement holds with P less than 0.05.",
+"work": [
+"P<0.05"
+]
+}
+]
+}
 },
 {
 "title": "Goodness of fit",
@@ -1758,7 +3042,55 @@ const PLAIN_STUDY={
 "table": "Use the class chi-square table (upper tail). Read the row for the degrees of freedom and the column for alpha. For 1 degree of freedom at 0.05 the printed value is 3.841.",
 "tablePath": "sources/tables/Chi_Squared_Table2.pdf"
 }
+],
+"example": {
+"source": "Session 12 lecture example (pages 23 and 24)",
+"prompt": "Before a health campaign, 60% of graduating seniors reported no regular exercise, 25% sporadic exercise and 15% regular exercise. Four years later the seniors gave the counts below. Is there a difference in exercise behavior after the campaign?",
+"table": {
+"headers": [
+"",
+"No regular exercise",
+"Sporadic exercise",
+"Regular exercise",
+"Total"
+],
+"rows": [
+[
+"Number of students",
+"255",
+"125",
+"90",
+"470"
 ]
+]
+},
+"steps": [
+{
+"say": "Multiply each old proportion by the 470 new seniors. These are the counts expected if nothing changed.",
+"work": [
+"E_i=p_{i,\\mathrm{Exp}}\\cdot N",
+"E_1=470\\cdot 0.60=282,\\quad E_2=470\\cdot 0.25=117.5,\\quad E_3=470\\cdot 0.15=70.5"
+]
+},
+{
+"say": "Each category gives one standardized gap, and the three gaps add up to 8.457.",
+"work": [
+"\\chi^2=\\sum_{i=1}^{k}\\frac{(O_i-E_i)^2}{E_i}",
+"\\chi^2=\\frac{(255-282)^2}{282}+\\frac{(125-117.5)^2}{117.5}+\\frac{(90-70.5)^2}{70.5}",
+"\\chi^2=2.5851+0.4787+5.3936=8.457"
+]
+},
+{
+"say": "There are 3 categories, so there are 2 degrees of freedom. Because 8.457 passes 7.378 but not 9.210, reject the null with P between 0.01 and 0.025, so exercise behavior has changed.",
+"work": [
+"\\nu=k-1=3-1=2",
+"\\chi^2_{0.05}(2)=5.991,\\quad \\chi^2_{0.025}(2)=7.378,\\quad \\chi^2_{0.01}(2)=9.210",
+"\\chi^2_{0.025}(2)=7.378<\\chi^2=8.457<9.210=\\chi^2_{0.01}(2)",
+"\\text{reject } H_0,\\ 0.01<P<0.025"
+]
+}
+]
+}
 }
 ]
 },
@@ -1865,7 +3197,64 @@ const PLAIN_STUDY={
 "do": "Write one plain sentence with the number, the groups and the outcome.",
 "why": "This is because the answer is for a non-expert."
 }
+],
+"example": {
+"source": "Homework 2 Problem 2(b)",
+"prompt": "1000 expectant mothers reported whether they took folate supplements, and their infants were checked for neural tube defects (NTDs). A \\(\\chi^2\\) test found a difference (\\(P<0.01\\)). Quantify the association between the mother not taking folate and NTDs in one sentence a newspaper reader could follow.",
+"table": {
+"headers": [
+"",
+"No NTD",
+"Yes NTD",
+"Total"
+],
+"rows": [
+[
+"Took folate",
+"471",
+"4",
+"475"
+],
+[
+"No folate",
+"498",
+"27",
+"525"
 ]
+]
+},
+"steps": [
+{
+"say": "The mothers were enrolled during pregnancy and the infants were checked afterwards. So the study is prospective, and relative risk can be used.",
+"work": []
+},
+{
+"say": "The question is about not taking folate, so the No folate row is the exposed row. Having an NTD is the event column.",
+"work": [
+"n_{TD}=27,\\quad n_T=525\\quad(\\text{no folate})",
+"n_{CD}=4,\\quad n_C=475\\quad(\\text{took folate})"
+]
+},
+{
+"say": "About 5.1 percent of infants had an NTD when the mother took no folate, against about 0.84 percent when she did.",
+"work": [
+"\\hat p_T=\\frac{n_{TD}}{n_T}=\\frac{27}{525}=0.05143",
+"\\hat p_C=\\frac{n_{CD}}{n_C}=\\frac{4}{475}=0.008421"
+]
+},
+{
+"say": "The no folate risk is about six times the folate risk.",
+"work": [
+"RR=\\frac{n_{TD}/n_T}{n_{CD}/n_C}",
+"RR=\\frac{27/525}{4/475}=\\frac{0.05143}{0.008421}=6.107"
+]
+},
+{
+"say": "The risk that an infant develops one or more NTDs is about 6.1 times greater when the mother did not take folate than when she did.",
+"work": []
+}
+]
+}
 },
 {
 "title": "Odds ratio with a sentence",
@@ -1888,7 +3277,54 @@ const PLAIN_STUDY={
 "do": "Write one plain sentence about the odds.",
 "why": "This is because the answer is for a newspaper reader."
 }
+],
+"example": {
+"source": "Exam 1 Question 7",
+"prompt": "Men with prostate cancer from a hospital database were cases, and matched men without prostate cancer were controls, in a retrospective case-control study. A \\(\\chi^2\\) test found a difference (\\(P<0.01\\)). Quantify the association between smoking and prostate cancer in one sentence a newspaper reader could follow.",
+"table": {
+"headers": [
+"",
+"With cancer",
+"Without cancer"
+],
+"rows": [
+[
+"Smokers",
+"120",
+"180"
+],
+[
+"Non smokers",
+"130",
+"298"
 ]
+]
+},
+"steps": [
+{
+"say": "The men were chosen because they did or did not have cancer, and then their smoking was looked up. So the study is retrospective and needs an odds ratio, not relative risk.",
+"work": []
+},
+{
+"say": "Smoking is the exposure and prostate cancer is the disease, so each count gets its exposure letter and its disease letter.",
+"work": [
+"n_{ED}=120,\\quad n_{EN}=180",
+"n_{UD}=130,\\quad n_{UN}=298"
+]
+},
+{
+"say": "Multiply the smokers with cancer by the non smokers without cancer, then divide by the other cross product.",
+"work": [
+"OR=\\frac{n_{ED}\\,n_{UN}}{n_{UD}\\,n_{EN}}",
+"OR=\\frac{120\\cdot 298}{130\\cdot 180}=\\frac{35760}{23400}=1.528"
+]
+},
+{
+"say": "The odds of getting prostate cancer are about 1.5 times greater for men who smoke than for men who do not smoke.",
+"work": []
+}
+]
+}
 },
 {
 "title": "Number needed to treat",
@@ -1907,7 +3343,56 @@ const PLAIN_STUDY={
 "why": "This is because you cannot treat part of a person.",
 "tex": "NNT=\\frac{1}{p_C-p_T}"
 }
+],
+"example": {
+"source": "Session 13 lecture example (pages 6 to 9)",
+"prompt": "People on dialysis were given placebo or aspirin. In the placebo group 18 of 25 developed thrombi, and in the aspirin group 6 of 19 did. How many people must be treated with aspirin for one more person to avoid a thrombus?",
+"table": {
+"headers": [
+"",
+"Developed thrombi",
+"Free of thrombi",
+"Treated"
+],
+"rows": [
+[
+"Placebo",
+"18",
+"7",
+"25"
+],
+[
+"Aspirin",
+"6",
+"13",
+"19"
 ]
+]
+},
+"steps": [
+{
+"say": "Divide each group's thrombus count by its group size. About 72 percent of the placebo group and 32 percent of the aspirin group developed thrombi.",
+"work": [
+"\\hat p_{asp}=\\frac{n_{TD}}{n_T}=\\frac{6}{19}=0.3158",
+"\\hat p_{pla}=\\frac{n_{CD}}{n_C}=\\frac{18}{25}=0.7200"
+]
+},
+{
+"say": "Aspirin lowers the thrombus rate by about 40 percentage points.",
+"work": [
+"\\hat p_{pla}-\\hat p_{asp}=0.7200-0.3158=0.4042"
+]
+},
+{
+"say": "One over 0.4042 is 2.474, or about 2.5 people. A part of a person cannot be treated, so rounding up gives 3.",
+"work": [
+"NNT=\\frac{1}{p_C-p_T}",
+"NNT=\\frac{1}{0.4042}=2.474",
+"NNT=3\\ \\text{(rounded up)}"
+]
+}
+]
+}
 },
 {
 "title": "Number needed to harm",
@@ -1926,7 +3411,55 @@ const PLAIN_STUDY={
 "why": "This is because you cannot treat part of a person.",
 "tex": "NNH=\\frac{1}{p_T-p_C}"
 }
+],
+"example": {
+"source": "Practice example",
+"prompt": "In a trial, 8 of 100 patients on a drug and 3 of 100 patients on placebo had a serious side effect. How many patients must take the drug for one extra patient to be harmed?",
+"table": {
+"headers": [
+"",
+"Side effect",
+"No side effect",
+"Total"
+],
+"rows": [
+[
+"Drug",
+"8",
+"92",
+"100"
+],
+[
+"Placebo",
+"3",
+"97",
+"100"
 ]
+]
+},
+"steps": [
+{
+"say": "Divide each side effect count by the group size, so the drug group rate is 8 percent and the placebo rate is 3 percent.",
+"work": [
+"p_T=\\frac{8}{100}=0.08",
+"p_C=\\frac{3}{100}=0.03"
+]
+},
+{
+"say": "The drug raises the side effect rate by 5 percentage points.",
+"work": [
+"p_T-p_C=0.08-0.03=0.05"
+]
+},
+{
+"say": "One over 0.05 is exactly 20, so no rounding is needed. For every 20 patients who take the drug, one extra patient has the side effect.",
+"work": [
+"NNH=\\frac{1}{p_T-p_C}",
+"NNH=\\frac{1}{0.05}=20"
+]
+}
+]
+}
 }
 ]
 },
@@ -2018,7 +3551,65 @@ const PLAIN_STUDY={
 "table": "Use the class power chart for the t test, posted with the statistical tables.",
 "tablePath": null
 }
+],
+"example": {
+"source": "Session 14 lecture example (pages 17 and 18)",
+"prompt": "Halothane (\\(n=9\\), mean 2.08, SD 1.05) and morphine (\\(n=16\\), mean 1.75, SD 0.88) were compared for best cardiac index in \\(\\mathrm{L/min/m^2}\\), and the difference was not significant. What is the power to detect a difference in cardiac index of \\(2.08-1.75=0.33\\) with \\(\\alpha=0.05\\)?",
+"table": {
+"headers": [
+"",
+"Halothane",
+"Morphine"
+],
+"rows": [
+[
+"n",
+"9",
+"16"
+],
+[
+"Mean",
+"2.08",
+"1.75"
+],
+[
+"SD",
+"1.05",
+"0.88"
 ]
+]
+},
+"steps": [
+{
+"say": "The effect to detect is the gap between the two group means.",
+"work": [
+"\\delta=\\bar x_1-\\bar x_2=2.08-1.75=0.33"
+]
+},
+{
+"say": "Pool the two variances, weighting each by its degrees of freedom, and take the square root to get the SD.",
+"work": [
+"s^2=\\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}",
+"s^2=\\frac{(9-1)(1.05)^2+(16-1)(0.88)^2}{9+16-2}=\\frac{8.820+11.616}{23}=0.8885",
+"s=\\sqrt{0.8885}=0.9426"
+]
+},
+{
+"say": "The difference is only about a third of an SD, so it is a small effect.",
+"work": [
+"\\phi=\\frac{\\delta}{\\sigma}\\approx\\frac{\\delta}{s}",
+"\\phi=\\frac{0.33}{0.9426}=0.3501\\approx 0.35"
+]
+},
+{
+"say": "Use n of 9 because the smaller group limits the power. At phi of 0.35 the curves sit at about 0.1, so the study had only about a 10 percent chance of finding this difference.",
+"work": [
+"n=9\\ (\\text{smaller group}),\\quad \\alpha=0.05",
+"\\text{Power}\\approx 0.1"
+]
+}
+]
+}
 }
 ]
 },
@@ -2125,7 +3716,57 @@ const PLAIN_STUDY={
 "do": "Interpret the interval in the measurement's units.",
 "why": "This is because the answer is about the population mean."
 }
+],
+"example": {
+"source": "Session 17 lecture example (page 10)",
+"prompt": "Ten BME 423 students have a mean heart rate of 67 beats/min with a sample SD of 9 beats/min. Find the 95% confidence interval for the population mean heart rate \\(\\mu_{HR}\\).",
+"table": {
+"headers": [
+"\\(n\\)",
+"\\(\\bar x\\) (beats/min)",
+"\\(s\\) (beats/min)"
+],
+"rows": [
+[
+"10",
+"67",
+"9"
 ]
+]
+},
+"steps": [
+{
+"say": "The SD of 9 beats/min is divided by the square root of 10. So the mean of ten students is uncertain by about 2.846 beats/min.",
+"work": [
+"s_{\\bar x}=\\frac{s}{\\sqrt n}",
+"s_{\\bar x}=\\frac{9}{\\sqrt{10}}=\\frac{9}{3.162278}=2.846050"
+]
+},
+{
+"say": "Row 9 and the two-tailed 0.05 column of the t table give 2.262. That column already holds both tails, so it is not halved again.",
+"work": [
+"\\nu=n-1=10-1=9",
+"\\alpha=1-0.95=0.05",
+"t_{0.05}(9)=2.262"
+]
+},
+{
+"say": "The margin is the cutoff times the standard error, about 6.44 beats/min. Taking it off 67 gives the lower end and adding it gives the upper end.",
+"work": [
+"\\bar x\\pm t_c\\,\\frac{s}{\\sqrt n}",
+"M=2.262(2.846050)=6.437765",
+"L=67-6.437765=60.56224",
+"U=67+6.437765=73.43776"
+]
+},
+{
+"say": "We are 95% confident that the mean heart rate of all BME 423 students is between about 60.6 and 73.4 beats/min. This range is for the mean, not for single students.",
+"work": [
+"60.56224<\\mu_{HR}<73.43776\\ \\text{beats/min}"
+]
+}
+]
+}
 },
 {
 "title": "Confidence interval for a difference of two means",
@@ -2155,7 +3796,71 @@ const PLAIN_STUDY={
 "do": "Interpret the interval in the units of the measurement.",
 "why": "This is because the answer is about the population difference."
 }
+],
+"example": {
+"source": "Session 17 lecture example (page 6)",
+"prompt": "Daily urine production is compared between a diuretic group and a placebo group. Assume Normal responses with a common variance. Find the 95% confidence interval for \\(\\mu_{\\mathrm{diuretic}}-\\mu_{\\mathrm{placebo}}\\).",
+"table": {
+"headers": [
+"Group",
+"\\(n\\)",
+"\\(\\bar x\\) (mL/day)",
+"\\(s\\) (mL/day)"
+],
+"rows": [
+[
+"Diuretic (1)",
+"10",
+"1400",
+"245"
+],
+[
+"Placebo (2)",
+"10",
+"1180",
+"144"
 ]
+]
+},
+"steps": [
+{
+"say": "Diuretic minus placebo is 220 mL/day. This order is kept to the end so the sign of the interval keeps its meaning.",
+"work": [
+"\\bar x_1-\\bar x_2=1400-1180=220"
+]
+},
+{
+"say": "Each variance is weighted by its own 9 degrees of freedom before pooling. The pooled variance then gives a standard error of about 89.87 mL/day.",
+"work": [
+"s_{\\bar x_1-\\bar x_2}=\\sqrt{s_p^2\\left(\\frac1{n_1}+\\frac1{n_2}\\right)},\\quad s_p^2=\\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}",
+"s_p^2=\\frac{9(245^2)+9(144^2)}{10+10-2}=\\frac{540225+186624}{18}=40380.5",
+"s_{\\bar x_1-\\bar x_2}=\\sqrt{40380.5\\left(\\frac1{10}+\\frac1{10}\\right)}=\\sqrt{8076.1}=89.86712"
+]
+},
+{
+"say": "Row 18 and the two-tailed 0.05 column of the t table give 2.101.",
+"work": [
+"\\nu=n_1+n_2-2=10+10-2=18",
+"t_{0.05}(18)=2.101"
+]
+},
+{
+"say": "The margin is about 188.8 mL/day. It is taken off and added to the difference of 220 mL/day.",
+"work": [
+"(\\bar x_1-\\bar x_2)\\pm t_c\\, s_{\\bar x_1-\\bar x_2}",
+"M=2.101(89.86712)=188.8108",
+"L=220-188.8108=31.1892",
+"U=220+188.8108=408.8108"
+]
+},
+{
+"say": "We are 95% confident that the diuretic raises mean urine production by between about 31 and 409 mL/day. Zero is outside the interval, so the diuretic does change urine production.",
+"work": [
+"31.19<\\mu_{\\mathrm{diuretic}}-\\mu_{\\mathrm{placebo}}<408.81\\ \\text{mL/day}"
+]
+}
+]
+}
 },
 {
 "title": "Confidence interval for one proportion",
@@ -2181,7 +3886,57 @@ const PLAIN_STUDY={
 "do": "Check whether the null value, like one half, lies inside the interval.",
 "why": "This is because that decides the matching two-sided test."
 }
+],
+"example": {
+"source": "Session 17 lecture example (pages 14 and 15)",
+"prompt": "A survey asked college students “Did you take a non-prescribed stimulant in the last year?” Of the 500 students who responded, 177 said yes. Find the 95% confidence interval for the population proportion and decide whether it differs from 0.5.",
+"table": {
+"headers": [
+"Said yes \\(m\\)",
+"Responded \\(n\\)",
+"Null value \\(p_0\\)"
+],
+"rows": [
+[
+"177",
+"500",
+"0.5"
 ]
+]
+},
+"steps": [
+{
+"say": "177 of the 500 students said yes. So the sample proportion is 0.354.",
+"work": [
+"\\hat p=\\frac{m}{n}=\\frac{177}{500}=0.354"
+]
+},
+{
+"say": "The proportion times one minus the proportion is divided by 500. The square root gives a standard error of about 0.0214.",
+"work": [
+"s_{\\hat p}=\\sqrt{\\frac{\\hat p(1-\\hat p)}{n}}",
+"s_{\\hat p}=\\sqrt{\\frac{0.354(1-0.354)}{500}}=\\sqrt{\\frac{0.228684}{500}}=\\sqrt{0.000457368}=0.02138616"
+]
+},
+{
+"say": "The infinity row and the 0.05 column of the t table give 1.96. So the interval runs from about 0.312 to 0.396.",
+"work": [
+"z_c=t_{0.05}(\\infty)=1.9600",
+"\\hat p\\pm z_c\\,s_{\\hat p}",
+"M=1.96(0.02138616)=0.04191688",
+"L=0.354-0.04191688=0.3120831",
+"U=0.354+0.04191688=0.3959169"
+]
+},
+{
+"say": "One half lies above the whole interval. So the proportion of students who took a stimulant differs from 0.5 at the 0.05 level, and it is lower.",
+"work": [
+"0.3121<p<0.3959",
+"p_0=0.5\\notin[0.3121,\\ 0.3959]"
+]
+}
+]
+}
 },
 {
 "title": "Confidence interval for a difference of two proportions",
@@ -2211,7 +3966,68 @@ const PLAIN_STUDY={
 "do": "Say the interval in percentage points.",
 "why": "This is because a difference of proportions is measured in points."
 }
+],
+"example": {
+"source": "Session 17 lecture example (page 12)",
+"prompt": "A trial records thrombosis with placebo and with aspirin. Find the 95% confidence interval for the difference in the probability of thrombosis, placebo minus aspirin, using the pooled standard error.",
+"table": {
+"headers": [
+"Group",
+"Thrombosis \\(m\\)",
+"Total \\(n\\)"
+],
+"rows": [
+[
+"Placebo (1)",
+"18",
+"25"
+],
+[
+"Aspirin (2)",
+"6",
+"19"
 ]
+]
+},
+"steps": [
+{
+"say": "Group 1 is placebo and group 2 is aspirin. The difference is placebo minus aspirin, so a positive value means more thrombosis with placebo.",
+"work": [
+"\\hat p_1=\\frac{18}{25}=0.72,\\quad \\hat p_2=\\frac{6}{19}=0.3157895",
+"\\hat p_1-\\hat p_2=0.72-0.3157895=0.4042105"
+]
+},
+{
+"say": "The counts and the sizes are added first to get the pooled proportion. That pooled value goes into the standard error, which is about 0.1515.",
+"work": [
+"s_{\\hat p_1-\\hat p_2}=\\sqrt{\\hat p(1-\\hat p)\\left(\\frac1{n_1}+\\frac1{n_2}\\right)},\\quad \\hat p=\\frac{m_1+m_2}{n_1+n_2}",
+"\\hat p=\\frac{18+6}{25+19}=\\frac{24}{44}=0.5454545",
+"s_{\\hat p_1-\\hat p_2}=\\sqrt{0.5454545(1-0.5454545)\\left(\\frac1{25}+\\frac1{19}\\right)}=\\sqrt{0.2479339(0.09263158)}=0.1515470"
+]
+},
+{
+"say": "Proportions use the Normal distribution, so the cutoff comes from the infinity row of the t table in the 0.05 column.",
+"work": [
+"z_c=t_{0.05}(\\infty)=1.9600"
+]
+},
+{
+"say": "The margin is about 0.297. So the interval runs from about 0.107 to 0.701.",
+"work": [
+"(\\hat p_1-\\hat p_2)\\pm z_c\\, s_{\\hat p_1-\\hat p_2}",
+"M=1.96(0.1515470)=0.2970322",
+"L=0.4042105-0.2970322=0.1071783",
+"U=0.4042105+0.2970322=0.7012427"
+]
+},
+{
+"say": "With 95% confidence, aspirin lowers the chance of thrombosis by about 10.7 to 70.1 percentage points compared with placebo. Zero is outside, so the two probabilities differ.",
+"work": [
+"10.72<100(p_1-p_2)<70.12\\ \\text{percentage points}"
+]
+}
+]
+}
 },
 {
 "title": "Decide significance from intervals only",
@@ -2237,7 +4053,72 @@ const PLAIN_STUDY={
 "do": "Say how you reached each conclusion.",
 "why": "This is because the question asks you to explain the reasoning."
 }
+],
+"example": {
+"source": "Homework 3 Problem 1",
+"prompt": "Six-month survival after heart-transplant surgery is compared between two ways of transporting the heart. Find the 95% and 99% confidence intervals for the difference in the proportion alive at 6 months. Using only these intervals, is the difference significant with \\(P<0.05\\)? With \\(P<0.01\\)? State how you reached each conclusion.",
+"table": {
+"headers": [
+"Group",
+"Alive at 6 months",
+"Not alive at 6 months",
+"Total"
+],
+"rows": [
+[
+"Warm and beating (1)",
+"82",
+"11",
+"93"
+],
+[
+"Stopped and on ice (2)",
+"72",
+"26",
+"98"
 ]
+]
+},
+"steps": [
+{
+"say": "The 95% interval uses the pooled standard error and the cutoff 1.96. It runs from about 0.035 to 0.259, so it does not contain zero.",
+"work": [
+"\\hat p_1=\\frac{82}{93}=0.8817204,\\quad \\hat p_2=\\frac{72}{98}=0.7346939,\\quad \\hat p_1-\\hat p_2=0.1470266",
+"\\hat p=\\frac{82+72}{93+98}=\\frac{154}{191}=0.8062827",
+"s_{\\hat p_1-\\hat p_2}=\\sqrt{0.8062827(1-0.8062827)\\left(\\frac1{93}+\\frac1{98}\\right)}=0.05721238",
+"0.1470266\\pm1.96(0.05721238)=0.1470266\\pm0.1121363",
+"0.03489<p_1-p_2<0.2592"
+]
+},
+{
+"say": "Zero is outside the 95% interval, so a difference of zero is not a believable value. The difference in survival is significant with P less than 0.05.",
+"work": [
+"0\\notin[0.03489,\\ 0.2592]\\ \\Rightarrow\\ P<0.05"
+]
+},
+{
+"say": "The 99% interval uses 2.5758 from the infinity row and the 0.01 column. Its lower end sits just below zero, so the difference is not significant with P less than 0.01.",
+"work": [
+"z_c=t_{0.01}(\\infty)=2.5758",
+"0.1470266\\pm2.5758(0.05721238)=0.1470266\\pm0.1473677",
+"-0.0003411<p_1-p_2<0.2944",
+"0\\in[-0.0003411,\\ 0.2944]\\ \\Rightarrow\\ P>0.01"
+]
+},
+{
+"say": "This is a difference of two proportions, so the null value is zero and not one half. A single proportion would be checked against its own reference value instead.",
+"work": [
+"H_0:p_1-p_2=0"
+]
+},
+{
+"say": "The 95% interval leaves out zero, so P is below 0.05. The wider 99% interval just includes zero, so P is not below 0.01. The higher survival with warm transport is significant at the 0.05 level only.",
+"work": [
+"0.01<P<0.05"
+]
+}
+]
+}
 }
 ]
 },
@@ -2446,7 +4327,130 @@ const PLAIN_STUDY={
 "why": "This is because a confidence interval is the estimate plus or minus the margin.",
 "tex": "b\\pm t_\\alpha(n-2)\\,s_b,\\quad a\\pm t_\\alpha(n-2)\\,s_a"
 }
+],
+"example": {
+"source": "Session 18 lecture example (pages 15 and 19 to 23)",
+"prompt": "A sample of 10 Martians gives the heights and weights below (Table 8-1), with \\(\\sum x_i=369\\), \\(\\sum y_i=103.8\\), \\(\\sum x_i^2=13{,}841\\), \\(\\sum x_iy_i=3930.1\\) and \\(\\sum y_i^2=1129.24\\). By hand, find the regression line and the standard errors of \\(a\\) and \\(b\\), test whether weight is related to height, and give 95% intervals for the slope and intercept. The true line of means for all Martians is \\(\\mu_{y|x}=-8+0.5x\\).",
+"table": {
+"headers": [
+"Height \\(x\\) (cm)",
+"Weight \\(y\\) (g)"
+],
+"rows": [
+[
+"31",
+"7.8"
+],
+[
+"32",
+"8.3"
+],
+[
+"33",
+"7.6"
+],
+[
+"34",
+"9.1"
+],
+[
+"35",
+"9.6"
+],
+[
+"35",
+"9.8"
+],
+[
+"40",
+"11.8"
+],
+[
+"41",
+"12.1"
+],
+[
+"42",
+"14.7"
+],
+[
+"46",
+"13.0"
 ]
+]
+},
+"steps": [
+{
+"say": "Height is x in cm and weight is y in g. So the slope will be in g per cm and the intercept in g.",
+"work": [
+"x=\\text{height (cm)},\\quad y=\\text{weight (g)},\\quad n=10"
+]
+},
+{
+"say": "The numerator is 998.8 and the denominator is 2249. So mean weight rises about 0.444 g for each extra cm of height.",
+"work": [
+"b=\\frac{n\\sum x_iy_i-\\sum x_i\\sum y_i}{n\\sum x_i^2-\\left(\\sum x_i\\right)^2}",
+"b=\\frac{10(3930.1)-369(103.8)}{10(13841)-369^2}=\\frac{39301-38302.2}{138410-136161}=\\frac{998.8}{2249}=0.4441085"
+]
+},
+{
+"say": "The unrounded slope is carried into this step. The intercept comes out near minus 6.01 g.",
+"work": [
+"a=\\bar y-b\\,\\bar x",
+"\\bar x=\\frac{369}{10}=36.9,\\quad \\bar y=\\frac{103.8}{10}=10.38",
+"a=10.38-0.4441085(36.9)=-6.007603"
+]
+},
+{
+"say": "This is the least-squares line for the ten Martians, with weight in g and height in cm.",
+"work": [
+"\\hat y=a+b\\,x",
+"\\hat y=-6.008+0.4441\\,x"
+]
+},
+{
+"say": "The two variances come from the column sums. Rounding the SDs to 5.0 and 2.4 first would give about 1.02 g, because the shortcut subtracts two close numbers.",
+"work": [
+"s_{y|x}=\\sqrt{\\frac{n-1}{n-2}\\left(s_y^2-b^2s_x^2\\right)}",
+"s_x^2=\\frac{13841-369^2/10}{10-1}=\\frac{224.9}{9}=24.98889,\\quad s_x=4.998889",
+"s_y^2=\\frac{1129.24-103.8^2/10}{10-1}=\\frac{51.796}{9}=5.755111",
+"s_{y|x}=\\sqrt{\\frac{9}{8}\\left(5.755111-0.4441085^2(24.98889)\\right)}=\\sqrt{\\frac{9}{8}(0.826494)}=0.9642642"
+]
+},
+{
+"say": "The slope is known to about 0.064 g per cm. The intercept is far less precise because a height of zero is far from the mean height of 36.9 cm.",
+"work": [
+"s_a=s_{y|x}\\sqrt{\\frac1n+\\frac{\\bar x^2}{(n-1)s_x^2}},\\quad s_b=\\frac{1}{\\sqrt{n-1}}\\frac{s_{y|x}}{s_x}",
+"s_b=\\frac{1}{\\sqrt{9}}\\cdot\\frac{0.9642642}{4.998889}=0.06429857",
+"s_a=0.9642642\\sqrt{\\frac1{10}+\\frac{36.9^2}{9(24.98889)}}=0.9642642\\sqrt{6.154291}=2.392132"
+]
+},
+{
+"say": "The null hypothesis says mean Martian weight does not change with height. The slope is about 6.9 of its standard errors away from zero.",
+"work": [
+"H_0:\\beta=0,\\quad H_A:\\beta\\ne0",
+"t=\\frac{b}{s_b}=\\frac{0.4441085}{0.06429857}=6.906973,\\quad \\nu=10-2=8"
+]
+},
+{
+"say": "The statistic is larger than even the 0.001 cutoff in row 8. So we reject the null hypothesis, and taller Martians are heavier on average with P less than 0.001.",
+"work": [
+"t_{0.05}(8)=2.306,\\quad t_{0.001}(8)=5.041",
+"6.907>5.041\\ \\Rightarrow\\ P<0.001"
+]
+},
+{
+"say": "The slope interval leaves out zero, which agrees with the test. Both intervals contain the true population values of 0.5 g per cm and minus 8 g.",
+"work": [
+"b\\pm t_\\alpha(n-2)\\,s_b,\\quad a\\pm t_\\alpha(n-2)\\,s_a",
+"0.4441085\\pm2.306(0.06429857)=0.4441085\\pm0.1482725",
+"0.2958<\\beta<0.5924\\ \\text{g/cm}",
+"-6.007603\\pm2.306(2.392132)=-6.007603\\pm5.516255",
+"-11.52<\\alpha_{LOM}<-0.4913\\ \\text{g}"
+]
+}
+]
+}
 },
 {
 "title": "Interval for the mean versus one observation at a given x",
@@ -2477,7 +4481,49 @@ const PLAIN_STUDY={
 "do": "Say which interval is wider and why.",
 "why": "This is because the comparison is usually part of the question."
 }
+],
+"example": {
+"source": "Session 18 lecture example (pages 24 and 25)",
+"prompt": "Use the Martian line \\(\\hat y=-6.0+0.44x\\) with \\(s_{y|x}=1.02\\) g, \\(n=10\\), \\(\\bar x=36.9\\) cm and \\(s_x=5.0\\) cm. Find the 95% interval for the mean weight of Martians 40 cm tall, and the 95% interval for the weight of one Martian 40 cm tall.",
+"steps": [
+{
+"say": "The line predicts 11.6 g at 40 cm. Both intervals are centered on this value.",
+"work": [
+"\\hat y=-6.0+0.44(40)=11.6"
 ]
+},
+{
+"say": "40 cm is only 3.1 cm from the mean height, so the distance term is small. The height of the line at 40 cm is uncertain by about 0.385 g.",
+"work": [
+"s_{\\hat y}=s_{y|x}\\sqrt{\\frac1n+\\frac{(x-\\bar x)^2}{(n-1)s_x^2}}",
+"s_{\\hat y}=1.02\\sqrt{\\frac1{10}+\\frac{(40-36.9)^2}{9(5.0^2)}}=1.02\\sqrt{0.1427111}=0.3853267"
+]
+},
+{
+"say": "The extra 1 adds the scatter of one Martian around the line. So the standard error grows to about 1.09 g.",
+"work": [
+"s_{Y_{new}}=s_{y|x}\\sqrt{1+\\frac1n+\\frac{(x-\\bar x)^2}{(n-1)s_x^2}}",
+"s_{Y_{new}}=1.02\\sqrt{1+0.1427111}=1.02\\sqrt{1.1427111}=1.090356"
+]
+},
+{
+"say": "Row 8 of the t table gives 2.306 for both intervals. Only the standard error changes between them.",
+"work": [
+"\\nu=10-2=8,\\quad t_{0.05}(8)=2.306",
+"11.6\\pm2.306(0.3853267)=11.6\\pm0.8885633",
+"10.71<\\mu_{y|40}<12.49\\ \\text{g (mean)}",
+"11.6\\pm2.306(1.090356)=11.6\\pm2.514361",
+"9.086<y<14.11\\ \\text{g (one Martian)}"
+]
+},
+{
+"say": "The interval for one Martian is about 2.8 times as wide. This is because single Martians scatter about 1 g around the mean even if the line were known exactly.",
+"work": [
+"\\frac{s_{Y_{new}}}{s_{\\hat y}}=\\frac{1.090356}{0.3853267}=2.830"
+]
+}
+]
+}
 },
 {
 "title": "Correlation and its test",
@@ -2499,7 +4545,35 @@ const PLAIN_STUDY={
 "table": "Use the class t table (two-tailed). Read the row for the degrees of freedom and the column for alpha, like 0.05. If that row is not printed, use the printed rows on either side.",
 "tablePath": "sources/tables/t_table.pdf"
 }
+],
+"example": {
+"source": "Session 18 lecture example (pages 39 to 41)",
+"prompt": "For the 10 Martians, Table 8-3 gives \\(\\sum(x-\\bar x)(y-\\bar y)=99.9\\), \\(\\sum(x-\\bar x)^2=224.9\\) and \\(\\sum(y-\\bar y)^2=51.8\\). Find the Pearson correlation between height and weight and test whether it differs from zero.",
+"steps": [
+{
+"say": "The deviation products total 99.9 g cm. The units cancel in the ratio, so r has no units.",
+"work": [
+"r=\\frac{\\sum(x-\\bar x)(y-\\bar y)}{\\sqrt{\\sum(x-\\bar x)^2\\sum(y-\\bar y)^2}}",
+"r=\\frac{99.9}{\\sqrt{224.9(51.8)}}=\\frac{99.9}{\\sqrt{11649.82}}=\\frac{99.9}{107.9343}=0.9255628"
 ]
+},
+{
+"say": "The null hypothesis is that the population correlation is zero. The statistic is about 6.91 with 8 degrees of freedom.",
+"work": [
+"t=r\\sqrt{\\frac{n-2}{1-r^2}},\\quad \\nu=n-2",
+"t=0.9255628\\sqrt{\\frac{10-2}{1-0.9255628^2}}=0.9255628\\sqrt{\\frac{8}{0.1433335}}=0.9255628\\sqrt{55.81387}=6.914757,\\quad \\nu=8"
+]
+},
+{
+"say": "The statistic passes even the 0.001 cutoff, so the correlation is not zero. It is strong and positive, so taller Martians tend to be heavier, and about 86% of the variation in weight goes with height.",
+"work": [
+"t_{0.05}(8)=2.306,\\quad t_{0.001}(8)=5.041",
+"6.915>5.041\\ \\Rightarrow\\ P<0.001",
+"r^2=0.9255628^2=0.8566665"
+]
+}
+]
+}
 },
 {
 "title": "Compare the slopes of two groups",
@@ -2530,7 +4604,69 @@ const PLAIN_STUDY={
 "table": "Use the class t table (two-tailed). Read the row for the degrees of freedom and the column for alpha, like 0.05. If that row is not printed, use the printed rows on either side.",
 "tablePath": "sources/tables/t_table.pdf"
 }
+],
+"example": {
+"source": "Session 18 lecture example (pages 26, 29 and 36)",
+"prompt": "Separate lm() fits of weight (lb) on height (in) for 18 male and 18 female Plutonians give the slopes and standard errors below. Test whether the slopes of the male and female lines of means differ at the 0.05 level.",
+"table": {
+"headers": [
+"Group",
+"\\(n\\)",
+"Slope \\(b\\) (lb/in)",
+"\\(s_b\\) (lb/in)"
+],
+"rows": [
+[
+"Males (M)",
+"18",
+"3.2833",
+"0.2041"
+],
+[
+"Females (F)",
+"18",
+"2.029",
+"0.4708"
 ]
+]
+},
+"steps": [
+{
+"say": "Each line has 18 points, so each slope test has 16 degrees of freedom. Both statistics pass the 0.001 cutoff, so both trends are real and comparing them makes sense.",
+"work": [
+"t_M=\\frac{3.2833}{0.2041}=16.09,\\quad t_F=\\frac{2.029}{0.4708}=4.310",
+"t_{0.05}(16)=2.120,\\quad t_{0.001}(16)=4.015"
+]
+},
+{
+"say": "The null hypothesis says weight rises with height at the same rate in male and female Plutonians.",
+"work": [
+"H_0:\\beta_M=\\beta_F,\\quad H_A:\\beta_M\\ne\\beta_F"
+]
+},
+{
+"say": "Both groups have 18 Plutonians, so the equal sizes formula is used. The two squared standard errors are added before taking the square root.",
+"work": [
+"s_{b_1-b_2}=\\sqrt{s_{b_1}^2+s_{b_2}^2}",
+"s_{b_M-b_F}=\\sqrt{0.2041^2+0.4708^2}=\\sqrt{0.04165681+0.2216526}=\\sqrt{0.2633095}=0.5131369"
+]
+},
+{
+"say": "Males minus females is kept as the order. The slopes differ by about 2.44 standard errors.",
+"work": [
+"t=\\frac{b_M-b_F}{s_{b_M-b_F}}=\\frac{3.2833-2.029}{0.5131369}=\\frac{1.2543}{0.5131369}=2.444377",
+"\\nu=18+18-4=32"
+]
+},
+{
+"say": "The statistic passes the 0.05 cutoff but not the 0.02 cutoff in row 32. So we reject equal slopes, and male weight rises faster with height than female weight.",
+"work": [
+"t_{0.05}(32)=2.037,\\quad t_{0.02}(32)=2.449",
+"2.037<2.444<2.449\\ \\Rightarrow\\ 0.02<P<0.05"
+]
+}
+]
+}
 }
 ]
 },
@@ -2707,7 +4843,99 @@ const PLAIN_STUDY={
 "do": "Plug the given values into the final equation by hand.",
 "why": "This is because the prediction is just arithmetic with the coefficients."
 }
+],
+"example": {
+"source": "Session 19 lecture example (pages 24 and 25)",
+"prompt": "For 20 families, lm(SBPchild ~ SBPmother + SBPfather) prints the summary below (Residual SE 10.67 on 17 df, Multiple R-squared 0.5973, F-statistic 12.61 on 2 and 17 DF, p-value 0.0004388). Write the equation, test the model and each coefficient, and predict the child's SBP when the mother's SBP is 130 mm Hg and the father's is 150 mm Hg.",
+"table": {
+"headers": [
+"Term",
+"Estimate",
+"Std. Error",
+"t value",
+"Pr(>|t|)"
+],
+"rows": [
+[
+"(Intercept)",
+"-15.6892",
+"23.6503",
+"-0.663",
+"0.51598"
+],
+[
+"SBPmother",
+"0.4225",
+"0.1185",
+"3.565",
+"0.00238"
+],
+[
+"SBPfather",
+"0.4150",
+"0.1248",
+"3.325",
+"0.00401"
 ]
+]
+},
+"steps": [
+{
+"say": "Here \\(x_1\\) is the mother's SBP and \\(x_2\\) is the father's SBP, both in mm Hg. The intercept and both slopes come straight from the Estimate column.",
+"work": [
+"\\hat y=b_0+b_1x_1+b_2x_2",
+"\\hat y=-15.6892+0.4225\\,x_1+0.4150\\,x_2"
+]
+},
+{
+"say": "The null hypothesis says neither parent's SBP is related to the child's mean SBP. The alternative says at least one of them is.",
+"work": [
+"H_0:\\beta_1=\\beta_2=0",
+"H_1:\\beta_1\\ne0\\ \\text{and/or}\\ \\beta_2\\ne0"
+]
+},
+{
+"say": "R prints F of 12.61 on 2 and 17 degrees of freedom, and the same value follows from R squared. It passes both table cutoffs, so the model as a whole is significant with P of about 0.0004.",
+"work": [
+"F=\\frac{MS_{mod}}{MS_{res}},\\quad df=k,\\ n-k-1",
+"F=12.61\\ \\text{on}\\ (2,\\ 17),\\quad P=0.0004388",
+"F=\\frac{0.5973/2}{(1-0.5973)/17}=\\frac{0.29865}{0.02368824}=12.61",
+"F_{0.05}(2,17)=3.59,\\quad F_{0.01}(2,17)=6.11"
+]
+},
+{
+"say": "Each null hypothesis says that parent's coefficient is zero. Both t values pass the cutoff of 2.110 in row 17, so the mother and the father coefficients are each significant.",
+"work": [
+"H_0:\\beta_1=0,\\quad t=\\frac{0.4225}{0.1185}=3.565,\\quad \\Pr(>|t|)=0.00238",
+"H_0:\\beta_2=0,\\quad t=\\frac{0.4150}{0.1248}=3.325,\\quad \\Pr(>|t|)=0.00401",
+"t_{0.05}(17)=2.110"
+]
+},
+{
+"say": "Each interval is the estimate plus or minus 2.110 standard errors, which matches confint in R to rounding. Neither interval contains zero, which agrees with the two t tests.",
+"work": [
+"b_j\\pm t_{0.05}(17)\\,s_{b_j}",
+"0.4225\\pm2.110(0.1185)=0.4225\\pm0.2500",
+"0.1725<\\beta_1<0.6725",
+"0.4150\\pm2.110(0.1248)=0.4150\\pm0.2633",
+"0.1517<\\beta_2<0.6783"
+]
+},
+{
+"say": "Both variables are significant, so nothing is dropped. The original equation is the final model.",
+"work": [
+"\\hat y=-15.6892+0.4225\\,x_1+0.4150\\,x_2"
+]
+},
+{
+"say": "The predicted mean SBP for a child with these parents is about 101.5 mm Hg.",
+"work": [
+"\\hat y=-15.6892+0.4225(130)+0.4150(150)",
+"\\hat y=-15.6892+54.925+62.25=101.4858"
+]
+}
+]
+}
 },
 {
 "title": "Probability and odds from a logistic model",
@@ -2731,7 +4959,63 @@ const PLAIN_STUDY={
 "do": "Write the answer as a sentence, like the odds are 3.76 to 1.",
 "why": "This is because the result must be understood without the formula."
 }
+],
+"example": {
+"source": "Session 19 lecture example (pages 35 and 36)",
+"prompt": "For 100 subjects, glm(CHD ~ AGE, family = \"binomial\") gives \\(\\beta_0=-5.30945\\) and \\(\\beta_1=0.11092\\) per year of age. Find the probability and the odds of coronary heart disease (CHD) at age 60.",
+"table": {
+"headers": [
+"Term",
+"Estimate",
+"Std. Error",
+"z value",
+"Pr(>|z|)"
+],
+"rows": [
+[
+"(Intercept)",
+"-5.30945",
+"1.13365",
+"-4.683",
+"2.82e-06"
+],
+[
+"AGE",
+"0.11092",
+"0.02406",
+"4.610",
+"4.02e-06"
 ]
+]
+},
+"steps": [
+{
+"say": "Age 60 goes in for x. The result is the log of the odds of CHD at that age.",
+"work": [
+"\\beta_0+\\beta_1x=-5.30945+0.11092(60)=-5.30945+6.6552=1.34575"
+]
+},
+{
+"say": "The logistic function turns 1.34575 into a probability of about 0.793.",
+"work": [
+"p=\\frac{1}{1+e^{-(\\beta_0+\\beta_1x)}}",
+"p=\\frac{1}{1+e^{-1.34575}}=\\frac{1}{1+0.2603444}=\\frac{1}{1.2603444}=0.7934339"
+]
+},
+{
+"say": "Both routes give odds of about 3.84. Rounding p to 0.79 first gives 0.79 over 0.21, which is 3.76.",
+"work": [
+"\\text{odds}=\\frac{p}{1-p}=e^{\\beta_0}e^{\\beta_1x}",
+"\\text{odds}=\\frac{0.7934339}{1-0.7934339}=\\frac{0.7934339}{0.2065661}=3.841066",
+"e^{-5.30945}e^{6.6552}=0.004944646(776.8133)=3.841066"
+]
+},
+{
+"say": "A 60-year-old has about a 79% chance of CHD, so the odds of CHD are about 3.84 to 1. With the probability rounded to 0.79, the odds are 3.76 to 1.",
+"work": []
+}
+]
+}
 }
 ]
 },
@@ -2861,7 +5145,142 @@ const PLAIN_STUDY={
 "do": "If R is asked for, match the t, df, P value, interval and mean difference lines to your hand work.",
 "why": "This is because the question asks you to mark each line of the output."
 }
+],
+"example": {
+"source": "Session 20 lecture example (page 10), before and after values from Session 24 page 26",
+"prompt": "Eleven people have maximum percent platelet aggregation measured before and after smoking one cigarette. Assume the differences are Normal. Does smoking change platelet aggregation at the two-sided 0.05 level?",
+"table": {
+"headers": [
+"Person",
+"Before (%)",
+"After (%)"
+],
+"rows": [
+[
+"1",
+"25",
+"27"
+],
+[
+"2",
+"25",
+"29"
+],
+[
+"3",
+"27",
+"37"
+],
+[
+"4",
+"44",
+"56"
+],
+[
+"5",
+"30",
+"46"
+],
+[
+"6",
+"67",
+"82"
+],
+[
+"7",
+"53",
+"57"
+],
+[
+"8",
+"53",
+"80"
+],
+[
+"9",
+"52",
+"61"
+],
+[
+"10",
+"60",
+"59"
+],
+[
+"11",
+"28",
+"43"
 ]
+]
+},
+"steps": [
+{
+"say": "This is a paired t test because each of the 11 people was measured twice, once before and once after the cigarette.",
+"work": [
+"n=11"
+]
+},
+{
+"say": "The null hypothesis is that smoking one cigarette causes no change in mean platelet aggregation, so the true mean difference is zero.",
+"work": [
+"H_0:\\delta=0",
+"H_A:\\delta\\ne0"
+]
+},
+{
+"say": "Each person gives one difference, after minus before. Only person 10 went down.",
+"work": [
+"d_i=x_{\\mathrm{after},i}-x_{\\mathrm{before},i}",
+"d_1=27-25=2,\\quad d_2=29-25=4,\\quad d_3=37-27=10,\\quad d_4=56-44=12",
+"d_5=46-30=16,\\quad d_6=82-67=15,\\quad d_7=57-53=4,\\quad d_8=80-53=27",
+"d_9=61-52=9,\\quad d_{10}=59-60=-1,\\quad d_{11}=43-28=15"
+]
+},
+{
+"say": "The differences add to 113, so the mean change is about 10.27 percentage points. The squared deviations add to 636.18, which gives an SD of 7.976.",
+"work": [
+"\\bar d=\\frac1n\\sum d_i,\\quad s_d=\\sqrt{\\frac{\\sum(d_i-\\bar d)^2}{n-1}}",
+"\\bar d=\\frac{2+4+10+12+16+15+4+27+9-1+15}{11}=\\frac{113}{11}=10.2727",
+"\\sum(d_i-\\bar d)^2=636.1818",
+"s_d=\\sqrt{\\frac{636.1818}{11-1}}=\\sqrt{63.6182}=7.9761"
+]
+},
+{
+"say": "The standard error is the SD shrunk by the square root of 11, because a mean of 11 differences varies less than one difference.",
+"work": [
+"s_{\\bar d}=\\frac{s_d}{\\sqrt n}",
+"s_{\\bar d}=\\frac{7.9761}{\\sqrt{11}}=\\frac{7.9761}{3.3166}=2.4049"
+]
+},
+{
+"say": "The mean change is about 4.27 standard errors away from zero. The degrees of freedom are one less than the number of people.",
+"work": [
+"t=\\frac{\\bar d}{s_{\\bar d}},\\quad \\nu=n-1",
+"t=\\frac{10.2727}{2.4049}=4.2716",
+"\\nu=11-1=10"
+]
+},
+{
+"say": "Because 4.2716 is larger than 2.228, reject the null hypothesis. It also passes the 0.002 cutoff of 4.144 but not the 0.001 cutoff, so smoking increases platelet aggregation with P below 0.002.",
+"work": [
+"t_{0.05}(10)=2.228\\ \\ (\\text{row }10,\\ \\text{column }0.05)",
+"|t|=4.2716>2.228",
+"t_{0.002}(10)=4.144<4.2716<t_{0.001}(10)=4.587",
+"0.001<P<0.002"
+]
+},
+{
+"say": "The R lines repeat the hand work. The t of 4.2716 and df of 10 match, the P value of 0.001633 sits inside the bracket, and the interval misses 0, which agrees with the test rejecting.",
+"work": [
+"\\texttt{t.test(after, before, paired = TRUE)}",
+"t=4.2716,\\quad df=10,\\quad p\\text{-value}=0.001633",
+"\\text{95\\% CI from R}\\ \\ 4.914310\\ \\ 15.631145",
+"\\text{by hand}\\ \\ 10.2727-2.228(2.4049)=4.9146,\\quad 10.2727+2.228(2.4049)=15.6308",
+"\\text{mean difference}\\ \\ 10.2727"
+]
+}
+]
+}
 }
 ]
 },
@@ -3000,7 +5419,104 @@ const PLAIN_STUDY={
 "table": "Use the class F table (upper tail). Numerator degrees of freedom run across the top and denominator degrees of freedom run down the side. Lightface numbers are for 0.05 and boldface numbers are for 0.01.",
 "tablePath": "sources/tables/F_table.pdf"
 }
+],
+"example": {
+"source": "Session 21 lecture example (pages 9 to 11)",
+"prompt": "FEV1 (L) is measured in the same 4 people at baseline, 1 hour after inhaling endotoxin, and 2 hours after endotoxin plus salbutamol. Does mean FEV1 differ across the 3 conditions at the 0.05 level?",
+"table": {
+"headers": [
+"Subject",
+"Baseline",
+"Endotoxin",
+"Endotoxin + salbutamol"
+],
+"rows": [
+[
+"1",
+"3.7",
+"3.4",
+"4.0"
+],
+[
+"2",
+"4.0",
+"3.7",
+"4.4"
+],
+[
+"3",
+"3.0",
+"2.8",
+"3.2"
+],
+[
+"4",
+"3.2",
+"2.9",
+"3.4"
 ]
+]
+},
+"steps": [
+{
+"say": "This is a repeated measures ANOVA because the same 4 people are measured under all 3 conditions. The null hypothesis is that mean FEV1 does not differ across the conditions.",
+"work": [
+"H_0:\\mu_{base}=\\mu_{endo}=\\mu_{endo+salb}",
+"m=3,\\quad n=4"
+]
+},
+{
+"say": "Each row gives a subject mean and each column gives a treatment mean. The grand mean is the mean of all 12 values.",
+"work": [
+"\\bar S_1=\\frac{3.7+3.4+4.0}{3}=3.7000,\\quad \\bar S_2=\\frac{4.0+3.7+4.4}{3}=4.0333",
+"\\bar S_3=\\frac{3.0+2.8+3.2}{3}=3.0000,\\quad \\bar S_4=\\frac{3.2+2.9+3.4}{3}=3.1667",
+"\\bar T_1=\\frac{3.7+4.0+3.0+3.2}{4}=3.475,\\quad \\bar T_2=\\frac{3.4+3.7+2.8+2.9}{4}=3.200",
+"\\bar T_3=\\frac{4.0+4.4+3.2+3.4}{4}=3.750",
+"\\bar X=\\frac{41.7}{12}=3.475"
+]
+},
+{
+"say": "Each person is compared only with their own mean, so differences in lung size between people drop out. The four pieces add to 0.6333.",
+"work": [
+"SS_1=(3.7-3.7)^2+(3.4-3.7)^2+(4.0-3.7)^2=0.1800",
+"SS_2=(4.0-4.0333)^2+(3.7-4.0333)^2+(4.4-4.0333)^2=0.2467",
+"SS_3=(3.0-3.0)^2+(2.8-3.0)^2+(3.2-3.0)^2=0.0800",
+"SS_4=(3.2-3.1667)^2+(2.9-3.1667)^2+(3.4-3.1667)^2=0.1267",
+"SS_{wit\\,subjs}=0.1800+0.2467+0.0800+0.1267=0.6333"
+]
+},
+{
+"say": "The treatment means sit 0, 0.275 and 0.275 L from the grand mean. Each mean uses 4 people, so the squared distances are multiplied by 4.",
+"work": [
+"SS_{treat}=n\\sum_t(\\bar T_t-\\bar X)^2",
+"SS_{treat}=4\\left[(3.475-3.475)^2+(3.200-3.475)^2+(3.750-3.475)^2\\right]=0.6050"
+]
+},
+{
+"say": "Most of the within-subject variation is explained by the treatments, so only a small residual is left.",
+"work": [
+"SS_{res}=SS_{wit\\,subjs}-SS_{treat}",
+"SS_{res}=0.63333-0.60500=0.02833"
+]
+},
+{
+"say": "The treatment mean square is about 64 times the residual mean square.",
+"work": [
+"DF_{treat}=3-1=2,\\quad DF_{res}=(4-1)(3-1)=6",
+"MS_{treat}=\\frac{0.6050}{2}=0.3025,\\quad MS_{res}=\\frac{0.02833}{6}=0.004722",
+"F=\\frac{0.3025}{0.004722}=64.06"
+]
+},
+{
+"say": "F is far above both cutoffs, so reject the null hypothesis. Mean FEV1 differs across baseline, endotoxin, and endotoxin plus salbutamol, with P below 0.01.",
+"work": [
+"F_{0.05}(2,6)=5.14,\\quad F_{0.01}(2,6)=10.92\\ \\ (\\text{column }2,\\ \\text{row }6)",
+"F=64.06>10.92",
+"P<0.01"
+]
+}
+]
+}
 },
 {
 "title": "Holm pairwise t tests after repeated measures ANOVA",
@@ -3027,7 +5543,64 @@ const PLAIN_STUDY={
 "do": "Write one combined conclusion with P less than 0.05.",
 "why": "This is because the statement covers every pair."
 }
+],
+"example": {
+"source": "Session 21 lecture example (pages 11 and 12)",
+"prompt": "The FEV1 repeated measures ANOVA rejected. Using rounded values, treatment means 3.48 L (baseline), 3.20 L (endotoxin) and 3.75 L (endotoxin + salbutamol), \\(MS_{res}=0.0047\\) and \\(n=4\\), find which conditions differ with an overall 0.05 level.",
+"table": {
+"headers": [
+"Condition",
+"Treatment mean (L)"
+],
+"rows": [
+[
+"Baseline",
+"3.48"
+],
+[
+"Endotoxin",
+"3.20"
+],
+[
+"Endotoxin + salbutamol",
+"3.75"
 ]
+]
+},
+"steps": [
+{
+"say": "All three pairs share one standard error because every treatment mean uses the same 4 people. Endotoxin against salbutamol gives the biggest t.",
+"work": [
+"t=\\frac{\\bar T_i-\\bar T_j}{\\sqrt{2MS_{res}/n}}",
+"\\sqrt{\\frac{2(0.0047)}{4}}=0.048477",
+"t_{\\text{base, endo}}=\\frac{3.48-3.20}{0.048477}=5.776",
+"t_{\\text{endo, salb}}=\\frac{3.20-3.75}{0.048477}=-11.346",
+"t_{\\text{base, salb}}=\\frac{3.48-3.75}{0.048477}=-5.570"
+]
+},
+{
+"say": "The table row is 6 because the shared error came from the residual mean square.",
+"work": [
+"\\nu=(n-1)(m-1)=(4-1)(3-1)=6"
+]
+},
+{
+"say": "The largest t is tested at the strictest level. The levels 0.0167 and 0.025 are not printed, so use the stricter printed columns 0.01 and 0.02. Every pair passes, so no stop is needed.",
+"work": [
+"\\alpha_1=\\frac{0.05}{3}=0.0167,\\quad \\alpha_2=\\frac{0.05}{2}=0.025,\\quad \\alpha_3=\\frac{0.05}{1}=0.05",
+"|t|=11.346>t_{0.01}(6)=3.707>t_{0.0167}(6)\\ \\Rightarrow\\ \\text{endo and salb differ}",
+"|t|=5.776>t_{0.02}(6)=3.143>t_{0.025}(6)\\ \\Rightarrow\\ \\text{base and endo differ}",
+"|t|=5.570>t_{0.05}(6)=2.447\\ \\Rightarrow\\ \\text{base and salb differ}"
+]
+},
+{
+"say": "All three conditions differ from each other with P below 0.05. FEV1 falls after endotoxin, and after salbutamol it rises above both the endotoxin level and baseline.",
+"work": [
+"P<0.05"
+]
+}
+]
+}
 },
 {
 "title": "McNemar's test",
@@ -3057,7 +5630,66 @@ const PLAIN_STUDY={
 "table": "Use the class chi-square table (upper tail). Read the row for the degrees of freedom and the column for alpha. For 1 degree of freedom at 0.05 the printed value is 3.841.",
 "tablePath": "sources/tables/Chi_Squared_Table2.pdf"
 }
+],
+"example": {
+"source": "Session 21 lecture example (page 17)",
+"prompt": "Twenty people, none of whom has hypertension by the gold standard, are judged by an automated BP machine and by an experienced person. Do the two methods differ in specificity at the 0.05 level?",
+"table": {
+"headers": [
+"BP machine by person",
+"Person positive",
+"Person negative"
+],
+"rows": [
+[
+"Machine positive",
+"3",
+"7"
+],
+[
+"Machine negative",
+"1",
+"9"
 ]
+]
+},
+"steps": [
+{
+"say": "The same 20 people were judged both ways. Only the 7 called positive by the machine alone and the 1 called positive by the person alone disagree.",
+"work": [
+"a=3,\\quad b=7,\\quad c=1,\\quad d=9"
+]
+},
+{
+"say": "The null hypothesis is that machine positive with person negative is as likely as the reverse, so the two methods have the same specificity.",
+"work": [
+"H_0:P(\\text{machine}+,\\ \\text{person}-)=P(\\text{machine}-,\\ \\text{person}+)"
+]
+},
+{
+"say": "Eight people changed, so 4 are expected in each direction if the methods agree.",
+"work": [
+"E=\\frac{b+c}{2}=\\frac{7+1}{2}=4"
+]
+},
+{
+"say": "Each changing cell is 3 away from 4. The Yates correction takes off one half before squaring.",
+"work": [
+"\\chi^2=\\frac{(|b-E|-\\frac12)^2}{E}+\\frac{(|c-E|-\\frac12)^2}{E}",
+"\\chi^2=\\frac{(|7-4|-\\frac12)^2}{4}+\\frac{(|1-4|-\\frac12)^2}{4}=\\frac{6.25}{4}+\\frac{6.25}{4}=3.125",
+"\\nu=1"
+]
+},
+{
+"say": "Because 3.125 is below 3.841, do not reject the null hypothesis. The machine and the person do not differ significantly in specificity, even though the machine made 7 false calls and the person 1.",
+"work": [
+"\\chi^2_{0.05}(1)=3.841\\ \\ (\\text{row }1,\\ \\text{column }\\chi^2_{.050})",
+"\\chi^2=3.125<3.841",
+"\\chi^2_{0.10}(1)=2.706<3.125\\ \\Rightarrow\\ 0.05<P<0.10"
+]
+}
+]
+}
 }
 ]
 },
@@ -3237,7 +5869,51 @@ const PLAIN_STUDY={
 "do": "Report each point's cluster label and the new centroids.",
 "why": "This is because the question asks for both."
 }
+],
+"example": {
+"source": "Session 22 lecture example (pages 17 to 19)",
+"prompt": "Ten ages are 20, 21, 22, 28, 35, 40, 41, 42, 43 and 44. Run one iteration of k-means with \\(k=2\\) and starting centroids \\(c_1=21\\) and \\(c_2=30\\). Give each age its cluster label and find the new centroids.",
+"steps": [
+{
+"say": "Start from the two given centroids, 21 and 30 years.",
+"work": [
+"c_1=21,\\quad c_2=30"
 ]
+},
+{
+"say": "With one feature the Euclidean distance is just the size of the difference, so each age gets two distances.",
+"work": [
+"d(q,r)=\\sqrt{\\sum_i (q_i-r_i)^2}=|q-r|\\ \\text{for one feature}",
+"d(20,21)=|20-21|=1,\\quad d(20,30)=|20-30|=10,\\qquad d(21,21)=|21-21|=0,\\quad d(21,30)=|21-30|=9",
+"d(22,21)=|22-21|=1,\\quad d(22,30)=|22-30|=8,\\qquad d(28,21)=|28-21|=7,\\quad d(28,30)=|28-30|=2",
+"d(35,21)=|35-21|=14,\\quad d(35,30)=|35-30|=5,\\qquad d(40,21)=|40-21|=19,\\quad d(40,30)=|40-30|=10",
+"d(41,21)=|41-21|=20,\\quad d(41,30)=|41-30|=11,\\qquad d(42,21)=|42-21|=21,\\quad d(42,30)=|42-30|=12",
+"d(43,21)=|43-21|=22,\\quad d(43,30)=|43-30|=13,\\qquad d(44,21)=|44-21|=23,\\quad d(44,30)=|44-30|=14"
+]
+},
+{
+"say": "Ages 20, 21 and 22 are closer to 21, so they join cluster 1. Age 28 is 2 away from 30 but 7 away from 21, so it joins cluster 2 with every older age.",
+"work": [
+"y=(1,1,1,2,2,2,2,2,2,2)"
+]
+},
+{
+"say": "Each centroid moves to the mean of its members. Cluster 1 keeps its centroid at 21, while cluster 2 moves from 30 up to 39.",
+"work": [
+"c_j=\\frac{1}{n_j}\\sum_{i:\\,y_i=j} x_i",
+"c_1=\\frac{20+21+22}{3}=\\frac{63}{3}=21",
+"c_2=\\frac{28+35+40+41+42+43+44}{7}=\\frac{273}{7}=39"
+]
+},
+{
+"say": "After one iteration the clusters are 20 to 22 and 28 to 44, with centroids 21 and 39. A second iteration would move 28 into cluster 1, because 28 is now closer to 21.",
+"work": [
+"y=(1,1,1,2,2,2,2,2,2,2),\\quad c_1=21,\\quad c_2=39",
+"d(28,21)=7<d(28,39)=11"
+]
+}
+]
+}
 },
 {
 "title": "Classify a new object with K-NN",
@@ -3263,7 +5939,81 @@ const PLAIN_STUDY={
 "do": "Give the probability as the share of neighbors in that class.",
 "why": "This is because the question often asks how sure the classification is."
 }
+],
+"example": {
+"source": "Session 22 lecture example (pages 40 to 42)",
+"prompt": "Surgical mesh from four vendors was graded Pass or Fail by surgeons. A new vendor has strength \\(x_1=7\\) kg/m² and flexibility \\(x_2=3\\). Classify it with K-NN using \\(K=3\\) and the Euclidean distance, and give the probability that it fails.",
+"table": {
+"headers": [
+"Vendor",
+"x1 strength (kg/m²)",
+"x2 flexibility",
+"Surgeons"
+],
+"rows": [
+[
+"A",
+"7",
+"7",
+"Pass"
+],
+[
+"B",
+"4",
+"7",
+"Pass"
+],
+[
+"C",
+"4",
+"3",
+"Fail"
+],
+[
+"D",
+"4",
+"1",
+"Fail"
 ]
+]
+},
+"steps": [
+{
+"say": "Strength runs from 4 to 7 and flexibility from 1 to 7, so both features are on similar small scales and are used as they are.",
+"work": [
+"q=(7,3)"
+]
+},
+{
+"say": "Subtract the matching features, square, add and take the square root for each vendor.",
+"work": [
+"d=\\sqrt{(x_1-q_1)^2+(x_2-q_2)^2}",
+"d_A=\\sqrt{(7-7)^2+(7-3)^2}=\\sqrt{16}=4",
+"d_B=\\sqrt{(4-7)^2+(7-3)^2}=\\sqrt{25}=5",
+"d_C=\\sqrt{(4-7)^2+(3-3)^2}=\\sqrt{9}=3",
+"d_D=\\sqrt{(4-7)^2+(1-3)^2}=\\sqrt{13}=3.6056"
+]
+},
+{
+"say": "C is nearest, then D and then A. B is the farthest, so it is left out when K is 3.",
+"work": [
+"d_C=3<d_D=3.6056<d_A=4<d_B=5"
+]
+},
+{
+"say": "Two of the three neighbors failed, so the new mesh is classified as Fail.",
+"work": [
+"C=\\text{Fail},\\quad D=\\text{Fail},\\quad A=\\text{Pass}"
+]
+},
+{
+"say": "Two of the three votes are Fail, so the probability that the new mesh fails is 2 in 3.",
+"work": [
+"P(\\text{Fail})=\\frac{2}{3}=0.6667"
+]
+}
+]
+}
 }
 ]
 },
@@ -3555,7 +6305,111 @@ const PLAIN_STUDY={
 "do": "Repeat with the second K and say whether the class changed.",
 "why": "This is because a different K can change the vote."
 }
+],
+"example": {
+"source": "Session 23 lecture exercise (page 35)",
+"prompt": "Seven tumor samples have dimensionless size and irregularity scores and a known diagnosis. A new sample has scores (4, 4). Classify it with K-NN and the Euclidean distance for \\(K=3\\) and for \\(K=5\\), and give the probability each time.",
+"table": {
+"headers": [
+"Sample",
+"Size score",
+"Irregularity score",
+"Diagnosis"
+],
+"rows": [
+[
+"A",
+"4",
+"3",
+"Benign"
+],
+[
+"B",
+"3",
+"3",
+"Benign"
+],
+[
+"C",
+"4",
+"5",
+"Malignant"
+],
+[
+"D",
+"6",
+"4",
+"Malignant"
+],
+[
+"E",
+"5",
+"6",
+"Malignant"
+],
+[
+"F",
+"1",
+"3",
+"Benign"
+],
+[
+"G",
+"7",
+"7",
+"Malignant"
 ]
+]
+},
+"steps": [
+{
+"say": "The new sample has size 4 and irregularity 4. The scores are already dimensionless, so no scaling is needed.",
+"work": [
+"q=(4,4)"
+]
+},
+{
+"say": "The same formula is used for all seven samples.",
+"work": [
+"d=\\sqrt{(x_1-q_1)^2+(x_2-q_2)^2}",
+"d_A=\\sqrt{(4-4)^2+(4-3)^2}=\\sqrt{1}=1",
+"d_B=\\sqrt{(4-3)^2+(4-3)^2}=\\sqrt{2}=1.4142",
+"d_C=\\sqrt{(4-4)^2+(4-5)^2}=\\sqrt{1}=1",
+"d_D=\\sqrt{(4-6)^2+(4-4)^2}=\\sqrt{4}=2",
+"d_E=\\sqrt{(4-5)^2+(4-6)^2}=\\sqrt{5}=2.2361",
+"d_F=\\sqrt{(4-1)^2+(4-3)^2}=\\sqrt{10}=3.1623",
+"d_G=\\sqrt{(4-7)^2+(4-7)^2}=\\sqrt{18}=4.2426"
+]
+},
+{
+"say": "A and C tie for nearest at a distance of 1, so the tie does not matter for K of 3 or 5. B is third, D fourth and E fifth.",
+"work": [
+"d_A=d_C=1<d_B=1.4142<d_D=2<d_E=2.2361<d_F=3.1623<d_G=4.2426"
+]
+},
+{
+"say": "With K of 3 the neighbors are A, C and B. Two are benign and one is malignant, so the new sample is benign.",
+"work": [
+"K=3,\\quad A=\\text{Benign},\\quad C=\\text{Malignant},\\quad B=\\text{Benign}",
+"\\text{Benign }2,\\quad \\text{Malignant }1"
+]
+},
+{
+"say": "Benign has 2 of the 3 votes, so the probability is 2 in 3.",
+"work": [
+"P=\\frac{\\text{votes for the winning class}}{K}",
+"P(\\text{Benign})=\\frac{2}{3}=0.6667"
+]
+},
+{
+"say": "With K of 5, D and E join and both are malignant, so malignant wins 3 to 2. The class changes from benign to malignant, so the choice of K matters here.",
+"work": [
+"K=5,\\quad A=\\text{B},\\ C=\\text{M},\\ B=\\text{B},\\ D=\\text{M},\\ E=\\text{M}",
+"P(\\text{Malignant})=\\frac{3}{5}=0.6"
+]
+}
+]
+}
 },
 {
 "title": "Read a confusion matrix",
@@ -3588,7 +6442,78 @@ const PLAIN_STUDY={
 "do": "Say which errors matter most, like missed cancers.",
 "why": "This is because accuracy alone can hide a weak sensitivity."
 }
+],
+"example": {
+"source": "Session 23 lecture example (page 17)",
+"prompt": "K-NN with \\(K=21\\) on min-max scaled breast cancer data is tested on 100 samples. CrossTable() gives the actual diagnosis in rows and the predicted diagnosis in columns. Find the accuracy, error rate, sensitivity and specificity.",
+"table": {
+"headers": [
+"Actual by predicted",
+"Benign",
+"Malignant",
+"Row total"
+],
+"rows": [
+[
+"Benign",
+"61",
+"0",
+"61"
+],
+[
+"Malignant",
+"2",
+"37",
+"39"
+],
+[
+"Column total",
+"63",
+"37",
+"100"
 ]
+]
+},
+"steps": [
+{
+"say": "Malignant is the positive class because the test is meant to find cancer.",
+"work": [
+"\\text{positive}=\\text{Malignant}"
+]
+},
+{
+"say": "Rows are the truth and columns are the call. The 2 malignant samples called benign are the false negatives.",
+"work": [
+"TP=37,\\quad TN=61,\\quad FP=0,\\quad FN=2"
+]
+},
+{
+"say": "The two diagonal cells are correct, so 98 of 100 calls are right. The two errors give an error rate of 0.02.",
+"work": [
+"\\text{accuracy}=\\frac{TP+TN}{TP+TN+FP+FN}=\\frac{37+61}{37+61+0+2}=\\frac{98}{100}=0.98",
+"\\text{error rate}=\\frac{FP+FN}{TP+TN+FP+FN}=\\frac{0+2}{100}=0.02"
+]
+},
+{
+"say": "Only the actual malignant row is used. The model caught 37 of the 39 cancers, matching the 0.949 printed in that row.",
+"work": [
+"\\text{sensitivity}=\\frac{TP}{TP+FN}=\\frac{37}{37+2}=\\frac{37}{39}=0.9487"
+]
+},
+{
+"say": "Only the actual benign row is used. All 61 benign samples were cleared, so no false alarms happened.",
+"work": [
+"\\text{specificity}=\\frac{TN}{TN+FP}=\\frac{61}{61+0}=1"
+]
+},
+{
+"say": "Both errors are cancers called benign, and a missed cancer delays treatment. So the sensitivity of 0.9487 matters more here than the high accuracy of 0.98.",
+"work": [
+"FN=2,\\quad FP=0"
+]
+}
+]
+}
 },
 {
 "title": "Run K-NN in R",
@@ -3620,7 +6545,67 @@ const PLAIN_STUDY={
 "do": "Try another scaling or another K and compare the missed cancers.",
 "why": "This is because a different choice can change which errors the model makes."
 }
+],
+"example": {
+"source": "Session 23 lecture example (pages 12 to 20) and the course script BreastCancerClassification.R",
+"prompt": "The Wisconsin breast cancer file wisc_bc_data.csv has 569 fine needle biopsy samples with an id, a diagnosis (B or M) and 30 numeric features. Write the R steps to classify the last 100 samples with knn() and evaluate the result.",
+"steps": [
+{
+"say": "str() shows 569 rows and 32 columns with the id in column 1. Dropping the id leaves the diagnosis in column 1 and the 30 features in columns 2 to 31.",
+"work": [
+"\\texttt{wbcd <- read.csv(\"wisc\\_bc\\_data.csv\", stringsAsFactors = FALSE)}",
+"\\texttt{wbcd <- wbcd[-1]}",
+"\\texttt{wbcd\\$diagnosis <- factor(wbcd\\$diagnosis, levels = c(\"B\", \"M\"),}",
+"\\texttt{\\ \\ \\ \\ labels = c(\"Benign\", \"Malignant\"))}",
+"\\text{table() gives Benign }357,\\ \\text{Malignant }212,\\quad 357+212=569"
 ]
+},
+{
+"say": "The normalize() function maps every feature onto 0 to 1. For radius_mean the minimum is 6.981 and the maximum 28.110, so its mean of 14.127 becomes 0.3382.",
+"work": [
+"x'=\\frac{x-\\min(x)}{\\max(x)-\\min(x)}",
+"\\texttt{normalize <- function(x) \\{ return ((x - min(x)) / (max(x) - min(x))) \\}}",
+"\\texttt{wbcd\\_n <- as.data.frame(lapply(wbcd[2:31], normalize))}",
+"x'=\\frac{14.127-6.981}{28.110-6.981}=\\frac{7.146}{21.129}=0.3382"
+]
+},
+{
+"say": "The first 469 rows train the model and the last 100 test it. The labels come from column 1, which works only because the id was dropped.",
+"work": [
+"\\texttt{wbcd\\_train <- wbcd\\_n[1:469, ]}",
+"\\texttt{wbcd\\_test <- wbcd\\_n[470:569, ]}",
+"\\texttt{wbcd\\_train\\_labels <- wbcd[1:469, 1]}",
+"\\texttt{wbcd\\_test\\_labels <- wbcd[470:569, 1]}",
+"469+100=569"
+]
+},
+{
+"say": "Each test sample gets the plurality class of its 21 nearest training samples. With prob set to TRUE, R also keeps the share of the 21 votes for the winning class.",
+"work": [
+"\\texttt{wbcd\\_test\\_pred <- knn(train = wbcd\\_train, test = wbcd\\_test,}",
+"\\texttt{\\ \\ \\ \\ cl = wbcd\\_train\\_labels, k = 21, prob = TRUE)}",
+"\\texttt{prob\\_test <- attr(wbcd\\_test\\_pred, \"prob\")}"
+]
+},
+{
+"say": "The table puts the true labels in rows and the predictions in columns. It shows 98 of 100 correct, and both errors are cancers called benign.",
+"work": [
+"\\texttt{CrossTable(x = wbcd\\_test\\_labels, y = wbcd\\_test\\_pred, prop.chisq = FALSE)}",
+"TN=61,\\quad FP=0,\\quad FN=2,\\quad TP=37",
+"\\text{accuracy}=\\frac{61+37}{100}=0.98"
+]
+},
+{
+"say": "z-scores raise the missed cancers from 2 to 5, so min-max scaling works better here. Going back to min-max, K of 1 misses 1 cancer but adds 3 false alarms, and K of 27 misses 4.",
+"work": [
+"\\texttt{wbcd\\_z <- as.data.frame(scale(wbcd[-1]))}",
+"\\text{z-scores},\\ K=21\\ \\ FN=5,\\ FP=0,\\ \\text{accuracy}=\\frac{61+34}{100}=0.95",
+"\\text{min-max},\\ K=1\\ \\ FN=1,\\ FP=3,\\ \\text{accuracy}=\\frac{58+38}{100}=0.96",
+"\\text{min-max},\\ K=27\\ \\ FN=4,\\ FP=0,\\ \\text{accuracy}=\\frac{61+35}{100}=0.96"
+]
+}
+]
+}
 }
 ]
 },
@@ -3875,7 +6860,72 @@ const PLAIN_STUDY={
 "do": "Reject if T is at or below the lower value or at or above the upper value, then write the conclusion.",
 "why": "This is because those values of T are rare when the null hypothesis is true."
 }
+],
+"example": {
+"source": "Session 24 lecture example (pages 9 to 12)",
+"prompt": "Daily urine production (mL/day) is measured in three people given a placebo and four different people given a drug. Without assuming Normal populations, does the drug change urine production at a level near 0.05?",
+"table": {
+"headers": [
+"Placebo (mL/day)",
+"Drug (mL/day)"
+],
+"rows": [
+[
+"1000",
+"1400"
+],
+[
+"1380",
+"1600"
+],
+[
+"1200",
+"1180"
+],
+[
+"",
+"1220"
 ]
+]
+},
+"steps": [
+{
+"say": "This is a Mann-Whitney rank-sum test because the two groups hold different people and Normality is not assumed. The null hypothesis is that urine production has the same distribution with placebo and drug.",
+"work": [
+"H_0:\\text{same distribution with placebo and drug}"
+]
+},
+{
+"say": "All seven values are ranked in one list regardless of group. No two values are equal, so there are no ties to average.",
+"work": [
+"1000,\\ 1180,\\ 1200,\\ 1220,\\ 1380,\\ 1400,\\ 1600",
+"\\text{ranks}\\ \\ 1,\\ 2,\\ 3,\\ 4,\\ 5,\\ 6,\\ 7",
+"\\text{placebo ranks}\\ \\ 1000\\to1,\\ 1380\\to5,\\ 1200\\to3"
+]
+},
+{
+"say": "The placebo group is the smaller group, so T is the sum of its three ranks.",
+"work": [
+"T=\\sum R_{\\text{smaller group}}",
+"T=1+5+3=9"
+]
+},
+{
+"say": "In the row with 3 in the smaller group and 4 in the bigger group, the column near 0.05 gives the pair 6 and 18 with P of 0.057.",
+"work": [
+"n_S=3,\\quad n_B=4",
+"\\text{critical values}\\ \\ 6\\ \\text{and}\\ 18,\\quad P=0.057"
+]
+},
+{
+"say": "T of 9 lies strictly between 6 and 18, so do not reject the null hypothesis. These data do not show that the drug changes daily urine production.",
+"work": [
+"6<9<18",
+"P>0.05"
+]
+}
+]
+}
 },
 {
 "title": "Mann-Whitney test with the Normal approximation",
@@ -3906,7 +6956,139 @@ const PLAIN_STUDY={
 "table": "Use the class t table, infinity row on PDF page 2. The 0.05 column gives 1.96 and the 0.01 column gives 2.576.",
 "tablePath": "sources/tables/t_table.pdf#page=2"
 }
+],
+"example": {
+"source": "Session 24 lecture example (pages 17 to 19)",
+"prompt": "Minutes of alert behavior in the first hour of life are recorded for 20 infants delivered conventionally (control) and 20 delivered by the Leboyer method. The times are skewed. Do the distributions differ at the two-sided 0.05 level?",
+"table": {
+"headers": [
+"Control (min)",
+"Leboyer (min)"
+],
+"rows": [
+[
+"5.0",
+"2.0"
+],
+[
+"10.1",
+"19.0"
+],
+[
+"17.7",
+"29.7"
+],
+[
+"20.3",
+"32.1"
+],
+[
+"22.0",
+"35.4"
+],
+[
+"24.9",
+"36.7"
+],
+[
+"26.5",
+"38.5"
+],
+[
+"30.8",
+"40.2"
+],
+[
+"34.2",
+"42.1"
+],
+[
+"35.0",
+"43.0"
+],
+[
+"36.6",
+"44.4"
+],
+[
+"37.9",
+"45.6"
+],
+[
+"40.4",
+"46.7"
+],
+[
+"45.5",
+"47.1"
+],
+[
+"49.3",
+"48.0"
+],
+[
+"51.1",
+"49.0"
+],
+[
+"53.1",
+"50.9"
+],
+[
+"55.0",
+"51.2"
+],
+[
+"56.7",
+"52.5"
+],
+[
+"58.0",
+"53.3"
 ]
+]
+},
+"steps": [
+{
+"say": "All 40 times are ranked together and no two are equal. The groups are the same size, so the control group is used for T.",
+"work": [
+"\\text{control ranks}\\ \\ 2,\\ 3,\\ 4,\\ 6,\\ 7,\\ 8,\\ 9,\\ 11,\\ 13,\\ 14,",
+"\\quad 16,\\ 18,\\ 21,\\ 25,\\ 31,\\ 33,\\ 36,\\ 38,\\ 39,\\ 40",
+"T=2+3+4+6+7+8+9+11+13+14+16+18+21+25+31+33+36+38+39+40=374"
+]
+},
+{
+"say": "If the birth method has no effect, the control rank sum would average 410.",
+"work": [
+"\\mu_T=\\frac{n_S(n_S+n_B+1)}{2}",
+"\\mu_T=\\frac{20(20+20+1)}{2}=\\frac{820}{2}=410"
+]
+},
+{
+"say": "No two times are equal, so the simple form is used and no tie correction is needed.",
+"work": [
+"\\sigma_T=\\sqrt{\\frac{n_Sn_B(n_S+n_B+1)}{12}}",
+"\\sigma_T=\\sqrt{\\frac{20(20)(41)}{12}}=\\sqrt{1366.67}=36.9685"
+]
+},
+{
+"say": "T is 36 below its mean. The continuity correction takes off one half, so z is a little under 1.",
+"work": [
+"z_T=\\frac{|T-\\mu_T|-\\frac12}{\\sigma_T}",
+"z_T=\\frac{|374-410|-0.5}{36.9685}=\\frac{35.5}{36.9685}=0.9603"
+]
+},
+{
+"say": "Because 0.9603 is below 1.96, do not reject the null hypothesis. The data do not show a difference in alert minutes between Leboyer and control deliveries.",
+"work": [
+"z_{0.05}=1.9600\\ \\ (\\text{row }\\infty,\\ \\text{column }0.05)",
+"|z_T|=0.9603<1.9600",
+"t_{0.50}(\\infty)=0.6745<0.9603<t_{0.20}(\\infty)=1.2816",
+"0.20<P<0.50"
+]
+}
+]
+}
 },
 {
 "title": "Wilcoxon signed-rank test",
@@ -3946,7 +7128,130 @@ const PLAIN_STUDY={
 "table": "Use the class t table, infinity row on PDF page 2. The 0.05 column gives 1.96 and the 0.01 column gives 2.576.",
 "tablePath": "sources/tables/t_table.pdf#page=2"
 }
+],
+"example": {
+"source": "Session 24 lecture exercise (page 27), data on page 26",
+"prompt": "Eleven people have maximum percent platelet aggregation measured before and after smoking one cigarette. Use the Wilcoxon signed-rank test at the two-sided 0.05 level to decide whether smoking changes platelet aggregation.",
+"table": {
+"headers": [
+"Person",
+"Before (%)",
+"After (%)"
+],
+"rows": [
+[
+"1",
+"25",
+"27"
+],
+[
+"2",
+"25",
+"29"
+],
+[
+"3",
+"27",
+"37"
+],
+[
+"4",
+"44",
+"56"
+],
+[
+"5",
+"30",
+"46"
+],
+[
+"6",
+"67",
+"82"
+],
+[
+"7",
+"53",
+"57"
+],
+[
+"8",
+"53",
+"80"
+],
+[
+"9",
+"52",
+"61"
+],
+[
+"10",
+"60",
+"59"
+],
+[
+"11",
+"28",
+"43"
 ]
+]
+},
+"steps": [
+{
+"say": "Each person was measured before and after, so each gives one difference and the signed-rank test fits. The null hypothesis is that smoking causes no change in platelet aggregation.",
+"work": [
+"H_0:\\text{no difference before and after smoking}"
+]
+},
+{
+"say": "No difference is zero, so n stays at 11.",
+"work": [
+"d_1=27-25=2,\\quad d_2=29-25=4,\\quad d_3=37-27=10,\\quad d_4=56-44=12",
+"d_5=46-30=16,\\quad d_6=82-67=15,\\quad d_7=57-53=4,\\quad d_8=80-53=27",
+"d_9=61-52=9,\\quad d_{10}=59-60=-1,\\quad d_{11}=43-28=15",
+"n=11"
+]
+},
+{
+"say": "The two 4s share ranks 3 and 4, and the two 15s share ranks 8 and 9. The change of minus 1 has the smallest size, so it gets rank 1.",
+"work": [
+"|d|\\ \\text{in order}\\ \\ 1,\\ 2,\\ 4,\\ 4,\\ 9,\\ 10,\\ 12,\\ 15,\\ 15,\\ 16,\\ 27",
+"\\text{ranks of the 4s}=\\frac{3+4}{2}=3.5,\\quad \\text{ranks of the 15s}=\\frac{8+9}{2}=8.5",
+"\\text{ranks}\\ \\ 1,\\ 2,\\ 3.5,\\ 3.5,\\ 5,\\ 6,\\ 7,\\ 8.5,\\ 8.5,\\ 10,\\ 11"
+]
+},
+{
+"say": "Only person 10 went down, so only rank 1 is negative. W is large and positive, so the changes lean strongly upward.",
+"work": [
+"W=\\sum_i \\operatorname{sign}(d_i)\\,R_i",
+"W=2+3.5+6+7+10+8.5+3.5+11+5-1+8.5=64"
+]
+},
+{
+"say": "Here n is 11, which is more than 8, so the W table does not apply and the Normal approximation is used in the next step.",
+"work": [
+"n=11>8"
+]
+},
+{
+"say": "There are two sets of ties, each of size 2, so the variance drops by 1 from 506 to 505. The mean of W is 0, so only the half is subtracted.",
+"work": [
+"\\sigma_W=\\sqrt{\\frac{n(n+1)(2n+1)}{6}-\\sum\\frac{(\\tau_i-1)\\tau_i(\\tau_i+1)}{12}}",
+"\\sigma_W=\\sqrt{\\frac{11(12)(23)}{6}-\\frac{(1)(2)(3)+(1)(2)(3)}{12}}=\\sqrt{506-1}=\\sqrt{505}=22.4722",
+"z_W=\\frac{|W|-\\frac12}{\\sigma_W}=\\frac{64-0.5}{22.4722}=2.8257"
+]
+},
+{
+"say": "Because 2.8257 is above 1.96, reject the null hypothesis. It passes the 0.005 cutoff but not the 0.002 cutoff, so smoking increases platelet aggregation with P between 0.002 and 0.005.",
+"work": [
+"z_{0.05}=1.9600\\ \\ (\\text{row }\\infty,\\ \\text{column }0.05)",
+"|z_W|=2.8257>1.9600",
+"t_{0.005}(\\infty)=2.8070<2.8257<t_{0.002}(\\infty)=3.0902",
+"0.002<P<0.005"
+]
+}
+]
+}
 },
 {
 "title": "Check Normality before choosing a test",
@@ -3964,7 +7269,94 @@ const PLAIN_STUDY={
 "do": "If P is small, use the rank test that matches the design.",
 "why": "This is because the t test assumes Normal data."
 }
+],
+"example": {
+"source": "Session 24 lecture example (pages 5, 7 and 8)",
+"prompt": "Two samples of ten values are checked for Normality. Sample 2 equals sample 1 except that 60 is replaced by 50 and 68 by 88. Is a t test appropriate for each sample?",
+"table": {
+"headers": [
+"Order",
+"Sample 1",
+"Sample 2"
+],
+"rows": [
+[
+"1",
+"60",
+"50"
+],
+[
+"2",
+"62",
+"62"
+],
+[
+"3",
+"62",
+"62"
+],
+[
+"4",
+"63",
+"63"
+],
+[
+"5",
+"64",
+"64"
+],
+[
+"6",
+"64",
+"64"
+],
+[
+"7",
+"65",
+"65"
+],
+[
+"8",
+"65",
+"65"
+],
+[
+"9",
+"67",
+"67"
+],
+[
+"10",
+"68",
+"88"
 ]
+]
+},
+"steps": [
+{
+"say": "qqnorm() plots each sorted value against a Normal quantile running from about minus 1.55 to plus 1.55. Sample 1 lies close to the line, but sample 2 has 50 and 88 far off it.",
+"work": [
+"\\texttt{qqnorm(x); qqline(x)}",
+"p_1=\\frac{1-\\frac38}{10+\\frac14}=0.06098",
+"z_1=-1.5466,\\quad z_{10}=1.5466"
+]
+},
+{
+"say": "The null hypothesis is that the data come from a Normal distribution. Sample 1 has a large P, so Normality is not rejected, while sample 2 has a P far below 0.05.",
+"work": [
+"H_0:\\text{the data come from a Normal distribution}",
+"\\text{sample 1}\\ \\ W=0.97577,\\quad P=0.9386>0.05",
+"\\text{sample 2}\\ \\ W=0.75726,\\quad P=0.004374<0.05"
+]
+},
+{
+"say": "Sample 1 is consistent with Normal data, so a t test is fine. Sample 2 is not Normal, so use the Mann-Whitney test for two separate groups or the Wilcoxon signed-rank test for paired data.",
+"work": [
+"P=0.004374<0.05"
+]
+}
+]
+}
 }
 ]
 }

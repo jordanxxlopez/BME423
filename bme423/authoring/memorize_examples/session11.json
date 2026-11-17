@@ -1,0 +1,54 @@
+{
+ "examples": [
+  {
+   "title": "z test for two proportions",
+   "source": "Homework 2 Problem 2(a)",
+   "prompt": "When only the father was exposed to dioxin, the proportion of female babies was 0.565 out of 186 births. When only the mother was exposed, it was 0.455 out of 220 births. Of all 406 babies, 205 were female. Use a z test to decide whether the proportion of female babies differs between the two exposure groups.",
+   "steps": [
+    {
+     "say": "The test is the z test for two proportions, because sex of the baby is nominal and there are two groups. The null hypothesis is that there is no difference in the proportion of female babies when only the father or only the mother was exposed to dioxin.",
+     "work": []
+    },
+    {
+     "say": "These are the general equations, written before any numbers go in.",
+     "work": [
+      "\\hat p=\\frac{\\text{total events}}{n_1+n_2}",
+      "z=\\frac{\\lvert\\hat p_1-\\hat p_2\\rvert-\\frac{1}{2}\\left(\\frac{1}{n_1}+\\frac{1}{n_2}\\right)}{\\sqrt{\\hat p(1-\\hat p)\\left(\\frac{1}{n_1}+\\frac{1}{n_2}\\right)}}"
+     ]
+    },
+    {
+     "say": "The two group proportions are given. The pooled proportion uses all 205 female babies out of 406 births, because the null hypothesis says both groups share one rate.",
+     "work": [
+      "\\hat p_1=0.565,\\quad n_1=186",
+      "\\hat p_2=0.455,\\quad n_2=220",
+      "\\hat p=\\frac{205}{186+220}=\\frac{205}{406}=0.5049"
+     ]
+    },
+    {
+     "say": "The Yates correction takes 0.0049609 off the gap of 0.110 between the proportions. Dividing by the standard error gives z.",
+     "work": [
+      "\\frac{1}{2}\\left(\\frac{1}{186}+\\frac{1}{220}\\right)=\\frac{1}{2}(0.0099218)=0.0049609",
+      "\\lvert 0.565-0.455\\rvert-0.0049609=0.10504",
+      "\\sqrt{0.5049(1-0.5049)\\left(\\frac{1}{186}+\\frac{1}{220}\\right)}=\\sqrt{0.0024802}=0.049802",
+      "z=\\frac{0.10504}{0.049802}=2.109"
+     ]
+    },
+    {
+     "say": "A large-sample z is compared with the infinity row of the t table, because that row is the Normal distribution.",
+     "work": [
+      "z_{crit,0.05}=t_{0.05}(\\infty)=1.9600",
+      "z_{crit,0.01}=t_{0.01}(\\infty)=2.5758"
+     ]
+    },
+    {
+     "say": "The size of z passes the 0.05 cutoff but not the 0.01 cutoff, so reject at 0.05 only. The proportion of female babies differs between father-only and mother-only exposure, with P less than 0.05.",
+     "work": [
+      "\\lvert z\\rvert=2.109>t_{0.05}(\\infty)=1.9600",
+      "\\lvert z\\rvert=2.109<t_{0.01}(\\infty)=2.5758",
+      "0.01<P<0.05"
+     ]
+    }
+   ]
+  }
+ ]
+}

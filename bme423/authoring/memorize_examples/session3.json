@@ -1,0 +1,193 @@
+{
+ "examples": [
+  {
+   "title": "Check whether a function is a valid probability function",
+   "source": "Homework 1 Problem 2(a)",
+   "prompt": "Which of these functions could be probability functions of a discrete random variable \\(X\\)? Each is 0 elsewhere.",
+   "table": {
+    "headers": [
+     "Function",
+     "Values of x",
+     "f(x)"
+    ],
+    "rows": [
+     [
+      "f2",
+      "0, 3, 4, 5, 8, 10",
+      "0.2, 0, 0.4, 0.2, 0.2, 0.1"
+     ],
+     [
+      "f3",
+      "-2, 1, 3, 4.5, 7",
+      "0.3, 0.3, -0.1, 0.1, 0.4"
+     ],
+     [
+      "f4",
+      "0.5, 1, 2",
+      "0.4, 0.1, 0.4"
+     ],
+     [
+      "f5",
+      "1, 2, 3",
+      "1/6, 2/6, 1/2"
+     ]
+    ]
+   },
+   "steps": [
+    {
+     "say": "Every value of f2, f4 and f5 is between 0 and 1. The function f3 gives a negative value at x of 3, so f3 already fails.",
+     "work": [
+      "0\\le f(x_i)\\le 1\\ \\text{for all } x_i",
+      "f_3(3)=-0.1<0"
+     ]
+    },
+    {
+     "say": "The sums are 1.1 for f2, 1.0 for f3, 0.9 for f4 and 1 for f5. So f3 adds to 1 even though one of its values is negative.",
+     "work": [
+      "\\sum_{i=1}^{k} f(x_i)=1",
+      "f_2\\!:\\ 0.2+0+0.4+0.2+0.2+0.1=1.1",
+      "f_3\\!:\\ 0.3+0.3+(-0.1)+0.1+0.4=1.0",
+      "f_4\\!:\\ 0.4+0.1+0.4=0.9",
+      "f_5\\!:\\ \\tfrac{1}{6}+\\tfrac{2}{6}+\\tfrac{1}{2}=1"
+     ]
+    },
+    {
+     "say": "Only f5 is a probability function. f2 breaks the sum rule because it totals 1.1, f4 breaks it because it totals 0.9, and f3 breaks the rule that no probability is negative.",
+     "work": [
+      "f_2,\\ f_4\\!:\\ \\sum f(x_i)\\ne 1,\\qquad f_3\\!:\\ f(3)<0"
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Turn a CDF graph into a probability function",
+   "source": "Exam 1 Question 1(i)",
+   "prompt": "The d.f. \\(F(y)\\) of the discrete random variable \\(Y\\) is a staircase. It is 0 for \\(y<-2\\), \\(\\tfrac{1}{3}\\) for \\(-2\\le y<1\\), \\(\\tfrac{1}{2}\\) for \\(1\\le y<3\\) and 1 for \\(y\\ge 3\\). Write \\(f(y)\\) for all values of \\(y\\).",
+   "steps": [
+    {
+     "say": "The staircase jumps at y of minus 2, at y of 1 and at y of 3, so those are the only values Y can take.",
+     "work": [
+      "\\text{jumps at } y=-2,\\ 1,\\ 3"
+     ]
+    },
+    {
+     "say": "Each jump is the new height minus the old height, so the jumps are one third, one sixth and one half.",
+     "work": [
+      "f(y_k)=F(y_k)-F(y_{k-1})",
+      "f(-2)=\\tfrac{1}{3}-0=\\tfrac{1}{3}",
+      "f(1)=\\tfrac{1}{2}-\\tfrac{1}{3}=\\tfrac{1}{6}",
+      "f(3)=1-\\tfrac{1}{2}=\\tfrac{1}{2}"
+     ]
+    },
+    {
+     "say": "Each value is written next to its jump size.",
+     "work": [
+      "f(y)=\\tfrac{1}{3} \\text{ for } y=-2,\\quad \\tfrac{1}{6} \\text{ for } y=1,\\quad \\tfrac{1}{2} \\text{ for } y=3"
+     ]
+    },
+    {
+     "say": "Every other value of y gets probability 0, so the function is now defined for all y.",
+     "work": [
+      "f(y)=\\begin{cases}\\tfrac{1}{3} & y=-2\\\\[2pt] \\tfrac{1}{6} & y=1\\\\[2pt] \\tfrac{1}{2} & y=3\\\\[2pt] 0 & \\text{elsewhere}\\end{cases}"
+     ]
+    },
+    {
+     "say": "The three probabilities add to 1, so f is a valid probability function.",
+     "work": [
+      "\\tfrac{1}{3}+\\tfrac{1}{6}+\\tfrac{1}{2}=\\tfrac{2}{6}+\\tfrac{1}{6}+\\tfrac{3}{6}=1"
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Read a probability from the CDF",
+   "source": "Exam 1 Question 1(ii) and (iii)",
+   "prompt": "For the same \\(Y\\) (jumps of \\(\\tfrac{1}{3}\\) at \\(-2\\), \\(\\tfrac{1}{6}\\) at 1 and \\(\\tfrac{1}{2}\\) at 3), find (ii) \\(P(Y>-1)\\) and (iii) \\(P(-0.5<Y<2.25)\\).",
+   "steps": [
+    {
+     "say": "Both questions are rewritten with less than or equal to, so they can be read from F.",
+     "work": [
+      "P(Y>-1)=1-P(Y\\le -1)",
+      "P(-0.5<Y<2.25)=P(Y\\le 2.25)-P(Y\\le -0.5)"
+     ]
+    },
+    {
+     "say": "F at minus 1 is one third because only the jump at minus 2 has been collected, so the right tail is two thirds.",
+     "work": [
+      "P(Y>a)=1-F(a)",
+      "P(Y>-1)=1-F(-1)=1-\\tfrac{1}{3}=\\tfrac{2}{3}"
+     ]
+    },
+    {
+     "say": "F at 2.25 is one half and F at minus 0.5 is one third, so the interval holds one sixth.",
+     "work": [
+      "P(a<Y\\le b)=F(b)-F(a)",
+      "P(-0.5<Y<2.25)=F(2.25)-F(-0.5)=\\tfrac{1}{2}-\\tfrac{1}{3}=\\tfrac{1}{6}"
+     ]
+    },
+    {
+     "say": "None of minus 1, minus 0.5 or 2.25 is a value Y can take, so strict or not strict gives the same answer here. Adding the jumps at 1 and 3 confirms two thirds.",
+     "work": [
+      "P(Y>-1)=f(1)+f(3)=\\tfrac{1}{6}+\\tfrac{1}{2}=\\tfrac{2}{3}",
+      "P(-0.5<Y<2.25)=f(1)=\\tfrac{1}{6}"
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Expected value and variance of a discrete variable",
+   "source": "Homework 1 Problem 2(b)",
+   "prompt": "\\(f_6(x)=0.55\\) for \\(x=-1\\), 0.15 for \\(x=2\\), 0.1 for \\(x=3\\), 0.2 for \\(x=7\\), and 0 elsewhere. Compute \\(E[X]\\), \\(E[(X-E[X])^2]\\), \\(E[X^2]\\) and \\(E[X^2]-(E[X])^2\\).",
+   "table": {
+    "headers": [
+     "x",
+     "-1",
+     "2",
+     "3",
+     "7"
+    ],
+    "rows": [
+     [
+      "f(x)",
+      "0.55",
+      "0.15",
+      "0.1",
+      "0.2"
+     ]
+    ]
+   },
+   "steps": [
+    {
+     "say": "The four values are paired with their probabilities, and the probabilities add to 1.",
+     "work": [
+      "0.55+0.15+0.1+0.2=1"
+     ]
+    },
+    {
+     "say": "Each value times its probability gives minus 0.55, 0.3, 0.3 and 1.4, so the expected value is 1.45.",
+     "work": [
+      "E[X]=\\sum x\\,f(x)",
+      "E[X]=(-1)(0.55)+(2)(0.15)+(3)(0.1)+(7)(0.2)",
+      "E[X]=-0.55+0.3+0.3+1.4=1.45"
+     ]
+    },
+    {
+     "say": "The weighted squared distances from 1.45 add to 9.7475. The shortcut with E of X squared, which is 11.85, gives the same variance.",
+     "work": [
+      "\\operatorname{Var}(X)=\\sum (x-\\mu)^2 f(x)",
+      "=(-1-1.45)^2(0.55)+(2-1.45)^2(0.15)+(3-1.45)^2(0.1)+(7-1.45)^2(0.2)",
+      "=3.301+0.04538+0.2403+6.161=9.7475",
+      "E[X^2]=(-1)^2(0.55)+(2)^2(0.15)+(3)^2(0.1)+(7)^2(0.2)=11.85",
+      "E[X^2]-(E[X])^2=11.85-(1.45)^2=11.85-2.1025=9.7475"
+     ]
+    },
+    {
+     "say": "The SD is the square root of 9.7475, so X spreads about 3.122 units around its mean of 1.45.",
+     "work": [
+      "\\sigma=\\sqrt{9.7475}=3.122"
+     ]
+    }
+   ]
+  }
+ ]
+}

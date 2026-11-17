@@ -1,0 +1,263 @@
+{
+ "examples": [
+  {
+   "title": "Fit the line and test the slope by hand",
+   "source": "Session 18 lecture example (pages 15 and 19 to 23)",
+   "prompt": "A sample of 10 Martians gives the heights and weights below (Table 8-1), with \\(\\sum x_i=369\\), \\(\\sum y_i=103.8\\), \\(\\sum x_i^2=13{,}841\\), \\(\\sum x_iy_i=3930.1\\) and \\(\\sum y_i^2=1129.24\\). By hand, find the regression line and the standard errors of \\(a\\) and \\(b\\), test whether weight is related to height, and give 95% intervals for the slope and intercept. The true line of means for all Martians is \\(\\mu_{y|x}=-8+0.5x\\).",
+   "table": {
+    "headers": [
+     "Height \\(x\\) (cm)",
+     "Weight \\(y\\) (g)"
+    ],
+    "rows": [
+     [
+      "31",
+      "7.8"
+     ],
+     [
+      "32",
+      "8.3"
+     ],
+     [
+      "33",
+      "7.6"
+     ],
+     [
+      "34",
+      "9.1"
+     ],
+     [
+      "35",
+      "9.6"
+     ],
+     [
+      "35",
+      "9.8"
+     ],
+     [
+      "40",
+      "11.8"
+     ],
+     [
+      "41",
+      "12.1"
+     ],
+     [
+      "42",
+      "14.7"
+     ],
+     [
+      "46",
+      "13.0"
+     ]
+    ]
+   },
+   "steps": [
+    {
+     "say": "Height is x in cm and weight is y in g. So the slope will be in g per cm and the intercept in g.",
+     "work": [
+      "x=\\text{height (cm)},\\quad y=\\text{weight (g)},\\quad n=10"
+     ]
+    },
+    {
+     "say": "The numerator is 998.8 and the denominator is 2249. So mean weight rises about 0.444 g for each extra cm of height.",
+     "work": [
+      "b=\\frac{n\\sum x_iy_i-\\sum x_i\\sum y_i}{n\\sum x_i^2-\\left(\\sum x_i\\right)^2}",
+      "b=\\frac{10(3930.1)-369(103.8)}{10(13841)-369^2}=\\frac{39301-38302.2}{138410-136161}=\\frac{998.8}{2249}=0.4441085"
+     ]
+    },
+    {
+     "say": "The unrounded slope is carried into this step. The intercept comes out near minus 6.01 g.",
+     "work": [
+      "a=\\bar y-b\\,\\bar x",
+      "\\bar x=\\frac{369}{10}=36.9,\\quad \\bar y=\\frac{103.8}{10}=10.38",
+      "a=10.38-0.4441085(36.9)=-6.007603"
+     ]
+    },
+    {
+     "say": "This is the least-squares line for the ten Martians, with weight in g and height in cm.",
+     "work": [
+      "\\hat y=a+b\\,x",
+      "\\hat y=-6.008+0.4441\\,x"
+     ]
+    },
+    {
+     "say": "The two variances come from the column sums. Rounding the SDs to 5.0 and 2.4 first would give about 1.02 g, because the shortcut subtracts two close numbers.",
+     "work": [
+      "s_{y|x}=\\sqrt{\\frac{n-1}{n-2}\\left(s_y^2-b^2s_x^2\\right)}",
+      "s_x^2=\\frac{13841-369^2/10}{10-1}=\\frac{224.9}{9}=24.98889,\\quad s_x=4.998889",
+      "s_y^2=\\frac{1129.24-103.8^2/10}{10-1}=\\frac{51.796}{9}=5.755111",
+      "s_{y|x}=\\sqrt{\\frac{9}{8}\\left(5.755111-0.4441085^2(24.98889)\\right)}=\\sqrt{\\frac{9}{8}(0.826494)}=0.9642642"
+     ]
+    },
+    {
+     "say": "The slope is known to about 0.064 g per cm. The intercept is far less precise because a height of zero is far from the mean height of 36.9 cm.",
+     "work": [
+      "s_a=s_{y|x}\\sqrt{\\frac1n+\\frac{\\bar x^2}{(n-1)s_x^2}},\\quad s_b=\\frac{1}{\\sqrt{n-1}}\\frac{s_{y|x}}{s_x}",
+      "s_b=\\frac{1}{\\sqrt{9}}\\cdot\\frac{0.9642642}{4.998889}=0.06429857",
+      "s_a=0.9642642\\sqrt{\\frac1{10}+\\frac{36.9^2}{9(24.98889)}}=0.9642642\\sqrt{6.154291}=2.392132"
+     ]
+    },
+    {
+     "say": "The null hypothesis says mean Martian weight does not change with height. The slope is about 6.9 of its standard errors away from zero.",
+     "work": [
+      "H_0:\\beta=0,\\quad H_A:\\beta\\ne0",
+      "t=\\frac{b}{s_b}=\\frac{0.4441085}{0.06429857}=6.906973,\\quad \\nu=10-2=8"
+     ]
+    },
+    {
+     "say": "The statistic is larger than even the 0.001 cutoff in row 8. So we reject the null hypothesis, and taller Martians are heavier on average with P less than 0.001.",
+     "work": [
+      "t_{0.05}(8)=2.306,\\quad t_{0.001}(8)=5.041",
+      "6.907>5.041\\ \\Rightarrow\\ P<0.001"
+     ]
+    },
+    {
+     "say": "The slope interval leaves out zero, which agrees with the test. Both intervals contain the true population values of 0.5 g per cm and minus 8 g.",
+     "work": [
+      "b\\pm t_\\alpha(n-2)\\,s_b,\\quad a\\pm t_\\alpha(n-2)\\,s_a",
+      "0.4441085\\pm2.306(0.06429857)=0.4441085\\pm0.1482725",
+      "0.2958<\\beta<0.5924\\ \\text{g/cm}",
+      "-6.007603\\pm2.306(2.392132)=-6.007603\\pm5.516255",
+      "-11.52<\\alpha_{LOM}<-0.4913\\ \\text{g}"
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Interval for the mean versus one observation at a given x",
+   "source": "Session 18 lecture example (pages 24 and 25)",
+   "prompt": "Use the Martian line \\(\\hat y=-6.0+0.44x\\) with \\(s_{y|x}=1.02\\) g, \\(n=10\\), \\(\\bar x=36.9\\) cm and \\(s_x=5.0\\) cm. Find the 95% interval for the mean weight of Martians 40 cm tall, and the 95% interval for the weight of one Martian 40 cm tall.",
+   "steps": [
+    {
+     "say": "The line predicts 11.6 g at 40 cm. Both intervals are centered on this value.",
+     "work": [
+      "\\hat y=-6.0+0.44(40)=11.6"
+     ]
+    },
+    {
+     "say": "40 cm is only 3.1 cm from the mean height, so the distance term is small. The height of the line at 40 cm is uncertain by about 0.385 g.",
+     "work": [
+      "s_{\\hat y}=s_{y|x}\\sqrt{\\frac1n+\\frac{(x-\\bar x)^2}{(n-1)s_x^2}}",
+      "s_{\\hat y}=1.02\\sqrt{\\frac1{10}+\\frac{(40-36.9)^2}{9(5.0^2)}}=1.02\\sqrt{0.1427111}=0.3853267"
+     ]
+    },
+    {
+     "say": "The extra 1 adds the scatter of one Martian around the line. So the standard error grows to about 1.09 g.",
+     "work": [
+      "s_{Y_{new}}=s_{y|x}\\sqrt{1+\\frac1n+\\frac{(x-\\bar x)^2}{(n-1)s_x^2}}",
+      "s_{Y_{new}}=1.02\\sqrt{1+0.1427111}=1.02\\sqrt{1.1427111}=1.090356"
+     ]
+    },
+    {
+     "say": "Row 8 of the t table gives 2.306 for both intervals. Only the standard error changes between them.",
+     "work": [
+      "\\nu=10-2=8,\\quad t_{0.05}(8)=2.306",
+      "11.6\\pm2.306(0.3853267)=11.6\\pm0.8885633",
+      "10.71<\\mu_{y|40}<12.49\\ \\text{g (mean)}",
+      "11.6\\pm2.306(1.090356)=11.6\\pm2.514361",
+      "9.086<y<14.11\\ \\text{g (one Martian)}"
+     ]
+    },
+    {
+     "say": "The interval for one Martian is about 2.8 times as wide. This is because single Martians scatter about 1 g around the mean even if the line were known exactly.",
+     "work": [
+      "\\frac{s_{Y_{new}}}{s_{\\hat y}}=\\frac{1.090356}{0.3853267}=2.830"
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Correlation and its test",
+   "source": "Session 18 lecture example (pages 39 to 41)",
+   "prompt": "For the 10 Martians, Table 8-3 gives \\(\\sum(x-\\bar x)(y-\\bar y)=99.9\\), \\(\\sum(x-\\bar x)^2=224.9\\) and \\(\\sum(y-\\bar y)^2=51.8\\). Find the Pearson correlation between height and weight and test whether it differs from zero.",
+   "steps": [
+    {
+     "say": "The deviation products total 99.9 g cm. The units cancel in the ratio, so r has no units.",
+     "work": [
+      "r=\\frac{\\sum(x-\\bar x)(y-\\bar y)}{\\sqrt{\\sum(x-\\bar x)^2\\sum(y-\\bar y)^2}}",
+      "r=\\frac{99.9}{\\sqrt{224.9(51.8)}}=\\frac{99.9}{\\sqrt{11649.82}}=\\frac{99.9}{107.9343}=0.9255628"
+     ]
+    },
+    {
+     "say": "The null hypothesis is that the population correlation is zero. The statistic is about 6.91 with 8 degrees of freedom.",
+     "work": [
+      "t=r\\sqrt{\\frac{n-2}{1-r^2}},\\quad \\nu=n-2",
+      "t=0.9255628\\sqrt{\\frac{10-2}{1-0.9255628^2}}=0.9255628\\sqrt{\\frac{8}{0.1433335}}=0.9255628\\sqrt{55.81387}=6.914757,\\quad \\nu=8"
+     ]
+    },
+    {
+     "say": "The statistic passes even the 0.001 cutoff, so the correlation is not zero. It is strong and positive, so taller Martians tend to be heavier, and about 86% of the variation in weight goes with height.",
+     "work": [
+      "t_{0.05}(8)=2.306,\\quad t_{0.001}(8)=5.041",
+      "6.915>5.041\\ \\Rightarrow\\ P<0.001",
+      "r^2=0.9255628^2=0.8566665"
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Compare the slopes of two groups",
+   "source": "Session 18 lecture example (pages 26, 29 and 36)",
+   "prompt": "Separate lm() fits of weight (lb) on height (in) for 18 male and 18 female Plutonians give the slopes and standard errors below. Test whether the slopes of the male and female lines of means differ at the 0.05 level.",
+   "table": {
+    "headers": [
+     "Group",
+     "\\(n\\)",
+     "Slope \\(b\\) (lb/in)",
+     "\\(s_b\\) (lb/in)"
+    ],
+    "rows": [
+     [
+      "Males (M)",
+      "18",
+      "3.2833",
+      "0.2041"
+     ],
+     [
+      "Females (F)",
+      "18",
+      "2.029",
+      "0.4708"
+     ]
+    ]
+   },
+   "steps": [
+    {
+     "say": "Each line has 18 points, so each slope test has 16 degrees of freedom. Both statistics pass the 0.001 cutoff, so both trends are real and comparing them makes sense.",
+     "work": [
+      "t_M=\\frac{3.2833}{0.2041}=16.09,\\quad t_F=\\frac{2.029}{0.4708}=4.310",
+      "t_{0.05}(16)=2.120,\\quad t_{0.001}(16)=4.015"
+     ]
+    },
+    {
+     "say": "The null hypothesis says weight rises with height at the same rate in male and female Plutonians.",
+     "work": [
+      "H_0:\\beta_M=\\beta_F,\\quad H_A:\\beta_M\\ne\\beta_F"
+     ]
+    },
+    {
+     "say": "Both groups have 18 Plutonians, so the equal sizes formula is used. The two squared standard errors are added before taking the square root.",
+     "work": [
+      "s_{b_1-b_2}=\\sqrt{s_{b_1}^2+s_{b_2}^2}",
+      "s_{b_M-b_F}=\\sqrt{0.2041^2+0.4708^2}=\\sqrt{0.04165681+0.2216526}=\\sqrt{0.2633095}=0.5131369"
+     ]
+    },
+    {
+     "say": "Males minus females is kept as the order. The slopes differ by about 2.44 standard errors.",
+     "work": [
+      "t=\\frac{b_M-b_F}{s_{b_M-b_F}}=\\frac{3.2833-2.029}{0.5131369}=\\frac{1.2543}{0.5131369}=2.444377",
+      "\\nu=18+18-4=32"
+     ]
+    },
+    {
+     "say": "The statistic passes the 0.05 cutoff but not the 0.02 cutoff in row 32. So we reject equal slopes, and male weight rises faster with height than female weight.",
+     "work": [
+      "t_{0.05}(32)=2.037,\\quad t_{0.02}(32)=2.449",
+      "2.037<2.444<2.449\\ \\Rightarrow\\ 0.02<P<0.05"
+     ]
+    }
+   ]
+  }
+ ]
+}

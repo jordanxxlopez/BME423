@@ -1,0 +1,181 @@
+{
+ "examples": [
+  {
+   "title": "Holm pairwise t tests after ANOVA",
+   "source": "Exam 1 Question 5",
+   "prompt": "Subjects with low hematocrit got a placebo or one of two doses of EPO for two months. An ANOVA in R found a difference among the three groups (Treatment Df 2, Mean Sq 906.1, F 49.35, Pr(>F) 5.97e-16; Residuals Df 108, Mean Sq 18.4). Use multiple pairwise comparisons with the Holm correction at an overall level of 0.05 to find which groups differ.",
+   "table": {
+    "headers": [
+     "",
+     "Placebo",
+     "EPO Dose 1",
+     "EPO Dose 2"
+    ],
+    "rows": [
+     [
+      "Mean (%)",
+      "31.39",
+      "39.87",
+      "40.05"
+     ],
+     [
+      "Variance",
+      "28.24",
+      "16.65",
+      "10.20"
+     ],
+     [
+      "n",
+      "37",
+      "37",
+      "37"
+     ]
+    ]
+   },
+   "steps": [
+    {
+     "say": "The procedure is multiple unpaired t tests with the Holm correction.",
+     "work": []
+    },
+    {
+     "say": "The null hypothesis is that there is no difference in hematocrit between placebo and Dose 1, AND between placebo and Dose 2, AND between Dose 1 and Dose 2.",
+     "work": []
+    },
+    {
+     "say": "These are the general equations, written before any numbers go in.",
+     "work": [
+      "t_{AB}=\\frac{\\bar x_A-\\bar x_B}{\\sqrt{s^2_{wit}\\left(\\frac{1}{n_A}+\\frac{1}{n_B}\\right)}}",
+      "\\alpha_j=\\frac{\\alpha_T}{k-j+1}"
+     ]
+    },
+    {
+     "say": "R gives the Residuals Mean Sq as 18.4 and the Residuals Df as 108, so these are the shared variance and degrees of freedom.",
+     "work": [
+      "s^2_{wit}=18.4\\;\\%^2",
+      "\\nu=108"
+     ]
+    },
+    {
+     "say": "All three groups have 37 subjects, so every pair shares the same standard error of 0.99729.",
+     "work": [
+      "\\sqrt{18.4\\left(\\frac{1}{37}+\\frac{1}{37}\\right)}=\\sqrt{0.99459}=0.99729",
+      "t_{P,D1}=\\frac{31.39-39.87}{0.99729}=\\frac{-8.48}{0.99729}=-8.503",
+      "t_{P,D2}=\\frac{31.39-40.05}{0.99729}=\\frac{-8.66}{0.99729}=-8.684",
+      "t_{D1,D2}=\\frac{39.87-40.05}{0.99729}=\\frac{-0.18}{0.99729}=-0.1805"
+     ]
+    },
+    {
+     "say": "Placebo against Dose 2 has the largest size of t, so it goes first. Dose 1 against Dose 2 has the smallest, so it goes last.",
+     "work": [
+      "\\lvert t_{P,D2}\\rvert=8.684>\\lvert t_{P,D1}\\rvert=8.503>\\lvert t_{D1,D2}\\rvert=0.1805"
+     ]
+    },
+    {
+     "say": "There are three comparisons, so the first pair is tested at 0.05 divided by 3 and the last pair at 0.05.",
+     "work": [
+      "k=3,\\quad \\alpha_T=0.05",
+      "\\alpha_1=\\frac{0.05}{3-1+1}=0.0167",
+      "\\alpha_2=\\frac{0.05}{3-2+1}=0.025",
+      "\\alpha_3=\\frac{0.05}{3-3+1}=0.05"
+     ]
+    },
+    {
+     "say": "Row 108 and the levels 0.0167 and 0.025 are not printed. So each cutoff is bracketed between rows 100 and 120 and between the printed columns on either side.",
+     "work": [
+      "t_{0.01}(100)=2.626>t_{0.0167}(108)>t_{0.02}(120)=2.358",
+      "t_{0.02}(100)=2.364>t_{0.025}(108)>t_{0.05}(120)=1.980",
+      "t_{0.05}(100)=1.984>t_{0.05}(108)>t_{0.05}(120)=1.980"
+     ]
+    },
+    {
+     "say": "The first two pairs beat even the top of their brackets, so both are significant. The third pair is below the bottom of its bracket, so it is not significant and the procedure stops there.",
+     "work": [
+      "\\lvert t_{P,D2}\\rvert=8.684>2.626>t_{0.0167}(108)",
+      "\\lvert t_{P,D1}\\rvert=8.503>2.364>t_{0.025}(108)",
+      "\\lvert t_{D1,D2}\\rvert=0.1805<1.980<t_{0.05}(108)"
+     ]
+    },
+    {
+     "say": "There is a difference in hematocrit between placebo and Dose 2, AND between placebo and Dose 1, AND there is no difference between Dose 1 and Dose 2. This entire statement is made with P less than 0.05.",
+     "work": [
+      "P<0.05"
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Bonferroni pairwise t tests",
+   "source": "Homework 2 Problem 1(c)",
+   "prompt": "Patients were randomized to low, medium or high doses of filgrastim (\\(n = 15\\) each) and blood neutrophil count was measured. An ANOVA was significant (\\(F = 3.3839\\), \\(P < 0.05\\)) with \\(s^2_{wit} = 2.5267\\). Using pairwise comparisons with the Bonferroni correction, find which dose groups differ. You will need \\(t_{0.0167}(42)\\) from qt((0.05/2)/3, 42, lower.tail=FALSE).",
+   "table": {
+    "headers": [
+     "Dose group",
+     "Mean neutrophil count (10^9 cells/L)",
+     "SD (10^9 cells/L)"
+    ],
+    "rows": [
+     [
+      "1: Low dose",
+      "3.7",
+      "1.1"
+     ],
+     [
+      "2: Medium dose",
+      "4.6",
+      "1.4"
+     ],
+     [
+      "3: High dose",
+      "5.2",
+      "2.1"
+     ]
+    ]
+   },
+   "steps": [
+    {
+     "say": "The procedure is multiple unpaired t tests with the Bonferroni correction.",
+     "work": []
+    },
+    {
+     "say": "The null hypothesis is that there is no difference in neutrophil count between low and medium dose, AND between low and high dose, AND between medium and high dose.",
+     "work": []
+    },
+    {
+     "say": "Three groups give three pairs, so every pair is tested at 0.05 divided by 3. The degrees of freedom are the within-groups degrees of freedom from the ANOVA.",
+     "work": [
+      "k=3",
+      "\\alpha=\\frac{\\alpha_T}{k}=\\frac{0.05}{3}=0.0167",
+      "\\nu=m(n-1)=3(15-1)=42"
+     ]
+    },
+    {
+     "say": "The within-groups variance of 2.5267 is given, and it equals the average of the squared SDs. Every pair has 15 per group, so they share one standard error.",
+     "work": [
+      "s^2_{wit}=\\frac{1}{3}\\left(1.1^2+1.4^2+2.1^2\\right)=2.5267\\;(10^9\\ \\mathrm{cells/L})^2",
+      "t_{AB}=\\frac{\\bar x_A-\\bar x_B}{\\sqrt{s^2_{wit}\\left(\\frac{1}{n_A}+\\frac{1}{n_B}\\right)}}",
+      "\\sqrt{2.5267\\left(\\frac{1}{15}+\\frac{1}{15}\\right)}=\\sqrt{0.33689}=0.58043",
+      "t_{12}=\\frac{3.7-4.6}{0.58043}=-1.5506",
+      "t_{13}=\\frac{3.7-5.2}{0.58043}=-2.5843",
+      "t_{23}=\\frac{4.6-5.2}{0.58043}=-1.0337"
+     ]
+    },
+    {
+     "say": "The printed 0.02 and 0.01 columns settle the first and third pairs. The low against high pair falls inside that bracket, so the cutoff the question gives decides it.",
+     "work": [
+      "t_{0.02}(42)=2.418<t_{0.0167}(42)<t_{0.01}(42)=2.698",
+      "t_{0.0167}(42)=2.4937",
+      "\\lvert t_{12}\\rvert=1.5506<2.418<t_{0.0167}(42)",
+      "\\lvert t_{13}\\rvert=2.5843>t_{0.0167}(42)=2.4937",
+      "\\lvert t_{23}\\rvert=1.0337<2.418<t_{0.0167}(42)"
+     ]
+    },
+    {
+     "say": "There is a difference in neutrophil count between low and high dose, AND no difference between low and medium dose, AND no difference between medium and high dose. This entire statement is made with P less than 0.05.",
+     "work": [
+      "P<0.05"
+     ]
+    }
+   ]
+  }
+ ]
+}

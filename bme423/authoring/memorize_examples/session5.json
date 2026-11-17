@@ -1,0 +1,106 @@
+{
+ "examples": [
+  {
+   "title": "Normal probability for one measurement",
+   "source": "Homework 1 Problem 3(b)(ii)",
+   "prompt": "Fasting blood glucose in healthy U.S. adults aged 30 to 50 is Normal with mean 95 mg/dL and SD 8.7 mg/dL, \\(X\\sim N(95,8.7^2)\\). Find \\(P(85\\le X<115)\\).",
+   "steps": [
+    {
+     "say": "X is fasting glucose, Normal with mean 95 mg/dL and SD 8.7 mg/dL.",
+     "work": [
+      "X\\sim N(\\mu,\\sigma^2)=N(95,\\ 8.7^2)\\ \\text{mg/dL}"
+     ]
+    },
+    {
+     "say": "The cutoff 85 sits 1.149 SDs below the mean and 115 sits 2.299 SDs above it. The table rows nearest these are 1.15 and 2.30.",
+     "work": [
+      "z=\\frac{x-\\mu}{\\sigma}",
+      "z_{85}=\\frac{85-95}{8.7}=-1.149\\approx -1.15",
+      "z_{115}=\\frac{115-95}{8.7}=2.299\\approx 2.30"
+     ]
+    },
+    {
+     "say": "The wanted area is the middle band between the two cutoffs, so it is the left area at 2.30 minus the left area at minus 1.15.",
+     "work": [
+      "P(85\\le X<115)=P(-1.15\\le Z<2.30)"
+     ]
+    },
+    {
+     "say": "The table gives 0.9893 at 2.30 and 0.8749 at 1.15. Symmetry turns the negative cutoff into 0.1251, so the band holds 0.8642.",
+     "work": [
+      "P(a<X<b)=F(z_b)-F(z_a),\\quad F(-z)=1-F(z)",
+      "F(2.30)=0.9893,\\qquad F(-1.15)=1-F(1.15)=1-0.8749=0.1251",
+      "P(85\\le X<115)=0.9893-0.1251=0.8642"
+     ]
+    },
+    {
+     "say": "About 86.4 percent of healthy adults aged 30 to 50 have fasting glucose from 85 up to 115 mg/dL.",
+     "work": [
+      "P(85\\le X<115)\\approx 0.864"
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Normal probability for a sample mean",
+   "source": "Exam 1 Question 3",
+   "prompt": "BUN in healthy U.S. adults aged 20 to 60 is Normal with mean 18 mg/100mL and SD 6 mg/100mL. What is the probability that the mean BUN in a sample of 16 healthy adults is between 15 and 24 mg/100mL?",
+   "steps": [
+    {
+     "say": "The sample mean of 16 adults is its own random variable. By the central limit theorem it is Normal and centered on the same mean of 18 mg/100mL.",
+     "work": [
+      "\\bar X\\sim N\\big(\\mu_{\\bar X},\\sigma_{\\bar X}^2\\big),\\quad \\mu_{\\bar X}=\\mu=18\\ \\text{mg/100mL}"
+     ]
+    },
+    {
+     "say": "The SD of 6 is divided by the square root of 16, so the SE is 1.5 mg/100mL.",
+     "work": [
+      "\\sigma_{\\bar X}=\\frac{\\sigma}{\\sqrt n}=\\frac{6}{\\sqrt{16}}=\\frac{6}{4}=1.5\\ \\text{mg/100mL}"
+     ]
+    },
+    {
+     "say": "Measured in SEs, 15 is 2 below the mean and 24 is 4 above it.",
+     "work": [
+      "z=\\frac{\\bar x-\\mu}{\\sigma/\\sqrt n}",
+      "P(15<\\bar X<24)=P\\left(\\frac{15-18}{1.5}<Z<\\frac{24-18}{1.5}\\right)=P(-2<Z<4)"
+     ]
+    },
+    {
+     "say": "The table gives 1.0000 at 4.00 and 0.9773 at 2.00, so the chance the sample mean lands between 15 and 24 is 0.9773.",
+     "work": [
+      "P(-2<Z<4)=F(4)-F(-2)=F(4)-\\big(1-F(2)\\big)",
+      "=1.0000-(1-0.9773)=0.9773"
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Normal percentile",
+   "source": "Homework 1 Problem 3(b)(ii)",
+   "prompt": "For fasting blood glucose \\(X\\sim N(95,8.7^2)\\) mg/dL, find the 25th percentile.",
+   "steps": [
+    {
+     "say": "The 25th percentile is the value with 25 percent of the area to its left.",
+     "work": [
+      "F(z_{25})=0.25"
+     ]
+    },
+    {
+     "say": "The table starts at one half, so symmetry is used. The left area 0.75 falls between 0.7486 at 0.67 and 0.7517 at 0.68, so z is about 0.675 and the 25th percentile z is minus 0.675.",
+     "work": [
+      "F(-z_{25})=1-0.25=0.75",
+      "F(0.67)=0.7486,\\quad F(0.68)=0.7517\\ \\Rightarrow\\ -z_{25}\\approx 0.675",
+      "z_{25}=-0.675"
+     ]
+    },
+    {
+     "say": "Going 0.675 SDs below the mean of 95 gives 89.13 mg/dL, so a quarter of these adults fall below about 89.13 mg/dL.",
+     "work": [
+      "x=\\mu+z\\,\\sigma",
+      "x_{25}=95+8.7(-0.675)=95-5.8725=89.1275\\approx 89.13\\ \\text{mg/dL}"
+     ]
+    }
+   ]
+  }
+ ]
+}

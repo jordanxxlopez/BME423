@@ -13,5 +13,9 @@ for (const f of process.argv.slice(2)) { const d = JSON.parse(fs.readFileSync(f,
     (c.steps || []).forEach((s, i) => { (s.general || []).forEach(g => tex(g, w + ' step' + i + ' general', true)); (s.work || []).forEach(g => tex(g, w + ' step' + i + ' work', true)); inline(s.words, w + ' step' + i + ' words'); }); }
   for (const q of d.questions || []) { const w = f + ' ' + q.id; inline(q.stem, w); (q.options || []).forEach(o => inline(o, w)); inline(q.why, w); (q.equations || []).forEach(e => tex(e, w + ' eq', true)); }
   for (const q of d.exam || []) { const w = f + ' ' + q.id; (q.paragraphs || []).forEach(p => inline(p, w)); (q.parts || []).forEach(p => inline(p, w));
-    (q.solution || []).forEach((s, i) => { (s.general || []).forEach(g => tex(g, w + ' sol' + i, true)); (s.work || []).forEach(g => tex(g, w + ' sol' + i, true)); inline(s.words, w + ' sol' + i); }); inline(q.conclusion, w); } }
+    (q.solution || []).forEach((s, i) => { (s.general || []).forEach(g => tex(g, w + ' sol' + i, true)); (s.work || []).forEach(g => tex(g, w + ' sol' + i, true)); inline(s.words, w + ' sol' + i); }); inline(q.conclusion, w); }
+  for (const x of JSON.parse(fs.readFileSync(f, 'utf8')).examples || []) { const w = f + ' ' + x.title; inline(x.prompt, w + ' prompt');
+    (x.table?.headers || []).forEach(h => inline(String(h), w + ' table')); (x.table?.rows || []).forEach(r => r.forEach(v => inline(String(v), w + ' table')));
+    (x.steps || []).forEach((s, i) => { (s.work || []).forEach(g => tex(g, w + ' step' + i + ' work', true)); inline(s.say, w + ' step' + i + ' say'); }); }
+}
 console.log(bad ? `${bad} problems in ${n} strings` : `all ${n} LaTeX strings compile`); process.exit(bad ? 1 : 0);

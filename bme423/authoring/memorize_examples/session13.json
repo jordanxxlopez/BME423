@@ -1,0 +1,209 @@
+{
+ "examples": [
+  {
+   "title": "Relative risk with a sentence",
+   "source": "Homework 2 Problem 2(b)",
+   "prompt": "1000 expectant mothers reported whether they took folate supplements, and their infants were checked for neural tube defects (NTDs). A \\(\\chi^2\\) test found a difference (\\(P<0.01\\)). Quantify the association between the mother not taking folate and NTDs in one sentence a newspaper reader could follow.",
+   "table": {
+    "headers": [
+     "",
+     "No NTD",
+     "Yes NTD",
+     "Total"
+    ],
+    "rows": [
+     [
+      "Took folate",
+      "471",
+      "4",
+      "475"
+     ],
+     [
+      "No folate",
+      "498",
+      "27",
+      "525"
+     ]
+    ]
+   },
+   "steps": [
+    {
+     "say": "The mothers were enrolled during pregnancy and the infants were checked afterwards. So the study is prospective, and relative risk can be used.",
+     "work": []
+    },
+    {
+     "say": "The question is about not taking folate, so the No folate row is the exposed row. Having an NTD is the event column.",
+     "work": [
+      "n_{TD}=27,\\quad n_T=525\\quad(\\text{no folate})",
+      "n_{CD}=4,\\quad n_C=475\\quad(\\text{took folate})"
+     ]
+    },
+    {
+     "say": "About 5.1 percent of infants had an NTD when the mother took no folate, against about 0.84 percent when she did.",
+     "work": [
+      "\\hat p_T=\\frac{n_{TD}}{n_T}=\\frac{27}{525}=0.05143",
+      "\\hat p_C=\\frac{n_{CD}}{n_C}=\\frac{4}{475}=0.008421"
+     ]
+    },
+    {
+     "say": "The no folate risk is about six times the folate risk.",
+     "work": [
+      "RR=\\frac{n_{TD}/n_T}{n_{CD}/n_C}",
+      "RR=\\frac{27/525}{4/475}=\\frac{0.05143}{0.008421}=6.107"
+     ]
+    },
+    {
+     "say": "The risk that an infant develops one or more NTDs is about 6.1 times greater when the mother did not take folate than when she did.",
+     "work": []
+    }
+   ]
+  },
+  {
+   "title": "Odds ratio with a sentence",
+   "source": "Exam 1 Question 7",
+   "prompt": "Men with prostate cancer from a hospital database were cases, and matched men without prostate cancer were controls, in a retrospective case-control study. A \\(\\chi^2\\) test found a difference (\\(P<0.01\\)). Quantify the association between smoking and prostate cancer in one sentence a newspaper reader could follow.",
+   "table": {
+    "headers": [
+     "",
+     "With cancer",
+     "Without cancer"
+    ],
+    "rows": [
+     [
+      "Smokers",
+      "120",
+      "180"
+     ],
+     [
+      "Non smokers",
+      "130",
+      "298"
+     ]
+    ]
+   },
+   "steps": [
+    {
+     "say": "The men were chosen because they did or did not have cancer, and then their smoking was looked up. So the study is retrospective and needs an odds ratio, not relative risk.",
+     "work": []
+    },
+    {
+     "say": "Smoking is the exposure and prostate cancer is the disease, so each count gets its exposure letter and its disease letter.",
+     "work": [
+      "n_{ED}=120,\\quad n_{EN}=180",
+      "n_{UD}=130,\\quad n_{UN}=298"
+     ]
+    },
+    {
+     "say": "Multiply the smokers with cancer by the non smokers without cancer, then divide by the other cross product.",
+     "work": [
+      "OR=\\frac{n_{ED}\\,n_{UN}}{n_{UD}\\,n_{EN}}",
+      "OR=\\frac{120\\cdot 298}{130\\cdot 180}=\\frac{35760}{23400}=1.528"
+     ]
+    },
+    {
+     "say": "The odds of getting prostate cancer are about 1.5 times greater for men who smoke than for men who do not smoke.",
+     "work": []
+    }
+   ]
+  },
+  {
+   "title": "Number needed to treat",
+   "source": "Session 13 lecture example (pages 6 to 9)",
+   "prompt": "People on dialysis were given placebo or aspirin. In the placebo group 18 of 25 developed thrombi, and in the aspirin group 6 of 19 did. How many people must be treated with aspirin for one more person to avoid a thrombus?",
+   "table": {
+    "headers": [
+     "",
+     "Developed thrombi",
+     "Free of thrombi",
+     "Treated"
+    ],
+    "rows": [
+     [
+      "Placebo",
+      "18",
+      "7",
+      "25"
+     ],
+     [
+      "Aspirin",
+      "6",
+      "13",
+      "19"
+     ]
+    ]
+   },
+   "steps": [
+    {
+     "say": "Divide each group's thrombus count by its group size. About 72 percent of the placebo group and 32 percent of the aspirin group developed thrombi.",
+     "work": [
+      "\\hat p_{asp}=\\frac{n_{TD}}{n_T}=\\frac{6}{19}=0.3158",
+      "\\hat p_{pla}=\\frac{n_{CD}}{n_C}=\\frac{18}{25}=0.7200"
+     ]
+    },
+    {
+     "say": "Aspirin lowers the thrombus rate by about 40 percentage points.",
+     "work": [
+      "\\hat p_{pla}-\\hat p_{asp}=0.7200-0.3158=0.4042"
+     ]
+    },
+    {
+     "say": "One over 0.4042 is 2.474, or about 2.5 people. A part of a person cannot be treated, so rounding up gives 3.",
+     "work": [
+      "NNT=\\frac{1}{p_C-p_T}",
+      "NNT=\\frac{1}{0.4042}=2.474",
+      "NNT=3\\ \\text{(rounded up)}"
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Number needed to harm",
+   "source": "Practice example",
+   "prompt": "In a trial, 8 of 100 patients on a drug and 3 of 100 patients on placebo had a serious side effect. How many patients must take the drug for one extra patient to be harmed?",
+   "table": {
+    "headers": [
+     "",
+     "Side effect",
+     "No side effect",
+     "Total"
+    ],
+    "rows": [
+     [
+      "Drug",
+      "8",
+      "92",
+      "100"
+     ],
+     [
+      "Placebo",
+      "3",
+      "97",
+      "100"
+     ]
+    ]
+   },
+   "steps": [
+    {
+     "say": "Divide each side effect count by the group size, so the drug group rate is 8 percent and the placebo rate is 3 percent.",
+     "work": [
+      "p_T=\\frac{8}{100}=0.08",
+      "p_C=\\frac{3}{100}=0.03"
+     ]
+    },
+    {
+     "say": "The drug raises the side effect rate by 5 percentage points.",
+     "work": [
+      "p_T-p_C=0.08-0.03=0.05"
+     ]
+    },
+    {
+     "say": "One over 0.05 is exactly 20, so no rounding is needed. For every 20 patients who take the drug, one extra patient has the side effect.",
+     "work": [
+      "NNH=\\frac{1}{p_T-p_C}",
+      "NNH=\\frac{1}{0.05}=20"
+     ]
+    }
+   ]
+  }
+ ]
+}

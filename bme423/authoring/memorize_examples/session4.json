@@ -1,0 +1,133 @@
+{
+ "examples": [
+  {
+   "title": "Write the full CDF from a piecewise density",
+   "source": "Exam 1 Question 2(ii)",
+   "prompt": "The p.d.f. of \\(X\\) is \\(f(x)=0\\) for \\(x\\le 0\\), \\(f(x)=\\tfrac{1}{8} x\\) for \\(0<x\\le 4\\), and \\(f(x)=0\\) for \\(x>4\\). Write \\(F(x)\\) for all values of \\(x\\).",
+   "steps": [
+    {
+     "say": "The CDF is the area under f from the far left up to x.",
+     "work": [
+      "F(x)=\\int_{-\\infty}^{x} f(u)\\,du"
+     ]
+    },
+    {
+     "say": "For x at or below 0 the density is 0, so no area has been collected.",
+     "work": [
+      "x\\le 0\\!:\\quad F(x)=\\int_{-\\infty}^{x} 0\\,du=0"
+     ]
+    },
+    {
+     "say": "For x between 0 and 4 the area so far is F of 0, which is 0, plus the area under u over 8 from 0 to x. That gives x squared over 16.",
+     "work": [
+      "F(x)=F(a)+\\int_{a}^{x} f(u)\\,du",
+      "0<x\\le 4\\!:\\quad F(x)=F(0)+\\int_0^x \\tfrac{1}{8} u\\,du=0+\\tfrac{1}{16}u^2\\Big|_0^x=\\tfrac{1}{16}x^2"
+     ]
+    },
+    {
+     "say": "Past 4 the density is 0 again, so F stays at F of 4, which is 1.",
+     "work": [
+      "x>4\\!:\\quad F(x)=F(4)+\\int_4^x 0\\,du=1+0=1"
+     ]
+    },
+    {
+     "say": "At 0 the middle piece gives 0 and at 4 it gives 1, so the pieces meet with no jump.",
+     "work": [
+      "\\tfrac{1}{16}(0)^2=0,\\qquad \\tfrac{1}{16}(4)^2=\\tfrac{16}{16}=1",
+      "F(x)=\\begin{cases}0 & x\\le 0\\\\[2pt] \\tfrac{1}{16}x^2 & 0<x\\le 4\\\\[2pt] 1 & x>4\\end{cases}"
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Percentile or median of a continuous variable",
+   "source": "Exam 1 Question 2(iii)",
+   "prompt": "For the same \\(X\\) with \\(f(x)=\\tfrac{1}{8} x\\) on \\(0<x\\le 4\\), what is the 75th percentile of \\(X\\)?",
+   "steps": [
+    {
+     "say": "The CDF from the density is written out first.",
+     "work": [
+      "F(x)=\\begin{cases}0 & x\\le 0\\\\[2pt] \\tfrac{1}{16}x^2 & 0<x\\le 4\\\\[2pt] 1 & x>4\\end{cases}"
+     ]
+    },
+    {
+     "say": "F rises from 0 at x of 0 to 1 at x of 4, so 0.75 is reached inside the middle piece.",
+     "work": [
+      "F(0)=0<0.75<1=F(4)"
+     ]
+    },
+    {
+     "say": "The middle piece is set equal to three quarters.",
+     "work": [
+      "F(c)=\\frac{p}{100}",
+      "F(c)=\\tfrac{1}{16}c^2=\\tfrac{3}{4}"
+     ]
+    },
+    {
+     "say": "Solving gives c squared of 12, so c is 2 root 3, about 3.464. The negative root is dropped because it is outside 0 to 4.",
+     "work": [
+      "c^2=\\frac{16\\cdot 3}{4}=12",
+      "c=\\pm\\sqrt{12}=\\pm 3.464",
+      "c=2\\sqrt3\\approx 3.464"
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Expected value from a density",
+   "source": "Exam 1 Question 2(i)",
+   "prompt": "For the same \\(X\\) with \\(f(x)=\\tfrac{1}{8} x\\) on \\(0<x\\le 4\\), what is \\(E[X]\\)?",
+   "steps": [
+    {
+     "say": "E of X weights each x by its density.",
+     "work": [
+      "E[X]=\\int_{-\\infty}^{\\infty} x\\,f(x)\\,dx"
+     ]
+    },
+    {
+     "say": "The integral splits into three pieces. The two outer pieces are 0, so only 0 to 4 is kept.",
+     "work": [
+      "E[X]=\\int_{-\\infty}^{0} x\\cdot 0\\,dx+\\int_0^4 x\\left(\\tfrac{1}{8} x\\right)dx+\\int_4^{\\infty} x\\cdot 0\\,dx",
+      "E[X]=\\tfrac{1}{8}\\int_0^4 x^2\\,dx"
+     ]
+    },
+    {
+     "say": "The antiderivative is x cubed over 24, so the answer is 64 over 24, which is 8 thirds.",
+     "work": [
+      "E[X]=\\tfrac{1}{24}x^3\\Big|_0^4=\\tfrac{1}{24}\\big(4^3-0^3\\big)=\\tfrac{64}{24}",
+      "E[X]=\\tfrac{8}{3}\\approx 2.667"
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Find an unknown constant in a density",
+   "source": "Homework 1 Problem 3(a)(i)",
+   "prompt": "The p.d.f. of \\(X\\) is \\(f(x)=0\\) for \\(x\\le 0\\), \\(f(x)=0.1+x\\) for \\(0<x\\le c\\), and \\(f(x)=0\\) for \\(c<x\\). Find \\(c\\).",
+   "steps": [
+    {
+     "say": "The density is only nonzero from 0 to c, so the area over that range must be 1.",
+     "work": [
+      "\\int_{-\\infty}^{\\infty} f(x)\\,dx=1",
+      "\\int_0^c (0.1+x)\\,dx=1"
+     ]
+    },
+    {
+     "say": "Integrating gives 0.1c plus c squared over 2. Setting that to 1 gives a quadratic with roots 1.3177 and minus 1.5177.",
+     "work": [
+      "\\left[0.1x+\\tfrac{1}{2} x^2\\right]_0^c=0.1c+\\tfrac{1}{2} c^2=1",
+      "c^2+0.2c-2=0",
+      "c=\\frac{-0.2\\pm\\sqrt{0.2^2+4(2)}}{2}=\\frac{-0.2\\pm\\sqrt{8.04}}{2}=\\frac{-0.2\\pm 2.8355}{2}",
+      "c=1.3177\\quad\\text{or}\\quad c=-1.5177"
+     ]
+    },
+    {
+     "say": "The range 0 to c needs c above 0, so the negative root is dropped and c is 1.3177.",
+     "work": [
+      "c=1.3177"
+     ]
+    }
+   ]
+  }
+ ]
+}

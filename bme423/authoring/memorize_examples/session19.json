@@ -1,0 +1,154 @@
+{
+ "examples": [
+  {
+   "title": "Read a multiple regression summary from R",
+   "source": "Session 19 lecture example (pages 24 and 25)",
+   "prompt": "For 20 families, lm(SBPchild ~ SBPmother + SBPfather) prints the summary below (Residual SE 10.67 on 17 df, Multiple R-squared 0.5973, F-statistic 12.61 on 2 and 17 DF, p-value 0.0004388). Write the equation, test the model and each coefficient, and predict the child's SBP when the mother's SBP is 130 mm Hg and the father's is 150 mm Hg.",
+   "table": {
+    "headers": [
+     "Term",
+     "Estimate",
+     "Std. Error",
+     "t value",
+     "Pr(>|t|)"
+    ],
+    "rows": [
+     [
+      "(Intercept)",
+      "-15.6892",
+      "23.6503",
+      "-0.663",
+      "0.51598"
+     ],
+     [
+      "SBPmother",
+      "0.4225",
+      "0.1185",
+      "3.565",
+      "0.00238"
+     ],
+     [
+      "SBPfather",
+      "0.4150",
+      "0.1248",
+      "3.325",
+      "0.00401"
+     ]
+    ]
+   },
+   "steps": [
+    {
+     "say": "Here \\(x_1\\) is the mother's SBP and \\(x_2\\) is the father's SBP, both in mm Hg. The intercept and both slopes come straight from the Estimate column.",
+     "work": [
+      "\\hat y=b_0+b_1x_1+b_2x_2",
+      "\\hat y=-15.6892+0.4225\\,x_1+0.4150\\,x_2"
+     ]
+    },
+    {
+     "say": "The null hypothesis says neither parent's SBP is related to the child's mean SBP. The alternative says at least one of them is.",
+     "work": [
+      "H_0:\\beta_1=\\beta_2=0",
+      "H_1:\\beta_1\\ne0\\ \\text{and/or}\\ \\beta_2\\ne0"
+     ]
+    },
+    {
+     "say": "R prints F of 12.61 on 2 and 17 degrees of freedom, and the same value follows from R squared. It passes both table cutoffs, so the model as a whole is significant with P of about 0.0004.",
+     "work": [
+      "F=\\frac{MS_{mod}}{MS_{res}},\\quad df=k,\\ n-k-1",
+      "F=12.61\\ \\text{on}\\ (2,\\ 17),\\quad P=0.0004388",
+      "F=\\frac{0.5973/2}{(1-0.5973)/17}=\\frac{0.29865}{0.02368824}=12.61",
+      "F_{0.05}(2,17)=3.59,\\quad F_{0.01}(2,17)=6.11"
+     ]
+    },
+    {
+     "say": "Each null hypothesis says that parent's coefficient is zero. Both t values pass the cutoff of 2.110 in row 17, so the mother and the father coefficients are each significant.",
+     "work": [
+      "H_0:\\beta_1=0,\\quad t=\\frac{0.4225}{0.1185}=3.565,\\quad \\Pr(>|t|)=0.00238",
+      "H_0:\\beta_2=0,\\quad t=\\frac{0.4150}{0.1248}=3.325,\\quad \\Pr(>|t|)=0.00401",
+      "t_{0.05}(17)=2.110"
+     ]
+    },
+    {
+     "say": "Each interval is the estimate plus or minus 2.110 standard errors, which matches confint in R to rounding. Neither interval contains zero, which agrees with the two t tests.",
+     "work": [
+      "b_j\\pm t_{0.05}(17)\\,s_{b_j}",
+      "0.4225\\pm2.110(0.1185)=0.4225\\pm0.2500",
+      "0.1725<\\beta_1<0.6725",
+      "0.4150\\pm2.110(0.1248)=0.4150\\pm0.2633",
+      "0.1517<\\beta_2<0.6783"
+     ]
+    },
+    {
+     "say": "Both variables are significant, so nothing is dropped. The original equation is the final model.",
+     "work": [
+      "\\hat y=-15.6892+0.4225\\,x_1+0.4150\\,x_2"
+     ]
+    },
+    {
+     "say": "The predicted mean SBP for a child with these parents is about 101.5 mm Hg.",
+     "work": [
+      "\\hat y=-15.6892+0.4225(130)+0.4150(150)",
+      "\\hat y=-15.6892+54.925+62.25=101.4858"
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Probability and odds from a logistic model",
+   "source": "Session 19 lecture example (pages 35 and 36)",
+   "prompt": "For 100 subjects, glm(CHD ~ AGE, family = \"binomial\") gives \\(\\beta_0=-5.30945\\) and \\(\\beta_1=0.11092\\) per year of age. Find the probability and the odds of coronary heart disease (CHD) at age 60.",
+   "table": {
+    "headers": [
+     "Term",
+     "Estimate",
+     "Std. Error",
+     "z value",
+     "Pr(>|z|)"
+    ],
+    "rows": [
+     [
+      "(Intercept)",
+      "-5.30945",
+      "1.13365",
+      "-4.683",
+      "2.82e-06"
+     ],
+     [
+      "AGE",
+      "0.11092",
+      "0.02406",
+      "4.610",
+      "4.02e-06"
+     ]
+    ]
+   },
+   "steps": [
+    {
+     "say": "Age 60 goes in for x. The result is the log of the odds of CHD at that age.",
+     "work": [
+      "\\beta_0+\\beta_1x=-5.30945+0.11092(60)=-5.30945+6.6552=1.34575"
+     ]
+    },
+    {
+     "say": "The logistic function turns 1.34575 into a probability of about 0.793.",
+     "work": [
+      "p=\\frac{1}{1+e^{-(\\beta_0+\\beta_1x)}}",
+      "p=\\frac{1}{1+e^{-1.34575}}=\\frac{1}{1+0.2603444}=\\frac{1}{1.2603444}=0.7934339"
+     ]
+    },
+    {
+     "say": "Both routes give odds of about 3.84. Rounding p to 0.79 first gives 0.79 over 0.21, which is 3.76.",
+     "work": [
+      "\\text{odds}=\\frac{p}{1-p}=e^{\\beta_0}e^{\\beta_1x}",
+      "\\text{odds}=\\frac{0.7934339}{1-0.7934339}=\\frac{0.7934339}{0.2065661}=3.841066",
+      "e^{-5.30945}e^{6.6552}=0.004944646(776.8133)=3.841066"
+     ]
+    },
+    {
+     "say": "A 60-year-old has about a 79% chance of CHD, so the odds of CHD are about 3.84 to 1. With the probability rounded to 0.79, the odds are 3.76 to 1.",
+     "work": []
+    }
+   ]
+  }
+ ]
+}

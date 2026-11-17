@@ -1,0 +1,63 @@
+{
+ "examples": [
+  {
+   "title": "Read power or sample size from the chart",
+   "source": "Session 14 lecture example (pages 17 and 18)",
+   "prompt": "Halothane (\\(n=9\\), mean 2.08, SD 1.05) and morphine (\\(n=16\\), mean 1.75, SD 0.88) were compared for best cardiac index in \\(\\mathrm{L/min/m^2}\\), and the difference was not significant. What is the power to detect a difference in cardiac index of \\(2.08-1.75=0.33\\) with \\(\\alpha=0.05\\)?",
+   "table": {
+    "headers": [
+     "",
+     "Halothane",
+     "Morphine"
+    ],
+    "rows": [
+     [
+      "n",
+      "9",
+      "16"
+     ],
+     [
+      "Mean",
+      "2.08",
+      "1.75"
+     ],
+     [
+      "SD",
+      "1.05",
+      "0.88"
+     ]
+    ]
+   },
+   "steps": [
+    {
+     "say": "The effect to detect is the gap between the two group means.",
+     "work": [
+      "\\delta=\\bar x_1-\\bar x_2=2.08-1.75=0.33"
+     ]
+    },
+    {
+     "say": "Pool the two variances, weighting each by its degrees of freedom, and take the square root to get the SD.",
+     "work": [
+      "s^2=\\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}",
+      "s^2=\\frac{(9-1)(1.05)^2+(16-1)(0.88)^2}{9+16-2}=\\frac{8.820+11.616}{23}=0.8885",
+      "s=\\sqrt{0.8885}=0.9426"
+     ]
+    },
+    {
+     "say": "The difference is only about a third of an SD, so it is a small effect.",
+     "work": [
+      "\\phi=\\frac{\\delta}{\\sigma}\\approx\\frac{\\delta}{s}",
+      "\\phi=\\frac{0.33}{0.9426}=0.3501\\approx 0.35"
+     ]
+    },
+    {
+     "say": "Use n of 9 because the smaller group limits the power. At phi of 0.35 the curves sit at about 0.1, so the study had only about a 10 percent chance of finding this difference.",
+     "work": [
+      "n=9\\ (\\text{smaller group}),\\quad \\alpha=0.05",
+      "\\text{Power}\\approx 0.1"
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,415 @@
+{
+ "examples": [
+  {
+   "title": "Mann-Whitney rank-sum test with the T table",
+   "source": "Session 24 lecture example (pages 9 to 12)",
+   "prompt": "Daily urine production (mL/day) is measured in three people given a placebo and four different people given a drug. Without assuming Normal populations, does the drug change urine production at a level near 0.05?",
+   "table": {
+    "headers": [
+     "Placebo (mL/day)",
+     "Drug (mL/day)"
+    ],
+    "rows": [
+     [
+      "1000",
+      "1400"
+     ],
+     [
+      "1380",
+      "1600"
+     ],
+     [
+      "1200",
+      "1180"
+     ],
+     [
+      "",
+      "1220"
+     ]
+    ]
+   },
+   "steps": [
+    {
+     "say": "This is a Mann-Whitney rank-sum test because the two groups hold different people and Normality is not assumed. The null hypothesis is that urine production has the same distribution with placebo and drug.",
+     "work": [
+      "H_0:\\text{same distribution with placebo and drug}"
+     ]
+    },
+    {
+     "say": "All seven values are ranked in one list regardless of group. No two values are equal, so there are no ties to average.",
+     "work": [
+      "1000,\\ 1180,\\ 1200,\\ 1220,\\ 1380,\\ 1400,\\ 1600",
+      "\\text{ranks}\\ \\ 1,\\ 2,\\ 3,\\ 4,\\ 5,\\ 6,\\ 7",
+      "\\text{placebo ranks}\\ \\ 1000\\to1,\\ 1380\\to5,\\ 1200\\to3"
+     ]
+    },
+    {
+     "say": "The placebo group is the smaller group, so T is the sum of its three ranks.",
+     "work": [
+      "T=\\sum R_{\\text{smaller group}}",
+      "T=1+5+3=9"
+     ]
+    },
+    {
+     "say": "In the row with 3 in the smaller group and 4 in the bigger group, the column near 0.05 gives the pair 6 and 18 with P of 0.057.",
+     "work": [
+      "n_S=3,\\quad n_B=4",
+      "\\text{critical values}\\ \\ 6\\ \\text{and}\\ 18,\\quad P=0.057"
+     ]
+    },
+    {
+     "say": "T of 9 lies strictly between 6 and 18, so do not reject the null hypothesis. These data do not show that the drug changes daily urine production.",
+     "work": [
+      "6<9<18",
+      "P>0.05"
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Mann-Whitney test with the Normal approximation",
+   "source": "Session 24 lecture example (pages 17 to 19)",
+   "prompt": "Minutes of alert behavior in the first hour of life are recorded for 20 infants delivered conventionally (control) and 20 delivered by the Leboyer method. The times are skewed. Do the distributions differ at the two-sided 0.05 level?",
+   "table": {
+    "headers": [
+     "Control (min)",
+     "Leboyer (min)"
+    ],
+    "rows": [
+     [
+      "5.0",
+      "2.0"
+     ],
+     [
+      "10.1",
+      "19.0"
+     ],
+     [
+      "17.7",
+      "29.7"
+     ],
+     [
+      "20.3",
+      "32.1"
+     ],
+     [
+      "22.0",
+      "35.4"
+     ],
+     [
+      "24.9",
+      "36.7"
+     ],
+     [
+      "26.5",
+      "38.5"
+     ],
+     [
+      "30.8",
+      "40.2"
+     ],
+     [
+      "34.2",
+      "42.1"
+     ],
+     [
+      "35.0",
+      "43.0"
+     ],
+     [
+      "36.6",
+      "44.4"
+     ],
+     [
+      "37.9",
+      "45.6"
+     ],
+     [
+      "40.4",
+      "46.7"
+     ],
+     [
+      "45.5",
+      "47.1"
+     ],
+     [
+      "49.3",
+      "48.0"
+     ],
+     [
+      "51.1",
+      "49.0"
+     ],
+     [
+      "53.1",
+      "50.9"
+     ],
+     [
+      "55.0",
+      "51.2"
+     ],
+     [
+      "56.7",
+      "52.5"
+     ],
+     [
+      "58.0",
+      "53.3"
+     ]
+    ]
+   },
+   "steps": [
+    {
+     "say": "All 40 times are ranked together and no two are equal. The groups are the same size, so the control group is used for T.",
+     "work": [
+      "\\text{control ranks}\\ \\ 2,\\ 3,\\ 4,\\ 6,\\ 7,\\ 8,\\ 9,\\ 11,\\ 13,\\ 14,",
+      "\\quad 16,\\ 18,\\ 21,\\ 25,\\ 31,\\ 33,\\ 36,\\ 38,\\ 39,\\ 40",
+      "T=2+3+4+6+7+8+9+11+13+14+16+18+21+25+31+33+36+38+39+40=374"
+     ]
+    },
+    {
+     "say": "If the birth method has no effect, the control rank sum would average 410.",
+     "work": [
+      "\\mu_T=\\frac{n_S(n_S+n_B+1)}{2}",
+      "\\mu_T=\\frac{20(20+20+1)}{2}=\\frac{820}{2}=410"
+     ]
+    },
+    {
+     "say": "No two times are equal, so the simple form is used and no tie correction is needed.",
+     "work": [
+      "\\sigma_T=\\sqrt{\\frac{n_Sn_B(n_S+n_B+1)}{12}}",
+      "\\sigma_T=\\sqrt{\\frac{20(20)(41)}{12}}=\\sqrt{1366.67}=36.9685"
+     ]
+    },
+    {
+     "say": "T is 36 below its mean. The continuity correction takes off one half, so z is a little under 1.",
+     "work": [
+      "z_T=\\frac{|T-\\mu_T|-\\frac12}{\\sigma_T}",
+      "z_T=\\frac{|374-410|-0.5}{36.9685}=\\frac{35.5}{36.9685}=0.9603"
+     ]
+    },
+    {
+     "say": "Because 0.9603 is below 1.96, do not reject the null hypothesis. The data do not show a difference in alert minutes between Leboyer and control deliveries.",
+     "work": [
+      "z_{0.05}=1.9600\\ \\ (\\text{row }\\infty,\\ \\text{column }0.05)",
+      "|z_T|=0.9603<1.9600",
+      "t_{0.50}(\\infty)=0.6745<0.9603<t_{0.20}(\\infty)=1.2816",
+      "0.20<P<0.50"
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Wilcoxon signed-rank test",
+   "source": "Session 24 lecture exercise (page 27), data on page 26",
+   "prompt": "Eleven people have maximum percent platelet aggregation measured before and after smoking one cigarette. Use the Wilcoxon signed-rank test at the two-sided 0.05 level to decide whether smoking changes platelet aggregation.",
+   "table": {
+    "headers": [
+     "Person",
+     "Before (%)",
+     "After (%)"
+    ],
+    "rows": [
+     [
+      "1",
+      "25",
+      "27"
+     ],
+     [
+      "2",
+      "25",
+      "29"
+     ],
+     [
+      "3",
+      "27",
+      "37"
+     ],
+     [
+      "4",
+      "44",
+      "56"
+     ],
+     [
+      "5",
+      "30",
+      "46"
+     ],
+     [
+      "6",
+      "67",
+      "82"
+     ],
+     [
+      "7",
+      "53",
+      "57"
+     ],
+     [
+      "8",
+      "53",
+      "80"
+     ],
+     [
+      "9",
+      "52",
+      "61"
+     ],
+     [
+      "10",
+      "60",
+      "59"
+     ],
+     [
+      "11",
+      "28",
+      "43"
+     ]
+    ]
+   },
+   "steps": [
+    {
+     "say": "Each person was measured before and after, so each gives one difference and the signed-rank test fits. The null hypothesis is that smoking causes no change in platelet aggregation.",
+     "work": [
+      "H_0:\\text{no difference before and after smoking}"
+     ]
+    },
+    {
+     "say": "No difference is zero, so n stays at 11.",
+     "work": [
+      "d_1=27-25=2,\\quad d_2=29-25=4,\\quad d_3=37-27=10,\\quad d_4=56-44=12",
+      "d_5=46-30=16,\\quad d_6=82-67=15,\\quad d_7=57-53=4,\\quad d_8=80-53=27",
+      "d_9=61-52=9,\\quad d_{10}=59-60=-1,\\quad d_{11}=43-28=15",
+      "n=11"
+     ]
+    },
+    {
+     "say": "The two 4s share ranks 3 and 4, and the two 15s share ranks 8 and 9. The change of minus 1 has the smallest size, so it gets rank 1.",
+     "work": [
+      "|d|\\ \\text{in order}\\ \\ 1,\\ 2,\\ 4,\\ 4,\\ 9,\\ 10,\\ 12,\\ 15,\\ 15,\\ 16,\\ 27",
+      "\\text{ranks of the 4s}=\\frac{3+4}{2}=3.5,\\quad \\text{ranks of the 15s}=\\frac{8+9}{2}=8.5",
+      "\\text{ranks}\\ \\ 1,\\ 2,\\ 3.5,\\ 3.5,\\ 5,\\ 6,\\ 7,\\ 8.5,\\ 8.5,\\ 10,\\ 11"
+     ]
+    },
+    {
+     "say": "Only person 10 went down, so only rank 1 is negative. W is large and positive, so the changes lean strongly upward.",
+     "work": [
+      "W=\\sum_i \\operatorname{sign}(d_i)\\,R_i",
+      "W=2+3.5+6+7+10+8.5+3.5+11+5-1+8.5=64"
+     ]
+    },
+    {
+     "say": "Here n is 11, which is more than 8, so the W table does not apply and the Normal approximation is used in the next step.",
+     "work": [
+      "n=11>8"
+     ]
+    },
+    {
+     "say": "There are two sets of ties, each of size 2, so the variance drops by 1 from 506 to 505. The mean of W is 0, so only the half is subtracted.",
+     "work": [
+      "\\sigma_W=\\sqrt{\\frac{n(n+1)(2n+1)}{6}-\\sum\\frac{(\\tau_i-1)\\tau_i(\\tau_i+1)}{12}}",
+      "\\sigma_W=\\sqrt{\\frac{11(12)(23)}{6}-\\frac{(1)(2)(3)+(1)(2)(3)}{12}}=\\sqrt{506-1}=\\sqrt{505}=22.4722",
+      "z_W=\\frac{|W|-\\frac12}{\\sigma_W}=\\frac{64-0.5}{22.4722}=2.8257"
+     ]
+    },
+    {
+     "say": "Because 2.8257 is above 1.96, reject the null hypothesis. It passes the 0.005 cutoff but not the 0.002 cutoff, so smoking increases platelet aggregation with P between 0.002 and 0.005.",
+     "work": [
+      "z_{0.05}=1.9600\\ \\ (\\text{row }\\infty,\\ \\text{column }0.05)",
+      "|z_W|=2.8257>1.9600",
+      "t_{0.005}(\\infty)=2.8070<2.8257<t_{0.002}(\\infty)=3.0902",
+      "0.002<P<0.005"
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Check Normality before choosing a test",
+   "source": "Session 24 lecture example (pages 5, 7 and 8)",
+   "prompt": "Two samples of ten values are checked for Normality. Sample 2 equals sample 1 except that 60 is replaced by 50 and 68 by 88. Is a t test appropriate for each sample?",
+   "table": {
+    "headers": [
+     "Order",
+     "Sample 1",
+     "Sample 2"
+    ],
+    "rows": [
+     [
+      "1",
+      "60",
+      "50"
+     ],
+     [
+      "2",
+      "62",
+      "62"
+     ],
+     [
+      "3",
+      "62",
+      "62"
+     ],
+     [
+      "4",
+      "63",
+      "63"
+     ],
+     [
+      "5",
+      "64",
+      "64"
+     ],
+     [
+      "6",
+      "64",
+      "64"
+     ],
+     [
+      "7",
+      "65",
+      "65"
+     ],
+     [
+      "8",
+      "65",
+      "65"
+     ],
+     [
+      "9",
+      "67",
+      "67"
+     ],
+     [
+      "10",
+      "68",
+      "88"
+     ]
+    ]
+   },
+   "steps": [
+    {
+     "say": "qqnorm() plots each sorted value against a Normal quantile running from about minus 1.55 to plus 1.55. Sample 1 lies close to the line, but sample 2 has 50 and 88 far off it.",
+     "work": [
+      "\\texttt{qqnorm(x); qqline(x)}",
+      "p_1=\\frac{1-\\frac38}{10+\\frac14}=0.06098",
+      "z_1=-1.5466,\\quad z_{10}=1.5466"
+     ]
+    },
+    {
+     "say": "The null hypothesis is that the data come from a Normal distribution. Sample 1 has a large P, so Normality is not rejected, while sample 2 has a P far below 0.05.",
+     "work": [
+      "H_0:\\text{the data come from a Normal distribution}",
+      "\\text{sample 1}\\ \\ W=0.97577,\\quad P=0.9386>0.05",
+      "\\text{sample 2}\\ \\ W=0.75726,\\quad P=0.004374<0.05"
+     ]
+    },
+    {
+     "say": "Sample 1 is consistent with Normal data, so a t test is fine. Sample 2 is not Normal, so use the Mann-Whitney test for two separate groups or the Wilcoxon signed-rank test for paired data.",
+     "work": [
+      "P=0.004374<0.05"
+     ]
+    }
+   ]
+  }
+ ]
+}

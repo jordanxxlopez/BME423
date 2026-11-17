@@ -1,0 +1,182 @@
+{
+ "examples": [
+  {
+   "title": "Balanced ANOVA from means and SDs",
+   "source": "Exam 1 Question 4",
+   "prompt": "Postmenopausal women were randomized to three treatment groups (\\(n = 12\\) each) and their rate of bone loss was measured for 2 years. Is there a difference in the rate of bone loss among these three groups? Use \\(\\alpha = 0.05\\), and if a difference exists do not identify which groups are different.",
+   "table": {
+    "headers": [
+     "Group",
+     "Mean rate of bone loss (%/year)",
+     "SD (%/year)"
+    ],
+    "rows": [
+     [
+      "1: estrogen cream, placebo calcium",
+      "0.43",
+      "1.6"
+     ],
+     [
+      "2: placebo cream, 2000 mg/day calcium",
+      "2.62",
+      "2.68"
+     ],
+     [
+      "3: placebo cream, placebo calcium",
+      "3.98",
+      "1.63"
+     ]
+    ]
+   },
+   "steps": [
+    {
+     "say": "The test is analysis of variance (there are more than two groups made of different subjects, and the data are interval and Normally distributed).",
+     "work": []
+    },
+    {
+     "say": "The null hypothesis is that there is no difference in the mean rate of bone loss among women in these three treatment groups.",
+     "work": []
+    },
+    {
+     "say": "There are three groups and 12 women in each group.",
+     "work": [
+      "m=3",
+      "n=12"
+     ]
+    },
+    {
+     "say": "These are the general equations, written before any numbers go in, because each one earns credit on its own.",
+     "work": [
+      "s^2_{wit}=\\frac{1}{m}\\sum_{i=1}^{m}s_i^2",
+      "\\bar X=\\frac{1}{m}\\sum_{i=1}^{m}\\bar x_i",
+      "s^2_{\\bar X}=\\frac{\\sum_{i=1}^{m}(\\bar x_i-\\bar X)^2}{m-1}",
+      "s^2_{bet}=n\\,s^2_{\\bar X}",
+      "F=\\frac{s^2_{bet}}{s^2_{wit}}",
+      "\\nu_n=m-1,\\quad \\nu_d=m(n-1)"
+     ]
+    },
+    {
+     "say": "Square each SD and average the three squares. This gives the within-groups variance.",
+     "work": [
+      "s^2_{wit}=\\frac{1}{m}\\sum_{i=1}^{m}s_i^2",
+      "s^2_{wit}=\\frac{1}{3}\\left(1.6^2+2.68^2+1.63^2\\right)=\\frac{1}{3}(2.56+7.1824+2.6569)",
+      "=\\frac{12.3993}{3}=4.1331\\;(\\%/\\mathrm{yr})^2"
+     ]
+    },
+    {
+     "say": "Average the three group means to get the grand mean. Then find how far each group mean sits from it and turn that into a variance.",
+     "work": [
+      "\\bar X=\\frac{1}{m}\\sum_{i=1}^{m}\\bar x_i=\\frac{1}{3}(0.43+2.62+3.98)=2.3433\\;\\%/\\mathrm{yr}",
+      "s^2_{\\bar X}=\\frac{\\sum_{i=1}^{m}(\\bar x_i-\\bar X)^2}{m-1}",
+      "s^2_{\\bar X}=\\frac{(0.43-2.3433)^2+(2.62-2.3433)^2+(3.98-2.3433)^2}{3-1}",
+      "=\\frac{3.6608+0.07654+2.6787}{2}=\\frac{6.4161}{2}=3.2080\\;(\\%/\\mathrm{yr})^2"
+     ]
+    },
+    {
+     "say": "Multiply by the 12 women per group. This gives the between-groups variance.",
+     "work": [
+      "s^2_{bet}=n\\,s^2_{\\bar X}",
+      "s^2_{bet}=12(3.2080)=38.496\\;(\\%/\\mathrm{yr})^2"
+     ]
+    },
+    {
+     "say": "Divide the between-groups variance by the within-groups variance.",
+     "work": [
+      "F=\\frac{s^2_{bet}}{s^2_{wit}}",
+      "F=\\frac{38.496}{4.1331}=9.314"
+     ]
+    },
+    {
+     "say": "The numerator uses the number of groups minus 1. The denominator uses the 11 free values in each of the three groups.",
+     "work": [
+      "\\nu_n=m-1=3-1=2",
+      "\\nu_d=m(n-1)=3(12-1)=33"
+     ]
+    },
+    {
+     "say": "Row 33 is not printed in the F table, so the cutoff sits between rows 32 and 34 in the column for 2. Lightface numbers give 0.05 and boldface numbers give 0.01.",
+     "work": [
+      "F_{0.05}(2,34)=3.28<F_{0.05}(2,33)<F_{0.05}(2,32)=3.30",
+      "F_{0.01}(2,34)=5.29<F_{0.01}(2,33)<F_{0.01}(2,32)=5.34"
+     ]
+    },
+    {
+     "say": "F is larger than both cutoffs, so reject the null hypothesis. There is a difference in the mean rate of bone loss among women in these three treatment groups, with P less than 0.01.",
+     "work": [
+      "F=9.314>F_{0.05}(2,32)=3.30>F_{0.05}(2,33)",
+      "F=9.314>F_{0.01}(2,32)=5.34>F_{0.01}(2,33)",
+      "P<0.01"
+     ]
+    },
+    {
+     "say": "The question says not to identify which groups are different, so the answer ends with the overall conclusion and no pairwise tests.",
+     "work": []
+    }
+   ]
+  },
+  {
+   "title": "Read an R aov table",
+   "source": "Homework 1 Problem 5(b)",
+   "prompt": "165 subjects with raised BNP levels were randomly assigned to a placebo, an experimental drug or the standard treatment (55 per group). R gives this ANOVA output from aov(BNP ~ Group). Read the table and state the result.",
+   "table": {
+    "headers": [
+     "",
+     "Df",
+     "Sum Sq",
+     "Mean Sq",
+     "F value",
+     "Pr(>F)"
+    ],
+    "rows": [
+     [
+      "Group",
+      "2",
+      "47686",
+      "23843",
+      "11.49",
+      "2.16e-05 ***"
+     ],
+     [
+      "Residuals",
+      "162",
+      "336188",
+      "2075",
+      "",
+      ""
+     ]
+    ]
+   },
+   "steps": [
+    {
+     "say": "The Group row has Df 2, which is the numerator degrees of freedom because there are three groups.",
+     "work": [
+      "\\nu_n=\\text{Df}_{\\text{Group}}=2",
+      "\\nu_n=m-1=3-1=2"
+     ]
+    },
+    {
+     "say": "The Residuals row has Df 162 and Mean Sq 2075. These are the within degrees of freedom and the within-groups variance.",
+     "work": [
+      "\\nu_d=\\text{Df}_{\\text{Residuals}}=162",
+      "\\nu_d=N-m=165-3=162",
+      "s^2_{wit}=\\text{Mean Sq}_{\\text{Residuals}}=\\frac{336188}{162}=2075\\;(\\mathrm{pg/mL})^2"
+     ]
+    },
+    {
+     "say": "F is 11.49 and P is \\(2.16\\times10^{-5}\\), so reject the null hypothesis. There is a difference in BNP levels among the three treatment groups, with P less than 0.001.",
+     "work": [
+      "F=\\frac{\\text{Mean Sq}_{\\text{Group}}}{\\text{Mean Sq}_{\\text{Residuals}}}=\\frac{23843}{2075}=11.49",
+      "P=2.16\\times10^{-5}<0.001"
+     ]
+    },
+    {
+     "say": "Keep 2075 as the within-groups variance with 162 degrees of freedom, because any pairwise t tests after this ANOVA reuse them.",
+     "work": [
+      "s^2_{wit}=2075\\;(\\mathrm{pg/mL})^2",
+      "\\nu=162"
+     ]
+    }
+   ]
+  }
+ ]
+}

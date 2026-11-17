@@ -29,19 +29,25 @@ function psLecture(lid,mode=state.scriptVersion,controls=''){
  return `<span class="tag">VERSION E · SESSION ${lid}</span> ${psTier(l)}<h1>${esc(l.title)}</h1><p class="ps-lead">${psMd(l.lead)}</p>${controls}<div class="row no-print"><button data-ps-expand="1">Expand topics</button><button data-ps-expand="0">Collapse topics</button>${memoCount?`<button class="primary" data-ps-memo-go="${lid}">Order to memorize · ${known} of ${memoCount} learned</button>`:''}${psHasCollection(lid)?`<button data-open-slide="${lid}:${l.topics[0].blocks[0].pages[0]}">Open the original slides</button>`:`<a class="button-link" href="sources/session${lid}.pdf" target="_blank" rel="noopener">Original PDF</a>`}</div>${mode==='EQ'?psQuestions(l)+topics:topics+psQuestions(l)}${note('plain:'+lid,'My notes for this session')}`}
 
 // ---------- Order to memorize ----------
-function psStep(st,mode,n){
+// The worked example's line for one step: the numbers written at that step, then one plain sentence.
+function psExStep(ex){if(!ex)return '';return `<div class="ps-ex"><span class="ps-ex-tag">In the example</span>${(ex.work||[]).map(displayMath).join('')}${ex.say?`<p>${rich(ex.say)}</p>`:''}</div>`}
+function psExOn(){return state.plain.showExample!==false}
+function psStep(st,mode,n,ex){
  const tab=st.table?`<span class="ps-table">${psMd(st.table)}${st.tablePath?` <a href="${st.tablePath.includes('#')?st.tablePath:st.tablePath+'#page=1'}" target="_blank" rel="noopener">Open the class table</a>`:''}</span>`:'';
- if(mode==='list')return `<li><strong>${psMd(st.do)}</strong>${tab}</li>`;
- return `<li><strong>${psMd(st.do)}</strong> <span class="ps-why">${psMd(st.why)}</span>${tab}${mode==='formula'&&st.tex?displayMath(st.tex):''}</li>`}
+ const exh=psExStep(ex);
+ if(mode==='list')return `<li><strong>${psMd(st.do)}</strong>${tab}${exh}</li>`;
+ return `<li><strong>${psMd(st.do)}</strong> <span class="ps-why">${psMd(st.why)}</span>${tab}${mode==='formula'&&st.tex?displayMath(st.tex):''}${exh}</li>`}
 function psType(lid,m,i,mode){
  const id=psTypeId(lid,i),shown=mode==='drill'?Math.min(state.plain.drill[id]||0,m.steps.length):m.steps.length;
- const steps=m.steps.slice(0,shown).map((s,k)=>psStep(s,mode==='drill'?'words':mode,k)).join('');
+ const ex=psExOn()&&m.example?m.example:null;
+ const steps=m.steps.slice(0,shown).map((s,k)=>psStep(s,mode==='drill'?'words':mode,k,ex&&ex.steps[k])).join('');
+ const exHead=ex?`<div class="ps-ex-prompt"><span class="ps-ex-tag">Worked example to follow${ex.source?' · '+esc(ex.source):''}</span><p>${rich(ex.prompt)}</p>${ex.table&&ex.table.headers?`<div class="m2-table"><table><thead><tr>${ex.table.headers.map(h=>`<th>${rich(String(h))}</th>`).join('')}</tr></thead><tbody>${ex.table.rows.map(r=>`<tr>${r.map(v=>`<td>${rich(String(v))}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`:''}</div>`:'';
  const hidden=m.steps.length-shown;
- return `<section class="card ps-type ${state.plain.known[id]?'ps-known':''}"><h2>${esc(m.title)}</h2><p class="ps-when">${psMd(m.when)}</p><ol class="ps-steps">${steps}${mode==='drill'&&hidden?Array.from({length:hidden},(_,k)=>`<li class="ps-cover">Say step ${shown+k+1} out loud, then show it.</li>`).join(''):''}</ol>${mode==='drill'?`<div class="row no-print">${hidden?`<button class="primary" data-ps-next="${id}">Show step ${shown+1} of ${m.steps.length}</button>`:''}<button data-ps-reset="${id}">Cover all steps again</button></div>`:''}<label class="checkline"><input type="checkbox" data-ps-known="${id}" ${state.plain.known[id]?'checked':''}> I can say this order from memory</label></section>`}
+ return `<section class="card ps-type ${state.plain.known[id]?'ps-known':''}"><h2>${esc(m.title)}</h2><p class="ps-when">${psMd(m.when)}</p>${exHead}<ol class="ps-steps">${steps}${mode==='drill'&&hidden?Array.from({length:hidden},(_,k)=>`<li class="ps-cover">Say step ${shown+k+1} out loud, then show it.</li>`).join(''):''}</ol>${mode==='drill'?`<div class="row no-print">${hidden?`<button class="primary" data-ps-next="${id}">Show step ${shown+1} of ${m.steps.length}</button>`:''}<button data-ps-reset="${id}">Cover all steps again</button></div>`:''}<label class="checkline"><input type="checkbox" data-ps-known="${id}" ${state.plain.known[id]?'checked':''}> I can say this order from memory</label></section>`}
 function psMemo(lid,controls=''){
  const l=PS_LEC.get(lid),mode=state.plain.memoVersion;
  const body=l.memorize.length?l.memorize.map((m,i)=>psType(lid,m,i,mode)).join(''):`<p class="notice">This session teaches the idea that the next session turns into a full procedure, so its steps to memorize are under Session ${lid+1}.</p>`;
- return `<span class="tag">ORDER TO MEMORIZE · SESSION ${lid}</span> ${psTier(l)}<h1>${esc(l.title)}</h1><p class="ps-lead">Learn each problem type as a fixed order of steps. Each step says what to write, and the sentence after it says why that step comes next.</p>${controls}<div class="row no-print"><button data-ps-plain-go="${lid}">Read the plain concepts for Session ${lid}</button></div>${body}`}
+ return `<span class="tag">ORDER TO MEMORIZE · SESSION ${lid}</span> ${psTier(l)}<h1>${esc(l.title)}</h1><p class="ps-lead">Learn each problem type as a fixed order of steps. Each step says what to write, and the sentence after it says why that step comes next.</p>${controls}<div class="row no-print"><button data-ps-plain-go="${lid}">Read the plain concepts for Session ${lid}</button>${l.memorize.some(m=>m.example)?`<button data-ps-example="${psExOn()?0:1}" aria-pressed="${psExOn()}">${psExOn()?'Hide the worked examples':'Show the worked examples'}</button>`:''}</div>${body}`}
 
 // ---------- shared workspace shell (lecture chips and version dropdowns) ----------
 function psChips(ids,current,kind){return `<div class="ps-chips no-print" role="group" aria-label="Choose a session">${ids.map(id=>{const l=PS_LEC.get(id),k=l.memorize.filter((m,i)=>state.plain.known[psTypeId(id,i)]).length;return `<button class="${id===current?'active':''}" data-ps-lecture="${id}" data-ps-kind="${kind}" aria-pressed="${id===current}">S${id}${kind==='memo'&&l.memorize.length?` <small>${k}/${l.memorize.length}</small>`:''}</button>`}).join('')}</div>`}
@@ -83,6 +89,7 @@ document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)r
  if(d.psZoom){const[lid,p]=d.psZoom.split(':');modalImage({src:image(lid,p),alt:`Original Session ${lid}, PDF page ${p}`,focus:()=>b.focus()})}
  if(d.psReset){state.plain.drill[d.psReset]=0;save();render()}
  if(d.psExpand!==undefined)document.querySelectorAll('details.ps-topic').forEach(el=>el.open=d.psExpand==='1');
+ if(d.psExample!==undefined){state.plain.showExample=d.psExample==='1';save();render();return}
  if(d.psMemoGo){const lid=Number(d.psMemoGo);state.plain[lid>=17?'m2lecture':'lecture']=lid;save();go(lid>=17?'m2memorize':'memorize')}
  if(d.psPlainGo){const lid=Number(d.psPlainGo);state.plain[lid>=17?'m2lecture':'lecture']=lid;save();go(lid>=17?'m2plain':'plainStudy')}},true);
 ['m2plain','m2memorize'].forEach(v=>m2Views.add(v));

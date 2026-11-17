@@ -56,6 +56,28 @@ for lec in LECTURES:
             if not st['why'].startswith('This is because'):
                 problems.append(f'S{lid} {m["title"]} step {j+1}: reason must start with "This is because"')
 
+# Worked examples applied through each problem type's steps (authoring/memorize_examples/session{N}.json).
+# One example per problem type, matched by title, with exactly one entry per step.
+EX_DIR = ROOT / 'authoring' / 'memorize_examples'
+for path in sorted(EX_DIR.glob('session*.json')):
+    lid = int(re.findall(r'\d+', path.stem)[0])
+    lec = next((l for l in LECTURES if l['id'] == lid), None)
+    if lec is None:
+        problems.append(f'{path.name}: no session {lid}'); continue
+    for ex in json.loads(path.read_text())['examples']:
+        m = next((m for m in lec['memorize'] if m['title'] == ex['title']), None)
+        if m is None:
+            problems.append(f'{path.name}: no problem type titled "{ex["title"]}"'); continue
+        if len(ex['steps']) != len(m['steps']):
+            problems.append(f'{path.name} {ex["title"]}: {len(ex["steps"])} example steps for {len(m["steps"])} steps'); continue
+        for j, st in enumerate(ex['steps']):
+            if not st.get('say'):
+                problems.append(f'{path.name} {ex["title"]} step {j+1}: missing "say"')
+            else:
+                check(st['say'], f'S{lid} {ex["title"]} example step {j+1}')
+        m['example'] = {k: ex[k] for k in ('source', 'prompt', 'table', 'steps') if k in ex}
+        counts.setdefault('examples', 0); counts['examples'] += 1
+
 
 # Which class table each cutoff step uses (sources/tables/*.pdf). Matched by session and the
 # start of the step text; the build fails if a listed step is not found, so nothing drops silently.

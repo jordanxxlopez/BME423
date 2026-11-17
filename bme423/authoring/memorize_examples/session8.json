@@ -1,0 +1,104 @@
+{
+ "examples": [
+  {
+   "title": "Unpaired two-sample t test",
+   "source": "Homework 2 Problem 1(a)",
+   "prompt": "Subjects over 65 with cognitive decline were split into a control group (\\(n_1 = 22\\), \\(\\bar x_1 = 49\\), \\(s_1 = 8.4\\)) and a treatment group of diet, exercise and brain training (\\(n_2 = 27\\), \\(\\bar x_2 = 57\\), \\(s_2 = 9.5\\)). Is there a difference in cognitive scores between the two populations?",
+   "steps": [
+    {
+     "say": "The test is the unpaired two-sample t test, because the control group and the treatment group are made of different subjects.",
+     "work": []
+    },
+    {
+     "say": "The null hypothesis is that there is no difference in cognitive scores between the control group and the treatment group.",
+     "work": []
+    },
+    {
+     "say": "These are the general equations, written before any numbers go in.",
+     "work": [
+      "s_p^2=\\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}",
+      "t=\\frac{\\bar x_1-\\bar x_2}{\\sqrt{s_p^2\\left(\\frac{1}{n_1}+\\frac{1}{n_2}\\right)}}",
+      "\\nu=n_1+n_2-2"
+     ]
+    },
+    {
+     "say": "Weight each squared SD by its group size minus 1 and divide by the total degrees of freedom. This gives one shared variance.",
+     "work": [
+      "s_p^2=\\frac{(22-1)(8.4)^2+(27-1)(9.5)^2}{22+27-2}",
+      "=\\frac{1481.76+2346.5}{47}=\\frac{3828.26}{47}=81.452",
+      "s_p=\\sqrt{81.452}=9.0251"
+     ]
+    },
+    {
+     "say": "The standard error of the difference is 2.5921, so the means are about 3.1 standard errors apart.",
+     "work": [
+      "t=\\frac{49-57}{\\sqrt{81.452\\left(\\frac{1}{22}+\\frac{1}{27}\\right)}}=\\frac{-8}{\\sqrt{6.7191}}=\\frac{-8}{2.5921}=-3.086"
+     ]
+    },
+    {
+     "say": "Both groups lose one degree of freedom for their own mean.",
+     "work": [
+      "\\nu=n_1+n_2-2=22+27-2=47"
+     ]
+    },
+    {
+     "say": "Row 47 is not printed, so the cutoff sits between rows 46 and 48 in the 0.05 column. The size of t is larger, so reject at 0.05.",
+     "work": [
+      "t_{0.05}(46)=2.013>t_{0.05}(47)>t_{0.05}(48)=2.011",
+      "\\lvert t\\rvert=3.086>t_{0.05}(46)=2.013>t_{0.05}(47)"
+     ]
+    },
+    {
+     "say": "The size of t also beats the 0.01 cutoff. There is a difference in cognitive scores between the control group and the treatment group, with P less than 0.01.",
+     "work": [
+      "t_{0.01}(46)=2.687>t_{0.01}(47)>t_{0.01}(48)=2.682",
+      "\\lvert t\\rvert=3.086>t_{0.01}(46)=2.687>t_{0.01}(47)",
+      "P<0.01"
+     ]
+    }
+   ]
+  },
+  {
+   "title": "One-sample t test",
+   "source": "Homework 2 Problem 1(b)",
+   "prompt": "The average LDL of USC faculty and staff is 115 mg/dL. A random sample of 16 USC undergraduates had mean LDL 103 mg/dL with SD 16 mg/dL. Is there a significant difference in LDL between USC undergraduates and the faculty and staff value?",
+   "steps": [
+    {
+     "say": "The test is the one-sample t test. The null hypothesis is that mean LDL in USC undergraduates is not different from the faculty and staff value of 115 mg/dL.",
+     "work": [
+      "\\mu_0=115\\;\\mathrm{mg/dL}"
+     ]
+    },
+    {
+     "say": "These are the general equations, written before any numbers go in.",
+     "work": [
+      "t=\\frac{\\bar x-\\mu_0}{s/\\sqrt n}",
+      "\\nu=n-1"
+     ]
+    },
+    {
+     "say": "The standard error is 4 mg/dL, so the sample mean sits 3 standard errors below 115.",
+     "work": [
+      "t=\\frac{103-115}{16/\\sqrt{16}}=\\frac{-12}{4}=-3.000"
+     ]
+    },
+    {
+     "say": "One mean was estimated from the 16 students, so there are 15 degrees of freedom. Row 15 is printed in the two-tailed t table.",
+     "work": [
+      "\\nu=n-1=16-1=15",
+      "t_{0.05}(15)=2.131",
+      "t_{0.01}(15)=2.947"
+     ]
+    },
+    {
+     "say": "The size of t passes both cutoffs, so reject the null hypothesis. Mean LDL in USC undergraduates differs from the faculty and staff value of 115 mg/dL, with P less than 0.01.",
+     "work": [
+      "\\lvert t\\rvert=3.000>t_{0.05}(15)=2.131",
+      "\\lvert t\\rvert=3.000>t_{0.01}(15)=2.947",
+      "P<0.01"
+     ]
+    }
+   ]
+  }
+ ]
+}

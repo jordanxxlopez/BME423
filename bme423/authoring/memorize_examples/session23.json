@@ -1,0 +1,242 @@
+{
+ "examples": [
+  {
+   "title": "Classify a new sample with K-NN for two values of K",
+   "source": "Session 23 lecture exercise (page 35)",
+   "prompt": "Seven tumor samples have dimensionless size and irregularity scores and a known diagnosis. A new sample has scores (4, 4). Classify it with K-NN and the Euclidean distance for \\(K=3\\) and for \\(K=5\\), and give the probability each time.",
+   "table": {
+    "headers": [
+     "Sample",
+     "Size score",
+     "Irregularity score",
+     "Diagnosis"
+    ],
+    "rows": [
+     [
+      "A",
+      "4",
+      "3",
+      "Benign"
+     ],
+     [
+      "B",
+      "3",
+      "3",
+      "Benign"
+     ],
+     [
+      "C",
+      "4",
+      "5",
+      "Malignant"
+     ],
+     [
+      "D",
+      "6",
+      "4",
+      "Malignant"
+     ],
+     [
+      "E",
+      "5",
+      "6",
+      "Malignant"
+     ],
+     [
+      "F",
+      "1",
+      "3",
+      "Benign"
+     ],
+     [
+      "G",
+      "7",
+      "7",
+      "Malignant"
+     ]
+    ]
+   },
+   "steps": [
+    {
+     "say": "The new sample has size 4 and irregularity 4. The scores are already dimensionless, so no scaling is needed.",
+     "work": [
+      "q=(4,4)"
+     ]
+    },
+    {
+     "say": "The same formula is used for all seven samples.",
+     "work": [
+      "d=\\sqrt{(x_1-q_1)^2+(x_2-q_2)^2}",
+      "d_A=\\sqrt{(4-4)^2+(4-3)^2}=\\sqrt{1}=1",
+      "d_B=\\sqrt{(4-3)^2+(4-3)^2}=\\sqrt{2}=1.4142",
+      "d_C=\\sqrt{(4-4)^2+(4-5)^2}=\\sqrt{1}=1",
+      "d_D=\\sqrt{(4-6)^2+(4-4)^2}=\\sqrt{4}=2",
+      "d_E=\\sqrt{(4-5)^2+(4-6)^2}=\\sqrt{5}=2.2361",
+      "d_F=\\sqrt{(4-1)^2+(4-3)^2}=\\sqrt{10}=3.1623",
+      "d_G=\\sqrt{(4-7)^2+(4-7)^2}=\\sqrt{18}=4.2426"
+     ]
+    },
+    {
+     "say": "A and C tie for nearest at a distance of 1, so the tie does not matter for K of 3 or 5. B is third, D fourth and E fifth.",
+     "work": [
+      "d_A=d_C=1<d_B=1.4142<d_D=2<d_E=2.2361<d_F=3.1623<d_G=4.2426"
+     ]
+    },
+    {
+     "say": "With K of 3 the neighbors are A, C and B. Two are benign and one is malignant, so the new sample is benign.",
+     "work": [
+      "K=3,\\quad A=\\text{Benign},\\quad C=\\text{Malignant},\\quad B=\\text{Benign}",
+      "\\text{Benign }2,\\quad \\text{Malignant }1"
+     ]
+    },
+    {
+     "say": "Benign has 2 of the 3 votes, so the probability is 2 in 3.",
+     "work": [
+      "P=\\frac{\\text{votes for the winning class}}{K}",
+      "P(\\text{Benign})=\\frac{2}{3}=0.6667"
+     ]
+    },
+    {
+     "say": "With K of 5, D and E join and both are malignant, so malignant wins 3 to 2. The class changes from benign to malignant, so the choice of K matters here.",
+     "work": [
+      "K=5,\\quad A=\\text{B},\\ C=\\text{M},\\ B=\\text{B},\\ D=\\text{M},\\ E=\\text{M}",
+      "P(\\text{Malignant})=\\frac{3}{5}=0.6"
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Read a confusion matrix",
+   "source": "Session 23 lecture example (page 17)",
+   "prompt": "K-NN with \\(K=21\\) on min-max scaled breast cancer data is tested on 100 samples. CrossTable() gives the actual diagnosis in rows and the predicted diagnosis in columns. Find the accuracy, error rate, sensitivity and specificity.",
+   "table": {
+    "headers": [
+     "Actual by predicted",
+     "Benign",
+     "Malignant",
+     "Row total"
+    ],
+    "rows": [
+     [
+      "Benign",
+      "61",
+      "0",
+      "61"
+     ],
+     [
+      "Malignant",
+      "2",
+      "37",
+      "39"
+     ],
+     [
+      "Column total",
+      "63",
+      "37",
+      "100"
+     ]
+    ]
+   },
+   "steps": [
+    {
+     "say": "Malignant is the positive class because the test is meant to find cancer.",
+     "work": [
+      "\\text{positive}=\\text{Malignant}"
+     ]
+    },
+    {
+     "say": "Rows are the truth and columns are the call. The 2 malignant samples called benign are the false negatives.",
+     "work": [
+      "TP=37,\\quad TN=61,\\quad FP=0,\\quad FN=2"
+     ]
+    },
+    {
+     "say": "The two diagonal cells are correct, so 98 of 100 calls are right. The two errors give an error rate of 0.02.",
+     "work": [
+      "\\text{accuracy}=\\frac{TP+TN}{TP+TN+FP+FN}=\\frac{37+61}{37+61+0+2}=\\frac{98}{100}=0.98",
+      "\\text{error rate}=\\frac{FP+FN}{TP+TN+FP+FN}=\\frac{0+2}{100}=0.02"
+     ]
+    },
+    {
+     "say": "Only the actual malignant row is used. The model caught 37 of the 39 cancers, matching the 0.949 printed in that row.",
+     "work": [
+      "\\text{sensitivity}=\\frac{TP}{TP+FN}=\\frac{37}{37+2}=\\frac{37}{39}=0.9487"
+     ]
+    },
+    {
+     "say": "Only the actual benign row is used. All 61 benign samples were cleared, so no false alarms happened.",
+     "work": [
+      "\\text{specificity}=\\frac{TN}{TN+FP}=\\frac{61}{61+0}=1"
+     ]
+    },
+    {
+     "say": "Both errors are cancers called benign, and a missed cancer delays treatment. So the sensitivity of 0.9487 matters more here than the high accuracy of 0.98.",
+     "work": [
+      "FN=2,\\quad FP=0"
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Run K-NN in R",
+   "source": "Session 23 lecture example (pages 12 to 20) and the course script BreastCancerClassification.R",
+   "prompt": "The Wisconsin breast cancer file wisc_bc_data.csv has 569 fine needle biopsy samples with an id, a diagnosis (B or M) and 30 numeric features. Write the R steps to classify the last 100 samples with knn() and evaluate the result.",
+   "steps": [
+    {
+     "say": "str() shows 569 rows and 32 columns with the id in column 1. Dropping the id leaves the diagnosis in column 1 and the 30 features in columns 2 to 31.",
+     "work": [
+      "\\texttt{wbcd <- read.csv(\"wisc\\_bc\\_data.csv\", stringsAsFactors = FALSE)}",
+      "\\texttt{wbcd <- wbcd[-1]}",
+      "\\texttt{wbcd\\$diagnosis <- factor(wbcd\\$diagnosis, levels = c(\"B\", \"M\"),}",
+      "\\texttt{\\ \\ \\ \\ labels = c(\"Benign\", \"Malignant\"))}",
+      "\\text{table() gives Benign }357,\\ \\text{Malignant }212,\\quad 357+212=569"
+     ]
+    },
+    {
+     "say": "The normalize() function maps every feature onto 0 to 1. For radius_mean the minimum is 6.981 and the maximum 28.110, so its mean of 14.127 becomes 0.3382.",
+     "work": [
+      "x'=\\frac{x-\\min(x)}{\\max(x)-\\min(x)}",
+      "\\texttt{normalize <- function(x) \\{ return ((x - min(x)) / (max(x) - min(x))) \\}}",
+      "\\texttt{wbcd\\_n <- as.data.frame(lapply(wbcd[2:31], normalize))}",
+      "x'=\\frac{14.127-6.981}{28.110-6.981}=\\frac{7.146}{21.129}=0.3382"
+     ]
+    },
+    {
+     "say": "The first 469 rows train the model and the last 100 test it. The labels come from column 1, which works only because the id was dropped.",
+     "work": [
+      "\\texttt{wbcd\\_train <- wbcd\\_n[1:469, ]}",
+      "\\texttt{wbcd\\_test <- wbcd\\_n[470:569, ]}",
+      "\\texttt{wbcd\\_train\\_labels <- wbcd[1:469, 1]}",
+      "\\texttt{wbcd\\_test\\_labels <- wbcd[470:569, 1]}",
+      "469+100=569"
+     ]
+    },
+    {
+     "say": "Each test sample gets the plurality class of its 21 nearest training samples. With prob set to TRUE, R also keeps the share of the 21 votes for the winning class.",
+     "work": [
+      "\\texttt{wbcd\\_test\\_pred <- knn(train = wbcd\\_train, test = wbcd\\_test,}",
+      "\\texttt{\\ \\ \\ \\ cl = wbcd\\_train\\_labels, k = 21, prob = TRUE)}",
+      "\\texttt{prob\\_test <- attr(wbcd\\_test\\_pred, \"prob\")}"
+     ]
+    },
+    {
+     "say": "The table puts the true labels in rows and the predictions in columns. It shows 98 of 100 correct, and both errors are cancers called benign.",
+     "work": [
+      "\\texttt{CrossTable(x = wbcd\\_test\\_labels, y = wbcd\\_test\\_pred, prop.chisq = FALSE)}",
+      "TN=61,\\quad FP=0,\\quad FN=2,\\quad TP=37",
+      "\\text{accuracy}=\\frac{61+37}{100}=0.98"
+     ]
+    },
+    {
+     "say": "z-scores raise the missed cancers from 2 to 5, so min-max scaling works better here. Going back to min-max, K of 1 misses 1 cancer but adds 3 false alarms, and K of 27 misses 4.",
+     "work": [
+      "\\texttt{wbcd\\_z <- as.data.frame(scale(wbcd[-1]))}",
+      "\\text{z-scores},\\ K=21\\ \\ FN=5,\\ FP=0,\\ \\text{accuracy}=\\frac{61+34}{100}=0.95",
+      "\\text{min-max},\\ K=1\\ \\ FN=1,\\ FP=3,\\ \\text{accuracy}=\\frac{58+38}{100}=0.96",
+      "\\text{min-max},\\ K=27\\ \\ FN=4,\\ FP=0,\\ \\text{accuracy}=\\frac{61+35}{100}=0.96"
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,177 @@
+{
+ "examples": [
+  {
+   "title": "Find a percentile in a small sample",
+   "source": "Homework 1 Problem 4(i)",
+   "prompt": "Heights (in) of a random sample of \\(n=10\\) BME freshmen are 65, 69, 59, 64, 62, 67, 68, 62, 64, 65. Find the 75th percentile.",
+   "table": {
+    "headers": [
+     "Rank",
+     "1",
+     "2",
+     "3",
+     "4",
+     "5",
+     "6",
+     "7",
+     "8",
+     "9",
+     "10"
+    ],
+    "rows": [
+     [
+      "Height (in)",
+      "59",
+      "62",
+      "62",
+      "64",
+      "64",
+      "65",
+      "65",
+      "67",
+      "68",
+      "69"
+     ]
+    ]
+   },
+   "steps": [
+    {
+     "say": "The ten heights are put in order from shortest to tallest, so each height now has a rank from 1 to 10.",
+     "work": [
+      "65,\\ 69,\\ 59,\\ 64,\\ 62,\\ 67,\\ 68,\\ 62,\\ 64,\\ 65",
+      "x_{(1)},\\dots,x_{(10)}\\;=\\;59,\\ 62,\\ 62,\\ 64,\\ 64,\\ 65,\\ 65,\\ 67,\\ 68,\\ 69"
+     ]
+    },
+    {
+     "say": "With p of 75 and n of 10, the 75th percentile sits at position 7.75 in the ordered list.",
+     "work": [
+      "\\text{position}=1+\\frac{p(n-1)}{100}",
+      "\\text{position}=1+\\frac{75(10-1)}{100}",
+      "\\text{position}=1+6.75=7.75"
+     ]
+    },
+    {
+     "say": "The whole part is 7 and the leftover is 0.75, so the answer lies three quarters of the way from the 7th value to the 8th value.",
+     "work": [
+      "k=\\lfloor 7.75\\rfloor=7",
+      "f=7.75-7=0.75"
+     ]
+    },
+    {
+     "say": "The position 7.75 is not a whole number, so no single height can be read off directly and the next step is needed.",
+     "work": []
+    },
+    {
+     "say": "The 7th value is 65 and the 8th value is 67, so the percentile is 65 plus three quarters of the 2 inch gap.",
+     "work": [
+      "x_{(k)}+f\\,\\big(x_{(k+1)}-x_{(k)}\\big)",
+      "x_{(7)}+0.75\\,\\big(x_{(8)}-x_{(7)}\\big)=65+0.75\\,(67-65)",
+      "=65+1.5=66.5"
+     ]
+    },
+    {
+     "say": "The 75th percentile of the freshman heights is 66.5 inches, so about three quarters of the sample is shorter than 66.5 inches.",
+     "work": [
+      "x_{75}=66.5\\ \\text{in}"
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Standard error from one sample",
+   "source": "Homework 1 Problem 4(i)",
+   "prompt": "For the same freshman heights (65, 69, 59, 64, 62, 67, 68, 62, 64, 65 in, \\(n=10\\)), find the standard error of the mean.",
+   "steps": [
+    {
+     "say": "The ten heights add to 645 inches, so the mean is 64.5 inches. The squared distances from 64.5 add to 82.5, so the SD is 3.028 inches.",
+     "work": [
+      "\\bar x=\\frac{\\sum x_i}{n}=\\frac{645}{10}=64.5\\ \\text{in}",
+      "s=\\sqrt{\\frac{\\sum (x_i-\\bar x)^2}{n-1}}",
+      "\\sum (x_i-\\bar x)^2=(65-64.5)^2+(69-64.5)^2+\\dots+(65-64.5)^2=82.5",
+      "s^2=\\frac{82.5}{10-1}=9.167\\ \\text{in}^2,\\quad s=\\sqrt{9.167}=3.028\\ \\text{in}"
+     ]
+    },
+    {
+     "say": "Dividing the SD by the square root of 10 gives an SE of 0.9574 inches.",
+     "work": [
+      "s_{\\bar x}=\\frac{s}{\\sqrt n}",
+      "s_{\\bar x}=\\frac{3.028}{\\sqrt{10}}=\\frac{3.028}{3.162}",
+      "s_{\\bar x}=0.9574\\ \\text{in}"
+     ]
+    },
+    {
+     "say": "The SE of 0.9574 inches is the typical error when 64.5 inches is used to estimate the population mean. Individual freshmen still spread about 3.028 inches around the mean, because that is the SD.",
+     "work": []
+    }
+   ]
+  },
+  {
+   "title": "Check whether data look Normal using percentiles",
+   "source": "Homework 1 Problem 4(v)",
+   "prompt": "Heights (in) of a random sample of \\(n=10\\) BME seniors are 69, 66, 70, 71, 72, 67, 70, 71, 72, 69. Does the senior population seem to be Normally distributed? Show how you came to this conclusion.",
+   "table": {
+    "headers": [
+     "Rank",
+     "1",
+     "2",
+     "3",
+     "4",
+     "5",
+     "6",
+     "7",
+     "8",
+     "9",
+     "10"
+    ],
+    "rows": [
+     [
+      "Height (in)",
+      "66",
+      "67",
+      "69",
+      "69",
+      "70",
+      "70",
+      "71",
+      "71",
+      "72",
+      "72"
+     ]
+    ]
+   },
+   "steps": [
+    {
+     "say": "The mean is 69.7 inches and the median is 70 inches. They are only 0.3 inches apart, so the center looks like a Normal center.",
+     "work": [
+      "\\bar x=\\frac{697}{10}=69.7\\ \\text{in}",
+      "\\text{median}=\\frac{x_{(5)}+x_{(6)}}{2}=\\frac{70+70}{2}=70\\ \\text{in}"
+     ]
+    },
+    {
+     "say": "The SD is 2.003 inches, so a Normal shape would put the 16th percentile near 67.70 inches and the 84th percentile near 71.70 inches.",
+     "work": [
+      "\\sum (x_i-\\bar x)^2=(66-69.7)^2+(67-69.7)^2+\\dots+(72-69.7)^2=36.1",
+      "s=\\sqrt{\\frac{36.1}{10-1}}=\\sqrt{4.011}=2.003\\ \\text{in}",
+      "x_{16}\\approx \\bar x-s=69.7-2.003=67.70\\ \\text{in}",
+      "x_{84}\\approx \\bar x+s=69.7+2.003=71.70\\ \\text{in}"
+     ]
+    },
+    {
+     "say": "From the ordered heights the 16th percentile is 67.88 inches and the 84th percentile is 71.56 inches.",
+     "work": [
+      "\\text{position}_{16}=1+\\frac{16(10-1)}{100}=2.44,\\quad k=2,\\ f=0.44",
+      "x_{16}=x_{(2)}+0.44\\,\\big(x_{(3)}-x_{(2)}\\big)=67+0.44\\,(69-67)=67.88\\ \\text{in}",
+      "\\text{position}_{84}=1+\\frac{84(10-1)}{100}=8.56,\\quad k=8,\\ f=0.56",
+      "x_{84}=x_{(8)}+0.56\\,\\big(x_{(9)}-x_{(8)}\\big)=71+0.56\\,(72-71)=71.56\\ \\text{in}"
+     ]
+    },
+    {
+     "say": "The mean is close to the median, and both percentiles land within 0.2 inches of the Normal targets. So the senior heights may come from a Normal population, but 10 values can only suggest this.",
+     "work": [
+      "67.88\\approx 67.70,\\qquad 71.56\\approx 71.70"
+     ]
+    }
+   ]
+  }
+ ]
+}
